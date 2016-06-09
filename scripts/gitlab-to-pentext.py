@@ -98,11 +98,11 @@ def add_finding(issue, options):
     for note in [x for x in issue.notes.list() if not x.system]:
         finding['technicaldescription'] += unicode.replace(note.body,
                                                            '\r\n', '\n')
-        finding['impact'] = {}
-        finding['impact']['p'] = 'TODO'
-        finding['recommendation'] = {}
-        finding['recommendation']['ul'] = {}
-        finding['recommendation']['ul']['li'] = 'TODO'
+    finding['impact'] = {}
+    finding['impact']['p'] = 'TODO'
+    finding['recommendation'] = {}
+    finding['recommendation']['ul'] = {}
+    finding['recommendation']['ul']['li'] = 'TODO'
     finding_xml = jxmlease.XMLDictNode(finding, tag='finding',
                                        xml_attrs={'id': finding_id,
                                                   'threatLevel': threatLevel,
