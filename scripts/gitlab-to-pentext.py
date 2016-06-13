@@ -115,8 +115,7 @@ def add_finding(issue, options):
             print_line('Finding {0} already exists (use --overwrite to overwrite)'.
                        format(filename))
         else:
-            print_line('Create file {0} ? [y/N]'.format(filename))
-            if raw_input().lower() == 'y':
+            if options['y'] or ask_permission('Create file ' + filename):
                 with open(filename, 'w') as xmlfile:
                     xmlfile.write(finding_xml.emit_xml().encode('utf-8'))
                 print_line('[+] Created {0}'.format(filename))
@@ -148,9 +147,18 @@ def add_non_finding(issue, options):
             print_line('Non-finding {0} already exists (use --overwrite to overwrite)'.
                        format(filename))
         else:
-            with open(filename, 'w') as xmlfile:
-                xmlfile.write(non_finding_xml.emit_xml().encode('utf-8'))
-            print_line('[+] Created {0}'.format(filename))
+            if options['y'] or ask_permission('Create file ' + filename):
+                with open(filename, 'w') as xmlfile:
+                    xmlfile.write(non_finding_xml.emit_xml().encode('utf-8'))
+                print_line('[+] Created {0}'.format(filename))
+
+
+def ask_permission(question):
+    """
+    Ask question and return True if user answered with y.
+    """
+    print_line('{0} ? [y/N]'.format(question))
+    return raw_input().lower() == 'y'
 
 
 def list_projects(gitserver, options):
@@ -188,6 +196,8 @@ the Free Software Foundation, either version 3 of the License, or
                         help='list gitlab projects')
     parser.add_argument('-v', '--verbose', action='store_true',
                         help='increase output verbosity')
+    parser.add_argument('-y', action='store_true',
+                        help='assume yes on all questions, write findings')
     if len(sys.argv) == 1:
         parser.print_help()
     return vars(parser.parse_args())
