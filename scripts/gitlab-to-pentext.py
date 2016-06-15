@@ -35,53 +35,6 @@ except ImportError:
     sys.exit(-1)
 
 
-def add_to_report(report, item, options):
-    """
-    Adds item to report.
-    """
-    with open(report, 'r') as xml_file:
-        data = xml_file.read()
-    report_xml = jxmlease.parse(data)
-    report_xml['techSummary']['findings'].add_node(item)
-
-
-def convert_markdown(text):
-    """
-    Replace markdown monospace with monospace tags
-    """
-    result = text
-    return result
-    print('EXAMINING ' + text + ' END')
-    monospace = re.findall("\`\`\`(.*?)\`\`\`", text, re.DOTALL)
-    print(monospace)
-    if len(monospace):
-        print('YESSS ' + monospace)
-        result = {}
-        result['monospace'] = ''.join(monospace)
-
-
-def replace_tags(text):
-    """
-    Replace markdown with correct XML tags
-    """
-    monospace = False
-    linebreaks = re.compile(ur'[\n-\r\x85\u2028\u2929]')
-    return linebreaks.split(text)
-
-
-def list_issues(gitserver, options):
-    """
-    Lists all issues for options['issues']
-    """
-    for issue in gitserver.projects.get(options['issues']).issues.list(all=True):
-        if issue.state != 'opened' and not options['closed']:
-            continue
-        if 'finding' in issue.labels:
-            add_finding(issue, options)
-        if 'non-finding' in issue.labels:
-            add_non_finding(issue, options)
-
-
 def add_finding(issue, options):
     title = validate_report.capitalize(issue.title.strip())
     print_status('{0} - {1} - {2}'.format(issue.state, issue.labels,
@@ -161,6 +114,34 @@ def ask_permission(question):
     return raw_input().lower() == 'y'
 
 
+def convert_markdown(text):
+    """
+    Replace markdown monospace with monospace tags
+    """
+    result = text
+    return result
+    print('EXAMINING ' + text + ' END')
+    monospace = re.findall("\`\`\`(.*?)\`\`\`", text, re.DOTALL)
+    print(monospace)
+    if len(monospace):
+        print('YESSS ' + monospace)
+        result = {}
+        result['monospace'] = ''.join(monospace)
+
+
+def list_issues(gitserver, options):
+    """
+    Lists all issues for options['issues']
+    """
+    for issue in gitserver.projects.get(options['issues']).issues.list(all=True):
+        if issue.state != 'opened' and not options['closed']:
+            continue
+        if 'finding' in issue.labels:
+            add_finding(issue, options)
+        if 'non-finding' in issue.labels:
+            add_non_finding(issue, options)
+
+
 def list_projects(gitserver, options):
     """
     Lists all available projects.
@@ -206,7 +187,7 @@ the Free Software Foundation, either version 3 of the License, or
 def preflight_checks(options):
     """
     Checks if all tools are there.
-    Exits with 0 if everything went okilydokily
+    Exits with 0 if everything went okilydokily.
     """
     try:
         gitserver = gitlab.Gitlab.from_config('remote')
@@ -255,11 +236,11 @@ def valid_filename(filename):
     valid_filename = ''
     for char in filename.strip():
         if char in [':', '/', '.', '\\', ' ', '[', ']', '(', ')', '\'']:
-            if len(char) and valid_filename[-1] != '-':
+            if len(char) and not valid_filename.endswith('-'):
                 valid_filename += '-'
         else:
             valid_filename += char
-    if len(valid_filename) and valid_filename[-1:] == '-':
+    if len(valid_filename) and not valid_filename.endswith('-'):
         valid_filename = valid_filename[:-1]
     return valid_filename.lower()
 
