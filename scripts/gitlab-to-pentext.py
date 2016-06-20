@@ -240,8 +240,6 @@ def valid_filename(filename):
                 valid_filename += '-'
         else:
             valid_filename += char
-    if len(valid_filename) and not valid_filename.endswith('-'):
-        valid_filename = valid_filename[:-1]
     return valid_filename.lower()
 
 
