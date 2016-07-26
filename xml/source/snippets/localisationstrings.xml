@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<localised_strings>
+    <date>
+        <!-- Note: NOT IMPLEMENTED YET - date localisation requires some Saxon HE hacking and it isn't pretty -->
+        <format xml:lang="nl">[D1] [MNn] [Y]</format>
+        <format xml:lang="en">[MNn] [D1], [Y]</format>
+    </date>
+    <!-- THIS you can change/expand! -->
+    <string id="coverpage_offer">
+        <translation xml:lang="nl">OFFERTE</translation>
+        <translation xml:lang="en">OFFER</translation>
+    </string>
+    <string id="coverpage_service_pentest">
+        <translation xml:lang="nl">penetratietestdiensten</translation>
+        <translation xml:lang="en">penetration testing services</translation>
+    </string>
+    <string id="coverpage_service_pentest_short">
+        <translation xml:lang="nl">penetratietest</translation>
+        <translation xml:lang="en">penetration test</translation>
+    </string>
+    <string id="coverpage_service_basic-scan">
+        <translation xml:lang="nl">basis-securityscandiensten</translation>
+        <translation xml:lang="en">basic security scan services</translation>
+    </string>
+    <string id="coverpage_service_basic-scan">
+        <translation xml:lang="nl">basis-securityscan</translation>
+        <translation xml:lang="en">basic scan</translation>
+    </string>
+    <string id="coverpage_for">
+        <translation xml:lang="nl">VOOR</translation>
+        <translation xml:lang="en">FOR</translation>
+    </string>
+    <string id="qs2off_about">
+        <translation xml:lang="nl">Over <client_short/></translation>
+        <translation xml:lang="en">About <client_short/></translation>
+    </string>
+    <string id="qs2off_infrastructure">
+        <translation xml:lang="nl">Infrastructuur</translation>
+        <translation xml:lang="en">Infrastructure</translation>
+    </string>
+    <string id="qs2off_reach">
+        <translation xml:lang="nl">Reikwijdte <company_svc_short/></translation>
+        <translation xml:lang="en">Reach of <company_svc_short/></translation>
+    </string>
+    <string id="waiver_signed">
+        <translation xml:lang="nl">Getekend</translation>
+        <translation xml:lang="en">Signed</translation>
+    </string>
+    <string id="waiver_signed_on">
+        <translation xml:lang="nl">op</translation>
+        <translation xml:lang="en">on</translation>
+    </string>
+    <string id="waiver_signed_in">
+        <translation xml:lang="nl">in</translation>
+        <translation xml:lang="en">in</translation>
+    </string>
+    <string id="waiver_signed_by">
+        <translation xml:lang="nl">door</translation>
+        <translation xml:lang="en">by</translation>
+    </string>
+    <string id="waiver_signed_for">
+        <translation xml:lang="nl">namens</translation>
+        <translation xml:lang="en">for</translation>
+    </string>
+</localised_strings>
+

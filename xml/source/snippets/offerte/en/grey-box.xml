@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section id="greyboxing">
+<title>The Grey-Box Pentesting Method</title>
+<p>
+  <!--snippet -->Crystal-Box vs. Black-Box pentesting refers to the amount of information
+  regarding the target environment, architecture, and/or applications that is
+  initially shared by the customer with the pentesters. With Black-Box testing,
+  pentesters are given no information whatsoever about the target(s). With 
+  Crystal-Box testing, pentesters are given all information requested about the target(s),
+  including source-code (when relevant), access to developers or system management, etc..
+<br />
+<br />
+  <company_short/> will conduct Gray-Box testing, which means that partial information is
+  given on the target.
+</p>
+</section>

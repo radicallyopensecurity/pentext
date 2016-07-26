@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+        <title>Team en Rapportage</title>
+
+        <section>
+                <title>Team</title>
+                <p><company_short/> mag de activiteiten uitvoeren met haar kern-teamleden, 
+                externe freelancers, en/of vrijwilligers.</p>
+                <p>Het eerste contactpersoon voor deze opdracht zal zijn:</p>
+                <ul>
+                        <li><company_poc1/> (<company_short/>)</li>
+                        <li><client_poc1/> (<client_short/>)</li>
+                </ul>
+                <p>Onze penetratie tests lijken een beetje op een "verover de vlag competitie":
+                
+				<company_long/> heeft een geografisch gedistribueerd team 
+				en wij gebruiken online infrastructuur (RocketChat, GitLabs, etc.) 
+				om ons werk te coördineren. Dit geeft ons de mogelijkheid om 
+                om verscheidene technische mensen uit de organisatie van de klant
+                uit te nodigen om op vrijwillige basis samen te werken met ons pentest team.
+				Natuurlijk geldt deze uitnodiging ook voor <client_short/>.</p>
+				
+                <p>In de loop van het project hebben wij de insteek om actief te 
+                brainstormen met <client_short/> over zowel de pentest, als het proces.
+                Dit is een doorlopende leerervaring voor zowel u, als voor onszelf.
+                Daarnaast hebben wij ervaren dat een directe lijn voor feedback naar de klant 
+                de kwaliteit en de focus van het dienstverband enorm verbeteren.</p>
+
+        </section>
+        <section>
+                <title>Rapportage</title>
+                <p><company_short/> zal rapporteren aan <client_short/> betreffende de 
+                penetratie test. Dit rapport zal de genomen stappen bevatten die benodigd waren 
+                gedurende de test en daarnaast de bevonden kwetsbaarheden. Daarnaast zal het 
+                aanbevelingen bevatten, maar geen uitgebreide oplossingen om deze 
+                kwetsbaarheden op te lossen.</p>
+                
+                <p>Een voorbeeld van een Pentest rapport kan hier gevonden worden</p>
+					<ul>
+						<li><a href="https://github.com/radicallyopensecurity/templates/blob/master/sample-report/REP_SittingDuck-
+					pentestreport-v10.pdf">https://github.com/radicallyopensecurity/templates/blob/master/sample-report/REP_SittingDuck-
+					pentestreport-v10.pdf</a></li>
+					</ul>
+					
+				<p>Een van <company_short/> haar kernwaarden is het 
+				"Leer iemand Vissen" principe - ook bekend als het 
+				"Meekijken over de Schouder" principe. Wij streven ernaar om 
+				onze diensten te structureren, zodat zij kans kunnen bieden 
+				om deze te benutten voor educatieve- of trainingsdoeleinden voor onze klanten.</p>
+        </section>
+</section>

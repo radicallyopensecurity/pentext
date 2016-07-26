@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<annex>
+        <title>Annex 1<br/>General Terms and Conditions</title>
+        
+        <p><b>What is this document?</b></p>
+<p>These are the general terms and conditions (in Dutch: “<i>algemene voorwaarden</i>”) 
+of <company_long/> (<company_short/>). This version of the general terms and conditions 
+is dated 15 July 2014.</p>
+<p>In the spirit of <company_short/>'s philosophy, <company_short/> wants these 
+general terms and conditions to be as understandable as possible. If you have any 
+questions, feel free to ask for clarification.</p>
+<p><b>What is <company_long/>?</b></p>
+<p><company_short/> is a private limited liability company under Dutch law located 
+in Amsterdam, The Netherlands. It is registered at the Dutch Chamber of Commerce 
+under no. 60628081.</p>
+<p><b>To what do these terms and conditions apply?</b></p>
+<p>These general terms and conditions apply to all agreements between <company_short/> 
+and the customer. <company_short/> rejects any terms and conditions used by the 
+customer. The parties can only deviate from these general terms and conditions 
+in writing. These general terms and conditions are also intended to benefit any 
+person employed or engaged by <company_short/> during the performance of an assignment.</p>
+<p><b>How does <company_short/> agree on an assignment?</b></p>
+<p><company_short/> wants both parties to have a clear picture of an assignment 
+before it starts. This means there only is an agreement between <company_short/> 
+and the customer after <company_short/> sends a written offer containing the key 
+terms of the agreement and the customer subsequently accepts the offer. 
+Communications other than the written offer do not form part of the agreement. 
+<company_short/> can rescind an offer until it is accepted by the customer.</p>
+<p><b>What can the customer expect from <company_short/>?</b></p>
+<p>It is important to understand the limits of <company_short/>'s services. 
+<company_short/> does not (and cannot) give guarantees that something is secure. 
+<company_short/> instead has an obligation to make reasonable efforts 
+(in Dutch: “<i>inspanningsverplichting</i>”) to perform the agreed services.</p>
+<p><company_short/> will make reasonable efforts to perform the assignment in 
+accordance with the plan set out in the offer (if any). If <company_short/> 
+expects it will not fulfill the plan as documented, it will let the customer 
+know without delay. <company_short/> is not automatically deemed to be in default 
+if it doesn't meet the plan.</p>
+<p><company_short/> will make reasonable efforts to avoid disruption of the 
+customer's operations and damage to its owned or operated systems, but it 
+cannot guarantee that this will be avoided. The customer agrees 
+to this. <company_short/> is not obliged to restore the systems or recover any 
+data deleted or amended in the course of the assignment.</p>
+<p><b>What can <company_short/> expect from the customer?</b></p>
+<p>The customer will provide <company_short/> with all means necessary to allow 
+<company_short/> to perform the agreed services. If <company_short/> needs explicit 
+permission from the customer to perform its services (for example, when doing 
+penetration tests) the customer gives this permission. The customer also warrants 
+that it has the legal authority to give this permission.</p>
+<p><b>How do the parties handle confidential information?</b></p>
+<p><company_short/> and the customer will not disclose to others confidential 
+information and personal data they receive from each other or gain access to in 
+the course of an assignment. <company_short/> has the right to disclose this 
+information and data to persons engaged by <company_short/>, but only if these 
+persons have a similar confidentiality obligation vis-á-vis <company_short/>.
+Any person will only use the information and data it receives or gains access 
+to for the purposes following from the agreement. Both parties will take reasonable 
+measures to maintain the confidentiality of the information and data they received 
+or gained access to, and will ensure that persons engaged by them do the same.</p>
+<p><b>What does <company_short/> do with vulnerabilities it finds in the course 
+of an assignment?</b></p>
+<p>If <company_short/> in the course of an assignment finds a vulnerability which 
+might affect the customer, it will report this to the customer. If a vulnerability 
+might affect third parties as well, <company_short/> retains the right to disclose 
+this vulnerability also to others than the customer. It will only do so after 
+having given the customer a reasonable period to take measures minimising the 
+impact of the vulnerability, in line with responsible disclosure best practices.</p>
+<p><b>What does <company_short/> do with indicators of compromise it finds?</b></p>
+<p>If <company_short/> in the course of an assignment finds indicators of 
+compromise, such as malware signatures and IP-addresses, it will report this to 
+the customer. <company_short/> retains the right to also publish this information 
+in a publicly accessible database. It will only do so after it has given the 
+customer the opportunity to object to the publication of data which would 
+negatively impact the customer.</p>
+<p><b>Who owns the products developed in the course of the assignment?</b></p>
+<p><company_short/> retains any intellectual property rights in products developed 
+for an assignment, such as software and reports. <company_short/>, however, wants 
+to teach as many customers as possible 'how to fish'.</p>
+<p>For software it developed, this means that <company_short/> gives the customer 
+a permanent, non-exclusive, transferable, sub-licensable, worldwide license to 
+distribute and use the software in source and binary forms, with or without 
+modification (very similar to the BSD-license). If <company_short/>'s software 
+is based on other software which is provided under a license which restricts 
+<company_short/>'s ability to license its own software (such as the GPLv3 license), 
+the more restrictive license will apply.</p>
+<p>For other products it developed, such as reports and analyses, <company_short/> 
+gives the customer the same license, but this license is exclusive to the customer 
+and does not contain the right to modification. The latter condition is intended 
+to ensure that the customer will not change <company_short/>'s products, such as 
+reports and analyses. <company_short/> retains the right to reuse these products, 
+for example for training and marketing purposes. <company_short/> will remove any 
+confidential information from these products before publication.</p>
+<p><company_short/> retains title to any property transferred to the customer 
+until all outstanding payments by the customer have been done in full (in Dutch: 
+“<i>eigendomsvoorbehoud</i>”). <company_short/> also only gives a license after 
+all outstanding payments have been done in full.</p> 
+<p><b>Who will perform the assignment?</b></p>
+<p><company_short/> has the right to appoint the persons who will perform the 
+assignment. It has the right to replace a person with someone with at least the 
+same expertise, but only after having consulted with the customer. This means 
+that section 7:404 Dutch Civil Code (in Dutch: “<i>Burgerlijk Wetboek</i>”) is 
+excluded.</p>
+<p>Due to the nature of <company_short/>'s business, <company_short/> regularly 
+works with freelancers for the performance of its assignments. <company_short/> 
+has the right to engage third parties, including freelancers, in the course of 
+the performance of an assignment.</p>
+<p><company_short/> wants to be able to use the expertise of its entire team to 
+help with an assignment. This means that in the course of an assignment, it is 
+possible that the persons performing the assignment will consult with and be 
+advised by others in <company_short/>'s team. These others will of course be 
+bound by the same confidentiality obligations as the persons performing the assignment.</p>
+<p><b>What happens when the scope of the assignment is bigger than agreed?</b></p>
+<p><company_short/> and the customer will attempt to precisely define the scope 
+of the assignment before <company_short/> starts. If during the course of the 
+assignment, the scope turns out to be bigger than expected, <company_short/> 
+will report this to the customer and make a written offer for the additional work.</p>
+<p><b>How is payment arranged?</b></p>
+<p>All amounts in <company_short/>'s offers are in Euros, excluding VAT and 
+other applicable taxes, unless agreed otherwise.</p>
+<p>For assignments where the parties agreed to an hourly fee, <company_short/> 
+will send an invoice after each month. For other assignments, <company_short/> 
+will send an invoice after completion of the assignment, and at moments set out 
+in the offer (if any). The customer must pay an invoice within 30 days of the 
+invoice date.</p>
+<p><company_short/> may, prior to an assignment, agree on the payment of a 
+deposit by the customer. <company_short/> will settle deposits with interim 
+payments or the final invoice for the assignment.</p>
+<p>If the payment is not received before the agreed term, the client will be 
+deemed to be in default without prior notice. <company_short/> will then have 
+the right to charge the statutory interest (in Dutch: “<i>wettelijke rente</i>”) 
+and any judicial and extrajudicial (collection) costs (in Dutch: 
+“<i>gerechtelijke- en buitengerechtelijke (incasso)kosten</i>”).</p>
+<p>If the customer cancels or delays the assignment two weeks before it starts, 
+<company_short/> is entitled to charge the customer 50% of the agreed price. 
+If the customer cancels or delays the assignment after it already started, 
+<company_short/> is entitled to charge the customer 100% of the agreed price. 
+<company_short/> is entitled to charge a pro rata percentage in the case of
+cancellation or delay shorter than two weeks before the start of the assignment 
+(i.e. a cancellation one week before the assignment would entitle <company_short/> 
+to charge 75% of the agreed price).</p>
+<p><b>For what can <company_short/> be held liable?</b></p>
+<p>Any liability of <company_short/> resulting from or related to the performance 
+of an assignment, shall be limited to the amount that is paid out in that 
+specific case under an applicable indemnity insurance of <company_short/>, 
+if any, increased by the amount of the applicable deductible (in Dutch: 
+“<i>eigen risico</i>”) which under that insurance shall be borne by <company_short/>. 
+If no amount is paid out under an insurance, these damages are limited to the 
+amount already paid for the assignment, with a maximum of EUR 10.000.
+Each claim for damages shall expire after a period of one month from the day 
+following the day on which the customer became aware or could reasonably 
+be aware of the existence of the damages.</p>
+<p>To make things clear, <company_short/> is not liable if a person associated 
+with <company_short/> acts contrary to any confidentiality or non-compete 
+obligation vis-á-vis the customer or a third party, this person might have 
+agreed to in another engagement.</p>
+<p>What happens when third parties lodge a claim or initiate criminal proceedings 
+against <company_short/>?</p>
+<p>The customer shall indemnify <company_short/> and any person employed or 
+engaged by <company_short/> for any claims of third parties which are in any 
+way related to the activities of <company_short/> and any person employed or 
+engaged by <company_short/> for the customer.</p>
+<p>Should a third party lodge a claim against <company_short/> or any of the 
+consultants it engaged or employed as a result of the performance of the assignment 
+for the customer, then the customer will co-operate fully with <company_short/> 
+in defending against this claim, including by providing to <company_short/> any 
+evidence it has which relates to this claim.
+Should the public prosecutor initiate an investigation or criminal proceedings 
+against <company_short/> or any of the consultants it engaged or employed as a 
+result of the performance of the assignment for the customer, then the customer 
+will also co-operate fully with <company_short/> in defending against this 
+investigation or proceedings, including by providing any evidence it has which 
+relates to this investigation or these proceedings.</p>
+<p>The customer shall reimburse <company_short/> and any person employed or 
+engaged by <company_short/> all costs of legal defence and all damages in 
+relation to these claims, investigations or proceedings. This provision does 
+not apply to the extent a claim, investigation, or proceeding is the result of 
+the intent or recklessness (in Dutch: “<i>opzet of bewuste roekeloosheid</i>”) 
+of <company_short/> or a person employed or engaged by <company_short/>.</p>
+<p><b>When is this agreement terminated and what happens then?</b></p>
+<p>Each of the parties may terminate the agreement wholly or partly without 
+prior notice if the other party is declared bankrupt or is being wound up or if 
+the other party's affairs are being administered by the court 
+(in Dutch: “surséance van betaling”).</p>
+<p><b>When can <company_short/> not be expected to perform the assignment?</b></p>
+<p>In the case of force majeure (in Dutch: “<i>overmacht</i>”) as a result of 
+which <company_short/> cannot reasonably be expected to perform the assignment, 
+the performance will be suspended. Situations of force majeure include cases 
+where means, such as soft- and hardware, which are prescribed by the customer 
+do not function well. The agreement may be terminated by either party if a 
+situation of force majeure has continued longer than 90 days. The customer will 
+then have to pay the amount for the work already performed pro rata.</p>
+<p><b>Which law applies and which court is competent?</b></p>
+<p>Dutch law applies to the legal relationship between <company_short/> and its 
+customers. Any dispute between <company_short/> and a customer will be resolved 
+in the first instance exclusively by the District Court (in Dutch: 
+“<i>rechtbank</i>”) of Amsterdam, the Netherlands.</p>
+    </annex>

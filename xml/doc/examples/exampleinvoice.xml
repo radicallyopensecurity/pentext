@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<invoice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:fo="http://www.w3.org/1999/XSL/Format" xsi:noNamespaceSchemaLocation="../dtd/invoice.xsd"
+    invoice_no="00/000" denomination="dollar">
+    <meta>
+        <xi:include href="snippets/company_info.xml"/>
+        <xi:include href="client_info.xml"/>
+    </meta>
+    <servicesdelivered>
+        <service>
+            <description>10-day penetration test Sitting Duck</description>
+            <fee vat="yes">7000</fee>
+        </service>
+        <service>
+            <description>Something else</description>
+            <fee vat="yes">2000</fee>
+        </service>
+    </servicesdelivered>
+    <additionalcosts>
+        <cost>
+            <description>An additional cost without vat</description>
+            <fee vat="no">1000</fee>
+        </cost>
+        <cost>
+            <description>An additional cost with vat</description>
+            <fee vat="yes">1000</fee>
+        </cost>
+    </additionalcosts>
+</invoice>

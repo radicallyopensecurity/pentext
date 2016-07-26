@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE scoping
+[   
+]>
+<!-- General information -->
+<general-info>
+    <company-name>Name of the company:</company-name>
+    <contact>
+        <contact-name>Name:</contact-name>
+        <contact-mail>E-mail:</contact-mail>
+        <contact-phone>Phone:</contact-phone>
+    </contact>
+</general-info>
+
+<!-- Relevant information about the pentest -->
+<pentest-info>
+    <service_kind>What kind of service are you interested in?</service_kind>
+    <target>Which webapp, website and/or URL would you like to have tested?</target>
+    <framework>What framework is the target built on?</framework>
+    <ip>Are there IP-addresses that need to be whitelisted for our pentesters?</ip>
+</pentest-info>
+
+<!-- Information about the project size -->
+<project-info>
+    <size>Can you give an estimation of the size/duration of the project(s)?</size>
+    <budget>Is there a budget? If so, how much?</budget>
+    <output>What kind of output do you expect?</output>
+    <project-type>Is this a single-time job or a long-term collaboration?</project-type>   
+<project-info>
+
+<!-- Additional information -->
+<misc>
+    <medium>What is your preferred medium of communication?</medium>
+    <additions>Is there anything else we need to know?</additions>
+<misc>
+    

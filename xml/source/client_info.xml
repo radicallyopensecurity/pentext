@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file contains all known information for this client. All elements are MANDATORY. If any piece of information is not available, leave the element empty -->
+<!-- Example <invoice_rep></invoice_rep> -->
+<client xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../dtd/offerte.xsd" id="client">
+    <full_name>Sitting Duck B.V.</full_name>
+    <!-- long client name, e.g. Sitting Duck B.V. -->
+    <short_name>Sitting Duck</short_name>
+    <!-- short client name, e.g. Sitting Duck; if no short name: same as long name -->
+    <legal_rep>I.M. Portant</legal_rep>
+    <!-- customer legal representative (to sign offer) -->
+    <waiver_rep>B.I.G. Wig</waiver_rep>
+    <!-- customer legal representative (to sign waiver; can be same person as legal_rep) -->
+    <poc1>Sir Knowsalot</poc1>
+    <!-- first point of contact for customer (during pentest); can be same person as above -->
+    <address>Reed Street 42</address>
+    <postal_code>0000</postal_code>
+    <city>Pond City</city>
+    <country>Amazonia</country>
+    <coc nationality="Dutch">9999999</coc>
+    <!-- chamber of commerce number; if no chamber of commerce number, please delete the whole element -->
+    <invoice_rep>D. Ollars</invoice_rep>
+    <invoice_mail>freemoney@sittingduck.com</invoice_mail>
+    <vat_no>0000000000B01</vat_no>
+</client>

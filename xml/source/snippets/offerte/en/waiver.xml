@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<waivers>
+    <standard_waiver>
+        <title><company_svc_short/> - WAIVER</title>
+
+        <p><b><i><signee_long/></i> (<i><signee_short/></i>)</b>, with its registered office at <signee_street/>,
+            <signee_city/>, <signee_country/> and duly represented by <b><signee_waiver_rep/></b></p>
+
+        <p>
+            <b>WHEREAS:</b>
+        </p>
+
+<p>A. <client_short/> wants some of its systems to be tested,
+                            <company_long/> (“<company_short/>”) has offered to perform
+                        such testing for <client_short/> and
+                            <client_short/> has accepted this offer.
+                        The assignment will be performed by <company_short/>' core-team members, external
+                        freelancers, and/or volunteers (the “Consultants”).</p>
+                    <p>B. Some of the activities performed by
+                            <company_short/> and the
+                        Consultants during the course of this assignment could be considered
+                        illegal, unless <signee_short/> has given permission for
+                        these activities. <company_short/>
+                        and the Consultant will only perform such activities if they have received
+                        the required permission.</p>
+                    <p>C. <signee_short/> is
+                        willing to give such permission to <company_short/>, the Consultants and any
+                        other person <company_short/> might
+                        employ or engage for the assignment.</p>
+                    <p>
+                        <b>DECLARES AS FOLLOWS:</b>
+                    </p>
+                    <p>1. <signee_short/> is
+                        aware that <company_short/> will
+                        perform <company_svc_long/> of the
+                        following systems of <signee_short/>, as described
+                        below. The services are intended to gain insight in the security of these
+                        systems. To do so, <company_short/>
+                        will access these systems, attempt to find vulnerabilities and gain further
+                        access and elevated privileges by exploiting any vulnerabilities found.
+                            <company_short/> will test the
+                        following targets (the “<b>Targets</b>”):</p>
+                    <generate_targets/>
+                    <p>2. <signee_short/>
+                        hereby grants <company_short/> and
+                        the Consultants on a date to be confirmed by email the broadest permission
+                        possible to perform the assignment, including the permission to:</p>
+                    <p>a. enter and use the Targets;</p>
+                    <p>b. circumvent, breach, remove and turn off
+                        any security measures protecting the Targets;</p>
+                    <p>c. copy, intercept, record, amend, delete,
+                        render unusable or inaccessible any data stored on, processed by or
+                        transferred via the Targets; and</p>
+                    <p>d. hinder the access or use of the
+                        Targets,</p>
+                    <p>but <signee_short/>
+                        only grants the permission for these activities to the extent that (i) such
+                        activities are necessary to perform the assignment and (ii) such activities
+                        do not disrupt the normal business operations of <signee_short/>.</p>
+                    <p>3. The permission under Article 1 extends
+                        to all systems on which the Targets run, or which <company_short/> or the Consultant might
+                        encounter while performing the assignment, regardless of whether these
+                        systems are owned by third parties.</p>
+                    <p>4. <signee_short/>
+                        warrants that it has the legal authority to give the permission set out
+                        under Articles 1 and 2. It also warrants it has obtained the necessary
+                        permissions from any third parties referred to under Article 3.</p>
+                    <p>5. Should the public prosecutor initiate an
+                        investigation or criminal proceedings against <company_short/> or any of the consultants it
+                        engaged or employed as a result of the performance of the assignment for the
+                        customer, then <signee_short/> will co-operate fully
+                        with <company_short/> in defending
+                        against this investigation or proceedings, including by providing any
+                        evidence it has which relates to this investigation or these
+                        proceedings.</p>
+
+        <generate_waiver_signature_box/>
+
+    </standard_waiver>
+</waivers>

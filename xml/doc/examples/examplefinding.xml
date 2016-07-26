@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<finding threatLevel="Moderate" type="Escalation">
+  <title>Example Title</title>
+    <description>
+        A specialized piece of malware can be crafted to bypass local anti-virus software and to cheat during tests.
+    </description>
+    <technicaldescription>
+        The student desks run antivirus software that will prevent many common remote access and malware tools that students may use to try and cheat. It is however still possible to use common tools to evade detection by the anti-virus software. Note that to run the custom malware, a student needs to have found an arbitrary file execution bug first.
+        
+        To exploit this vulnerability, we used 'veil-evasion' to build an undetected Meterpreter reverse TCP executable that connects back to an external computer and allows for remote access. See https://www.veil-framework.com/veil-tutorial/ for details.
+    </technicaldescription>
+    <impact>
+        A student may use this malware to have an accomplice at a remote location assist in the test by viewing screenshots of the student desk and reading/modifying files on the student desk. The setup for this can be done very quickly - before the  test even starts - and will leave no obvious visible clues that something fishy has happened.
+    </impact>
+    <recommendation>
+        Allow only a set of whitelisted programs to be executed. Base restrictions on file contents, e.g. by comparing agains one or more strong file hashes.
+    </recommendation>
+</finding>

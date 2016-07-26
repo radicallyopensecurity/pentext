@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<generic_document xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../dtd/genericdocument.xsd">
+        <meta>
+                <title>Generic Document</title>
+                <subtitle>Optional Subtitle</subtitle>
+                <collaborators>
+                        <reviewers>
+                                <reviewer>Melanie Rieback</reviewer>
+                        </reviewers>
+                        <approver>
+                                <name>Melanie Rieback</name>
+                                <bio>Melanie Rieback is a former Asst. Prof. of Computer Science from the VU,
+who is also the co-founder/CEO of Radically Open Security.</bio>
+                        </approver>
+                </collaborators>
+                <classification>Confidential</classification>
+                <version_history>
+                        <version date="2015-01-19T01:00:00" number="auto">
+                                <v_author>Writer's Name</v_author>
+                                <v_description>Initial draft</v_description>
+                        </version>
+                </version_history>
+                <xi:include href="snippets/company_info.xml"/>
+        </meta>
+        
+        <generate_index/>
+        
+        <section id="introduction">
+                <title>Introduction</title>
+                <section id="subsection">
+                        <title>This is a subsection</title>
+                        <p>In this document we describe anything that is not an offer, invoice or pentest.</p>
+                </section>
+        </section>
+        <appendix id="appendix">
+                <title>Is this a self-aware appendix?</title>
+                <p>Why yes, yes it is.</p>
+        </appendix>
+</generic_document>

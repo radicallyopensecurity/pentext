@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+  <!-- for an example load testing offer, ask other writers!-->
+  <title>Load testing</title>
+  <p>The aim of load testing is to measure what realistic level of performance a
+    service deployment is capable of delivering, or whether it meets a specific
+    performance requirement, in a consistent and repeatable way. For web sites
+    and applications it usually involves simulating multiple visitors using the
+    site's features in various ways. This sets it apart from DDoS testing, which
+    is much more indiscriminate. For load testing, <company_long/>
+    generally executes the following steps:
+  </p>
+
+  <ol>
+    <li>Establishing the aim of the load test;</li>
+    <li>Defining user types to simulate;</li>
+    <li>Choosing appropriate test volumes;</li>
+    <li>Collecting URLs and form data for each user type;</li>
+    <li>Implementing user simulation scripts;</li>
+    <li>Running appropriate load tests;</li>
+    <li>Reporting results;</li>
+  </ol>
+
+  <p>
+    <b>Step 1: Establishing the aim of the load test</b>
+    <br/>
+    Load testing needs a well-defined purpose to be useful. There is usually an
+    underlying reason for wanting to load test, for example users may have
+    complained your site is slow, or you're evaluating new technology and want
+    to see whether it brings performance improvements. These reasons boil down
+    to running some specific tests, usually one or more of:
+    <ul>
+      <li>How much activity a system can cope with before it starts to fail (maximum
+        simultaneous users, maximum request rate)
+      </li>
+      <li>What level of performance can be sustained for a given load (average
+        response time for a fixed number of users)
+      </li>
+      <li>What level of load meets a given performance requirement (maximum
+        users while remaining below a target average response time)
+      </li>
+    </ul>
+    The last two are inverses of each other. A single test is only of moderate
+    interest - load tests are most useful when repeated so that multiple results
+    may be compared. It's important that the tests remain consistent, otherwise
+    they may not be compared meaningfully. Load testing may even be automated as
+    part of your site's development process so that changes can be evaluated for
+    performance before deployment.
+  </p>
+
+  <p>
+    <b>Step 2: Defining user types to simulate</b>
+    <br/>
+    Most web sites can group their users into general categories that can be
+    used as a basis for simulations, for example, a basic browser that looks at
+    the home and contact pages; a new user trying out some basic features; a
+    power user that understands the system and uses specific features
+    repeatedly.
+  </p>
+
+  <p>
+    <b>Step 3: Choosing appropriate test volumes</b>
+    <br/>
+    To provide realistic results it's important to choose test sizes
+    (simultaneous user count) that are appropriate for the size of the site, and
+    representative proportions of each user type. An example specification might
+    be 1000 simultaneous users split into 40% basic browsers, 40% new users, 20%
+    power users. Multiple tests can be run with different counts and user type
+    mixes.
+  </p>
+
+  <p>
+    <b>Step 4: Collecting URLs and form data for each user type</b>
+    <br/>
+    Each user type needs a sequence of URL requests and form submissions that
+    represents their activity. This can be done either by capturing HTTP traffic
+    using a proxy or by manual inspection of forms and URLs.
+  </p>
+
+  <p>
+    <b>Step 5: Implementing user simulation scripts</b>
+    <br/>
+    Test scripts can be created automatically (effectively replaying captured
+    URL sequences) or manually for tests requiring finer detail or greater
+    realism. Turning captured URLs into a user script can be complex and time
+    consuming - for example when the results of one request need to be
+    incorporated into a later form submission.
+  </p>
+
+  <p>
+    <b>Step 6: Running the load tests</b>
+    <br/>
+    Combining the user simulation scripts with the test volume settings in a
+    load testing system produces a working load test. Load tests can be run over
+    varying time periods, from a few minutes to hours or even days, depending on
+    the aims of the test. Intense load tests can impose enormous stress on web
+    sites, often to the point of failure, so they need to be undertaken
+    carefully and with regard for possible denial of service or downtime they
+    may cause.
+  </p>
+
+  <p>
+    <b>Step 7: Reporting results</b>
+    <br/>
+    Most load testing tools can generate useful output immediately, but they
+    often need filtering and interpretation to fulfil the aims of the test.
+    <company_short/>
+    has the necessary experience to produce comprehensible reports from the
+    flood of data that load testing generates.
+  </p>
+
+  <p>Steps 3 and 6 may be repeated for different usage scenarios. For example,
+    if the test aim is to see if supposed performance enhancements have had a
+    positive effect, the same test would be run before and after the changes to
+    allow comparison. In a fixed load test, multiple passes could be run with
+    100, 500, 1000, 2000 users, or a maximum load test using a slow increase
+    from 100 to 10000 users to see how far it gets before problems appear.
+  </p>
+  
+  <p>There are many load testing tools of varying levels of sophistication,
+    including Apache's simple "ab" and more complex "JMeter" projects, the
+    Selenium project for fine-detail browser simulation.
+    <company_long/>
+    prefers to use open-source tools such as these. There are also online
+    commercial services that are useful for testing very large loads that
+    would otherwise be difficult and expensive to configure from scratch.
+  </p>
+</section>
