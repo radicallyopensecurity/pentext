@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section  xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Pentest Methodology</title>
+    <p>During the execution of penetration tests, <company_long/> broadly follows 
+    the following steps:</p>
+
+            <ol>
+                <li>Requirements Gathering and Scoping; </li>
+                <li>Discovery;</li>
+                <li>Validation;</li>
+                <li>Information Collection;</li>
+                <li>Threat and Vulnerability Analysis;</li>
+                <li>Exploitation;</li>
+                <li>Reporting;</li>
+            </ol>
+          
+
+<p><b>Step 1: Requirements Gathering and Scoping</b> <br/>
+The expectations of both parties are discussed and agreements are made regarding 
+how to conduct the test(s). For example, contact details and the pentest's scope 
+are documented.</p>
+
+<p><b>Step 2: Discovery</b><br/>
+As much information as possible about the target organization and target objects 
+is collected. This information is passively gathered, primarily from public sources.</p>
+
+<p><b>Step 3: Validation</b><br/>
+All customer-specified systems are cross-referenced with findings from the 
+Discovery step. We do this to ensure that discovered systems are legal property 
+of the customer and to verify the scope with the customer.</p>
+
+<p><b>Step 4: Information Collection</b><br/>
+Information from Step 2 is now used to actively collect information about the 
+system. Activities conducted during this phase may include:
+Determining which parts of the various components will be investigated;
+Testing for the presence of known vulnerabilities, using automated tests;
+Identifying the offered services and fingerprinting the software used for them.</p>
+
+<p><b>Step 5: Threat and Vulnerability Analysis</b><br/>
+Potential threats and vulnerabilities are indexed, based upon the collected information.</p>
+
+<p><b>Step 6: Exploitation</b><br/>
+Attempt to use vulnerabilities of the various components. 
+The diverse applications and components of the client's infrastructure are 
+relentlessly probed for frequently occurring design, configuration, and 
+programming errors.</p>
+
+<p>Note: <company_long/> uses open-source scanning tools to get its bearings, 
+but generally performs most of the exploitation by hand.</p>
+
+<p><b>Step 7: Reporting</b><br/>
+After finishing the audit, a report will be delivered where the step-by-step 
+approach, results, and discovered vulnerabilities are described. The report and 
+results will be presented to the responsible project leader or manager at the 
+client's office.</p>
+
+<p>Steps 4-6 may be repeated multiple times per test. For example, access may be 
+acquired in an external system, which serves as a stepping-stone to the internal network. 
+The internal network will then be explored in Steps 4 and 5, and exploited in Step 6.</p>
+
+<!--DO NOT INCLUDE ANY OF THESE-->
+ <!--xi:include href="crystal-box.xml"/-->
+ <!--xi:include href="black-box.xml"/-->
+ <!--xi:include href="grey-box.xml"/-->
+
+</section>

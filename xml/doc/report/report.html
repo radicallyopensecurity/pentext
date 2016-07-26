@@ -1,0 +1,574 @@
+<h1 id="writing-a-test-report">Writing a test report</h1>
+<h2 id="tools">Tools</h2>
+<p>First of all, make sure you have the right tools installed. Check the tools manual for more info.</p>
+<h2 id="main-structure">Main structure</h2>
+<p>The report's main element is <code>&lt;pentest_report&gt;</code>. It contains four major parts:</p>
+<ul>
+<li>Document information (metadata), in the element <code>&lt;meta&gt;</code></li>
+<li>The index, in the element <code>&lt;generate_index&gt;</code></li>
+<li>A variable number of sections (main content), in several <code>&lt;section&gt;</code> elements</li>
+<li>A variable number of appendices (extra content), in one or more <code>&lt;appendix&gt;</code> elements</li>
+</ul>
+<p>Additionally, the <code>&lt;pentest_report&gt;</code> element has two attributes:</p>
+<ul>
+<li><code>findingCode</code>, which is a three-letter prefix for the finding numbers, derivated from the client name (e.g. 'SID' for Sitting Duck BV, 'BIC' for Big International Company Ltd, etc.).  When this is not 
+    filled in you will see three question marks '???' in the finding ID columns 
+    in the Table of Contents and detailed finding sections.</li>
+<li><code>findingNumberingBase</code>, which can be set to 'Report' or 'Section' - this configures whether the numbering of findings in the report is report-based (i.e. starting with XXX-001 and continuing upwards) or section-based (i.e. findings in section 3 are numbered XXX-301 and up, findings in section 5 are numbered XXX-501 and up). Use 'Report' for smaller pentest reports and 'Section' for large ones.</li>
+</ul>
+<h2 id="document-information-metadata">Document information / metadata</h2>
+<p>This is the part where we put all information that is <em>about the report</em> rather than about the pentest itself (hence the term metadata): who has been working on it, what is the document title, what versions has it gone through, etc.</p>
+<p>In XML, this part is indicated by the <code>&lt;meta&gt;</code> element. It contains the following elements (mandatory and in the listed order):</p>
+<ul>
+<li>The document title, in the <code>&lt;title&gt;</code> element</li>
+<li>Client information, in the <code>&lt;client&gt;</code> element</li>
+<li>Targets listing, in the <code>&lt;targets&gt;</code> element</li>
+<li>(Optionally) Pentest-related information, in the <code>&lt;pentestinfo&gt;</code> element</li>
+<li>People who worked on the pentest and/or report, in the <code>&lt;collaborators&gt;</code> element</li>
+<li>Document classification, in the <code>&lt;classification&gt;</code> element</li>
+<li>The document's version history, in the <code>&lt;version_history&gt;</code> element</li>
+<li>Your company contact information, in the <code>&lt;company&gt;</code> element</li>
+</ul>
+<p>For more details, see the sections below.</p>
+<h3 id="the-document-title">The document title</h3>
+<p>In the <code>&lt;title&gt;</code> element, put the document title (in text). This is something like 'Penetration Test Report', 'Security Audit Report', whatever fits the bill.</p>
+<p>Example: <code>&lt;title&gt;</code>Penetration Test Report<code>&lt;/title&gt;</code></p>
+<h3 id="client-information">Client information</h3>
+<p>The <code>&lt;client&gt;</code> element contains two other elements:</p>
+<ul>
+<li><code>&lt;full_name&gt;</code>, in which you should type the client's official name, e.g. 'Sitting Duck BV', or 'Big International Company Ltd'</li>
+<li><code>&lt;short_name&gt;</code>, in which you should type the client's shorter name, e.g. 'Sitting Duck' or 'Big International' (or, if there is no shorter name, just type the long name again)</li>
+</ul>
+<p>Example:</p>
+<pre><code>&lt;client&gt;
+    &lt;full_name&gt;Sitting Duck B.V.&lt;/full_name&gt;
+    &lt;short_name&gt;Sitting Duck&lt;/short_name&gt;
+&lt;/client&gt;</code></pre>
+<h3 id="targets">Targets</h3>
+<p>The <code>&lt;targets&gt;</code> element contains one or more <code>&lt;target&gt;</code> elements, one for each target specified for the pentest. Put every target of the pentest in its own <code>&lt;target&gt;</code> element. If there is only one target, you'll end up with a <code>&lt;targets&gt;</code> element containing only one <code>&lt;target&gt;</code> element. This is ok.</p>
+<p>Example:</p>
+<pre><code>&lt;targets&gt;
+    &lt;target&gt;fishinabarrel.sittingduck.com&lt;/target&gt;
+    &lt;target&gt;hackthis.sittingduck.com&lt;/target&gt;
+    &lt;target&gt;Sitting Duck&#39;s support staff&lt;/target&gt;
+&lt;targets&gt;</code></pre>
+<h3 id="pentest-info">Pentest Info</h3>
+<p>The <code>&lt;pentestinfo&gt;</code> element contains some data about the pentest itself. This element is optional, but may be useful as you can refer to its content using placeholders, allowing e.g. for standard referrals to the tested application name, pentest type or pentest duration.</p>
+<p>Example:</p>
+<pre><code>&lt;pentestinfo&gt;
+        &lt;duration&gt;10&lt;/duration&gt;&lt;!-- duration of pentest, in working days --&gt;
+        &lt;test_planning&gt;January 1st until January 12th, 2015&lt;/test_planning&gt; &lt;!-- date or date range in text, e.g. May 18th until May 25th, 2015 --&gt;
+        &lt;report_writing&gt;January 15th until January 20th, 2015&lt;/report_writing&gt; &lt;!-- date or date range in text, e.g. May 18th until May 25th, 2015 --&gt;
+        &lt;report_due&gt;January 23rd, 2015&lt;/report_due&gt; &lt;!-- date or date range in text, e.g. May 18th until May 25th, 2015 --&gt;
+        &lt;nature&gt;time-boxed&lt;/nature&gt;
+        &lt;type&gt;black-box&lt;/type&gt;&lt;!-- please choose one of the following: black-box, grey-box, crystal-box --&gt;
+        &lt;target_application&gt;FishInABarrel&lt;/target_application&gt;&lt;!-- name of application to be tested (if any) --&gt;
+        &lt;target_application_producer&gt;H4ckers &#39;R&#39; Us&lt;/target_application_producer&gt;
+    &lt;/pentestinfo&gt;</code></pre>
+<h3 id="collaborators">Collaborators</h3>
+<p>The <code>&lt;collaborators&gt;</code> element contains three other elements, mandatory and in the listed order:</p>
+<ul>
+<li><code>&lt;reviewers&gt;</code>, containing one or more <code>&lt;reviewer&gt;</code> elements (same system as <code>&lt;targets&gt;</code>; put the name of each reviewer in its own <code>&lt;reviewer&gt;</code> element.)</li>
+<li><code>&lt;approver&gt;</code>, containing only text. Here you put the name of the person who has approved the document for distribution to the client (usually this is Melanie)</li>
+<li><code>&lt;pentesters&gt;</code>, containing one or more <code>&lt;pentester&gt;</code> elements (<em>not</em> the same system as targets, see the section on pentesters for more details)</li>
+</ul>
+<p>Example:</p>
+<pre><code>&lt;collaborators&gt;
+    &lt;reviewers&gt;
+        &lt;reviewer&gt;Patricia Piolon&lt;/reviewer&gt;
+    &lt;/reviewers&gt;
+    &lt;approver&gt;Melanie Rieback&lt;/approver&gt;
+    ...
+&lt;/collaborators&gt;</code></pre>
+<h3 id="pentesters">Pentesters</h3>
+<p>As said, the <code>&lt;pentesters&gt;</code> element contains one or more <code>&lt;pentester&gt;</code> elements.</p>
+<p>The <code>&lt;pentester&gt;</code> element contains two other elements:</p>
+<ul>
+<li><code>&lt;name&gt;</code>, containing the pentester's name (in text)</li>
+<li><code>&lt;bio&gt;</code>, containing a paragraph about the pentester's l33tness :) - For many pentesters, you can get this bio from a previous pentest. If we're working with a new guy or girl, ask them for some info about themselves.</li>
+</ul>
+<p>The names of the pentesters will appear on the document info page and their names and bios will be listed automatically in a table wherever you insert the <code>&lt;generate_testteam/&gt;</code> element.</p>
+<p>Example:</p>
+<pre><code>&lt;collaborators&gt;
+    ...
+    &lt;pentesters&gt;
+        &lt;pentester&gt;
+            &lt;name&gt;Melanie Rieback&lt;/name&gt;
+            &lt;bio&gt;Melanie Rieback is a former Asst. Prof. of Computer Science 
+            from the VU, who is also the co-founder/CEO of 
+            Radically Open Security.&lt;/bio&gt;
+        &lt;/pentester&gt;
+        &lt;pentester&gt;
+            &lt;name&gt;William of Ockham&lt;/name&gt;
+            &lt;bio&gt;English Franciscan friar and scholastic philosopher and theologian. 
+            Considered to be one of the major figures of medieval thought. 
+            At the centre of some major intellectual and political controversies.&lt;/bio&gt;
+        &lt;/pentester&gt;
+    &lt;/pentesters&gt;
+&lt;/collaborators&gt;</code></pre>
+<h3 id="document-classification">Document Classification</h3>
+<p>The <code>&lt;classification&gt;</code> element contains information on the confidentiality level of the report. Usually this will be 'Confidential'.</p>
+<p>The classification will appear in the header of each page.</p>
+<p>Example:</p>
+<pre><code>&lt;classification&gt;Confidential&lt;/classification&gt;</code></pre>
+<h3 id="version-history">Version History</h3>
+<p>The <code>&lt;version_history&gt;</code> element contains one or more <code>&lt;version&gt;</code> elements, one for each version of the document you create. Whenever you start a new version, add a <code>&lt;version&gt;</code> element to the list.</p>
+<p>The <code>&lt;version&gt;</code> element should contain the following:</p>
+<ul>
+<li>a <code>date</code> attribute with a date of your version as a value, in the format YYYY-MM-DDT00:00:00, e.g. 2015-04-18T00:00:00</li>
+<li>a <code>number</code> attribute with the version number as a value. This value can either be 'auto' or an actual version number, e.g. 1.0. If you use the 'auto' value, the system will automatically count it (starting with 0.1 for the first <code>&lt;version&gt;</code> element and going up from there: 0.2, 0.3, etc...).</li>
+<li>One or more <code>&lt;v_author&gt;</code> elements, each containing the name of the person who worked on this version (that would be you at least, and perhaps a pentester or colleague who did significant work on it)</li>
+<li>A <code>&lt;v_description&gt;</code> element with a (very short!) description of what has been done in this version, e.g. 'Added non-findings' or 'Revision'</li>
+</ul>
+<p>Example:</p>
+<pre><code>&lt;version_history&gt;
+    &lt;version number=&quot;auto&quot; date=&quot;2014-12-18T00:00:00&quot;&gt;
+        &lt;v_author&gt;Bob Goudriaan&lt;/v_author&gt;
+        &lt;v_description&gt;Initial draft&lt;/v_description&gt;
+    &lt;/version&gt;
+    &lt;version date=&quot;2014-12-22T00:00:00&quot; number=&quot;auto&quot;&gt;
+        &lt;v_author&gt;Bob Goudriaan&lt;/v_author&gt;
+        &lt;v_author&gt;Patricia Piolon&lt;/v_author&gt;
+        &lt;v_description&gt;Revision&lt;/v_description&gt;
+    &lt;/version&gt;
+&lt;/version_history&gt;</code></pre>
+<h3 id="contact-information">Contact information</h3>
+<p>This is the contact information in a basic XML format. It never changes, so it has been isolated in its own little xml file, which is referred to from the main document with an <code>&lt;xi:include&gt;</code> element:</p>
+<p><code>&lt;xi:include href=&quot;snippets/contact.xml&quot;/&gt;</code></p>
+<p>If you need to edit the contact information, edit that file. But it's extremely likely that you won't need to.</p>
+<h2 id="the-index">The index</h2>
+<p>The document index is generated at the location of the element <code>&lt;generate_index/&gt;</code>. To make sure the index works (meaning that a reference page number is listed for each section), you will need to give a unique <code>id</code> attribute to all elements (sections, appendices, findings and non-findings) that need to be listed in the index.</p>
+<p>Insert the <code>&lt;generate_index/&gt;</code> element immediately after the <code>&lt;meta&gt;</code> element.</p>
+<h2 id="sections">Sections</h2>
+<p>The main bulk of the pentest report is made up of normal content. We divide our content into sections using the <code>&lt;section&gt;</code> element.</p>
+<h3 id="id"><code>id</code></h3>
+<p>Make sure that every <code>&lt;section&gt;</code> element, no matter where in the structure it is located, gets a unique id attribute. By 'unique' we mean that no other element in the report should have the same value for its id attribute. This is enforced by the schema, so you will get an error message if you have duplicate ids in your report.</p>
+<p>The exact value of the id attribute doesn't really matter, it can be anything, but it is good practice to pick an id that has some kind of relation to the section subject. For example, if your section is titled 'Technical Summary', a good id value for this <code>&lt;section&gt;</code> element would be 'technicalsummary'. You can use dots (.), dashes (-), underscores (_) and numbers and letters in the id. You cannot use spaces.</p>
+<p>Example:</p>
+<pre><code>&lt;section id=&quot;summary_of_findings&quot;&gt;
+...
+&lt;/section&gt;</code></pre>
+<h3 id="section-title">Section title</h3>
+<p>A section must always start with a <code>&lt;title&gt;</code> element, which should only contain text; after that you're free to do what you want. As explained in the previous section, it's a good idea to have the section id and the title be somewhat related.</p>
+<p>Example:</p>
+<pre><code>&lt;section id=&quot;summary_of_findings&quot;&gt;
+    &lt;title&gt;Summary of Findings&lt;/title&gt;
+    ...
+&lt;/section&gt;</code></pre>
+<h3 id="section-content">Section content</h3>
+<p>As said, after the title, anything goes (well, almost):</p>
+<ul>
+<li>A section can be subdivided into smaller sections (section 1 can be subdivided into 1.1, 1.2, etc.)</li>
+<li>A section can contain generic content, that is to say any number and order of:
+<ul>
+<li>paragraphs (<code>&lt;p&gt;</code>)</li>
+<li>lists (ordered <code>&lt;ol&gt;</code> or unordered <code>&lt;ul&gt;</code>)</li>
+<li>tables (<code>&lt;table&gt;</code>)</li>
+<li>command input/output boxes (<code>&lt;pre&gt;</code>)</li>
+<li>div containers (<code>&lt;div&gt;</code>)</li>
+</ul></li>
+<li>A section can contain any number of findings (<code>&lt;finding&gt;</code>)</li>
+<li>A section can contain any number of non-findings (<code>&lt;non-finding&gt;</code>)</li>
+<li>A section can contain any number of finding or recommendation summary tables (<code>&lt;generate_findings&gt;</code>, <code>&lt;generate_recommendations&gt;</code>)</li>
+<li>A section can contain a listing of targets, taken from the <code>&lt;targets&gt;</code> element in the meta section (<code>&lt;generate_targets&gt;</code>)</li>
+</ul>
+<p>All of these elements are described elsewhere in this document; see the appropriate sections for details.</p>
+<h2 id="appendices">Appendices</h2>
+<p>Appendices (using the <code>&lt;appendix&gt;</code> element) work the same as sections, they just come last in the report. Like sections, they must have a unique id, and must start with a title. Also like sections, the rest of their content is free-form.</p>
+<p>You will need at least one appendix, for the pentester listing (name and bio). This is generated from the info you provided in the <code>&lt;meta&gt;</code> section in the beginning of the report, so all you need to do is insert a <code>&lt;generate_testteam/&gt;</code> element.</p>
+<p>Example:</p>
+<pre><code>&lt;appendix id=&quot;pentesters&quot;&gt;
+    &lt;title&gt;Pentesters&lt;/title&gt;
+    &lt;generate_testteam/&gt;
+&lt;/appendix&gt;</code></pre>
+<h2 id="findings">Findings</h2>
+<p>Findings are special sections with a specific structure. Findings are written by the pentesters. It is the job of a report writer to copy them into the report (or reference them using an xi:include) and edit/elaborate.</p>
+<p>A finding consists of a <code>&lt;finding&gt;</code> element with the following attributes:</p>
+<ul>
+<li><code>id</code> - to uniquely identify the finding in the document</li>
+<li><code>threatLevel</code> - which can be set to 'N/A', 'Low', 'Moderate', 'Elevated', 'High', or 'Extreme'</li>
+<li><code>type</code> - the finding type (free text, but keep it short)</li>
+</ul>
+<p>Furthermore, the <code>&lt;finding&gt;</code> is made up of several sub-elements:</p>
+<ul>
+<li><code>&lt;title&gt;</code>, a title for the finding</li>
+<li><code>&lt;description&gt;</code>, a short, general description of the finding</li>
+<li><code>&lt;description_summary&gt;</code>, an <em>optional</em> shorter description for use in the summary tables</li>
+<li><code>&lt;technicaldescription&gt;</code>, a technical elaboration on what the problem entails</li>
+<li><code>&lt;impact&gt;</code>, the finding's impact on the target's security</li>
+<li><code>&lt;recommendation&gt;</code>, instructions or advice on how to improve security</li>
+<li><code>&lt;recommendation_summary&gt;</code>, an <em>optional</em> shorter recommendation for use in the summary tables</li>
+</ul>
+<p>For more details, see the sections below.</p>
+<h3 id="note-to-pentesters">Note to pentesters</h3>
+<p><strong>PENTESTERS</strong> should only use the <code>&lt;finding&gt;</code> element containing:</p>
+<ul>
+<li>the <code>threatLevel</code> attribute</li>
+<li>the <code>type</code> attribute</li>
+<li>the <code>&lt;title&gt;</code> element</li>
+<li>the <code>&lt;description&gt;</code> element</li>
+<li>the <code>&lt;technicaldescription&gt;</code> element</li>
+<li>the <code>&lt;impact&gt;</code> element, and</li>
+<li>the <code>&lt;recommendation&gt;</code> element</li>
+</ul>
+<p>The contents of these elements is free - write whatever you like. The report writer will mark up your text.</p>
+<p>Please create one file per finding.</p>
+<p>There is no need to number your findings, as they will be numbered automatically in the report. There is also no need to add an <code>id</code> since the report writer is better positioned to do that.</p>
+<p>Finding template:</p>
+<pre><code>&lt;finding threatLevel=&quot;SelectFromList&quot; type=&quot;ThreatTypeText&quot;&gt;
+    &lt;title&gt;Finding Title&lt;/title&gt;
+    &lt;description&gt;General Description of the problem&lt;/description&gt;
+    &lt;technicaldescription&gt;Technical description of the problem.&lt;/technicaldescription&gt;
+    &lt;impact&gt;Impact of the finding&lt;/impact&gt;
+    &lt;recommendation&gt;Advice/tips/instructions on how to solve the problem&lt;/recommendation&gt;
+&lt;/finding&gt;</code></pre>
+<h3 id="note-to-report-writers">Note to report writers</h3>
+<p><strong>REPORT WRITERS</strong> should: - Add any necessary xml to the main structure elements (e.g. add paragraphs or <code>&lt;pre&gt;</code> text to the technical description) - Edit the text so that it is in correct english and informative/helpful to the client (or, when in doubt, ask pentesters to make it more informative/helpful) - Add a <code>&lt;description_summary&gt;</code> and/or <code>&lt;recommendation_summary&gt;</code> element if necessary.</p>
+<h3 id="description">Description</h3>
+<p>This is a general intro to the problem. It can be left as-is, in which case the contents of this element will be treated as a paragraph, or it can be marked up as generic text (using the Generic content elements listed elsewhere in this document - with paragraphs, lists, tables, images).</p>
+<p>The contents of the <code>&lt;description&gt;</code> element will be used verbatim in the finding summary table <strong>unless</strong> the finding <em>also</em> contains a <code>&lt;description_summary&gt;</code> element, in which case that element will be used.</p>
+<p>Example:</p>
+<pre><code>&lt;finding id=&quot;xmlsignatureexclusion&quot; threatLevel=&quot;Low&quot; type=&quot;Signature Exclusion&quot;&gt;
+    &lt;title&gt;XML signature exclusion&lt;/title&gt;
+    &lt;description&gt;
+        &lt;p&gt;This is a reasonably short general description. It can easily fit in the summary table.&lt;/p&gt;
+    &lt;/description&gt;
+    ...
+&lt;/finding&gt;</code></pre>
+<h3 id="description-for-summary-table">Description for Summary Table</h3>
+<p>If the general finding description is too long or uses elements like images or tables, it will not be usable to put in the finding summary table. In this case you can add a <code>&lt;description_summary&gt;</code> element right after the <code>&lt;description&gt;</code> element. The system will then use this description for the summary table instead. The contents of the <code>&lt;description_summary&gt;</code> element will <strong>only be used in the summary table</strong>. This means that it <strong>will not be visible in the finding text</strong>.</p>
+<p>Example:</p>
+<pre><code>&lt;finding id=&quot;xmlsignatureexclusion&quot; threatLevel=&quot;Low&quot; type=&quot;Signature Exclusion&quot;&gt;
+    &lt;title&gt;XML signature exclusion&lt;/title&gt;
+    &lt;description&gt;
+        &lt;p&gt;This is a more elaborate general description:&lt;/p&gt;
+        &lt;img src=&quot;../graphics/screenshot.png&quot;/&gt;
+        &lt;p&gt;In this case, the screenshot above makes this description a bad candidate for inclusion in the summary table.&lt;/p&gt;
+        &lt;p&gt;Additionally, the description is very very very very very very very very very very very very 
+        very very very very very very very very very very very very very very very very very very very 
+        very very very very very very very very very very very very very very very very very very very very 
+        very very very very very very very very very very very very very very very very very very very 
+        very very very very very very very very very very very very very very very very very very very very very 
+        very very very very very very very very very very very very very very very very very very very 
+        very very very very very very very long.&lt;/p&gt;
+    &lt;/description&gt;
+    &lt;description_summary&gt;
+        &lt;p&gt;This is the alternative summary.&lt;/p&gt;
+    &lt;/description_summary&gt;
+    ...
+&lt;/finding&gt;</code></pre>
+<h3 id="technical-description">Technical Description</h3>
+<p>This is a technical description of the problem. It can be left as-is, in which case the contents of this element will be treated as a paragraph, or it can be marked up as generic text (using the Generic content elements listed elsewhere in this document - with paragraphs, lists, tables, images).</p>
+<p>Example:</p>
+<pre><code>&lt;finding id=&quot;xmlsignatureexclusion&quot; threatLevel=&quot;Low&quot; type=&quot;Signature Exclusion&quot;&gt;
+    &lt;title&gt;XML signature exclusion&lt;/title&gt;
+    &lt;description&gt;
+        &lt;p&gt;This is a reasonably short general description. It can easily fit in the summary table.&lt;/p&gt;
+    &lt;/description&gt;
+    &lt;technicaldescription&gt;
+        &lt;p&gt;This is a very detailed and technical description of the finding using a screenshot:&lt;/p&gt;
+        &lt;img src=&quot;../graphics/screenshot1.png&quot;/&gt;
+        &lt;p&gt;And another screenshot:&lt;/p&gt;
+        &lt;img src=&quot;../graphics/screenshot2.png&quot;/&gt;
+    &lt;/technicaldescription&gt;
+    ...
+&lt;/finding&gt;</code></pre>
+<h3 id="impact">Impact</h3>
+<p>This describes the impact of the problem. It can be left as-is, in which case the contents of this element will be treated as a paragraph, or it can be marked up as generic text (using the Generic content elements listed elsewhere in this document - with paragraphs, lists, tables, images).</p>
+<p>Example:</p>
+<pre><code>&lt;finding id=&quot;xmlsignatureexclusion&quot; threatLevel=&quot;Low&quot; type=&quot;Signature Exclusion&quot;&gt;
+    &lt;title&gt;XML signature exclusion&lt;/title&gt;
+    ...
+    &lt;impact&gt;This finding is not a big threat because most people don&#39;t even know what a
+    signature inclusion is. Do you?&lt;/impact&gt;
+&lt;/finding&gt;</code></pre>
+<h3 id="recommendation">Recommendation</h3>
+<p>This element contains tips/advice/instructions to deal with the problem. It can be left as-is, in which case the contents of this element will be treated as a paragraph, or it can be marked up as generic text (using the Generic content elements listed elsewhere in this document - with paragraphs, lists, tables, images).</p>
+<p>The contents of the <code>&lt;recommendation&gt;</code> element will be used verbatim in the recommendation summary table <strong>unless</strong> the finding <em>also</em> contains a <code>&lt;recommendation_summary&gt;</code> element, in which case that element will be used.</p>
+<p>Example:</p>
+<pre><code>&lt;finding id=&quot;xmlsignatureexclusion&quot; threatLevel=&quot;Low&quot; type=&quot;Signature Exclusion&quot;&gt;
+    &lt;title&gt;XML signature exclusion&lt;/title&gt;
+    ...
+    &lt;recommendation&gt;Advise all users to change their passwords. That&#39;s always a good idea.&lt;/recommendation&gt;
+&lt;/finding&gt;</code></pre>
+<h3 id="recommendation-for-summary-table">Recommendation for Summary Table</h3>
+<p>If the recommendation is too long or uses elements like images or tables, it will not be usable to put in the recommendation table. In this case you can add a <code>&lt;recommendation_summary&gt;</code> element right after the <code>&lt;recommendation&gt;</code> element. The system will then use this recommendation for the summary table instead. The contents of the <code>&lt;recommendation_summary&gt;</code> element will <strong>only be used in the summary table</strong>. This means that it <strong>will not be visible in the finding text</strong>.</p>
+<p>Example:</p>
+<pre><code>&lt;finding id=&quot;xmlsignatureexclusion&quot; threatLevel=&quot;Low&quot; type=&quot;Signature Exclusion&quot;&gt;
+    &lt;title&gt;XML signature exclusion&lt;/title&gt;
+    ...
+    &lt;recommendation&gt;
+        &lt;p&gt;Advise all users to:&lt;/p&gt;
+        &lt;ol&gt;
+            &lt;li&gt;Stand on their head&lt;/li&gt;
+            &lt;li&gt;Restart their computers&lt;/li&gt;
+            &lt;li&gt;Change their passwords&lt;/li&gt;
+        &lt;/ol&gt;
+        &lt;img src=&quot;../graphics/pictureofauserchangingtheirpassword.png&quot;/&gt;
+    &lt;/recommendation&gt;
+    &lt;recommendation_summary&gt;
+        &lt;p&gt;Advise all users to change their passwords.&lt;/p&gt;
+    &lt;/recommendation_summary&gt;
+&lt;/finding&gt;</code></pre>
+<h2 id="non-findings">Non-findings</h2>
+<p>Non-findings are much more freeform than findings. They consist of a <code>&lt;non-finding&gt;</code> element with: - a <code>&lt;title&gt;</code> - generic elements such as paragraphs, images, etc.</p>
+<p><code>&lt;non-finding&gt;</code> elements must have an <code>id</code> attribute.</p>
+<p>(Basically, they are a <code>&lt;section&gt;</code> with a special name.)</p>
+<p>Example:</p>
+<pre><code>&lt;non-finding id=&quot;nf_xss&quot;&gt;
+    &lt;title&gt;Mail Server&lt;/title&gt;
+    &lt;p&gt;
+        The server was running MailServer ABC for SMTP, POP3 and IMAP. This is 
+        the most recent version of this particular piece of software. 
+        No relevant vulnerabilities or exploits were found.
+    &lt;/p&gt;
+    &lt;p&gt;
+    Note that this does not mean it&#39;s a good idea to use it, since the company
+    making MailServer ABC is notoriously terrible at pushing out secure software.
+&lt;/p&gt;
+&lt;/non-finding&gt;</code></pre>
+<h2 id="summary-tables">Summary tables</h2>
+<p>Every pentest report should include summary tables for all findings and recommendations. This is easy, however, as these tables are generated automatically by the software. You just need to indicate where, by using the <code>&lt;generate_findings/&gt;</code> and <code>&lt;generate_recommendations/&gt;</code> elements.</p>
+<p><code>&lt;generate_findings/&gt;</code> and <code>&lt;generate_recommendations/&gt;</code> will generate findings/recommendation summary tables for the complete report. If you only want to generate a table for findings in a specific section, add a <code>Ref</code> attribute and enter the id of the section you want to reference as its value.</p>
+<p>Example:</p>
+<pre><code>&lt;section id=&quot;xmlxamlsummary&quot;&gt;
+    &lt;title&gt;Summary&lt;/title&gt;
+    &lt;generate_findings Ref=&quot;section2&quot;/&gt;
+&lt;/section&gt;</code></pre>
+<h2 id="generic-content">Generic content</h2>
+<p>Generic content is modeled on very basic HTML.</p>
+<h3 id="paragraphs">Paragraphs</h3>
+<p>Paragraphs ('</p>
+<p>') go in sections or in the various sub-elements of findings and non-findings. They are the basic way of displaying text.</p>
+<p>Example:</p>
+<pre><code>&lt;p&gt;This is a paragraph&lt;/p&gt;</code></pre>
+<h3 id="lists">Lists</h3>
+<p>Lists can be ordered (<code>&lt;ol&gt;</code>, for '<strong>o</strong>rdered <strong>l</strong>ist') or unordered (<code>&lt;ul&gt;</code>, for <strong>u</strong>nordered <strong>l</strong>ist). Regardless of whether a list is ordered or unordered, it contains one or more list items (<code>&lt;li&gt;</code>, for <strong>l</strong>ist <strong>i</strong>tem).</p>
+<p><strong>Unordered lists</strong></p>
+<p>Example:</p>
+<pre><code>&lt;ul&gt;
+    &lt;li&gt;Some item&lt;/li&gt;
+    &lt;li&gt;Some other item&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<p><strong>Ordered lists</strong></p>
+<p>Ordered lists are numbered by default. You can configure a different ordering system by setting its <code>type</code> attribute to one of the following values:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">type</th>
+<th align="left">ordering</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">a</td>
+<td align="left">lowercase alphabetic</td>
+</tr>
+<tr class="even">
+<td align="left">A</td>
+<td align="left">uppercase alphabetic</td>
+</tr>
+<tr class="odd">
+<td align="left">i</td>
+<td align="left">lowercase roman</td>
+</tr>
+<tr class="even">
+<td align="left">I</td>
+<td align="left">uppercase roman</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code>&lt;ol type=&quot;i&quot;&gt;
+    &lt;li&gt;Some item&lt;/li&gt;
+    &lt;li&gt;Some other item&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+<h3 id="codeinputoutput-blocks">Code/Input/Output Blocks</h3>
+<p>Whenever you need to display some command line input/output or code, use the <code>&lt;pre&gt;</code> element. It will conserve any whitespace you leave, so you can format the contents of this element in a pleasant/readable way. Use spaces for indents. Note that text in the <code>&lt;pre&gt;</code> element <em>will not wrap</em>.</p>
+<p>Example:</p>
+<pre><code>&lt;section id=&quot;nmap&quot;&gt;
+    &lt;title&gt;nmap&lt;/title&gt;
+    &lt;p&gt;Command:&lt;/p&gt;
+    &lt;pre&gt;$ nmap -vvvv -oA fishinabarrel.sittingduck.com_complete -sV -sC -A -p1-65535 -T5 fishinabarrel.sittingduck.com&lt;/pre&gt;
+    &lt;p&gt;Outcome:&lt;/p&gt;
+    &lt;pre&gt;Nmap scan report for fishinabarrel.sittingduck.com (10.10.10.1)
+In several lines
+    Some indented
+and some not
+
+This is not a haiku.&lt;/pre&gt;
+&lt;/section&gt;</code></pre>
+<h4 id="help-the-code-in-my-pre-element-contains-characters-and-it-messes-with-my-xml">Help! The code in my pre element contains &lt; characters and it messes with my xml!</h4>
+<p>You can escape the &lt; character by replacing it with its entity <code>&amp;lt;</code>.</p>
+<h3 id="div-containers">Div containers</h3>
+<h4 id="what-does-div-do">What does <code>&lt;div&gt;</code> do?</h4>
+<p>Nothing. <code>&lt;div&gt;</code> just <em>is</em>.</p>
+<h4 id="sigh.-ok-why-is-div">Sigh. Ok, why <em>is</em> <code>&lt;div&gt;</code>?</h4>
+<p>You can use <code>&lt;div&gt;</code> as a container for other block elements. This is basically only (but very) useful for snippets, as snippets need to be well-formed XML documentlets and can therefore only have one root element. If the snippet is a complete section, this is not a problem. If the snippet is a bunch of paragraphs or something, you're out of luck. Or rather, you used to be out of luck, because there was no <code>&lt;div&gt;</code>. But now there is <code>&lt;div&gt;</code>. So your snippet can be <code>&lt;div&gt;</code> (root element), containing everything you want. Well, everything that's allowed, anyway.</p>
+<h4 id="so-whats-allowed-in-div">So what's allowed in <code>&lt;div&gt;</code>?</h4>
+<p>All block elements: <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;table&gt;</code>, <code>&lt;img&gt;</code>, <code>&lt;pre&gt;</code>, <code>&lt;code&gt;</code></p>
+<h4 id="and-what-elements-can-contain-div">And what elements can <em>contain</em> <code>&lt;div&gt;</code>?</h4>
+<p><code>&lt;section&gt;</code> and <code>&lt;annex&gt;</code>.</p>
+<h3 id="tables">Tables</h3>
+<p><strong>Rows</strong></p>
+<p>Tables consist of a <code>&lt;table&gt;</code> element containing one or more rows (<code>&lt;tr&gt;</code>).</p>
+<p>Example:</p>
+<pre><code>&lt;table&gt;
+    &lt;tr&gt;...&lt;/tr&gt;
+    &lt;tr&gt;...&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+<p><strong>Cells</strong></p>
+<p>A table row consists of one or more cells (<code>&lt;td&gt;</code>).</p>
+<p>Example:</p>
+<pre><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Cell 1 in row 1&lt;/td&gt;
+        &lt;td&gt;Cell 2 in row 1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Cell 1 in row 2&lt;/td&gt;
+        &lt;td&gt;Cell 2 in row 2&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+<p>Columns are implicit: each cell in a row corresponds to a column.</p>
+<p><strong>Header Cells</strong></p>
+<p>Instead of normal cells, you can also use header cells (<code>&lt;th&gt;</code>) for a table header.</p>
+<p>Example:</p>
+<pre><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Header cell 1 in row 1&lt;/th&gt;
+        &lt;th&gt;Header cell 2 in row 1&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Cell 1 in row 2&lt;/td&gt;
+        &lt;td&gt;Cell 2 in row 2&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+<p><strong>Borders</strong></p>
+<p>To turn on borders for your table, set its <code>border</code> attribute to '1'.</p>
+<p>Example:</p>
+<pre><code>&lt;table border=&quot;1&quot;&gt;
+...
+&lt;/table&gt;</code></pre>
+<p>You can also turn borders on or off (<code>border=&quot;0&quot;</code>) on lower levels (on the row level, for example) for finer-tuned border control.</p>
+<p><strong>Setting column width</strong></p>
+<p>To set the width for your columns, add a number for each column to the <code>cols</code> element. This number is in millimeters (you can either type 200mm or just 200; don't use cm or pt or px or other measures though). The total width between the margins is 17cm, so 170mm.</p>
+<p>Example:</p>
+<pre><code>&lt;table cols=&quot;50 50 70&quot;&gt;
+    &lt;tr&gt;
+        &lt;td&gt;cell 1&lt;/td&gt;&lt;td&gt;cell 2&lt;/td&gt;&lt;td&gt;cell 3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;cell 4&lt;/td&gt;&lt;td&gt;cell 5&lt;/td&gt;&lt;td&gt;cell 6&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+<p>This will give the first column a width of 50mm (5cm), the second as well, and the third a width of 70mm (7cm).</p>
+<p><strong>Spanning multiple rows/columns</strong></p>
+<p>To make a cell span multiple columns, set its <code>colspan</code> attribute to the number of columns you want to span.</p>
+<p>Example:</p>
+<pre><code>&lt;tr&gt;
+    &lt;td colspan=&quot;2&quot;&gt;This cell spans the two cells in the row below.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;Cell 1 in row 2&lt;/td&gt;
+    &lt;td&gt;Cell 2 in row 2&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+<p>To make a cell span multiple rows, set its <code>rowspan</code> attribute to the number of rows you want to span.</p>
+<p>Example:</p>
+<pre><code>&lt;tr&gt;
+    &lt;td rowspan=&quot;2&quot;&gt;This cell spans the two cells in the second column.&lt;/td&gt;
+    &lt;td&gt;Cell 2 in row 1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;Cell 2 in row 2&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+<p><strong>Alignment</strong></p>
+<p>Set the <code>align</code> attribute of any cell, row or table to one of the following values to change the text alignment in that cell/row/table:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">align</th>
+<th align="left">result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">right</td>
+<td align="left">right alignment</td>
+</tr>
+<tr class="even">
+<td align="left">center</td>
+<td align="left">centered</td>
+</tr>
+<tr class="odd">
+<td align="left">justify</td>
+<td align="left">justified</td>
+</tr>
+</tbody>
+</table>
+<h2 id="images">Images</h2>
+<p>To insert an image, use the <code>&lt;img&gt;</code> element. In its <code>src</code> attribute, enter the relative path to the image file you want to reference.</p>
+<p>To set the height or width, use <em>either</em> the <code>height</code> or <code>width</code> attribute. Any numerical value you enter will be interpreted as centimeters.</p>
+<p>If you set both, only the width will be interpreted.</p>
+<p>If you do not set any height or width, the image will be displayed at full page width (i.e. 17 cm wide)</p>
+<p>Example: <code>&lt;img src=&quot;../graphics/xmlsignatureexclusion.png&quot; width=&quot;5&quot;/&gt;</code></p>
+<p>Optionally, you can set an image caption by adding some text in the <code>title</code> attribute.</p>
+<p>Example: <code>&lt;img src=&quot;../graphics/xmlsignatureexclusion.png&quot; width=&quot;5&quot; title=&quot;This is a funny picture LOL&quot;/&gt;</code></p>
+<h3 id="inline-elements">Inline elements</h3>
+<p>Inline elements are elements that modify the text inside e.g. a paragraph or a list item, for styling or linking purposes. You have the following options available to you:</p>
+<p><strong>Bold</strong></p>
+<p>To make text bold, wrap it in <code>&lt;b&gt;</code> tags.</p>
+<p>Example:</p>
+<p><code>&lt;p&gt;&lt;b&gt;This text is bold&lt;/b&gt; and this text is not.&lt;/p&gt;</code></p>
+<p><strong>Italic</strong></p>
+<p>To make text italic, wrap it in <code>&lt;i&gt;</code> tags.</p>
+<p>Example:</p>
+<p><code>&lt;p&gt;&lt;i&gt;This text is italic&lt;/i&gt; and this text is not.&lt;/p&gt;</code></p>
+<p><strong>Underline</strong></p>
+<p>To make text underlined, wrap it in <code>&lt;u&gt;</code> tags.</p>
+<p>Example:</p>
+<p><code>&lt;p&gt;&lt;u&gt;This text is underlined&lt;/u&gt; and this text is not.&lt;/p&gt;</code></p>
+<p><strong>Monospace</strong></p>
+<p>To have inline text in a monospace font, wrap it in <code>&lt;monospace&gt;</code> tags.</p>
+<p>Example:</p>
+<p><code>&lt;p&gt;&lt;monospace&gt;This text is monospace&lt;/monospace&gt; and this text is not.&lt;/p&gt;</code></p>
+<p><strong>Superscript</strong></p>
+<p>To have inline text in superscript, wrap it in <code>&lt;sup&gt;</code> tags.</p>
+<p>Example:</p>
+<p><code>&lt;p&gt;&lt;sup&gt;This text is in superscript&lt;/sup&gt; and this text is not.&lt;/p&gt;</code></p>
+<p><strong>Subscript</strong></p>
+<p>To have inline text in subscript, wrap it in <code>&lt;sub&gt;</code> tags.</p>
+<p>Example:</p>
+<p><code>&lt;p&gt;&lt;sub&gt;This text is in subscript&lt;/sub&gt; and this text is not.&lt;/p&gt;</code></p>
+<p><strong>Links</strong></p>
+<p>Link to internal (in the report) or external (on the web) pages using the <code>&lt;a&gt;</code> element. For internal destinations, you can either use an empty <code>&lt;a/&gt;</code> (recommended, see example 1) or 'normal' linking (see example 2).</p>
+<p>In the <code>href</code> attribute of the <code>&lt;a&gt;</code> element, type:</p>
+<ul>
+<li><h1>+ the id of the section you're linking to (when linking to a section</h1>
+in the report), or</li>
+<li>the url of the website you're linking to (when linking to a website)</li>
+</ul>
+<p>Example 1 - linking with an empty element:</p>
+<p><code>&lt;p&gt;Please refer to &lt;a href=&quot;#xss_finding&quot;/&gt;.&lt;/p&gt;</code></p>
+<p>(Note that in this case, we would need to have an element with id &quot;xss_finding&quot; in the report, otherwise the link wouldn't resolve.)</p>
+<p>This will auto-generate the linked text: 'Please refer to SID-004 (page 4).', or 'Please refer to section 2 (page 13).'</p>
+<p>Example 2:</p>
+<p><code>&lt;p&gt;Please refer to &lt;a href=&quot;#xss_finding&quot;&gt;our finding on insecure mailservers&lt;/a&gt;.&lt;/p&gt;</code></p>
+<p>(Again, we would need to have an element with id &quot;xss_finding&quot; in the report, otherwise the link wouldn't resolve.)</p>
+<p>Example 3:</p>
+<p><code>&lt;p&gt;Please refer to &lt;a href=&quot;http://www.radicallyopensecurity.com&quot;&gt;our amazing website&lt;/a&gt;.&lt;/p&gt;</code></p>
+<h2 id="manual-breaks">Manual breaks</h2>
+<h3 id="line-breaks">Line breaks</h3>
+<p>Mostly text is broken automatically (between paragraphs etc.) but in some rare cases you may need to insert a manual line break. To do so, use the <code>&lt;br/&gt;</code> element.</p>
+<p>Example:</p>
+<pre><code>&lt;p&gt;This is my haiku&lt;br/&gt;
+my line is broken, but still&lt;br/&gt;
+the paragraph flows&lt;/p&gt;</code></pre>
+<h3 id="page-breaks">Page breaks</h3>
+<p>To force a page break before or after a section, set its <code>break</code> attribute to 'before' or 'after'.</p>
+<p>Note: breaks are inserted automatcally before every appendix and before/after the index.</p>
+<p>Example:</p>
+<pre><code>&lt;section id=&quot;technicalfindings&quot; break=&quot;before&quot;&gt;
+&lt;title&gt;Technical Findings&lt;/title&gt;
+...
+&lt;/section&gt;</code></pre>

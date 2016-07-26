@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns:xi="http://www.w3.org/2001/XInclude">
+        <title>Inleiding</title>
+        <p><client_long/> (hierna “<b><client_short/></b>”), statutair gevestigd te
+            <client_street/>, <client_city/>, <client_country/>, heeft <company_long/> (hierna
+                “<b><company_short/></b>”) verzocht een <company_svc_long/> uit te voeren. Motivatie
+            voor dit verzoek is dat <client_short/> een beter inzicht wenst te krijgen in ...</p>
+        
+        <p>Deze offerte beschrijft de scope van het werk en de voorwaarden waaronder <company_short/> deze diensten zal uitvoeren.</p>
+    </section>

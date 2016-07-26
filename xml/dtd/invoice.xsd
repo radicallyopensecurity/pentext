@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.0" vc:maxVersion="1.1">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+        schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+    <xs:import namespace="http://www.w3.org/2001/XInclude"
+        schemaLocation="http://www.w3.org/2001/XInclude/XInclude.xsd"/>
+    <xs:include schemaLocation="common.xsd"/>
+    <xs:element name="invoice">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="meta"/>
+                <xs:element ref="servicesdelivered" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="additionalcosts" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="invoice_no" type="xs:string"/>
+            <xs:attribute name="date" type="xs:date" use="optional"/>
+            <xs:attribute name="denomination" use="optional" default="euro">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="euro"/>
+                        <xs:enumeration value="dollar"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="meta">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="company"/>
+                <xs:element ref="client"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="servicesdelivered">
+        <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                <xs:element name="service" type="entry"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="additionalcosts">
+        <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                <xs:element name="cost" type="entry"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:complexType name="entry">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element ref="description"/>
+            <xs:element ref="fee"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:element name="description" type="xs:string"/>
+    <xs:element name="fee">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:integer">
+                    <xs:attribute name="vat" use="optional" default="yes">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="yes"/>
+                                <xs:enumeration value="no"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="block" mixed="true">
+        <xs:choice maxOccurs="unbounded">
+            <xs:group ref="inline-all"/>
+            <xs:group ref="placeholders"/>
+        </xs:choice>
+        <xs:attribute ref="xml:base"/>
+    </xs:complexType>
+    <!-- Placeholders -->
+    <xs:group name="placeholders">
+        <xs:choice>
+            <xs:element name="client_long"/>
+            <xs:element name="client_short"/>
+            <xs:element name="client_street"/>
+            <xs:element name="client_city"/>
+            <xs:element name="client_country"/>
+            <xs:element name="company_long"/>
+            <xs:element name="company_short"/>
+            <xs:element name="company_svc_long"/>
+            <xs:element name="company_svc_short"/>
+            <xs:element name="company_legal_rep"/>
+            <xs:element name="company_poc1"/>
+            <xs:element name="t_app"/>
+            <xs:element name="t_app_producer"/>
+            <xs:element name="p_duration"/>
+        </xs:choice>
+    </xs:group>
+</xs:schema>

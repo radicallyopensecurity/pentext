@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?><pentest_report xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" findingCode="SID" xsi:noNamespaceSchemaLocation="../dtd/pentestreport.xsd">
+        <meta>
+                <title>Penetration Test Report</title>
+                <xi:include href="client_info.xml"/>
+                <targets>
+                        <target>fishinabarrel.sittingduck.com</target>
+                </targets>
+                <collaborators>
+                        <reviewers>
+                                <reviewer>Melanie Rieback</reviewer>
+                        </reviewers>
+                        <approver>
+                                <name>Melanie Rieback</name>
+                                <bio>Melanie Rieback is a former Asst. Prof. of Computer Science from the VU,
+who is also the co-founder/CEO of Radically Open Security.</bio>
+                        </approver>
+                        <pentesters>
+                                <pentester>
+                                        <name>Melanie Rieback</name>
+                                        <bio>Melanie Rieback is a former Asst. Prof. of Computer Science from the VU,
+                                                who is also the co-founder/CEO of Radically Open Security.</bio>
+                                </pentester>
+                                <pentester>
+                                        <name>Aristotle</name>
+                                        <bio>Greek philosopher and scientist born in the Macedonian city of Stagira, Chalkidice, on the northern periphery of Classical Greece.</bio>
+                                </pentester>
+                                <pentester>
+                                        <name>George Boole</name>
+                                        <bio>English mathematician, philosopher and logician. Works in the fields of differential equations and algebraic logic, and is now best known as the author of The Laws of Thought.</bio>
+                                </pentester>
+                                <pentester>
+                                        <name>William of Ockham</name>
+                                        <bio>English Franciscan friar and scholastic philosopher and theologian. Considered to be one of the major figures of medieval thought. At the centre of some major intellectual and political controversies.</bio>
+                                </pentester>
+                                <pentester>
+                                        <name>Ludwig Josef Johann Wittgenstein</name>
+                                        <bio>Austrian-British philosopher who works primarily in logic, the philosophy of mathematics, the philosophy of mind, and the philosophy of language.</bio>
+                                </pentester>
+                        </pentesters>
+                </collaborators>
+                <classification>Confidential</classification>
+                <version_history>
+                        <version date="2015-01-19T01:00:00" number="auto">
+                                <v_author>Patricia Piolon</v_author>
+                                <v_description>Initial draft</v_description>
+                        </version>
+                        <version date="2015-01-20T01:00:00" number="auto">
+                                <v_author>Ernest Hemingway</v_author>
+                                <v_description>Structure &amp; contents revision</v_description>
+                        </version>
+                        <version date="2015-01-21T01:00:00" number="auto">
+                                <v_author>Patricia Piolon</v_author>
+                                <v_description>Added threat levels and recommendations</v_description>
+                        </version>
+                        <version date="2015-01-22T01:00:00" number="auto">
+                                <v_author>Patricia Piolon</v_author>
+                                <v_author>JRR Tolkien</v_author>
+                                <v_description>Revision</v_description>
+                        </version>
+                        <version date="2015-01-23T01:00:00" number="auto">
+                                <v_author>Patricia Piolon</v_author>
+                                <v_description>Revision</v_description>
+                        </version>
+                        <version date="2015-01-26T01:00:00" number="1.0">
+                                <v_author>Arthur Conan Doyle</v_author>
+                                <v_description>Finalizing</v_description>
+                        </version>
+                </version_history>
+                <xi:include href="snippets/company_info.xml"/>
+        </meta>
+        
+        <generate_index/>
+        
+        <section id="executiveSummary">
+                <title>Executive Summary</title>
+                <section id="introduction">
+                        <title>Introduction</title>
+                        <p>Sitting Duck B.V. (“Sitting Duck”) has assigned
+                                the task of performing a Penetration Test of the FishInABarrel Web
+                                Application to Radically Open Security BV (hereafter “ROS”).
+                                Sitting Duck has made this request to better evaluate the security of the application and
+                                to identify application level vulnerabilities in order to see whether the FishInABarrel
+                                Web Application is ready, security-wise, for production deployment.</p>
+                        <p>This report contains our findings as well as detailed explanations of exactly how ROS performed
+                                the penetration test.</p>
+                </section>
+                <section id="scope">
+                        <title>Scope of work</title>
+                        <p>The scope of the Sitting Duck penetration test was limited to the following
+                                target:</p>
+                        <generate_targets/>
+                        <p>The penetration test was carried out from a black box perspective: no information
+                                regarding the system(s) tested was provided by Sitting Duck or FishInABarrel, although FishInABarrel
+                                did provide ROS with two test user accounts.</p>
+                </section>
+                <section id="objectives">
+                        <title>Project objectives</title>
+                        <p>The objective of the security assessment is to gain insight into the security of
+                                the host and the FishInABarrel Web Application.</p>
+                </section>
+                <section id="timeline">
+                        <title>Timeline</title>
+                        <p>The FishInABarrel Security Audit took place between January 14 and January 16,
+                                2015.</p>
+                </section>
+                <section id="results">
+                        <title>Results in a Nutshell</title>
+                        <p>During this pentest, we found quite a number of different security problems –
+                                Cross-site Scripting (XSS) vulnerabilities, both stored and reflected, Cross-site
+                                Request Forgery (CSRF) vulnerabilities, 
+                                information disclosures (multiple instances), and lack of
+                                brute force protection.</p>
+                </section>
+                <section id="findingSummary">
+                        <title>Summary of Findings</title>
+                        <generate_findings/>
+                        <!-- generated from Findings section -->
+                </section>
+                <section id="recommendationSummary">
+                        <title>Summary of Recommendations</title>
+                        <generate_recommendations/>
+                        <!-- generated from Findings section -->
+                </section>
+        </section>
+        
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="snippets/report/methodology.xml"/>
+        
+        <section id="recon">
+                <title>Reconnaissance and Fingerprinting</title>
+                <p>Through automated scans we were able to gain the following information about the
+                        software and infrastructure. Detailed scan output can be found in the sections
+                        below.</p>
+                
+                <table border="1"><tr><th>Fingerprinted Information</th></tr>
+                        <tr><td>Windows XP<br/>Microsoft IIS 6.0<br/>PHP 5.4.29<br/>jQuery 1.7.2<br/>Mailserver XYZ<br/>FTPserver ABC</td></tr></table>
+                
+                <section id="scans">
+                        <title>Automated Scans</title>
+                        <p>As part of our active reconnaissance we used the following automated scans:</p>
+                        <ul>
+                                <li>nmap – <a href="http://nmap.org">http://nmap.org</a></li>
+                                <li>skipfish - <a href="https://code.google.com/p/skipfish/">https://code.google.com/p/skipfish/</a></li>
+                                <li>sqlmap – <a href="http://sqlmap.org">http://sqlmap.org</a></li>
+                                <li>Wapiti – <a href="http://wapiti.sourceforge.net">http://wapiti.sourceforge.net</a></li>
+                        </ul>
+                        <p>Of these, only the output of nmap turned out to be
+                                useful; consequently only nmap and output will be discussed in
+                                this section.</p>
+                </section>
+                <section id="nmap">
+                        <title>nmap</title>
+                        <p>Command:</p>
+                        <pre>$ nmap -vvvv -oA fishinabarrel.sittingduck.com_complete -sV -sC -A -p1-65535 -T5
+fishinabarrel.sittingduck.com</pre>
+                        
+                        <p>Outcome:</p>
+                        <pre> Nmap scan report for fishinabarrel.sittingduck.com (10.10.10.1)
+Starting Nmap 4.11 ( http://www.insecure.org/nmap/ ) at 2013-11-11 15:43 EST
+Initiating ARP Ping Scan against 10.10.10.1 [1 port] at 15:43
+The ARP Ping Scan took 0.01s to scan 1 total hosts.
+Initiating SYN Stealth Scan against fishinabarrel.sittingduck.com (10.10.10.1) [1680 ports] at 15:43
+Discovered open port 22/tcp on 10.10.10.1
+Discovered open port 80/tcp on 10.10.10.1
+Discovered open port 8888/tcp on 10.10.10.1
+Discovered open port 111/tcp on 10.10.10.1
+Discovered open port 3306/tcp on 10.10.10.1
+Discovered open port 957/tcp on 10.10.10.1
+The SYN Stealth Scan took 0.30s to scan 1680 total ports.
+Host fishinabarrel.sittingduck.com (10.10.10.1) appears to be up ... good.
+Interesting ports on fishinabarrel.sittingduck.com (10.10.10.1):
+Not shown: 1674 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+25/tcp   open  smtp
+80/tcp   open  http
+110/tcp  open  pop3
+111/tcp  open  rpcbind
+957/tcp  open  unknown
+3306/tcp open  mysql
+4000/tcp open  dangerous service
+
+Nmap finished: 1 IP address (1 host up) scanned in 0.485 seconds
+Raw packets sent: 1681 (73.962KB) | Rcvd: 1681 (77.322KB)</pre>
+                        
+                        <p>The scan revealed a very large number of open services on this machine, which
+                                greatly increases the attack surface; see <a href="#f2"/> for more information on the
+                                security risk.</p>
+                        
+                </section>
+                
+        </section>
+        <section id="techSummary">
+                <title>Pentest Technical Summary</title>
+                <section id="findings">
+                        <title>Findings</title>
+                        
+                        <p>We have identified the following issues:</p>
+                        
+                        <finding id="f1" threatLevel="Moderate" type="Information Leak">
+                                <title>PHPInfo Disclosure</title>
+                                <description>
+                                        <p>The phpinfo() function of the PHP language is readable,
+                                                resulting in a listing of all the runtime information of the environment,
+                                                thus disclosing potentially valuable information to attackers.</p>
+                                </description>
+                                <technicaldescription>
+                                        <p>This is where the good stuff goes. We give a detailed technical description of the problem.</p>
+                                        <p>Illustrative picture of an evil hacker pondering dark deeds:</p>
+                                        <img height="10" src="../graphics/screenshot.jpg"/>
+                                </technicaldescription>
+                                <impact>
+                                        <p>This is where we explain how the sh*t is hitting the fan, exactly.</p>
+                                </impact>
+                                <recommendation>
+                                        <p>Here is where we write some tips to solve the problem.</p>
+                                </recommendation>
+                        </finding>
+                        
+                        <finding id="f2" threatLevel="High" type="XSS">
+                                <title>A terrible XSS issue</title>
+                                <description>
+                                        <p>A general description of the problem.</p>
+                                </description>
+                                <technicaldescription>
+                                        <p>This is we go into great detail about the vulnerability.</p>
+                                </technicaldescription>
+                                <impact>
+                                        <p>This is where we explain why this vulnerability is a problem.</p>
+                                </impact>
+                                <recommendation>
+                                        <p>This is where we solve everything and the sun starts shining again.</p>
+                                </recommendation>
+                        </finding>
+                        
+                        
+                </section>
+                
+                <section id="nonFindings">
+                        <title>Non-Findings</title>
+                        <p>In this section we list some of the things that were tried but turned out to be
+                                dead ends.</p>
+                        
+                        <non-finding id="ftp">
+                                <title>FTP</title>
+                                <p>The server was running FTPserver ABC, the most recent
+                                        version of this particular piece of software. Anonymous login was turned off and no
+                                        relevant vulnerabilities or exploits were found.</p>
+                        </non-finding>
+                        <non-finding id="mail">
+                                <title>Mail Server</title>
+                                <p>The server was running Mailserver XYZ, the most recent
+                                        version of this particular piece of software. No relevant vulnerabilities or
+                                        exploits were found. </p>
+                        </non-finding>
+                        <non-finding id="sqlInjection">
+                                <title>SQL Code Injection</title>
+                                <p>The following parameters are not vulnerable to SQL injection. </p>
+                                <p>All parameters have been checked manually.</p>
+                                <pre>-file1.php
+-file2.php
+-file3.php
+</pre></non-finding>
+                        <non-finding id="heartbleed">
+                                <title>Heartbleed</title>
+                                <p>System was not vulnerable to heartbleed.</p> </non-finding>
+                        <non-finding id="sp2">
+                                <title>Windows XP</title>
+                                <p>The host is running Windows XP. As we all know, Windows XP is bulletproof.</p>
+                        </non-finding>
+                </section>
+        </section>
+        <section id="conclusion">
+                <title>Conclusion</title>
+                <p>In the course of this penetration test, we have demonstrated that the FishInABarrel
+                        Web Application faces a range of security issues which makes it vulnerable to a number
+                        of different attacks. Vulnerabilities found included: cross-site scripting (both stored
+                        and reflected), cross-site request forgery, information disclosure
+                        and lack of brute force protection.</p>
+                <p>Our conclusion is that there are a number of things that FishInABarrel BV has to fix before
+                        Sitting Duck should use their software. A number of the security issues highlighted in this
+                        report have fairly simple solutions, but these should nevertheless be fixed before use
+                        of the FishInABarrel Web App continues.</p>
+                <p>We finally want to emphasize that security is a process – and this penetration test is
+                        just a one-time snapshot. Security posture must be continuously evaluated and improved.
+                        Regular audits and ongoing improvements are essential in order to maintain control of
+                        your corporate information security. We hope that this pentest report (and the detailed
+                        explanations of our findings) will contribute meaningfully towards that end. Don't
+                        hesitate to let us know if you have any further questions or need further clarification
+                        of anything in this report.</p>
+        </section>
+        <appendix id="testteam">
+                <title>Testing team</title>
+                <generate_testteam/>
+        </appendix>
+</pentest_report>

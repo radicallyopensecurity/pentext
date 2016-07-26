@@ -1,0 +1,95 @@
+<h1 id="tools-manual">Tools Manual</h1>
+<h2 id="intro">Intro</h2>
+<p>You can write your documentation in OpenOffice (and then you just install OpenOffice and do your thing), or you can write it in XML. This allows you to concentrate only on the content without having to worry about what the end result will look like: the XML document is converted to PDF using a style sheet, so you only need to think about what needs to be said, not about numbering, styling or document metadata.</p>
+<p>This sounds cool (and it is), but it does mean you may need to use some software you're not well used to working with. You're going to need:</p>
+<ul>
+<li>jEdit, An XML editor</li>
+<li>Saxon, An XML parser</li>
+<li>FOP, A tool to convert XSL-FO to PDF</li>
+</ul>
+<h2 id="downloading-and-installing">Downloading and installing</h2>
+<h3 id="java">Java</h3>
+<p>Make sure you have at least Java 7 installed (Java 8 is fine as well). If not, download it at www.java.com.</p>
+<h3 id="jedit">jEdit</h3>
+<p>jEdit is an open source, cross platform text editor with support for XML editing. If you're used to working with XML and have a favorite different XML editor that's fine, but if not, start with jEdit.</p>
+<p>Download jEdit (5.x) at: http://jedit.org/index.php?page=download and install.</p>
+<h3 id="saxon">Saxon</h3>
+<p>Download Saxon Home Edition (HE) 9.6 <strong>for Java</strong> at: http://saxon.sourceforge.net/ and unzip to a location of your choice.</p>
+<h3 id="fop">FOP</h3>
+<p>Download Apache FOP 1.1 at https://xmlgraphics.apache.org/fop/download.html and unzip.</p>
+<h3 id="fonts">Fonts</h3>
+<p>Download the Liberation Sans font from http://www.fontsquirrel.com/fonts/liberation-sans and install.</p>
+<p>Download the Liberation Mono font from http://www.fontsquirrel.com/fonts/Liberation-Mono and install.</p>
+<h2 id="configuring">Configuring</h2>
+<h3 id="jedit-1">jEdit</h3>
+<p>In jEdit, you're going to have to install the XML plugin:</p>
+<ol style="list-style-type: decimal">
+<li>Start jEdit, then go to plugins &gt; plugin manager</li>
+<li>Click on the 'Install' tab</li>
+<li>Find the plugin called 'XML' and click its checkbox. Its dependencies will be checked automatically; this is a good thing.</li>
+<li>Click the 'Install' button below the description box and wait until everything is done downloading and installing.</li>
+<li>Click the 'Close' button.</li>
+</ol>
+<p>You may also want to dock the various plugin panes so they're easy to find and use: XML (XML Insert), Error List and Sidekick. XML will give you a list of all the elements you can insert at the caret, Error List will show you where your XML is not valid according to the Schema and Sidekick is useful for quick navigation.</p>
+<h3 id="fop-1">FOP</h3>
+<p>First, make sure you have installed the LiberationSansNarrow and LiberationMono fonts on your machine.</p>
+<p>In the fop directory, find directory 'conf'. In this directory you'll find a file 'fop.xconf'. Make a copy of this file and rename it, maybe to rosfop.xconf.</p>
+<p>Edit rosfop.xconf:</p>
+<ol style="list-style-type: decimal">
+<li>Under <code>&lt;base&gt;.&lt;/base&gt;</code>, add the line: <code>&lt;font-base&gt;/Path/To/Your/Fonts/Directory&lt;/font-base&gt;</code> (using the actual path to the Fonts directory on your own pc)</li>
+<li>Change the line <code>&lt;default-page-settings height=&quot;11in&quot; width=&quot;8.26in&quot;/&gt;</code> to <code>&lt;default-page-settings height=&quot;29.7cm&quot; width=&quot;21cm&quot;/&gt;</code></li>
+<li><p>Just above the <code>&lt;/fonts&gt;</code> closing tag, add:</p>
+<pre><code>&lt;font kerning=&quot;yes&quot; embed-url=&quot;LiberationSansNarrow-Regular.ttf&quot;&gt;
+    &lt;font-triplet name=&quot;LiberationSansNarrow&quot; style=&quot;normal&quot; weight=&quot;normal&quot;/&gt;
+    &lt;/font&gt;
+    &lt;font kerning=&quot;yes&quot; embed-url=&quot;LiberationSansNarrow-Bold.ttf&quot;&gt;
+      &lt;font-triplet name=&quot;LiberationSansNarrow&quot; style=&quot;normal&quot; weight=&quot;bold&quot;/&gt;
+    &lt;/font&gt;
+    &lt;font kerning=&quot;yes&quot; embed-url=&quot;LiberationSansNarrow-Italic.ttf&quot;&gt;
+      &lt;font-triplet name=&quot;LiberationSansNarrow&quot; style=&quot;italic&quot; weight=&quot;normal&quot;/&gt;
+    &lt;/font&gt;
+    &lt;font kerning=&quot;yes&quot; embed-url=&quot;LiberationSansNarrow-BoldItalic.ttf&quot;&gt;
+      &lt;font-triplet name=&quot;LiberationSansNarrow&quot; style=&quot;italic&quot; weight=&quot;bold&quot;/&gt;
+    &lt;/font&gt;
+    &lt;font kerning=&quot;yes&quot; embed-url=&quot;LiberationMono-Regular.ttf&quot;&gt;
+    &lt;font-triplet name=&quot;LiberationMono&quot; style=&quot;normal&quot; weight=&quot;normal&quot;/&gt;
+    &lt;/font&gt;
+    &lt;font kerning=&quot;yes&quot; embed-url=&quot;LiberationMono-Bold.ttf&quot;&gt;
+      &lt;font-triplet name=&quot;LiberationMono&quot; style=&quot;normal&quot; weight=&quot;bold&quot;/&gt;
+    &lt;/font&gt;
+    &lt;font kerning=&quot;yes&quot; embed-url=&quot;LiberationMono-Italic.ttf&quot;&gt;
+      &lt;font-triplet name=&quot;LiberationMono&quot; style=&quot;italic&quot; weight=&quot;normal&quot;/&gt;
+    &lt;/font&gt;
+    &lt;font kerning=&quot;yes&quot; embed-url=&quot;LiberationMono-BoldItalic.ttf&quot;&gt;
+      &lt;font-triplet name=&quot;LiberationMono&quot; style=&quot;italic&quot; weight=&quot;bold&quot;/&gt;
+    &lt;/font&gt;</code></pre></li>
+<li><p>Save the file.</p></li>
+</ol>
+<h2 id="using">Using</h2>
+<h3 id="jedit-2">jEdit</h3>
+<p>When you open an xml pentest report, jEdit automatically loads the referenced schema (the file containing all the xml 'grammar' rules). As part of the schema is online, jEdit will sometimes give you a message asking if you want to cache the online part:</p>
+<p>&quot;This XML file depends on a resource which is stored at the following Internet address: http://www.w3.org/2001/XInclude/XInclude.xsd&quot;</p>
+<p>Caching it is a good idea, so click the yes button when prompted (or 'no' if you have good reasons not to, it's your party!)</p>
+<p>Use the pentestreport.xml template (which already contains some default stuff) to create your report (read the doc on report writing for more info).</p>
+<p>Make sure the XML file you've created with jEdit is valid (no errors in the Error List in jEdit).</p>
+<h3 id="saxon-1">Saxon</h3>
+<p>To transform your XML file into XSL-FO, use the following command from the saxon directory:</p>
+<h4 id="to-generate-a-pentest-report">To Generate a Pentest Report</h4>
+<p><code>java  -jar saxon9he.jar -s:/path/to/report/source/pentestreport.xml -xsl:/path/to/report/xslt/generate_report.xsl -o:/path/to/report/target/pentestreport.fo -xi</code></p>
+<p>(Note the source/xslt/target directories in this example, which correspond to the directory structure in the report directory. Also make sure to add the -xi option!)</p>
+<h4 id="to-generate-an-offerte">To Generate an Offerte</h4>
+<p><code>java  -jar saxon9he.jar -s:/path/to/report/source/offerte.xml -xsl:/path/to/report/xslt/generate_offerte.xsl -o:/path/to/report/target/offerte.fo</code></p>
+<p>(Note the source/xslt/target directories in this example, which correspond to the directory structure in the report directory.)</p>
+<p>If you have defined extra parties that need to give permission, waivers for these parties will be generated in .fo format automatically</p>
+<h3 id="fop-2">FOP</h3>
+<p>To then convert your XSL-FO file into a nice and shiny pdf, use the following command from the fop directory:</p>
+<h4 id="to-generate-a-pentest-report-1">To Generate a Pentest Report</h4>
+<p><code>fop -c conf/rosfop.xconf /path/to/report/target/pentestreport.fo path/to/report/target/pentestreport.pdf</code></p>
+<p>(If you used another name for your custom FOP configuration file, use that.)</p>
+<p>or maybe it is easier to go to your target directory and type:</p>
+<p><code>/path/to/fop -c path/to/fop/conf/rosfop.xconf offerte.fo offerte.pdf</code></p>
+<p>it depends on your directory structure, I guess.</p>
+<p>Note that, if you define extra parties that need to give permission, you'll need to convert the waiver fo files to pdf as well.</p>
+<h4 id="to-generate-an-offerte-1">To Generate an Offerte</h4>
+<p><code>fop -c conf/rosfop.xconf /path/to/report/target/offerte.fo path/to/report/target/offerte.pdf</code></p>
+<p>(If you used another name for your custom FOP configuration file, use that.)</p>

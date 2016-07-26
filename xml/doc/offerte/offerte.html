@@ -1,0 +1,361 @@
+<h1 id="writing-an-offerte">Writing an offerte</h1>
+<h2 id="tools">Tools</h2>
+<p>First of all, make sure you have the right tools installed. Check the tools manual for more info.</p>
+<h2 id="main-structure">Main structure</h2>
+<p>The report's main element is <code>&lt;offerte&gt;</code>. It contains a number of major parts:</p>
+<ul>
+<li>Entity listing, in the doctype. These are fields that will be reused throughout the document, mostly in boilerplate text</li>
+<li>Document information (metadata), in the element <code>&lt;meta&gt;</code></li>
+<li>A variable number of sections (main content), in several <code>&lt;section&gt;</code> elements</li>
+<li>A waiver annex, in the <code>&lt;annex&gt;</code> element (located in the snippets directory as it is also boilerplate text)</li>
+</ul>
+<h2 id="entity-listing">Entity listing</h2>
+<p>When you have your scoping information, fill in all the fields. They are commented in the template, so what to fill in should be pretty self-explanatory.</p>
+<p>You should be able to fill all fields. The only exception is <code>client_waiver_rep</code>, as it is not always known in advance who this will be.</p>
+<h2 id="document-information-metadata">Document information / metadata</h2>
+<p>This is the part where we put all information that is <em>about the offerte</em> rather than about the offer itself (hence the term metadata): who has been working on it, what is the offer about, what versions has it gone through, etc.</p>
+<p>In XML, this part is indicated by the <code>&lt;meta&gt;</code> element. It contains the following elements (mandatory and in the listed order):</p>
+<ul>
+<li>The offered service, in the <code>&lt;offered_service&gt;</code> element</li>
+<li>Client information, in the <code>&lt;client&gt;</code> element</li>
+<li>Your-company-related information, in the '<company>' element</li>
+<li>Targets listing, in the <code>&lt;targets&gt;</code> element</li>
+<li>The document's version history, in the <code>&lt;version_history&gt;</code> element</li>
+</ul>
+<p>You need to fill in everything <em>that isn't already filled in with an entity</em>. If there is an entity, the info will be taken from the scoping info you entered in the entity list above. So leave it alone. No need to do anything.</p>
+<p>For more details, see the sections below.</p>
+<h3 id="the-offered-service">The offered service</h3>
+<p>In the <code>&lt;offered_service&gt;</code> element, put the offered_service (in text). This is something like 'penetration testing services' probably.</p>
+<p>Example: <code>&lt;offered_service&gt;penetration testing services&lt;/offered_service&gt;</code></p>
+<p><strong>No need to do anything here, the entity takes care of this</strong></p>
+<h3 id="client-information">Client information</h3>
+<p>The <code>&lt;client&gt;</code> element contains four other elements:</p>
+<ul>
+<li><code>&lt;full_name&gt;</code>, in which you should type the client's official name, e.g. 'Sitting Duck BV', or 'Big International Company Ltd'</li>
+<li><code>&lt;short_name&gt;</code>, in which you should type the client's shorter name, e.g. 'Sitting Duck' or 'Big International' (or, if there is no shorter name, just type the long name again)</li>
+<li><code>&lt;city&gt;</code>, in which you should type the city where the client's office is based</li>
+<li><code>&lt;legal_rep&gt;</code>, in which you should type the name of the client's legal representative, i.e. the guy or gal who can sign the offerte.</li>
+<li><code>&lt;waiver_rep&gt;</code>, in which you should type the name of the client's legal representative, i.e. the guy or gal who can sign the waiver. If the legal rep is not known when you are creating the offerte, you can delete this element. The waiver will then be generated with a little line on which the legal rep can write his/her own name.</li>
+</ul>
+<p>Example:</p>
+<pre><code>&lt;client&gt;
+    &lt;full_name&gt;Sitting Duck B.V.&lt;/full_name&gt;
+    &lt;short_name&gt;Sitting Duck&lt;/short_name&gt;
+    &lt;city&gt;Amazonia&lt;/city&gt;
+    &lt;legal_rep&gt;Shaniah T. Brick&lt;/legal_rep&gt;
+    &lt;waiver_rep&gt;William Wonder&lt;/waiver_rep&gt;
+&lt;/client&gt;</code></pre>
+<p><strong>If all names are known, no need to do anything here, the entity takes care of this. If the waiver rep is not known, delete the <code>waiver_rep</code> element.</strong></p>
+<h3 id="company-information">Company information</h3>
+<p>The <code>&lt;company&gt;</code> element contains two other elements:</p>
+<ul>
+<li><code>&lt;full_name&gt;</code>, in which you should type your company's official name</li>
+<li><code>&lt;legal_rep&gt;</code>, in which you should type the name of your legal rep</li>
+</ul>
+<p>Example:</p>
+<pre><code>&lt;company&gt;
+    &lt;full_name&gt;Shining Armour B.V.&lt;/full_name&gt;
+    &lt;legal_rep&gt;Sir Lancelot&lt;/legal_rep&gt;
+&lt;/company&gt;</code></pre>
+<h3 id="targets">Targets</h3>
+<p>The <code>&lt;targets&gt;</code> element contains one or more <code>&lt;target&gt;</code> elements, one for each target specified for the pentest. Put every target of the pentest in its own <code>&lt;target&gt;</code> element. If there is only one target, you'll end up with a <code>&lt;targets&gt;</code> element containing only one <code>&lt;target&gt;</code> element. This is ok.</p>
+<p>Example:</p>
+<pre><code>&lt;targets&gt;
+    &lt;target&gt;fishinabarrel.sittingduck.com&lt;/target&gt;
+    &lt;target&gt;hackthis.sittingduck.com&lt;/target&gt;
+    &lt;target&gt;Sitting Duck&#39;s support staff&lt;/target&gt;
+&lt;targets&gt;</code></pre>
+<h3 id="pentest-info">Pentest Info</h3>
+<p>The <code>&lt;pentestinfo&gt;</code> element contains some data about the pentest itself. This element is useful as you can refer to its content using placeholders, allowing e.g. for standard referrals to the tested application name, pentest type or pentest duration.</p>
+<p>Example:</p>
+<pre><code>&lt;pentestinfo&gt;
+        &lt;duration&gt;10&lt;/duration&gt;&lt;!-- duration of pentest, in working days --&gt;
+        &lt;test_planning&gt;January 1st until January 12th, 2015&lt;/test_planning&gt; &lt;!-- date or date range in text, e.g. May 18th until May 25th, 2015 --&gt;
+        &lt;report_writing&gt;January 15th until January 20th, 2015&lt;/report_writing&gt; &lt;!-- date or date range in text, e.g. May 18th until May 25th, 2015 --&gt;
+        &lt;report_due&gt;January 23rd, 2015&lt;/report_due&gt; &lt;!-- date or date range in text, e.g. May 18th until May 25th, 2015 --&gt;
+        &lt;nature&gt;time-boxed&lt;/nature&gt;
+        &lt;type&gt;black-box&lt;/type&gt;&lt;!-- please choose one of the following: black-box, grey-box, crystal-box --&gt;
+        &lt;fee&gt;50000&lt;/fee&gt;&lt;!-- euro is added automatically in the document --&gt;
+        &lt;target_application&gt;FishInABarrel&lt;/target_application&gt;&lt;!-- name of application to be tested (if any) --&gt;
+        &lt;target_application_producer&gt;H4ckers &#39;R&#39; Us&lt;/target_application_producer&gt;
+    &lt;/pentestinfo&gt;</code></pre>
+<h3 id="version-history">Version History</h3>
+<p>The <code>&lt;version_history&gt;</code> element contains one or more <code>&lt;version&gt;</code> elements, one for each version of the document you create. Whenever you start a new version, add a <code>&lt;version&gt;</code> element to the list.</p>
+<p>The <code>&lt;version&gt;</code> element should contain the following:</p>
+<ul>
+<li>a <code>date</code> attribute with a date of your version as a value, in the format YYYY-MM-DDT00:00:00, e.g. 2015-04-18T00:00:00</li>
+<li>a <code>number</code> attribute with the version number as a value. This value can either be 'auto' or an actual version number, e.g. 1.0. If you use the 'auto' value, the system will automatically count it (starting with 0.1 for the first <code>&lt;version&gt;</code> element and going up from there: 0.2, 0.3, etc...).</li>
+<li>One or more <code>&lt;v_author&gt;</code> elements, each containing the name of the person who worked on this version (that would be you at least, and perhaps a pentester or colleague who did significant work on it)</li>
+<li>A <code>&lt;v_description&gt;</code> element with a (very short!) description of what has been done in this version, e.g. 'Added non-findings' or 'Revision'</li>
+</ul>
+<p>Example:</p>
+<pre><code>&lt;version_history&gt;
+    &lt;version number=&quot;auto&quot; date=&quot;2014-12-18T00:00:00&quot;&gt;
+        &lt;v_author&gt;Bob Goudriaan&lt;/v_author&gt;
+        &lt;v_description&gt;Initial draft&lt;/v_description&gt;
+    &lt;/version&gt;
+    &lt;version date=&quot;2014-12-22T00:00:00&quot; number=&quot;auto&quot;&gt;
+        &lt;v_author&gt;Bob Goudriaan&lt;/v_author&gt;
+        &lt;v_author&gt;Patricia Piolon&lt;/v_author&gt;
+        &lt;v_description&gt;Revision&lt;/v_description&gt;
+    &lt;/version&gt;
+&lt;/version_history&gt;</code></pre>
+<h2 id="sections">Sections</h2>
+<p>The main bulk of the offerte is made up of normal content. We divide our content into sections using the <code>&lt;section&gt;</code> element.</p>
+<h3 id="section-title">Section title</h3>
+<p>A section must always start with a <code>&lt;title&gt;</code> element, which should only contain text; after that you're free to do what you want. As explained in the previous section, it's a good idea to have the section id and the title be somewhat related.</p>
+<p>Example:</p>
+<pre><code>&lt;section&gt;
+    &lt;title&gt;Project Planning&lt;/title&gt;
+    ...
+&lt;/section&gt;</code></pre>
+<h3 id="section-content">Section content</h3>
+<p>As said, after the title, anything goes (well, almost):</p>
+<ul>
+<li>A section can be subdivided into smaller sections</li>
+<li>A section can contain generic content, that is to say any number and order of:
+<ul>
+<li>paragraphs (<code>&lt;p&gt;</code>)</li>
+<li>lists (ordered <code>&lt;ol&gt;</code> or unordered <code>&lt;ul&gt;</code>)</li>
+<li>tables (<code>&lt;table&gt;</code>)</li>
+<li>command input/output boxes (<code>&lt;pre&gt;</code>)</li>
+<li>code (<code>&lt;code&gt;</code>)</li>
+<li>div containers (<code>&lt;div&gt;</code>)</li>
+</ul></li>
+<li>A section can contain a signing box for the offerte itself (<code>&lt;generate_offer_signature_box/&gt;</code>)</li>
+<li>A section can contain a listing of targets, taken from the <code>&lt;targets&gt;</code> element in the meta section (<code>&lt;generate_targets/&gt;</code>)</li>
+</ul>
+<p>All of these elements are described elsewhere in this document; see the appropriate sections for details.</p>
+<h2 id="annexes">Annexes</h2>
+<p>Annexes (using the <code>&lt;annex&gt;</code> element) work the same as sections, they just come last in the report. Like sections, they must start with a title. Also like sections, the rest of their content is free-form.</p>
+<p>You will need at least one annex in the template, for the waiver. An annex can contain a signing box for the waiver (<code>&lt;generate_waiver_signature_box/&gt;</code>)</p>
+<p>Example:</p>
+<pre><code>&lt;annex&gt;
+    &lt;title&gt;Annex 1: Waiver&lt;/title&gt;
+    &lt;p&gt;You waive all responsibility.&lt;/p&gt;
+    &lt;generate_waiver_signature_box/&gt;
+&lt;/annex&gt;</code></pre>
+<h2 id="generic-content">Generic content</h2>
+<p>Generic content is modeled on very basic HTML.</p>
+<h3 id="paragraphs">Paragraphs</h3>
+<p>Paragraphs (<code>&lt;p&gt;</code>) go in sections or in the various sub-elements of findings and non-findings. They are the basic way of displaying text.</p>
+<p>Example:</p>
+<pre><code>&lt;p&gt;This is a paragraph&lt;/p&gt;</code></pre>
+<h3 id="lists">Lists</h3>
+<p>Lists can be ordered (<code>&lt;ol&gt;</code>, for '<strong>o</strong>rdered <strong>l</strong>ist') or unordered (<code>&lt;ul&gt;</code>, for <strong>u</strong>nordered <strong>l</strong>ist). Regardless of whether a list is ordered or unordered, it contains one or more list items (<code>&lt;li&gt;</code>, for <strong>l</strong>ist <strong>i</strong>tem).</p>
+<p><strong>Unordered lists</strong></p>
+<p>Example:</p>
+<pre><code>&lt;ul&gt;
+    &lt;li&gt;Some item&lt;/li&gt;
+    &lt;li&gt;Some other item&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<p><strong>Ordered lists</strong></p>
+<p>Ordered lists are numbered by default. You can configure a different ordering system by setting its <code>type</code> attribute to one of the following values:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">type</th>
+<th align="left">ordering</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">a</td>
+<td align="left">lowercase alphabetic</td>
+</tr>
+<tr class="even">
+<td align="left">A</td>
+<td align="left">uppercase alphabetic</td>
+</tr>
+<tr class="odd">
+<td align="left">i</td>
+<td align="left">lowercase roman</td>
+</tr>
+<tr class="even">
+<td align="left">I</td>
+<td align="left">uppercase roman</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code>&lt;ol type=&quot;i&quot;&gt;
+    &lt;li&gt;Some item&lt;/li&gt;
+    &lt;li&gt;Some other item&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+<h3 id="codeinputoutput-blocks">Code/Input/Output Blocks</h3>
+<p>Whenever you need to display some command line input/output or code, use the <code>&lt;pre&gt;</code> element. It will conserve any whitespace you leave, so you can format the contents of this element in a pleasant/readable way. Use spaces for indents. Note that text in the <code>&lt;pre&gt;</code> element <em>will not wrap</em>.</p>
+<p>Example:</p>
+<pre><code>&lt;section&gt;
+    &lt;title&gt;Some output&lt;/title&gt;
+    &lt;p&gt;This is some relevant stuff the client sent us:&lt;/p&gt;
+    &lt;pre&gt;&#39;relevant stuff&#39;&lt;/pre&gt;
+    &lt;p&gt;And this too:&lt;/p&gt;
+    &lt;pre&gt;this relevant stuff comes
+in several lines
+    Some indented
+and some not
+
+This is not a haiku.&lt;/pre&gt;
+&lt;/section&gt;</code></pre>
+<h4 id="help-the-code-in-my-pre-element-contains-characters-and-it-messes-with-my-xml">Help! The code in my pre element contains &lt; characters and it messes with my xml!</h4>
+<p>You can escape the &lt; character by replacing it with its entity <code>&amp;lt;</code>.</p>
+<h3 id="div-containers">Div containers</h3>
+<h4 id="what-does-div-do">What does <code>&lt;div&gt;</code> do?</h4>
+<p>Nothing. <code>&lt;div&gt;</code> just <em>is</em>.</p>
+<h4 id="sigh.-ok-why-is-div">Sigh. Ok, why <em>is</em> <code>&lt;div&gt;</code>?</h4>
+<p>You can use <code>&lt;div&gt;</code> as a container for other block elements. This is basically only (but very) useful for snippets, as snippets need to be well-formed XML documentlets and can therefore only have one root element. If the snippet is a complete section, this is not a problem. If the snippet is a bunch of paragraphs or something, your snippet can be <code>&lt;div&gt;</code> (root element), containing everything you want. Well, everything that's allowed, anyway.</p>
+<h4 id="so-whats-allowed-in-div">So what's allowed in <code>&lt;div&gt;</code>?</h4>
+<p>All block elements: <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;table&gt;</code>, <code>&lt;img&gt;</code>, <code>&lt;pre&gt;</code>, <code>&lt;code&gt;</code></p>
+<h4 id="and-what-elements-can-contain-div">And what elements can <em>contain</em> <code>&lt;div&gt;</code>?</h4>
+<p><code>&lt;section&gt;</code> and <code>&lt;annex&gt;</code>.</p>
+<h3 id="tables">Tables</h3>
+<p><strong>Rows</strong></p>
+<p>Tables consist of a <code>&lt;table&gt;</code> element containing one or more rows (<code>&lt;tr&gt;</code>).</p>
+<p>Example:</p>
+<pre><code>&lt;table&gt;
+    &lt;tr&gt;...&lt;/tr&gt;
+    &lt;tr&gt;...&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+<p><strong>Cells</strong></p>
+<p>A table row consists of one or more cells (<code>&lt;td&gt;</code>).</p>
+<p>Example:</p>
+<pre><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Cell 1 in row 1&lt;/td&gt;
+        &lt;td&gt;Cell 2 in row 1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Cell 1 in row 2&lt;/td&gt;
+        &lt;td&gt;Cell 2 in row 2&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+<p>Columns are implicit: each cell in a row corresponds to a column.</p>
+<p><strong>Header Cells</strong></p>
+<p>Instead of normal cells, you can also use header cells (<code>&lt;th&gt;</code>) for a table header.</p>
+<p>Example:</p>
+<pre><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Header cell 1 in row 1&lt;/th&gt;
+        &lt;th&gt;Header cell 2 in row 1&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Cell 1 in row 2&lt;/td&gt;
+        &lt;td&gt;Cell 2 in row 2&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+<p><strong>Borders</strong></p>
+<p>To turn on borders for your table, set its <code>border</code> attribute to '1'.</p>
+<p>Example:</p>
+<pre><code>&lt;table border=&quot;1&quot;&gt;
+...
+&lt;/table&gt;</code></pre>
+<p>You can also turn borders on or off (<code>border=&quot;0&quot;</code>) on lower levels (on the row level, for example) for finer-tuned border control.</p>
+<p><strong>Setting column width</strong></p>
+<p>To set the width for your columns, add a number for each column to the <code>cols</code> element. This number is in millimeters (you can either type 200mm or just 200; don't use cm or pt or px or other measures though). The total width between the margins is 17cm, so 170mm.</p>
+<p>Example:</p>
+<pre><code>&lt;table cols=&quot;50 50 70&quot;&gt;
+    &lt;tr&gt;
+        &lt;td&gt;cell 1&lt;/td&gt;&lt;td&gt;cell 2&lt;/td&gt;&lt;td&gt;cell 3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;cell 4&lt;/td&gt;&lt;td&gt;cell 5&lt;/td&gt;&lt;td&gt;cell 6&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+<p>This will give the first column a width of 50mm (5cm), the second as well, and the third a width of 70mm (7cm).</p>
+<p><strong>Spanning multiple rows/columns</strong></p>
+<p>To make a cell span multiple columns, set its <code>colspan</code> attribute to the number of columns you want to span.</p>
+<p>Example:</p>
+<pre><code>&lt;tr&gt;
+    &lt;td colspan=&quot;2&quot;&gt;This cell spans the two cells in the row below.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;Cell 1 in row 2&lt;/td&gt;
+    &lt;td&gt;Cell 2 in row 2&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+<p>To make a cell span multiple rows, set its <code>rowspan</code> attribute to the number of rows you want to span.</p>
+<p>Example:</p>
+<pre><code>&lt;tr&gt;
+    &lt;td rowspan=&quot;2&quot;&gt;This cell spans the two cells in the second column.&lt;/td&gt;
+    &lt;td&gt;Cell 2 in row 1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;Cell 2 in row 2&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+<p><strong>Alignment</strong></p>
+<p>Set the <code>align</code> attribute of any cell, row or table to one of the following values to change the text alignment in that cell/row/table:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">align</th>
+<th align="left">result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">right</td>
+<td align="left">right alignment</td>
+</tr>
+<tr class="even">
+<td align="left">center</td>
+<td align="left">centered</td>
+</tr>
+<tr class="odd">
+<td align="left">justify</td>
+<td align="left">justified</td>
+</tr>
+</tbody>
+</table>
+<h2 id="images">Images</h2>
+<p>To insert an image, use the <code>&lt;img&gt;</code> element. In its <code>src</code> attribute, enter the relative path to the image file you want to reference.</p>
+<p>To set the height or width, use <em>either</em> the <code>height</code> or <code>width</code> attribute. Any numerical value you enter will be interpreted as centimeters.</p>
+<p>If you set both, only the width will be interpreted.</p>
+<p>If you do not set any height or width, the image will be displayed at full page width (i.e. 17 cm wide)</p>
+<p>Example: <code>&lt;img src=&quot;../graphics/xmlsignatureexclusion.png&quot; width=&quot;5&quot;/&gt;</code></p>
+<p>Optionally, you can set an image caption by adding some text in the <code>title</code> attribute.</p>
+<p>Example: <code>&lt;img src=&quot;../graphics/xmlsignatureexclusion.png&quot; width=&quot;5&quot; title=&quot;This is a funny picture LOL&quot;/&gt;</code></p>
+<h3 id="inline-elements">Inline elements</h3>
+<p>Inline elements are elements that modify the text inside e.g. a paragraph or a list item, for styling or linking purposes. You have the following options available to you:</p>
+<p><strong>Bold</strong></p>
+<p>To make text bold, wrap it in <code>&lt;b&gt;</code> tags.</p>
+<p>Example:</p>
+<p><code>&lt;p&gt;&lt;b&gt;This text is bold&lt;/b&gt; and this text is not.&lt;/p&gt;</code></p>
+<p><strong>Italic</strong></p>
+<p>To make text italic, wrap it in <code>&lt;i&gt;</code> tags.</p>
+<p>Example:</p>
+<p><code>&lt;p&gt;&lt;i&gt;This text is italic&lt;/i&gt; and this text is not.&lt;/p&gt;</code></p>
+<p><strong>Underline</strong></p>
+<p>To make text underlined, wrap it in <code>&lt;u&gt;</code> tags.</p>
+<p>Example:</p>
+<p><code>&lt;p&gt;&lt;u&gt;This text is underlined&lt;/u&gt; and this text is not.&lt;/p&gt;</code></p>
+<p><strong>Monospace</strong></p>
+<p>To have inline text in a monospace font, wrap it in <code>&lt;monospace&gt;</code> tags.</p>
+<p>Example:</p>
+<p><code>&lt;p&gt;&lt;monospace&gt;This text is monospace&lt;/monospace&gt; and this text is not.&lt;/p&gt;</code></p>
+<p><strong>Superscript</strong></p>
+<p>To have inline text in superscript, wrap it in <code>&lt;sup&gt;</code> tags.</p>
+<p>Example:</p>
+<p><code>&lt;p&gt;&lt;sup&gt;This text is in superscript&lt;/sup&gt; and this text is not.&lt;/p&gt;</code></p>
+<p><strong>Subscript</strong></p>
+<p>To have inline text in subscript, wrap it in <code>&lt;sub&gt;</code> tags.</p>
+<p>Example:</p>
+<p><code>&lt;p&gt;&lt;sub&gt;This text is in subscript&lt;/sub&gt; and this text is not.&lt;/p&gt;</code></p>
+<p><strong>Links</strong></p>
+<p>Link to web pages using the <code>&lt;a&gt;</code> element.</p>
+<p>In the <code>href</code> attribute of the <code>&lt;a&gt;</code> element, type the url of the website you're linking to.</p>
+<p>Example:</p>
+<p><code>&lt;p&gt;Please refer to &lt;a href=&quot;http://www.radicallyopensecurity.com&quot;&gt;our amazing website&lt;/a&gt;.&lt;/p&gt;</code></p>
+<h2 id="manual-breaks">Manual breaks</h2>
+<h3 id="line-breaks">Line breaks</h3>
+<p>Mostly text is broken automatically (between paragraphs etc.) but in some rare cases you may need to insert a manual line break. To do so, use the <code>&lt;br/&gt;</code> element.</p>
+<p>Example:</p>
+<pre><code>&lt;p&gt;This is my haiku&lt;br/&gt;
+my line is broken, but still&lt;br/&gt;
+the paragraph flows&lt;/p&gt;</code></pre>
+<h3 id="page-breaks">Page breaks</h3>
+<p>To force a page break before or after a section, set its <code>break</code> attribute to 'before' or 'after'.</p>
+<p>Note: breaks are inserted automatcally before every appendix and before/after the index.</p>
+<p>Example:</p>
+<pre><code>&lt;section break=&quot;before&quot;&gt;
+&lt;title&gt;Technical Findings&lt;/title&gt;
+...
+&lt;/section&gt;</code></pre>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+    <title>Vrijwaring</title>
+      
+		<p>Het is mogelijk dat in de loop van het penetratie testen <company_short/>
+		de operaties van het doelwit hindert of hier schade aan toebrengt.
+		<client_short/> geeft hier toestemming voor, onder voorbehoud dat <company_short/> 
+		hier niet nalatig of roekeloos mee omgaat. <client_short/> waarborgt dit ook en heeft de bevoegdheid om 
+		hier toestemming voor te geven.</p>
+		
+		<p>Het is van belang om de limitaties van de diensten van <company_short/> te begrijpen. 
+		<company_short/> geeft geen (en kan geen) garanties geven dat iets veilig is.
+		<company_short/>, heeft in plaats daarvan, een wettelijke inspanningsverplichting 
+		voor de uit te voeren diensten.</p>
+		
+		<p><company_short/> en <client_short/> komen hierbij overeen dat redelijke maatregelen
+		worden getroffen om, de vertrouwelijkheid van informatie en persoonlijke 
+        gegevens van de doelwitten waar zij toegang tot krijgen
+		in de loop van het uitvoeren van de penetratie test, in stand wordt gehouden.
+		Beide partijen zullen de informatie en data die zij ontvangen of waar zij toegang tot krijgen
+		alleen gebruiken ten behoeve van de doelen die beschreven zijn in deze overeenkomst.
+		<company_short/> garandeert dat alle kern-leden, externe freelancers en vrijwilligers
+		die betrokken zijn bij het uitvoeren van de penetratie test een geheimhoudingsverklaring (NDA) hebben getekend.</p>
+</section>

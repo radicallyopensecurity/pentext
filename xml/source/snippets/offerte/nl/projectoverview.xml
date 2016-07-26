@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+        <title>Projectoverzicht</title><!-- section with an overview of ROS activities -->
+        <!-- snippet --><p><company_short/> zal <company_svc_long/> uitvoeren voor <client_short/> 
+        op de onderstaand beschreven systemen. De diensten zijn bedoelt om inzicht te bieden
+        in de veiligheid van deze systemen. Om dit te kunnen bewerkstelligen zal <company_short/>
+        toegang krijgen tot deze systemen, proberen kwetsbaarheden op te sporen en trachten 
+        verdere toegang te krijgen door de gevonden kwetsbaarheden uit te buiten.</p>
+        
+        <!-- snippet --><p><company_short/> zal de volgende objectieven testen 
+        (de “<b>objectieven</b>”):</p>
+        
+        <generate_targets/>
+        
+        <!-- snippet --><p><company_short/> zal testen op de aanwezigheid van de 
+        meest voorkomende kwetsbaarheden, gebruik makend van zowel publiek beschikbare
+         scanning tools, als door handmatig testen. <company_short/> zal een 
+        <p_duration/>-daagse, <p_boxtype/>, grondige test uitvoeren, via internet.</p>
+        
+		<!-- snippet --> <!--Not Needed if Disclaimer is Included; Duplicate Text-->
+		<!--p>It is possible that in the course of the penetration 
+		testing, <company_short/> might hinder the operations of the Targets or 
+		cause damage to the Targets. <client_short/> gives permission for this, to 
+		the extent that <company_short/> does not act negligently or 
+		recklessly. <client_short/> also warrants it has the authority to give such 
+		permission.</p-->
+        
+		<!-- snippet --><!--Not Needed if Disclaimer is Included; Duplicate Text-->
+		<!--p>It is important to understand the limits of 
+		<company_short/>'s services. <company_short/> does not (and cannot) 
+		give guarantees that something is secure. <company_short/> instead has 
+		an obligation to make reasonable efforts (in Dutch: 
+		“<i>inspanningsverplichting</i>”) to perform the agreed services.</p-->
+		
+		<!--REMOVE commented-out text above if not including Disclaimer-->
+		
+    </section>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section id="basicscanmethodology">
+  <title><company_svc_short/> methodologie</title>
+  <p>Tijdens het uitvoeren van de <company_svc_long/> volgt <company_long/> in grote lijnen de volgende stappen:</p>
+
+  <ol>
+    <li>vaststellen van vereisten en scoping</li>
+    <li>uitvoeren van scans</li>
+    <li>analyseren van bedreigingen en kwetsbaarheden</li>
+    <li>rapporteren van bevindingen</li>
+  </ol>
+
+
+  <p><b>Stap 1: vaststellen van vereisten en scoping</b> <br/>
+    De verwachtingen van beide partijen worden besproken en er worden afspraken 
+    gemaakt betreffende het uitvoeren van de test(s). De benodige vereisten zoals 
+    de contactgegevens en het bereik van de <company_svc_short/> worden vastgesteld.
+  </p>
+
+  <p><b>Stap 2: uitvoeren van scans</b><br/>
+    In deze fase worden automatische scans uitgevoerd die op het doelwit van toepassing 
+    zijn. Bijvoorbeeld:
+    <ul>
+  
+      <li>Het identificeren van aangeboden diensten en de 
+      daarbij gebruikte software <i>fingerprinten</i>.</li>
+      
+      <li>Het maken van een <i>basic</i> oppervlakte scan om bekende kwetsbaarheden 
+      in de gebruikte software en protocollen op te sporen. Tijdens een <i>basic</i> 
+      scan worden ontdekte 'gaten' in de beveiliging door ons niet geexploiteerd. </li>
+      
+      <li>Het testen op veel voorkomende, bekende configuratiefouten in de software. 
+      Dit zijn met name instellingen op het gebied van authenticatiemechanismen, 
+      toegangsrechten en encryptie. Configuratiefouten in zelf ontwikkelde of exotische 
+      software vallen hier niet onder.</li>
+
+    </ul>
+  </p>
+
+  <p><b>Stap 3: analyseren van kwetsbaarheden</b><br/> 
+    Op basis van de verzamelde informatie worden potentiële kwetsbaarheden geïndexeerd. 
+    De kwetsbaarheden worden geanalyseerd om overduidelijke <i>false positives</i> 
+    er uit te filteren (niet alle scans produceren automatisch betrouwbare resultaten).
+  </p>
+
+  <p><b>Stap 4: rapporteren van bevindingen</b><br/>
+    Na afronding van de analyse wordt een rapport opgeleverd waarin onze
+    stapsgewijze benadering, de resultaten en gevonden kwetsbaarheden worden beschreven.
+    Het rapport dat <client_short/> oplevert bevat geen management samenvatting; <client_short/> 
+    voegt deze zelf toe.
+  </p>
+  
+  <p>
+    Na het doorlopen van bovengenoemde stappen kan <client_short/> een goed beeld
+    schetsen van de beveiligingsstatus van het doelwit. Een echte aanvaller zou \
+    deze analyse uitvoeren voordat een daadwerkelijke aanval wordt gepleegd. 
+    Het resultaat van deze scan kan niet worden gebruikt om aan te tonen of aan 
+    bepaalde <i>security</i> certificeringen is voldaan. Het resultaat uit een 
+    penetratietest kan daar wel voor worden gebruikt. Bij een penetratietest wordt 
+    gebruik gemaakt van de gevonden exploits om dieper liggende kwetsbaarheden in 
+    kaart te brengen. Een pentest kan daarom worden gezien als de daadwerkelijke 
+    aanval op het systeem.
+  </p>  
+</section>
