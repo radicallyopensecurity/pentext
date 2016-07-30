@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs"
     xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
-    
+
     <xsl:variable name="denomination">
         <xsl:choose>
             <xsl:when test="/offerte/meta/pentestinfo/fee/@denomination = 'euro'">€</xsl:when>
@@ -16,9 +16,10 @@
 
     <xsl:template name="generate_targets_xslt">
         <xsl:param name="Ref" select="@Ref"/>
-        <fo:list-block xsl:use-attribute-sets="list"  provisional-distance-between-starts="0.75cm"
+        <fo:list-block xsl:use-attribute-sets="list" provisional-distance-between-starts="0.75cm"
             provisional-label-separation="2.5mm" space-after="12pt" start-indent="1cm">
-            <xsl:for-each select="/*/meta/targets/target[@Ref=$Ref] | /*/meta/targets/target[not(@Ref)]">
+            <xsl:for-each
+                select="/*/meta/targets/target[@Ref = $Ref] | /*/meta/targets/target[not(@Ref)]">
                 <fo:list-item>
                     <!-- insert a bullet -->
                     <fo:list-item-label end-indent="label-end()">
@@ -39,6 +40,7 @@
 
     <xsl:template match="generate_findings">
         <xsl:variable name="Ref" select="@Ref"/>
+        <xsl:variable name="status" select="@status"/>
         <fo:block>
             <fo:table width="100%" table-layout="fixed" xsl:use-attribute-sets="table borders">
                 <xsl:call-template name="checkIfLast"/>
@@ -66,7 +68,21 @@
                         </fo:table-cell>
                     </fo:table-row>
                     <xsl:choose>
-                        <xsl:when test="@Ref">
+                        <xsl:when test="@status and @Ref">
+                            <!-- Only generate a table for findings in the section with this status AND this Ref -->
+                            <xsl:for-each
+                                select="/pentest_report/descendant::finding[@status = $status][ancestor::*[@id = $Ref]]">
+                                <xsl:call-template name="findingsSummaryContent"/>
+                            </xsl:for-each>
+                        </xsl:when>
+                        <xsl:when test="@status and not(@Ref)">
+                            <!-- Only generate a table for findings in the section with this status -->
+                            <xsl:for-each
+                                select="/pentest_report/descendant::finding[@status = $status]">
+                                <xsl:call-template name="findingsSummaryContent"/>
+                            </xsl:for-each>
+                        </xsl:when>
+                        <xsl:when test="@Ref and not(@status)">
                             <!-- Only generate a table for findings in the section with this Ref -->
                             <xsl:for-each
                                 select="/pentest_report/descendant::finding[ancestor::*[@id = $Ref]]">
@@ -118,6 +134,7 @@
 
     <xsl:template match="generate_recommendations">
         <xsl:variable name="Ref" select="@Ref"/>
+        <xsl:variable name="status" select="@status"/>
         <fo:block>
             <fo:table width="100%" table-layout="fixed" xsl:use-attribute-sets="table borders">
                 <xsl:call-template name="checkIfLast"/>
@@ -140,7 +157,21 @@
                         </fo:table-cell>
                     </fo:table-row>
                     <xsl:choose>
-                        <xsl:when test="@Ref">
+                        <xsl:when test="@status and @Ref">
+                            <!-- Only generate a table for findings in the section with this status AND this Ref -->
+                            <xsl:for-each
+                                select="/pentest_report/descendant::finding[@status = $status][ancestor::*[@id = $Ref]]">
+                                <xsl:call-template name="recommendationsSummaryContent"/>
+                            </xsl:for-each>
+                        </xsl:when>
+                        <xsl:when test="@status and not(@Ref)">
+                            <!-- Only generate a table for findings in the section with this status -->
+                            <xsl:for-each
+                                select="/pentest_report/descendant::finding[@status = $status]">
+                                <xsl:call-template name="recommendationsSummaryContent"/>
+                            </xsl:for-each>
+                        </xsl:when>
+                        <xsl:when test="@Ref and not(@status)">
                             <!-- Only generate a table for findings in the section with this Ref -->
                             <xsl:for-each
                                 select="/pentest_report/descendant::finding[ancestor::*[@id = $Ref]]">
@@ -209,19 +240,20 @@
                         </fo:table-row>
                     </xsl:for-each>
                     <xsl:for-each select="/pentest_report/meta/collaborators/pentesters/pentester">
-                        <xsl:if test="not(./name = /pentest_report/meta/collaborators/approver/name)">
+                        <xsl:if
+                            test="not(./name = /pentest_report/meta/collaborators/approver/name)">
                             <fo:table-row xsl:use-attribute-sets="borders">
-                            <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block>
-                                    <xsl:apply-templates select="name"/>
-                                </fo:block>
-                            </fo:table-cell>
-                            <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block>
-                                    <xsl:apply-templates select="bio"/>
-                                </fo:block>
-                            </fo:table-cell>
-                        </fo:table-row>
+                                <fo:table-cell xsl:use-attribute-sets="td">
+                                    <fo:block>
+                                        <xsl:apply-templates select="name"/>
+                                    </fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell xsl:use-attribute-sets="td">
+                                    <fo:block>
+                                        <xsl:apply-templates select="bio"/>
+                                    </fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
                         </xsl:if>
                     </xsl:for-each>
                 </fo:table-body>
@@ -235,7 +267,7 @@
             <xsl:with-param name="latestVersionDate" select="$latestVersionDate"/>
         </xsl:call-template>
     </xsl:template>
-    
+
     <xsl:template name="generateSignatureBox">
         <xsl:param name="latestVersionDate"/>
         <fo:block keep-together.within-page="always" xsl:use-attribute-sets="signaturebox">
@@ -413,7 +445,8 @@
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="client_legal_rep">
-        <xsl:param name="placeholderElement" select="/offerte/meta/permission_parties/client/legal_rep"/>
+        <xsl:param name="placeholderElement"
+            select="/offerte/meta/permission_parties/client/legal_rep"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
@@ -479,7 +512,8 @@
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="t_app_producer">
-        <xsl:param name="placeholderElement" select="/*/meta/pentestinfo/target_application_producer"/>
+        <xsl:param name="placeholderElement"
+            select="/*/meta/pentestinfo/target_application_producer"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
@@ -498,7 +532,8 @@
     </xsl:template>
     <xsl:template match="p_fee">
         <xsl:param name="placeholderElement" select="/*/meta/pentestinfo/fee"/>
-        <xsl:value-of select="$denomination"/><xsl:text>&#160;</xsl:text>
+        <xsl:value-of select="$denomination"/>
+        <xsl:text>&#160;</xsl:text>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
@@ -521,13 +556,15 @@
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
-    
+
     <xsl:template name="checkPlaceholder">
         <xsl:param name="placeholderElement" select="/"/>
         <xsl:choose>
-            <xsl:when test="normalize-space($placeholderElement)"><!-- placeholder exists and contains text -->
+            <xsl:when test="normalize-space($placeholderElement)">
+                <!-- placeholder exists and contains text -->
                 <xsl:choose>
-                    <xsl:when test="self::p_fee"><!-- pretty numbering for fee -->
+                    <xsl:when test="self::p_fee">
+                        <!-- pretty numbering for fee -->
                         <xsl:variable name="fee" select="$placeholderElement * 1"/>
                         <xsl:number value="$fee" grouping-separator="," grouping-size="3"/>
                     </xsl:when>

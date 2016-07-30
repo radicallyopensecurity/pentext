@@ -1,6 +1,22 @@
 RELEASE NOTES
 =============
 
+July 30, 2016
+-------------
+
+### Finding status
+
+New feature for retests: finding status to indicate if, in context of a follow-up pentest, a finding is new, resolved, still unresolved or not retested.
+
+The `<finding>` element now has an optional `@status` attribute. Possible values are:
+
+- `new` (default)
+- `unresolved`
+- `resolved`
+- `not_retested`
+
+The `<generate_findings/>` element now likewise has this optional `@status` attribute with the same possible values. You can add it to generate a finding summary table containing only the findings with a specific status.
+
 June 15, 2016
 -------------
 
