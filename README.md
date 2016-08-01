@@ -10,16 +10,16 @@ The directories are used as follows:
 - scripts: contains misc scripts. Currently has a script for importing github issues into XML format suited for PenText.
 - chatops: contains bash and Python scripts that can be used with Hubot (chatOps), handy for automation while getting started or for checking document validity or spellchecking. 
 - xml: 
-   - contains the XML system and templates in directories dtd, source and xslt
-   - your report or quote goes in source
-   - contains a graphics map for your company logo 
+   - contains the XML system and templates in directories *dtd*, *source* and *xslt*
+   - your report or quote goes in *source*
+   - contains a *graphics* map for your company logo 
    - the *findings* and *non-findings* maps are reserved for finding templates for reports.
 
 ## Getting Started
 ### Software Requirements
-An XML editor -which could be any text editor like JEdit, to a full IDE- for editing of course ;). Preferably something that can check XML file validity. The FOP library for building a PDF document and a PDF reader for the result are the bare minimum and lastly the Java library Saxon.
+An XML editor -which could be any text editor like *JEdit*, to a full IDE- for editing of course ;). Preferably something that can check XML file validity. The *FOP* library for building a PDF document and a PDF reader for the result are the bare minimum and lastly the *Java* library *Saxon*.
 It is also possible to set up the whole system with Ansible scripts or Docker.
 
 ### Compiling
-Manually compiling a quotation, report or other document can be done with *java -jar <path-to-Saxon-jar> -s:<name-of-xml-file> -xsl:<name-of-xsl-file-in-xsl-directory> -o:<name-for-pdf-output>*
+Manually compiling a quotation, report or other document can be done with *java -jar path-to-Saxon-jar -s:name-of-xml-file -xsl:name-of-xsl-file-in-xsl-directory -o:name-for-pdf-output*
 Of course this is tedious to write manually. Therefore it would be easier to script this or use one of the Hubot scripts in the chatops directory to build a document in a chatroom. 
