@@ -38,3 +38,8 @@ Manually compiling a quotation, report or other document can be done using `java
 But why do it manually when the [ChatOps](https://github.com/radicallyopensecurity/pentext/tree/master/chatops) directory contains so much nice scripts to do just that ?
 
 See for more detailed information the [tools manual](https://github.com/radicallyopensecurity/pentext/blob/master/xml/doc/Tools%20manual.md)
+
+### Adding and Modifying Content
+- There is a guide for [report writing](xml/doc/report/Report%20Writing%20-%20Procedure.md)
+- There is a guide for [quote writing](xml/doc/)
+
