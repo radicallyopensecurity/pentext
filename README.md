@@ -41,5 +41,5 @@ See for more detailed information the [tools manual](https://github.com/radicall
 
 ### Adding and Modifying Content
 - There is a guide for [report writing](xml/doc/report/Report%20Writing%20-%20Procedure.md)
-- There is a guide for [quote writing](xml/doc/)
+- There is a guide for [quotation writing](xml/doc/offerte/Offerte%20Writing%20Procedure.md)
 
