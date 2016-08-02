@@ -3,23 +3,37 @@
 The PenText XML documentation project is a collection of XML templates, XML schemas and XSLT code, which combined provide an easy way to generate IT security documents including test reports (for penetration tests, load tests, code audits, etc), offers (to companies requesting these tests) and invoices. 
 
 ### How it Works
-The OWASP PenText project is based on XML. A PenText Report, Offer, Invoice or Generic Document is in fact a (modular) XML document, conforming to an XML Schema. The XML Schema ensures that the documents are structured correctly, so that they can then be transformed into other formats using XSLT and the SAXON XSLT processor. Currently there is only one target format: PDF. To produce the PDF document, the report, offer, invoice or generic document XML is first transformed into XSL-FO (XSL Formatting Objects), which is then converted to PDF using Apache FOP.
+The OWASP PenText project is based on XML. A PenText Report, Quote, Invoice or Generic Document is in fact a (modular) XML document, conforming to an XML Schema. The XML Schema ensures that the documents are structured correctly, so that they can then be transformed into other formats using XSLT and the SAXON XSLT processor. Currently there is only one target format: PDF. To produce the PDF document, the report, offer, invoice or generic document XML is first transformed into XSL-FO (XSL Formatting Objects), which is then converted to PDF using Apache FOP.
 
 ### The Structure
 The directories are used as follows:
-- scripts: contains misc scripts. Currently has a script for importing github issues into XML format suited for PenText.
 - chatops: contains bash and Python scripts that can be used with Hubot (chatOps), handy for automation while getting started or for checking document validity or spellchecking. 
 - xml: 
-   - contains the XML system and templates in directories *dtd*, *source* and *xslt*
-   - your report or quote goes in *source*
+   - contains the PenText XML system and templates in directories *dtd*, *source* and *xslt*
+   - your report or quote will go into *source*
    - contains a *graphics* map for your company logo 
-   - the *findings* and *non-findings* maps are reserved for finding templates for reports.
+   - the *findings* and *non-findings* directories are for findings and non-findings
 
 ## Getting Started
-### Software Requirements
-An XML editor -which could be any text editor like *JEdit*, to a full IDE- for editing of course ;). Preferably something that can check XML file validity. The *FOP* library for building a PDF document and a PDF reader for the result are the bare minimum and lastly the *Java* library *Saxon*.
-It is also possible to set up the whole system with Ansible scripts or Docker.
 
-### Compiling
-Manually compiling a quotation, report or other document can be done with *java -jar path-to-Saxon-jar -s:name-of-xml-file -xsl:name-of-xsl-file-in-xsl-directory -o:name-for-pdf-output*
-Of course this is tedious to write manually. Therefore it would be easier to script this or use one of the Hubot scripts in the chatops directory to build a document in a chatroom. 
+What do you need ?
+1. Clone this repository
+
+2. Install the toolchain
+
+3. Edit the content
+
+Listo! That's all you need. Now you can build PDF reports using the content.
+
+
+### Toolchain
+The *Apache FOP* library and the *Java* library *Saxon*.
+It is easiest to install the toolchain using Ansible: check out the role PeterMosmans.docbuilder (https://galaxy.ansible.com/PeterMosmans/docbuilder/)
+
+To edit (and view) the content you'll need a XML editor - which could be any text editor like *JEdit*, to a full IDE- for editing of course ;). Preferably something that can check XML file validity. To view the resulting PDF files a PDF viewer is necessary. 
+
+### Building PDF's
+Manually compiling a quotation, report or other document can be done using `java -jar path-to-Saxon-jar -s:name-of-xml-file -xsl:name-of-xsl-file-in-xsl-directory -o:name-for-pdf-output`
+But why do it manually when the [ChatOps](https://github.com/radicallyopensecurity/pentext/tree/master/chatops) directory contains so much nice scripts to do just that ?
+
+See for more detailed information the [tools manual](https://github.com/radicallyopensecurity/pentext/blob/master/xml/doc/Tools%20manual.md)
