@@ -39,7 +39,11 @@ But why do it manually when the [ChatOps](https://github.com/radicallyopensecuri
 
 See for more detailed information the [tools manual](https://github.com/radicallyopensecurity/pentext/blob/master/xml/doc/Tools%20manual.md)
 
-### Adding and Modifying Content
+## Adding and Modifying Content
+### Guidelines
 - There is a guide for [report writing](xml/doc/report/Report%20Writing%20-%20Procedure.md)
-- There is a guide for [quotation writing](xml/doc/offerte/Offerte%20Writing%20Procedure.md)
+- There is also a guide for [quotation writing](xml/doc/offerte/Offerte%20Writing%20Procedure.md)
 
+### Example documents
+Besides the reports and quotations, generic documents can also be created.
+Those can be found [here](xml/doc/examples)
