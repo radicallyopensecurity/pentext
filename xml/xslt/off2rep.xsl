@@ -44,7 +44,7 @@
                 <version_history>
                     <xsl:comment>needed for date on frontpage and in signature boxes; it is possible to add a new &lt;version> after each review; in that case, make sure to update the date/time</xsl:comment>
                     <version number="auto">
-                        <xsl:attribute name="date"><xsl:value-of select="format-date(current-date(), '[Y]-[M,2]-[D1]', 'en', (), ())"/>T10:00:00</xsl:attribute>
+                        <xsl:attribute name="date"><xsl:value-of select="format-date(current-date(), '[Y]-[M,2]-[D,2]', 'en', (), ())"/>T10:00:00</xsl:attribute>
                         <xsl:comment>actual date-time here; you can leave the number attribute alone</xsl:comment>
                         <v_author>ROS Writer</v_author>
                         <xsl:comment>name of the author here; for internal use only</xsl:comment>
