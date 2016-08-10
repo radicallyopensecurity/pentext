@@ -17,13 +17,14 @@
 #    (at your option) any later version.
 
 
-VERSION=0.6
+VERSION=0.7
 
 # These variables should be set environment-specific
 [ -z $GITLABCLI ] && GITLABCLI=gitlab
 [ -z $GITSERVER ] && GITSERVER=gitlab.local
 [ -z $NAMESPACE ] && NAMESPACE=ros
-[ -z $PENTEXTREPO ] && PENTEXTREPO=https://github.com/radicallyopensecurity/templates
+[ -z $NAMESPACEID ] && NAMESPACEID=1
+[ -z $PENTEXTREPO ] && PENTEXTREPO=https://github.com/radicallyopensecurity/pentext
 PREFIX="off-"
 pentext=$(echo $PENTEXTREPO|awk -F '/' '{print $5}')
 TEMPLOC=$(mktemp -d)
@@ -71,7 +72,7 @@ preflight_checks() {
 }
 
 setup_repo() {
-    project_id=$($GITLABCLI project create --name $REPO --issues-enabled true --wiki-enabled true --snippets-enabled true --wall-enabled true --merge-requests-enabled true 2>/dev/null| awk '/id:/{print $2}')
+    project_id=$($GITLABCLI project create --name $REPO --namespace $NAMESPACEID --issues-enabled true --wiki-enabled true --snippets-enabled true --wall-enabled true --merge-requests-enabled true 2>/dev/null| awk '/id:/{print $2}')
     if [ ! -z $project_id ]; then
         echo "[+] successfully created gitlab project $REPO with id ${project_id}"
     else
