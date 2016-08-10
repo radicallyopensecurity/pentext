@@ -76,7 +76,7 @@ backwards_compatible() {
 setup_repo() {
     echo "[*] testing gitlab command line interface..."
     REPO=${reponame,,} # lowercase, but of course
-    project_id=$($GITLABCLI project create --name $REPO --namespace $NAMESPACEID--issues-enabled true --wiki-enabled true --snippets-enabled true --wall-enabled true --merge-requests-enabled true| awk '/id:/{print $2}')
+    project_id=$($GITLABCLI project create --name $REPO --namespace $NAMESPACEID --issues-enabled true --wiki-enabled true --snippets-enabled true --wall-enabled true --merge-requests-enabled true| awk '/id:/{print $2}')
     if [ ! -z $project_id ]; then
         echo "[+] successfully created test gitlab project with id ${project_id}"
     else
