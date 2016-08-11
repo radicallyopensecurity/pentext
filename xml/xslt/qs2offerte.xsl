@@ -110,11 +110,11 @@
                     <test_planning>
                         <xsl:value-of select="/*/pentest_info/planning"/>
                     </test_planning>
-                    <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2015</xsl:comment>
+                    <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2016</xsl:comment>
                     <report_due>
                         <xsl:value-of select="/*/pentest_info/delivery"/>
                     </report_due>
-                    <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2015</xsl:comment>
+                    <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2016</xsl:comment>
                     <nature>
                         <xsl:value-of select="/*/pentest_info/nature"/>
                     </nature>
@@ -136,7 +136,7 @@
                     <xsl:comment>needed for date on frontpage and in signature boxes; it is possible to add a new &lt;version> after each review; in that case, make sure to update the date/time</xsl:comment>
                     <version number="auto">
                         <xsl:attribute name="date"><xsl:value-of
-                                select="format-date(current-date(), '[Y]-[M,2]-[D1]', 'en', (), ())"
+                                select="format-date(current-date(), '[Y]-[M,2]-[D,2]', 'en', (), ())"
                             />T10:00:00</xsl:attribute>
                         <xsl:comment>actual date-time here; you can leave the number attribute alone</xsl:comment>
                         <v_author>ROS Writer</v_author>
