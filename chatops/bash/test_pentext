@@ -16,7 +16,7 @@
 #    (at your option) any later version.
 
 
-VERSION=0.5
+VERSION=0.6
 DOCBUILDER=/usr/local/bin/docbuilder.py
 VALIDATOR=/usr/local/bin/validate_report.py
 SAXON=/usr/local/bin/saxon/saxon9he.jar
@@ -26,7 +26,8 @@ SAXON=/usr/local/bin/saxon/saxon9he.jar
 [ -z $GITSERVER ] && GITSERVER=gitlab.local
 [ -z $GITWEB ] && GITWEB=https://$GITSERVER
 [ -z $NAMESPACE ] && NAMESPACE=ros
-[ -z $PENTEXTREPO ] && PENTEXTREPO=https://github.com/radicallyopensecurity/templates
+[ -z $NAMESPACEID ] && NAMESPACEID=1
+[ -z $PENTEXTREPO ] && PENTEXTREPO=https://github.com/radicallyopensecurity/pentext
 
 TEMPLOC=$(mktemp -d)
 BRANCH=master
@@ -75,7 +76,7 @@ backwards_compatible() {
 setup_repo() {
     echo "[*] testing gitlab command line interface..."
     REPO=${reponame,,} # lowercase, but of course
-    project_id=$($GITLABCLI project create --name $REPO --issues-enabled true --wiki-enabled true --snippets-enabled true --wall-enabled true --merge-requests-enabled true| awk '/id:/{print $2}')
+    project_id=$($GITLABCLI project create --name $REPO --namespace $NAMESPACEID --issues-enabled true --wiki-enabled true --snippets-enabled true --wall-enabled true --merge-requests-enabled true| awk '/id:/{print $2}')
     if [ ! -z $project_id ]; then
         echo "[+] successfully created test gitlab project with id ${project_id}"
     else
@@ -106,6 +107,7 @@ preflight_checks() {
     echo "GITSERVER=$GITSERVER  (git server)"
     echo "GITWEB=$GITWEB  (webinterface of git server)"
     echo "NAMESPACE=$NAMESPACE  (namespace of repositories)"
+    echo "NAMESPACEID=$NAMESPACEID  (namespace ID of repositories)"
     echo "PENTEXTREPO=$PENTEXTREPO  (location of pentext repo)"
     echo "SAXON=$SAXON  (saxon binary)"
     echo "VALIDATOR=$VALIDATOR  (location of validate_report.py)"
