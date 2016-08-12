@@ -5,7 +5,7 @@
 
     <xsl:param name="INVOICE_NO">00/000</xsl:param>
     <xsl:param name="DATE">
-        <xsl:value-of select="format-date(current-date(), '[Y]-[M,2]-[D1]', 'en', (), ())"/>
+        <xsl:value-of select="format-date(current-date(), '[Y]-[M,2]-[D,2]', 'en', (), ())"/>
     </xsl:param>
     
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
