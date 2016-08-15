@@ -1,0 +1,59 @@
+/* CSS declarations go here */
+body {
+    font-family:Droid-Sans;
+    color: #cd7e00;
+    background-color: #000000;
+}
+
+fieldset {
+    border-radius: 10px;
+    border-color: #cd7e00;
+}
+
+input {
+    color: white;
+    border-color: #cd7e00;
+    background-color: #000000;
+    border-radius: 5px;
+}
+
+button {
+    color: #cd7e00;
+    border-color: #cd7e00;
+    border-radius: 5px;
+    background-color: #000000;
+}
+
+button:hover {
+    color: #000000;
+    background-color: #cd7e00;
+}
+
+.search_panel {
+    float: right;
+}
+
+.box {
+    border-radius: 10px;
+    border: 2px solid #cd7e00;
+    padding: 5px;
+    margin: 2px;
+}
+
+.top_menu {
+    height: 40px;
+}
+
+.left_pane {
+    order: 1;
+    flex-grow: 1;
+}
+
+.right_pane {
+    order: 2;
+    width: 30%;
+}
+
+.bottom_pane {
+    display: flex;
+}
