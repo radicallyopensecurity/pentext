@@ -1,0 +1,50 @@
+<head>
+  <title>PenText editor</title>
+</head>
+
+<body>
+    <div class="top_menu box">{{> top_menu}}</div>
+    <div class="bottom_pane">
+        <div class="left_pane box">{{> editor}}</div>
+        <div class="right_pane box">{{> search_results}}</div>
+    </div>
+</body>
+
+<template name="top_menu">
+    <div class="search_panel">
+        <form class=".search_form">
+            <input type="text" name="text"/>
+            <button class="button">Search</button>
+        </form>
+    </div>
+</template>
+
+<template name="editor">
+    <h1>Editor</h1>
+</template>
+
+<template name="search">
+
+</template>
+
+<template name="search_results">
+    <h1>Search results</h1>
+    {{results}}
+</template>
+
+
+
+<template name="hello">
+  <button>Click Me</button>
+  <p>You've pressed the button {{counter}} times.</p>
+</template>
+
+<template name="info">
+  <h2>Learn Meteor!</h2>
+  <ul>
+    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
+    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
+    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
+    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
+  </ul>
+</template>
