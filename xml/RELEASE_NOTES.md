@@ -10,7 +10,7 @@ New feature for retests: finding status to indicate if, in context of a follow-u
 
 The `<finding>` element now has an optional `@status` attribute. Possible values are:
 
-- `new` (default)
+- `new`
 - `unresolved`
 - `resolved`
 - `not_retested`
