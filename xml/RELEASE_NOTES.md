@@ -1,6 +1,20 @@
 RELEASE NOTES
 =============
 
+August 19th, 2016
+-----------------
+
+### Contracts
+
+Added a contract document type; it works as follows:
+
+1. fill out the fields (elements) in contract_info.xml
+2. Create contract.xml from contract_info.xml using info2contract.xsl
+3. contract.xml --> contract.pdf (using generate_contract.xsl + fop)
+
+In general there shoudl be no need to edit contract.xml, it is an intermediate document. The idea is to go straight from contract_info.xml to contract.pdf (in two steps)
+
+
 July 30, 2016
 -------------
 
@@ -16,6 +30,7 @@ The `<finding>` element now has an optional `@status` attribute. Possible values
 - `not_retested`
 
 The `<generate_findings/>` element now likewise has this optional `@status` attribute with the same possible values. You can add it to generate a finding summary table containing only the findings with a specific status.
+
 
 June 15, 2016
 -------------

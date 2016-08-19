@@ -11,7 +11,7 @@
     <xsl:import href="att-set.xslt"/>
     <xsl:import href="block.xslt"/>
     <xsl:import href="findings.xslt"/>
-    <xsl:import href="auto.xsl"/>
+    <xsl:import href="auto.xslt"/>
     <xsl:import href="table.xslt"/>
     <xsl:import href="lists.xslt"/>
     <xsl:import href="inline.xslt"/>
