@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+    schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+  <xs:import namespace="http://www.w3.org/2001/XInclude"
+    schemaLocation="http://www.w3.org/2001/XInclude/XInclude.xsd"/>
+  <xs:include schemaLocation="common.xsd"/>
+  <xs:element name="contract_info">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="company"/>
+        <xs:element ref="scope"/>
+        <xs:element ref="contractor"/>
+        <xs:element ref="work"/>
+      </xs:sequence>
+      <xs:attribute ref="xml:lang"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="scope">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="contract_type"/>
+        <xs:element ref="engagement_description"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="contract_type">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="single_engagement"/>
+            <xs:enumeration value="fixed_term"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+  <xs:element name="engagement_description" type="xs:string"/>
+  <xs:element name="contractor">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name"/>
+        <xs:element ref="address"/>
+        <xs:element ref="postal_code"/>
+        <xs:element ref="city"/>
+        <xs:element ref="country"/>
+        <xs:element ref="email"/>
+        <xs:element ref="hourly_fee"/>
+      </xs:sequence>
+      <xs:attribute name="sex" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="F"/>
+            <xs:enumeration value="M"/>
+            <xs:enumeration value="O"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="work">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="activities"/>
+        <xs:element ref="start_date"/>
+        <xs:element ref="end_date"/>
+        <xs:element ref="planning"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="activities">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="activity"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="activity" type="xs:string"/>
+  <xs:element name="start_date" type="xs:date"/>
+  <xs:element name="end_date" type="xs:date"/>
+  <xs:element name="planning">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="hours"/>
+        <xs:element ref="per"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="hours" type="xs:integer"/>
+  <xs:element name="per">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="week"/>
+        <xs:enumeration value="month"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="hourly_fee">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:integer">
+          <xs:attribute name="denomination" use="required">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="eur"/>
+                <xs:enumeration value="gbp"/>
+                <xs:enumeration value="usd"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:group name="placeholders">
+    <xs:choice>
+      <xs:element name="company_long"/>
+      <xs:element name="company_short"/>
+      <xs:element name="company_address"/>
+      <xs:element name="company_postalcode"/>
+      <xs:element name="company_city"/>
+      <xs:element name="company_country"/>
+      <xs:element name="company_poc1"/>
+      <xs:element name="company_email"/>
+      <xs:element name="engagement_description"/>
+      <xs:element name="contract_start_date"/>
+      <xs:element name="contract_end_date"/>
+      <xs:element name="contract_period"/>
+      <xs:element name="contract_total_fee"/>
+      <xs:element name="contract_planned_hours"/>
+      <xs:element name="contract_period_unit"/>
+      <xs:element name="contract_activities"/>
+      <xs:element name="contractor_name"/>
+      <xs:element name="contractor_address"/>
+      <xs:element name="contractor_postalcode"/>
+      <xs:element name="contractor_city"/>
+      <xs:element name="contractor_country"/>
+      <xs:element name="contractor_email"/>
+      <xs:element name="contractor_hourly_fee"/>
+    </xs:choice>
+  </xs:group>
+</xs:schema>

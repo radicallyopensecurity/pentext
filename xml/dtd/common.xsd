@@ -32,6 +32,7 @@
         <xs:element ref="iban"/>
       </xs:sequence>
       <xs:attribute ref="xml:base"/>
+      <xs:attribute ref="xml:lang"/>
     </xs:complexType>
   </xs:element>
 
@@ -220,6 +221,15 @@
     </xs:complexType>
   </xs:element>
 
+  
+  <xs:complexType name="block" mixed="true">
+    <xs:choice maxOccurs="unbounded">
+      <xs:group ref="inline-all"/>
+      <xs:group ref="placeholders"/>
+    </xs:choice>
+    <xs:attribute ref="xml:base"/>
+  </xs:complexType>
+  
   <xs:element name="version_history">
     <xs:complexType>
       <xs:sequence>

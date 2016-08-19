@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contract xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xsi:noNamespaceSchemaLocation="../dtd/contract.xsd"
+          xml:lang="en">
+   <meta>
+      <xi:include href="snippets/company_info.xml"/>
+      <scope>
+        <contract_type>fixed_term</contract_type>
+         <!-- single_engagement or fixed_term -->
+        <engagement_description>battle the pirates</engagement_description>
+         <!-- [NOTE: only needed for SINGLE ENGAGEMENT type contract, value is ignored otherwise] -->
+      </scope>
+      <contractor sex="M"><!-- (M|F|O) (O for other) --> <!-- this info is used to select the correct pronoun, not for profiling :) -->
+        <name>Peter Pan</name>
+        <address>Cloud 9</address>
+        <postal_code>1234 XX</postal_code>
+        <city>Treehouse City</city>
+        <country>Neverland</country>
+        <email>peter@pan.tech</email>
+        <hourly_fee denomination="eur">50</hourly_fee>
+         <!-- (eur|gbp|usd) -->
+      </contractor>
+      <work>
+        <activities>
+            <activity>Taunting Captain Hook</activity>
+            <activity>Feeding crocodiles</activity>
+            <activity>Flying to and fro ('to' and 'fro' to be specified at takeoff)</activity>
+        </activities>
+        <start_date>2015-08-18</start_date>
+        <end_date>2016-10-14</end_date>
+        <planning><!-- planned amount of work during the period mentioned above -->
+            <hours>30</hours>
+            <!-- non-negative integer, used for planned working hours over total engagement (for SINGLE ENGAGEMENT contract) or over each period in <per> (for FIXED TIME contract) -->
+            <per>month</per>
+            <!-- (month|week) [NOTE: only used for FIXED TIME contract, value is ignored otherwise] -->
+        </planning>
+      </work>
+   </meta>
+   <section>
+      <title>security consulting agreement</title>
+      <!--Whereas section-->
+      <xi:include href="snippets/contract/en/parties.xml"/>
+      <p>WHEREAS:</p>
+      <ol type="A">
+         <xi:include href="snippets/contract/en/wa_contractorcan.xml"/>
+         <xi:include href="snippets/contract/en/wa_noemploymentintention.xml"/>
+      </ol>
+      <!--Agreement section-->
+      <section>
+         <title>AGREE AS FOLLOWS</title>
+         <ol type="1">
+            <xi:include href="snippets/contract/en/ag_period.xml"/>
+            <xi:include href="snippets/contract/en/ag_noemployment.xml"/>
+            <xi:include href="snippets/contract/en/ag_companyinstructs.xml"/>
+            <xi:include href="snippets/contract/en/ag_ownrisk.xml"/>
+            <xi:include href="snippets/contract/en/ag_workinghours.xml"/>
+            <xi:include href="snippets/contract/en/ag_payment_fixed_term.xml"/>
+            <xi:include href="snippets/contract/en/ag_propertyrights.xml"/>
+            <xi:include href="snippets/contract/en/ag_retainrights.xml"/>
+            <xi:include href="snippets/contract/en/ag_nondisclosure.xml"/>
+            <xi:include href="snippets/contract/en/ag_responsibilities.xml"/>
+            <xi:include href="snippets/contract/en/ag_thirdparty.xml"/>
+            <xi:include href="snippets/contract/en/ag_liability.xml"/>
+            <xi:include href="snippets/contract/en/ag_provisions.xml"/>
+            <xi:include href="snippets/contract/en/ag_generaltermsandconditions.xml"/>
+            <xi:include href="snippets/contract/en/ag_law.xml"/>
+         </ol>
+      </section>
+      <section>
+         <title>Signed in duplicate on August 18, 2016 in</title>
+         <generate_contract_signature_box/>
+      </section>
+   </section>
+</contract>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<snippet_selection>
+    <document root_node="offerte">
+        <selection type="pentest">
+            <snippet>introandscope</snippet>
+            <snippet>projectoverview</snippet>
+        </selection>
+        <selection type="basic-scan">
+            <snippet>introandscope</snippet>
+            <snippet>projectoverview</snippet>
+        </selection>
+    </document>
+    <document root_node="contract">
+        <selection type="single_engagement">
+            <snippet_group number="1">
+                <snippet>parties</snippet>
+            </snippet_group>
+            <snippet_group number="2">
+                <snippet>wa_companywants</snippet>
+                <snippet>wa_companyhasasked</snippet>
+                <snippet>wa_contractorcan</snippet>
+                <snippet>wa_noemploymentintention</snippet>
+            </snippet_group>
+        </selection>
+        <selection type="fixed_term">
+            <snippet>parties</snippet>
+            <snippet>projectoverview</snippet>
+        </selection>
+    </document>
+</snippet_selection>

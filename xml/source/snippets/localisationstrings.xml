@@ -63,5 +63,37 @@
         <translation xml:lang="nl">namens</translation>
         <translation xml:lang="en">for</translation>
     </string>
+    <string id="signed_dupe">
+        <translation xml:lang="nl">In duplicaat getekend</translation>
+        <translation xml:lang="en">Signed in duplicate</translation>
+    </string>
+    <string id="contract_title">
+        <translation xml:lang="nl">security consulting agreement</translation>
+        <translation xml:lang="en">security consulting agreement</translation>
+    </string>
+    <string id="personal_m">
+        <translation xml:lang="nl">hij</translation>
+        <translation xml:lang="en">he</translation>
+    </string>
+    <string id="personal_f">
+        <translation xml:lang="nl">ze</translation>
+        <translation xml:lang="en">she</translation>
+    </string>
+    <string id="personal_o">
+        <translation xml:lang="nl">hen</translation>
+        <translation xml:lang="en">they</translation>
+    </string>
+    <string id="possessive_m">
+        <translation xml:lang="nl">zijn</translation>
+        <translation xml:lang="en">his</translation>
+    </string>
+    <string id="possessive_f">
+        <translation xml:lang="nl">haar</translation>
+        <translation xml:lang="en">her</translation>
+    </string>
+    <string id="possessive_o">
+        <translation xml:lang="nl">hun</translation>
+        <translation xml:lang="en">their</translation>
+    </string>
 </localised_strings>
 
