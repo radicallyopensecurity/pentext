@@ -80,27 +80,11 @@
                     <xsl:element name="xi:include">
                         <xsl:attribute name="href">client_info.xml</xsl:attribute>
                     </xsl:element>
-                    <xsl:if test="/*/third_party">
+                    <xsl:for-each select="/*/third_party">
                         <party>
-                            <full_name>
-                                <xsl:value-of select="/*/third_party/full_name"/>
-                            </full_name>
-                            <short_name>
-                                <xsl:value-of select="/*/third_party/short_name"/>
-                            </short_name>
-                            <xsl:comment>short party name; if no short name: same as long name</xsl:comment>
-                            <waiver_rep>
-                                <xsl:value-of select="/*/third_party/waiver_rep"/>
-                            </waiver_rep>
-                            <address><xsl:value-of select="/*/third_party/address"/></address>
-                            <city>
-                                <xsl:value-of select="/*/third_party/city"/>
-                            </city>
-                            <country>
-                                <xsl:value-of select="/*/third_party/country"/>
-                            </country>
+                            <xsl:copy-of select="node()"/>
                         </party>
-                    </xsl:if>
+                    </xsl:for-each>
                 </permission_parties>
                 <pentestinfo>
                     <duration>
