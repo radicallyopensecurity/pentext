@@ -34,6 +34,7 @@ try:
     import gitlab
     import jxmlease
     # Path of this script. The validate_report module is on the same path.
+    sys.path.append(os.path.dirname(__file__))
     import validate_report
 except ImportError as e:
     print('[-] This script needs python-gitlab, jxmlease and validate_report library', file=sys.stderr)
