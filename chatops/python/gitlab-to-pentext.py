@@ -140,13 +140,16 @@ def list_issues(gitserver, options):
     """
     Lists all issues for options['issues']
     """
-    for issue in gitserver.projects.get(options['issues']).issues.list(all=True):
-        if issue.state != 'opened' and not options['closed']:
-            continue
-        if 'finding' in issue.labels:
-            add_finding(issue, options)
-        if 'non-finding' in issue.labels:
-            add_non_finding(issue, options)
+    try:
+        for issue in gitserver.projects.get(options['issues']).issues.list(all=True):
+            if issue.state != 'opened' and not options['closed']:
+                continue
+            if 'finding' in issue.labels:
+                add_finding(issue, options)
+            if 'non-finding' in issue.labels:
+                add_non_finding(issue, options)
+    except:
+        print_error('could not find any issues', -1)
 
 
 def list_projects(gitserver, options):
