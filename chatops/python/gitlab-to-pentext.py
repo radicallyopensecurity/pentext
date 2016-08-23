@@ -142,7 +142,7 @@ def list_issues(gitserver, options):
     """
     try:
         for issue in gitserver.projects.get(options['issues']).issues.list(all=True):
-            if issue.state != 'opened' and not options['closed']:
+            if issue.state == 'closed' and not options['closed']:
                 continue
             if 'finding' in issue.labels:
                 add_finding(issue, options)
