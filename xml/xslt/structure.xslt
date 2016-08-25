@@ -15,7 +15,7 @@
         </xsl:if>
     </xsl:template>
     
-    <xsl:template match="title">
+    <xsl:template match="title[not(parent::biblioentry)]">
         <xsl:variable name="LEVEL" select="count(ancestor::*) - 1"/>
         <xsl:variable name="CLASS">
             <!-- use title-x for all levels -->

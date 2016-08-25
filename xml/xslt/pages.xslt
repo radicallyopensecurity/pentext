@@ -31,15 +31,15 @@
         </fo:layout-master-set>
     </xsl:template>
     
-    <xsl:template name="layout-master-set-invoice">
-        <!-- Main Page layout structure -->
+    <!--<xsl:template name="layout-master-set-invoice">
+        <!-\- Main Page layout structure -\->
         <fo:layout-master-set>
             <fo:simple-page-master master-name="Content" xsl:use-attribute-sets="PortraitPage">
-                <fo:region-body region-name="region-body-content" xsl:use-attribute-sets="region-body-content"/>
-                <fo:region-before region-name="region-before" xsl:use-attribute-sets="region-before-content"/>
+                <fo:region-body region-name="region-body" xsl:use-attribute-sets="region-body-content"/>
+                <fo:region-before region-name="region-before-content" xsl:use-attribute-sets="region-before-content"/>
                 <fo:region-after region-name="region-after-content" xsl:use-attribute-sets="region-after-content"/>
             </fo:simple-page-master>
-            <!-- sequence master -->
+            <!-\- sequence master -\->
             <fo:page-sequence-master master-name="Invoice">
                 <fo:repeatable-page-master-alternatives>
                     <fo:conditional-page-master-reference master-reference="Content"
@@ -47,7 +47,7 @@
                 </fo:repeatable-page-master-alternatives>
             </fo:page-sequence-master>
         </fo:layout-master-set>
-    </xsl:template>
+    </xsl:template>-->
     
     <xsl:template name="page_header">
         <fo:static-content flow-name="region-before-cover" xsl:use-attribute-sets="HeaderFont">

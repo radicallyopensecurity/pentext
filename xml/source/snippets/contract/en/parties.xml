@@ -3,4 +3,4 @@
 
 <p>AND</p>
 
-<p><u><b><contractor_name/></b></u>, with <contractor_possessive_pronoun/> address at <contractor_address/>, <contractor_postalcode/>, <contractor_city/>, <contractor_country/> (the “<b>Consultant</b>”);</p></div>
+<p><u><b><contractor_name/><!-- this might include the company in parentheses; if you don't want the company in here, remove the <ctcompany> element from contract_info.xml --></b></u>, with <contractor_possessive_pronoun/> address at <contractor_address/>, <contractor_postalcode/>, <contractor_city/>, <contractor_country/> (the “<b><secondpartyrole/></b>”);</p></div>

@@ -9,7 +9,6 @@
     <xsl:import href="structure.xslt"/>
     <xsl:import href="att-set.xslt"/>
     <xsl:import href="block.xslt"/>
-    <xsl:import href="findings.xslt"/>
     <xsl:import href="auto.xslt"/>
     <xsl:import href="table.xslt"/>
     <xsl:import href="lists.xslt"/>
@@ -18,6 +17,8 @@
     <xsl:import href="generic.xslt"/>
     <xsl:import href="numbering.xslt"/>
     <xsl:import href="localisation.xslt"/>
+    <xsl:import href="placeholders.xslt"/>
+    <xsl:import href="snippets.xslt"/>
 
     <xsl:include href="styles_con.xslt"/>
 
@@ -29,11 +30,12 @@
 
 
     <xsl:key name="rosid" match="section | finding | appendix | non-finding" use="@id"/>
+    <xsl:key name="biblioid" match="biblioentry" use="@id"/>
 
 
     <xsl:variable name="CLASSES" select="document('../xslt/styles_con.xslt')/*/xsl:attribute-set"/>
 
-    <xsl:variable name="lang" select="/contract/@xml:lang"/>
+    <xsl:variable name="lang" select="/*/@xml:lang"/>
     <xsl:variable name="localDateFormat" select="$strdoc/date/format[lang($lang)]"/>
     <xsl:variable name="fee" select="/contract/meta/contractor/hourly_fee * 1"/>
     <xsl:variable name="plannedHours" select="/contract/meta/work/planning/hours * 1"/>
@@ -133,7 +135,7 @@
                         </fo:table-row>
                         <fo:table-row>
                             <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block/>
+                                <fo:block xsl:use-attribute-sets="bold"><xsl:value-of select="/*/meta/contractor/ctcompany"/></fo:block>
                             </fo:table-cell>
                             <fo:table-cell xsl:use-attribute-sets="td">
                                 <fo:block xsl:use-attribute-sets="bold"><xsl:value-of select="/*/meta/company/full_name"/>
@@ -180,9 +182,7 @@
         </fo:block>
         </fo:static-content>
         <fo:static-content flow-name="region-before-content" xsl:use-attribute-sets="HeaderFont">
-            <fo:block xsl:use-attribute-sets="header">
-                <xsl:value-of select="/pentest_report/meta/classification"/>
-            </fo:block>
+            <fo:block xsl:use-attribute-sets="header"/>
         </fo:static-content>
     </xsl:template>
 

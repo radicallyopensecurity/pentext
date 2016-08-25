@@ -1,6 +1,49 @@
 RELEASE NOTES
 =============
 
+August 25th, 2016
+-----------------
+
+### More configurable contract snippet selection
+
+You can now configure contract types and the snippets they use in `snippets/snippetselection.xml`. The selected snippets will be used when generating the contract from `contract_info.xml` (see Aug 19 release notes). If you define no snippet group, all snippets will be generated one after the other in the resulting contract. If you do define snippet groups, these can then be referenced from the xslt so that you generate a group at a time (useful if there should be something in between them or if they go in different sections or something like that). In due time this will also be generated for offertes (so as to configure offertes generated from the `quickscope.xml`)
+
+### Generic Document footnotes
+
+You can now use footnotes (`<p>This is a nice<fnref>And by nice I mean that it contains a footnote</fnref> sentence.</p>`) in generic documents. In due time these will also be added to pentest reports and offertes.
+
+### Generic Document bibliography
+
+You can now use bibliography references and entries in generic documents. In due time these will also be added to pentest reports and offertes.
+
+#### Example:
+
+	<p>This is a nice book<bibref ref="bib1"/>.</p>` 
+
+	
+	<section id="bibliography">
+		<title>Bibliography</title>
+		<biblioentries>
+                        <biblioentry role="book" id="bib1">
+                                <author>
+                                        <surname>Guy</surname>
+                                        <firstname>Some</firstname>
+                                </author>
+                                <title>Books are cool</title>
+                                <info>pages 207–228</info>
+                                <publisher>
+                                        <name>We Publish Everything</name>
+                                        <location>Amsterdam</location>
+                                </publisher>
+                                <pubdate>2016</pubdate>
+                                <link>
+                                        <a href="http://www.noqualitycontrol.com/someguysbook">http://www.noqualitycontrol.com/someguysbook</a>
+                                        <accessed>2016-08-25</accessed>
+                                </link>
+                        </biblioentry>
+    
+
+
 August 19th, 2016
 -----------------
 

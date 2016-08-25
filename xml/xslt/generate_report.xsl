@@ -18,6 +18,9 @@
     <xsl:import href="graphics.xslt"/>
     <xsl:import href="generic.xslt"/>
     <xsl:import href="numbering.xslt"/>
+    <xsl:import href="localisation.xslt"/>
+    <xsl:import href="placeholders.xslt"/><!--
+    <xsl:import href="snippets.xslt"/>-->
     
     <xsl:include href="styles_rep.xslt"/>
     
@@ -27,7 +30,15 @@
     <!-- ****** AUTO_NUMBERING_FORMAT:	value of the <xsl:number> element used for auto numbering -->
     <xsl:param name="AUTO_NUMBERING_FORMAT" select="'1.1.1'"/>
 
-    <xsl:key name="rosid" match="section|finding|appendix|non-finding" use="@id"/>
+    <xsl:key name="rosid" match="section|finding|appendix|non-finding" use="@id"/><xsl:key name="biblioid" match="biblioentry" use="@id"/>
+    
+    <!-- not used but needed because of shared code with contract; todo: clean these up -->
+    <xsl:variable name="fee" select="/contract/meta/contractor/hourly_fee * 1"/>
+    <xsl:variable name="plannedHours" select="/contract/meta/work/planning/hours * 1"/>
+    <xsl:variable name="total_fee" select="$fee * $plannedHours"/>
+    <!-- end -->
+    
+    <xsl:variable name="lang" select="/*/@xml:lang"/>
     
     <xsl:variable name="CLASSES" select="document('../xslt/styles_rep.xslt')/*/xsl:attribute-set"/>
     

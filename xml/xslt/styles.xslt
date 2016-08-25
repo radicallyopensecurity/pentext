@@ -124,7 +124,21 @@
 		<xsl:attribute name="font-size">60%</xsl:attribute>
 		<xsl:attribute name="vertical-align">sub</xsl:attribute>
     </xsl:attribute-set>
+    <!-- bibliography -->
+    <xsl:attribute-set name="title.book" use-attribute-sets="italic"/>
+    <xsl:attribute-set name="title.article"/>
+    <xsl:attribute-set name="journal" use-attribute-sets="italic"/>
+    <xsl:attribute-set name="website"/>
+    <xsl:attribute-set name="info"/>
+    <xsl:attribute-set name="publisher"/>
+    <xsl:attribute-set name="pubdate"/>
+    <!-- blocks -->
     <xsl:attribute-set name="p">
+        <xsl:attribute name="margin-bottom">
+            <xsl:value-of select="$small-space"/>
+        </xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="biblioentry">
         <xsl:attribute name="margin-bottom">
             <xsl:value-of select="$small-space"/>
         </xsl:attribute>
