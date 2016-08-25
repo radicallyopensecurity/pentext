@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"><fo:layout-master-set><fo:simple-page-master margin-top="2cm" margin-bottom="1.8cm" margin-left="2cm" margin-right="2cm" page-height="29.7cm" page-width="21.0cm" master-name="Cover"><fo:region-body margin-top="1cm" margin-bottom="1cm" region-name="region-body"/><fo:region-before precedence="true" extent="0.6cm" region-name="region-before-cover"/><fo:region-after precedence="true" extent="0.6cm" padding="0" region-name="region-after-cover"/></fo:simple-page-master><fo:simple-page-master margin-top="2cm" margin-bottom="1.8cm" margin-left="2cm" margin-right="2cm" page-height="29.7cm" page-width="21.0cm" master-name="Content"><fo:region-body margin-top="1cm" margin-bottom="1cm" region-name="region-body"/><fo:region-before precedence="true" extent="0.6cm" region-name="region-before-content"/><fo:region-after precedence="true" extent="0.6cm" padding="0" region-name="region-after-content"/></fo:simple-page-master><fo:page-sequence-master master-name="Report"><fo:repeatable-page-master-alternatives><fo:conditional-page-master-reference master-reference="Cover" blank-or-not-blank="not-blank" page-position="first"/><fo:conditional-page-master-reference master-reference="Content" blank-or-not-blank="not-blank"/></fo:repeatable-page-master-alternatives></fo:page-sequence-master></fo:layout-master-set><fo:page-sequence master-reference="Report"><fo:static-content font-family="LiberationSansNarrow" font-size="12pt" color="black" flow-name="region-before-cover"><fo:block text-align="right" font-weight="bold"/></fo:static-content><fo:static-content font-family="LiberationSansNarrow" font-size="12pt" color="black" flow-name="region-before-content"><fo:block text-align="right" font-weight="bold"/></fo:static-content><fo:static-content font-family="LiberationSansNarrow" font-size="12pt" color="black" flow-name="region-after-cover"><fo:block text-align-last="justify"><fo:page-number/>/<fo:page-number-citation ref-id="EndOfDoc"/><fo:leader leader-pattern="space"/><fo:inline font-family="LiberationSansNarrow" font-size="8pt" color="black"> - Chamber of Commerce
+                    </fo:inline></fo:block></fo:static-content><fo:static-content font-family="LiberationSansNarrow" font-size="12pt" color="black" flow-name="region-after-content"><fo:block text-align-last="justify"><fo:page-number/>/<fo:page-number-citation ref-id="EndOfDoc"/><fo:leader leader-pattern="space"/><fo:inline font-family="LiberationSansNarrow" font-size="8pt" color="black"> - Chamber of Commerce
+                    </fo:inline></fo:block></fo:static-content><fo:flow font-family="LiberationSansNarrow" font-size="12pt" color="black" flow-name="region-body"><fo:block><fo:block margin-bottom="1.5cm"><fo:block font-weight="bold" keep-with-next.within-page="always" text-align="center" color="white" text-transform="uppercase" font-size="18pt" margin-bottom="1cm" background-color="#FF5C00"/>
+        <fo:block xmlns:xlink="http://www.w3.org/1999/xlink" keep-with-next.within-page="always" text-align="center" color="white" font-weight="bold" text-transform="uppercase" font-style="italic" font-size="14pt" margin-bottom="0.8cm" background-color="#999999">penetration test - WAIVER</fo:block>
+
+        <fo:block margin-bottom="10pt" line-height="18pt"><fo:inline font-weight="bold"><fo:inline font-style="italic">dafaf</fo:inline> (<fo:inline font-style="italic">dad</fo:inline>)</fo:inline>, with its registered office at fsgf,
+            sgf, sfgsfg and duly represented by <fo:inline font-weight="bold">sgf</fo:inline></fo:block>
+
+        <fo:block margin-bottom="10pt" line-height="18pt">
+            <fo:inline font-weight="bold">WHEREAS:</fo:inline>
+        </fo:block>
+
+<fo:block margin-bottom="10pt" line-height="18pt">A. Sitting Duck wants some of its systems to be tested,
+                            Radically Open Security B.V. (“ROS”) has offered to perform
+                        such testing for Sitting Duck and
+                            Sitting Duck has accepted this offer.
+                        The assignment will be performed by ROS' core-team members, external
+                        freelancers, and/or volunteers (the “Consultants”).</fo:block>
+                    <fo:block margin-bottom="10pt" line-height="18pt">B. Some of the activities performed by
+                            ROS and the
+                        Consultants during the course of this assignment could be considered
+                        illegal, unless dad has given permission for
+                        these activities. ROS
+                        and the Consultant will only perform such activities if they have received
+                        the required permission.</fo:block>
+                    <fo:block margin-bottom="10pt" line-height="18pt">C. dad is
+                        willing to give such permission to ROS, the Consultants and any
+                        other person ROS might
+                        employ or engage for the assignment.</fo:block>
+                    <fo:block margin-bottom="10pt" line-height="18pt">
+                        <fo:inline font-weight="bold">DECLARES AS FOLLOWS:</fo:inline>
+                    </fo:block>
+                    <fo:block margin-bottom="10pt" line-height="18pt">1. dad is
+                        aware that ROS will
+                        perform penetration testing services of the
+                        following systems of dad, as described
+                        below. The services are intended to gain insight in the security of these
+                        systems. To do so, ROS
+                        will access these systems, attempt to find vulnerabilities and gain further
+                        access and elevated privileges by exploiting any vulnerabilities found.
+                            ROS will test the
+                        following targets (the “<fo:inline font-weight="bold">Targets</fo:inline>”):</fo:block>
+                    <fo:list-block margin-bottom="10pt" line-height="18pt" provisional-distance-between-starts="0.75cm" provisional-label-separation="2.5mm" space-after="12pt" start-indent="1cm"><fo:list-item><fo:list-item-label end-indent="label-end()"><fo:block><fo:inline>•</fo:inline></fo:block></fo:list-item-label><fo:list-item-body start-indent="body-start()"><fo:block>dsfsd</fo:block></fo:list-item-body></fo:list-item><fo:list-item><fo:list-item-label end-indent="label-end()"><fo:block><fo:inline>•</fo:inline></fo:block></fo:list-item-label><fo:list-item-body start-indent="body-start()"><fo:block>adfsd</fo:block></fo:list-item-body></fo:list-item></fo:list-block>
+                    <fo:block margin-bottom="10pt" line-height="18pt">2. dad
+                        hereby grants ROS and
+                        the Consultants on a date to be confirmed by email the broadest permission
+                        possible to perform the assignment, including the permission to:</fo:block>
+                    <fo:block margin-bottom="10pt" line-height="18pt">a. enter and use the Targets;</fo:block>
+                    <fo:block margin-bottom="10pt" line-height="18pt">b. circumvent, breach, remove and turn off
+                        any security measures protecting the Targets;</fo:block>
+                    <fo:block margin-bottom="10pt" line-height="18pt">c. copy, intercept, record, amend, delete,
+                        render unusable or inaccessible any data stored on, processed by or
+                        transferred via the Targets; and</fo:block>
+                    <fo:block margin-bottom="10pt" line-height="18pt">d. hinder the access or use of the
+                        Targets,</fo:block>
+                    <fo:block margin-bottom="10pt" line-height="18pt">but dad
+                        only grants the permission for these activities to the extent that (i) such
+                        activities are necessary to perform the assignment and (ii) such activities
+                        do not disrupt the normal business operations of dad.</fo:block>
+                    <fo:block margin-bottom="10pt" line-height="18pt">3. The permission under Article 1 extends
+                        to all systems on which the Targets run, or which ROS or the Consultant might
+                        encounter while performing the assignment, regardless of whether these
+                        systems are owned by third parties.</fo:block>
+                    <fo:block margin-bottom="10pt" line-height="18pt">4. dad
+                        warrants that it has the legal authority to give the permission set out
+                        under Articles 1 and 2. It also warrants it has obtained the necessary
+                        permissions from any third parties referred to under Article 3.</fo:block>
+                    <fo:block margin-bottom="10pt" line-height="18pt">5. Should the public prosecutor initiate an
+                        investigation or criminal proceedings against ROS or any of the consultants it
+                        engaged or employed as a result of the performance of the assignment for the
+                        customer, then dad will co-operate fully
+                        with ROS in defending
+                        against this investigation or proceedings, including by providing any
+                        evidence it has which relates to this investigation or these
+                        proceedings.</fo:block>
+
+        <fo:block margin-top="1.5cm" keep-together.within-page="always"><fo:table width="100%" table-layout="fixed"><fo:table-column column-width="proportional-column-width(10)"/><fo:table-column column-width="proportional-column-width(90)"/><fo:table-body><fo:table-row><fo:table-cell padding="2pt" number-rows-spanned="4"><fo:block>Signed</fo:block></fo:table-cell><fo:table-cell padding="2pt"><fo:block margin-bottom="10pt" line-height="18pt">on    August 25, 2016</fo:block></fo:table-cell></fo:table-row><fo:table-row><fo:table-cell padding="2pt"><fo:block margin-bottom="10pt" line-height="18pt">in     </fo:block></fo:table-cell></fo:table-row><fo:table-row><fo:table-cell padding="2pt"><fo:block margin-bottom="10pt" line-height="18pt">by
+                                           __________________________________</fo:block></fo:table-cell></fo:table-row><fo:table-row><fo:table-cell padding="2pt"><fo:block margin-bottom="10pt" line-height="18pt">for    </fo:block></fo:table-cell></fo:table-row></fo:table-body></fo:table></fo:block>
+
+    </fo:block></fo:block><fo:block id="EndOfDoc"/></fo:flow></fo:page-sequence></fo:root>

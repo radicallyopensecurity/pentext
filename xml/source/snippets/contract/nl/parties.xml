@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div><p><u><b><company_long/></b></u>, met adres <company_address/>, <company_postalcode/>, <company_city/>, vertegenwoordigd door <company_poc1/> (“<b><company_short/></b>”);</p>
+
+<p>EN</p>
+
+<p><u><b><contractor_name/></b></u>, met <contractor_possessive_pronoun/> adres op <contractor_address/>, <contractor_postalcode/>, <contractor_city/>, <contractor_country/> (de “<b><secondpartyrole/></b>”);</p></div>

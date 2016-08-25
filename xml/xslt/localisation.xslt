@@ -12,7 +12,16 @@
     
     <xsl:template name="getString">
         <xsl:param name="stringID" select="'none'"/>
-        <xsl:copy-of select="$strdoc/string[@id=$stringID]/translation[lang($lang)]/node()"/>
+        <xsl:param name="caps" select="false()"/>
+        <xsl:choose>
+            <xsl:when test="$caps">
+                <xsl:value-of select="$strdoc/string[@id=$stringID]/translation[lang($lang)]/upper-case(text())"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$strdoc/string[@id=$stringID]/translation[lang($lang)]/text()"/>
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
 
 </xsl:stylesheet>

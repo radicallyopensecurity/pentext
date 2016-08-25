@@ -32,6 +32,7 @@
         <xs:element ref="iban"/>
       </xs:sequence>
       <xs:attribute ref="xml:base"/>
+      <xs:attribute ref="xml:lang"/>
     </xs:complexType>
   </xs:element>
 
@@ -99,6 +100,7 @@
         <xs:element ref="vat_no"/>
       </xs:sequence>
       <xs:attribute ref="xml:base"/>
+      <xs:attribute ref="xml:lang"/>
       <xs:attribute name="id" type="xs:ID"/>
     </xs:complexType>
   </xs:element>
@@ -108,7 +110,6 @@
 
   <xs:element name="duration" type="xs:nonNegativeInteger"/>
   <xs:element name="test_planning" type="xs:string"/>
-  <xs:element name="report_writing" type="xs:string"/>
   <xs:element name="report_due" type="xs:string"/>
   <xs:element name="nature" type="xs:string"/>
   <xs:element name="type">
@@ -219,7 +220,7 @@
       <xs:attribute ref="xml:base"/>
     </xs:complexType>
   </xs:element>
-
+  
   <xs:element name="version_history">
     <xs:complexType>
       <xs:sequence>
@@ -294,6 +295,23 @@
       </xs:simpleContent>
     </xs:complexType>
   </xs:element>
+  <xs:element name="bibref">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="ref" use="optional" type="xs:anyURI"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="fnref">
+    <xs:complexType mixed="true">
+      <xs:choice maxOccurs="unbounded">
+        <xs:group ref="inline-except-fnref"/>
+        <xs:group ref="placeholders"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="b">
     <xs:complexType mixed="true">
       <xs:choice maxOccurs="unbounded">
@@ -350,6 +368,79 @@
       </xs:choice>
     </xs:complexType>
   </xs:element>
+  
+  <xs:element name="biblioentries">
+    <xs:complexType>
+      <xs:sequence minOccurs="1" maxOccurs="unbounded">
+        <xs:element ref="biblioentry"></xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="biblioentry">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="author" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="title"/>
+        <xs:choice>
+          <xs:element ref="journal" minOccurs="0"/>
+          <xs:element ref="website" minOccurs="0"/>
+        </xs:choice>
+        <xs:element ref="info" minOccurs="0"/>
+        <xs:element ref="publisher" minOccurs="0"/>
+        <xs:element ref="pubdate" minOccurs="0"/>
+        <xs:element ref="link" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute ref="role"/>
+      <xs:attribute name="id" use="required" type="xs:ID"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:attribute name="role">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="book"/>
+        <xs:enumeration value="article"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+  
+    <xs:element name="author">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="surname" minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="firstname" minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="org" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="publisher">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name" minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="location" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="link">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="a" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="accessed" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+    <xs:element name="surname" type="xs:string"/>
+    <xs:element name="firstname" type="xs:string"/>
+    <xs:element name="org" type="xs:string"/>
+    <xs:element name="journal" type="xs:string"/>
+    <xs:element name="info" type="xs:string"/>
+    <xs:element name="location" type="xs:string"/>
+    <xs:element name="pubdate" type="xs:string"/>
+    <xs:element name="accessed" type="xs:date"/>
 
   <!-- attributes -->
   <xs:attribute name="break">
@@ -380,6 +471,21 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="monospace"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sup"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fnref"/>
+    </xs:choice>
+  </xs:group>
+  <xs:group name="inline-except-fnref">
+    <xs:choice>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="a"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="br"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="i"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="b"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="u"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="monospace"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="sup"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
     </xs:choice>
   </xs:group>
   <xs:group name="inline-except-b">
@@ -391,6 +497,8 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="monospace"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sup"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fnref"/>
     </xs:choice>
   </xs:group>
   <xs:group name="inline-except-sup">
@@ -402,6 +510,8 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="b"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="monospace"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fnref"/>
     </xs:choice>
   </xs:group>
   <xs:group name="inline-except-sub">
@@ -413,6 +523,8 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="b"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="monospace"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sup"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fnref"/>
     </xs:choice>
   </xs:group>
   <xs:group name="inline-except-i">
@@ -424,6 +536,8 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="monospace"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sup"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fnref"/>
     </xs:choice>
   </xs:group>
   <xs:group name="inline-except-u">
@@ -435,6 +549,8 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="monospace"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sup"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fnref"/>
     </xs:choice>
   </xs:group>
   <xs:group name="inline-except-monospace">
@@ -446,6 +562,8 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="u"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sup"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fnref"/>
     </xs:choice>
   </xs:group>
 
