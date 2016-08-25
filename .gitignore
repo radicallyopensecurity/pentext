@@ -1,2 +1,7 @@
-
 xml/PenText.xpr
+# (Emacs) (temporary) files
+.#*
+\#*#
+.projectile
+# Compiled Python stuff
+*.pyc
