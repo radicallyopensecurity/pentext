@@ -31,15 +31,28 @@
         <xsl:attribute name="page-height">29.7cm</xsl:attribute>
         <xsl:attribute name="page-width">21.0cm</xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="region-body">
+       <xsl:attribute-set name="region-body-cover">
         <xsl:attribute name="margin-top">3.6cm</xsl:attribute>
         <xsl:attribute name="margin-bottom">1cm</xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="region-before">
+    <xsl:attribute-set name="region-before-cover">
         <xsl:attribute name="precedence">true</xsl:attribute>
         <xsl:attribute name="extent">2.7cm</xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="region-after">
+    <xsl:attribute-set name="region-after-cover">
+        <xsl:attribute name="precedence">true</xsl:attribute>
+        <xsl:attribute name="extent">0.6cm</xsl:attribute>
+        <xsl:attribute name="padding">0</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="region-body-content">
+        <xsl:attribute name="margin-top">2cm</xsl:attribute>
+        <xsl:attribute name="margin-bottom">1cm</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="region-before-content">
+        <xsl:attribute name="precedence">true</xsl:attribute>
+        <xsl:attribute name="extent">0.6cm</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="region-after-content">
         <xsl:attribute name="precedence">true</xsl:attribute>
         <xsl:attribute name="extent">0.6cm</xsl:attribute>
         <xsl:attribute name="padding">0</xsl:attribute>

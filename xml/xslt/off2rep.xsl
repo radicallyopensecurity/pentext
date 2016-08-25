@@ -10,7 +10,7 @@
 
         <pentest_report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:noNamespaceSchemaLocation="../dtd/pentestreport.xsd"
-            xmlns:xi="http://www.w3.org/2001/XInclude" findingCode="???">
+            xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" findingCode="???">
             <meta>
                 <title>Penetration Test Report</title>
                 <xsl:element name="xi:include">

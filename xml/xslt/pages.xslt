@@ -9,15 +9,15 @@
         <fo:layout-master-set>
             <!-- first page -->
             <fo:simple-page-master master-name="Cover" xsl:use-attribute-sets="PortraitPage">
-                <fo:region-body region-name="region-body" xsl:use-attribute-sets="region-body"/>
-                <fo:region-before region-name="region-before" xsl:use-attribute-sets="region-before"/>
-                <fo:region-after region-name="region-after" xsl:use-attribute-sets="region-after"/>
+                <fo:region-body region-name="region-body" xsl:use-attribute-sets="region-body-cover"/>
+                <fo:region-before region-name="region-before-cover" xsl:use-attribute-sets="region-before-cover"/>
+                <fo:region-after region-name="region-after-cover" xsl:use-attribute-sets="region-after-cover"/>
             </fo:simple-page-master>
             <!-- all other pages -->
             <fo:simple-page-master master-name="Content" xsl:use-attribute-sets="PortraitPage">
-                <fo:region-body region-name="region-body" xsl:use-attribute-sets="region-body"/>
-                <fo:region-before region-name="region-before" xsl:use-attribute-sets="region-before"/>
-                <fo:region-after region-name="region-after" xsl:use-attribute-sets="region-after"/>
+                <fo:region-body region-name="region-body" xsl:use-attribute-sets="region-body-content"/>
+                <fo:region-before region-name="region-before-content" xsl:use-attribute-sets="region-before-content"/>
+                <fo:region-after region-name="region-after-content" xsl:use-attribute-sets="region-after-content"/>
             </fo:simple-page-master>
             <!-- sequence master -->
             <fo:page-sequence-master master-name="Report">
@@ -31,15 +31,15 @@
         </fo:layout-master-set>
     </xsl:template>
     
-    <xsl:template name="layout-master-set-invoice">
-        <!-- Main Page layout structure -->
+    <!--<xsl:template name="layout-master-set-invoice">
+        <!-\- Main Page layout structure -\->
         <fo:layout-master-set>
             <fo:simple-page-master master-name="Content" xsl:use-attribute-sets="PortraitPage">
-                <fo:region-body region-name="region-body" xsl:use-attribute-sets="region-body"/>
-                <fo:region-before region-name="region-before" xsl:use-attribute-sets="region-before"/>
-                <fo:region-after region-name="region-after" xsl:use-attribute-sets="region-after"/>
+                <fo:region-body region-name="region-body" xsl:use-attribute-sets="region-body-content"/>
+                <fo:region-before region-name="region-before-content" xsl:use-attribute-sets="region-before-content"/>
+                <fo:region-after region-name="region-after-content" xsl:use-attribute-sets="region-after-content"/>
             </fo:simple-page-master>
-            <!-- sequence master -->
+            <!-\- sequence master -\->
             <fo:page-sequence-master master-name="Invoice">
                 <fo:repeatable-page-master-alternatives>
                     <fo:conditional-page-master-reference master-reference="Content"
@@ -47,10 +47,15 @@
                 </fo:repeatable-page-master-alternatives>
             </fo:page-sequence-master>
         </fo:layout-master-set>
-    </xsl:template>
+    </xsl:template>-->
     
     <xsl:template name="page_header">
-        <fo:static-content flow-name="region-before" xsl:use-attribute-sets="HeaderFont">
+        <fo:static-content flow-name="region-before-cover" xsl:use-attribute-sets="HeaderFont">
+            <fo:block xsl:use-attribute-sets="header">
+                <xsl:value-of select="/pentest_report/meta/classification"/>
+            </fo:block>
+        </fo:static-content>
+        <fo:static-content flow-name="region-before-content" xsl:use-attribute-sets="HeaderFont">
             <fo:block xsl:use-attribute-sets="header">
                 <xsl:value-of select="/pentest_report/meta/classification"/>
             </fo:block>
@@ -58,7 +63,16 @@
     </xsl:template>
     
     <xsl:template name="page_footer">
-        <fo:static-content flow-name="region-after" xsl:use-attribute-sets="FooterFont">
+        <fo:static-content flow-name="region-after-cover" xsl:use-attribute-sets="FooterFont">
+            <fo:block xsl:use-attribute-sets="footer">
+                <fo:page-number/>/<fo:page-number-citation ref-id="EndOfDoc"/>
+                <fo:leader leader-pattern="space"/>
+                <fo:inline xsl:use-attribute-sets="TinyFont"><xsl:value-of
+                select="*/meta/company/full_name"/> - Chamber of Commerce
+                    <xsl:value-of select="*/meta/company/coc"/></fo:inline>
+            </fo:block>
+        </fo:static-content>
+        <fo:static-content flow-name="region-after-content" xsl:use-attribute-sets="FooterFont">
             <fo:block xsl:use-attribute-sets="footer">
                 <fo:page-number/>/<fo:page-number-citation ref-id="EndOfDoc"/>
                 <fo:leader leader-pattern="space"/>
@@ -75,7 +89,7 @@
             <xsl:call-template name="page_footer"/>
             <fo:flow flow-name="region-body" xsl:use-attribute-sets="DefaultFont">
                 <fo:block>
-                    <xsl:apply-templates select="pentest_report|offerte|quickscope|generic_document"/>
+                    <xsl:apply-templates select="pentest_report|offerte|quickscope|generic_document|contract"/>
                 </fo:block>
                 <fo:block id="EndOfDoc"/>
             </fo:flow>

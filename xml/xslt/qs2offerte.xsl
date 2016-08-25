@@ -61,22 +61,6 @@
                     </xsl:for-each>
                 </targets>
                 <permission_parties>
-                    <!--<client><xsl:comment>mandatory; please add client information</xsl:comment>
-                        <full_name><xsl:value-of select="/*/customer/full_name"/></full_name><xsl:comment>long client name, e.g. Sitting Duck B.V.</xsl:comment>
-                        <short_name><xsl:value-of select="/*/customer/short_name"/></short_name>
-                        <xsl:comment>short client name, e.g. Sitting Duck; if no short name: same as long name</xsl:comment>
-                        <legal_rep><xsl:value-of select="/*/customer/legal_rep"/></legal_rep><xsl:comment>customer legal representative (to sign offer)</xsl:comment>
-                        <waiver_rep><xsl:value-of select="/*/customer/waiver_rep"/></waiver_rep><xsl:comment>customer legal representative (to sign waiver; can be same person as legal_rep)</xsl:comment>
-                        <poc1><xsl:value-of select="/*/customer/poc1"/></poc1><xsl:comment>first point of contact for customer (during pentest); can be same person as above</xsl:comment>
-                        <address><xsl:value-of select="/*/customer/address"/></address>
-                        <city><xsl:value-of select="/*/customer/city"/></city>
-                        <country><xsl:value-of select="/*/customer/country"/></country>
-                        <coc>
-                            <xsl:attribute name="nationality"><xsl:value-of
-                                    select="/*/customer/coc_nat"/></xsl:attribute>
-                            <xsl:value-of select="/*/customer/coc_no"/>
-                        </coc><xsl:comment>chamber of commerce number; if no chamber of commerce number, please delete the whole element</xsl:comment>
-                    </client>-->
                     <xsl:element name="xi:include">
                         <xsl:attribute name="href">client_info.xml</xsl:attribute>
                     </xsl:element>

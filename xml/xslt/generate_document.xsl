@@ -11,13 +11,14 @@
     <xsl:import href="att-set.xslt"/>
     <xsl:import href="block.xslt"/>
     <xsl:import href="findings.xslt"/>
-    <xsl:import href="auto.xsl"/>
+    <xsl:import href="auto.xslt"/>
     <xsl:import href="table.xslt"/>
     <xsl:import href="lists.xslt"/>
     <xsl:import href="inline.xslt"/>
     <xsl:import href="graphics.xslt"/>
     <xsl:import href="generic.xslt"/>
     <xsl:import href="numbering.xslt"/>
+    <xsl:import href="localisation.xslt"/>
     
     <xsl:include href="styles_rep.xslt"/>
     
@@ -28,8 +29,10 @@
     <xsl:param name="AUTO_NUMBERING_FORMAT" select="'1.1.1'"/>
 
     <xsl:key name="rosid" match="section|appendix" use="@id"/>
+    <xsl:key name="biblioid" match="biblioentry" use="@id"/>
     
     <xsl:variable name="CLASSES" select="document('../xslt/styles_doc.xslt')/*/xsl:attribute-set"/>
+    <xsl:variable name="lang" select="/*/@xml:lang"/>
     
     <xsl:variable name="latestVersionDate">
             <xsl:for-each select="/*/meta/version_history/version">

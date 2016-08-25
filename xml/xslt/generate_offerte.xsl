@@ -11,13 +11,15 @@
     <xsl:import href="att-set.xslt"/>
     <xsl:import href="block.xslt"/>
     <xsl:import href="findings.xslt"/>
-    <xsl:import href="auto.xsl"/>
+    <xsl:import href="auto.xslt"/>
     <xsl:import href="table.xslt"/>
     <xsl:import href="lists.xslt"/>
     <xsl:import href="inline.xslt"/>
     <xsl:import href="graphics.xslt"/>
     <xsl:import href="generic.xslt"/>
     <xsl:import href="numbering.xslt"/>
+    <xsl:import href="placeholders.xslt"/><!--
+    <xsl:import href="snippets.xslt"/>-->
     <xsl:import href="waiver.xslt"/>
     
     <xsl:include href="localisation.xslt"/>
@@ -31,11 +33,17 @@
     
 
     <xsl:key name="rosid" match="section|finding|appendix|non-finding" use="@id"/>
+    <xsl:key name="biblioid" match="biblioentry" use="@id"/>
     
+    <!-- not used but needed because of shared code with contract; todo: clean these up -->
+    <xsl:variable name="fee" select="/contract/meta/contractor/hourly_fee * 1"/>
+    <xsl:variable name="plannedHours" select="/contract/meta/work/planning/hours * 1"/>
+    <xsl:variable name="total_fee" select="$fee * $plannedHours"/>
+    <!-- end -->
     
     <xsl:variable name="CLASSES" select="document('../xslt/styles_off.xslt')/*/xsl:attribute-set"/>
     
-    <xsl:variable name="lang" select="/offerte/@xml:lang"/>
+    <xsl:variable name="lang" select="/*/@xml:lang"/>
     <xsl:variable name="localDateFormat" select="$strdoc/date/format[lang($lang)]"/>
     
     <xsl:variable name="latestVersionDate">
@@ -111,11 +119,6 @@
             </xsl:call-template>
             <xsl:apply-templates/>
         </fo:block>
-    </xsl:template>
-    
-    <!-- TITLES (ALL CAPS) -->
-    <xsl:template match="title/text()">
-        <xsl:value-of select="upper-case(.)"/>
     </xsl:template>
     
     <!-- CONTACT BOX (comes at the end, is just the address, no title/table) -->

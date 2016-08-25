@@ -5,7 +5,7 @@
     version="2.0">
     
     <xsl:template match="table">
-        <fo:table table-layout="fixed" width="100%">
+        <fo:block xsl:use-attribute-sets="p"><fo:table table-layout="fixed" width="100%">
             <xsl:call-template name="checkIfLast"/>
             <xsl:choose>
                 <xsl:when test="@cols">
@@ -20,7 +20,7 @@
             <fo:table-body>
                 <xsl:apply-templates select="*"/>
             </fo:table-body>
-        </fo:table>
+        </fo:table></fo:block>
     </xsl:template>
     
     <xsl:template name="build-columns">

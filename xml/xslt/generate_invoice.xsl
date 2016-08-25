@@ -11,7 +11,7 @@
     <xsl:import href="att-set.xslt"/>
     <xsl:import href="block.xslt"/>
     <xsl:import href="findings.xslt"/>
-    <xsl:import href="auto.xsl"/>
+    <xsl:import href="auto.xslt"/>
     <xsl:import href="table.xslt"/>
     <xsl:import href="lists.xslt"/>
     <xsl:import href="inline.xslt"/>
@@ -46,20 +46,12 @@
         </xsl:choose>
     </xsl:param>
     <!-- ROOT -->
-    <xsl:template match="/offerte">
+    <xsl:template match="/offerte | /invoice">
         <!-- Invoice is generated straight from offerte -->
         <fo:root>
-            <xsl:call-template name="layout-master-set-invoice"/>
+            <xsl:call-template name="layout-master-set"/>
             <xsl:call-template name="Content"/>
       </fo:root>
-    </xsl:template>
-
-    <xsl:template match="/invoice">
-        <!-- Invoice is generated from custom invoice xml -->
-        <fo:root>
-            <xsl:call-template name="layout-master-set-invoice"/>
-            <xsl:call-template name="Content"/>
-        </fo:root>
     </xsl:template>
     
     <!-- CONTENT -->
@@ -251,7 +243,7 @@
     
     <!-- overrules for pages.xslt -->
     <xsl:template name="Content">
-        <fo:page-sequence master-reference="Invoice">
+        <fo:page-sequence master-reference="Report">
             <xsl:call-template name="page_header"/>
             <xsl:call-template name="page_footer"/>
             <fo:flow flow-name="region-body" xsl:use-attribute-sets="DefaultFont">
@@ -270,7 +262,7 @@
     </xsl:template>
     
     <xsl:template name="page_header">
-        <fo:static-content flow-name="region-before" xsl:use-attribute-sets="HeaderFont">
+        <fo:static-content flow-name="region-before-cover" xsl:use-attribute-sets="HeaderFont">
             <fo:block>
             <fo:table width="100%" table-layout="fixed">
                 <fo:table-column column-width="proportional-column-width(40)"/>
@@ -302,10 +294,18 @@
             </fo:table>
         </fo:block>
         </fo:static-content>
+        <fo:static-content flow-name="region-before-content" xsl:use-attribute-sets="HeaderFont">
+            <fo:block xsl:use-attribute-sets="header"/>
+        </fo:static-content>
     </xsl:template>
     
     <xsl:template name="page_footer">
-        <fo:static-content flow-name="region-after" xsl:use-attribute-sets="FooterFont">
+        <fo:static-content flow-name="region-after-cover" xsl:use-attribute-sets="FooterFont">
+            <fo:block xsl:use-attribute-sets="footer">
+                <fo:inline xsl:use-attribute-sets="TinyFont orange-text">Please keep digital unless absolutely required. Read the (unique) terms and conditions of Radically Open Security at: https://radicallyopensecurity.com/TermsandConditions.pdf</fo:inline>
+            </fo:block>
+        </fo:static-content>
+        <fo:static-content flow-name="region-after-content" xsl:use-attribute-sets="FooterFont">
             <fo:block xsl:use-attribute-sets="footer">
                 <fo:inline xsl:use-attribute-sets="TinyFont orange-text">Please keep digital unless absolutely required. Read the (unique) terms and conditions of Radically Open Security at: https://radicallyopensecurity.com/TermsandConditions.pdf</fo:inline>
             </fo:block>
