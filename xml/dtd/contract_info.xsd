@@ -21,6 +21,7 @@
       <xs:sequence>
         <xs:element ref="contract_type"/>
         <xs:element ref="engagement_description"/>
+        <xs:element ref="secondpartyrole"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -33,10 +34,12 @@
         </xs:simpleType>
       </xs:element>
   <xs:element name="engagement_description" type="xs:string"/>
+  <xs:element name="secondpartyrole" type="xs:string"/>
   <xs:element name="contractor">
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="name"/>
+        <xs:element ref="ctcompany"/>
         <xs:element ref="address"/>
         <xs:element ref="postal_code"/>
         <xs:element ref="city"/>
@@ -55,6 +58,7 @@
       </xs:attribute>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ctcompany" type="xs:string"/>
   <xs:element name="work">
     <xs:complexType>
       <xs:sequence>
@@ -121,6 +125,7 @@
       <xs:element name="company_poc1"/>
       <xs:element name="company_email"/>
       <xs:element name="engagement_description"/>
+      <xs:element name="secondpartyrole"/>
       <xs:element name="contract_start_date"/>
       <xs:element name="contract_end_date"/>
       <xs:element name="contract_period"/>
@@ -129,6 +134,7 @@
       <xs:element name="contract_period_unit"/>
       <xs:element name="contract_activities"/>
       <xs:element name="contractor_name"/>
+      <xs:element name="contractor_company"/>
       <xs:element name="contractor_address"/>
       <xs:element name="contractor_postalcode"/>
       <xs:element name="contractor_city"/>

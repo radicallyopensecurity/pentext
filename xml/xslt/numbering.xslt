@@ -44,4 +44,11 @@
         </xsl:choose>
     </xsl:template>
     
+    <xsl:template match="biblioentry" mode="number">
+                <fo:inline>
+                    <xsl:number count="biblioentry" 
+                        format="{$AUTO_NUMBERING_FORMAT}"/>
+                </fo:inline>
+    </xsl:template>
+    
 </xsl:stylesheet>

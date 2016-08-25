@@ -8,9 +8,11 @@
     <scope>
         <contract_type>fixed_term</contract_type><!-- single_engagement or fixed_term -->
         <engagement_description>battle the pirates</engagement_description><!-- [NOTE: only needed for SINGLE ENGAGEMENT type contract, value is ignored otherwise] -->
+        <secondpartyrole>Consultant</secondpartyrole><!-- what contractor will be referred to throughout the contract. Can be anything, but should probably be Consultant or Consultancy company. When in doubt, leave as is. -->
     </scope>
     <contractor sex="M"><!-- (M|F|O) (O for other) --> <!-- this info is used to select the correct pronoun, not for profiling :) -->
         <name>Peter Pan</name>
+        <ctcompany>Lost Boys Inc.</ctcompany><!-- delete element in case of freelancer without company -->
         <address>Cloud 9</address>
         <postal_code>1234 XX</postal_code>
         <city>Treehouse City</city>

@@ -71,6 +71,14 @@
         <translation xml:lang="nl">security consulting agreement</translation>
         <translation xml:lang="en">security consulting agreement</translation>
     </string>
+    <string id="contract_whereas">
+        <translation xml:lang="nl">in aanmerking genomen dat</translation>
+        <translation xml:lang="en">whereas</translation>
+    </string>
+    <string id="contract_agree">
+        <translation xml:lang="nl">komen het volgende overeen</translation>
+        <translation xml:lang="en">agree as follows</translation>
+    </string>
     <string id="personal_m">
         <translation xml:lang="nl">hij</translation>
         <translation xml:lang="en">he</translation>

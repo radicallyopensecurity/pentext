@@ -75,6 +75,7 @@
           <xs:element ref="ol"/>
           <xs:element ref="img"/>
           <xs:element ref="div"/>
+          <xs:element ref="biblioentries"/>
         </xs:choice>
       </xs:sequence>
       <xs:attribute name="id" use="required" type="xs:ID"/>
@@ -105,13 +106,6 @@
     </xs:complexType>
   </xs:element>
     
-    <xs:complexType name="block" mixed="true">
-    <xs:choice maxOccurs="unbounded">
-      <xs:group ref="inline-all"/>
-      <xs:group ref="placeholders"/>
-    </xs:choice>
-    <xs:attribute ref="xml:base"/>
-  </xs:complexType>
   
     <!-- Placeholders -->
   <xs:group name="placeholders">
