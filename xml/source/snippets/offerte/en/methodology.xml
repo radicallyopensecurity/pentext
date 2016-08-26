@@ -43,7 +43,7 @@ Potential threats and vulnerabilities are indexed, based upon the collected info
 <p><b>Step 6: Exploitation</b><br/>
 Attempt to use vulnerabilities of the various components. 
 The diverse applications and components of the client's infrastructure are 
-relentlessly probed for frequently occurring design, configuration, and 
+rigorously probed for frequently occurring design, configuration, and 
 programming errors.</p>
 
 <p>Note: <company_long/> uses open-source scanning tools to get its bearings, 
