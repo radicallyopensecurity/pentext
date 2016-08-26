@@ -130,4 +130,29 @@
         </fo:list-item>
     </xsl:template>
     
+    
+    
+    <xsl:template match="biblioentries"><!-- div doesn't do anything, it's just there to make snippets more flexible -->
+        <fo:list-block provisional-distance-between-starts="0.75cm"
+            provisional-label-separation="2.5mm" space-after="12pt">
+            <xsl:call-template name="checkIfLast"/>
+            <xsl:apply-templates select="biblioentry"/>
+        </fo:list-block>
+    </xsl:template>
+    
+    <xsl:template match="biblioentry">
+        <fo:list-item xsl:use-attribute-sets="li">
+            <xsl:attribute name="id">
+                <xsl:value-of select="@id"/>
+            </xsl:attribute>
+            <fo:list-item-label end-indent="label-end()">
+                <fo:block><xsl:number value="position()" format="[1] "/></fo:block>
+            </fo:list-item-label>
+            <fo:list-item-body start-indent="body-start()">
+                <fo:block xsl:use-attribute-sets="biblioentry">
+                    <xsl:apply-templates select="*"/>
+                </fo:block>
+            </fo:list-item-body>
+        </fo:list-item>
+    </xsl:template>
 </xsl:stylesheet>

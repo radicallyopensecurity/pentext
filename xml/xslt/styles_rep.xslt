@@ -61,6 +61,15 @@
     <xsl:attribute-set name="toc-block">
         <xsl:attribute name="background-color">orange</xsl:attribute>
     </xsl:attribute-set>
+    <xsl:attribute-set name="logo">
+        <xsl:attribute name="padding-top">2cm</xsl:attribute>
+        <xsl:attribute name="padding-bottom">3cm</xsl:attribute>
+        <xsl:attribute name="src">url(../graphics/logo.png)</xsl:attribute>
+        <xsl:attribute name="width">70mm</xsl:attribute>
+        <xsl:attribute name="content-width">scale-to-fit</xsl:attribute>
+        <xsl:attribute name="content-height">scale-to-fit</xsl:attribute>
+        <xsl:attribute name="scaling">uniform</xsl:attribute>
+    </xsl:attribute-set>
     
     
     <!-- colors -->

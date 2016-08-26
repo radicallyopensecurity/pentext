@@ -124,7 +124,21 @@
 		<xsl:attribute name="font-size">60%</xsl:attribute>
 		<xsl:attribute name="vertical-align">sub</xsl:attribute>
     </xsl:attribute-set>
+    <!-- bibliography -->
+    <xsl:attribute-set name="title.book" use-attribute-sets="italic"/>
+    <xsl:attribute-set name="title.article"/>
+    <xsl:attribute-set name="journal" use-attribute-sets="italic"/>
+    <xsl:attribute-set name="website"/>
+    <xsl:attribute-set name="info"/>
+    <xsl:attribute-set name="publisher"/>
+    <xsl:attribute-set name="pubdate"/>
+    <!-- blocks -->
     <xsl:attribute-set name="p">
+        <xsl:attribute name="margin-bottom">
+            <xsl:value-of select="$small-space"/>
+        </xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="biblioentry">
         <xsl:attribute name="margin-bottom">
             <xsl:value-of select="$small-space"/>
         </xsl:attribute>
@@ -162,15 +176,28 @@
         <xsl:attribute name="page-height">29.7cm</xsl:attribute>
         <xsl:attribute name="page-width">21.0cm</xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="region-body">
+    <xsl:attribute-set name="region-body-cover">
         <xsl:attribute name="margin-top">1cm</xsl:attribute>
         <xsl:attribute name="margin-bottom">1cm</xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="region-before">
+    <xsl:attribute-set name="region-before-cover">
         <xsl:attribute name="precedence">true</xsl:attribute>
         <xsl:attribute name="extent">0.6cm</xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="region-after">
+    <xsl:attribute-set name="region-after-cover">
+        <xsl:attribute name="precedence">true</xsl:attribute>
+        <xsl:attribute name="extent">0.6cm</xsl:attribute>
+        <xsl:attribute name="padding">0</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="region-body-content">
+        <xsl:attribute name="margin-top">1cm</xsl:attribute>
+        <xsl:attribute name="margin-bottom">1cm</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="region-before-content">
+        <xsl:attribute name="precedence">true</xsl:attribute>
+        <xsl:attribute name="extent">0.6cm</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="region-after-content">
         <xsl:attribute name="precedence">true</xsl:attribute>
         <xsl:attribute name="extent">0.6cm</xsl:attribute>
         <xsl:attribute name="padding">0</xsl:attribute>
@@ -192,15 +219,6 @@
     <xsl:attribute-set name="graphics-block">
         <xsl:attribute name="text-align">center</xsl:attribute>
         <xsl:attribute name="margin-bottom" select="$small-space"/>
-    </xsl:attribute-set>
-    <xsl:attribute-set name="logo">
-        <xsl:attribute name="padding-top">2cm</xsl:attribute>
-        <xsl:attribute name="padding-bottom">3cm</xsl:attribute>
-        <xsl:attribute name="src">url(../graphics/logo.png)</xsl:attribute>
-        <xsl:attribute name="width">70mm</xsl:attribute>
-        <xsl:attribute name="content-width">scale-to-fit</xsl:attribute>
-        <xsl:attribute name="content-height">scale-to-fit</xsl:attribute>
-        <xsl:attribute name="scaling">uniform</xsl:attribute>
     </xsl:attribute-set>
     
     <!-- tables -->

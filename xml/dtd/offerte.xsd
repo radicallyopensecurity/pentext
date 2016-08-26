@@ -68,7 +68,6 @@
       <xs:sequence>
         <xs:element ref="duration"/>
         <xs:element ref="test_planning"/>
-        <xs:element ref="report_writing"/>
         <xs:element ref="report_due"/>
         <xs:element ref="nature"/>
         <xs:element ref="type"/>
@@ -114,6 +113,7 @@
         </xs:choice>
       </xs:sequence>
       <xs:attribute ref="xml:base"/>
+      <xs:attribute ref="xml:lang"/>
       <xs:attribute ref="visibility" use="optional"/>
     </xs:complexType>
   </xs:element>
@@ -122,11 +122,10 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="standard_waiver"/>
-        <xs:choice>
-          <xs:element ref="alternative_waiver"/>
-        </xs:choice>
+        <xs:element ref="alternative_waiver" minOccurs="0"/>
       </xs:sequence>
       <xs:attribute ref="xml:base"/>
+      <xs:attribute ref="xml:lang"/>
     </xs:complexType>
   </xs:element>
 
@@ -192,6 +191,7 @@
       <xs:attribute name="id" use="optional" type="xs:ID"/>
       <xs:attribute ref="break" use="optional"/>
       <xs:attribute ref="xml:base"/>
+      <xs:attribute ref="xml:lang"/>
     </xs:complexType>
   </xs:element>
 
@@ -232,7 +232,6 @@
       <xs:element name="p_boxtype"/>
       <xs:element name="p_fee"/>
       <xs:element name="p_testingduration"/>
-      <xs:element name="p_reportwritingduration"/>
       <xs:element name="p_reportdue"/>
       <xs:element name="signee_long"/>
       <xs:element name="signee_short"/>

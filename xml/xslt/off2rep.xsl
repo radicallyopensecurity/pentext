@@ -10,7 +10,7 @@
 
         <pentest_report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:noNamespaceSchemaLocation="../dtd/pentestreport.xsd"
-            xmlns:xi="http://www.w3.org/2001/XInclude" findingCode="???">
+            xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" findingCode="???">
             <meta>
                 <title>Penetration Test Report</title>
                 <xsl:element name="xi:include">
@@ -44,7 +44,7 @@
                 <version_history>
                     <xsl:comment>needed for date on frontpage and in signature boxes; it is possible to add a new &lt;version> after each review; in that case, make sure to update the date/time</xsl:comment>
                     <version number="auto">
-                        <xsl:attribute name="date"><xsl:value-of select="format-date(current-date(), '[Y]-[M,2]-[D1]', 'en', (), ())"/>T10:00:00</xsl:attribute>
+                        <xsl:attribute name="date"><xsl:value-of select="format-date(current-date(), '[Y]-[M,2]-[D,2]', 'en', (), ())"/>T10:00:00</xsl:attribute>
                         <xsl:comment>actual date-time here; you can leave the number attribute alone</xsl:comment>
                         <v_author>ROS Writer</v_author>
                         <xsl:comment>name of the author here; for internal use only</xsl:comment>
