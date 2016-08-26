@@ -113,7 +113,7 @@
     </xsl:template>
 
 
-    <xsl:template name="generate_waiver_signature_box">
+    <xsl:template match="generate_waiver_signature_box">
         <fo:block keep-together.within-page="always" xsl:use-attribute-sets="signaturebox">
             <fo:table width="100%" table-layout="fixed">
                 <fo:table-column column-width="proportional-column-width(10)"/>
