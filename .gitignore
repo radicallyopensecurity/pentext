@@ -5,3 +5,5 @@ xml/PenText.xpr
 .projectile
 # Compiled Python stuff
 *.pyc
+
+.DS_Store
