@@ -65,7 +65,7 @@
         <xs:element ref="activities"/>
         <xs:element ref="start_date"/>
         <xs:element ref="end_date"/>
-        <xs:element ref="planning"/>
+        <xs:element ref="planning" minOccurs="0"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
