@@ -16,12 +16,13 @@
             </xs:sequence>
             <xs:attribute name="invoice_no" type="xs:string"/>
             <xs:attribute name="date" type="xs:date" use="optional"/>
-            <xs:attribute name="denomination" use="optional" default="euro">
+            <xs:attribute name="denomination" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:enumeration value="euro"/>
-                        <xs:enumeration value="dollar"/>
-                    </xs:restriction>
+                <xs:enumeration value="eur"/>
+                <xs:enumeration value="gbp"/>
+                <xs:enumeration value="usd"/>
+              </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
         </xs:complexType>

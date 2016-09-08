@@ -3,11 +3,20 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="xs" version="2.0">
 
+
+    <xsl:import href="localisation.xslt"/>
+    <xsl:import href="snippets.xslt"/>
+    
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
-    <xsl:include href="localisation.xslt"/>
 
     <xsl:variable name="lang" select="/quickscope/meta/offer_language/text()"/>
+    <xsl:param name="snippetBase" select="'offerte'"/>
+    <xsl:variable name="snippetSelectionRoot"
+        select="document('../source/snippets/snippetselection.xml')/snippet_selection/document[@type = $docType]"/>
+
+    <xsl:variable name="docType" select="'offerte'"/>
+    <xsl:variable name="docSubType" select="/quickscope/meta/offer_type"/>
 
     <!-- ROOT -->
     <xsl:template match="/">
@@ -15,13 +24,15 @@
         <offerte xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:noNamespaceSchemaLocation="../dtd/offerte.xsd"
             xmlns:xi="http://www.w3.org/2001/XInclude">
-            <xsl:attribute name="xml:lang"><xsl:value-of select="$lang"/></xsl:attribute>
+            <xsl:attribute name="xml:lang">
+                <xsl:value-of select="$lang"/>
+            </xsl:attribute>
             <xsl:comment>document meta information; to be filled in by the offerte writer</xsl:comment>
             <meta>
                 <offered_service_long>
+                    <!-- if known type, use long service name from localisationstrings.xml; otherwise, use long service name provided in quickscope -->
                     <xsl:choose>
-                        <xsl:when
-                            test="/quickscope/meta/offer_type = 'pentest' or /*/meta/offer_type = 'basic-scan'">
+                        <xsl:when test="/quickscope/meta/offer_type != 'other'">
                             <xsl:call-template name="getString">
                                 <xsl:with-param name="stringID"
                                     select="concat('coverpage_service_', /quickscope/meta/offer_type)"
@@ -35,9 +46,9 @@
                 </offered_service_long>
                 <xsl:comment>if there is a shorter way of saying the same thing, you can type it here (it makes for more dynamic offerte text). If not, just repeat the long name.</xsl:comment>
                 <offered_service_short>
+                    <!-- if known type, use short service name from localisationstrings.xml; otherwise, use short service name provided in quickscope -->
                     <xsl:choose>
-                        <xsl:when
-                            test="/*/meta/offer_type = 'pentest' or /*/meta/offer_type = 'basic-scan'">
+                        <xsl:when test="/quickscope/meta/offer_type != 'other'">
                             <xsl:call-template name="getString">
                                 <xsl:with-param name="stringID"
                                     select="concat('coverpage_service_', /*/meta/offer_type, '_short')"
@@ -53,6 +64,7 @@
                     <xsl:attribute name="href">snippets/company_info.xml</xsl:attribute>
                 </xsl:element>
                 <targets>
+                    <!-- copy targets from quickscope -->
                     <xsl:comment>one target element per target</xsl:comment>
                     <xsl:for-each select="/*/meta/targets/target">
                         <xsl:copy>
@@ -61,6 +73,7 @@
                     </xsl:for-each>
                 </targets>
                 <permission_parties>
+                    <!-- copy permission parties from quickscope -->
                     <xsl:element name="xi:include">
                         <xsl:attribute name="href">client_info.xml</xsl:attribute>
                     </xsl:element>
@@ -71,6 +84,7 @@
                     </xsl:for-each>
                 </permission_parties>
                 <pentestinfo>
+                    <!-- copy various variables from quickscope -->
                     <duration>
                         <xsl:value-of select="/*/pentest_info/days"/>
                     </duration>
@@ -90,21 +104,23 @@
                         <xsl:value-of select="/*/pentest_info/type"/>
                     </type>
                     <xsl:comment>please choose one of the following: black-box, grey-box, crystal-box</xsl:comment>
-                    <fee denomination="euro">
+                    <fee denomination="eur">
                         <xsl:value-of select="/*/pentest_info/rate"/>
                     </fee>
-                    <xsl:comment>(euro|dollar)</xsl:comment>
+                    <xsl:comment>(eur|usd|gbp)</xsl:comment>
                     <xsl:if test="*/pentest_info/application_name">
-                        <target_application><xsl:value-of select="/*/pentest_info/application_name"/></target_application>
+                        <target_application>
+                            <xsl:value-of select="/*/pentest_info/application_name"/>
+                        </target_application>
                         <xsl:comment>name of application/service to be tested (if any; if none, DELETE target_application element)</xsl:comment>
                     </xsl:if>
-                    
+
                 </pentestinfo>
                 <version_history>
                     <xsl:comment>needed for date on frontpage and in signature boxes; it is possible to add a new &lt;version> after each review; in that case, make sure to update the date/time</xsl:comment>
                     <version number="auto">
                         <xsl:attribute name="date"><xsl:value-of
-                                select="format-date(current-date(), '[Y]-[M,2]-[D1]', 'en', (), ())"
+                                select="format-date(current-date(), '[Y]-[M,2]-[D,2]', 'en', (), ())"
                             />T10:00:00</xsl:attribute>
                         <xsl:comment>actual date-time here; you can leave the number attribute alone</xsl:comment>
                         <v_author>ROS Writer</v_author>
@@ -115,8 +131,45 @@
                 </version_history>
             </meta>
 
+            <xsl:for-each
+                select="$snippetSelectionRoot/selection[@subtype = $docSubType]/snippet_group[@set = 'group1']/snippet">
+                <xsl:element name="xi:include">
+                    <xsl:attribute name="href">
+                        <xsl:call-template name="docCheck">
+                            <xsl:with-param name="fileNameBase" select="."/>
+                            <xsl:with-param name="snippetDirectory" select="$snippetBase"/>
+                        </xsl:call-template>
+                    </xsl:attribute>
+                </xsl:element>
+            </xsl:for-each>
+            
+            <xsl:if test="/*/pentest_info/codeaudit/@perform = 'yes'">
+                <xsl:for-each
+                select="$snippetSelectionRoot/selection[@subtype = $docSubType]/snippet_group[@set = 'additionalcodeaudit']/snippet">
+                <xsl:element name="xi:include">
+                    <xsl:attribute name="href">
+                        <xsl:call-template name="docCheck">
+                            <xsl:with-param name="fileNameBase" select="."/>
+                            <xsl:with-param name="snippetDirectory" select="$snippetBase"/>
+                        </xsl:call-template>
+                    </xsl:attribute>
+                </xsl:element>
+            </xsl:for-each>
+            </xsl:if>
+            
+            <xsl:for-each
+                select="$snippetSelectionRoot/selection[@subtype = $docSubType]/snippet_group[@set = 'group2']/snippet">
+                <xsl:element name="xi:include">
+                    <xsl:attribute name="href">
+                        <xsl:call-template name="docCheck">
+                            <xsl:with-param name="fileNameBase" select="."/>
+                            <xsl:with-param name="snippetDirectory" select="$snippetBase"/>
+                        </xsl:call-template>
+                    </xsl:attribute>
+                </xsl:element>
+            </xsl:for-each>
 
-            <xsl:comment>Introduction and Scope</xsl:comment>
+            <!--<xsl:comment>Introduction and Scope</xsl:comment>
             <xsl:element name="xi:include">
                 <xsl:attribute name="href">
                     <xsl:call-template name="docCheck">
@@ -155,8 +208,8 @@
                         <xsl:with-param name="fileNamePart">methodology</xsl:with-param>
                     </xsl:call-template>
                 </xsl:attribute>
-            </xsl:element>
-            <xsl:if test="/*/pentest_info/codeaudit/@perform = 'yes'">
+            </xsl:element>-->
+            <!--<xsl:if test="/*/pentest_info/codeaudit/@perform = 'yes'">
                 <xsl:element name="xi:include">
                     <xsl:attribute name="href">
                         <xsl:call-template name="docCheck">
@@ -165,8 +218,8 @@
                         </xsl:call-template>
                     </xsl:attribute>
                 </xsl:element>
-            </xsl:if>
-            <xsl:element name="xi:include">
+            </xsl:if>-->
+            <!--<xsl:element name="xi:include">
                 <xsl:attribute name="href">
                     <xsl:call-template name="docCheck">
                         <xsl:with-param name="fileNamePart">teamandreporting</xsl:with-param>
@@ -215,13 +268,13 @@
                         <xsl:with-param name="fileNamePart">waiver</xsl:with-param>
                     </xsl:call-template>
                 </xsl:attribute>
-            </xsl:element>
+            </xsl:element>-->
         </offerte>
 
 
     </xsl:template>
 
-    <xsl:template name="docCheck">
+    <!--<xsl:template name="docCheck">
         <xsl:param name="fileNamePart" select="'none'"/>
         <xsl:param name="typeSuffix">
             <xsl:choose>
@@ -244,6 +297,6 @@
                 <xsl:value-of select="$fileNameStandard"/>
             </xsl:otherwise>
         </xsl:choose>
-    </xsl:template>
+    </xsl:template>-->
 
 </xsl:stylesheet>

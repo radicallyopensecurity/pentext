@@ -1,15 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <snippet_selection>
+    <!-- QUOTES -->
+    <!-- [NOTE: when creating a new offerte subtype, please make sure you have at least one snippet_group with @set="group1"] -->
     <document type="offerte">
         <selection subtype="pentest">
-            <snippet>introandscope</snippet>
-            <snippet>projectoverview</snippet>
+            <snippet_group set="group1">
+                <snippet>introandscope</snippet>
+                <snippet>projectoverview</snippet>
+                <snippet>prerequisites</snippet>
+                <snippet>disclaimer</snippet>
+                <snippet>methodology</snippet>
+            </snippet_group>
+            <snippet_group set="additionalcodeaudit">
+                <!-- isolated since it is subject to logic (unlike some people) -->
+                <snippet>additional-code-audit_methodology</snippet>
+            </snippet_group>
+            <snippet_group set="group2">
+                <snippet>teamandreporting</snippet>
+                <snippet>planningandpayment</snippet>
+                <snippet>aboutus</snippet>
+                <snippet>conditions</snippet>
+                <snippet>generaltermsandconditions</snippet>
+                <snippet>waiver</snippet>
+            </snippet_group>
         </selection>
+
         <selection subtype="basic-scan">
-            <snippet>introandscope</snippet>
-            <snippet>projectoverview</snippet>
+            <snippet_group set="group1">
+                <snippet>introandscope</snippet>
+                <snippet>projectoverview</snippet>
+                <snippet>prerequisites</snippet>
+                <snippet>disclaimer</snippet>
+                <snippet>methodology</snippet>
+            </snippet_group>
+            <snippet_group set="additionalcodeaudit">
+                <!-- isolated since it is subject to logic -->
+                <snippet>additional-code-audit_methodology</snippet>
+            </snippet_group>
+            <snippet_group set="group2">
+                <snippet>teamandreporting</snippet>
+                <snippet>planningandpayment</snippet>
+                <snippet>aboutus</snippet>
+                <snippet>conditions</snippet>
+                <snippet>generaltermsandconditions</snippet>
+                <snippet>waiver</snippet>
+            </snippet_group>
+        </selection>
+
+        <selection subtype="load-test">
+            <snippet_group set="group1">
+                <snippet>introandscope</snippet>
+                <snippet>projectoverview</snippet>
+                <snippet>prerequisites</snippet>
+                <snippet>disclaimer</snippet>
+                <snippet>methodology_load-test</snippet>
+            </snippet_group>
+            <snippet_group set="additionalcodeaudit">
+                <!-- isolated since it is subject to logic -->
+                <snippet>additional-code-audit_methodology</snippet>
+            </snippet_group>
+            <snippet_group set="group2">
+                <snippet>teamandreporting</snippet>
+                <snippet>planningandpayment</snippet>
+                <snippet>aboutus</snippet>
+                <snippet>conditions</snippet>
+                <snippet>generaltermsandconditions</snippet>
+                <snippet>waiver</snippet>
+            </snippet_group>
+        </selection>
+
+        <selection subtype="code-audit">
+            <!-- no additional code audit presumed :) -->
+            <snippet_group set="group1">
+                <snippet>introandscope</snippet>
+                <snippet>projectoverview</snippet>
+                <snippet>prerequisites</snippet>
+                <snippet>disclaimer_code-audit</snippet>
+                <snippet>methodology_code-audit</snippet>
+                <snippet>teamandreporting</snippet>
+                <snippet>planningandpayment</snippet>
+                <snippet>aboutus</snippet>
+                <snippet>conditions_code-audit</snippet>
+                <snippet>generaltermsandconditions</snippet>
+                <snippet>waiver</snippet>
+            </snippet_group>
+        </selection>
+        <selection subtype="other">
+            <!-- standard -->
+            <snippet_group set="group1">
+                <snippet>introandscope</snippet>
+                <snippet>projectoverview</snippet>
+                <snippet>prerequisites</snippet>
+                <snippet>disclaimer</snippet>
+                <snippet>methodology</snippet>
+            </snippet_group>
+            <snippet_group set="additionalcodeaudit">
+                <!-- isolated since it is subject to logic -->
+                <snippet>additional-code-audit_methodology</snippet>
+            </snippet_group>
+            <snippet_group set="group2">
+                <snippet>teamandreporting</snippet>
+                <snippet>planningandpayment</snippet>
+                <snippet>aboutus</snippet>
+                <snippet>conditions</snippet>
+                <snippet>generaltermsandconditions</snippet>
+                <snippet>waiver</snippet>
+            </snippet_group>
         </selection>
     </document>
+
+
+    <!-- CONTRACTS -->
+    <!-- [NOTE: when creating a new contract subtype, please make sure you have at least one snippet_group with @set="agree1"] -->
+    
     <document type="contract">
         <selection subtype="single_engagement">
             <snippet_group set="parties">
@@ -23,7 +126,7 @@
                 <snippet>wa_contractorcan</snippet>
                 <snippet>wa_noemploymentintention</snippet>
             </snippet_group>
-            <snippet_group set="agree">
+            <snippet_group set="agree1">
                 <!-- define agreement -->
                 <snippet>ag_noemployment</snippet>
                 <snippet>ag_companyinstructs</snippet>

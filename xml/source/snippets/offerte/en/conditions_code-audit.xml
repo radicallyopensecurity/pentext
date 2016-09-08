@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+  <title>Terms and Conditions</title>
+  <p>
+    <company_short/> will only perform the <company_svc_short/> 
+    if it has obtained the permission from <generate_permission_parties/> 
+    as set out in the waiver, attached as <b>Annex 2</b>, 
+    or provided in a separate document.
+  </p>
+
+  <p>
+    <company_short/> performs this assignment on the basis of its general 
+    terms and conditions, which are attached to this offer as Annex 1. 
+    <company_short/> rejects any general terms and conditions used by 
+    <client_short/>.
+  </p>
+  <p>
+    In order to agree to this offer, please sign this letter in duplicate 
+    and return it to:
+  </p>
+  <contact>
+    <name><company_legal_rep/></name>
+    <address><company_long/><br/>Overdiemerweg 28<br/>1111 PP Diemen</address>
+    <email>melanie@radicallyopensecurity.com</email>
+  </contact>
+  <generate_offer_signature_box/>
+</section>
