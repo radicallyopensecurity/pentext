@@ -51,13 +51,19 @@
                 <snippet>wa_contractorcan</snippet>
                 <snippet>wa_noemploymentintention</snippet>
             </snippet_group>
-            <snippet_group set="agree">
-                <!-- define agreement -->
+            <snippet_group set="agree1">
+                <!-- define agreement, first part -->
                 <snippet>ag_period</snippet>
                 <snippet>ag_noemployment</snippet>
                 <snippet>ag_companyinstructs</snippet>
                 <snippet>ag_ownrisk</snippet>
+            </snippet_group>
+            <snippet_group set="workinghours">
+                <!-- define working hours (this snippet is isolated because it is subject to some extra logic - not all fixed term contracts have working hours defined) -->
                 <snippet>ag_workinghours</snippet>
+            </snippet_group>
+            <snippet_group set="agree2">
+                <!-- define rest of agreement -->
                 <snippet>ag_payment_fixed_term</snippet>
                 <snippet>ag_biggerscopewarning</snippet>
                 <snippet>ag_propertyrights</snippet>

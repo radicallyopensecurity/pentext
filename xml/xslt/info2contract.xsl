@@ -78,7 +78,32 @@
                     </title>
                     <ol type="1">
                         <xsl:for-each
-                            select="$snippetSelectionRoot/selection[@subtype = $docSubType]/snippet_group[@set = 'agree']/snippet">
+                            select="$snippetSelectionRoot/selection[@subtype = $docSubType]/snippet_group[@set = 'agree1']/snippet">
+                            <xsl:element name="xi:include">
+                                <xsl:attribute name="href">
+                                    <xsl:call-template name="docCheck">
+                                        <xsl:with-param name="fileNameBase" select="."/>
+                                <xsl:with-param name="snippetDirectory" select="$snippetBase"/>
+                                    </xsl:call-template>
+                                </xsl:attribute>
+                            </xsl:element>
+                        </xsl:for-each>
+                        <!-- need to isolate this snippet to insert some logic: not all contracts define working hours -->
+                        <xsl:if test="/contract_info/work/planning">
+                            <xsl:for-each
+                            select="$snippetSelectionRoot/selection[@subtype = $docSubType]/snippet_group[@set = 'workinghours']/snippet">
+                            <xsl:element name="xi:include">
+                                <xsl:attribute name="href">
+                                    <xsl:call-template name="docCheck">
+                                        <xsl:with-param name="fileNameBase" select="."/>
+                                <xsl:with-param name="snippetDirectory" select="$snippetBase"/>
+                                    </xsl:call-template>
+                                </xsl:attribute>
+                            </xsl:element>
+                        </xsl:for-each>
+                        </xsl:if>
+                        <xsl:for-each
+                            select="$snippetSelectionRoot/selection[@subtype = $docSubType]/snippet_group[@set = 'agree2']/snippet">
                             <xsl:element name="xi:include">
                                 <xsl:attribute name="href">
                                     <xsl:call-template name="docCheck">

@@ -12,7 +12,7 @@
     </scope>
     <contractor sex="M"><!-- (M|F|O) (O for other) --> <!-- this info is used to select the correct pronoun, not for profiling :) -->
         <name>Peter Pan</name>
-        <ctcompany>Lost Boys Inc.</ctcompany><!-- delete element in case of freelancer without company -->
+        <ctcompany>Lost Boys Inc.</ctcompany><!-- delete ctcompany element in case of freelancer without company -->
         <address>Cloud 9</address>
         <postal_code>1234 XX</postal_code>
         <city>Treehouse City</city>
@@ -28,9 +28,14 @@
         </activities>
         <start_date>2016-08-18</start_date>
         <end_date>2016-09-15</end_date>
-        <planning><!-- amount of work to be done between the start and end date -->
+        <!-- amount of work to be done between the start and end date; delete <planning> and its children if not relevant -->
+        <planning>
             <hours>30</hours><!-- non-negative integer, used for planned working hours over total engagement (for SINGLE ENGAGEMENT contract) or over each period in <per> (for FIXED TIME contract) -->
-            <per>month</per><!-- (month|week) [NOTE: only used for FIXED TIME contract, value is ignored otherwise] -->
+            <per>month</per><!-- (month|week|engagement) [NOTE: month/week are only used for FIXED TIME contract, for SINGLE ENGAGEMENT use 'engagement'] -->
         </planning>
+        <!-- For the above planning bit, here are three possible cases:
+        1. You have a fixed term contract with no specifically defined working hours: delete <planning> element 
+        2. You have a fixed term contract with some indication of how many hours you'll be working: fill in <hours> and <per> (month or week)
+        3. You have a single engagement contract. Working hours clause is mandatory in this case. Fill in <hours> and <per> (engagement) -->
     </work>
 </contract_info>
