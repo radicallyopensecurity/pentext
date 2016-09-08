@@ -20,6 +20,7 @@ the Free Software Foundation, either version 3 of the License, or
 
 from __future__ import absolute_import
 from __future__ import print_function
+from __future__ import unicode_literals
 
 import argparse
 import mmap
@@ -334,9 +335,10 @@ def validate_type(tree, filename, options):
                          root.find(tag).text))
             root.find(tag).text = capitalize(root.find(tag).text)
             fix = True
-        if tag == 'description' and get_all_text(root.find(tag)).strip()[-1] != '.':
-            print('[A] Description missing final dot in {0}: {1}'.format(filename, get_all_text(root.find(tag))))
-            root.find(tag).text = get_all_text(root.find(tag)).strip() + '.'
+        all_text = get_all_text(root.find(tag))
+        if tag == 'description' and all_text.strip()[-1] != '.':
+            print('[A] Description missing final dot in {0}: {1}'.format(filename, all_text))
+            root.find(tag).text = all_text.strip() + '.'
             fix = True
     if fix:
         if options['auto_fix']:
@@ -502,6 +504,9 @@ def main():
     The main program. Cross-checks, validates XML files and report.
     Returns True if the checks were successful.
     """
+    # we want to print pretty Unicode characters
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
     options = parse_arguments()
     if options['all']:
         options['capitalization'] = True
