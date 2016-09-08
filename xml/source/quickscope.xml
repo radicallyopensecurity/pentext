@@ -5,18 +5,18 @@
     <!-- Today's date -->
     <version date="2015-01-01"/>
     <!-- YYYY-MM-DD -->
-    <!-- COMPANY INFO -->
+    <!-- CLIENT INFO -->
     <xi:include href="client_info.xml"/>
 
     <!-- SERVICE INFO -->
     <meta>
         <!-- Language the offer should be in (en|nl) -->
         <offer_language>en</offer_language>
-        <!-- Offer type (pentest|basic-scan|load-test|other) -->
+        <!-- Offer type (pentest|basic-scan|load-test|code-audit|other) -->
         <offer_type>pentest</offer_type>
         <!-- Required service -->
         <!-- Note: is only used when type is 'other', if offer_type is a specific type, service name will be taken from the localisation strings -->
-    <requested_service>penetration testing services</requested_service>
+    <requested_service></requested_service>
     <!-- Which targets will need to be tested? 
         (one <target> element for each piece of software/service/server address/location...), delete/add as necessary -->
         <targets>

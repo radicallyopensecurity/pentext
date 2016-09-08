@@ -60,8 +60,9 @@
         <xsl:variable name="vat" select="$fee div 100 * 21"/>
         <xsl:variable name="denomination">
             <xsl:choose>
-                <xsl:when test="/offerte/meta/pentestinfo/fee/@denomination = 'euro'">€</xsl:when>
-                <xsl:when test="/offerte/meta/pentestinfo/fee/@denomination = 'dollar'">$</xsl:when>
+                <xsl:when test="/offerte/meta/pentestinfo/fee/@denomination = 'eur'">€</xsl:when>
+                <xsl:when test="/offerte/meta/pentestinfo/fee/@denomination = 'gbp'">£</xsl:when>
+                <xsl:when test="/offerte/meta/pentestinfo/fee/@denomination = 'usd'">$</xsl:when>
             </xsl:choose>
         </xsl:variable>
         <xsl:call-template name="invoiceStart">
@@ -108,8 +109,9 @@
     <xsl:template name="custom_invoice">
         <xsl:variable name="denomination">
             <xsl:choose>
-                <xsl:when test="/invoice/@denomination = 'euro'">€</xsl:when>
-                <xsl:when test="/invoice/@denomination = 'dollar'">$</xsl:when>
+                <xsl:when test="/invoice/@denomination = 'eur'">€</xsl:when>
+                <xsl:when test="/invoice/@denomination = 'gbp'">£</xsl:when>
+                <xsl:when test="/invoice/@denomination = 'usd'">$</xsl:when>
             </xsl:choose>
         </xsl:variable>
         <xsl:call-template name="invoiceStart">

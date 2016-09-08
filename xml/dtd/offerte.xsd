@@ -82,11 +82,12 @@
     <xs:complexType>
       <xs:simpleContent>
         <xs:extension base="xs:integer">
-          <xs:attribute name="denomination" use="optional" default="euro">
+          <xs:attribute name="denomination" use="required">
             <xs:simpleType>
               <xs:restriction base="xs:string">
-                <xs:enumeration value="euro"/>
-                <xs:enumeration value="dollar"/>
+                <xs:enumeration value="eur"/>
+                <xs:enumeration value="gbp"/>
+                <xs:enumeration value="usd"/>
               </xs:restriction>
             </xs:simpleType>
           </xs:attribute>

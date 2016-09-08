@@ -23,9 +23,25 @@
         <translation xml:lang="nl">basis-securityscandiensten</translation>
         <translation xml:lang="en">basic security scan services</translation>
     </string>
-    <string id="coverpage_service_basic-scan">
+    <string id="coverpage_service_basic-scan_short">
         <translation xml:lang="nl">basis-securityscan</translation>
         <translation xml:lang="en">basic scan</translation>
+    </string>
+    <string id="coverpage_service_code-audit">
+        <translation xml:lang="nl">code-auditing-diensten</translation>
+        <translation xml:lang="en">code auditing services</translation>
+    </string>
+    <string id="coverpage_service_code-audit_short">
+        <translation xml:lang="nl">code audit</translation>
+        <translation xml:lang="en">code audit</translation>
+    </string>
+    <string id="coverpage_service_load-test">
+        <translation xml:lang="nl">loadtest-diensten</translation>
+        <translation xml:lang="en">load testing services</translation>
+    </string>
+    <string id="coverpage_service_load-test_short">
+        <translation xml:lang="nl">load test</translation>
+        <translation xml:lang="en">load test</translation>
     </string>
     <string id="coverpage_for">
         <translation xml:lang="nl">VOOR</translation>

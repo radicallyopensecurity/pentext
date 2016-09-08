@@ -61,6 +61,14 @@
             </xsl:for-each>
         </xsl:variable>
     
+    <xsl:variable name="denomination">
+        <xsl:choose>
+            <xsl:when test="/offerte/meta/pentestinfo/fee/@denomination = 'eur'">€</xsl:when>
+            <xsl:when test="/offerte/meta/pentestinfo/fee/@denomination = 'usd'">$</xsl:when>
+            <xsl:when test="/offerte/meta/pentestinfo/fee/@denomination = 'gbp'">£</xsl:when>
+        </xsl:choose>
+    </xsl:variable>
+    
 <!-- ROOT -->
     <xsl:template match="/">
 
