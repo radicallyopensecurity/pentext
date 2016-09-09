@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section>
-    <title>Disclaimer</title>
-      
-		<p>It is possible that in the course of the penetration testing, <company_short/> 
-		might hinder the operations of the Targets or cause damage to the Targets.
-		<client_short/> gives permission for this, to the extent that <company_short/> 
-		does not act negligent or recklessly. <client_short/> also warrants it has the 
-		authority to give such permission.</p>
-		
-		<p>It is important to understand the limits of <company_short/>'s services. 
+	<title>Disclaimer</title>
+	<p>
+		It is important to understand the limits of <company_short/>'s services. 
 		<company_short/> does not (and cannot) give guarantees that something is 
 		secure. <company_short/>, instead, has an obligation to make reasonable 
 		efforts (in Dutch: “<i>inspanningsverplichting</i>”) to perform the 
-		agreed services.</p>
+		agreed services.
+	</p>
 		
-		<p><company_short/> and <client_short/> agree to take reasonable measures to 
-		maintain the confidentiality of information and personal data they gain 
-		access to in the course of performing the penetration test within the 
-		Targets. Both parties will use the information and data they receive or 
-		access only for the purposes outlined in this agreement. 
+	<p>
+		<company_short/> and <client_short/> agree to take reasonable measures to 
+		maintain the confidentiality of information and any personal data they gain 
+		access to in the course of performing the code audit. Both parties will use the 
+		information and data they receive or access only for the purposes outlined 
+		in this agreement. 
 		<company_short/> warrants that all core-team members, external freelancers, 
-		and volunteers it engages to perform the penetration test have signed a 
-		non-disclosure agreement (NDA). </p>
+		and volunteers it engages to perform the <company_svc_short/> have signed a 
+		non-disclosure agreement (NDA).
+	</p>
 </section>
