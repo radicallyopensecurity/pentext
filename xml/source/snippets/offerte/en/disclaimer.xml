@@ -12,7 +12,7 @@
 	<p>
 		<company_short/> and <client_short/> agree to take reasonable measures to 
 		maintain the confidentiality of information and any personal data they gain 
-		access to in the course of performing the code audit. Both parties will use the 
+		access to in the course of performing the <company_svc_short/>. Both parties will use the 
 		information and data they receive or access only for the purposes outlined 
 		in this agreement. 
 		<company_short/> warrants that all core-team members, external freelancers, 
