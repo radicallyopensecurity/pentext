@@ -45,8 +45,8 @@ SNIPPETDIR = 'snippets/'
 TEMPLATEDIR = 'templates/'
 OFFERTE = '/offerte.xml'
 REPORT = '/report.xml'
-WARN_LINE = 100  # There should be a separation character after x characters...
-MAX_LINE = 130  # ... and before y
+WARN_LINE = 80  # There should be a separation character after x characters...
+MAX_LINE = 86  # ... and before y
 
 
 if DOCBUILDER:
@@ -63,8 +63,8 @@ def parse_arguments():
     Parses command line arguments.
     """
     parser = argparse.ArgumentParser(
-            formatter_class=argparse.RawDescriptionHelpFormatter,
-            description=textwrap.dedent('''\
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        description=textwrap.dedent('''\
 validate_report - validates offer letters and reports
 
 Copyright (C) 2015-2016  Radically Open Security (Peter Mosmans)
@@ -172,12 +172,12 @@ def validate_files(filenames, options):
     scans = []
     for filename in filenames:
         if (filename.lower().endswith('.xml') or
-                filename.lower().endswith('xml"')):
+            filename.lower().endswith('xml"')):
             if SNIPPETDIR not in filename and TEMPLATEDIR not in filename:
                 if (OFFERTE in filename and options['offer']) or \
                    (REPORT in filename and not options['no_report']):
                     masters.append(filename)
-                # try:
+                    # try:
                 type_result, xml_type = validate_xml(filename, options)
                 result = result and type_result
                 if 'non-finding' in xml_type:
@@ -225,9 +225,9 @@ def validate_xml(filename, options):
     try:
         with open(filename, 'rb') as xml_file:
             xml.sax.parse(xml_file, xml.sax.ContentHandler())
-        tree = ElementTree.parse(filename, ElementTree.XMLParser(strip_cdata=False))
-        type_result, xml_type = validate_type(tree, filename, options)
-        result = validate_long_lines(tree, filename, options) and result and type_result
+            tree = ElementTree.parse(filename, ElementTree.XMLParser(strip_cdata=False))
+            type_result, xml_type = validate_type(tree, filename, options)
+            result = validate_long_lines(tree, filename, options) and result and type_result
         if options['edit'] and not result:
             open_editor(filename)
     except (xml.sax.SAXException, ElementTree.ParseError) as exception:
@@ -269,7 +269,7 @@ def capitalize(line):
     for word in line.strip().split():
         if word not in NOT_CAPITALIZED or not len(capitalized):
             word = word[0].upper() + word[1:]
-        capitalized += word + ' '
+            capitalized += word + ' '
     return capitalized.strip()
 
 
@@ -351,7 +351,7 @@ def validate_type(tree, filename, options):
 
 def validate_long_lines(tree, filename, options):
     """
-    Checks whether <pre> section contains lines longer than MAX_LINE characters
+    Checks whether pre or code section contains lines longer than MAX_LINE characters
     Returns True if the file validated successfully.
     """
     if not options['long']:
@@ -359,29 +359,31 @@ def validate_long_lines(tree, filename, options):
     result = True
     fix = False
     root = tree.getroot()
-    for pre_section in root.iter('pre'):
+    for pre_section in [j for section in ('pre', 'code') for j in root.iter(section)]:
         if pre_section.text:
             fixed_text = ''
             for line in pre_section.text.splitlines():
-                fixed_line = line
-                if len(line.strip()) > MAX_LINE:
-                    if ' ' not in line[WARN_LINE:MAX_LINE]:
-                        print('[-] {0} Line inside <pre> too long: {1}'.
-                              format(filename, line.encode('utf-8')[WARN_LINE:]))
-                        result = False
-                        for split in ['"', '\'', '=', '-', ';']:
-                            if split in line.encode('utf-8').strip()[WARN_LINE:MAX_LINE]:
-                                print('[A] can be fixed')
-                                fix = True
-                                index = line.find(split, WARN_LINE)
-                                fixed_line = line[:index + 1] + '\n'
-                                fixed_line += line[index + 1:]
-                fixed_text += fixed_line.encode('utf-8')
-    if fix:
-        if options['auto_fix']:
-            print('[+] Automatically fixed {0}'.format(filename))
-#            tree.write(filename)
-        print(fixed_text)
+                while len(line) > MAX_LINE:
+                    result = False
+                    print('[-] {0} Line inside {1} too long: {2}'.
+                          format(filename, section, line.encode('utf-8')[MAX_LINE:]))
+                    cutpoint = MAX_LINE
+                    for split in [' ', '"', '\'', '=', '-', ';']:
+                        if split in line.encode('utf-8')[WARN_LINE:MAX_LINE]:
+                            cutpoint = line.find(split, WARN_LINE, MAX_LINE)
+                    fix = True
+                    fixed_line = line[:cutpoint] + '\n'
+                    print('cutted line {0}'.format(line))
+                    line = line[cutpoint:]
+                    fixed_text += fixed_line.encode('utf-8')
+                    print('[A] can be fixed (breaking at {0}): {1}'.format(cutpoint, fixed_line))
+                fixed_text += line + '\n'
+            if fix and options['auto_fix']:
+                print('[+] Automatically fixed {0}'.format(filename))
+                pre_section.text = fixed_text
+                print(fixed_text)
+                tree.write(filename)
+                close_file(filename)
     return result
 
 
@@ -399,7 +401,7 @@ def validate_master(filename, findings, non_findings, scans, options):
         if not find_keyword(xmltree, 'TODO', filename):
             print('[-] Keyword checks failed for {0}'.format(filename))
             result = False
-        print_output(options, 'Performing cross check on findings, non-findings and scans...')
+            print_output(options, 'Performing cross check on findings, non-findings and scans...')
         for finding in findings:
             if not cross_check_file(filename, finding):
                 print('[A] Cross check failed for finding {0}'.
@@ -450,7 +452,7 @@ def cross_check_file(filename, external):
         print('[-] could not find a reference in {0} to {1}'.format(filename, external))
         result = False
     return result
-    
+
 
 def add_include(filename, identifier, findings):
     """
@@ -465,7 +467,7 @@ def add_include(filename, identifier, findings):
         for finding in findings:
             new_finding = ElementTree.XML('<placeholderinclude href="../{0}"/>'.format(finding))
             finding_section.append(new_finding)
-        tree.write(filename, encoding="utf-8", xml_declaration=True, pretty_print=True)
+            tree.write(filename, encoding="utf-8", xml_declaration=True, pretty_print=True)
 
 def close_file(filename):
     """
@@ -513,11 +515,11 @@ def main():
         options['long'] = True
     if options['learn']:
         print_output(options, 'Adding unknown words to {0}'.format(VOCABULARY))
-#    if options['spelling']:
-#        if not os.path.exists(VOCABULARY):
-#            print_output(options, 'Creating project-specific vocabulary file {0}'.
-#                  format(VOCABULARY))
-#            options['learn'] = True
+        #    if options['spelling']:
+        #        if not os.path.exists(VOCABULARY):
+        #            print_output(options, 'Creating project-specific vocabulary file {0}'.
+        #                  format(VOCABULARY))
+        #            options['learn'] = True
     print_output(options, 'Validating all XML files...')
     result = validate_files(all_files(), options)
     if result:
