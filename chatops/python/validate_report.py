@@ -172,7 +172,7 @@ def validate_files(filenames, options):
     scans = []
     for filename in filenames:
         if (filename.lower().endswith('.xml') or
-            filename.lower().endswith('xml"')):
+                filename.lower().endswith('xml"')):
             if SNIPPETDIR not in filename and TEMPLATEDIR not in filename:
                 if (OFFERTE in filename and options['offer']) or \
                    (REPORT in filename and not options['no_report']):
@@ -313,7 +313,8 @@ def validate_type(tree, filename, options):
         else:
             if attribute == 'threatLevel' and root.attrib[attribute] not in \
                ('Low', 'Moderate', 'Elevated', 'High', 'Extreme'):
-                print('[-] threatLevel is not Low, Moderate, High, Elevated or Extreme: {0}'.format(root.attrib[attribute]))
+                print('[-] threatLevel is not Low, Moderate, High, Elevated or Extreme: {0}'.
+                      format(root.attrib[attribute]))
                 result = False
             if attribute == 'type' and (options['capitalization'] and not \
                                         is_capitalized(root.attrib[attribute])):
@@ -472,16 +473,17 @@ def add_include(filename, identifier, findings):
             finding_section.append(new_finding)
             tree.write(filename, encoding="utf-8", xml_declaration=True, pretty_print=True)
 
+
 def close_file(filename):
     """
     Replace placeholder with proper XML include.
     """
-    f = open(filename,'r')
+    f = open(filename, 'r')
     filedata = f.read()
     f.close()
-    newdata = filedata.replace("placeholderinclude","xi:include")
+    newdata = filedata.replace("placeholderinclude", "xi:include")
     fileout = filename
-    f = open(fileout,'w')
+    f = open(fileout, 'w')
     f.write(newdata)
     f.close()
     tree = ElementTree.parse(filename, ElementTree.XMLParser(strip_cdata=False))
