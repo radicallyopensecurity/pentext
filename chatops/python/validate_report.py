@@ -221,6 +221,9 @@ def validate_xml(filename, options):
     """
     result = True
     xml_type = ''
+    # crude check whether the file is outside the pentext framework
+    if 'notes' in filename:
+        return result, xml_type
     print_output(options, 'Validating XML file: {0}'.format(filename))
     try:
         with open(filename, 'rb') as xml_file:
@@ -269,7 +272,7 @@ def capitalize(line):
     for word in line.strip().split():
         if word not in NOT_CAPITALIZED or not len(capitalized):
             word = word[0].upper() + word[1:]
-            capitalized += word + ' '
+        capitalized += word + ' '
     return capitalized.strip()
 
 
@@ -394,7 +397,7 @@ def validate_master(filename, findings, non_findings, scans, options):
     result = True
     include_findings = []
     include_nonfindings = []
-    print_output(options, '[*] Validating master file {0}'.format(filename))
+    print_output(options, 'Validating master file {0}'.format(filename))
     try:
         xmltree = ElementTree.parse(filename,
                                     ElementTree.XMLParser(strip_cdata=False))
@@ -415,7 +418,7 @@ def validate_master(filename, findings, non_findings, scans, options):
                 include_nonfindings.append(non_finding)
                 result = False
         if result:
-            print_output(options, '[+] Cross checks successful')
+            print_output(options, 'Cross checks successful')
     except (ElementTree.ParseError, IOError) as exception:
         print('[-] validating {0} failed ({1})'.format(filename, exception))
         result = False
