@@ -9,18 +9,46 @@
 #
 # Usage:
 #   build
-#     Detailed line 1
-#     Detailed line 2
-#     Detailed line 3
+#     Builds a .pdf document of <type> based on files in <repository>. The file is stored in target/ of the specified repository.
+#     Usage: build <type> <repository> [namespace=ros] [branch=master] [-v]
+#     <type>       Can be either report or quote
+#     <repository> Specifies the name of the gitlab repository where the files needed to do the job are located.
+#     [namespace]  This optional parameter refers to the gitlab user or group this repository is part of. Defaults to ros
+#     [branch]     This optional parameter specifies which branch to use. Defaults to master.
+#     [-v]         Specifying this flag will yield verbose output.
+#     
+#   convert
+#     Converts gitlab issues in <respository> to xml files. The issues must be open and need to be labelled with either finding or non-finding.
+#     Depending on the label, the xml files will be put in either the finding/ or non-finding/ directory in the repository.
+#     Usage: convert <repository> [--closed] [--dry-run] [--issues] [--projects] [-v|--verbose] [-y]
+#     <repository>   Specifies the name of the gitlab repository where the files needed to do the job are located.
+#     [--closed]     If specified, will include closed issues
+#     [--dry-run]    If specified, will not write xml files, but only displays output on screen
+#     [--issues]     If specified, will list issues in given <repository>
+#     [--projects]   If specified, will list gitlab repositories
+#     [-v|--verbose] If specified, will yield verbose output
+#     [-y]           Assumes yes on all questions
 #
-#   respond
-#     Detailed line 11
-#     Detailed line 22
-#     Detailed line 33
+#   validate
+#     Validates the XML structure of a reports or quote to be able to generate a .pdf file. (See build command)
+#     Usage: validate <repository> [-a|-all] [--autofix] [-c|--capitalization] [--debug] [--edit] [--learn] [--long] [--offer] [--spelling] [-v|--verbose] [--no-report] [--quiet]
+#     <repository>   Specifies the name of the gitlab repository where the files needed to do the job are located.     
+#     [-a|-all]             Perform all checks
+#     [--autofix]           Try to automatically correct issues
+#     [-c|--capitalization] Check capitalization
+#     [--debug]             Show debug information
+#     [--edit]              Open files with issues using an editor
+#     [--learn]             Store all unknown words in dictionary file
+#     [--long]              Check for long lines
+#     [--offer]             Validate offer master file
+#     [--spelling]          Check spelling
+#     [-v|--verbose]        If specified, will yield verbose output
+#     [--no-report]         Do not validate report master file
+#     [--quiet]             Don't output status messages
 #
 #
 # Commands:
-#   hubot build <repo> <target> - Builds a .pdf file from <target> in <repo>
+#   hubot build <type> <repo> <target> - Builds a .pdf file from <target> in <repo>
 #   hubot convert <repo> <target> - Builds a .xml file from <target> in <repo>
 #   hubot invoice <repo> <target> - Builds pdf invoice from quote
 #   hubot quickscope <repo> <namespace> [branch=MASTER] - Converts quickscope into quotation

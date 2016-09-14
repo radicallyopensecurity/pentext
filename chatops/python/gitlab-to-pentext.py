@@ -32,12 +32,17 @@ import textwrap
 try:
     import gitlab
     import jxmlease
-    # path to docbuilder installation (needs the module)
-    sys.path.append('/usr/local/bin')
+    # Path of this script. The validate_report module is on the same path.
+    sys.path.append(os.path.dirname(__file__))
     import validate_report
-except ImportError:
-    print('[-] This script needs gitlab, jxmlease and validate_report library',
-          file=sys.stderr)
+except ImportError as e:
+    print('[-] This script needs python-gitlab, jxmlease and validate_report library', file=sys.stderr)
+    print("validate_report is part of the pentext framework", file=sys.stderr)
+    print("Install python-gitlab with: sudo pip install python-gitlab", file=sys.stderr)
+    print("Install jxmlease with: sudo pip install jxmlease", file=sys.stderr)
+    print("", file=sys.stderr)
+    print("Currently missing: " + e.message,file=sys.stderr)
+
     sys.exit(-1)
 
 
