@@ -35,14 +35,14 @@ try:
     # Path of this script. The validate_report module is on the same path.
     sys.path.append(os.path.dirname(__file__))
     import validate_report
-except ImportError as e:
-    print('[-] This script needs python-gitlab, jxmlease and validate_report library', file=sys.stderr)
+except ImportError as exception:
+    print('[-] This script needs python-gitlab, jxmlease and validate_report library',
+          file=sys.stderr)
     print("validate_report is part of the pentext framework", file=sys.stderr)
     print("Install python-gitlab with: sudo pip install python-gitlab", file=sys.stderr)
     print("Install jxmlease with: sudo pip install jxmlease", file=sys.stderr)
     print("", file=sys.stderr)
-    print("Currently missing: " + e.message,file=sys.stderr)
-
+    print("Currently missing: " + exception.message, file=sys.stderr)
     sys.exit(-1)
 
 
@@ -153,8 +153,8 @@ def list_issues(gitserver, options):
                 add_finding(issue, options)
             if 'non-finding' in issue.labels:
                 add_non_finding(issue, options)
-    except Exception as e:
-        print_error('could not find any issues ({0})'.format(e), -1)
+    except Exception as exception:
+        print_error('could not find any issues ({0})'.format(exception), -1)
 
 
 def list_projects(gitserver):
@@ -208,8 +208,8 @@ def preflight_checks():
     try:
         gitserver = gitlab.Gitlab.from_config('remote')
         gitserver.auth()
-    except gitlab.config.GitlabDataError as e:
-        print_error('could not connect {0}'.format(e), -1)
+    except gitlab.config.GitlabDataError as exception:
+        print_error('could not connect {0}'.format(exception), -1)
     return gitserver
 
 
