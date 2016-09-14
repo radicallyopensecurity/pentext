@@ -26,7 +26,6 @@ from __future__ import unicode_literals
 import argparse
 import collections
 import os
-import re
 import sys
 import textwrap
 
@@ -43,6 +42,9 @@ except ImportError:
 
 
 def add_finding(issue, options):
+    """
+    Writes issue as XML finding to file.
+    """
     title = validate_report.capitalize(issue.title.strip())
     print_status('{0} - {1} - {2}'.format(issue.state, issue.labels,
                                           title), options)
@@ -127,13 +129,11 @@ def convert_markdown(text):
     """
     result = text
     return result
-    print('EXAMINING ' + text + ' END')
-    monospace = re.findall("\`\`\`(.*?)\`\`\`", text, re.DOTALL)
-    print(monospace)
-    if len(monospace):
-        print('YESSS ' + monospace)
-        result = {}
-        result['monospace'] = ''.join(monospace)
+    # print('EXAMINING ' + text + ' END')
+    # monospace = re.findall("\`\`\`(.*?)\`\`\`", text, re.DOTALL)
+    # if len(monospace):
+    #     result = {}
+    #     result['monospace'] = ''.join(monospace)
 
 
 def list_issues(gitserver, options):
@@ -141,7 +141,7 @@ def list_issues(gitserver, options):
     Lists all issues for options['issues']
     """
     try:
-        for issue in gitserver.projects.get(options['issues']).issues.list(all=True):
+        for issue in gitserver.project_issues.list(project_id=options['issues']):
             if issue.state == 'closed' and not options['closed']:
                 continue
             if 'finding' in issue.labels:
@@ -149,7 +149,7 @@ def list_issues(gitserver, options):
             if 'non-finding' in issue.labels:
                 add_non_finding(issue, options)
     except Exception as e:
-        print_error('could not find any issues {{0}'.format(e), -1)
+        print_error('could not find any issues ({0})'.format(e), -1)
 
 
 def list_projects(gitserver):
