@@ -46,7 +46,7 @@ def add_finding(issue, options):
     title = validate_report.capitalize(issue.title.strip())
     print_status('{0} - {1} - {2}'.format(issue.state, issue.labels,
                                           title), options)
-    threatLevel = 'Moderate'
+    threat_level = 'Moderate'
     finding_type = 'TODO'
     finding_id = '{0}-{1}'.format(issue.iid, valid_filename(title))
     filename = 'findings/{0}.xml'.format(finding_id)
@@ -65,7 +65,7 @@ def add_finding(issue, options):
     finding['recommendation']['ul']['li'] = 'TODO'
     finding_xml = jxmlease.XMLDictNode(finding, tag='finding',
                                        xml_attrs={'id': finding_id,
-                                                  'threatLevel': threatLevel,
+                                                  'threatLevel': threat_level,
                                                   'type': finding_type})
     if options['dry_run']:
         print_line('[+] {0}'.format(filename))
@@ -93,10 +93,10 @@ def add_non_finding(issue, options):
     non_finding = collections.OrderedDict()
     non_finding['title'] = title
     non_finding['p'] = unicode.replace(issue.description,
-                                   '\r\n', '\n')
+                                       '\r\n', '\n')
     for note in [x for x in issue.notes.list() if not x.system]:
         non_finding['p'] += unicode.replace(note.body,
-                                        '\r\n', '\n')
+                                            '\r\n', '\n')
     non_finding_xml = jxmlease.XMLDictNode(non_finding, tag='non-finding',
                                            xml_attrs={'id': non_finding_id})
     if options['dry_run']:
@@ -148,11 +148,11 @@ def list_issues(gitserver, options):
                 add_finding(issue, options)
             if 'non-finding' in issue.labels:
                 add_non_finding(issue, options)
-    except:
-        print_error('could not find any issues', -1)
+    except Exception as e:
+        print_error('could not find any issues {{0}'.format(e), -1)
 
 
-def list_projects(gitserver, options):
+def list_projects(gitserver):
     """
     Lists all available projects.
     """
@@ -166,8 +166,8 @@ def parse_arguments():
     Parses command line arguments.
     """
     parser = argparse.ArgumentParser(
-            formatter_class=argparse.RawDescriptionHelpFormatter,
-            description=textwrap.dedent('''\
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        description=textwrap.dedent('''\
 gitlab-to-pentext - imports and updates gitlab issues into PenText (XML) format
 
 Copyright (C) 2015-2016  Radically Open Security (Peter Mosmans)
@@ -195,7 +195,7 @@ the Free Software Foundation, either version 3 of the License, or
     return vars(parser.parse_args())
 
 
-def preflight_checks(options):
+def preflight_checks():
     """
     Checks if all tools are there.
     Exits with 0 if everything went okilydokily.
@@ -244,14 +244,14 @@ def valid_filename(filename):
     """
     Return a valid filename.
     """
-    valid_filename = ''
+    result = ''
     for char in filename.strip():
         if char in [':', '/', '.', '\\', ' ', '[', ']', '(', ')', '\'']:
-            if len(char) and not valid_filename.endswith('-'):
-                valid_filename += '-'
+            if len(char) and not result.endswith('-'):
+                result += '-'
         else:
-            valid_filename += char
-    return valid_filename.lower()
+            result += char
+    return result.lower()
 
 
 def main():
@@ -259,9 +259,9 @@ def main():
     The main program.
     """
     options = parse_arguments()
-    gitserver = preflight_checks(options)
+    gitserver = preflight_checks()
     if options['projects']:
-        list_projects(gitserver, options)
+        list_projects(gitserver)
     if options['issues']:
         list_issues(gitserver, options)
 
