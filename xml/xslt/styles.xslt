@@ -162,6 +162,7 @@
     <xsl:attribute-set name="code" use-attribute-sets="borders pre">
         <xsl:attribute name="font-family">LiberationMono</xsl:attribute>
         <xsl:attribute name="font-size">9pt</xsl:attribute>
+        <xsl:attribute name="padding">4pt</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="finding-meta">
         <xsl:attribute name="margin-bottom" select="$small-space"/>

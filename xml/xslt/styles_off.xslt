@@ -86,10 +86,6 @@
         <xsl:attribute name="linefeed-treatment">preserve</xsl:attribute>
         <xsl:attribute name="white-space-treatment">preserve</xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="code" use-attribute-sets="borders pre">
-        <xsl:attribute name="font-family">LiberationMono</xsl:attribute>
-        <xsl:attribute name="font-size">9pt</xsl:attribute>
-    </xsl:attribute-set>
     <xsl:attribute-set name="finding-meta">
         <xsl:attribute name="margin-bottom" select="$small-space"/>
     </xsl:attribute-set>
