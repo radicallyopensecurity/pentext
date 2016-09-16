@@ -13,9 +13,6 @@
             xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" findingCode="???">
             <meta>
                 <title>Penetration Test Report</title>
-                <xsl:element name="xi:include">
-                    <xsl:attribute name="href">client_info.xml</xsl:attribute>
-                </xsl:element>
                 <targets>
                     <xsl:comment>one target element per target</xsl:comment>
                     <xsl:for-each select="/*/meta/targets/target">
@@ -24,6 +21,26 @@
                         </xsl:copy>
                     </xsl:for-each>
                 </targets>
+                <pentestinfo>
+                    <xsl:for-each select="/offerte/meta/pentestinfo/*">
+                        <xsl:if test="not(self::fee)">
+                            <xsl:copy>
+                                <xsl:copy-of select="node()"/>
+                            </xsl:copy>
+                        </xsl:if>
+                    </xsl:for-each>
+                </pentestinfo>
+                <permission_parties>
+                    <xsl:element name="xi:include">
+                    <xsl:attribute name="href">client_info.xml</xsl:attribute>
+                </xsl:element>
+                    <xsl:for-each select="/offerte/meta/permission_parties/party">
+                        <xsl:copy>
+                                <xsl:copy-of select="node()"/>
+                            </xsl:copy>
+                    </xsl:for-each>
+                </permission_parties>
+                
                 <collaborators>
                     <reviewers>
                         <reviewer>FirstName LastName</reviewer>

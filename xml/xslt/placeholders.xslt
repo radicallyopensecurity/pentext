@@ -36,25 +36,25 @@
     </xsl:template>
     <xsl:template match="client_legal_rep">
         <xsl:param name="placeholderElement"
-            select="/offerte/meta/permission_parties/client/legal_rep"/>
+            select="/*/meta//client/legal_rep"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="client_waiver_rep">
-        <xsl:param name="placeholderElement" select="/*/meta/permission_parties/client/waiver_rep"/>
+        <xsl:param name="placeholderElement" select="/*/meta//client/waiver_rep"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="client_poc1">
-        <xsl:param name="placeholderElement" select="/*/meta/permission_parties/client/poc1"/>
+        <xsl:param name="placeholderElement" select="/*/meta//client/poc1"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="client_coc">
-        <xsl:param name="placeholderElement" select="/*/meta/permission_parties/client/coc"/>
+        <xsl:param name="placeholderElement" select="/*/meta//client/coc"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>

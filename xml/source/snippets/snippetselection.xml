@@ -24,6 +24,22 @@
                 <snippet>waiver</snippet>
             </snippet_group>
         </selection>
+        
+        <selection subtype="retest">
+            <snippet_group set="group1">
+                <snippet>introandscope_retest</snippet>
+                <snippet>projectoverview_retest</snippet>
+                <snippet>prerequisites</snippet>
+                <snippet>disclaimer</snippet>
+                <snippet>methodology</snippet>
+                <snippet>teamandreporting</snippet>
+                <snippet>planningandpayment</snippet>
+                <snippet>aboutus</snippet>
+                <snippet>conditions</snippet>
+                <snippet>generaltermsandconditions</snippet>
+                <snippet>waiver</snippet>
+            </snippet_group>
+        </selection>
 
         <selection subtype="basic-scan">
             <snippet_group set="group1">

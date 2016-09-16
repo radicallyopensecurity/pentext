@@ -105,6 +105,29 @@
     </xs:complexType>
   </xs:element>
 
+<xs:element name="permission_parties">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="1" ref="client"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="party"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="party">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="full_name"/>
+        <xs:element ref="short_name"/>
+        <xs:element ref="waiver_rep"/>
+        <xs:element ref="address"/>
+        <xs:element ref="city"/>
+        <xs:element ref="country"/>
+        <xs:element minOccurs="0" ref="coc"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID"/>
+    </xs:complexType>
+  </xs:element>
+  
   <xs:element name="invoice_rep" type="xs:string"/>
   <xs:element name="invoice_mail" type="emailAddress"/>
 
