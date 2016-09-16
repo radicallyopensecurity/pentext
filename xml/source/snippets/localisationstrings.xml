@@ -9,7 +9,7 @@
     <!-- THIS you can change/expand! -->
     <string id="coverpage_offer">
         <translation xml:lang="nl">OFFERTE</translation>
-        <translation xml:lang="en">OFFER</translation>
+        <translation xml:lang="en">QUOTE</translation>
     </string>
     <string id="coverpage_service_pentest">
         <translation xml:lang="nl">penetratietestdiensten</translation>
@@ -18,6 +18,14 @@
     <string id="coverpage_service_pentest_short">
         <translation xml:lang="nl">penetratietest</translation>
         <translation xml:lang="en">penetration test</translation>
+    </string>
+    <string id="coverpage_service_retest">
+        <translation xml:lang="nl">penetratietestdiensten</translation>
+        <translation xml:lang="en">penetration retesting services</translation>
+    </string>
+    <string id="coverpage_service_retest_short">
+        <translation xml:lang="nl">hertest</translation>
+        <translation xml:lang="en">retest</translation>
     </string>
     <string id="coverpage_service_basic-scan">
         <translation xml:lang="nl">basis-securityscandiensten</translation>

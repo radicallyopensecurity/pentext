@@ -25,7 +25,7 @@
             <xsl:text>for</xsl:text>
         </fo:block>
         <fo:block xsl:use-attribute-sets="title-client">
-            <xsl:value-of select="client/full_name"/>
+            <xsl:value-of select="//client/full_name"/>
         </fo:block>
         <fo:block break-after="page">
             <fo:table width="100%" table-layout="fixed">
