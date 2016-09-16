@@ -31,7 +31,13 @@ import sys
 import textwrap
 import xml.sax
 
-from lxml import etree as ElementTree
+try:
+    from lxml import etree as ElementTree
+except ImportError as exception:
+    print('[-] This script needs lxml',
+          file=sys.stderr)
+    print("Install lxml with: sudo pip install lxml", file=sys.stderr)
+    sys.exit(-1)
 
 
 # When set to True, the report will be validated using docbuilder
