@@ -28,7 +28,7 @@ Download Saxon Home Edition (HE) 9.6 **for Java** at: http://saxon.sourceforge.n
 
 ### FOP
 
-Download Apache FOP 1.1 at https://xmlgraphics.apache.org/fop/download.html and unzip.
+Download Apache FOP 2.1 at https://xmlgraphics.apache.org/fop/download.html and unzip.
 
 ### Fonts
 
