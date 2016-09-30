@@ -1,21 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section>
+<section todo="no">
         <title>Projectoverzicht</title><!-- section with an overview of ROS activities -->
         <!-- snippet --><p><company_short/> zal <company_svc_long/> uitvoeren voor <client_short/> 
-        op de onderstaand beschreven systemen. De diensten zijn bedoelt om inzicht te bieden
+        op de hieronder beschreven systemen. De diensten zijn bedoeld om inzicht te bieden
         in de veiligheid van deze systemen. Om dit te kunnen bewerkstelligen zal <company_short/>
         toegang krijgen tot deze systemen, proberen kwetsbaarheden op te sporen en trachten 
         verdere toegang te krijgen door de gevonden kwetsbaarheden uit te buiten.</p>
         
-        <!-- snippet --><p><company_short/> zal de volgende objectieven testen 
-        (de “<b>objectieven</b>”):</p>
+        <!-- snippet --><p><company_short/> zal de volgende doelwitten testen 
+        (de “<b>Doelwitten</b>”):</p>
         
         <generate_targets/>
         
         <!-- snippet --><p><company_short/> zal testen op de aanwezigheid van de 
         meest voorkomende kwetsbaarheden, gebruik makend van zowel publiek beschikbare
-         scanning tools, als door handmatig testen. <company_short/> zal een 
-        <p_duration/>-daagse, <p_boxtype/>, grondige test uitvoeren, via internet.</p>
+         scanning tools, als door handmatig testen. <company_short/> zal een grondige
+        <p_duration/>-daagse, <p_boxtype/> test uitvoeren via internet.</p>
+        
+        <section todo="yes">
+        <title>Scope</title>
+        <p><company_short/> schat de uitvoering van de penetratietest op ... dagen in totaal: </p>
+        <ul>
+        <li>... dagen voor het testen van ...;</li>
+        <li>... dagen voor het testen van ...;</li>
+        <li>... dagen voor de verificatie van potentiële risico's, opstellen van een Proof of Concept 
+        en het vastleggen van onze bevindingen en aanbevelingen in het rapport.</li>
+        </ul>
+        <br/>
+        <b>Out of scope</b><br/>
+        <p>De onderliggende netwerkinfrastructuur, ..., ... en eventuele loadbalancing-infrastructuur maken geen deel uit van de scope. 
+        Uitgesloten zijn ook:</p>
+        <ul>
+        <li>elke vorm van social engineering;</li>
+        <li>(D)DoS aanvallen;</li>
+        <li>...</li>
+        </ul>
+        </section>
+        
         
 		<!-- snippet --> <!--Not Needed if Disclaimer is Included; Duplicate Text-->
 		<!--p>It is possible that in the course of the penetration 
