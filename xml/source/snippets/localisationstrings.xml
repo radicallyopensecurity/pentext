@@ -31,6 +31,10 @@
         <translation xml:lang="nl">VOOR</translation>
         <translation xml:lang="en">FOR</translation>
     </string>
+    <string id="page_kvk">
+        <translation xml:lang="nl">Kamer van Koophandel</translation>
+        <translation xml:lang="en">Chamber of Commerce</translation>
+    </string>
     <string id="qs2off_about">
         <translation xml:lang="nl">Over <client_short/></translation>
         <translation xml:lang="en">About <client_short/></translation>
