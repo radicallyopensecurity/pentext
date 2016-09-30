@@ -90,10 +90,10 @@
                         <xsl:value-of select="/*/pentest_info/type"/>
                     </type>
                     <xsl:comment>please choose one of the following: black-box, grey-box, crystal-box</xsl:comment>
-                    <fee denomination="euro">
+                    <fee denomination="eur">
                         <xsl:value-of select="/*/pentest_info/rate"/>
                     </fee>
-                    <xsl:comment>(euro|dollar)</xsl:comment>
+                    <xsl:comment>(eur|usd|gbp)</xsl:comment>
                     <xsl:if test="*/pentest_info/application_name">
                         <target_application><xsl:value-of select="/*/pentest_info/application_name"/></target_application>
                         <xsl:comment>name of application/service to be tested (if any; if none, DELETE target_application element)</xsl:comment>
