@@ -14,13 +14,15 @@
                 <xs:element ref="servicesdelivered" minOccurs="1" maxOccurs="1"/>
                 <xs:element ref="additionalcosts" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
+            <xs:attribute ref="xml:lang"/>
             <xs:attribute name="invoice_no" type="xs:string"/>
             <xs:attribute name="date" type="xs:date" use="optional"/>
-            <xs:attribute name="denomination" use="optional" default="euro">
+            <xs:attribute name="denomination" use="optional" default="eur">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:enumeration value="euro"/>
-                        <xs:enumeration value="dollar"/>
+                        <xs:enumeration value="eur"/>
+                        <xs:enumeration value="usd"/>
+                        <xs:enumeration value="gbp"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
