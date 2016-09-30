@@ -11,7 +11,7 @@
                         <li><company_poc1/> (<company_short/>)</li>
                         <li><client_poc1/> (<client_short/>)</li>
                 </ul>
-                <p>De workflow van onze penetratietest-teams is gemodelleerd op die van teams tijdens een "<i>Capture The Flag</i>-competitie":
+                <p>De werkwijze van onze penetratietest-teams is gemodelleerd die van een "<i>Capture The Flag</i>-team":
                 
 				<company_long/> heeft een geografisch gedistribueerd team; 
 				 wij gebruiken online infrastructuur (RocketChat, GitLabs, etc.) 
