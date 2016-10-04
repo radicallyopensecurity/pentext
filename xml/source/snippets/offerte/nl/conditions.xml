@@ -3,15 +3,15 @@
         <title>Algemene voorwaarden</title>
         <!-- snippet --><p><company_short/> zal alleen de <company_svc_short/> 
         uitvoeren als het de toestemming heeft gekregen van <generate_permission_parties/> 
-        zoals uiteengezet in de penetration test verklaring, bijgevoegd als <b>Annex 2</b>, 
-        of verschafd als los document.</p>
+        zoals uiteengezet in de penetratietestvrijwaring, bijgevoegd als <b>Annex 2</b>  
+        of verschaft als los document.</p>
         
         <p><company_short/> voert deze opdracht uit op basis van de algemene voorwaarden,
         die bijgevoegd zijn als Annex 1. 
-        <company_short/> weigert alle algemene voorwaarden die gebruikt worden door 
+        <company_short/> verwerpt alle algemene voorwaarden die gebruikt worden door 
         <client_short/>.</p>
-        <p>Om akkoord te gaan met dit aanbod, tekent u deze brief in tweevoud en retourneert
-        deze naar:</p>
+        <p>Om akkoord te gaan met dit aanbod dient u deze brief in tweevoud te tekenen en te
+        retourneren naar:</p>
         <contact>
     <name><company_legal_rep/></name>
     <address><company_long/><br/>Overdiemerweg 28<br/>1111 PP Diemen</address>

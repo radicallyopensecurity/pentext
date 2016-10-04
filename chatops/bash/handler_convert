@@ -1,0 +1,131 @@
+#!/bin/bash
+
+# handler_convert - converts gitlab issues into XML files
+#
+# This script is part of the PenText framework
+#                            https://pentext.org
+#
+#    Copyright (C) 2016      Radically Open Security
+#                            https://www.radicallyopensecurity.com
+#
+#                 Author(s): Peter Mosmans
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+
+
+VERSION=0.2
+CONVERTER=/usr/local/bin/gitlab-to-pentext.py
+TEMPLOC=$(mktemp -d)
+
+# These variables should be set environment-specific
+[ -z $GITLABCLI ] && GITLABCLI=gitlab
+[ -z $GITSERVER ] && GITSERVER=gitlab.local
+[ -z $NAMESPACE ] && NAMESPACE=ros
+BRANCH=master
+
+# Read standard 'command line' variables
+[[ ! -z $1 ]] && REPO=$1
+# Reading parms is a bit ugly, shifting parms or actually using getopt would be nicer
+if [[ ! -z $2 ]]; then
+    if [[ ! $2 == -* ]]; then
+        NAMESPACE=$2
+    else
+        PARMS=$2
+    fi
+fi
+if [[ ! -z $3 ]]; then
+    if [[ ! $3 == -* ]]; then
+        BRANCH=$3
+    else
+        PARMS="$PARMS $3"
+    fi
+fi
+
+if [[ $# -ge 4 ]]; then
+    shift 3
+    PARMS="$PARMS $@"
+fi
+
+trap cleanup EXIT QUIT
+
+# Make sure that the temporary files are always removed
+cleanup() {
+    trap '' EXIT INT QUIT
+    [ -d $TEMPLOC ] && rm -rf $TEMPLOC &>/dev/null
+    exit
+}
+
+# As quote used to be called offerte or offer,
+# this function retains backward compatibility - v0.2
+backwards_compatible() {
+    if [[ $TARGET == "quote" ]] && [ ! -f $TARGET.xml ]; then
+        TARGET="offerte"
+    fi
+}
+
+# Clones repo using global (!) variables - v0.2
+clone_repo() {
+    pushd $TEMPLOC 1>/dev/null
+    git clone -b $BRANCH --depth=1 -q ssh://git@${GITSERVER}/${NAMESPACE}/${REPO}.git &>/dev/null
+    if [ ! -d $TEMPLOC/$REPO ]; then
+        echo "[-] could not clone repo ${NAMESPACE}/${REPO}"
+        exit 1
+    else
+        cd $REPO
+    fi
+}
+
+# Preflight checks using global (!) variables - v0.2
+preflight_checks() {
+    if [ -z $REPO ]; then
+        echo "[-] repository name needed"
+        exit
+    fi
+    if [ ! -f $CONVERTER ]; then
+        echo "[-] this script needs gitlab-to-pentext.py ($CONVERTER)"
+        exit
+    fi
+}
+
+get_id() {
+    project_id=$($GITLABCLI project search --query $REPO|awk '/id:/{print $2}')
+    if [ -z $project_id ]; then
+        echo "[-] could not find $REPO in gitlab"
+        exit
+    fi
+    return $project_id
+}
+
+convert() {
+    $CONVERTER --issues $project_id -y
+}
+
+add_to_repo() {
+    git add * &>/dev/null
+    git commit -q -m "Converted gitlab (non) findings to XML using ChatOps" &>/dev/null
+    git push -q >/dev/null
+}
+
+validate() {
+    if [ ! -d source ]; then
+        echo "[-] missing necessary pentext framework files"
+        exit 1
+    fi
+    $VALIDATOR $PARMS
+    if [[ -f project-vocabulary.pws ]]; then
+        git add project-vocabulary.pws
+        git commit -q -m 'Added spellcheck vocabulary using ChatOps' >/dev/null
+        git push -q >/dev/null
+    fi
+}
+
+preflight_checks
+echo "convert v$VERSION - Convert all the things!"
+get_id
+clone_repo
+convert
+add_to_repo
+echo "[+] Listo!"

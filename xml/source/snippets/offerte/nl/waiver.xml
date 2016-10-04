@@ -28,9 +28,7 @@ in de veiligheid van deze systemen. <company_short/> zal zich daartoe toegang ve
 deze systemen om op zoek te gaan naar kwetsbaarheden. Vervolgens zal worden getracht 
 dergelijke kwetsbaarheden uit te buiten om verdere toegang en verhoogde privileges 
 te bemachtigen. <company_short/> zal de volgende doelwitten testen (de “Doelwitten”):
-<ul>
-  <li>Doelsysteem</li>
-</ul>
+<generate_targets/>
 </p>
 <p>2. <i><signee_short/></i> verklaart hierbij <company_short/> en de Consultants – op een datum die 
 per email zal worden bevestigd – de meest uitvoerige toestemming te verlenen voor 

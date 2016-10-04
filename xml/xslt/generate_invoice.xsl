@@ -21,9 +21,11 @@
     <xsl:import href="waiver.xslt"/>-->
     
     <xsl:include href="styles_inv.xslt"/>
+    <xsl:include href="localisation.xslt"/>
     
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
+    <xsl:variable name="lang" select="/*/@xml:lang"/>
 
     <!-- ****** AUTO_NUMBERING_FORMAT:	value of the <xsl:number> element used for auto numbering -->
     <!--<xsl:param name="AUTO_NUMBERING_FORMAT" select="'1.1.1'"/>-->
@@ -76,7 +78,8 @@
                 <fo:table-body>
                     <fo:table-row>
                         <fo:table-cell xsl:use-attribute-sets="td">
-                            <fo:block><xsl:value-of select="/offerte/meta/pentestinfo/duration"/>-day&#160;<xsl:value-of select="/offerte/meta/offered_service_short"/>&#160;<xsl:value-of select="/offerte/meta/permission_parties/client/short_name"/></fo:block>
+                            <fo:block><xsl:value-of select="/offerte/meta/pentestinfo/duration"/>-
+                                <xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_days'"/></xsl:call-template>&#160;<xsl:value-of select="/offerte/meta/offered_service_short"/>&#160;<xsl:value-of select="/offerte/meta/permission_parties/client/short_name"/></fo:block>
                         </fo:table-cell>
                         <fo:table-cell xsl:use-attribute-sets="td align-right">
                             <fo:block xsl:use-attribute-sets="p"><xsl:value-of select="$denomination"/>&#160;<xsl:number value="$fee" grouping-separator="," grouping-size="3"/>.--</fo:block>
@@ -84,7 +87,7 @@
                     </fo:table-row>
                     <fo:table-row>
                         <fo:table-cell xsl:use-attribute-sets="td">
-                            <fo:block>VAT 21%</fo:block>
+                            <fo:block><xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_vat'"/></xsl:call-template> 21%</fo:block>
                         </fo:table-cell>
                         <fo:table-cell xsl:use-attribute-sets="td align-right">
                             <fo:block xsl:use-attribute-sets="p"><xsl:value-of select="$denomination"/>&#160;<xsl:number value="$vat" grouping-separator="," grouping-size="3"/>.--</fo:block>
@@ -92,7 +95,7 @@
                     </fo:table-row>
                     <fo:table-row xsl:use-attribute-sets="border-top bold">
                         <fo:table-cell xsl:use-attribute-sets="td">
-                            <fo:block>Total amount to be paid</fo:block>
+                            <fo:block><xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_total'"/></xsl:call-template></fo:block>
                         </fo:table-cell>
                         <fo:table-cell xsl:use-attribute-sets="td align-right">
                             <fo:block xsl:use-attribute-sets="p"><xsl:value-of select="$denomination"/>&#160;<xsl:number value="$vat + $fee" grouping-separator="," grouping-size="3"/>.--</fo:block>
@@ -109,9 +112,9 @@
     <xsl:template name="custom_invoice">
         <xsl:variable name="denomination">
             <xsl:choose>
+                <xsl:when test="/invoice/@denomination = 'usd'">$</xsl:when>
                 <xsl:when test="/invoice/@denomination = 'eur'">€</xsl:when>
                 <xsl:when test="/invoice/@denomination = 'gbp'">£</xsl:when>
-                <xsl:when test="/invoice/@denomination = 'usd'">$</xsl:when>
             </xsl:choose>
         </xsl:variable>
         <xsl:call-template name="invoiceStart">
@@ -137,7 +140,7 @@
                     <xsl:if test="additionalcosts">
                         <fo:table-row>
                             <fo:table-cell xsl:use-attribute-sets="td padding-top">
-                                <fo:block xsl:use-attribute-sets="bold">Additional Expenses</fo:block>
+                                <fo:block xsl:use-attribute-sets="bold"><xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_additional'"/></xsl:call-template></fo:block>
                             </fo:table-cell>
                             <fo:table-cell xsl:use-attribute-sets="td align-right padding-top">
                                 <fo:block xsl:use-attribute-sets="p">&#160;</fo:block>
@@ -165,7 +168,7 @@
                         </xsl:variable>
                         <fo:table-row>
                             <fo:table-cell xsl:use-attribute-sets="td padding-top">
-                               <fo:block>VAT 21%</fo:block>
+                               <fo:block><xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_vat'"/></xsl:call-template> 21%</fo:block>
                            </fo:table-cell>
                             <fo:table-cell xsl:use-attribute-sets="td align-right padding-top">
                                <fo:block xsl:use-attribute-sets="p"><xsl:value-of select="$denomination"/>&#160;<xsl:number value="$vat" grouping-separator="," grouping-size="3"/>.--</fo:block>
@@ -173,7 +176,7 @@
                         </fo:table-row>
                         <fo:table-row xsl:use-attribute-sets="border-top bold">
                            <fo:table-cell xsl:use-attribute-sets="td">
-                               <fo:block>Total amount to be paid</fo:block>
+                               <fo:block><xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_total'"/></xsl:call-template></fo:block>
                             </fo:table-cell>
                             <fo:table-cell xsl:use-attribute-sets="td align-right">
                               <fo:block xsl:use-attribute-sets="p"><xsl:value-of select="$denomination"/>&#160;<xsl:number value="$total" grouping-separator="," grouping-size="3"/>.--</fo:block>
@@ -190,14 +193,14 @@
     <xsl:template name="invoiceStart">
         <xsl:param name="INVOICE_NO"/>
         <xsl:param name="DATE"/>
-        <fo:block xsl:use-attribute-sets="title-0">Invoice nr. <xsl:value-of select="$INVOICE_NO"
+        <fo:block xsl:use-attribute-sets="title-0"><xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_no'"/></xsl:call-template><xsl:text>&#160;</xsl:text><xsl:value-of select="$INVOICE_NO"
             /></fo:block>
         <fo:block>
             <fo:block>
                 <xsl:value-of select="/*/meta//client/full_name"/>
             </fo:block>
             <fo:block>
-                <xsl:if test="/*/meta//client/invoice_rep">T.a.v. <xsl:value-of
+                <xsl:if test="/*/meta//client/invoice_rep"><xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_fao'"/></xsl:call-template><xsl:text>&#160;</xsl:text><xsl:value-of
                         select="/offerte/meta/permission_parties/client/invoice_rep"/></xsl:if>
             </fo:block>
             <fo:block>
@@ -217,27 +220,26 @@
         <fo:block xsl:use-attribute-sets="p big-space-below" text-align="right">
             <xsl:value-of select="$DATE"/>
         </fo:block>
-        <fo:block xsl:use-attribute-sets="title-2">Services Delivered</fo:block>
+        <fo:block xsl:use-attribute-sets="title-2"><xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_svcdeliv'"/></xsl:call-template></fo:block>
     </xsl:template>
 
 <xsl:template name="invoiceEnd">
     <xsl:param name="INVOICE_NO"/>
     <fo:block xsl:use-attribute-sets="big-space-below"><xsl:value-of
-        select="/*/meta/company/full_name"/> donates > 90% of its entire profits to
-        charity.</fo:block>
-    <fo:block xsl:use-attribute-sets="big-space-below">Please be so kind to pay within 30 days
-        by money transfer, to the following account:</fo:block>
+        select="/*/meta/company/full_name"/><xsl:text>&#160;</xsl:text><xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_donation'"/></xsl:call-template></fo:block>
+    <fo:block xsl:use-attribute-sets="big-space-below"><xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_pleasepay'"/></xsl:call-template></fo:block>
     
     <fo:block xsl:use-attribute-sets="big-space-below" margin-left="1.3cm">
         <fo:block>
             <xsl:value-of select="/*/meta/company/full_name"/>
         </fo:block>
-        <fo:block>IBAN: <xsl:value-of select="/*/meta/company/iban"/></fo:block>
-        <fo:block>Reference: <xsl:value-of select="$INVOICE_NO"/></fo:block>
+        <fo:block>
+            <xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_iban'"/></xsl:call-template>: <xsl:value-of select="/*/meta/company/iban"/></fo:block>
+        <fo:block><xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_ref'"/></xsl:call-template>: <xsl:value-of select="$INVOICE_NO"/></fo:block>
     </fo:block>
     
-    <fo:block>Kind regards,</fo:block>
-    <fo:block>your dedicated team at</fo:block>
+    <fo:block><xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_regards'"/></xsl:call-template>,</fo:block>
+    <fo:block><xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_team'"/></xsl:call-template></fo:block>
     <fo:block font-style="italic">
         <xsl:value-of select="/*/meta/company/full_name"/>
     </fo:block>
@@ -287,8 +289,8 @@
                             <fo:block xsl:use-attribute-sets="TinyFont">
                                 <fo:block xsl:use-attribute-sets="bold orange-text"><xsl:value-of select="/*/meta/company/website"/></fo:block>
                                 <fo:block><xsl:value-of select="/*/meta/company/email"/></fo:block>
-                                <fo:block>Chamber of Commerce <xsl:value-of select="/*/meta/company/coc"/></fo:block>
-                                <fo:block>VAT number <xsl:value-of select="/*/meta/company/vat_no"/></fo:block>
+                                <fo:block><xsl:call-template name="getString"><xsl:with-param name="stringID" select="'page_kvk'"/></xsl:call-template><xsl:text>&#160;</xsl:text><xsl:value-of select="/*/meta/company/coc"/></fo:block>
+                                <fo:block><xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_vatno'"/></xsl:call-template><xsl:text>&#160;</xsl:text><xsl:value-of select="/*/meta/company/vat_no"/></fo:block>
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>
@@ -304,12 +306,12 @@
     <xsl:template name="page_footer">
         <fo:static-content flow-name="region-after-cover" xsl:use-attribute-sets="FooterFont">
             <fo:block xsl:use-attribute-sets="footer">
-                <fo:inline xsl:use-attribute-sets="TinyFont orange-text">Please keep digital unless absolutely required. Read the (unique) terms and conditions of Radically Open Security at: https://radicallyopensecurity.com/TermsandConditions.pdf</fo:inline>
+                <fo:inline xsl:use-attribute-sets="TinyFont orange-text"><xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_yaygreen'"/></xsl:call-template></fo:inline>
             </fo:block>
         </fo:static-content>
         <fo:static-content flow-name="region-after-content" xsl:use-attribute-sets="FooterFont">
             <fo:block xsl:use-attribute-sets="footer">
-                <fo:inline xsl:use-attribute-sets="TinyFont orange-text">Please keep digital unless absolutely required. Read the (unique) terms and conditions of Radically Open Security at: https://radicallyopensecurity.com/TermsandConditions.pdf</fo:inline>
+                <fo:inline xsl:use-attribute-sets="TinyFont orange-text"><xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_yaygreen'"/></xsl:call-template></fo:inline>
             </fo:block>
         </fo:static-content>
     </xsl:template>

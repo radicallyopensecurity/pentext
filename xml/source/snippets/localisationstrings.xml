@@ -55,6 +55,72 @@
         <translation xml:lang="nl">VOOR</translation>
         <translation xml:lang="en">FOR</translation>
     </string>
+    <string id="page_kvk">
+        <translation xml:lang="nl">Kamer van Koophandel</translation>
+        <translation xml:lang="en">Chamber of Commerce</translation>
+    </string>
+    <string id="invoice_no">
+        <translation xml:lang="nl">Factuur nr.</translation>
+        <translation xml:lang="en">Invoice no.</translation>
+    </string>
+    <string id="invoice_fao">
+        <translation xml:lang="nl">T.a.v.</translation>
+        <translation xml:lang="en">F.a.o.</translation>
+    </string>
+    <string id="invoice_svcdeliv">
+        <translation xml:lang="nl">Geleverde diensten</translation>
+        <translation xml:lang="en">Services delivered</translation>
+    </string>
+    <string id="invoice_days">
+        <translation xml:lang="nl">daagse</translation>
+        <translation xml:lang="en">day</translation>
+    </string>
+    <string id="invoice_vat">
+        <translation xml:lang="nl">BTW</translation>
+        <translation xml:lang="en">VAT</translation>
+    </string>
+    <string id="invoice_vatno">
+        <translation xml:lang="nl">BTW-nummer</translation>
+        <translation xml:lang="en">VAT number</translation>
+    </string>
+    <string id="invoice_additional">
+        <translation xml:lang="nl">Extra gemaakte kosten</translation>
+        <translation xml:lang="en">Additional expenses</translation>
+    </string>
+    <string id="invoice_total">
+        <translation xml:lang="nl">Totaal te betalen</translation>
+        <translation xml:lang="en">Total amount to be paid</translation>
+    </string>
+    <string id="invoice_donation">
+        <translation xml:lang="nl">doneert > 90% van haar totale winst aan goede doelen.</translation>
+        <translation xml:lang="en">donates > 90% of its entire profits to
+        charity.</translation>
+    </string>
+    <string id="invoice_pleasepay">
+        <translation xml:lang="nl">Maak binnen 30 dagen het totale bedrag over op de volgende rekening:</translation>
+        <translation xml:lang="en">Please be so kind to pay within 30 days
+        by money transfer, to the following account:</translation>
+    </string>
+    <string id="invoice_iban">
+        <translation xml:lang="nl">IBAN</translation>
+        <translation xml:lang="en">IBAN</translation>
+    </string>
+    <string id="invoice_ref">
+        <translation xml:lang="nl">Referentie</translation>
+        <translation xml:lang="en">Reference</translation>
+    </string>
+    <string id="invoice_regards">
+        <translation xml:lang="nl">Met vriendelijke groet</translation>
+        <translation xml:lang="en">Kind regards</translation>
+    </string>
+    <string id="invoice_team">
+        <translation xml:lang="nl">uw team bij</translation>
+        <translation xml:lang="en">your dedicated team at</translation>
+    </string>
+    <string id="invoice_yaygreen">
+        <translation xml:lang="nl">Spaar papier — niet afdrukken tenzij absoluut noodzakelijk. Lees onze (unieke) voorwaarden op: https://radicallyopensecurity.com/TermsandConditions.pdf</translation>
+        <translation xml:lang="en">Please keep digital unless absolutely required. Read the (unique) terms and conditions of Radically Open Security at: https://radicallyopensecurity.com/TermsandConditions.pdf</translation>
+    </string>
     <string id="qs2off_about">
         <translation xml:lang="nl">Over <client_short/></translation>
         <translation xml:lang="en">About <client_short/></translation>

@@ -4,48 +4,56 @@
 
         <section>
                 <title>Team</title>
-                <p><company_short/> mag de activiteiten uitvoeren met haar kern-teamleden, 
-                externe freelancers, en/of vrijwilligers.</p>
-                <p>Het eerste contactpersoon voor deze opdracht zal zijn:</p>
-                <ul>
-                        <li><company_poc1/> (<company_short/>)</li>
-                        <li><client_poc1/> (<client_short/>)</li>
-                </ul>
-                <p>Onze penetratie tests lijken een beetje op een "verover de vlag competitie":
-                
-				<company_long/> heeft een geografisch gedistribueerd team 
-				en wij gebruiken online infrastructuur (RocketChat, GitLabs, etc.) 
-				om ons werk te coördineren. Dit geeft ons de mogelijkheid om 
-                om verscheidene technische mensen uit de organisatie van de klant
-                uit te nodigen om op vrijwillige basis samen te werken met ons pentest team.
-				Natuurlijk geldt deze uitnodiging ook voor <client_short/>.</p>
-				
-                <p>In de loop van het project hebben wij de insteek om actief te 
-                brainstormen met <client_short/> over zowel de pentest, als het proces.
-                Dit is een doorlopende leerervaring voor zowel u, als voor onszelf.
-                Daarnaast hebben wij ervaren dat een directe lijn voor feedback naar de klant 
-                de kwaliteit en de focus van het dienstverband enorm verbeteren.</p>
+                <p><company_short/> voert de activiteiten zoals genoemd in deze offerte uit 
+    met haar kernteamleden, externe freelancers, en/of vrijwilligers.<br />
+    De eerste aanspreekpunt voor deze opdracht zijn:</p>
+    <ul>
+      <li><company_poc1/> (<company_short/>)</li>
+      <li><client_poc1/> (<client_short/>)</li>
+    </ul>
+                <p>De werkwijze van onze penetratietest-teams is gemodelleerd die van een
+                                "<i>Capture The Flag</i>-team": <company_long/> heeft een
+                        geografisch gedistribueerd team; wij gebruiken online infrastructuur
+                        (RocketChat, GitLabs, etc.) om ons werk te coördineren. Dit geeft ons de
+                        mogelijkheid om verscheidene technische mensen uit de organisatie van de
+                        klant uit te nodigen om op vrijwillige basis samen te werken met ons
+                        pentestteam. Uiteraard geldt deze uitnodiging ook voor <client_short/>.</p>
+
+                <p> <company_short/> betrekt <client_short/> actief bij het project door tussentijds 
+    overleg te voeren over de voortgang van de <company_svc_short/> en over het proces. 
+    Door deze manier van werken wordt het project een doorlopende leerervaring voor 
+    zowel u als voor <company_short/>. <company_short/> heeft ervaren dat een 
+    rechtstreeks contact met de klant tijdens het project de kwaliteit en de focus 
+    van onze diensten aanzienlijk verbetert.</p>
 
         </section>
         <section>
                 <title>Rapportage</title>
-                <p><company_short/> zal rapporteren aan <client_short/> betreffende de 
-                penetratie test. Dit rapport zal de genomen stappen bevatten die benodigd waren 
-                gedurende de test en daarnaast de bevonden kwetsbaarheden. Daarnaast zal het 
-                aanbevelingen bevatten, maar geen uitgebreide oplossingen om deze 
-                kwetsbaarheden op te lossen.</p>
-                
-                <p>Een voorbeeld van een Pentest rapport kan hier gevonden worden</p>
-					<ul>
-						<li><a href="https://github.com/radicallyopensecurity/templates/blob/master/sample-report/REP_SittingDuck-
-					pentestreport-v10.pdf">https://github.com/radicallyopensecurity/templates/blob/master/sample-report/REP_SittingDuck-
-					pentestreport-v10.pdf</a></li>
-					</ul>
-					
-				<p>Een van <company_short/> haar kernwaarden is het 
-				"Leer iemand Vissen" principe - ook bekend als het 
-				"Meekijken over de Schouder" principe. Wij streven ernaar om 
-				onze diensten te structureren, zodat zij kans kunnen bieden 
-				om deze te benutten voor educatieve- of trainingsdoeleinden voor onze klanten.</p>
+                <p>
+      <company_short/> zal voor <client_short/> de tijdens de <company_svc_short/>
+      aangetroffen kwetsbaarheden onderzoeken en classificeren. Onze bevindingen verwerken we in een (Engelstalig) 
+      rapport. De belangrijkste bevindingen worden voorzien van een gedetailleerd advies 
+      voor het verbeteren van de onveilige situatie. De minder kritische bevindingen 
+      zullen door ons minder gedetailleerd worden behandeld. Voorafgaand aan de oplevering 
+      van het rapport krijgt <client_short/> inzage in de conceptversie, zodat er nog ruimte is voor 
+      vragen en suggesties. De bevindingen uit het rapport zullen telefonisch en/of per email door 
+      <client_short/> en <company_short/> worden besproken.
+    </p>
+
+                <p>Een voorbeeld van een pentestrapport vindt u hier:</p>
+                <ul>
+                        <li>
+                                <a
+                                        href="https://github.com/radicallyopensecurity/templates/blob/master/sample-report/REP_SittingDuck-
+					pentestreport-v10.pdf"
+                                        >https://github.com/radicallyopensecurity/templates/blob/master/sample-report/REP_SittingDuck-
+                                        pentestreport-v10.pdf</a>
+                        </li>
+                </ul>
+
+                <p>Een van de kernwaarden van <company_short/> is het "Teach To Fish"-principe - ook
+                        bekend als het "Peek over our Shoulder (PooS)"-principe. Wij streven ernaar
+                        om onze diensten en rapporten zodanig te structureren dat onze klanten ze
+                        mogelijk kunnen benutten voor educatieve of trainingsdoeleinden.</p>
         </section>
 </section>

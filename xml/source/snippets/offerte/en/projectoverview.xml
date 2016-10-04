@@ -16,7 +16,7 @@
         <!-- snippet --><p><company_short/> will test for the presence of the 
         most common vulnerabilities, using both publicly available vulnerability 
         scanning tools and manual testing. <company_short/> shall perform a 
-        <p_duration/>-day, <p_boxtype/>, intrusive test via the internet.</p>
+        <p_duration/>-day (<p_mandays/>-manday), <p_boxtype/>, intrusive test via the internet.</p>
         
 		<!-- snippet --> <!--Not Needed if Disclaimer is Included; Duplicate Text-->
 		<!--p>It is possible that in the course of the penetration 

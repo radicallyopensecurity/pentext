@@ -68,7 +68,11 @@
                 <fo:page-number/>/<fo:page-number-citation ref-id="EndOfDoc"/>
                 <fo:leader leader-pattern="space"/>
                 <fo:inline xsl:use-attribute-sets="TinyFont"><xsl:value-of
-                select="*/meta/company/full_name"/> - Chamber of Commerce
+                select="*/meta/company/full_name"/><xsl:text> - </xsl:text>
+                    <xsl:call-template name="getString">
+                        <xsl:with-param name="stringID" select="'page_kvk'"/>
+                    </xsl:call-template>
+                    <xsl:text>&#160;</xsl:text>
                     <xsl:value-of select="*/meta/company/coc"/></fo:inline>
             </fo:block>
         </fo:static-content>
@@ -77,7 +81,11 @@
                 <fo:page-number/>/<fo:page-number-citation ref-id="EndOfDoc"/>
                 <fo:leader leader-pattern="space"/>
                 <fo:inline xsl:use-attribute-sets="TinyFont"><xsl:value-of
-                select="*/meta/company/full_name"/> - Chamber of Commerce
+                select="*/meta/company/full_name"/><xsl:text> - </xsl:text>
+                    <xsl:call-template name="getString">
+                        <xsl:with-param name="stringID" select="'page_kvk'"/>
+                    </xsl:call-template>
+                    <xsl:text>&#160;</xsl:text>
                     <xsl:value-of select="*/meta/company/coc"/></fo:inline>
             </fo:block>
         </fo:static-content>

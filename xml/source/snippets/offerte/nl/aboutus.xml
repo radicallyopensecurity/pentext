@@ -1,38 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section>
         <title>Over ons <company_long/></title>
-	<p><company_long/> is 's werelds eerste non-profit computer security consultancy bedrijf.
-	Wij zijn een <i>Fiscaal Fondswervende Instelling</i> en in die hoedanigheid kunnen we 90 procent van onze winst
+	<p><company_long/> is het eerste non-profit computer security consultancy bedrijf ter wereld.
+	We zijn een <i>Fiscaal Fondswervende Instelling</i> en kunnen daardoor 90 procent van onze winst
 	belastingvrij aan non-profit stichting NLnet doneren. Stichting NLnet ondersteunt al bijna twintig jaar 
-	open-source, digitale rechten en internet onderzoek.</p>
+	open-source, digitale rechten en internetonderzoek.</p>
 
-	<p>Onze winst worden dus niet uitgekeerd aan aandeelhouders, investeerders of eigenaren. 
-	Met de winst dienen we de maatschappij. Omdat wij geen winstoogmerk hebben kunnen we de beste ethische 
-	veiligheidsexperts rekruteren. Met onze kernwaarden trekken we gelijkgestemde klanten aan. Wij stellen onze klanten
-	in staat om met IT veiligheidsbudgetten sociaal verantwoord ondernemen te ondersteunen. 
-	Het hoge tempo waarmee wij groeien weerspiegelt de positieve respons van de markt op onze idealistische 
-	filosofie en ons innovatieve business model.</p>
+	<p>Onze winst wordt dus niet uitgekeerd aan aandeelhouders, investeerders of eigenaren, maar ingezet om de maatschappij te dienen. Omdat we geen winstoogmerk hebben, kunnen we de beste ethische 
+	veiligheidsexperts rekruteren. Met onze kernwaarden trekken we gelijkgestemde klanten aan, die we
+	in staat stellen om met hun IT-veiligheidsbudget het sociaal verantwoord ondernemen te ondersteunen. 
+	Ons hoge groeitempo weerspiegelt de positieve respons van de markt op onze idealistische 
+	filosofie en ons innovatieve businessmodel.</p>
 
- <p><company_long/> heeft een aantal waarden die wij beschrijven als onze
- "Kernwaarden." Deze zijn:</p>
+ <p>De waarden die <company_long/> als haar kernwaarden zou willen omschrijven zijn:</p>
     <ul>
       <li><b>Openheid van zaken</b><br/> 
-      Wij bouwen geen toezichtssystemen, we helpen geen hacking activisten, we verkopen geen <i>exploits</i>
-      aan geheime diensten of iets in die richting. Als een opdracht ons moreel verwerpelijk lijkt, nemen 
+      Wij bouwen geen toezichtssystemen, hacken geen activisten en verkopen geen <i>exploits</i>
+      aan geheime diensten. Als een opdracht ons moreel verwerpelijk lijkt, nemen 
       we die niet aan. </li>
       <li><b>Open-Source</b><br/>
-      Wij geven ALLE tools en frameworks, die wij open-source bouwen, vrij op onze website.</li>
-      <li><b>Leren vissen</b><br/>
-      Tijdens de samenwerken delen wij niet alleen de resultaten met onze opdrachtgevers, maar 
-      geven wij ook een stapsgewijze beschrijving waarmee klanten in de toekomst zelf de 
-      veiligheid van hun systemen kunnen testen. Wij willen graag inzichtelijk maken wat we doen. Het is geen 
+      Wij geven de broncode van <b>alle</b> tools en frameworks die we bouwen vrij op onze website.</li>
+      <li><b>Het "<i>teach to fish</i>"-principe</b><br/>
+        Tijdens het samenwerken delen we niet alleen onze bevindingen met onze opdrachtgevers, maar 
+      beschrijven we ook stap voor stap hoe de opdrachtgever in de toekomst zelf de 
+      veiligheid van zijn of haar systemen kan testen. Wij willen graag inzichtelijk maken wat we doen. Het is geen 
       hogere wiskunde. We helpen klanten om hun kennis en houding ten aanzien van veiligheid te verbeteren.</li>
-      <li><b>Gratis IoCs</b><br/>
-      Wij geven ALLE verzamelde bedreigingen (<i>Indicators of Compromise</i>) vrij in
-      een open-source <i>database</i> die iederen gratis kan gebruiken (Opgeschoond in
-      overeenstemming met klanten).</li>
-      <li><b>Zero days</b><br/>
-      Wij verkopen geen <i>'Zero days' exploits</i> (nuldagenaanval) - wij brengen ze op verantwoorde wijze aan het licht!</li>
+      <li><b>Gratis <i>IoC</i>s</b><br/>
+      Wij geven <b>alle</b> verzamelde gevarenindicatoren (<i>Indicators of Compromise</i>) vrij in
+      een open-source <i>database</i> die iederen gratis kan gebruiken (uiteraard gebeurt dit in overleg met de klant en worden de gegevens opgeschoond voor ze openbaar worden gemaakt).</li>
+      <li><b><i>Zero days</i></b><br/>
+      Wij verkopen geen <i>'Zero day' exploits</i> (pas bekend geworden kwetsbaarheden) - wij brengen ze op verantwoorde wijze aan het licht!</li>
           </ul> 
 <p>Voor meer informatie over <company_long/> verwijzen wij u naar onze website: 
 <a href="http://www.radicallyopensecurity.com">www.radicallyopensecurity.com</a>.</p>

@@ -89,14 +89,18 @@
                         <xsl:value-of select="/*/pentest_info/days"/>
                     </duration>
                     <xsl:comment>duration of pentest, in working days</xsl:comment>
+                    <mandays>
+                        <xsl:value-of select="/*/pentest_info/mandays"/>
+                    </mandays>
+                    <xsl:comment>duration of pentest, in mandays</xsl:comment>
                     <test_planning>
                         <xsl:value-of select="/*/pentest_info/planning"/>
                     </test_planning>
-                    <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2015</xsl:comment>
+                    <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2016</xsl:comment>
                     <report_due>
                         <xsl:value-of select="/*/pentest_info/delivery"/>
                     </report_due>
-                    <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2015</xsl:comment>
+                    <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2016</xsl:comment>
                     <nature>
                         <xsl:value-of select="/*/pentest_info/nature"/>
                     </nature>
