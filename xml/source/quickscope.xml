@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <quickscope xmlns:xi="http://www.w3.org/2001/XInclude"
-    xmlns:xml="http://www.w3.org/XML/1998/namespace">
-    <!-- Today's date -->
-    <version date="2015-01-01"/>
-    <!-- YYYY-MM-DD -->
-    <!-- CLIENT INFO -->
+    xmlns:xml="http://www.w3.org/XML/1998/namespace"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../dtd/quickscope.xsd">
+    
+    <!-- COMPANY INFO -->
     <xi:include href="client_info.xml"/>
 
     <!-- SERVICE INFO -->
@@ -16,29 +16,23 @@
         <offer_type>pentest</offer_type>
         <!-- Required service -->
         <!-- Note: is only used when type is 'other', if offer_type is a specific type, service name will be taken from the localisation strings -->
-    <requested_service></requested_service>
-    <!-- Which targets will need to be tested? 
-        (one <target> element for each piece of software/service/server address/location...), delete/add as necessary -->
+        <requested_service>penetration testing services</requested_service>
+        <!-- Which targets will need to be tested? 
+                (one <target> element for each piece of software/service/server address/location...), delete/add as necessary -->
         <targets>
             <target></target>
             <target></target>
         </targets>
     </meta>
-    <!-- Some information about any third parties involved with the software/service to be tested, if applicable. 
-        If not applicable, delete the whole <third_party> element. If more parties are needed, add <third_party> elements -->
-    <third_party>
-        <full_name></full_name>
-        <short_name></short_name>
-        <!-- Name of the person who will need to sign the waiver for this vendor -->
-        <waiver_rep></waiver_rep>
-        <address></address>
-        <city></city>
-        <country></country>
-    </third_party>
-
+    <!-- Do we need permission from third parties? Insert as many <third_party> elements as needed under this comment -->
+    <!-- INSERT OPTIONAL THIRD PARTIES HERE -->
+    
+    <!-- ___________________________________ -->
     <pentest_info>
         <!-- How long would you like the test to be? (in days) -->
-        <days></days>
+        <days>0</days>
+        <!-- How many mandays (if you don't know, try days * number of assigned pentesters) -->
+        <mandays>0</mandays>
         <!-- Service execution (Use one of the following values: time-boxed, subscription) -->
         <nature>time-boxed</nature>
         <!-- Testing type (Use one of the following values: crystal-box, black-box, grey-box) -->
@@ -51,8 +45,11 @@
         <delivery>TBD</delivery>
         <!-- Do you need/want a code audit? (possible values: yes/no), only for pentest -->
         <codeaudit perform="yes"/>
-        <!-- Is there an application that needs to be tested? Type its name below. If not, please DELETE <application_name> element -->
-        <application_name></application_name>
+        <!-- Is there an application that needs to be tested? Add an <application_name> element below. -->
+        <!-- INSERT OPTIONAL APPLICATION NAME HERE -->
+    
+        <!-- ___________________________________ -->
+        
         <!-- rate (to be filled in by ROS ;) -->
         <rate>0</rate>
 

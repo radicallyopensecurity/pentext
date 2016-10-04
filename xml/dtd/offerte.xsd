@@ -44,6 +44,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="duration"/>
+        <xs:element ref="mandays"/>
         <xs:element ref="test_planning"/>
         <xs:element ref="report_due"/>
         <xs:element ref="nature"/>

@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd" />
-  <xs:import namespace="http://www.w3.org/2001/XInclude" schemaLocation="http://www.w3.org/2001/XInclude/XInclude.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+    schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+  <xs:import namespace="http://www.w3.org/2001/XInclude"
+    schemaLocation="http://www.w3.org/2001/XInclude/XInclude.xsd"/>
   <xs:include schemaLocation="common.xsd"/>
-  
+
   <xs:element name="generic_document">
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="meta"/>
         <xs:element ref="generate_index"/>
         <xs:element ref="section" maxOccurs="unbounded"/>
-        <xs:element ref="appendix" maxOccurs="unbounded"/>
+        <xs:element ref="appendix" minOccurs="0" maxOccurs="unbounded"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:element name="meta">
     <xs:complexType>
       <xs:sequence>
@@ -27,9 +29,9 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-    
+
   <xs:element name="subtitle" type="xs:string"/>
-    
+
   <xs:element name="collaborators">
     <xs:complexType>
       <xs:sequence>
@@ -38,7 +40,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-    
+
   <xs:element name="reviewers">
     <xs:complexType>
       <xs:sequence>
@@ -46,9 +48,9 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:element name="reviewer" type="xs:string"/>
-  
+
   <xs:element name="approver">
     <xs:complexType>
       <xs:sequence>
@@ -57,10 +59,10 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-    
+
   <xs:element name="bio" type="xs:string"/>
   <xs:element name="classification" type="xs:NCName"/>
-    
+
   <xs:element name="section">
     <xs:complexType>
       <xs:sequence>
@@ -84,7 +86,7 @@
       <xs:attribute ref="xml:base"/>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:element name="appendix">
     <xs:complexType>
       <xs:sequence>
@@ -105,10 +107,18 @@
       <xs:attribute ref="visibility" use="optional"/>
     </xs:complexType>
   </xs:element>
-    
-  
-    <!-- Placeholders -->
+
+  <xs:complexType name="block" mixed="true">
+    <xs:choice maxOccurs="unbounded">
+      <xs:group ref="inline-all"/>
+      <xs:group ref="placeholders"/>
+    </xs:choice>
+    <xs:attribute ref="xml:base"/>
+  </xs:complexType>
+
+  <!-- Placeholders -->
+
   <xs:group name="placeholders">
-      <xs:choice></xs:choice>
+    <xs:choice/>
   </xs:group>
 </xs:schema>

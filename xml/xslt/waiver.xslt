@@ -110,10 +110,16 @@
                 </xsl:if>
             </fo:block>
             <xsl:apply-templates/>
+        <xsl:call-template name="generate_waiver_signature_box"/>
+            
+        
     </xsl:template>
 
 
-    <xsl:template match="generate_waiver_signature_box">
+    <xsl:template name="generate_waiver_signature_box">
+        <xsl:param name="signee_long" tunnel="yes"/>
+        <xsl:param name="signee_waiver_rep" tunnel="yes"/>
+        <xsl:param name="signee_city" tunnel="yes"/>
         <fo:block keep-together.within-page="always" xsl:use-attribute-sets="signaturebox">
             <fo:table width="100%" table-layout="fixed">
                 <fo:table-column column-width="proportional-column-width(10)"/>
@@ -138,20 +144,20 @@
                         <fo:table-cell xsl:use-attribute-sets="td">
                             <fo:block xsl:use-attribute-sets="p"><xsl:call-template name="getString">
                                     <xsl:with-param name="stringID" select="'waiver_signed_in'"/>
-                                </xsl:call-template> &#160;&#160;&#160; <xsl:value-of select="city"
+                                </xsl:call-template> &#160;&#160;&#160; <xsl:value-of select="$signee_city"
                                 /></fo:block>
                         </fo:table-cell>
                     </fo:table-row>
                     <fo:table-row>
                         <fo:table-cell xsl:use-attribute-sets="td">
                             <xsl:choose>
-                                <xsl:when test="waiver_rep">
+                                <xsl:when test="$signee_waiver_rep">
                                     <fo:block xsl:use-attribute-sets="p"><xsl:call-template
                                             name="getString">
                                             <xsl:with-param name="stringID"
                                                 select="'waiver_signed_by'"/>
                                         </xsl:call-template> &#160;&#160;&#160;<xsl:value-of
-                                            select="waiver_rep"/></fo:block>
+                                            select="$signee_waiver_rep"/></fo:block>
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <fo:block xsl:use-attribute-sets="p"><xsl:call-template
@@ -169,13 +175,16 @@
                             <fo:block xsl:use-attribute-sets="p"><xsl:call-template name="getString">
                                     <xsl:with-param name="stringID" select="'waiver_signed_for'"/>
                                 </xsl:call-template> &#160;&#160;&#160;<xsl:value-of
-                                    select="full_name"/></fo:block>
+                                    select="$signee_long"/></fo:block>
                         </fo:table-cell>
                     </fo:table-row>
                 </fo:table-body>
             </fo:table>
         </fo:block>
     </xsl:template>
+    
+    <!-- deprecated element; ignore if still there -->
+    <xsl:template match="generate_waiver_signature_box"/>
     
     <!-- special waiver placeholders -->
     <!-- (tunnel ftw ;) -->

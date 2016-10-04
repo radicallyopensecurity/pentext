@@ -4,7 +4,7 @@
 		<p>Om de diensten naar behoren uit te kunnen voeren heeft <company_short/> toegang nodig tot:</p>
 					<!--Example of most common scenario, change if necessary!! :-->
 			  <ul>
-				  <li>test accounts</li>
+				  <li>testaccounts</li>
 				  <li>een testomgeving</li>
 				  <li>contactgegevens van de systeemadministrators, voor noodgevallen</li>
 			  
