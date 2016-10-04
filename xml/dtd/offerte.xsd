@@ -117,7 +117,6 @@
           <xs:element ref="ul"/>
           <xs:element ref="generate_targets"/>
         </xs:choice>
-        <xs:element ref="generate_waiver_signature_box"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -131,13 +130,10 @@
           <xs:element ref="ul"/>
           <xs:element ref="generate_targets"/>
         </xs:choice>
-        <xs:element ref="generate_waiver_signature_box"/>
       </xs:sequence>
       <xs:attribute name="Ref" use="optional" type="xs:IDREFS"/>
     </xs:complexType>
   </xs:element>
-
-  <xs:element name="generate_waiver_signature_box"/>
 
   <xs:complexType name="block" mixed="true">
     <xs:choice maxOccurs="unbounded">
@@ -208,6 +204,7 @@
       <xs:element name="t_app"/>
       <xs:element name="t_app_producer"/>
       <xs:element name="p_duration"/>
+      <xs:element name="p_mandays"/>
       <xs:element name="p_boxtype"/>
       <xs:element name="p_fee"/>
       <xs:element name="p_testingduration"/>
