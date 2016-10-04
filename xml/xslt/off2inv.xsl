@@ -41,6 +41,7 @@
                 </xsl:element>
             </meta>
             <servicesdelivered>
+                <xsl:comment>Add/delete &lt;service> elements as needed</xsl:comment>
                 <service>
                     <description>
                         <xsl:value-of select="/offerte/meta/pentestinfo/duration"
@@ -48,11 +49,22 @@
                             />&#160;<xsl:value-of
                             select="/offerte/meta/permission_parties/client/short_name"/>
                     </description>
-                    <fee>
+                    <fee vat="yes">
                         <xsl:value-of select="/offerte/meta/pentestinfo/fee"/>
                     </fee>
                 </service>
             </servicesdelivered>
+            <additionalcosts>
+                <xsl:comment>Add/delete &lt;cost> elements as needed</xsl:comment>
+                <cost>
+                    <description>...</description>
+                    <fee vat="yes">0</fee>
+                </cost>
+                <cost>
+                    <description>...</description>
+                    <fee vat="yes">0</fee>
+                </cost>
+            </additionalcosts>
         </invoice>
 
 
