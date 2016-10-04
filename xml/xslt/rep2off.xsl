@@ -71,34 +71,36 @@
                     <!-- copy various variables from quickscope -->
                     <duration>2</duration>
                     <xsl:comment>duration of pentest, in working days</xsl:comment>
+                    <mandays>2</mandays>
+                    <xsl:comment>duration of pentest, in mandays</xsl:comment>
                     <test_planning>
                         <xsl:choose>
-                            <xsl:when test="/*/pentest_info/test_planning"><xsl:value-of select="/*/pentest_info/test_planning"/></xsl:when>
+                            <xsl:when test="/*/pentestinfo/test_planning"><xsl:value-of select="/*/pentest_info/test_planning"/></xsl:when>
                             <xsl:otherwise>TBD</xsl:otherwise>
                         </xsl:choose>
                     </test_planning>
                     <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2015</xsl:comment>
                     <report_due>
                         <xsl:choose>
-                            <xsl:when test="/*/pentest_info/report_due"><xsl:value-of select="/*/pentest_info/report_due"/></xsl:when>
+                            <xsl:when test="/*/pentestinfo/report_due"><xsl:value-of select="/*/pentest_info/report_due"/></xsl:when>
                             <xsl:otherwise>TBD</xsl:otherwise>
                         </xsl:choose>
                     </report_due>
                     <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2015</xsl:comment>
                     <nature>
                         <xsl:choose>
-                            <xsl:when test="/*/pentest_info/nature"><xsl:value-of select="/*/pentest_info/nature"/></xsl:when>
-                            <xsl:otherwise>???</xsl:otherwise>
+                            <xsl:when test="/*/pentestinfo/nature"><xsl:value-of select="/*/pentest_info/nature"/></xsl:when>
+                            <xsl:otherwise>time-boxed</xsl:otherwise>
                         </xsl:choose>
                     </nature>
                     <type>
                         <xsl:choose>
-                            <xsl:when test="/*/pentest_info/type"><xsl:value-of select="/*/pentest_info/type"/></xsl:when>
-                            <xsl:otherwise>???-box</xsl:otherwise>
+                            <xsl:when test="/*/pentestinfo/type"><xsl:value-of select="/*/pentest_info/type"/></xsl:when>
+                            <xsl:otherwise>crystal-box</xsl:otherwise>
                         </xsl:choose>
                     </type>
                     <xsl:comment>please choose one of the following: black-box, grey-box, crystal-box</xsl:comment>
-                    <fee denomination="eur">???</fee>
+                    <fee denomination="eur">0</fee>
                     <xsl:comment>(eur|usd|gbp)</xsl:comment>
                     <xsl:if test="*/pentest_info/target_application">
                         <target_application>
