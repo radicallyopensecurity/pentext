@@ -75,6 +75,10 @@
                         <xsl:value-of select="/*/pentest_info/days"/>
                     </duration>
                     <xsl:comment>duration of pentest, in working days</xsl:comment>
+                    <mandays>
+                        <xsl:value-of select="/*/pentest_info/mandays"/>
+                    </mandays>
+                    <xsl:comment>duration of pentest, in mandays</xsl:comment>
                     <test_planning>
                         <xsl:value-of select="/*/pentest_info/planning"/>
                     </test_planning>

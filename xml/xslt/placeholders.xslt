@@ -147,6 +147,12 @@
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
+    <xsl:template match="p_mandays">
+        <xsl:param name="placeholderElement" select="/*/meta/pentestinfo/mandays"/>
+        <xsl:call-template name="checkPlaceholder">
+            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+        </xsl:call-template>
+    </xsl:template>
     <xsl:template match="p_boxtype">
         <xsl:param name="placeholderElement" select="/*/meta/pentestinfo/type"/>
         <xsl:call-template name="checkPlaceholder">
