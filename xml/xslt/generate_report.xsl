@@ -36,6 +36,7 @@
     <xsl:variable name="fee" select="/contract/meta/contractor/hourly_fee * 1"/>
     <xsl:variable name="plannedHours" select="/contract/meta/work/planning/hours * 1"/>
     <xsl:variable name="total_fee" select="$fee * $plannedHours"/>
+    <xsl:variable name="denomination" select="'X'"/>
     <!-- end -->
     
     <xsl:variable name="lang" select="/*/@xml:lang"/>
