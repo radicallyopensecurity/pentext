@@ -289,7 +289,7 @@
                         </fo:table-row>
                         <fo:table-row>
                             <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block><xsl:value-of select="/*/customer/city"/></fo:block>
+                                <fo:block><xsl:value-of select="/*/meta/permission_parties/client/city"/></fo:block>
                             </fo:table-cell>
                             <fo:table-cell xsl:use-attribute-sets="td">
                                 <fo:block><xsl:value-of
