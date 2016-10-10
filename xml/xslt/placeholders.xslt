@@ -238,7 +238,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    <xsl:template match="contractor_name">
+    <xsl:template match="contractor_name_company">
         <xsl:param name="placeholderElement" select="/contract/meta/contractor/name"/>
         <xsl:param name="placeholderElement2" select="/contract/meta/contractor/ctcompany"/>
         <xsl:call-template name="checkPlaceholder">
@@ -252,16 +252,32 @@
             <xsl:text>)</xsl:text>
         </xsl:if>
     </xsl:template>
-    <xsl:template match="contractor_address">
-        <xsl:param name="placeholderElement" select="/contract/meta/contractor/address"/>
+    <xsl:template match="contractor_name">
+        <xsl:param name="placeholderElement" select="/contract/meta/contractor/name"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
-    <xsl:template match="contractor_city">
-        <xsl:param name="placeholderElement" select="/contract/meta/contractor/city"/>
+    <xsl:template match="contractor_company">
+        <xsl:param name="placeholderElement" select="/contract/meta/contractor/ctcompany"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="contractor_address">
+        <xsl:param name="placeholderElement" select="/contract/meta/contractor/address"/>
+        <xsl:param name="caps" select="@caps"/>
+        <xsl:call-template name="checkPlaceholder">
+            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+            <xsl:with-param name="caps" select="$caps"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="contractor_city">
+        <xsl:param name="placeholderElement" select="/contract/meta/contractor/city"/>
+        <xsl:param name="caps" select="@caps"/>
+        <xsl:call-template name="checkPlaceholder">
+            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+            <xsl:with-param name="caps" select="$caps"/>
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="contractor_postalcode">
@@ -272,8 +288,10 @@
     </xsl:template>
     <xsl:template match="contractor_country">
         <xsl:param name="placeholderElement" select="/contract/meta/contractor/country"/>
+        <xsl:param name="caps" select="@caps"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+            <xsl:with-param name="caps" select="$caps"/>
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="contractor_hourly_fee">
@@ -286,25 +304,39 @@
     </xsl:template>
     <xsl:template match="contractor_email">
         <xsl:param name="placeholderElement" select="/contract/meta/contractor/email"/>
+        <xsl:param name="caps" select="@caps"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+            <xsl:with-param name="caps" select="$caps"/>
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="contractor_possessive_pronoun">
         <xsl:param name="placeholderElement" select="/contract/meta/contractor/@sex"/>
+        <xsl:param name="caps" select="@caps"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+            <xsl:with-param name="caps" select="$caps"/>
         </xsl:call-template>
     </xsl:template>
-    <xsl:template match="contractor_personal_pronoun">
+    <xsl:template match="contractor_subject_pronoun">
         <xsl:param name="placeholderElement" select="/contract/meta/contractor/@sex"/>
+        <xsl:param name="caps" select="@caps"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+            <xsl:with-param name="caps" select="$caps"/>
         </xsl:call-template>
     </xsl:template>
-
+    <xsl:template match="contractor_object_pronoun">
+        <xsl:param name="placeholderElement" select="/contract/meta/contractor/@sex"/>
+        <xsl:param name="caps" select="@caps"/>
+        <xsl:call-template name="checkPlaceholder">
+            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+            <xsl:with-param name="caps" select="$caps"/>
+        </xsl:call-template>
+    </xsl:template>
     <xsl:template name="checkPlaceholder">
         <xsl:param name="placeholderElement" select="/"/>
+        <xsl:param name="caps" select="'none'"/>
         <xsl:choose>
             <xsl:when test="normalize-space($placeholderElement)">
                 <!-- placeholder exists and contains text -->
@@ -338,26 +370,49 @@
                         <xsl:choose>
                             <xsl:when test="//contractor/@sex = 'M'"><xsl:call-template name="getString">
                             <xsl:with-param name="stringID" select="'possessive_m'"/>
+                            <xsl:with-param name="caps" select="$caps"/>
                         </xsl:call-template></xsl:when>
                             <xsl:when test="//contractor/@sex = 'F'"><xsl:call-template name="getString">
                             <xsl:with-param name="stringID" select="'possessive_f'"/>
+                            <xsl:with-param name="caps" select="$caps"/>
                         </xsl:call-template></xsl:when>
                             <xsl:when test="//contractor/@sex = 'O'"><xsl:call-template name="getString">
                             <xsl:with-param name="stringID" select="'possessive_o'"/>
+                            <xsl:with-param name="caps" select="$caps"/>
                         </xsl:call-template></xsl:when>
                         </xsl:choose>
                     </xsl:when>
-                    <xsl:when test="self::contractor_personal_pronoun">
+                    <xsl:when test="self::contractor_subject_pronoun">
                         <!-- some sexy logic -->
                         <xsl:choose>
                             <xsl:when test="//contractor/@sex = 'M'"><xsl:call-template name="getString">
-                            <xsl:with-param name="stringID" select="'personal_m'"/>
+                            <xsl:with-param name="stringID" select="'subject_m'"/>
+                            <xsl:with-param name="caps" select="$caps"/>
                         </xsl:call-template></xsl:when>
                             <xsl:when test="//contractor/@sex = 'F'"><xsl:call-template name="getString">
-                            <xsl:with-param name="stringID" select="'personal_f'"/>
+                            <xsl:with-param name="stringID" select="'subject_f'"/>
+                            <xsl:with-param name="caps" select="$caps"/>
                         </xsl:call-template></xsl:when>
                             <xsl:when test="//contractor/@sex = 'O'"><xsl:call-template name="getString">
-                            <xsl:with-param name="stringID" select="'personal_o'"/>
+                            <xsl:with-param name="stringID" select="'subject_o'"/>
+                            <xsl:with-param name="caps" select="$caps"/>
+                        </xsl:call-template></xsl:when>
+                        </xsl:choose>
+                    </xsl:when>
+                    <xsl:when test="self::contractor_object_pronoun">
+                        <!-- some sexy logic -->
+                        <xsl:choose>
+                            <xsl:when test="//contractor/@sex = 'M'"><xsl:call-template name="getString">
+                            <xsl:with-param name="stringID" select="'object_m'"/>
+                            <xsl:with-param name="caps" select="$caps"/>
+                        </xsl:call-template></xsl:when>
+                            <xsl:when test="//contractor/@sex = 'F'"><xsl:call-template name="getString">
+                            <xsl:with-param name="stringID" select="'object_f'"/>
+                            <xsl:with-param name="caps" select="$caps"/>
+                        </xsl:call-template></xsl:when>
+                            <xsl:when test="//contractor/@sex = 'O'"><xsl:call-template name="getString">
+                            <xsl:with-param name="stringID" select="'object_o'"/>
+                            <xsl:with-param name="caps" select="$caps"/>
                         </xsl:call-template></xsl:when>
                         </xsl:choose>
                     </xsl:when>

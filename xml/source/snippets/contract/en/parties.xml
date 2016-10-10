@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div><p><u><b><company_long/></b></u>, located at <company_address/>, <company_postalcode/>, <company_city/>, represented by <company_poc1/> (“<b><company_short/></b>”);</p>
+<div><p><u><b><company_long/></b></u>, registered at <company_city/>, <company_address/>, <company_postalcode/>, represented by <company_poc1/> (“<b><company_short/></b>”);</p>
 
 <p>AND</p>
 
-<p><u><b><contractor_name/><!-- this might include the company in parentheses; if you don't want the company in here, remove the <ctcompany> element from contract_info.xml --></b></u>, with <contractor_possessive_pronoun/> address at <contractor_address/>, <contractor_postalcode/>, <contractor_city/>, <contractor_country/> (the “<b><secondpartyrole/></b>”);</p></div>
+<p><u><b><contractor_name_company/><!-- this might include the company in parentheses; if you don't want the company in here, remove the <ctcompany> element from contract_info.xml --></b></u>, registered at <contractor_city/>, <contractor_address/>, <contractor_postalcode/>,  <contractor_country/> (the “<b><secondpartyrole/></b>”);</p></div>

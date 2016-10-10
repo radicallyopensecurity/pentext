@@ -135,54 +135,282 @@
                 <!-- define parties in contract -->
                 <snippet>parties</snippet>
             </snippet_group>
-            <snippet_group set="whereas">
+            <snippet_group set="considering">
                 <!-- define conditions -->
                 <snippet>wa_companywants</snippet>
-                <snippet>wa_companyhasasked</snippet>
+                <snippet>wa_companyasks</snippet>
                 <snippet>wa_contractorcan</snippet>
-                <snippet>wa_noemploymentintention</snippet>
+                <snippet>wa_d</snippet>
+                <snippet>wa_e</snippet>
+                <snippet>wa_f</snippet>
+                <snippet>wa_g</snippet>
             </snippet_group>
-            <snippet_group set="agree1">
-                <!-- define agreement -->
-                <snippet>ag_noemployment</snippet>
-                <snippet>ag_companyinstructs</snippet>
-                <snippet>ag_worktime</snippet>
-                <snippet>ag_ownrisk</snippet>
-                <snippet>ag_payment_single_engagement</snippet>
-                <snippet>ag_biggerscopewarning</snippet>
-                <snippet>ag_propertyrights</snippet>
-                <snippet>ag_retainrights</snippet>
-                <snippet>ag_nondisclosure</snippet>
-                <snippet>ag_responsibilities</snippet>
-                <snippet>ag_thirdparty</snippet>
-                <snippet>ag_liability</snippet>
-                <snippet>ag_provisions</snippet>
-                <snippet>ag_generaltermsandconditions</snippet>
+            <snippet_group set="clause1title">
+                <snippet>c1_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause1content">
+                <snippet>c1_performswork</snippet>
+                <snippet>c1_tacitrenewal</snippet>
+                <snippet>c1_termination</snippet>
+                <snippet>c1_prematuretermination</snippet>
+                <snippet>c1_otheremployment</snippet>
+            </snippet_group>
+            <snippet_group set="clause2title">
+                <snippet>c2_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause2content">
+                <snippet>c2_planning</snippet>
+                <snippet>c2_assignmentaccept</snippet>
+                <snippet>c2_organisingwork</snippet>
+                <snippet>c2_authority</snippet>
+                <snippet>c2_independent</snippet>
+                <snippet>c2_ownresources</snippet>
+                <snippet>c2_notification</snippet>
+            </snippet_group>
+            <snippet_group set="clause3title">
+                <snippet>c3_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause3content">
+                <snippet>c3_payment</snippet>
+                <snippet>c3_travelexpenses</snippet>
+            </snippet_group>
+            <snippet_group set="clause4title">
+                <snippet>c4_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause4content">
+                <snippet>c4_thirdparty</snippet>
+                <snippet>c4_thirdpartycompetence</snippet>
+            </snippet_group>
+            <snippet_group set="clause5title">
+                <snippet>c5_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause5content">
+                <snippet>c5_retainrights</snippet>
+                <snippet>c5_transferrights</snippet>
+            </snippet_group>
+            <snippet_group set="clause6title">
+                <snippet>c6_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause6content">
+                <snippet>c6_confidentiality</snippet>
+            </snippet_group>
+            <snippet_group set="clause7title">
+                <snippet>c7_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause7content">
+                <snippet>c7_limitedlibility</snippet>
+                <snippet>c7_thirdpartyclaims</snippet>
+            </snippet_group>
+            <snippet_group set="clause8title">
+                <snippet>c8_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause8content">
+                <snippet>c8_responsibilities</snippet>
+                <snippet>c8_taxes</snippet>
+            </snippet_group>
+            <snippet_group set="clause9title">
+                <snippet>c9_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause9content">
+                <snippet>c9_provisions</snippet>
+                <snippet>c9_generaltermsandconditions</snippet>
+                <snippet>c9_dutchlaw</snippet>
             </snippet_group>
         </selection>
+        
         <selection subtype="fixed_term">
             <snippet_group set="parties">
                 <!-- define parties in contract -->
                 <snippet>parties</snippet>
             </snippet_group>
-            <snippet_group set="whereas">
+            <snippet_group set="considering">
                 <!-- define conditions -->
+                <snippet>wa_companywants</snippet>
+                <snippet>wa_companyasks</snippet>
+                <snippet>wa_contractorcan</snippet>
+                <snippet>wa_d</snippet>
+                <snippet>wa_e</snippet>
+                <snippet>wa_f</snippet>
+                <snippet>wa_g</snippet>
+            </snippet_group>
+            <snippet_group set="clause1title">
+                <snippet>c1_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause1content">
+                <snippet>c1_period</snippet>
+                <snippet>c1_tacitrenewal</snippet>
+                <snippet>c1_termination</snippet>
+                <snippet>c1_prematuretermination</snippet>
+                <snippet>c1_otheremployment</snippet>
+            </snippet_group>
+            <snippet_group set="clause2title">
+                <snippet>c2_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause2content">
+                <snippet>c1_performswork</snippet>
+                <snippet>c2_assignmentaccept</snippet>
+                <snippet>c2_organisingwork</snippet>
+                <snippet>c2_authority</snippet>
+                <snippet>c2_independent</snippet>
+                <snippet>c2_ownresources</snippet>
+                <snippet>c2_notification</snippet>
+            </snippet_group>
+            <snippet_group set="clause3title">
+                <snippet>c3_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause3content">
+                <snippet>c3_payment</snippet>
+                <snippet>c3_travelexpenses</snippet>
+            </snippet_group>
+            <snippet_group set="clause4title">
+                <snippet>c4_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause4content">
+                <snippet>c4_thirdparty</snippet>
+                <snippet>c4_thirdpartycompetence</snippet>
+            </snippet_group>
+            <snippet_group set="clause5title">
+                <snippet>c5_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause5content">
+                <snippet>c5_retainrights</snippet>
+                <snippet>c5_transferrights</snippet>
+            </snippet_group>
+            <snippet_group set="clause6title">
+                <snippet>c6_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause6content">
+                <snippet>c6_confidentiality</snippet>
+            </snippet_group>
+            <snippet_group set="clause7title">
+                <snippet>c7_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause7content">
+                <snippet>c7_limitedlibility</snippet>
+                <snippet>c7_thirdpartyclaims</snippet>
+            </snippet_group>
+            <snippet_group set="clause8title">
+                <snippet>c8_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause8content">
+                <snippet>c8_responsibilities</snippet>
+                <snippet>c8_taxes</snippet>
+            </snippet_group>
+            <snippet_group set="clause9title">
+                <snippet>c9_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause9content">
+                <snippet>c9_provisions</snippet>
+                <snippet>c9_generaltermsandconditions</snippet>
+                <snippet>c9_dutchlaw</snippet>
+            </snippet_group>
+        </selection>
+        
+        
+        <selection subtype="non_zzp">
+            <snippet_group set="parties">
+                <!-- define parties in contract -->
+                <snippet>parties_nonzzp</snippet>
+            </snippet_group>
+            <snippet_group set="considering">
+                <!-- define conditions -->
+                <snippet>wa_companywants</snippet>
+                <snippet>wa_companyasks</snippet>
+                <snippet>wa_contractorcan</snippet>
+                <snippet>wa_g</snippet>
+            </snippet_group>
+            <snippet_group set="clause1title">
+                <snippet>c1_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause1content">
+                <snippet>c1_performswork</snippet>
+                <snippet>c1_termination</snippet>
+                <snippet>c1_prematuretermination</snippet>
+            </snippet_group>
+            <snippet_group set="clause2title">
+                <snippet>c2_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause2content">
+                <snippet>c2_planning</snippet>
+                <snippet>c2_assignmentaccept</snippet>
+                <snippet>c2_organisingwork</snippet>
+                <snippet>c2_authority</snippet>
+                <snippet>c2_independent</snippet>
+                <snippet>c2_ownresources</snippet>
+                <snippet>c2_notification</snippet>
+            </snippet_group>
+            <snippet_group set="clause3title">
+                <snippet>c3_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause3content">
+                <snippet>c3_payment</snippet>
+            </snippet_group>
+            <snippet_group set="clause4title">
+                <snippet>c4_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause4content">
+                <snippet>c4_thirdparty_nonzzp</snippet>
+                <snippet>c4_thirdpartycompetence</snippet>
+            </snippet_group>
+            <snippet_group set="clause5title">
+                <snippet>c5_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause5content">
+                <snippet>c5_transferrights</snippet>
+            </snippet_group>
+            <snippet_group set="clause6title">
+                <snippet>c6_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause6content">
+                <snippet>c6_confidentiality</snippet>
+            </snippet_group>
+            <snippet_group set="clause7title">
+                <snippet>c7_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause7content">
+                <snippet>c7_limitedlibility</snippet>
+                <snippet>c7_thirdpartyclaims</snippet>
+            </snippet_group>
+            <snippet_group set="clause8title">
+                <snippet>c8_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause8content">
+                <snippet>c8_responsibilities</snippet>
+            </snippet_group>
+            <snippet_group set="clause9title">
+                <snippet>c9_title</snippet>
+            </snippet_group>
+            <snippet_group set="clause9content">
+                <snippet>c9_provisions</snippet>
+                <snippet>c9_generaltermsandconditions</snippet>
+                <snippet>c9_dutchlaw</snippet>
+            </snippet_group>
+        </selection>
+        
+        
+        <!--<selection subtype="fixed_term">
+            <snippet_group set="parties">
+                <!-\- define parties in contract -\->
+                <snippet>parties</snippet>
+            </snippet_group>
+            <snippet_group set="whereas">
+                <!-\- define conditions -\->
                 <snippet>wa_contractorcan</snippet>
                 <snippet>wa_noemploymentintention</snippet>
             </snippet_group>
             <snippet_group set="agree1">
-                <!-- define agreement, first part -->
+                <!-\- define agreement, first part -\->
                 <snippet>ag_period</snippet>
                 <snippet>ag_noemployment</snippet>
                 <snippet>ag_companyinstructs</snippet>
                 <snippet>ag_ownrisk</snippet>
             </snippet_group>
             <snippet_group set="workinghours">
-                <!-- define working hours (this snippet is isolated because it is subject to some extra logic - not all fixed term contracts have working hours defined) -->
+                <!-\- define working hours (this snippet is isolated because it is subject to some extra logic - not all fixed term contracts have working hours defined) -\->
                 <snippet>ag_workinghours</snippet>
             </snippet_group>
             <snippet_group set="agree2">
-                <!-- define rest of agreement -->
+                <!-\- define rest of agreement -\->
                 <snippet>ag_payment_fixed_term</snippet>
                 <snippet>ag_biggerscopewarning</snippet>
                 <snippet>ag_propertyrights</snippet>
@@ -194,6 +422,6 @@
                 <snippet>ag_provisions</snippet>
                 <snippet>ag_generaltermsandconditions</snippet>
             </snippet_group>
-        </selection>
+        </selection>-->
     </document>
 </snippet_selection>

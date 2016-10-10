@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div><p><u><b><company_long/></b></u>, registered at <company_city/>, <company_address/>, <company_postalcode/>, represented by <company_poc1/> (“<b><company_short/></b>”);</p>
+
+<p>AND</p>
+
+<p><u><b><contractor_name/></b></u>, registered at <contractor_city/>, <contractor_address/>, <contractor_postalcode/>,  <contractor_country/> and represented by <contractor_company/> (the “<b><secondpartyrole/></b>”);</p></div>

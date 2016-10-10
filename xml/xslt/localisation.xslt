@@ -12,10 +12,16 @@
     
     <xsl:template name="getString">
         <xsl:param name="stringID" select="'none'"/>
-        <xsl:param name="caps" select="false()"/>
+        <xsl:param name="caps" select="'none'"/>
         <xsl:choose>
-            <xsl:when test="$caps">
+            <xsl:when test="$caps = 'all'">
                 <xsl:value-of select="$strdoc/string[@id=$stringID]/translation[lang($lang)]/upper-case(text())"/>
+            </xsl:when>
+            <xsl:when test="$caps = 'first'">
+                <xsl:value-of select="concat(upper-case(substring($strdoc/string[@id=$stringID]/translation[lang($lang)]/text(),1,1)),
+                    substring($strdoc/string[@id=$stringID]/translation[lang($lang)]/text(), 2),
+                    ' '[not(last())]
+                    )"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$strdoc/string[@id=$stringID]/translation[lang($lang)]/text()"/>
