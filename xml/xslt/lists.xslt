@@ -54,7 +54,7 @@
     </xsl:template>
     
     <xsl:template match="ol">
-        <fo:list-block provisional-distance-between-starts="0.75cm"
+        <fo:list-block provisional-distance-between-starts="0.85cm"
             provisional-label-separation="2.5mm">
             <xsl:call-template name="checkIfLast"/>
             <xsl:attribute name="space-after">
@@ -105,18 +105,23 @@
                     </xsl:variable>
                     <xsl:choose>
                         <xsl:when test="../@type='i'">
+                            <xsl:value-of select="../@labelprefix"/>
                             <xsl:number value="$value-attr" format="i. "/>
                         </xsl:when>
                         <xsl:when test="../@type='I'">
+                            <xsl:value-of select="../@labelprefix"/>
                             <xsl:number value="$value-attr" format="I. "/>
                         </xsl:when>
                         <xsl:when test="../@type='a'">
+                            <xsl:value-of select="../@labelprefix"/>
                             <xsl:number value="$value-attr" format="a. "/>
                         </xsl:when>
                         <xsl:when test="../@type='A'">
+                            <xsl:value-of select="../@labelprefix"/>
                             <xsl:number value="$value-attr" format="A. "/>
                         </xsl:when>
                         <xsl:otherwise>
+                            <xsl:value-of select="../@labelprefix"/>
                             <xsl:number value="$value-attr" format="1. "/>
                         </xsl:otherwise>
                     </xsl:choose>

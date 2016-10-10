@@ -54,11 +54,11 @@
                 </xsl:for-each>
                 <p><xsl:call-template name="getString">
                         <xsl:with-param name="stringID" select="'contract_whereas'"/>
-                        <xsl:with-param name="caps" select="true()"/>
+                        <xsl:with-param name="caps" select="'all'"/>
                     </xsl:call-template>:</p>
                 <ol type="A">
                     <xsl:for-each
-                        select="$snippetSelectionRoot/selection[@subtype = $docSubType]/snippet_group[@set = 'whereas']/snippet">
+                        select="$snippetSelectionRoot/selection[@subtype = $docSubType]/snippet_group[@set = 'considering']/snippet">
                         <xsl:element name="xi:include">
                             <xsl:attribute name="href">
                                 <xsl:call-template name="docCheck">
@@ -76,20 +76,40 @@
                             <xsl:with-param name="stringID" select="'contract_agree'"/>
                         </xsl:call-template>
                     </title>
-                    <ol type="1">
-                        <xsl:for-each
-                            select="$snippetSelectionRoot/selection[@subtype = $docSubType]/snippet_group[@set = 'agree1']/snippet">
-                            <xsl:element name="xi:include">
-                                <xsl:attribute name="href">
+                    <xsl:for-each select="$snippetSelectionRoot/selection[@subtype = $docSubType]/snippet_group[contains(@set, 'clause')]">
+                        <xsl:variable name="clauseNo" select="concat(count(preceding-sibling::snippet_group[contains(@set, 'content')]) + 1, '.')"/>
+                        <xsl:choose>
+                            <xsl:when test="contains(@set, 'title')">
+                                <xsl:for-each select="snippet">
+                                    <xsl:element name="xi:include">
+                                        <xsl:attribute name="href">
+                                            <xsl:call-template name="docCheck">
+                                                <xsl:with-param name="fileNameBase" select="."/>
+                                                <xsl:with-param name="snippetDirectory" select="$snippetBase"/>
+                                            </xsl:call-template>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                </xsl:for-each>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <ol type="1.1" labelprefix="{$clauseNo}">
+                                <xsl:for-each select="snippet">
+                                    <xsl:element name="xi:include">
+                                    <xsl:attribute name="href">
                                     <xsl:call-template name="docCheck">
                                         <xsl:with-param name="fileNameBase" select="."/>
-                                <xsl:with-param name="snippetDirectory" select="$snippetBase"/>
+                                        <xsl:with-param name="snippetDirectory" select="$snippetBase"/>
                                     </xsl:call-template>
                                 </xsl:attribute>
                             </xsl:element>
                         </xsl:for-each>
+                                </ol>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                     </xsl:for-each>
+                    
                         <!-- need to isolate this snippet to insert some logic: not all contracts define working hours -->
-                        <xsl:if test="/contract_info/work/planning">
+                        <!--<xsl:if test="/contract_info/work/planning">
                             <xsl:for-each
                             select="$snippetSelectionRoot/selection[@subtype = $docSubType]/snippet_group[@set = 'workinghours']/snippet">
                             <xsl:element name="xi:include">
@@ -100,25 +120,13 @@
                                     </xsl:call-template>
                                 </xsl:attribute>
                             </xsl:element>
-                        </xsl:for-each>
-                        </xsl:if>
-                        <xsl:for-each
-                            select="$snippetSelectionRoot/selection[@subtype = $docSubType]/snippet_group[@set = 'agree2']/snippet">
-                            <xsl:element name="xi:include">
-                                <xsl:attribute name="href">
-                                    <xsl:call-template name="docCheck">
-                                        <xsl:with-param name="fileNameBase" select="."/>
-                                <xsl:with-param name="snippetDirectory" select="$snippetBase"/>
-                                    </xsl:call-template>
-                                </xsl:attribute>
-                            </xsl:element>
-                        </xsl:for-each>
-                    </ol>
+                        -->
+                      
                 </section>
                 <section>
                     <title>
                         <xsl:call-template name="getString">
-                            <xsl:with-param name="stringID" select="'signed_dupe'"/>
+                            <xsl:with-param name="stringID" select="'contract_signed_dupe'"/>
                         </xsl:call-template>
                         <xsl:text> </xsl:text>
                         <xsl:call-template name="getString">

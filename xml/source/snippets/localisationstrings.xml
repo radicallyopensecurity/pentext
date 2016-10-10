@@ -7,6 +7,7 @@
         <format xml:lang="en">[MNn] [D1], [Y]</format>
     </date>
     <!-- THIS you can change/expand! -->
+    <!-- COVERPAGE AND HEADERS/FOOTERS -->
     <string id="coverpage_offer">
         <translation xml:lang="nl">OFFERTE</translation>
         <translation xml:lang="en">QUOTE</translation>
@@ -59,6 +60,7 @@
         <translation xml:lang="nl">Kamer van Koophandel</translation>
         <translation xml:lang="en">Chamber of Commerce</translation>
     </string>
+    <!-- INVOICES -->
     <string id="invoice_no">
         <translation xml:lang="nl">Factuur nr.</translation>
         <translation xml:lang="en">Invoice no.</translation>
@@ -121,6 +123,7 @@
         <translation xml:lang="nl">Spaar papier — niet afdrukken tenzij absoluut noodzakelijk. Lees onze (unieke) voorwaarden op: https://radicallyopensecurity.com/TermsandConditions.pdf</translation>
         <translation xml:lang="en">Please keep digital unless absolutely required. Read the (unique) terms and conditions of Radically Open Security at: https://radicallyopensecurity.com/TermsandConditions.pdf</translation>
     </string>
+    <!-- QUICKSCOPING 2 QUOTE -->
     <string id="qs2off_about">
         <translation xml:lang="nl">Over <client_short/></translation>
         <translation xml:lang="en">About <client_short/></translation>
@@ -133,6 +136,7 @@
         <translation xml:lang="nl">Reikwijdte <company_svc_short/></translation>
         <translation xml:lang="en">Reach of <company_svc_short/></translation>
     </string>
+    <!-- WAIVERS -->
     <string id="waiver_signed">
         <translation xml:lang="nl">Getekend</translation>
         <translation xml:lang="en">Signed</translation>
@@ -157,29 +161,42 @@
         <translation xml:lang="nl">In duplicaat getekend</translation>
         <translation xml:lang="en">Signed in duplicate</translation>
     </string>
+    <!-- CONTRACTS -->
     <string id="contract_title">
         <translation xml:lang="nl">security consulting agreement</translation>
         <translation xml:lang="en">security consulting agreement</translation>
     </string>
     <string id="contract_whereas">
         <translation xml:lang="nl">in aanmerking genomen dat</translation>
-        <translation xml:lang="en">whereas</translation>
+        <translation xml:lang="en">considering that</translation>
     </string>
     <string id="contract_agree">
         <translation xml:lang="nl">komen het volgende overeen</translation>
-        <translation xml:lang="en">agree as follows</translation>
+        <translation xml:lang="en">agree the following</translation>
     </string>
-    <string id="personal_m">
+    <string id="subject_m">
         <translation xml:lang="nl">hij</translation>
         <translation xml:lang="en">he</translation>
     </string>
-    <string id="personal_f">
+    <string id="subject_f">
         <translation xml:lang="nl">ze</translation>
         <translation xml:lang="en">she</translation>
     </string>
-    <string id="personal_o">
+    <string id="subject_o">
         <translation xml:lang="nl">hen</translation>
         <translation xml:lang="en">they</translation>
+    </string>
+    <string id="object_m">
+        <translation xml:lang="nl">hem</translation>
+        <translation xml:lang="en">him</translation>
+    </string>
+    <string id="object_f">
+        <translation xml:lang="nl">haar</translation>
+        <translation xml:lang="en">her</translation>
+    </string>
+    <string id="object_o">
+        <translation xml:lang="nl">hen</translation>
+        <translation xml:lang="en">them</translation>
     </string>
     <string id="possessive_m">
         <translation xml:lang="nl">zijn</translation>
@@ -192,6 +209,10 @@
     <string id="possessive_o">
         <translation xml:lang="nl">hun</translation>
         <translation xml:lang="en">their</translation>
+    </string>
+    <string id="contract_signed_dupe">
+        <translation xml:lang="nl">TODOXXXXXXXXXX</translation>
+        <translation xml:lang="en">As such drawn up in duplicate and signed</translation>
     </string>
 </localised_strings>
 

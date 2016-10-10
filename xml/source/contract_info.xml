@@ -6,19 +6,19 @@
     The contract snippets in this repo are provided as an example and should not be used for official contracts. It is the responsibility of the end user to edit the contract snippets and code so that the resulting contract is valid and watertight in the context of their own business operations and legal system. -->
     <xi:include href="snippets/company_info.xml"/>
     <scope>
-        <contract_type>fixed_term</contract_type><!-- single_engagement or fixed_term -->
-        <engagement_description>battle the pirates</engagement_description><!-- [NOTE: only needed for SINGLE ENGAGEMENT type contract, value is ignored otherwise] -->
-        <secondpartyrole>Consultant</secondpartyrole><!-- what contractor will be referred to throughout the contract. Can be anything, but should probably be Consultant or Consultancy company. When in doubt, leave as is. -->
+        <contract_type>fixed_term</contract_type><!-- single_engagement|fixed_term|non_zzp -->
+        <engagement_description>battling the pirates</engagement_description>
+        <secondpartyrole>Contractor</secondpartyrole><!-- what contractor will be referred to throughout the contract. Can be anything, but should probably be Consultant or Contracting Party. When in doubt, leave as is. -->
     </scope>
-    <contractor sex="M"><!-- (M|F|O) (O for other) --> <!-- this info is used to select the correct pronoun, not for profiling :) -->
-        <name>Peter Pan</name>
-        <ctcompany>Lost Boys Inc.</ctcompany><!-- delete ctcompany element in case of freelancer without company -->
+    <contractor sex="F"><!-- (M|F|O) (O for other) --> <!-- this info is used to select the correct pronoun, not for profiling :) -->
+        <name>Petra Pan</name>
+        <ctcompany>Lost Boys Inc.</ctcompany><!-- DELETE ctcompany element in case of freelancer without company -->
         <address>Cloud 9</address>
         <postal_code>1234 XX</postal_code>
         <city>Treehouse City</city>
         <country>Neverland</country>
         <email>peter@pan.tech</email>
-        <hourly_fee denomination="eur">50</hourly_fee><!-- (eur|gbp|usd) -->
+        <hourly_fee denomination="eur">0</hourly_fee><!-- (eur|gbp|usd) -->
     </contractor>
     <work>
         <activities><!-- add/delete activity elements as necessary -->
@@ -28,14 +28,5 @@
         </activities>
         <start_date>2016-08-18</start_date>
         <end_date>2016-09-15</end_date>
-        <!-- amount of work to be done between the start and end date; delete <planning> and its children if not relevant -->
-        <planning>
-            <hours>30</hours><!-- non-negative integer, used for planned working hours over total engagement (for SINGLE ENGAGEMENT contract) or over each period in <per> (for FIXED TIME contract) -->
-            <per>month</per><!-- (month|week|engagement) [NOTE: month/week are only used for FIXED TIME contract, for SINGLE ENGAGEMENT use 'engagement'] -->
-        </planning>
-        <!-- For the above planning bit, here are three possible cases:
-        1. You have a fixed term contract with no specifically defined working hours: delete <planning> element 
-        2. You have a fixed term contract with some indication of how many hours you'll be working: fill in <hours> and <per> (month or week)
-        3. You have a single engagement contract. Working hours clause is mandatory in this case. Fill in <hours> and <per> (engagement) -->
     </work>
 </contract_info>

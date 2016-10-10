@@ -30,6 +30,7 @@
           <xs:restriction base="xs:string">
             <xs:enumeration value="single_engagement"/>
             <xs:enumeration value="fixed_term"/>
+            <xs:enumeration value="non_zzp"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -65,7 +66,6 @@
         <xs:element ref="activities"/>
         <xs:element ref="start_date"/>
         <xs:element ref="end_date"/>
-        <xs:element ref="planning" minOccurs="0"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -79,23 +79,6 @@
   <xs:element name="activity" type="xs:string"/>
   <xs:element name="start_date" type="xs:date"/>
   <xs:element name="end_date" type="xs:date"/>
-  <xs:element name="planning">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="hours"/>
-        <xs:element ref="per"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="hours" type="xs:integer"/>
-  <xs:element name="per">
-    <xs:simpleType>
-      <xs:restriction base="xs:string">
-        <xs:enumeration value="week"/>
-        <xs:enumeration value="month"/>
-      </xs:restriction>
-    </xs:simpleType>
-  </xs:element>
   <xs:element name="hourly_fee">
     <xs:complexType>
       <xs:simpleContent>
@@ -114,6 +97,14 @@
     </xs:complexType>
   </xs:element>
 
+<xs:complexType name="block" mixed="true">
+    <xs:choice maxOccurs="unbounded">
+      <xs:group ref="inline-all"/>
+      <xs:group ref="placeholders"/>
+    </xs:choice>
+    <xs:attribute ref="xml:base"/>
+  </xs:complexType>
+  
   <xs:group name="placeholders">
     <xs:choice>
       <xs:element name="company_long"/>

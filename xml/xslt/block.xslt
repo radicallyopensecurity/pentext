@@ -9,8 +9,8 @@
         <xsl:if
             test="(parent::section and not(following-sibling::*)) or 
             (parent::appendix and not(following-sibling::*)) or 
-            (ancestor::section and not(following-sibling::*) and not(parent::*/following-sibling::*) and not(parent::div)) or 
-            (ancestor::appendix and not(following-sibling::*) and not(parent::*/following-sibling::*) and not(parent::div)) or 
+            (ancestor::section and not(following-sibling::*) and not(parent::*/following-sibling::*) and not(parent::div) and not(parent::li)) or 
+            (ancestor::appendix and not(following-sibling::*) and not(parent::*/following-sibling::*) and not(parent::div) and not(parent::li)) or 
             (not(self::title) and following-sibling::*[1][self::section]) or
             (not(self::title) and following-sibling::*[1][self::finding]) or
             (not(self::title) and following-sibling::*[1][self::non-finding])">
