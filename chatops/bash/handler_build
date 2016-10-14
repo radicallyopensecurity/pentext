@@ -97,7 +97,12 @@ build() {
     fi
     pushd source &>/dev/null
     backwards_compatible
-    targetpdf=target/$TARGET-latest.pdf
+    targetpdf="target/$TARGET-latest.pdf"
+    if [[ $TARGET == "quote" ]]; then
+        targetpdf="target/quote_${REPO/off-/}.pdf"
+    elif [[ $TARGET == "report" ]]; then
+        targetpdf="target/report_${REPO/pen-/}.pdf"
+    fi
     $DOCBUILDER -c -i $TARGET.xml -o ../$targetpdf -x ../xslt/generate_$TARGET.xsl $PARMS
     if [[ $? -ne 0 ]]; then
         echo "[-] Sorry, failed to parse $TARGET. Use \`builder $TARGET $REPO $NAMESPACE $BRANCH -v\` for more information."
