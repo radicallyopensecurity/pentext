@@ -100,7 +100,7 @@ build() {
     fi
     pushd source &>/dev/null
     backwards_compatible
-    if [[ $TARGET == "quote" ]]; then
+    if ([[ $TARGET == "quote" ]] || [[ $TARGET == "offerte" ]]); then
         TARGETPDF="target/quote_${REPO/off-/}.pdf"
     elif [[ $TARGET == "report" ]]; then
         TARGETPDF="target/report_${REPO/pen-/}.pdf"
