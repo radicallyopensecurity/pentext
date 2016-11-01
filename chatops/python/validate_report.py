@@ -46,7 +46,8 @@ VOCABULARY = 'project-vocabulary.pws'
 # Snippets may contain XML fragments without the proper entities
 EXAMPLEDIR = 'examples/'
 NOT_CAPITALIZED = ['a', 'an', 'and', 'as', 'at', 'but', 'by', 'for', 'in',
-                   'nor', 'of', 'on', 'or', 'the', 'to', 'up']
+                   'jQuery', 'jQuery-UI', 'nor', 'of', 'on', 'or', 'the', 'to',
+                   'up']
 SNIPPETDIR = 'snippets/'
 TEMPLATEDIR = 'templates/'
 OFFERTE = '/offerte.xml'
