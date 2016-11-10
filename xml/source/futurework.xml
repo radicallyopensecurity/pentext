@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section id="futurework" xml:base="futurework.xml" break="before">
   <title>Future Work</title>
+  <p>
+    <ul>
+      <li>
+        <b>Title</b><br/>
+        Description
+      </li>
+    </ul>
+  </p>
 </section>
