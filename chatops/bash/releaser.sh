@@ -42,7 +42,7 @@ if [ -f ${source} ]; then
     else
         cp -v ${source} ${fullname}
         PASS=$(head -c 25 /dev/random | base64 | head -c 25)
-        zip --password ${PASS} "${fullname}.zip" ${fullname} 2>/dev/null && echo "Zip file encrypted with password '${PASS}'"
+        7z a -p${PASS} "${fullname}.zip" ${fullname} 2>/dev/null && echo "Zip file encrypted with password '${PASS}'"
     fi
 else
     echo "Could not find source ${source}"
