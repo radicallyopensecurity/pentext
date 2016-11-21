@@ -23,6 +23,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import argparse
+import logging
 import mmap
 import os
 import re
@@ -107,24 +108,41 @@ the Free Software Foundation, either version 3 of the License, or
     return vars(parser.parse_args())
 
 
-def validate_spelling(tree, filename, options):
+def initialize_speller():
     """
-    Checks spelling of text within tags.
-    If options['learn'], then unknown words will be added to the dictionary.
+    Initialize and return speller module.
     """
-    result = True
+    speller = None
     try:
         speller = aspell.Speller(('lang', 'en'),
                                  ('personal-dir', '.'),
                                  ('personal', VOCABULARY))
-    except:  # some versions of aspell use a different path
-        speller = aspell.Speller(('lang', 'en'),
-                                 ('personal-path', './' + VOCABULARY))
-    if options['debug']:
-        [print(i[0] + ' ' + str(i[2]) + '\n') for i in speller.ConfigKeys()]
+    except aspell.AspellConfigError as exception:  # some versions of aspell use a different path
+        logging.debug('Encountered exception when trying to intialize spelling: %s',
+                      exception)
+        try:
+            speller = aspell.Speller(('lang', 'en'),
+                                     ('personal-path', './' + VOCABULARY))
+        except aspell.AspellSpellerError as exception:
+            logging.error('Could not initialize speller: %s', exception)
+    if speller:
+        [logging.debug(i[0] + ' ' + str(i[2]) + '\n') for i in speller.ConfigKeys()]
+    return speller
+
+
+def validate_spelling(tree, filename, options):
+    """
+    Check spelling of text within tags.
+    If options['learn'], then unknown words will be added to the dictionary.
+    """
+    result = True
+    speller = initialize_speller()
+    if not speller:
+        options['spelling'] = False
+        return result
     try:
         root = tree.getroot()
-        for section in root.iter():
+        for section in root.iter(): 
             if section.text and isinstance(section.tag, basestring) and \
                section.tag not in ('a', 'code', 'monospace', 'pre'):
                 for word in re.findall('([a-zA-Z]+\'?[a-zA-Z]+)', section.text):
@@ -133,12 +151,13 @@ def validate_spelling(tree, filename, options):
                             speller.addtoPersonal(word)
                         else:
                             result = False
-                            print('[-] Misspelled (unknown) word {0} in {1}'.
-                                  format(word.encode('utf-8'), filename))
+                            logging.warning('Misspelled (unknown) word %s in %s',
+                                            word.encode('utf-8'), filename)
         if options['learn']:
             speller.saveAllwords()
     except aspell.AspellSpellerError as exception:
-        print('[-] Spelling disabled ({0})'.format(exception))
+        logging.error('Disabled spelling (%s)', exception)
+        options['spelling'] = False
     return result
 
 
@@ -201,16 +220,6 @@ def validate_files(filenames, options):
     return result
 
 
-def print_output(options, stdout, stderr=None):
-    """
-    Prints out standard out and standard err using the verboseprint function.
-    """
-    if stdout and options['verbose']:
-        print('[+] {0}'.format(stdout))
-    if stderr and options['verbose']:
-        print('[-] {0}'.format(stderr))
-
-
 def validate_report():
     """
     Validates XML report file by trying to build it.
@@ -231,7 +240,7 @@ def validate_xml(filename, options):
     # crude check whether the file is outside the pentext framework
     if 'notes' in filename:
         return result, xml_type
-    print_output(options, 'Validating XML file: {0}'.format(filename))
+    logging.info('Validating XML file: %s', filename)
     try:
         with open(filename, 'rb') as xml_file:
             xml.sax.parse(xml_file, xml.sax.ContentHandler())
@@ -332,11 +341,11 @@ def validate_type(tree, filename, options):
                 fix = True
     for tag in tags:
         if root.find(tag) is None:
-            print('[-] Missing tag in {0}: {1}'.format(filename, tag))
+            logging.warning('Missing tag in %s: %s', filename, tag)
             result = False
             continue
         if not get_all_text(root.find(tag)):
-            print('[-] Empty tag in {0}: {1}'.format(filename, tag))
+            logging.warning('Empty tag in %s: %s', filename, tag)
             result = False
             continue
         if tag == 'title' and (options['capitalization'] and \
@@ -405,14 +414,14 @@ def validate_master(filename, findings, non_findings, scans, options):
     result = True
     include_findings = []
     include_nonfindings = []
-    print_output(options, 'Validating master file {0}'.format(filename))
+    logging.info('Validating master file %s', filename)
     try:
         xmltree = ElementTree.parse(filename,
                                     ElementTree.XMLParser(strip_cdata=False))
         if not find_keyword(xmltree, 'TODO', filename):
             print('[-] Keyword checks failed for {0}'.format(filename))
             result = False
-            print_output(options, 'Performing cross check on findings, non-findings and scans...')
+            logging.info('Performing cross check on findings, non-findings and scans...')
         for finding in findings:
             if not cross_check_file(filename, finding):
                 print('[A] Cross check failed for finding {0}'.
@@ -421,23 +430,22 @@ def validate_master(filename, findings, non_findings, scans, options):
                 result = False
         for non_finding in non_findings:
             if not cross_check_file(filename, non_finding):
-                print('[A] Cross check failed for non-finding {0}'.
-                      format(non_finding))
+                logging.warning('Cross check failed for non-finding %s', non_finding)
                 include_nonfindings.append(non_finding)
                 result = False
         if result:
-            print_output(options, 'Cross checks successful')
+            logging.info('Cross checks successful')
     except (ElementTree.ParseError, IOError) as exception:
-        print('[-] validating {0} failed ({1})'.format(filename, exception))
+        logging.warning('Validating %s failed: %s', filename, exception)
         result = False
     if not result:
         if options['auto_fix']:
             add_include(filename, 'findings', include_findings)
             add_include(filename, 'nonFindings', include_nonfindings)
             close_file(filename)
-            print('[+] Automatically fixed {0}'.format(filename))
+            logging.info('Automatically fixed %s', filename)
         else:
-            print('[+] NOTE: Items with [A] can be fixed automatically, use --auto-fix')
+            logging.warning('Item can be fixed automatically, use --auto-fix')
     return result
 
 
@@ -449,7 +457,7 @@ def report_string(report_file):
         report = open(report_file)
         return mmap.mmap(report.fileno(), 0, access=mmap.ACCESS_READ)
     except IOError as exception:
-        print('[-] Could not open {0} ({1})'.format(report_file, exception))
+        logging.critical('Could not open %s: %s', report_file, exception)
         sys.exit(-1)
 
 
@@ -460,7 +468,7 @@ def cross_check_file(filename, external):
     result = True
     report_text = report_string(filename)
     if report_text.find(external) == -1:
-        print('[-] could not find a reference in {0} to {1}'.format(filename, external))
+        logging.warning('Could not find a reference in %s to %s', filename, external)
         result = False
     return result
 
@@ -508,9 +516,33 @@ def find_keyword(xmltree, keyword, filename):
             section = 'in {0}'.format(tag.attrib['id'])
         if tag.text:
             if keyword in tag.text:
-                print('[-] {0} found in {1} {2}'.format(keyword, filename, section))
+                logging.warning('%s found in %s %s', keyword, filename, section)
                 result = False
     return result
+
+
+def setup_logging(options):
+    """
+    Set up loghandlers according to options.
+    """
+    # DEBUG   = (10) debug status messages
+    # INFO    = (20) verbose status messages
+    # WARNING = (30) warning messages (= errors in validation)
+    # ERROR   = (40) error messages (= program errors)
+    logger = logging.getLogger()
+    logger.setLevel(0)
+    console = logging.StreamHandler(stream=sys.stdout)
+    console.setFormatter(logging.Formatter('%(levelname)s %(message)s',
+                                           datefmt='%H:%M:%S'))
+    if options['debug']:
+        console.setLevel(logging.DEBUG)
+    else:
+        if options['verbose']:
+            print('hi')
+            console.setLevel(logging.INFO)
+        else:
+            logger.setLevel(logging.WARNING)
+    logger.addHandler(console)
 
 
 def main():
@@ -522,27 +554,23 @@ def main():
     reload(sys)
     sys.setdefaultencoding('utf-8')
     options = parse_arguments()
+    setup_logging(options)
     if options['all']:
         options['capitalization'] = True
         options['long'] = True
     if options['learn']:
-        print_output(options, 'Adding unknown words to {0}'.format(VOCABULARY))
-        #    if options['spelling']:
-        #        if not os.path.exists(VOCABULARY):
-        #            print_output(options, 'Creating project-specific vocabulary file {0}'.
-        #                  format(VOCABULARY))
-        #            options['learn'] = True
-    print_output(options, 'Validating all XML files...')
+        logging.debug('Adding unknown words to %s', VOCABULARY)
+    logging.info('Validating all XML files...')
     result = validate_files(all_files(), options)
     if result:
-        print_output(options, 'Validation checks successful')
+        logging.info('Validation checks successful')
         if DOCBUILDER:
-            print_output(options, 'Validating report build...')
+            logging.info('Validating report build...')
             result = validate_report() and result
     if result:
-        print('[+] Succesfully validated everything. Good to go')
+        logging.info('Validation successful. Good to go')
     else:
-        print('[-] Errors occurred')
+        logging.warning('Validation failed')
     if options['spelling'] and options['learn']:
         print('[*] Don\'t forget to check the vocabulary file {0}'.
               format(VOCABULARY))
