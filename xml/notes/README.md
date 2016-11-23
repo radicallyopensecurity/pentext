@@ -1,2 +1,2 @@
 # notes
-This folder holds all email correspondence and other notes
+This folder holds all email correspondence, notes and received source code
