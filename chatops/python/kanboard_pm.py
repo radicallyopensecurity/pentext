@@ -7,17 +7,14 @@ def output(message):
 
 import sys
 import os
+import tempfile
+import json
 
 try:
     from kanboard import Kanboard
 except ImportError:
     error('This script needs the kanboard module to work. Use this command to install: sudo pip install kanboard\n')
     sys.exit(-1)
-
-try:
-    import json
-except ImportError:
-    error('This script needs the json module to work. Use this command to install: sudo pip install json\n')
     sys.exit(-1)
 
 
@@ -130,6 +127,13 @@ class KanboardAdapter():
 
         return checklist
 
+    def save_checklist_backup(self):
+        # Save description in temp dir before changing
+        _, filename = tempfile.mkstemp(prefix="checklist_%s_" % self.task["title"])
+
+        f = open(filename, "w")
+        f.write("\n".join(self.description))
+        f.close()
 
 '''
   Displays the checklist of the current project states. It does so by putting the indices in front of the item
@@ -157,6 +161,9 @@ def checklist_toggle(indices):
     checklist = adapter.get_checklist_of_state(state)
     output = []
 
+    # Save a quick backup before manipulating the checklist
+    adapter.save_checklist_backup()
+
     for index in indices:
         # Input validation
         if index not in checklist.keys():
@@ -182,9 +189,10 @@ def checklist_toggle(indices):
             line_content = line_content.replace("[ ]", "[X]", 1)
             output.append("%s has been *checked*" % line_content)
 
-    # Update & Save
-    # todo: Build backup save in tmp dir in case something breaks.
-    adapter.update_project_description(line_index, line_content)
+        # Update description
+        adapter.update_project_description(line_index, line_content)
+
+    # Save
     adapter.save_project_description()
     print "\n".join(output)
 
