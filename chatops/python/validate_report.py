@@ -50,6 +50,7 @@ NOT_CAPITALIZED = ['a', 'an', 'and', 'as', 'at', 'but', 'by', 'for', 'in',
                    'jQuery', 'jQuery-UI', 'nor', 'of', 'on', 'or', 'the', 'to',
                    'up']
 SNIPPETDIR = 'snippets/'
+STATUS = 25 # loglevel for 'generic' status messages
 TEMPLATEDIR = 'templates/'
 OFFERTE = '/offerte.xml'
 REPORT = '/report.xml'
@@ -62,8 +63,29 @@ if DOCBUILDER:
     import proxy_vagrant
 try:
     import aspell
-except:
-    print('[-] aspell not installed: spelling not available')
+except ImportError:
+    print('[-] aspell not installed: spelling not available',)
+
+
+class LogFormatter(logging.Formatter):
+    """
+    Format log messages according to their type.
+    """
+    # DEBUG   = (10) debug status messages
+    # INFO    = (20) verbose status messages
+    # STATUS  = (25) generic status messages
+    # WARNING = (30) warning messages (= errors in validation)
+    # ERROR   = (40) error messages (= program errors)
+    FORMATS = {logging.DEBUG :"DEBUG: %(module)s: %(lineno)d: %(message)s",
+               logging.INFO : "[*] %(message)s",
+               STATUS : "[+] %(message)s",
+               logging.WARN : "[-] %(message)s",
+               logging.ERROR : "ERROR: %(message)s",
+               'DEFAULT' : "%(message)s"}
+
+    def format(self, record):
+        self._fmt = self.FORMATS.get(record.levelno, self.FORMATS['DEFAULT'])
+        return logging.Formatter.format(self, record)
 
 
 def parse_arguments():
@@ -126,23 +148,22 @@ def initialize_speller():
         except aspell.AspellSpellerError as exception:
             logging.error('Could not initialize speller: %s', exception)
     if speller:
-        [logging.debug(i[0] + ' ' + str(i[2]) + '\n') for i in speller.ConfigKeys()]
+        [logging.debug('%s %s', i[0], i[2]) for i in speller.ConfigKeys()]
     return speller
 
 
-def validate_spelling(tree, filename, options):
+def validate_spelling(tree, filename, options, speller):
     """
     Check spelling of text within tags.
     If options['learn'], then unknown words will be added to the dictionary.
     """
     result = True
-    speller = initialize_speller()
     if not speller:
         options['spelling'] = False
         return result
     try:
         root = tree.getroot()
-        for section in root.iter(): 
+        for section in root.iter():
             if section.text and isinstance(section.tag, basestring) and \
                section.tag not in ('a', 'code', 'monospace', 'pre'):
                 for word in re.findall('([a-zA-Z]+\'?[a-zA-Z]+)', section.text):
@@ -172,6 +193,9 @@ def all_files():
 
 
 def open_editor(filename):
+    """
+    Open editor with file to edit.
+    """
     if sys.platform in ('linux', 'linux2'):
         editor = os.getenv('EDITOR')
         if editor:
@@ -196,6 +220,7 @@ def validate_files(filenames, options):
     findings = []
     non_findings = []
     scans = []
+    speller = initialize_speller()
     for filename in filenames:
         if (filename.lower().endswith('.xml') or
                 filename.lower().endswith('xml"')):
@@ -204,7 +229,7 @@ def validate_files(filenames, options):
                    (REPORT in filename and not options['no_report']):
                     masters.append(filename)
                     # try:
-                type_result, xml_type = validate_xml(filename, options)
+                type_result, xml_type = validate_xml(filename, options, speller)
                 result = result and type_result
                 if 'non-finding' in xml_type:
                     non_findings.append(filename)
@@ -230,7 +255,7 @@ def validate_report():
     return proxy_vagrant.execute_command(host, command)
 
 
-def validate_xml(filename, options):
+def validate_xml(filename, options, speller):
     """
     Validates XML file by trying to parse it.
     Returns True if the file validated successfully.
@@ -245,7 +270,7 @@ def validate_xml(filename, options):
         with open(filename, 'rb') as xml_file:
             xml.sax.parse(xml_file, xml.sax.ContentHandler())
             tree = ElementTree.parse(filename, ElementTree.XMLParser(strip_cdata=False))
-            type_result, xml_type = validate_type(tree, filename, options)
+            type_result, xml_type = validate_type(tree, filename, options, speller)
             result = validate_long_lines(tree, filename, options) and result and type_result
         if options['edit'] and not result:
             open_editor(filename)
@@ -292,7 +317,7 @@ def capitalize(line):
     return capitalized.strip()
 
 
-def validate_type(tree, filename, options):
+def validate_type(tree, filename, options, speller):
     """
     Performs specific checks based on type.
     Currently only finding and non-finding are supported.
@@ -304,7 +329,7 @@ def validate_type(tree, filename, options):
     attributes = []
     tags = []
     if options['spelling']:
-        result = validate_spelling(tree, filename, options)
+        result = validate_spelling(tree, filename, options, speller)
     if xml_type == 'pentest_report':
         attributes = ['findingCode']
     if xml_type == 'finding':
@@ -525,23 +550,17 @@ def setup_logging(options):
     """
     Set up loghandlers according to options.
     """
-    # DEBUG   = (10) debug status messages
-    # INFO    = (20) verbose status messages
-    # WARNING = (30) warning messages (= errors in validation)
-    # ERROR   = (40) error messages (= program errors)
     logger = logging.getLogger()
     logger.setLevel(0)
     console = logging.StreamHandler(stream=sys.stdout)
-    console.setFormatter(logging.Formatter('%(levelname)s %(message)s',
-                                           datefmt='%H:%M:%S'))
+    console.setFormatter(LogFormatter())
     if options['debug']:
         console.setLevel(logging.DEBUG)
     else:
         if options['verbose']:
-            print('hi')
             console.setLevel(logging.INFO)
         else:
-            logger.setLevel(logging.WARNING)
+            logger.setLevel(STATUS)
     logger.addHandler(console)
 
 
@@ -563,17 +582,15 @@ def main():
     logging.info('Validating all XML files...')
     result = validate_files(all_files(), options)
     if result:
-        logging.info('Validation checks successful')
         if DOCBUILDER:
             logging.info('Validating report build...')
             result = validate_report() and result
     if result:
-        logging.info('Validation successful. Good to go')
+        logging.log(STATUS, 'Validation checks successful. Good to go')
     else:
         logging.warning('Validation failed')
     if options['spelling'] and options['learn']:
-        print('[*] Don\'t forget to check the vocabulary file {0}'.
-              format(VOCABULARY))
+        logging.log(STATUS('Don\'t forget to check the vocabulary file %s', VOCABULARY))
 
 
 if __name__ == "__main__":
