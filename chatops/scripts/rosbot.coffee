@@ -269,3 +269,62 @@ module.exports = (robot) ->
     # All odd case have been dealt with, let's get down to business
     for index, line of robot.usages[command]
       msg.send line
+
+  ###
+    Project Management rosbot commands
+    See https://gitlabs.radicallyopensecurity.com/root/ros-infra/issues/61 for more details
+  ###
+
+  robot.respond /checklist$/i, id:'chatops.checklist', (msg) ->
+    msg.send("Usage: checklist [show|toggle]")
+
+  ###
+    checklist show
+  ###
+  robot.respond /checklist show/i, id:'chatops.checklist.show', (msg) ->
+    room = msg.message.room
+    console.log(msg.message)
+    cmd = "python/kanboard_pm.py";
+    args = [room, "checklist", "show"]
+    run_cmd cmd, args, (text) -> msg.send text
+
+  ###
+    checklist toggle
+  ###
+  robot.respond /checklist toggle(.*)/i, id:'chatops.checklist.toggle', (msg) ->
+    cmd = "python/kanboard_pm.py";
+    args = ["checklist", "toggle", msg.match[1].toString().trim()]
+
+    run_cmd cmd, args, (text) -> msg.send text
+
+  ###
+    state
+  ###
+  robot.respond /state$/i, id:'chatops.state', (msg) ->
+    msg.send "Usage: state [show|previous|next]"
+
+  ###
+    state show
+  ###
+  robot.respond /state show/i, id:'chatops.state.show', (msg) ->
+    cmd = "python/kanboard_pm.py";
+    args = ["state", "show"]
+    run_cmd cmd, args, (text) -> msg.send text
+
+  ###
+    state next
+  ###
+  robot.respond /state next/i, id:'chatops.state.next', (msg) ->
+    cmd = "python/kanboard_pm.py";
+    args = ["state", "next"]
+    run_cmd cmd, args, (text) -> msg.send text
+
+  ###
+    state previous
+  ###
+  robot.respond /state previous/i, id:'chatops.state.previous', (msg) ->
+    cmd = "python/kanboard_pm.py";
+    args = ["state", "previous"]
+    run_cmd cmd, args, (text) -> msg.send text
+
+
