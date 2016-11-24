@@ -37,7 +37,7 @@ class KanboardAdapter():
         # This pulls in the Kanboard project ("Pentesting" as of yet)
         self.kbb_project = self.kb.get_project_by_name(name=self.project_name)
         if not self.kbb_project:
-            error("Could not find the *%s* project in Kanboard." % self.project_name)
+            error("Could not find the *%s* project in Kanboard. Verify endpoint." % self.project_name)
             exit(-1)
 
         # This pulls in the task that will be manipulated
@@ -149,42 +149,44 @@ def checklist_show():
         print "- This checklist has no items."
 
 '''
- Toggles a certain checklist item. This function only eats integers. Proper validation should have been done upsteam.
+ Toggles certain checklist item(s). This function only eats integers. Proper validation should have been done upsteam.
+ :param indices list
 '''
-def checklist_toggle(index):
+def checklist_toggle(indices):
     state     = adapter.get_state()
     checklist = adapter.get_checklist_of_state(state)
+    output = []
 
-    # Input validation
-    if index not in checklist.keys():
-        error("%i is not a valid item" % index)
-        exit(-1)
+    for index in indices:
+        # Input validation
+        if index not in checklist.keys():
+            error("%i is not a valid item" % index)
+            exit(-1)
 
-    # item is a tuple
-    item = checklist[index]
-    
-    line_index   = item[0] # Index to settings
-    line_content = item[1] # Actual content
+        # item is a tuple
+        item = checklist[index]
 
-    # Validation of the item
-    if item[1].find("[X]") == -1 and item[1].find("[ ]") == -1:
-        error("Could not find checkbox for item: %s. Make sure this item contains either [ ] or [X] by editing the kanboard task description directly" % item[1])
-        exit(-1)
+        line_index   = item[0] # Index to settings
+        line_content = item[1] # Actual content
 
-    # Actual toggling
-    output = ""
-    if line_content.find("[X]") != -1:
-        line_content = line_content.replace("[X]", "[ ]", 1)
-        output = "%s has been *unchecked*" % line_content
-    elif line_content.find("[ ]") != -1:
-        line_content = line_content.replace("[ ]", "[X]", 1)
-        output = "%s has been *checked*" % line_content
+        # Validation of the item
+        if item[1].find("[X]") == -1 and item[1].find("[ ]") == -1:
+            error("Could not find checkbox for item: %s. Make sure this item contains either [ ] or [X] by editing the kanboard task description directly" % item[1])
+            exit(-1)
+
+        # Actual toggling
+        if line_content.find("[X]") != -1:
+            line_content = line_content.replace("[X]", "[ ]", 1)
+            output.append("%s has been *unchecked*" % line_content)
+        elif line_content.find("[ ]") != -1:
+            line_content = line_content.replace("[ ]", "[X]", 1)
+            output.append("%s has been *checked*" % line_content)
 
     # Update & Save
     # todo: Build backup save in tmp dir in case something breaks.
     adapter.update_project_description(line_index, line_content)
     adapter.save_project_description()
-    print output
+    print "\n".join(output)
 
 def state_show():
     global adapter
@@ -328,15 +330,11 @@ def process_cmdline_arguments(args):
 
         if sub_command == "toggle":
             if len(args) != 4:
-                error("Please specify an index as argument to this command")
+                error("Please specify a comma separated listof indices as argument to this command")
                 exit(-1)
 
             argument = args[3]
-            if not argument.isdigit():
-                error("The specified index must be an integer")
-                exit(-1)
-
-            argument = int(argument)
+            argument = clean_checklist_toggle_arguments(argument)
 
     if command == "state":
         sub_commands = ["show", "next", "previous"]
@@ -348,6 +346,20 @@ def process_cmdline_arguments(args):
             exit(2)
 
 
+def clean_checklist_toggle_arguments(argument):
+    indices = argument.split(",")
+    clean_indices = []
+    for index in indices:
+        index = index.strip()
+        if len(index) == 0:
+            continue
+
+        if index and not index.isdigit():
+            error("%s is not a digit." % index)
+            exit(-1)
+        else:
+            clean_indices.append(int(index))
+    return clean_indices
 
 
 ''' ---------------------- ENTRY POINT --------------------------'''
@@ -357,11 +369,9 @@ kanboard_task = None
 command = None
 sub_command = None
 argument = None
-kb_endpoint            = os.environ.get("KB_ENDPOINT") #"http://127.0.0.1:4444" #
-#kb_endpoint            = "http://127.0.0.1:4444"
+kb_endpoint            = os.environ.get("KB_ENDPOINT")
 kb_user                = os.environ.get("KB_USER")
 kb_apikey              = os.environ.get("KB_APIKEY")
-testenabled            = os.environ.get("PROJECT_TEST_ENABLED")
 checklist_template_url = os.environ.get("CHECKLIST_TEMPLATE_URL")
 
 validate_env_vars()
