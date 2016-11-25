@@ -46,7 +46,34 @@
 #     [--no-report]         Do not validate report master file
 #     [--quiet]             Don't output status messages
 #
+#   checklist show
+#     Shows the checklist for the column the kanboard task is in. It is required that the task's description contains the full checklist.
+#     The script will connect to kanboard, open the Pentesting project and tries to find the kanboard task. It will then pull the description
+#     and look for the checklist associated with the column the task is in.
+#     Usage: checklist show <kanboard task>
+#     <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
 #
+#   checklist toggle
+#     Pulls the checklist from the kanboard task's description and toggles its items
+#     Usage: checklist toggle <kanboard task> <index>
+#     <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
+#     <index>           Should be an integer or comma separated list of integers as indices to the items. Mandatory.
+#
+#   column show
+#     Shows the column the kanboard task is currently in.
+#     Usage: column show <kanboard task>
+#     <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
+#
+#   column next
+#     Moves the kanboard task to the next column.
+#     Usage: column next <kanboard task>
+#     <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
+#
+#   column previous
+#     Moves the kanboard task to the previous column.
+#     Usage: column previous <kanboard task>
+#     <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
+
 # Commands:
 #   hubot build <type> <repo> <target> - Builds a .pdf file from <target> in <repo>
 #   hubot convert <repo> <target> - Builds a .xml file from <target> in <repo>
@@ -56,7 +83,8 @@
 #   hubot startquote <name> - Bootstraps a quotation
 #   hubot validate <parms..> - Validates a report/quotation
 #   hubot usage [command] - Displays usage information for command. If no command is specified, supported commands are displayed.
-#
+#   hubot checklist [show|toggle] <kanboard task> [<index>] - Shows the checklist for the current column the task is in, and allows for toggling the items
+#   hubot column [show|next|previous] <kanboard task> - Respectively shows the column the task is in, or moves to the next or previous column.
 
 # Author:
 #   Peter Mosmans
@@ -248,10 +276,10 @@ module.exports = (robot) ->
   # Note that the regex option group (.*) also captures the space after the command
   # This allows for the case when there is no command specified, supported commands can be displayed
   robot.respond /usage(.*)/i, id:'chatops.usage', (msg) ->
-    msg.match[0] = msg.match[0].replace(/^[a-z0-9]+$/i);
-    msg.match.shift();
-    args = msg.match[0].trim().split(" ");
-    command = args[0]
+#    msg.match[0] = msg.match[0].replace(/^[a-z0-9]+$/i);
+#    msg.match.shift();
+#    args = msg.match[0].trim().split(" ");
+    command = msg.match[1].trim()
 
     # If not command is provided, return information on which commands can be handled
     if command.trim().length == 0
@@ -262,6 +290,7 @@ module.exports = (robot) ->
       return
 
     # This deals when unsupported commands
+    console.log(robot.usages)
     if not robot.usages[command]
       msg.send "I have no usage information for: " + command
       return
@@ -269,3 +298,84 @@ module.exports = (robot) ->
     # All odd case have been dealt with, let's get down to business
     for index, line of robot.usages[command]
       msg.send line
+
+  ###
+    Project Management rosbot commands
+    See https://gitlabs.radicallyopensecurity.com/root/ros-infra/issues/61 for more details
+  ###
+
+  robot.respond /checklist$/i, id:'chatops.checklist', (msg) ->
+    msg.send("Usage: checklist [show|toggle] <kanboard task> [toggle index]")
+
+  ###
+    checklist show
+  ###
+  robot.respond /checklist show(.*)/i, id:'chatops.checklist.show', (msg) ->
+    cmd = "python/kanboard_pm.py";
+    args = [msg.match[1].toString().trim(), "checklist", "show"]
+    msg.send "Working ..."
+    run_cmd cmd, args, (text) -> msg.send text
+
+  ###
+    checklist toggle
+  ###
+  robot.respond /checklist toggle(.*)/i, id:'chatops.checklist.toggle', (msg) ->
+    cmd = "python/kanboard_pm.py";
+
+    cleaned = msg.match[1].trim()
+    args = cleaned.split(" ")
+
+    if args.length != 2
+      msg.send("Usage: checklist toggle <kanboard task> <toggle index>")
+      return
+
+    project = args[0].trim()
+    arg     = args[1].trim()
+    args = [project, "checklist", "toggle", arg]
+
+    msg.send "Working ..."
+    run_cmd cmd, args, (text) -> msg.send text
+
+  ###
+    column
+  ###
+  robot.respond /column$/i, id:'chatops.column', (msg) ->
+    msg.send "Usage: column [show|previous|next] <kanboard task>"
+
+  ###
+    column show
+  ###
+  robot.respond /column show$/i, id:'chatops.column.show.usage', (msg) ->
+    msg.send "Usage: column show <kanboard task>"
+
+  robot.respond /column show (.*)/i, id:'chatops.column.show', (msg) ->
+    cmd = "python/kanboard_pm.py";
+    args = [msg.match[1].toString().trim(), "column", "show"]
+    msg.send "Working ..."
+    run_cmd cmd, args, (text) -> msg.send text
+
+  ###
+    column next
+  ###
+  robot.respond /column next$/i, id:'chatops.column.next.usage', (msg) ->
+    msg.send "Usage: column next <kanboard task>"
+
+  robot.respond /column next (.*)/i, id:'chatops.column.next', (msg) ->
+    cmd = "python/kanboard_pm.py";
+    args = [msg.match[1].toString().trim(), "column", "next"]
+    msg.send "Working ..."
+    run_cmd cmd, args, (text) -> msg.send text
+
+  ###
+    column previous
+  ###
+  robot.respond /column previous$/i, id:'chatops.column.previous.usage', (msg) ->
+    msg.send "Usage: column previous <kanboard task>"
+
+  robot.respond /column previous (.*)/i, id:'chatops.column.previous', (msg) ->
+    cmd = "python/kanboard_pm.py";
+    args = [msg.match[1].toString().trim(), "column", "previous"]
+    msg.send "Working ..."
+    run_cmd cmd, args, (text) -> msg.send text
+
+
