@@ -2,13 +2,9 @@
 def error(message):
     sys.stderr.write("[!] %s\n" % message)
 
-def output(message):
-    sys.stdout.write("%s\n" % message)
-
 import sys
 import os
 import tempfile
-import json
 
 try:
     from kanboard import Kanboard
@@ -40,14 +36,14 @@ class KanboardAdapter():
         # This pulls in the task that will be manipulated
         tasks = self.kb.search_tasks(project_id=self.kbb_project["id"], query="title:%s" % task_name)
         if len(tasks) == 0:
-            error("Could not find kanboard task for: %s" % task_name)
+            error("Could not find kanboard task with the title: %s" % task_name)
             exit(-1)
         for task in tasks:
             if task_name == task["title"]:
                 self.task = task
                 break
         if not self.task:
-            error("Similar tasks for %s have been found, but no exact match %s" % task_name)
+            error("Similar kanboard tasks for *%s* have been found, but no exact match. Check spelling." % task_name)
             exit(-1)
 
         self.description = task["description"].split("\r\n")
@@ -120,9 +116,9 @@ class KanboardAdapter():
         if found is False:
             if checklist_template_url:
                 error("Could not find the checklist for *%s* in kanboard task *%s*. Verify in kanboard if the task description contains the pentest checklist, which can be found here: %s" %
-                    (state, self.task["title"], checklist_template_url))
+                    (state.title, self.task["title"], checklist_template_url))
             else:
-                error("Could not find the checklist for state: *%s* in kanboard task *%s*" % (state, self.task["title"]))
+                error("Could not find the checklist for state: *%s* in kanboard task *%s*" % (state.title, self.task["title"]))
             exit(-1)
 
         return checklist
@@ -311,14 +307,6 @@ def process_cmdline_arguments(args):
         error("Please specify a kanboard task title")
         exit(-1)
 
-    if not kanboard_task.find("pen-") == 0:
-        print kanboard_task.find("pen-")
-        print kanboard_task
-        error("This command only works in a pentesting channel prefixed by pen-")
-        exit(-1)
-
-
-
     if not command:
         error("Please specify a command")
         exit(-1)
@@ -363,7 +351,7 @@ def clean_checklist_toggle_arguments(argument):
             continue
 
         if index and not index.isdigit():
-            error("%s is not a digit." % index)
+            error("%s is not an integer." % index)
             exit(-1)
         else:
             clean_indices.append(int(index))
