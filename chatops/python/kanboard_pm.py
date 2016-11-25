@@ -14,7 +14,7 @@ except ImportError:
     sys.exit(-1)
 
 
-class State:
+class Column:
     def __init__(self, id, position, title):
         self.id =id
         self.title = title
@@ -25,7 +25,7 @@ class KanboardAdapter():
         self.kb = Kanboard(kb_endpoint, kb_user, kb_apikey, "X-API-Auth")
         self.project_name = project_name
         self.task         = None
-        self.states       = None
+        self.columns       = None
 
         # This pulls in the Kanboard project ("Pentesting" as of yet)
         self.kbb_project = self.kb.get_project_by_name(name=self.project_name)
@@ -50,32 +50,32 @@ class KanboardAdapter():
 
         # At this point the kbb project, the task and the description are loaded
 
-    def get_states(self):
+    def get_columns(self):
         columns    = self.kb.get_columns(project_id=self.kbb_project["id"])
 
-        self.states = dict()
+        self.columns = dict()
         for column in columns:
-            self.states[int(column["id"])] = State(int(column["id"]), int(column["position"]), column["title"])
+            self.columns[int(column["id"])] = Column(int(column["id"]), int(column["position"]), column["title"])
 
-        return self.states
+        return self.columns
 
-    def get_state(self):
-        if not self.states:
-            self.get_states()
+    def get_column(self):
+        if not self.columns:
+            self.get_columns()
 
         column_id = int(self.task["column_id"]) # Make sure this is cast to int, otherwise comparison might go wrong
 
-        for id in self.states:
+        for id in self.columns:
             if id == column_id:
-                return self.states[id]
+                return self.columns[id]
 
-        error("Could not determine the current state of the project")
+        error("Could not determine the current column of the project")
 
 
-    def update_state(self, state):
-        result = self.kb.move_task_position(project_id=self.kbb_project["id"], task_id=self.task["id"], column_id=state.id, position=1)
+    def update_column(self, column):
+        result = self.kb.move_task_position(project_id=self.kbb_project["id"], task_id=self.task["id"], column_id=column.id, position=1)
         if not result:
-            error("Unable to update state")
+            error("Unable to update column")
 
     def save_project_description(self):
         # Format into string
@@ -88,8 +88,8 @@ class KanboardAdapter():
     def update_project_description(self, linenr, content):
         self.description[linenr] = content
 
-    def get_checklist_of_state(self, state):
-        heading = "### Checklist %s" % state.title
+    def get_checklist_of_column(self, column):
+        heading = "### Checklist %s" % column.title
 
         record = False
         found = False
@@ -116,9 +116,9 @@ class KanboardAdapter():
         if found is False:
             if checklist_template_url:
                 error("Could not find the checklist for *%s* in kanboard task *%s*. Verify in kanboard if the task description contains the pentest checklist, which can be found here: %s" %
-                    (state.title, self.task["title"], checklist_template_url))
+                    (column.title, self.task["title"], checklist_template_url))
             else:
-                error("Could not find the checklist for state: *%s* in kanboard task *%s*" % (state.title, self.task["title"]))
+                error("Could not find the checklist for column: *%s* in kanboard task *%s*" % (column.title, self.task["title"]))
             exit(-1)
 
         return checklist
@@ -132,14 +132,14 @@ class KanboardAdapter():
         f.close()
 
 '''
-  Displays the checklist of the current project states. It does so by putting the indices in front of the item
+  Displays the checklist of the current project columns. It does so by putting the indices in front of the item
   so it can be used to toggle.
 '''
 def checklist_show():
-    state = adapter.get_state()
-    checklist = adapter.get_checklist_of_state(state)
+    column = adapter.get_column()
+    checklist = adapter.get_checklist_of_column(column)
 
-    print "Checklist for current state: *%s*" % state.title
+    print "Checklist for current column: *%s*" % column.title
 
     if len(checklist) > 0:
         for key, item in checklist.iteritems():
@@ -153,8 +153,8 @@ def checklist_show():
  :param indices list
 '''
 def checklist_toggle(indices):
-    state     = adapter.get_state()
-    checklist = adapter.get_checklist_of_state(state)
+    column     = adapter.get_column()
+    checklist = adapter.get_checklist_of_column(column)
     output = []
 
     # Save a quick backup before manipulating the checklist
@@ -192,78 +192,78 @@ def checklist_toggle(indices):
     adapter.save_project_description()
     print "\n".join(output)
 
-def state_show():
+def column_show():
     global adapter
 
-    states    = adapter.get_states()
-    cur_state = adapter.get_state()
+    columns    = adapter.get_columns()
+    cur_column = adapter.get_column()
 
-    for state_id in states:
-        if state_id == cur_state.id:
-            print "*%s*" % cur_state.title
+    for column_id in columns:
+        if column_id == cur_column.id:
+            print "*%s*" % cur_column.title
         else:
-            print states[state_id].title
+            print columns[column_id].title
 
 '''
-Moves the project to the [next|previous] state.
+Moves the project to the [next|previous] column.
 
-Retrieves a list of available states
-Retrieves the current state
-Will validate the current state in order to determine the next state.
+Retrieves a list of available columns
+Retrieves the current column
+Will validate the current column in order to determine the next column.
 When the project is already in a border case, a notification of the fact is displayed.
-Will select the next state and update the current state with the next state + display notification
+Will select the next column and update the current column with the next column + display notification
 '''
-def change_state(direction):
+def change_column(direction):
     global adapter
 
-    states    = adapter.get_states()
-    cur_state = adapter.get_state()
+    columns    = adapter.get_columns()
+    cur_column = adapter.get_column()
 
-    # Get the id of the state with the lowest and highest position
-    highest_state = None
-    lowest_state  = None
+    # Get the id of the column with the lowest and highest position
+    highest_column = None
+    lowest_column  = None
 
-    for id in states:
-        if not highest_state:
-            highest_state = states[id]
-        if not lowest_state:
-            lowest_state = states[id]
+    for id in columns:
+        if not highest_column:
+            highest_column = columns[id]
+        if not lowest_column:
+            lowest_column = columns[id]
 
-        if states[id].position > highest_state.position:
-            highest_state = states[id]
-        if states[id].position < lowest_state.position:
-            lowest_state = states[id]
+        if columns[id].position > highest_column.position:
+            highest_column = columns[id]
+        if columns[id].position < lowest_column.position:
+            lowest_column = columns[id]
 
 
-    if cur_state.id == highest_state.id and direction == 1:
-        print "This project is in its final state."
+    if cur_column.id == highest_column.id and direction == 1:
+        print "This project is in its final column."
         return
 
-    if cur_state.id == lowest_state.id and direction == -1:
-        print "This project is in its first state."
+    if cur_column.id == lowest_column.id and direction == -1:
+        print "This project is in its first column."
         return
 
-    next_position = cur_state.position + direction
-    next_state = None
-    for id in states:
-        if states[id].position == next_position:
-            next_state = states[id]
+    next_position = cur_column.position + direction
+    next_column = None
+    for id in columns:
+        if columns[id].position == next_position:
+            next_column = columns[id]
 
-    adapter.update_state(next_state)
+    adapter.update_column(next_column)
 
-    print "The project changed state from *%s* to *%s*" % (cur_state.title, next_state.title)
+    print "The project changed column from *%s* to *%s*" % (cur_column.title, next_column.title)
 
 '''
 Moves the project to the next stage
 '''
-def state_next():
-    change_state(1)
+def column_next():
+    change_column(1)
 
 '''
-Moves the project to the previous state
+Moves the project to the previous column
 '''
-def state_previous():
-    change_state(-1)
+def column_previous():
+    change_column(-1)
 
 
 '''
@@ -286,7 +286,7 @@ def validate_env_vars():
 
 ''' Validate command line arguments.
 Fills the following global variables:
-command (checklist|state)
+command (checklist|column)
 sub_command [show|toggle] | [show|next|previous]
 argument <int> in case of checklist toggle
 '''
@@ -311,7 +311,7 @@ def process_cmdline_arguments(args):
         error("Please specify a command")
         exit(-1)
 
-    if command not in ["checklist", "state"]:
+    if command not in ["checklist", "column"]:
         error("command %s not recognised" % command)
         exit(-1)
 
@@ -332,7 +332,7 @@ def process_cmdline_arguments(args):
             argument = args[3]
             argument = clean_checklist_toggle_arguments(argument)
 
-    if command == "state":
+    if command == "column":
         sub_commands = ["show", "next", "previous"]
         if len(args) >= 3:
             sub_command = args[2]
@@ -394,13 +394,13 @@ if command == "checklist":
     if sub_command == "toggle":
         checklist_toggle(argument)
 
-if command == "state":
+if command == "column":
     if sub_command == "show":
-        state_show()
+        column_show()
     if sub_command == "next":
-        state_next()
+        column_next()
     if sub_command == "previous":
-        state_previous()
+        column_previous()
 
 
 
