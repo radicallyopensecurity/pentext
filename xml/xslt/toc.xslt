@@ -10,14 +10,32 @@
         </fo:block>
     </xsl:template>
 
-    <xsl:template match="meta | *[@visibility = 'hidden'] | *[../@visibilitiy = 'hidden']"
-        mode="toc"/>
-    <!-- meta, hidden things and children of hidden things not indexed -->
+    <xsl:template match="meta | *[ancestor-or-self::*/@visibility = 'hidden']" mode="toc"/>
+
+    <xsl:template match="*[ancestor-or-self::*/@inexecsummary = 'no']" mode="toc">
+        <xsl:choose>
+            <xsl:when test="$EXEC_SUMMARY = true()"/>
+            <xsl:otherwise>
+                <xsl:apply-templates mode="toc"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- meta, hidden things and children of hidden things not indexed; @inexecsummary="no" items are hidden only when a summary is requested -->
 
     <xsl:template
         match="section[not(@visibility = 'hidden')] | finding | appendix[not(@visibility = 'hidden')] | non-finding"
         mode="toc">
-        <xsl:call-template name="ToC"/>
+        <xsl:choose>
+            <xsl:when test="$EXEC_SUMMARY = true()">
+                <xsl:if test="ancestor-or-self::*/@inexecsummary = 'yes'">
+                    <xsl:call-template name="ToC"/>
+                </xsl:if>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="ToC"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="ToC">
@@ -26,7 +44,7 @@
                 <xsl:attribute name="internal-destination">
                     <xsl:value-of select="@id"/>
                 </xsl:attribute>
-            <xsl:call-template name="tocContent"/>
+                <xsl:call-template name="tocContent"/>
             </fo:basic-link>
             <xsl:text> </xsl:text>
             <fo:leader leader-pattern="dots" leader-alignment="reference-area"
@@ -39,9 +57,18 @@
                 <fo:page-number-citation ref-id="{@id}"/>
             </fo:basic-link>
         </fo:block>
-        <xsl:apply-templates
-            select="section[not(@visibility = 'hidden')][not(../@visibility = 'hidden')] | finding[not(../@visibility = 'hidden')] | non-finding[not(../@visibility = 'hidden')]"
-            mode="toc"/>
+        <xsl:choose>
+            <xsl:when test="$EXEC_SUMMARY = true()">
+                <xsl:apply-templates
+                    select="section[not(@visibility = 'hidden')][not(../@visibility = 'hidden')][ancestor-or-self::*/@inexecsummary = 'yes']"
+                    mode="toc"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates
+                    select="section[not(@visibility = 'hidden')][not(../@visibility = 'hidden')] | finding[not(../@visibility = 'hidden')] | non-finding[not(../@visibility = 'hidden')]"
+                    mode="toc"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="tocContent">
@@ -67,22 +94,56 @@
     <xsl:template name="tocContent_Numbering">
         <xsl:choose>
             <xsl:when test="self::appendix[not(@visibility = 'hidden')]">
-                <fo:inline> Appendix&#160;<xsl:number count="appendix[not(@visibility = 'hidden')]"
-                        level="multiple" format="{$AUTO_NUMBERING_FORMAT}"/>
-                </fo:inline>
+                <xsl:choose>
+                    <xsl:when test="$EXEC_SUMMARY = true()">
+                        <fo:inline> Appendix&#160;<xsl:number
+                                count="appendix[not(@visibility = 'hidden')][@inexecsummary = 'yes']"
+                                level="multiple" format="{$AUTO_NUMBERING_FORMAT}"/></fo:inline>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <fo:inline> Appendix&#160;<xsl:number
+                                count="appendix[not(@visibility = 'hidden')]" level="multiple"
+                                format="{$AUTO_NUMBERING_FORMAT}"/></fo:inline>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:when>
             <xsl:when test="ancestor::appendix[not(@visibility = 'hidden')]">
-                <fo:inline> App&#160;<xsl:number count="appendix[not(@visibility = 'hidden')]"
-                        level="multiple" format="{$AUTO_NUMBERING_FORMAT}"/>.<xsl:number
-                        count="section[not(@visibility = 'hidden')][ancestor::appendix[not(@visibility = 'hidden')]]"
-                        level="multiple" format="{$AUTO_NUMBERING_FORMAT}"/>
-                </fo:inline>
+                <xsl:choose>
+                    <xsl:when test="$EXEC_SUMMARY = true()">
+                        <xsl:if test="ancestor::appendix[@inexecsummary = 'yes']">
+                            <fo:inline> App&#160;<xsl:number
+                                    count="appendix[not(@visibility = 'hidden')][@inexecsummary = 'yes']"
+                                    level="multiple" format="{$AUTO_NUMBERING_FORMAT}"/>.<xsl:number
+                                    count="section[not(@visibility = 'hidden')][ancestor-or-self::*/@inexecsummary = 'yes'][ancestor::appendix[not(@visibility = 'hidden')]]"
+                                    level="multiple" format="{$AUTO_NUMBERING_FORMAT}"/>
+                            </fo:inline>
+                        </xsl:if>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <fo:inline> App&#160;<xsl:number
+                                count="appendix[not(@visibility = 'hidden')]" level="multiple"
+                                format="{$AUTO_NUMBERING_FORMAT}"/>.<xsl:number
+                                count="section[not(@visibility = 'hidden')][ancestor::appendix[not(@visibility = 'hidden')]]"
+                                level="multiple" format="{$AUTO_NUMBERING_FORMAT}"/>
+                        </fo:inline>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
-                <fo:inline>
-                    <xsl:number count="section[not(@visibility = 'hidden')] | finding | non-finding"
-                        level="multiple" format="{$AUTO_NUMBERING_FORMAT}"/>
-                </fo:inline>
+                <xsl:choose>
+                    <xsl:when test="$EXEC_SUMMARY = true()">
+                        <xsl:number
+                            count="section[not(@visibility = 'hidden')][ancestor-or-self::*/@inexecsummary = 'yes']"
+                            level="multiple" format="{$AUTO_NUMBERING_FORMAT}"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <fo:inline>
+                            <xsl:number
+                                count="section[not(@visibility = 'hidden')] | finding | non-finding"
+                                level="multiple" format="{$AUTO_NUMBERING_FORMAT}"/>
+                        </fo:inline>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

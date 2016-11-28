@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section id="conclusion" xml:base="conclusion.xml" break="before">
+<section id="conclusion" xml:base="conclusion.xml" break="before" inexecsummary="yes">
   <title>Conclusion</title>
 </section>

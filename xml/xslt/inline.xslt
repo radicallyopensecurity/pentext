@@ -20,7 +20,7 @@
                     DOCUMENT</fo:inline>
             </xsl:when>
             <xsl:when
-                test="starts-with(@href, '#') and //*[@id = $destination][ancestor-or-self::*[@visibility = 'hidden']]">
+                test="(starts-with(@href, '#') and //*[@id = $destination][ancestor-or-self::*[@visibility = 'hidden']]) or (starts-with(@href, '#') and $EXEC_SUMMARY=true() and //*[@id = $destination][ancestor-or-self::*[not(@inexecsummary='yes')]])">
                 <fo:inline xsl:use-attribute-sets="errortext">WARNING: LINK TARGET IS
                     HIDDEN</fo:inline>
             </xsl:when>

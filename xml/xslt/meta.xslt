@@ -19,7 +19,12 @@
             <fo:external-graphic xsl:use-attribute-sets="logo"/>
         </fo:block>
         <fo:block xsl:use-attribute-sets="title-0">
-            <xsl:value-of select="upper-case(title)"/>
+            <xsl:choose>
+                <xsl:when test="$EXEC_SUMMARY=true()">
+                    <xsl:text>PENETRATION TEST MANAGEMENT SUMMARY</xsl:text>
+                </xsl:when>
+                <xsl:otherwise><xsl:value-of select="upper-case(title)"/></xsl:otherwise>
+            </xsl:choose>
         </fo:block>
         <fo:block xsl:use-attribute-sets="for">
             <xsl:text>for</xsl:text>
@@ -90,7 +95,12 @@
                         </fo:table-cell>
                         <fo:table-cell xsl:use-attribute-sets="td">
                             <fo:block>
-                                <xsl:value-of select="title"/>
+                                <xsl:choose>
+                <xsl:when test="$EXEC_SUMMARY=true()">
+                    <xsl:text>PENETRATION TEST MANAGEMENT SUMMARY</xsl:text>
+                </xsl:when>
+                <xsl:otherwise><xsl:value-of select="upper-case(title)"/></xsl:otherwise>
+            </xsl:choose>
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>

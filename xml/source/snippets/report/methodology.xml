@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section id="methodology" xml:base="methodology.xml" break="before">
+<section id="methodology" xml:base="methodology.xml" break="before" inexecsummary="yes">
     <title>Methodology</title>
     <section id="planning">
         <title>Planning</title>
