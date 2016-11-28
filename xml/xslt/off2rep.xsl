@@ -76,7 +76,7 @@
 
             <generate_index/>
 
-            <section id="executiveSummary">
+            <section id="executiveSummary" inexecsummary="yes">
                 <title>Executive Summary</title>
                 <section id="introduction">
                     <title>Introduction</title>
@@ -116,7 +116,7 @@
                 <xsl:attribute name="href">snippets/report/methodology.xml</xsl:attribute>
             </xsl:element>
 
-            <section id="recon">
+            <section id="recon" inexecsummary="no">
                 <title>Reconnaissance and Fingerprinting</title>
                 <p>Through automated scans we were able to gain the following information about the
                     software and infrastructure. Detailed scan output can be found in the sections
@@ -142,7 +142,7 @@
                 </section>
             </section>
 
-            <section id="techSummary">
+            <section id="techSummary" inexecsummary="no">
                 <title>Pentest Technical Summary</title>
                 <section id="findings">
                     <title>Findings</title>
