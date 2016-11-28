@@ -30,6 +30,9 @@ BRANCH=master
 [[ ! -z $1 ]] && TARGET=$1
 [[ ! -z $2 ]] && REPO=$2
 
+# Set the default PDF name based on the target name
+TARGETPDF="target/$TARGET-latest.pdf"
+
 # Reading positional parms is a bit ugly, shifting parms or getopt would be nicer
 if [[ ! -z $3 ]]; then
     if [[ ! $3 == -* ]]; then
@@ -97,23 +100,27 @@ build() {
     fi
     pushd source &>/dev/null
     backwards_compatible
-    targetpdf=target/$TARGET-latest.pdf
-    $DOCBUILDER -c -i $TARGET.xml -o ../$targetpdf -x ../xslt/generate_$TARGET.xsl $PARMS
+    if ([[ $TARGET == "quote" ]] || [[ $TARGET == "offerte" ]]); then
+        TARGETPDF="target/quote_${REPO/off-/}.pdf"
+    elif [[ $TARGET == "report" ]]; then
+        TARGETPDF="target/report_${REPO/pen-/}.pdf"
+    fi
+    $DOCBUILDER -c -i $TARGET.xml -o ../$TARGETPDF -x ../xslt/generate_$TARGET.xsl $PARMS
     if [[ $? -ne 0 ]]; then
         echo "[-] Sorry, failed to parse $TARGET. Use \`builder $TARGET $REPO $NAMESPACE $BRANCH -v\` for more information."
         exit 1
     fi
     popd &>/dev/null
-    if [ ! -f $targetpdf ]; then
-        echo "[-] hmmm... failed to build PDF file (could not find $targetpdf)"
+    if [ ! -f $TARGETPDF ]; then
+        echo "[-] hmmm... failed to build PDF file (could not find $TARGETPDF)"
         exit 1
     fi
 }
 
 add_to_repo() {
-    git add target/$TARGET-latest.pdf
+    git add $TARGETPDF
     git add target/waiver_?*.pdf &>/dev/null
-    git commit -q -m "$targetpdf proudly manufactured using ChatOps" &>/dev/null
+    git commit -q -m "$TARGETPDF proudly manufactured using ChatOps" &>/dev/null
     git push -q >/dev/null
 }
 
@@ -122,5 +129,5 @@ echo "builder v$VERSION - Rocking your world, one build at a time..."
 clone_repo
 build
 add_to_repo
-echo "[+] listo! Check out $GITWEB/$NAMESPACE/$REPO/raw/$BRANCH/$targetpdf"
+echo "[+] listo! Check out $GITWEB/$NAMESPACE/$REPO/raw/$BRANCH/$TARGETPDF"
 exit 0
