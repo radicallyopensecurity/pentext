@@ -55,6 +55,9 @@ the Free Software Foundation, either version 3 of the License, or
                         help='overwrite output file if it already exists')
     parser.add_argument('-date', action='store',
                         help='the invoice date')
+    parser.add_argument('-execsummary', action='store',
+                        help="""create an executive summary as well as a report. 
+                        Default: no """)
     parser.add_argument('--fop-config', action='store',
                         default='/etc/docbuilder/rosfop.xconf',
                         help="""fop configuration file (default
@@ -141,6 +144,8 @@ def to_fo(options):
         cmd.append('INVOICE_NO=' + options['invoice'])
     if options['date']:
         cmd.append('DATE=' + options['date'])
+    if options['execsummary']:
+        cmd.append('EXEC_SUMMARY=' + options['execsummary'])
     process = subprocess.Popen(cmd, stdout=PIPE, stderr=PIPE)
     stdout, stderr = process.communicate()
     print_output(stdout, stderr)
