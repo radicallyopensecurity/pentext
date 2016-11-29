@@ -19,11 +19,12 @@
     <xsl:import href="generic.xslt"/>
     <xsl:import href="numbering.xslt"/>
     <xsl:import href="localisation.xslt"/>
-    <xsl:import href="placeholders.xslt"/><!--
+    <xsl:import href="placeholders.xslt"/>
+    <!--
     <xsl:import href="snippets.xslt"/>-->
-    
+
     <xsl:include href="styles_rep.xslt"/>
-    
+
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no"/>
 
 
@@ -31,38 +32,53 @@
     <xsl:param name="AUTO_NUMBERING_FORMAT" select="'1.1.1'"/>
     <xsl:param name="EXEC_SUMMARY" select="true()"/>
 
-    <xsl:key name="rosid" match="section|finding|appendix|non-finding" use="@id"/><xsl:key name="biblioid" match="biblioentry" use="@id"/>
-    
+    <xsl:key name="rosid" match="section | finding | appendix | non-finding" use="@id"/>
+    <xsl:key name="biblioid" match="biblioentry" use="@id"/>
+
     <!-- not used but needed because of shared code with contract; todo: clean these up -->
     <xsl:variable name="fee" select="/contract/meta/contractor/hourly_fee * 1"/>
     <xsl:variable name="plannedHours" select="/contract/meta/work/planning/hours * 1"/>
     <xsl:variable name="total_fee" select="$fee * $plannedHours"/>
     <xsl:variable name="denomination" select="'X'"/>
     <!-- end -->
-    
+
     <xsl:variable name="lang" select="/*/@xml:lang"/>
-    
+
     <xsl:variable name="CLASSES" select="document('../xslt/styles_rep.xslt')/*/xsl:attribute-set"/>
-    
+
     <xsl:variable name="latestVersionDate">
-            <xsl:for-each select="/*/meta/version_history/version">
-                <xsl:sort select="xs:dateTime(@date)" order="descending"/>
-                <xsl:if test="position() = 1">
-                    <xsl:value-of select="format-dateTime(@date, '[MNn] [D1o], [Y]', 'en', (), ())"/>
-                </xsl:if>
-            </xsl:for-each>
-        </xsl:variable>
-    
-<!-- ROOT -->
+        <xsl:for-each select="/*/meta/version_history/version">
+            <xsl:sort select="xs:dateTime(@date)" order="descending"/>
+            <xsl:if test="position() = 1">
+                <xsl:value-of select="format-dateTime(@date, '[MNn] [D1o], [Y]', 'en', (), ())"/>
+            </xsl:if>
+        </xsl:for-each>
+    </xsl:variable>
+
+    <!-- ROOT -->
     <xsl:template match="/">
 
-        <fo:root xsl:use-attribute-sets="root-common">
+        <xsl:choose>
+            <xsl:when test="$EXEC_SUMMARY = true()">
+                <xsl:result-document href="../target/execsummary.fo">
+                    <fo:root xsl:use-attribute-sets="root-common">
 
-            <xsl:call-template name="layout-master-set"/>
-            <xsl:call-template name="Content"/>
+                        <xsl:call-template name="layout-master-set"/>
+                        <xsl:call-template name="Content"/>
 
-        </fo:root>
+                    </fo:root>
+                </xsl:result-document>
+            </xsl:when>
+            <xsl:otherwise>
+                <fo:root xsl:use-attribute-sets="root-common">
+
+                    <xsl:call-template name="layout-master-set"/>
+                    <xsl:call-template name="Content"/>
+
+                </fo:root>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
-    
+
 </xsl:stylesheet>
