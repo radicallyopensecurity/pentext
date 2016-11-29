@@ -32,6 +32,7 @@ import textwrap
 GITREV = 'GITREV'  # Magic tag which gets replaced by the git short commit hash
 OFFERTE = 'generate_offerte.xsl'  # XSL for generating waivers
 WAIVER = 'waiver_'  # prefix for waivers
+EXECSUMMARY = 'execsummary' # generating an executive summary instead of a report
 
 
 def parse_arguments():
@@ -219,6 +220,23 @@ def main():
                 for fop in [os.path.splitext(x)[0] for x in
                             os.listdir(fop_dir) if x.endswith('fo')]:
                     if WAIVER in fop:
+                        options['output'] = output_dir + os.sep + fop + '.pdf'
+                    else:
+                        options['output'] = report_output
+                    options['fop'] = fop_dir + os.sep + fop + '.fo'
+                    result = to_pdf(options) and result
+            except OSError as exception:
+                print_exit('[-] ERR: {0}'.format(exception.strerror),
+                           exception.errno)
+        if options['execsummary'] == 'true':  # we're generating a summary as well as a report
+            report_output = options['output']
+            verboseprint('generating additional executive summary')
+            output_dir = os.path.dirname(options['output'])
+            fop_dir = os.path.dirname(options['fop'])
+            try:
+                for fop in [os.path.splitext(x)[0] for x in
+                            os.listdir(fop_dir) if x.endswith('fo')]:
+                    if EXECSUMMARY in fop:
                         options['output'] = output_dir + os.sep + fop + '.pdf'
                     else:
                         options['output'] = report_output
