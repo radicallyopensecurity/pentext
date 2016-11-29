@@ -11,17 +11,8 @@
     </xsl:template>
 
     <xsl:template match="meta | *[ancestor-or-self::*/@visibility = 'hidden']" mode="toc"/>
-
-    <xsl:template match="*[ancestor-or-self::*/@inexecsummary = 'no']" mode="toc">
-        <xsl:choose>
-            <xsl:when test="$EXEC_SUMMARY = true()"/>
-            <xsl:otherwise>
-                <xsl:apply-templates mode="toc"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-    <!-- meta, hidden things and children of hidden things not indexed; @inexecsummary="no" items are hidden only when a summary is requested -->
+    
+    <!-- meta, hidden things and children of hidden things not indexed -->
 
     <xsl:template
         match="section[not(@visibility = 'hidden')] | finding | appendix[not(@visibility = 'hidden')] | non-finding"
