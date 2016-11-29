@@ -113,6 +113,7 @@ build() {
 add_to_repo() {
     git add target/$TARGET-latest.pdf
     git add target/waiver_?*.pdf &>/dev/null
+    git add target/execsummary.pdf &>/dev/null
     git commit -q -m "$targetpdf proudly manufactured using ChatOps" &>/dev/null
     git push -q >/dev/null
 }
