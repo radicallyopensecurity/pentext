@@ -26,7 +26,14 @@
     </meta>
     <!-- Do we need permission from third parties? Insert as many <third_party> elements as needed under this comment -->
     <!-- INSERT OPTIONAL THIRD PARTIES HERE -->
-    
+    <!-- <third_party>
+        <full_name>XXX</full_name>
+        <short_name>XXX</short_name>
+        <waiver_rep>XXX</waiver_rep>
+        <address>XXX</address>
+        <city>XXX</city>
+        <country>XXX</country>
+    </third_party> -->
     <!-- ___________________________________ -->
     <pentest_info>
         <!-- How long would you like the test to be? (in days) -->
