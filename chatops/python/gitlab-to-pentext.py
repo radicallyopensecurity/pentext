@@ -146,7 +146,8 @@ def list_issues(gitserver, options):
     Lists all issues for options['issues']
     """
     try:
-        for issue in gitserver.project_issues.list(project_id=options['issues']):
+        for issue in gitserver.project_issues.list(project_id=options['issues'],
+                                                   per_page=99):
             if issue.state == 'closed' and not options['closed']:
                 continue
             if 'finding' in issue.labels:
@@ -251,7 +252,7 @@ def valid_filename(filename):
     """
     result = ''
     for char in filename.strip():
-        if char in [':', '/', '.', '\\', ' ', '[', ']', '(', ')', '\'']:
+        if char in ['*', ':', '/', '.', '\\', ' ', '[', ']', '(', ')', '\'']:
             if len(char) and not result.endswith('-'):
                 result += '-'
         else:
