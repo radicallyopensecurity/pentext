@@ -389,7 +389,7 @@
 
     <xsl:template match="generate_permission_parties">
         <xsl:for-each select="/*/meta/permission_parties/client | /*/meta/permission_parties/party">
-            <xsl:if test="self::party and not(following-sibling::party)"> and </xsl:if>
+            <xsl:if test="self::party and not(following-sibling::party)"><xsl:call-template name="getString"><xsl:with-param name="stringID" select="'permission_and'"/></xsl:call-template><xsl:text>&#x20;</xsl:text></xsl:if>
             <xsl:value-of select="full_name"/>
             <xsl:if test="../party[2]">, </xsl:if>
         </xsl:for-each>

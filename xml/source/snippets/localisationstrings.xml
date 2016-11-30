@@ -136,6 +136,11 @@
         <translation xml:lang="nl">Reikwijdte <company_svc_short/></translation>
         <translation xml:lang="en">Reach of <company_svc_short/></translation>
     </string>
+    <!-- PERMISSION PARTIES -->
+    <string id="permission_and">
+        <translation xml:lang="nl">en</translation>
+        <translation xml:lang="en">and</translation>
+    </string>
     <!-- WAIVERS -->
     <string id="waiver_signed">
         <translation xml:lang="nl">Getekend</translation>
