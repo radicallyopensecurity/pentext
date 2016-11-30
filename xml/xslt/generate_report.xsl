@@ -30,7 +30,7 @@
 
     <!-- ****** AUTO_NUMBERING_FORMAT:	value of the <xsl:number> element used for auto numbering -->
     <xsl:param name="AUTO_NUMBERING_FORMAT" select="'1.1.1'"/>
-    <xsl:param name="EXEC_SUMMARY" select="true()"/>
+    <xsl:param name="EXEC_SUMMARY" select="false()"/>
 
     <xsl:key name="rosid" match="section | finding | appendix | non-finding" use="@id"/>
     <xsl:key name="biblioid" match="biblioentry" use="@id"/>
