@@ -40,10 +40,10 @@
     <xsl:param name="DATE">
         <xsl:choose>
             <xsl:when test="/invoice/@date">
-                <xsl:value-of select="format-date(/invoice/@date, '[MNn] [D1], [Y]', 'en', (), ())"/>
+                <xsl:value-of select="/invoice/@date"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="format-date(current-date(), '[MNn] [D1], [Y]', 'en', (), ())"/>
+                <xsl:value-of select="current-date()"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:param>
@@ -69,7 +69,7 @@
         </xsl:variable>
         <xsl:call-template name="invoiceStart">
             <xsl:with-param name="INVOICE_NO" select="$INVOICE_NO"/>
-            <xsl:with-param name="DATE" select="$DATE"/>
+            <xsl:with-param name="DATE" select="format-date($DATE, '[MNn] [D1], [Y]', 'en', (), ())"/>
         </xsl:call-template>
         <fo:block>
             <fo:table width="100%" table-layout="fixed" xsl:use-attribute-sets="big-space-below table-shading">
