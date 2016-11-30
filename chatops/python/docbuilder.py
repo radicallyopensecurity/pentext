@@ -32,6 +32,7 @@ import textwrap
 GITREV = 'GITREV'  # Magic tag which gets replaced by the git short commit hash
 OFFERTE = 'generate_offerte.xsl'  # XSL for generating waivers
 WAIVER = 'waiver_'  # prefix for waivers
+EXECSUMMARY = 'execsummary' # generating an executive summary instead of a report
 
 
 def parse_arguments():
@@ -55,6 +56,9 @@ the Free Software Foundation, either version 3 of the License, or
                         help='overwrite output file if it already exists')
     parser.add_argument('-date', action='store',
                         help='the invoice date')
+    parser.add_argument('-execsummary', action='store',
+                        help="""create an executive summary as well as a report (true/false). 
+                        Default: false """)
     parser.add_argument('--fop-config', action='store',
                         default='/etc/docbuilder/rosfop.xconf',
                         help="""fop configuration file (default
@@ -141,6 +145,8 @@ def to_fo(options):
         cmd.append('INVOICE_NO=' + options['invoice'])
     if options['date']:
         cmd.append('DATE=' + options['date'])
+    if options['execsummary']:
+        cmd.append('EXEC_SUMMARY=' + options['execsummary'])
     process = subprocess.Popen(cmd, stdout=PIPE, stderr=PIPE)
     stdout, stderr = process.communicate()
     print_output(stdout, stderr)
@@ -214,6 +220,23 @@ def main():
                 for fop in [os.path.splitext(x)[0] for x in
                             os.listdir(fop_dir) if x.endswith('fo')]:
                     if WAIVER in fop:
+                        options['output'] = output_dir + os.sep + fop + '.pdf'
+                    else:
+                        options['output'] = report_output
+                    options['fop'] = fop_dir + os.sep + fop + '.fo'
+                    result = to_pdf(options) and result
+            except OSError as exception:
+                print_exit('[-] ERR: {0}'.format(exception.strerror),
+                           exception.errno)
+        if options['execsummary'] == 'true':  # we're generating a summary as well as a report
+            report_output = options['output']
+            verboseprint('generating additional executive summary')
+            output_dir = os.path.dirname(options['output'])
+            fop_dir = os.path.dirname(options['fop'])
+            try:
+                for fop in [os.path.splitext(x)[0] for x in
+                            os.listdir(fop_dir) if x.endswith('fo')]:
+                    if EXECSUMMARY in fop:
                         options['output'] = output_dir + os.sep + fop + '.pdf'
                     else:
                         options['output'] = report_output

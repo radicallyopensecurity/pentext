@@ -119,12 +119,11 @@ def convert_markdown(text):
     Replace markdown monospace with monospace tags
     """
     result = text
-    return result
+    return result  # currently not implemented
     print('EXAMINING ' + text + ' END')
     monospace = re.findall("\`\`\`(.*?)\`\`\`", text, re.DOTALL)
     print(monospace)
     if len(monospace):
-        print('YESSS ' + monospace)
         result = {}
         result['monospace'] = ''.join(monospace)
 
@@ -158,7 +157,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
             description=textwrap.dedent('''\
-gitlab-to-pentext - imports and updates gitlab issues into PetText (XML) format
+gitlab-to-pentext - imports and updates gitlab issues into PenText (XML) format
 
             Copyright (C) 2016  Peter Mosmans [Radically Open Security]]
 This program is free software: you can redistribute it and/or modify
@@ -184,7 +183,7 @@ the Free Software Foundation, either version 3 of the License, or
     return vars(parser.parse_args())
 
 
-def preflight_checks(options):
+def preflight_checks():
     """
     Checks if all tools are there.
     Exits with 0 if everything went okilydokily.
@@ -248,7 +247,7 @@ def main():
     The main program.
     """
     options = parse_arguments()
-    gitserver = preflight_checks(options)
+    gitserver = preflight_checks()
     if options['projects']:
         list_projects(gitserver, options)
     if options['issues']:
