@@ -8,7 +8,7 @@
       <xs:sequence>
         <xs:element ref="client"/>
         <xs:element ref="meta"/>
-        <xs:element ref="third_party" minOccurs="0"/>
+        <xs:element ref="third_party" minOccurs="0" maxOccurs="unbounded"/>
         <xs:element ref="pentest_info"/>
       </xs:sequence>
     </xs:complexType>
