@@ -1,64 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <quickscope xmlns:xi="http://www.w3.org/2001/XInclude"
-    xmlns:xml="http://www.w3.org/XML/1998/namespace"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="../dtd/quickscope.xsd">
-    
-    <!-- COMPANY INFO -->
-    <xi:include href="client_info.xml"/>
+            xmlns:xml="http://www.w3.org/XML/1998/namespace"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../dtd/quickscope.xsd">
 
-    <!-- SERVICE INFO -->
-    <meta>
-        <!-- Language the offer should be in (en|nl) -->
-        <offer_language>en</offer_language>
-        <!-- Offer type (pentest|basic-scan|load-test|code-audit|other) -->
-        <offer_type>pentest</offer_type>
-        <!-- Required service -->
-        <!-- Note: is only used when type is 'other', if offer_type is a specific type, service name will be taken from the localisation strings -->
-        <requested_service>penetration testing services</requested_service>
-        <!-- Which targets will need to be tested? 
-                (one <target> element for each piece of software/service/server address/location...), delete/add as necessary -->
-        <targets>
-            <target></target>
-            <target></target>
-        </targets>
-    </meta>
-    <!-- Do we need permission from third parties? Insert as many <third_party> elements as needed under this comment -->
-    <!-- INSERT OPTIONAL THIRD PARTIES HERE -->
-    <!-- <third_party>
-        <full_name>XXX</full_name>
-        <short_name>XXX</short_name>
-        <waiver_rep>XXX</waiver_rep>
-        <address>XXX</address>
-        <city>XXX</city>
-        <country>XXX</country>
-    </third_party> -->
+  <!-- COMPANY INFO -->
+  <xi:include href="client_info.xml"/>
+
+  <!-- SERVICE INFO -->
+  <meta>
+    <!-- Language the offer should be in (en|nl) -->
+    <offer_language>en</offer_language>
+    <!-- Offer type (pentest|basic-scan|load-test|code-audit|other) -->
+    <offer_type>pentest</offer_type>
+    <!-- Required service -->
+    <!-- Note: is only used when type is 'other', if offer_type is a specific type, service name will be taken from the localisation strings -->
+    <requested_service>penetration testing services</requested_service>
+    <!-- Which targets will need to be tested?
+            (one <target> element for each piece of software/service/server address/location...), delete/add as necessary -->
+    <targets>
+      <target></target>
+      <target></target>
+    </targets>
+  </meta>
+  <!-- Do we need permission from third parties? Insert as many <third_party> elements as needed under this comment -->
+  <!-- INSERT OPTIONAL THIRD PARTIES HERE -->
+  <!-- <third_party>
+      <full_name>XXX</full_name>
+      <short_name>XXX</short_name>
+      <waiver_rep>XXX</waiver_rep>
+      <address>XXX</address>
+      <city>XXX</city>
+      <country>XXX</country>
+  </third_party> -->
+  <!-- ___________________________________ -->
+  <pentest_info>
+    <!-- How long would you like the test to be? (in days) -->
+    <days>0</days>
+    <!-- How many mandays (if you don't know, try days * number of assigned pentesters) -->
+    <mandays>0</mandays>
+    <!-- Service execution (Use one of the following values: time-boxed, subscription) -->
+    <nature>time-boxed</nature>
+    <!-- Testing type (Use one of the following values: crystal-box, black-box, grey-box) -->
+    <type>crystal-box</type>
+    <!-- Test planning (when would you like the test to be executed -->
+    <!-- Ideally something specific like 'December 7th - December 12th, 2015', but another description 'Beginning of December' is fine as well -->
+    <!-- do not start with a capital letter -->
+    <planning>TBD</planning>
+    <!-- Pentest report delivery date (please allow at least 1 week between the end of the pentest and the report delivery date) -->
+    <delivery>TBD</delivery>
+    <!-- Do you need/want a code audit? (possible values: yes/no), only for pentest -->
+    <codeaudit perform="yes"/>
+    <!-- Is there an application that needs to be tested? Add an <application_name> element below. -->
+    <!-- INSERT OPTIONAL APPLICATION NAME HERE -->
+
     <!-- ___________________________________ -->
-    <pentest_info>
-        <!-- How long would you like the test to be? (in days) -->
-        <days>0</days>
-        <!-- How many mandays (if you don't know, try days * number of assigned pentesters) -->
-        <mandays>0</mandays>
-        <!-- Service execution (Use one of the following values: time-boxed, subscription) -->
-        <nature>time-boxed</nature>
-        <!-- Testing type (Use one of the following values: crystal-box, black-box, grey-box) -->
-        <type>crystal-box</type>
-        <!-- Test planning (when would you like the test to be executed -->
-        <!-- Ideally something specific like 'December 7th - December 12th, 2015', but another description 'Beginning of December' is fine as well -->
-        <!-- do not start with a capital letter -->
-        <planning>TBD</planning>
-        <!-- Pentest report delivery date (please allow at least 1 week between the end of the pentest and the report delivery date) -->
-        <delivery>TBD</delivery>
-        <!-- Do you need/want a code audit? (possible values: yes/no), only for pentest -->
-        <codeaudit perform="yes"/>
-        <!-- Is there an application that needs to be tested? Add an <application_name> element below. -->
-        <!-- INSERT OPTIONAL APPLICATION NAME HERE -->
-    
-        <!-- ___________________________________ -->
-        
-        <!-- rate (to be filled in by ROS ;) -->
-        <rate>0</rate>
 
-    </pentest_info>
+    <!-- rate (to be filled in by ROS ;) -->
+    <rate>0</rate>
+  </pentest_info>
 </quickscope>

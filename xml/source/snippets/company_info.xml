@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <company>
-        <full_name>Radically Open Security B.V.</full_name> 
-        <short_name>ROS</short_name>
-        <legal_rep>Melanie Rieback</legal_rep><!-- ROS legal representative (to sign offerte) -->
-        <poc1>Melanie Rieback</poc1><!-- first point of contact for ROS -->
-        <address>Overdiemerweg 28</address>
-        <postal_code>1111 PP</postal_code>
-        <city>Diemen</city>
-        <country>The Netherlands</country>
-        <phone>+31 6 10 21 32 40</phone>
-        <email>info@radicallyopensecurity.com</email>
-        <website>www.radicallyopensecurity.com</website>
-        <coc>60628081</coc>
-        <vat_no>853989655B01</vat_no>
-        <iban>NL06 RABO 0188 2813 12</iban>
+  <full_name>Radically Open Security B.V.</full_name>
+  <short_name>ROS</short_name>
+  <legal_rep>Melanie Rieback
+  </legal_rep><!-- ROS legal representative (to sign offerte) -->
+  <poc1>Melanie Rieback</poc1><!-- first point of contact for ROS -->
+  <address>Overdiemerweg 28</address>
+  <postal_code>1111 PP</postal_code>
+  <city>Diemen</city>
+  <country>The Netherlands</country>
+  <phone>+31 6 10 21 32 40</phone>
+  <email>info@radicallyopensecurity.com</email>
+  <website>www.radicallyopensecurity.com</website>
+  <coc>60628081</coc>
+  <vat_no>853989655B01</vat_no>
+  <iban>NL06 RABO 0188 2813 12</iban>
 </company>
