@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+  <title>Project Overview
+  </title><!-- section with an overview of ROS activities -->
+  <p>
+    <company_short/>
+    will provide xxx training sessions, for xxx different groups,
+    on-site/off-site at xxx venue, with a maximum of xxx participants per event.
+    The training will focus on the top 5 vulnerabilities from the OWASP Top 10.
+  </p>
+  <p>As part of this training, <company_short/>
+    will also guide the participants through performing security tests on the
+    targets described below. This is intended to gain insight into the security
+    of these systems. This is done by means of accessing the underlying systems,
+    attempting to find vulnerabilities, and gaining further access and elevated
+    privileges by exploiting any vulnerabilities found.
+  </p>
+  <p>Afterwards, <company_short/> will coach the participants in writing a pentest
+    report; <client_short/> will start writing the report and <company_short/>
+    will complete it.
+  </p>
+  <generate_targets/>
+</section>
