@@ -51,6 +51,14 @@
     <translation xml:lang="nl">load test</translation>
     <translation xml:lang="en">load test</translation>
   </string>
+  <string id="coverpage_service_training">
+    <translation xml:lang="nl">training</translation>
+    <translation xml:lang="en">training</translation>
+  </string>
+  <string id="coverpage_service_training_short">
+    <translation xml:lang="nl">training</translation>
+    <translation xml:lang="en">training</translation>
+  </string>
   <string id="coverpage_for">
     <translation xml:lang="nl">VOOR</translation>
     <translation xml:lang="en">FOR</translation>
