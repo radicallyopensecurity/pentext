@@ -102,14 +102,11 @@
       </snippet_group>
     </selection>
     <selection subtype="training">
-      <!-- standard -->
       <snippet_group set="group1">
         <snippet>introandscope</snippet>
         <snippet>projectoverview_training</snippet>
         <snippet>prerequisites_training</snippet>
         <snippet>disclaimer</snippet>
-      </snippet_group>
-      <snippet_group set="group2">
         <snippet>planningandpayment</snippet>
         <snippet>aboutus</snippet>
         <snippet>conditions</snippet>
