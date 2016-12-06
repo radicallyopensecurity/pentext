@@ -45,6 +45,8 @@ gone through, etc.
 In XML, this part is indicated by the `<meta>` element. It contains the
 following elements (mandatory and in the listed order):
 
+TODO
+
 -   The document title, in the `<title>` element
 -   Client information, in the `<client>` element
 -   Targets listing, in the `<targets>` element
