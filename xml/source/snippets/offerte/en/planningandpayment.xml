@@ -6,15 +6,14 @@
       <li><company_short/> performs a <company_svc_short/> on <p_testingduration/>.</li>
       <li><company_short/> delivers the final report <p_reportdue/>.</li>
   </ul>
-
-  <!-- snippet --><p>
-    Our fixed-fee price quote for the above described <company_svc_short/> is <p_fee/>.- excl. VAT and out-of-pocket expenses. 
+  <p>
+    Our fixed-fee price quote for the above described <company_svc_short/> is <p_fee/>.-
+    excl. VAT and out-of-pocket expenses.
     <company_short/> will send an invoice after the completion of this assignment. 
     <client_short/> will pay the agreed amount within 30 days of the invoice date.
   </p>
-  <!-- snippet --><p>
+  <p>
     Any additional work will be charged separately. An hourly 
     rate for additional work will be agreed upon before starting this work.
   </p>
-
 </section>
