@@ -1,51 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section>
-        <title>Team and Reporting</title>
+  <title>Team and Reporting</title>
 
-        <section>
-                <title>Team</title>
-                <p><company_short/> may perform the activities with its core-team 
-                members, external freelancers, and/or volunteers.</p>
-                <p>First point of contact for this assignment shall be:</p>
-                <ul>
-                        <li><company_poc1/> (<company_short/>)</li>
-                        <li><client_poc1/> (<client_short/>)</li>
-                </ul>
-                <!-- remove this for non pentesting offers-->
-                <p>The workflow of our penetration testing team is modeled on that of a Capture The Flag (CTF) team:
-                <!-- remove this for non pentesting offers-->
-                
-				<company_long/> has a geographically distributed team 
-				and we use online infrastructure (RocketChat, GitLabs, etc.)  
-				to coordinate our work. This enables us to invite the 
-				customer to send several technical people from their
-				organization to join our <company_svc_short/> team on a volunteer basis.  
-				Naturally, we extend this invitation to <client_short/> as well.</p>
-				
-                <p>Throughout the course of the audit, we intend to actively 
-                brainstorm with <client_short/> about both the <company_svc_short/> and the process. 
-                This is a continuous learning experience for both us and you. 
-                Also, in our experience, a tight feedback loop with the customer 
-                greatly improves both the quality and focus of the engagement.</p>
+  <section>
+    <title>Team</title>
+    <p>
+      <company_short/> may perform the activities with its core-team members,
+      external freelancers, and/or volunteers.
+    </p>
+    <p>First point of contact for this assignment shall be:</p>
+    <ul>
+      <li>
+        <company_poc1/> (<company_short/>)
+      </li>
+      <li>
+        <client_poc1/> (<client_short/>)
+      </li>
+    </ul>
+    <!-- remove this for non pentesting offers-->
+    <p>The workflow of our penetration testing team is modeled on that of a
+      Capture The Flag (CTF) team:
+      <!-- remove this for non pentesting offers-->
 
-        </section>
-        <section>
-                <title>Reporting</title>
-                <p><company_short/> will report to <client_short/> on the <company_svc_short/>. 
-                This report will include the steps it has taken during the 
-                test and the vulnerabilities it has found. It will include 
-                recommendations but not comprehensive solutions on how to address 
-                these vulnerabilities.</p>
-                
-                <p>A sample Pentest report can be found here</p>
-					<ul>
-						<li><a href="https://github.com/radicallyopensecurity/templates/blob/master/sample-report/REP_SittingDuck-pentestreport-v10.pdf">https://github.com/radicallyopensecurity/templates/blob/master/sample-report/REP_SittingDuck-pentestreport-v10.pdf</a></li>
-					</ul>
-					
-				<p>One of <company_short/>'s Core Principles is the Teach 
-				To Fish principle – otherwise known as the 'Peek over our 
-				Shoulder' (PooS) principle. We strive to structure our 
-				services so they can also serve as a teaching or training 
-				opportunity for our customers.</p>
-        </section>
+      <company_long/> has a geographically distributed team and we use online
+      infrastructure (RocketChat, GitLabs, etc.) to coordinate our work. This
+      enables us to invite the customer to send several technical people from
+      their organization to join our <company_svc_short/> team on a volunteer
+      basis. Naturally, we extend this invitation to <client_short/> as well.
+    </p>
+
+    <p>Throughout the course of the audit, we intend to actively brainstorm with
+      <client_short/> about both the <company_svc_short/>
+      and the process. This is a continuous learning experience for both us and
+      you. Also, in our experience, a tight feedback loop with the customer
+      greatly improves both the quality and focus of the engagement.
+    </p>
+  </section>
+
+  <section>
+    <title>Reporting</title>
+    <p>
+      <company_short/> will report to <client_short/>
+      on the <company_svc_short/>. This report will include the steps it has
+      taken during the test and the vulnerabilities it has found. It will
+      include recommendations but not comprehensive solutions on how to address
+      these vulnerabilities.
+    </p>
+
+    <p>A sample Pentest report can be found here</p>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/radicallyopensecurity/templates/blob/master/sample-report/REP_SittingDuck-pentestreport-v10.pdf">
+          https://github.com/radicallyopensecurity/templates/blob/master/sample-report/REP_SittingDuck-pentestreport-v10.pdf</a>
+      </li>
+    </ul>
+
+    <p>One of <company_short/>'s core principles is “Teach To Fish”, otherwise
+      known as “Peek over our Shoulder” (PooS); We strive to structure our
+      services so they can also serve as teaching or training opportunities for
+      our customers.
+    </p>
+  </section>
 </section>

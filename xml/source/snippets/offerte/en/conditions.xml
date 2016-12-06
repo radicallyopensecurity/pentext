@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section>
         <title>Terms and Conditions</title>
-        <!-- snippet --><p><company_short/> will only perform the <company_svc_short/> 
+        <p><company_short/> will only perform the <company_svc_short/>
         if it has obtained the permission from <generate_permission_parties/> 
         as set out in the penetration testing waiver, attached as <b>Annex 2</b>, 
         or provided in a separate document.</p>

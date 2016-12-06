@@ -7,7 +7,7 @@
     performance requirement, in a consistent and repeatable way. For web sites
     and applications it usually involves simulating multiple visitors using the
     site's features in various ways. This sets it apart from DDoS testing, which
-    is much more indiscriminate. For load testing, <company_long/>
+    is much more indiscriminate. For load testing, <company_short/>
     generally executes the following steps:
   </p>
 
@@ -30,8 +30,8 @@
     to see whether it brings performance improvements. These reasons boil down
     to running some specific tests, usually one or more of:
     <ul>
-      <li>How much activity a system can cope with before it starts to fail (maximum
-        simultaneous users, maximum request rate)
+      <li>How much activity a system can cope with before it starts to fail
+        (maximum simultaneous users, maximum request rate)
       </li>
       <li>What level of performance can be sustained for a given load (average
         response time for a fixed number of users)
@@ -116,13 +116,12 @@
     100, 500, 1000, 2000 users, or a maximum load test using a slow increase
     from 100 to 10000 users to see how far it gets before problems appear.
   </p>
-  
+
   <p>There are many load testing tools of varying levels of sophistication,
     including Apache's simple "ab" and more complex "JMeter" projects, the
-    Selenium project for fine-detail browser simulation.
-    <company_long/>
+    Selenium project for fine-detail browser simulation. <company_long/>
     prefers to use open-source tools such as these. There are also online
-    commercial services that are useful for testing very large loads that
-    would otherwise be difficult and expensive to configure from scratch.
+    commercial services that are useful for testing very large loads that would
+    otherwise be difficult and expensive to configure from scratch.
   </p>
 </section>
