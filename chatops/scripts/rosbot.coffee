@@ -46,6 +46,12 @@
 #     [--no-report]         Do not validate report master file
 #     [--quiet]             Don't output status messages
 #
+#   checklist
+#     The "checklist" family of commands are used to manipulate the checklist of a kanboard task.
+#     The following commands have been implemented:
+#     * checklist show      Shows the checklist for the column the task is in.
+#     * checklist toggle    Toggles a certain item
+#
 #   checklist show
 #     Shows the checklist for the column the kanboard task is in. It is required that the task's description contains the full checklist.
 #     The script will connect to kanboard, open the Pentesting project and tries to find the kanboard task. It will then pull the description
@@ -59,6 +65,13 @@
 #     <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
 #     <index>           Should be an integer or comma separated list of integers as indices to the items. Mandatory.
 #
+#   column
+#     The "column" family of commands are used to move a kanboard task across the board.
+#     The following commands are implemented:
+#     * column show      Shows the column the kanboard task is in
+#     * column next      Moves the kanboard task to the next column
+#     * column prev      Moves the kanboard task to the previous column
+#
 #   column show
 #     Shows the column the kanboard task is currently in.
 #     Usage: column show <kanboard task>
@@ -69,9 +82,9 @@
 #     Usage: column next <kanboard task>
 #     <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
 #
-#   column previous
+#   column prev
 #     Moves the kanboard task to the previous column.
-#     Usage: column previous <kanboard task>
+#     Usage: column prev <kanboard task>
 #     <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
 
 # Commands:

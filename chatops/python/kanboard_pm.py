@@ -131,11 +131,13 @@ class KanboardAdapter():
         f.write("\n".join(self.description))
         f.close()
 
-'''
-  Displays the checklist of the current project columns. It does so by putting the indices in front of the item
-  so it can be used to toggle.
-'''
+
 def checklist_show():
+    '''
+      Displays the checklist of the current project columns. It does so by putting the indices in front of the item
+      so it can be used to toggle.
+    '''
+
     column = adapter.get_column()
     checklist = adapter.get_checklist_of_column(column)
 
@@ -148,11 +150,12 @@ def checklist_show():
     else:
         print "- This checklist has no items."
 
-'''
- Toggles certain checklist item(s). This function only eats integers. Proper validation should have been done upsteam.
- :param indices list
-'''
+
 def checklist_toggle(indices):
+    '''
+     Toggles certain checklist item(s). This function only eats integers. Proper validation should have been done upsteam.
+     :param indices list
+    '''
     column     = adapter.get_column()
     checklist = adapter.get_checklist_of_column(column)
     output = []
@@ -204,16 +207,17 @@ def column_show():
         else:
             print columns[column_id].title
 
-'''
-Moves the project to the [next|previous] column.
 
-Retrieves a list of available columns
-Retrieves the current column
-Will validate the current column in order to determine the next column.
-When the project is already in a border case, a notification of the fact is displayed.
-Will select the next column and update the current column with the next column + display notification
-'''
 def change_column(direction):
+    '''
+    Moves the project to the [next|previous] column.
+
+    Retrieves a list of available columns
+    Retrieves the current column
+    Will validate the current column in order to determine the next column.
+    When the project is already in a border case, a notification of the fact is displayed.
+    Will select the next column and update the current column with the next column + display notification
+    '''
     global adapter
 
     columns    = adapter.get_columns()
@@ -253,24 +257,26 @@ def change_column(direction):
 
     print "The project changed column from *%s* to *%s*" % (cur_column.title, next_column.title)
 
-'''
-Moves the project to the next stage
-'''
+
 def column_next():
+    '''
+    Moves the project to the next stage
+    '''
     change_column(1)
 
-'''
-Moves the project to the previous column
-'''
+
 def column_previous():
+    '''
+    Moves the project to the previous column
+    '''
     change_column(-1)
 
 
-'''
-Validates the required environment variables to be able to adapter with kanboard.
-It checks them all. If one is missing, the script will exit
-'''
 def validate_env_vars():
+    '''
+    Validates the required environment variables to be able to adapter with kanboard.
+    It checks them all. If one is missing, the script will exit
+    '''
     global kb_user
     global kb_apikey
     global kb_endpoint
@@ -284,13 +290,14 @@ def validate_env_vars():
     if None in [kb_user, kb_apikey, kb_endpoint]:
         exit(-1)
 
-''' Validate command line arguments.
-Fills the following global variables:
-command (checklist|column)
-sub_command [show|toggle] | [show|next|previous]
-argument <int> in case of checklist toggle
-'''
 def process_cmdline_arguments(args):
+    ''' Validate command line arguments.
+    Fills the following global variables:
+    command (checklist|column)
+    sub_command [show|toggle] | [show|next|previous]
+    argument <int> in case of checklist toggle
+    '''
+
     global kanboard_task
     global command
     global sub_command
@@ -333,7 +340,7 @@ def process_cmdline_arguments(args):
             argument = clean_checklist_toggle_arguments(argument)
 
     if command == "column":
-        sub_commands = ["show", "next", "previous"]
+        sub_commands = ["show", "next", "previ"]
         if len(args) >= 3:
             sub_command = args[2]
 
@@ -399,7 +406,7 @@ if command == "column":
         column_show()
     if sub_command == "next":
         column_next()
-    if sub_command == "previous":
+    if sub_command == "prev":
         column_previous()
 
 
