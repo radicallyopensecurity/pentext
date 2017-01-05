@@ -5,6 +5,7 @@ def error(message):
 import sys
 import os
 import tempfile
+from urllib2 import URLError
 
 try:
     from kanboard import Kanboard
@@ -47,7 +48,6 @@ class KanboardAdapter():
             exit(-1)
 
         self.description = task["description"].split("\r\n")
-
         # At this point the kbb project, the task and the description are loaded
 
     def get_columns(self):
@@ -377,37 +377,35 @@ kb_user                = os.environ.get("KB_USER")
 kb_apikey              = os.environ.get("KB_APIKEY")
 checklist_template_url = os.environ.get("CHECKLIST_TEMPLATE_URL")
 
-validate_env_vars()
+try:
+    validate_env_vars()
 
-# Process command line:
-# Fills command, sub_command and argument (in case of toggle)
-process_cmdline_arguments(sys.argv[1:])
+    # Process command line:
+    # Fills command, sub_command and argument (in case of toggle)
+    process_cmdline_arguments(sys.argv[1:])
 
-adapter     = KanboardAdapter("Pentesting", kanboard_task)
+    adapter = KanboardAdapter("Pentesting", kanboard_task)
 
+    if command == "checklist":
+        if sub_command == "show":
+            checklist_show()
+        if sub_command == "toggle":
+            checklist_toggle(argument)
 
+    if command == "column":
+        if sub_command == "show":
+            column_show()
+        if sub_command == "next":
+            column_next()
+        if sub_command == "prev":
+            column_previous()
 
-
-
-# Debug reut WARNING THIS MAY SHOW UP IN A RC CHANNEL, FOR EVERYONE TO SEE
-# print kanboard_task
-# print command
-# print sub_command
-# print argument
-
-if command == "checklist":
-    if sub_command == "show":
-        checklist_show()
-    if sub_command == "toggle":
-        checklist_toggle(argument)
-
-if command == "column":
-    if sub_command == "show":
-        column_show()
-    if sub_command == "next":
-        column_next()
-    if sub_command == "prev":
-        column_previous()
+except URLError as e:
+    error("An exception has occured while initializing the kanboard adapter: [%s]. Please check the required environment variables." % (e.reason))
+    exit(-1)
+except Exception as e:
+    error("A general exception has occured: [%s]." % (e.message))
+    exit(-1)
 
 
 
