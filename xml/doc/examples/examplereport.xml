@@ -121,6 +121,19 @@ who is also the co-founder/CEO of Radically Open Security.</bio>
                         <generate_recommendations/>
                         <!-- generated from Findings section -->
                 </section>
+                <section id="dataSummary">
+                        <title>Charts</title>
+                        <section id="threatlevelpie">
+                                <title>Findings by Threat Level</title>
+                        <generate_piechart pieAttr="threatLevel" pieElem="finding" pieHeight="200"/>
+                        </section>
+                        <section id="typepie">
+                                <title>Findings by Type</title>
+                        <generate_piechart pieAttr="type" pieElem="finding" pieHeight="200"/>
+                        </section>
+                        
+                        <!-- generated from Findings section -->
+                </section>
         </section>
         
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="snippets/report/methodology.xml"/>
@@ -232,7 +245,21 @@ Raw packets sent: 1681 (73.962KB) | Rcvd: 1681 (77.322KB)</pre>
                                 </recommendation>
                         </finding>
                         
-                        
+                        <finding id="f3" threatLevel="Low" type="XSS">
+                                <title>A not quite so terrible XSS issue</title>
+                                <description>
+                                        <p>A description of the problem.</p>
+                                </description>
+                                <technicaldescription>
+                                        <p>Vulnerability described in detail.</p>
+                                </technicaldescription>
+                                <impact>
+                                        <p>Impact on security.</p>
+                                </impact>
+                                <recommendation>
+                                        <p>A ready solution.</p>
+                                </recommendation>
+                        </finding>
                 </section>
                 
                 <section id="nonFindings">
