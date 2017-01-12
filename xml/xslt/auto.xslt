@@ -518,7 +518,7 @@
                             <!-- PIE CHART LEGEND -->
                             <fo:table-cell>
                                 <fo:block>
-                                    <fo:table>
+                                    <fo:table xsl:use-attribute-sets="pieLegendTable">
                                         <fo:table-column column-width="20px"/>
                                         <fo:table-column/>
                                         <fo:table-body>
