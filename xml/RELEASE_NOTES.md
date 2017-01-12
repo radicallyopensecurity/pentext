@@ -1,6 +1,13 @@
 RELEASE NOTES
 =============
 
+January 12th, 2017
+------------------
+
+###Pie charts
+
+You can now generate pie charts for any countable data that might be in the report. You can do so using the element `<generate_piechart pieAttr="x" pieElem="y" pieHeight="z">`, where `x` is the attribute value of any element `y` in the document (useful charts would be `threatLevel` for `x` and `finding` for `y` to show a pie chart of the share of findings by threat level, or `type` for `x` and `finding` for `y` to show a pie chart of the share of findings by type). The height (and width) of the pie is set in the pieHeight attribute, where `z` is the height of the pie chart in px.
+
 August 25th, 2016
 -----------------
 
