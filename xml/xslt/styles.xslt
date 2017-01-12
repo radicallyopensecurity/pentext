@@ -241,6 +241,9 @@
     <xsl:attribute-set name="table">
         <xsl:attribute name="margin-bottom" select="$small-space"/>
     </xsl:attribute-set>
+    <xsl:attribute-set name="pieLegendTable">
+        <xsl:attribute name="background-color">#eeeeee</xsl:attribute>
+    </xsl:attribute-set>
     
     <!-- lists -->
     <xsl:attribute-set name="li">
@@ -270,7 +273,7 @@
     </xsl:attribute-set>
     
     <!-- Misc (invoice) -->
-    <xsl:attribute-set name="orange-text">
+    <xsl:attribute-set name="orange-text"><!-- 'silver' is #c0c0c0 -->
         <xsl:attribute name="color">#FF5C00</xsl:attribute>
     </xsl:attribute-set>
      <xsl:attribute-set name="align-right">
