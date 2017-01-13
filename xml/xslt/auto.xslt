@@ -615,19 +615,19 @@
         <xsl:variable name="text_y"
             select="math:cos(3.1415292 * (($angle - $part_half) div 180.0)) * ($radius * 0.8)"/>
         <xsl:variable name="text_line_x"
-            select="math:sin(3.1415292 * (($angle - $part_half) div 180.0)) * ($radius * 1.1)"/>
+            select="math:sin(3.1415292 * (($angle - $part_half) div 180.0)) * ($radius * 1.15)"/>
         <xsl:variable name="text_line_y"
-            select="math:cos(3.1415292 * (($angle - $part_half) div 180.0)) * ($radius * 1.1)"/>
-        <!--we either put it on the pie or have a line pointing into the slice, depending on how thick the slice is-->
+            select="math:cos(3.1415292 * (($angle - $part_half) div 180.0)) * ($radius * 1.15)"/>
+        <!--we either put it on the edge of the pie directly or have a line pointing into the slice, depending on how thick the slice is-->
         <xsl:choose>
-            <xsl:when test="$percentage >= 4">
-                <!--on the cream-->
-                <svg:text text-anchor="middle" xsl:use-attribute-sets="DefaultFont">
+            <xsl:when test="$percentage >= 3.5">
+                <!--on the edge-->
+                <svg:text text-anchor="middle" xsl:use-attribute-sets="TableFont">
                     <xsl:attribute name="x">
-                        <xsl:value-of select="$middle_x + $text_x"/>
+                        <xsl:value-of select="$middle_x + $text_line_x"/>
                     </xsl:attribute>
                     <xsl:attribute name="y">
-                        <xsl:value-of select="$middle_y - $text_y"/>
+                        <xsl:value-of select="$middle_y - $text_line_y"/>
                     </xsl:attribute>
                     <xsl:value-of select="format-number($percentage, '##,##0.0')"/>
                     <xsl:text>%</xsl:text>
@@ -635,17 +635,32 @@
             </xsl:when>
             <xsl:otherwise>
                 <!--extra line pointing into the slice-->
+                <xsl:variable name="line_dir">
+                    <xsl:choose>
+                        <!--when in the first half of the pie, have the line point to the right, otherwise to the left -->
+                        <xsl:when test="$angle &lt;= 180">+10</xsl:when>
+                        <xsl:otherwise>-10</xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                <xsl:variable name="text_x_relative_to_line">
+                    <xsl:choose>
+                        <!--when in the first half of the pie, have the text be on the right of the line, otherwise on the left -->
+                        <xsl:when test="$angle &lt;= 180"><xsl:value-of select="$middle_x + $text_line_x + $line_dir * 2 + 11"/></xsl:when>
+                        <xsl:otherwise><xsl:value-of select="$middle_x + $text_line_x - 11"/></xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
                 <svg:path stroke="black" stroke-width="1" stroke-linejoin="round">
                     <xsl:attribute name="fill">none</xsl:attribute>
                     <xsl:attribute name="d">
                         <xsl:value-of
-                            select="concat('M', ' ', $middle_x + $text_x, ',', $middle_y - $text_y, ' ', 'L', ' ', $middle_x + $text_line_x, ',', $middle_y - $text_line_y, ' ', 'H', ' ', $middle_x + $text_line_x - 10)"
+                            select="concat('M', ' ', $middle_x + $text_x, ',', $middle_y - $text_y, ' ', 'L', ' ', $middle_x + $text_line_x, ',', $middle_y - $text_line_y, ' ', 'H', ' ', $middle_x + $text_line_x + $line_dir)"
                         />
                     </xsl:attribute>
                 </svg:path>
-                <svg:text text-anchor="end" xsl:use-attribute-sets="DefaultFont">
+                <svg:text text-anchor="end" xsl:use-attribute-sets="TableFont">
                     <xsl:attribute name="x">
-                        <xsl:value-of select="$middle_x + $text_line_x - 11"/>
+                        <!-- placement of text depends on where extra line is pointing -->
+                        <xsl:value-of select="$text_x_relative_to_line"/>
                     </xsl:attribute>
                     <xsl:attribute name="y">
                         <xsl:value-of select="$middle_y - $text_line_y + 1"/>
@@ -655,6 +670,16 @@
                 </svg:text>
             </xsl:otherwise>
         </xsl:choose>
+        <!--<svg:text text-anchor="middle" xsl:use-attribute-sets="DefaultFont">
+                    <xsl:attribute name="x">
+                        <xsl:value-of select="$middle_x + $text_line_x"/>
+                    </xsl:attribute>
+                    <xsl:attribute name="y">
+                        <xsl:value-of select="$middle_y - $text_line_y"/>
+                    </xsl:attribute>
+                    <xsl:value-of select="format-number($percentage, '##,##0.0')"/>
+                    <xsl:text>%</xsl:text>
+                </svg:text>-->
         <!--loop until we reach the first part-->
         <xsl:if test="$position > 1">
             <xsl:call-template name="pie_chart_slice">
