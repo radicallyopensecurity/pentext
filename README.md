@@ -29,7 +29,7 @@ Listo! That's all you need. Now you can build PDF reports using the content.
 
 ### Toolchain
 To convert the XML content into PDF files the tools the *Apache FOP* library and the *Java* library *Saxon* will be used
-It is easiest to install the toolchain using Ansible: check out the role PeterMosmans.docbuilder (https://galaxy.ansible.com/PeterMosmans/docbuilder/)
+It is easiest to install the toolchain using Ansible: https://github.com/radicallyopensecurity/docbuilder
 
 To edit (and view) the content you'll need a XML editor - which could be any text editor like *JEdit*, to a full IDE- for editing of course ;). Preferably something that can check XML file validity. To view the resulting PDF files a PDF viewer is necessary. 
 
