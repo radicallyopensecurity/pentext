@@ -7,7 +7,7 @@ Gitlab bridge for PenText: imports and updates gitlab issues into PenText
 This script is part of the PenText framework
                            https://pentext.org
 
-   Copyright (C) 2016      Radically Open Security
+   Copyright (C) 2016-2017 Radically Open Security
                            https://www.radicallyopensecurity.com
 
                 Author(s): Peter Mosmans
@@ -150,9 +150,9 @@ def list_issues(gitserver, options):
                                                    per_page=99):
             if issue.state == 'closed' and not options['closed']:
                 continue
-            if 'finding' in issue.labels:
+            if 'finding' in [x.lower() for x in issue.labels]:
                 add_finding(issue, options)
-            if 'non-finding' in issue.labels:
+            if 'non-finding' in [x.lower() for x in issue.labels]:
                 add_non_finding(issue, options)
     except Exception as exception:
         print_error('could not find any issues ({0})'.format(exception), -1)
@@ -176,7 +176,7 @@ def parse_arguments():
         description=textwrap.dedent('''\
 gitlab-to-pentext - imports and updates gitlab issues into PenText (XML) format
 
-Copyright (C) 2015-2016  Radically Open Security (Peter Mosmans)
+Copyright (C) 2015-2017  Radically Open Security (Peter Mosmans)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
