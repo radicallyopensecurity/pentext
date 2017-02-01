@@ -85,7 +85,7 @@
                         </fo:table-cell>
                         <fo:table-cell xsl:use-attribute-sets="td">
                             <fo:block>
-                                <xsl:value-of select="permission_parties/client/full_name"/>
+                                <xsl:value-of select="//client/full_name"/>
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>
