@@ -41,7 +41,7 @@ def add_finding(issue, options):
                                           title), options)
     threatLevel = 'Moderate'
     finding_type = 'TODO'
-    finding_id = '{0}-{1}'.format(issue.iid, valid_filename(title))
+    finding_id = 'f{0}-{1}'.format(issue.iid, valid_filename(title))
     filename = 'findings/{0}.xml'.format(finding_id)
     finding = collections.OrderedDict()
     finding['title'] = title
