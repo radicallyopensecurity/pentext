@@ -406,11 +406,25 @@
     </xsl:template>
 
     <xsl:template match="generate_piechart">
+        <xsl:choose>
+            <xsl:when test="//finding">
+                <!-- only generate pie chart if there are findings in the report - otherwise we get into trouble with empty percentages and divisions by zero -->
+                <xsl:call-template name="do_generate_piechart">
+                    <xsl:with-param name="pieAttr" select="@pieAttr"/>
+                    <xsl:with-param name="pieElem" select="@pieElem"/>
+                    <xsl:with-param name="pieHeight" select="@pieHeight"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise><fo:block xsl:use-attribute-sets="errortext">Pie chart can only be generated when there are findings in the report. Get to work! ;)</fo:block></xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="do_generate_piechart">
         <!-- Get the numbers -->
         <!-- generate_piechart @type="type" or "threatLevel" -->
-        <xsl:variable name="pieAttr" select="@pieAttr"/>
-        <xsl:variable name="pieElem" select="@pieElem"/>
-        <xsl:variable name="pieHeight" as="xs:integer" select="@pieHeight"/>
+        <xsl:param name="pieAttr" select="@pieAttr"/>
+        <xsl:param name="pieElem" select="@pieElem"/>
+        <xsl:param name="pieHeight" as="xs:integer" select="@pieHeight"/>
         <xsl:variable name="pieTotal" select="count(//*[local-name() = $pieElem])"/>
         <!-- Create generic nodeset with values -->
         <xsl:variable name="unsortedPieTable">
