@@ -37,10 +37,15 @@ The scripts use multiple environment variables, that can be set by the user unde
 
 ## Prerequisites
 
-The Bash scripts use the python-gitlab command-line interface to talk to the gitlab instance. This interface can be installed using `sudo pip install git+https://github.com/gpocentek/python-gitlab`. Obviously, Python needs to be installed as well.
+### python-gitlab
+The Bash scripts use the *python-gitlab* command-line interface to talk to the gitlab instance. This interface can be installed using `sudo pip install git+https://github.com/gpocentek/python-gitlab`. Obviously, Python needs to be installed as well.
 This command line interface expects a configuration file `.python-gitlab.cfg` for the user under which rosbot is running, which it uses to connect to gitlab. Make sure it contains the correct details so that you can connect to gitlab.
 
-If you want to convert and build documents, the pentext toolchain is necessary. Use the ansible playbook https://galaxy.ansible.com/PeterMosmans/docbuilder/ or install the tools (Java, Saxon and Apache FOP) by hand, see https://github.com/radicallyopensecurity/pentext/blob/master/xml/doc/Tools%20manual.md for more information.
+If you want to convert and build documents, the pentext toolchain is necessary. Use the Ansible playbook https://galaxy.ansible.com/PeterMosmans/docbuilder/ or install the tools (Java, Saxon and Apache FOP) by hand, see https://github.com/radicallyopensecurity/pentext/blob/master/xml/doc/Tools%20manual.md for more information.
+
+### Python libraries
+Pandoc is necessary in order to automatically convert gitlab issues written in markdown to XML format.
+The *pypandoc* library is also necessary: `sudo pip install pypandoc`.
 
 ## Test the configuration
 Test out whether the configuration is successful by manually executing the Bash script [bash/test_pentext](bash/test_pentext) - this should return an OK.
