@@ -24,28 +24,27 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import argparse
-import collections
 import os
 import sys
 import textwrap
 
 try:
     import gitlab
-    import jxmlease
+    import pypandoc
     # Path of this script. The validate_report module is on the same path.
     sys.path.append(os.path.dirname(__file__))
     import validate_report
 except ImportError as exception:
-    print('[-] This script needs python-gitlab, jxmlease and validate_report library',
+    print('[-] This script needs python-gitlab, pypandoc and validate_report library',
           file=sys.stderr)
     print("validate_report is part of the pentext framework", file=sys.stderr)
     print("Install python-gitlab with: sudo pip install python-gitlab", file=sys.stderr)
-    print("Install jxmlease with: sudo pip install jxmlease", file=sys.stderr)
-    print("", file=sys.stderr)
+    print("Install pypandoc with: sudo pip install pypandoc\n", file=sys.stderr)
     print("Currently missing: " + exception.message, file=sys.stderr)
     sys.exit(-1)
 
-
+DECLARATION = '<?xml version="1.0" encoding="utf-8"?>\n'
+    
 def add_finding(issue, options):
     """
     Writes issue as XML finding to file.
@@ -57,26 +56,21 @@ def add_finding(issue, options):
     finding_type = 'TODO'
     finding_id = '{0}-{1}'.format(issue.iid, valid_filename(title))
     filename = 'findings/{0}.xml'.format(finding_id)
-    finding = collections.OrderedDict()
-    finding['title'] = title
-    finding['description'] = unicode.replace(issue.description,
-                                             '\r\n', '\n')
-    finding['technicaldescription'] = ''
+    finding = u'<title>{0}</title>\n'.format(title)
+    finding += '<description>{0}\n</description>\n'.format(convert_text(issue.description))
+    technical_description = ''
     for note in [x for x in issue.notes.list() if not x.system]:
-        finding['technicaldescription'] += unicode.replace(note.body,
-                                                           '\r\n', '\n')
-    finding['impact'] = {}
-    finding['impact']['p'] = 'TODO'
-    finding['recommendation'] = {}
-    finding['recommendation']['ul'] = {}
-    finding['recommendation']['ul']['li'] = 'TODO'
-    finding_xml = jxmlease.XMLDictNode(finding, tag='finding',
-                                       xml_attrs={'id': finding_id,
-                                                  'threatLevel': threat_level,
-                                                  'type': finding_type})
+        technical_description += u'{0}\n'.format(convert_text(note.body))
+    finding += '<technicaldescription>\n{0}\n</technicaldescription>\n'.format(technical_description)
+    finding += '<impact>\nTODO\n</impact>\n'
+    finding += '<recommendation>\n<ul>\n<li>\nTODO\n</li>\n</ul>\n</recommendation>\n'
+    finding = u'{0}<finding id="{1}" threatLevel="{2}" type="{3}">\n{4}\n</finding>'.format(DECLARATION,
+                                                                                            finding_id,
+                                                                                            threat_level,
+                                                                                            finding_type,
+                                                                                            finding)
     if options['dry_run']:
-        print_line('[+] {0}'.format(filename))
-        print(finding_xml.emit_xml())
+        print_line('[+] {0}\n{1}'.format(filename, finding))
     else:
         if os.path.isfile(filename) and not options['overwrite']:
             print_line('Finding {0} already exists (use --overwrite to overwrite)'.
@@ -84,8 +78,15 @@ def add_finding(issue, options):
         else:
             if options['y'] or ask_permission('Create file ' + filename):
                 with open(filename, 'w') as xmlfile:
-                    xmlfile.write(finding_xml.emit_xml().encode('utf-8'))
-                print_line('[+] Created {0}'.format(filename))
+                    xmlfile.write(finding)
+                    print_line('[+] Created {0}'.format(filename))
+
+
+def convert_text(text):
+    """
+    Convert (gitlab) markdown to 'XML' (actually HTML5).
+    """
+    return unicode.replace(pypandoc.convert_text(text, 'html5', format='markdown_github'), '\r\n', '\n')
 
 
 def add_non_finding(issue, options):
@@ -97,18 +98,15 @@ def add_non_finding(issue, options):
                                           title), options)
     non_finding_id = '{0}-{1}'.format(issue.iid, valid_filename(title))
     filename = 'non-findings/{0}.xml'.format(non_finding_id)
-    non_finding = collections.OrderedDict()
-    non_finding['title'] = title
-    non_finding['p'] = unicode.replace(issue.description,
-                                       '\r\n', '\n')
+    non_finding = u'<title>{0}</title>\n{1}\n'.format(title,
+                                                      convert_text(issue.description))
     for note in [x for x in issue.notes.list() if not x.system]:
-        non_finding['p'] += unicode.replace(note.body,
-                                            '\r\n', '\n')
-    non_finding_xml = jxmlease.XMLDictNode(non_finding, tag='non-finding',
-                                           xml_attrs={'id': non_finding_id})
+        non_finding += u'<p>{0}</p>\n'.format(convert_text(note.body))
+    non_finding = u'{0}<non-finding id="{1}">\n{2}\n</non-finding>\n'.format(DECLARATION,
+                                                                             non_finding_id,
+                                                                             non_finding)
     if options['dry_run']:
-        print_line('[+] {0}'.format(filename))
-        print(non_finding_xml.emit_xml())
+        print_line('[+] {0}\n{1}'.format(filename, non_finding))
     else:
         if os.path.isfile(filename) and not options['overwrite']:
             print_line('Non-finding {0} already exists (use --overwrite to overwrite)'.
@@ -116,8 +114,8 @@ def add_non_finding(issue, options):
         else:
             if options['y'] or ask_permission('Create file ' + filename):
                 with open(filename, 'w') as xmlfile:
-                    xmlfile.write(non_finding_xml.emit_xml().encode('utf-8'))
-                print_line('[+] Created {0}'.format(filename))
+                    xmlfile.write(non_finding)
+                    print_line('[+] Created {0}'.format(filename))
 
 
 def ask_permission(question):
@@ -128,26 +126,13 @@ def ask_permission(question):
     return raw_input().lower() == 'y'
 
 
-def convert_markdown(text):
-    """
-    Replace markdown monospace with monospace tags
-    """
-    result = text
-    return result
-    # print('EXAMINING ' + text + ' END')
-    # monospace = re.findall("\`\`\`(.*?)\`\`\`", text, re.DOTALL)
-    # if len(monospace):
-    #     result = {}
-    #     result['monospace'] = ''.join(monospace)
-
-
 def list_issues(gitserver, options):
     """
     Lists all issues for options['issues']
     """
     try:
         for issue in gitserver.project_issues.list(project_id=options['issues'],
-                                                   per_page=99):
+                                                   per_page=999):
             if issue.state == 'closed' and not options['closed']:
                 continue
             if 'finding' in [x.lower() for x in issue.labels]:
