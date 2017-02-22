@@ -58,13 +58,21 @@ def add_finding(issue, options):
     filename = 'findings/{0}.xml'.format(finding_id)
     finding = u'<title>{0}</title>\n'.format(title)
     finding += '<description>{0}\n</description>\n'.format(convert_text(issue.description))
+    impact = 'TODO'
+    recommendation = '<ul>\n<li>\nTODO\n</li>\n</ul>\n';
     technical_description = ''
-    for note in [x for x in issue.notes.list() if not x.system]:
-        technical_description += u'{0}\n'.format(convert_text(note.body))
-    finding += '<technicaldescription>\n{0}\n</technicaldescription>\n'.format(technical_description)
-    finding += '<impact>\nTODO\n</impact>\n'
-    finding += '<recommendation>\n<ul>\n<li>\nTODO\n</li>\n</ul>\n</recommendation>\n'
-    finding = u'{0}<finding id="{1}" threatLevel="{2}" type="{3}">\n{4}\n</finding>'.format(DECLARATION,
+    for note in [x for x in reversed(issue.notes.list()) if not x.system]:
+        if len(note.body.splitlines()):
+            if 'impact' in note.body.split()[0].lower():
+                impact = convert_text(''.join(note.body.splitlines(True)[1:]))
+            elif 'recommendation' in note.body.split()[0].lower():
+                recommendation = convert_text(''.join(note.body.splitlines(True)[1:]))
+            else:
+                technical_description += u'{0}\n'.format(convert_text(note.body))
+    finding += '<technicaldescription>\n{0}\n</technicaldescription>\n\n'.format(technical_description)
+    finding += '<impact>\n{0}\n</impact>\n\n'.format(impact)
+    finding += '<recommendation>\n{0}\n</recommendation>\n\n'.format(recommendation)
+    finding = u'{0}<finding id="{1}" threatLevel="{2}" type="{3}">\n{4}</finding>'.format(DECLARATION,
                                                                                             finding_id,
                                                                                             threat_level,
                                                                                             finding_type,
@@ -100,7 +108,7 @@ def add_non_finding(issue, options):
     filename = 'non-findings/{0}.xml'.format(non_finding_id)
     non_finding = u'<title>{0}</title>\n{1}\n'.format(title,
                                                       convert_text(issue.description))
-    for note in [x for x in issue.notes.list() if not x.system]:
+    for note in [x for x in reversed(issue.notes.list()) if not x.system]:
         non_finding += u'<p>{0}</p>\n'.format(convert_text(note.body))
     non_finding = u'{0}<non-finding id="{1}">\n{2}\n</non-finding>\n'.format(DECLARATION,
                                                                              non_finding_id,
@@ -191,6 +199,7 @@ def preflight_checks():
     Checks if all tools are there.
     Exits with 0 if everything went okilydokily.
     """
+    gitserver = None
     try:
         gitserver = gitlab.Gitlab.from_config('remote')
         gitserver.auth()
