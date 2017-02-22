@@ -54,7 +54,7 @@ def add_finding(issue, options):
                                           title), options)
     threat_level = 'Moderate'
     finding_type = 'TODO'
-    finding_id = '{0}-{1}'.format(issue.iid, valid_filename(title))
+    finding_id = 'f{0}-{1}'.format(issue.iid, valid_filename(title))
     filename = 'findings/{0}.xml'.format(finding_id)
     finding = u'<title>{0}</title>\n'.format(title)
     finding += '<description>{0}\n</description>\n'.format(convert_text(issue.description))
@@ -104,7 +104,7 @@ def add_non_finding(issue, options):
     title = validate_report.capitalize(issue.title.strip())
     print_status('{0} - {1} - {2}'.format(issue.state, issue.labels,
                                           title), options)
-    non_finding_id = '{0}-{1}'.format(issue.iid, valid_filename(title))
+    non_finding_id = 'nf{0}-{1}'.format(issue.iid, valid_filename(title))
     filename = 'non-findings/{0}.xml'.format(non_finding_id)
     non_finding = u'<title>{0}</title>\n{1}\n'.format(title,
                                                       convert_text(issue.description))
