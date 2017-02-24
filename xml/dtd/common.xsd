@@ -292,15 +292,7 @@
   <xs:element name="pre">
     <xs:complexType mixed="true">
       <xs:choice>
-        <xs:group ref="inline-except-monospace"/>
-        <xs:group ref="placeholders"/>
-      </xs:choice>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="code">
-    <xs:complexType mixed="true">
-      <xs:choice>
-        <xs:group ref="inline-except-monospace"/>
+        <xs:group ref="inline-except-code"/>
         <xs:group ref="placeholders"/>
       </xs:choice>
     </xs:complexType>
@@ -367,10 +359,10 @@
       </xs:choice>
     </xs:complexType>
   </xs:element>
-  <xs:element name="monospace">
+  <xs:element name="code">
     <xs:complexType mixed="true">
       <xs:choice maxOccurs="unbounded">
-        <xs:group ref="inline-except-monospace"/>
+        <xs:group ref="inline-except-code"/>
         <xs:group ref="placeholders"/>
       </xs:choice>
     </xs:complexType>
@@ -499,7 +491,7 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="i"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="b"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="u"/>
-      <xs:element minOccurs="0" maxOccurs="unbounded" ref="monospace"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="code"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sup"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
@@ -513,7 +505,7 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="i"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="b"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="u"/>
-      <xs:element minOccurs="0" maxOccurs="unbounded" ref="monospace"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="code"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sup"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
@@ -525,7 +517,7 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="br"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="i"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="u"/>
-      <xs:element minOccurs="0" maxOccurs="unbounded" ref="monospace"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="code"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sup"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
@@ -539,7 +531,7 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="i"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="u"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="b"/>
-      <xs:element minOccurs="0" maxOccurs="unbounded" ref="monospace"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="code"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="fnref"/>
@@ -552,7 +544,7 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="i"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="u"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="b"/>
-      <xs:element minOccurs="0" maxOccurs="unbounded" ref="monospace"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="code"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sup"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="fnref"/>
@@ -564,7 +556,7 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="br"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="b"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="u"/>
-      <xs:element minOccurs="0" maxOccurs="unbounded" ref="monospace"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="code"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sup"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
@@ -577,14 +569,14 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="br"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="i"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="b"/>
-      <xs:element minOccurs="0" maxOccurs="unbounded" ref="monospace"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="code"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sup"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="fnref"/>
     </xs:choice>
   </xs:group>
-  <xs:group name="inline-except-monospace">
+  <xs:group name="inline-except-code">
     <xs:choice>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="a"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="br"/>

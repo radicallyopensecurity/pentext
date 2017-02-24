@@ -14,6 +14,13 @@ The summary table is now ordered on threat level severity and each finding ID in
 
 Generated links (e.g. `<a href="#finding1"/>`) now have an optional attribute `@includepage` which can be set to `yes` or `no` (default is `yes`). If set to `yes`, the link will be generated as it was up till now (e.g. "SID-001 (page 4)"); if set to `no`, the link will be generated without the page number in parenthesis.
 
+###The big pre/code/monospace switch
+
+To have better compatibility with HTML and markdown-to-xml scripts, we have slimmed down and mixed up the `<pre>`, `<code>` and `<monospace>` tags. I tried to describe what was what and is now something else, but it became way too confusing. To keep it simple, just know this:
+
+- `<pre>` is for **terminal output and code blocks**, just like the triple back-tick (```) in markdown
+- `<code>` is for the **inline monospace font**, just like the single back-tick (`) in markdown
+
 January 12th, 2017
 ------------------
 
