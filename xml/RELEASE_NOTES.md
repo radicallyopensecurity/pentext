@@ -1,6 +1,19 @@
 RELEASE NOTES
 =============
 
+February 24th, 2017
+-------------------
+
+###Pie chart linking
+
+All pie charts now show a finding count in the legend label.
+
+The threat level pie chart legend finding count now additionally links to the summary table.
+
+The summary table is now ordered on threat level severity and each finding ID in the table links to the actual finding.
+
+Generated links (e.g. `<a href="#finding1"/>`) now have an optional attribute `@includepage` which can be set to `yes` or `no` (default is `yes`). If set to `yes`, the link will be generated as it was up till now (e.g. "SID-001 (page 4)"); if set to `no`, the link will be generated without the page number in parenthesis.
+
 January 12th, 2017
 ------------------
 
