@@ -81,7 +81,6 @@
         <xs:choice maxOccurs="unbounded">
           <xs:element name="p" type="block"/>
           <xs:element ref="pre"/>
-          <xs:element ref="code"/>
           <xs:element ref="table"/>
           <xs:element ref="ol"/>
           <xs:element ref="ul"/>
@@ -150,7 +149,6 @@
         <xs:element ref="title"/>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element ref="pre"/>
-          <xs:element ref="code"/>
           <xs:element name="p" type="block"/>
           <xs:element ref="section"/>
           <xs:element ref="table"/>

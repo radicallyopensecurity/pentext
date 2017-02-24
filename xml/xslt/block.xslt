@@ -50,13 +50,6 @@
         </fo:block>
     </xsl:template>
     
-    <xsl:template match="code">
-        <fo:block xsl:use-attribute-sets="code">
-            <xsl:call-template name="checkIfLast"/>
-            <xsl:apply-templates/>
-        </fo:block>
-    </xsl:template>
-    
     <xsl:template match="div"><!-- div doesn't do anything, it's just there to make snippets more flexible -->
         <fo:block>
             <xsl:call-template name="checkIfLast"/>

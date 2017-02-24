@@ -126,15 +126,15 @@
         </fo:inline>
     </xsl:template>
 
-    <xsl:template match="monospace">
+    <xsl:template match="code">
         <xsl:choose>
             <xsl:when test="parent::title">
-                <fo:inline xsl:use-attribute-sets="monospace-title">
+                <fo:inline xsl:use-attribute-sets="code-title">
                     <xsl:apply-templates/>
                 </fo:inline>
             </xsl:when>
             <xsl:otherwise>
-                <fo:inline xsl:use-attribute-sets="monospace">
+                <fo:inline xsl:use-attribute-sets="code">
                     <xsl:apply-templates/>
                 </fo:inline>
             </xsl:otherwise>

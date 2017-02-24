@@ -37,7 +37,7 @@
     <xsl:attribute-set name="TinyFont" use-attribute-sets="DefaultFont">
         <xsl:attribute name="font-size">8pt</xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="CodeFont" use-attribute-sets="DefaultFont">
+    <xsl:attribute-set name="PreFont" use-attribute-sets="DefaultFont">
         <xsl:attribute name="font-family">LiberationMono</xsl:attribute>
         <xsl:attribute name="font-size">10pt</xsl:attribute>
     </xsl:attribute-set><!--
@@ -107,12 +107,12 @@
     <xsl:attribute-set name="underline">
         <xsl:attribute name="text-decoration">underline</xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="monospace" use-attribute-sets="DefaultFont">
+    <xsl:attribute-set name="code" use-attribute-sets="DefaultFont">
         <xsl:attribute name="font-family">LiberationMono</xsl:attribute>
         <xsl:attribute name="font-size">90%</xsl:attribute>
         <xsl:attribute name="background-color">#eeeeee</xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="monospace-title" use-attribute-sets="DefaultFont">
+    <xsl:attribute-set name="code-title" use-attribute-sets="DefaultFont">
         <xsl:attribute name="font-family">LiberationMono</xsl:attribute>
         <xsl:attribute name="font-size">90%</xsl:attribute>
     </xsl:attribute-set>
@@ -149,7 +149,7 @@
             <xsl:value-of select="$very-large-space"/>
         </xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="pre" use-attribute-sets="borders TableFont">
+    <xsl:attribute-set name="pre" use-attribute-sets="borders PreFont">
         <xsl:attribute name="border-style">double</xsl:attribute>
         <xsl:attribute name="border-width">2pt</xsl:attribute>
         <xsl:attribute name="margin-bottom">
@@ -158,9 +158,6 @@
         <xsl:attribute name="white-space-collapse">false</xsl:attribute>
         <xsl:attribute name="linefeed-treatment">preserve</xsl:attribute>
         <xsl:attribute name="white-space-treatment">preserve</xsl:attribute>
-    </xsl:attribute-set>
-    <xsl:attribute-set name="code" use-attribute-sets="borders pre">
-        <xsl:attribute name="font-family">LiberationMono</xsl:attribute>
         <xsl:attribute name="font-size">8pt</xsl:attribute>
         <xsl:attribute name="padding">4pt</xsl:attribute>
     </xsl:attribute-set>
