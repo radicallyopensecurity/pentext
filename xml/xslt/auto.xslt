@@ -36,6 +36,84 @@
     <xsl:template match="generate_findings">
         <xsl:variable name="Ref" select="@Ref"/>
         <xsl:variable name="status" select="@status"/>
+        <xsl:variable name="unsortedFindingSummaryTable">
+            <xsl:for-each-group select="//finding" group-by="@threatLevel">
+                <xsl:for-each select="current-group()">
+                    <findingEntry>
+                        <xsl:attribute name="Ref">
+                            <xsl:value-of select="@Ref"/>
+                        </xsl:attribute>
+                        <xsl:attribute name="status">
+                            <xsl:value-of select="@status"/>
+                        </xsl:attribute>
+                        <xsl:attribute name="findingId">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                        <findingNumber>
+                            <xsl:apply-templates select="." mode="number"/>
+                        </findingNumber>
+                        <findingType>
+                            <xsl:value-of select="@type"/>
+                        </findingType>
+                        <findingDescription>
+                            <xsl:choose>
+                                <xsl:when test="description_summary">
+                                    <xsl:value-of select="description_summary"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:apply-templates select="description" mode="summarytable"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </findingDescription>
+                        <findingThreatLevel>
+                            <xsl:value-of select="current-grouping-key()"/>
+                        </findingThreatLevel>
+                    </findingEntry>
+                </xsl:for-each>
+            </xsl:for-each-group>
+        </xsl:variable>
+        <xsl:variable name="findingSummaryTable">
+            <xsl:for-each select="$unsortedFindingSummaryTable/findingEntry">
+                <xsl:sort data-type="number" order="descending"
+                    select="
+                        (number(findingThreatLevel = 'Extreme') * 10)
+                        + (number(findingThreatLevel = 'High') * 9)
+                        + (number(findingThreatLevel = 'Elevated') * 8)
+                        + (number(findingThreatLevel = 'Moderate') * 7)
+                        + (number(findingThreatLevel = 'Low') * 6)
+                        + (number(findingThreatLevel = 'Unknown') * 3)
+                        + (number(findingThreatLevel = 'N/A') * 1)"/>
+                <findingEntry>
+                    <xsl:attribute name="Ref">
+                            <xsl:value-of select="@Ref"/>
+                        </xsl:attribute>
+                        <xsl:attribute name="status">
+                            <xsl:value-of select="@status"/>
+                        </xsl:attribute>
+                        <xsl:attribute name="findingId">
+                            <xsl:value-of select="@findingId"/>
+                        </xsl:attribute>
+                    <!-- add an id for the first entry of each type so that we can link to it -->
+                    <xsl:if
+                        test="not(preceding-sibling::findingEntry/findingThreatLevel = findingThreatLevel)">
+                        <xsl:attribute name="id">summaryTableThreatLevel<xsl:value-of
+                                select="findingThreatLevel"/></xsl:attribute>
+                    </xsl:if>
+                    <findingNumber>
+                        <xsl:value-of select="findingNumber"/>
+                    </findingNumber>
+                    <findingType>
+                        <xsl:value-of select="findingType"/>
+                    </findingType>
+                    <findingDescription>
+                        <xsl:value-of select="findingDescription"/>
+                    </findingDescription>
+                    <findingThreatLevel>
+                        <xsl:value-of select="findingThreatLevel"/>
+                    </findingThreatLevel>
+                </findingEntry>
+            </xsl:for-each>
+        </xsl:variable>
         <fo:block>
             <fo:table width="100%" table-layout="fixed" xsl:use-attribute-sets="table borders">
                 <xsl:call-template name="checkIfLast"/>
@@ -66,26 +144,26 @@
                         <xsl:when test="@status and @Ref">
                             <!-- Only generate a table for findings in the section with this status AND this Ref -->
                             <xsl:for-each
-                                select="/pentest_report/descendant::finding[@status = $status][ancestor::*[@id = $Ref]]">
+                                select="$findingSummaryTable/findingEntry[@status = $status][ancestor::*[@id = $Ref]]">
                                 <xsl:call-template name="findingsSummaryContent"/>
                             </xsl:for-each>
                         </xsl:when>
                         <xsl:when test="@status and not(@Ref)">
                             <!-- Only generate a table for findings in the section with this status -->
                             <xsl:for-each
-                                select="/pentest_report/descendant::finding[@status = $status]">
+                                select="$findingSummaryTable/findingEntry[@status = $status]">
                                 <xsl:call-template name="findingsSummaryContent"/>
                             </xsl:for-each>
                         </xsl:when>
                         <xsl:when test="@Ref and not(@status)">
                             <!-- Only generate a table for findings in the section with this Ref -->
                             <xsl:for-each
-                                select="/pentest_report/descendant::finding[ancestor::*[@id = $Ref]]">
+                                select="$findingSummaryTable/findingEntry[ancestor::*[@id = $Ref]]">
                                 <xsl:call-template name="findingsSummaryContent"/>
                             </xsl:for-each>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:for-each select="/pentest_report/descendant::finding">
+                            <xsl:for-each select="$findingSummaryTable/findingEntry">
                                 <xsl:call-template name="findingsSummaryContent"/>
                             </xsl:for-each>
                         </xsl:otherwise>
@@ -99,29 +177,30 @@
         <fo:table-row xsl:use-attribute-sets="borders TableFont">
             <fo:table-cell xsl:use-attribute-sets="td">
                 <fo:block>
-                    <xsl:apply-templates select="." mode="number"/>
+                    <xsl:if test="@id">
+                        <xsl:attribute name="id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <fo:basic-link color="blue">
+                        <xsl:attribute name="internal-destination"><xsl:value-of select="@findingId"/></xsl:attribute>
+                        <xsl:value-of select="findingNumber"/>
+                    </fo:basic-link>
                 </fo:block>
             </fo:table-cell>
             <fo:table-cell xsl:use-attribute-sets="td">
                 <fo:block>
-                    <xsl:value-of select="@type"/>
+                    <xsl:value-of select="findingType"/>
                 </fo:block>
             </fo:table-cell>
             <fo:table-cell xsl:use-attribute-sets="td">
                 <fo:block>
-                    <xsl:choose>
-                        <xsl:when test="description_summary">
-                            <xsl:value-of select="description_summary"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:apply-templates select="description" mode="summarytable"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
+                    <xsl:value-of select="findingDescription"/>
                 </fo:block>
             </fo:table-cell>
             <fo:table-cell xsl:use-attribute-sets="td">
                 <fo:block>
-                    <xsl:value-of select="@threatLevel"/>
+                    <xsl:value-of select="findingThreatLevel"/>
                 </fo:block>
             </fo:table-cell>
         </fo:table-row>
@@ -415,10 +494,13 @@
                     <xsl:with-param name="pieHeight" select="@pieHeight"/>
                 </xsl:call-template>
             </xsl:when>
-            <xsl:otherwise><fo:block xsl:use-attribute-sets="errortext">Pie chart can only be generated when there are findings in the report. Get to work! ;)</fo:block></xsl:otherwise>
+            <xsl:otherwise>
+                <fo:block xsl:use-attribute-sets="errortext">Pie chart can only be generated when
+                    there are findings in the report. Get to work! ;)</fo:block>
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template name="do_generate_piechart">
         <!-- Get the numbers -->
         <!-- generate_piechart @type="type" or "threatLevel" -->
@@ -559,6 +641,22 @@
                                                   <fo:table-cell xsl:use-attribute-sets="td">
                                                   <fo:block>
                                                   <xsl:value-of select="pieEntryLabel"/>
+                                                  <xsl:text> (</xsl:text>
+                                                  <!-- for threatLevel legend, link to finding summary table -->
+                                                  <xsl:choose>
+                                                  <xsl:when test="$pieAttr = 'threatLevel'">
+                                                  <fo:basic-link text-decoration="underline">
+                                                  <xsl:attribute name="internal-destination"
+                                                  >summaryTableThreatLevel<xsl:value-of
+                                                  select="pieEntryLabel"/></xsl:attribute>
+                                                  <xsl:value-of select="pieEntryCount"/>
+                                                  </fo:basic-link>
+                                                  </xsl:when>
+                                                  <xsl:otherwise>
+                                                  <xsl:value-of select="pieEntryCount"/>
+                                                  </xsl:otherwise>
+                                                  </xsl:choose>
+                                                  <xsl:text>)</xsl:text>
                                                   </fo:block>
                                                   </fo:table-cell>
                                                 </fo:table-row>
@@ -659,8 +757,12 @@
                 <xsl:variable name="text_x_relative_to_line">
                     <xsl:choose>
                         <!--when in the first half of the pie, have the text be on the right of the line, otherwise on the left -->
-                        <xsl:when test="$angle &lt;= 180"><xsl:value-of select="$middle_x + $text_line_x + $line_dir * 2 + 11"/></xsl:when>
-                        <xsl:otherwise><xsl:value-of select="$middle_x + $text_line_x - 11"/></xsl:otherwise>
+                        <xsl:when test="$angle &lt;= 180">
+                            <xsl:value-of select="$middle_x + $text_line_x + $line_dir * 2 + 11"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="$middle_x + $text_line_x - 11"/>
+                        </xsl:otherwise>
                     </xsl:choose>
                 </xsl:variable>
                 <svg:path stroke="black" stroke-width="1" stroke-linejoin="round">
