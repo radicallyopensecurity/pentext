@@ -105,7 +105,7 @@
     </xs:complexType>
   </xs:element>
 
-<xs:element name="permission_parties">
+  <xs:element name="permission_parties">
     <xs:complexType>
       <xs:sequence>
         <xs:element maxOccurs="1" ref="client"/>
@@ -125,7 +125,7 @@
       <xs:attribute name="id" type="xs:ID"/>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:element name="invoice_rep" type="xs:string"/>
   <xs:element name="invoice_mail" type="emailAddress"/>
 
@@ -242,7 +242,7 @@
       <xs:attribute ref="xml:base"/>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:element name="version_history">
     <xs:complexType>
       <xs:sequence>
@@ -313,6 +313,15 @@
       <xs:simpleContent>
         <xs:extension base="xs:string">
           <xs:attribute name="href" use="required" type="xs:anyURI"/>
+          <xs:attribute name="includepage" use="optional">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="black-box"/>
+                <xs:enumeration value="crystal-box"/>
+                <xs:enumeration value="grey-box"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
         </xs:extension>
       </xs:simpleContent>
     </xs:complexType>
@@ -390,15 +399,15 @@
       </xs:choice>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:element name="biblioentries">
     <xs:complexType>
       <xs:sequence minOccurs="1" maxOccurs="unbounded">
-        <xs:element ref="biblioentry"></xs:element>
+        <xs:element ref="biblioentry"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:element name="biblioentry">
     <xs:complexType>
       <xs:sequence>
@@ -417,7 +426,7 @@
       <xs:attribute name="id" use="required" type="xs:ID"/>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:attribute name="role">
     <xs:simpleType>
       <xs:restriction base="xs:string">
@@ -426,8 +435,8 @@
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
-  
-    <xs:element name="author">
+
+  <xs:element name="author">
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="surname" minOccurs="0" maxOccurs="1"/>
@@ -436,7 +445,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:element name="publisher">
     <xs:complexType>
       <xs:sequence>
@@ -445,7 +454,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:element name="link">
     <xs:complexType>
       <xs:sequence>
@@ -454,15 +463,15 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  
-    <xs:element name="surname" type="xs:string"/>
-    <xs:element name="firstname" type="xs:string"/>
-    <xs:element name="org" type="xs:string"/>
-    <xs:element name="journal" type="xs:string"/>
-    <xs:element name="info" type="xs:string"/>
-    <xs:element name="location" type="xs:string"/>
-    <xs:element name="pubdate" type="xs:string"/>
-    <xs:element name="accessed" type="xs:date"/>
+
+  <xs:element name="surname" type="xs:string"/>
+  <xs:element name="firstname" type="xs:string"/>
+  <xs:element name="org" type="xs:string"/>
+  <xs:element name="journal" type="xs:string"/>
+  <xs:element name="info" type="xs:string"/>
+  <xs:element name="location" type="xs:string"/>
+  <xs:element name="pubdate" type="xs:string"/>
+  <xs:element name="accessed" type="xs:date"/>
 
   <!-- attributes -->
   <xs:attribute name="break">
