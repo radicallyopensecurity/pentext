@@ -56,9 +56,11 @@
                     </xsl:choose>
                 </fo:basic-link>
                 <xsl:if test="starts-with(@href, '#')">
-                    <xsl:text> (page </xsl:text>
+                    <xsl:if test="not(@includepage = 'no')">
+                        <xsl:text> (page </xsl:text>
                     <fo:page-number-citation ref-id="{substring(@href, 2)}"/>
                     <xsl:text>)</xsl:text>
+                    </xsl:if>
                 </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
