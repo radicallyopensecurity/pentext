@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section>
   <title>Introduction</title>
-  <p><client_long/> (hereafter “<b><client_short/></b>”), with its registered office
-  at <client_street/>, <client_city/>, <client_country/>, has requested <company_long/>
-  (hereafter “<b><company_short/></b>”) to perform <company_svc_long/>.
-  The motivation for this request is that <client_short/> wishes to get a better
-  insight into ...</p>
+  <p>
+    <client_long/> (hereafter “<b><client_short/></b>”), with its registered office at
+    <client_street/>, <client_city/>, <client_country/>, has requested <company_long/>
+    (hereafter “<b><company_short/></b>”) to perform <company_svc_long/>.
+  </p>
+  <p>
+    The motivation for this request is that <client_short/> wishes to gain better
+    insight into ...
+  </p>
 
-  <p>This offer sets out the scope of the work and the terms and conditions under
-  which <company_short/> will perform these services.</p>
+  <p>This offer sets out the scope of the work and the terms and conditions
+    under which <company_short/> will perform these services.
+  </p>
 </section>

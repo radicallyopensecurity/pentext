@@ -10,8 +10,8 @@
     impact on the Confidentiality, Integrity and Availability (CIA) of the
     system. We will describe how an attacker would exploit the vulnerability and
     suggest ways of fixing it.
-    <br/>
-    This requires an extensive knowledge of the platform the application is
+  </p>
+  <p>This requires an extensive knowledge of the platform the application is
     running on, as well as the extensive knowledge of the language the
     application in written in and patterns that have been used. Therefore a code
     audit done by highly-trained specialists with a strong background in
@@ -21,7 +21,7 @@
     During the code audit, we take the following approach:
   </p>
   <ol>
-    <li>Thorough comprehension of functionality
+    <li><b>Thorough comprehension of functionality</b>
       <br/>
       We try to get a thorough comprehension of how the application works and
       how it interacts with the user and other systems. Having detailed
@@ -29,7 +29,7 @@
       documentation) at this stage is very helpful, as they aid the
       understanding of the application
     </li>
-    <li>Static analysis
+    <li><b>Static analysis</b>
       <br/>
       Using the understanding we gained in the previous step, we will use static
       code analysis to uncover any vulnerabilities. Static analysis means the
@@ -47,7 +47,7 @@
       assessing the quality of the security measures.
     </li>
 
-    <li>Dynamic analysis
+    <li><b>Dynamic analysis</b>
       <br/>
       Dynamic analysis can also be performed. In this case, the program is run
       and actively exploited by the specialist. This is usually done to confirm
