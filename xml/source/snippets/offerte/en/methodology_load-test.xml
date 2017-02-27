@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section>
-  <!-- for an example load testing offer, ask other writers!-->
   <title>Load testing</title>
   <p>The aim of load testing is to measure what realistic level of performance a
     service deployment is capable of delivering, or whether it meets a specific

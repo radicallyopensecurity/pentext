@@ -20,7 +20,6 @@
     <!-- remove this for non pentesting offers-->
     <p>The workflow of our penetration testing team is modeled on that of a
       Capture The Flag (CTF) team:
-      <!-- remove this for non pentesting offers-->
 
       <company_long/> has a geographically distributed team and we use online
       infrastructure (RocketChat, GitLabs, etc.) to coordinate our work. This

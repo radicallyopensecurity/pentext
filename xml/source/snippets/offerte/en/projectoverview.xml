@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section>
-  <!-- section with an overview of ROS activities -->
   <title>Project Overview</title>
   <p>
     <company_short/> will perform <company_svc_long/> for <client_short/>
