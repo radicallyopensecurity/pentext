@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section>
   <title>Planning and Payment</title>
-  <p><company_short/> will uphold the following dates for the planning of the services:</p>
+  <p>
+    <company_short/>
+    will uphold the following dates for the planning of the services:
+  </p>
   <ul>
-      <li><company_short/> performs a <company_svc_short/> on <p_testingduration/>.</li>
-      <li><company_short/> delivers the final report <p_reportdue/>.</li>
+    <li><company_short/> performs a <company_svc_short/> on <p_testingduration/>.</li>
+    <li><company_short/> delivers the final report <p_reportdue/>.</li>
   </ul>
   <p>
     Our fixed-fee price quote for the above described <company_svc_short/> is <p_fee/>.-

@@ -2,7 +2,7 @@
 <section>
   <title>Prerequisites</title>
   <p>In order to perform this audit, <company_short/> will need access to:</p>
-    <!--Example of most common scenario, change if necessary!! :-->
+    <!-- Example of most common scenario, change as necessary -->
   <ul>
     <li>Test accounts</li>
     <li>Test environment</li>

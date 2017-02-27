@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!--snippet -->
+<?xml version="1.0" encoding="UTF-8"?>
 <section id="crystalboxing">
   <title>The Crystal-Box Pentesting Method</title>
   <p>
@@ -20,4 +20,4 @@
     crystal-box pentesting fits naturally hand-in-hand with the "Peek Over Our
     Shoulder" option that <company_short/> offers to <client_short/>.
   </p>
-</section><!-- end of template -->
+</section>
