@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- This file contains all known information for this client. All elements are MANDATORY. If any piece of information is not available, leave the element empty --><!-- Example <invoice_rep></invoice_rep> -->
+<!-- This file contains all known information for this client. 
+        
+        All elements are MANDATORY. If any piece of information is not available, leave the element empty 
+        
+        Example <invoice_rep></invoice_rep> -->
+
 <client xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../dtd/offerte.xsd" id="client">
   <full_name>Sitting Duck B.V.</full_name>
@@ -18,7 +23,8 @@
   <country>Amazonia</country>
   <coc nationality="Dutch">9999999</coc>
   <!-- chamber of commerce number; if no chamber of commerce number, please delete the whole element -->
-  <invoice_rep>D. Ollars</invoice_rep>
+  <invoice_rep></invoice_rep>
   <invoice_mail>freemoney@sittingduck.com</invoice_mail>
+  <invoice_extra_field></invoice_extra_field>
   <vat_no>0000000000B01</vat_no>
 </client>
