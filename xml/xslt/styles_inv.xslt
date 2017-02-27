@@ -67,7 +67,7 @@
     <xsl:attribute-set name="logo">
         <xsl:attribute name="padding-top">0cm</xsl:attribute>
         <xsl:attribute name="padding-bottom">0cm</xsl:attribute>
-        <xsl:attribute name="src">url(../graphics/logo.png)</xsl:attribute>
+        <xsl:attribute name="src">url(../graphics/logo_alt.png)</xsl:attribute>
         <xsl:attribute name="width">30mm</xsl:attribute>
         <xsl:attribute name="content-width">scale-to-fit</xsl:attribute>
         <xsl:attribute name="content-height">scale-to-fit</xsl:attribute>
