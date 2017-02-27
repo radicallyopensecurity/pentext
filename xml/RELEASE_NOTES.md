@@ -1,6 +1,13 @@
 RELEASE NOTES
 =============
 
+February 27th, 2017
+-------------------
+
+###Optional extra info field in invoices
+
+An extra element with the imaginative name `<invoice_extra_field>` has been added to client_info.xml. In this field you can enter a line requested by the client, such as creditor number, cost centre, internal account number or whatever info they need for their internal administration. If not needed, delete or leave empty.
+
 February 24th, 2017
 -------------------
 
