@@ -354,8 +354,8 @@ def validate_type(tree, filename, options, speller):
         else:
             if attribute == 'threatLevel' and root.attrib[attribute] not in \
                ('Low', 'Moderate', 'Elevated', 'High', 'Extreme'):
-                print('[-] threatLevel is not Low, Moderate, High, Elevated or Extreme: {0}'.
-                      format(root.attrib[attribute]))
+                print('[-] threatLevel is not Low, Moderate, High, Elevated or Extreme: {0} {1}'.
+                      format(filename, root.attrib[attribute]))
                 result = False
             if attribute == 'type' and (options['capitalization'] and not \
                                         is_capitalized(root.attrib[attribute])):
