@@ -299,20 +299,6 @@
                 <fo:table-column column-width="proportional-column-width(75)"
                     xsl:use-attribute-sets="borders"/>
                 <fo:table-body>
-                    <xsl:for-each select="/pentest_report/meta/collaborators/approver">
-                        <fo:table-row xsl:use-attribute-sets="borders">
-                            <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block>
-                                    <xsl:apply-templates select="name"/>
-                                </fo:block>
-                            </fo:table-cell>
-                            <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block>
-                                    <xsl:apply-templates select="bio"/>
-                                </fo:block>
-                            </fo:table-cell>
-                        </fo:table-row>
-                    </xsl:for-each>
                     <xsl:for-each select="/pentest_report/meta/collaborators/pentesters/pentester">
                         <xsl:if
                             test="not(./name = /pentest_report/meta/collaborators/approver/name)">
@@ -329,6 +315,20 @@
                                 </fo:table-cell>
                             </fo:table-row>
                         </xsl:if>
+                    </xsl:for-each>
+                    <xsl:for-each select="/pentest_report/meta/collaborators/approver">
+                        <fo:table-row xsl:use-attribute-sets="borders">
+                            <fo:table-cell xsl:use-attribute-sets="td">
+                                <fo:block>
+                                    <xsl:apply-templates select="name"/>
+                                </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell xsl:use-attribute-sets="td">
+                                <fo:block>
+                                    <xsl:apply-templates select="bio"/>
+                                </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
                     </xsl:for-each>
                 </fo:table-body>
             </fo:table>
