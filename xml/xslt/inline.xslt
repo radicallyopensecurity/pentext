@@ -128,10 +128,14 @@
 
     <xsl:template match="code">
         <xsl:choose>
-            <xsl:when test="parent::title">
+            <xsl:when test="ancestor::title">
                 <fo:inline xsl:use-attribute-sets="code-title">
                     <xsl:apply-templates/>
                 </fo:inline>
+            </xsl:when>
+            <xsl:when test="ancestor::pre">
+                <!-- <code> in <pre> is just <pre> -->
+                <xsl:apply-templates/>
             </xsl:when>
             <xsl:otherwise>
                 <fo:inline xsl:use-attribute-sets="code">
