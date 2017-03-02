@@ -34,6 +34,11 @@ The scripts use multiple environment variables, that can be set by the user unde
 + `GITWEB` :: the URL of the gitlab webinterface (defaults to `https://$GITSERVER`)
 + `NAMESPACE` :: the namespace of the user which is used to set up gitlab repositories (defaults to `ros`)
 + `PENTEXTREPO` :: the location of the PenText repository (defaults to `https://github.com/radicallyopensecurity/pentext`)
++ `KB_USER` :: The username of the kanboard account (required when using the kanboard interface)
++ `KB_APIKEY` :: The API key with which the kanboard account can be user (required when using the kanboard interface)
++ `KB_ENDPOINT` :: The URL of the kanboard API
++ `CHECKLIST_TEMPLATE_URL `:: URL of checklist template. This will be displayed when a checklist isn't available in the KBB task decription.
+
 
 ## Prerequisites
 
@@ -126,3 +131,68 @@ Handled by [bash/handler_invoice](bash/handler_invoice)
 
 
 Usage: `invoice REPO_NAME INVOICE_NO [NAMESPACE [[BRANCH]] [-PARAMETERS]`
+
+###   checklist
+Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
+
+The "checklist" family of commands are used to manipulate the checklist of a kanboard task.
+
+The following commands have been implemented:
+ * checklist show      Shows the checklist for the column the task is in.
+ * checklist toggle    Toggles a certain item
+
+### checklist show
+Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
+
+Shows the checklist for the column the kanboard task is in. It is required that the task's description contains the full checklist.
+The script will connect to kanboard, open the Pentesting project and tries to find the kanboard task. It will then pull the description
+and look for the checklist associated with the column the task is in.
+
+ Usage: `checklist show <kanboard task>`
+  * <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
+  
+###  checklist toggle
+Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
+
+Pulls the checklist from the kanboard task's description and toggles its items
+
+Usage: `checklist toggle <kanboard task> <index>`
+* <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
+* <index>           Should be an integer or comma separated list of integers as indices to the items. Mandatory.
+
+###   column
+Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
+
+The "column" family of commands are used to move a kanboard task across the board.
+
+The following commands are implemented:
+* column show      Shows the column the kanboard task is in
+* column next      Moves the kanboard task to the next column
+* column prev      Moves the kanboard task to the previous column
+
+###   column show
+Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
+
+Shows the column the kanboard task is currently in.
+
+Usage: `column show <kanboard task>`
+* <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
+
+###   column next
+Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
+
+Moves the kanboard task to the next column.
+
+Usage: `column next <kanboard task>`
+* <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
+
+###  column prev
+Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
+
+Moves the kanboard task to the previous column.
+
+Usage: `column prev <kanboard task>`
+* <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
+
+
+
