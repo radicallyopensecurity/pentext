@@ -1,0 +1,15 @@
+{
+    "ignore": [
+        "**/_playground/**",
+        "**/node_modules/**",
+        "**/coverage/**",
+        "**/jasmine/**",
+        "**/test/**",
+        "**/**-min-**",
+        "**/**-min.**",
+        "**/**.min.**"
+    ],
+    "test": [
+        "**/test/**"
+    ]
+}
