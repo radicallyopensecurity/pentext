@@ -267,7 +267,10 @@
         <fo:table-row xsl:use-attribute-sets="TableFont borders">
             <fo:table-cell xsl:use-attribute-sets="td">
                 <fo:block>
-                    <xsl:apply-templates select="." mode="number"/>
+                    <fo:basic-link color="blue">
+                        <xsl:attribute name="internal-destination"><xsl:value-of select="@id"/></xsl:attribute>
+                        <xsl:apply-templates select="." mode="number"/>
+                    </fo:basic-link>
                 </fo:block>
             </fo:table-cell>
             <fo:table-cell xsl:use-attribute-sets="td">
