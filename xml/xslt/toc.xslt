@@ -6,17 +6,26 @@
     <xsl:template match="generate_index">
         <fo:block xsl:use-attribute-sets="title-toc">Table of Contents</fo:block>
         <fo:block xsl:use-attribute-sets="index">
-            <xsl:apply-templates select="/" mode="toc"/>
+            <fo:block>
+                <fo:table width="100%" xsl:use-attribute-sets="toc-block">
+                    <fo:table-column/>
+                    <fo:table-column column-width="7mm"/>
+                    <fo:table-body>
+                        <xsl:apply-templates select="/" mode="toc"/>
+                    </fo:table-body>
+                </fo:table>
+            </fo:block>
         </fo:block>
     </xsl:template>
 
     <xsl:template match="meta | *[ancestor-or-self::*/@visibility = 'hidden']" mode="toc"/>
-    
+
     <!-- meta, hidden things and children of hidden things not indexed -->
 
     <xsl:template
         match="section[not(@visibility = 'hidden')] | finding | appendix[not(@visibility = 'hidden')] | non-finding"
         mode="toc">
+
         <xsl:choose>
             <xsl:when test="$EXEC_SUMMARY = true()">
                 <xsl:if test="ancestor-or-self::*/@inexecsummary = 'yes'">
@@ -27,27 +36,35 @@
                 <xsl:call-template name="ToC"/>
             </xsl:otherwise>
         </xsl:choose>
+
     </xsl:template>
 
     <xsl:template name="ToC">
-        <fo:block xsl:use-attribute-sets="toc-block">
-            <fo:basic-link>
-                <xsl:attribute name="internal-destination">
-                    <xsl:value-of select="@id"/>
-                </xsl:attribute>
-                <xsl:call-template name="tocContent"/>
-            </fo:basic-link>
-            <xsl:text> </xsl:text>
-            <fo:leader leader-pattern="dots" leader-alignment="reference-area"
-                leader-length.maximum="21cm"/>
-            <xsl:text>&#160;</xsl:text>
-            <fo:basic-link>
-                <xsl:attribute name="internal-destination">
-                    <xsl:value-of select="@id"/>
-                </xsl:attribute>
-                <fo:page-number-citation ref-id="{@id}"/>
-            </fo:basic-link>
-        </fo:block>
+        <fo:table-row>
+            <fo:table-cell text-align-last="justify">
+                <fo:block>
+                    <fo:basic-link>
+                        <xsl:attribute name="internal-destination">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                        <xsl:call-template name="tocContent"/>
+                    </fo:basic-link>
+                    <xsl:text>&#xA0;</xsl:text>
+                    <fo:leader leader-pattern="dots" leader-alignment="reference-area"
+                        leader-length.maximum="21cm"/>
+                </fo:block>
+            </fo:table-cell>
+            <fo:table-cell padding-right="3pt" display-align="after">
+                <fo:block text-align="right">
+                    <fo:basic-link>
+                        <xsl:attribute name="internal-destination">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                        <fo:page-number-citation ref-id="{@id}"/>
+                    </fo:basic-link>
+                </fo:block>
+            </fo:table-cell>
+        </fo:table-row>
         <xsl:choose>
             <xsl:when test="$EXEC_SUMMARY = true()">
                 <xsl:apply-templates
