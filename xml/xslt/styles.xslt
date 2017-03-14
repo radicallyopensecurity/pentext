@@ -86,8 +86,6 @@
     </xsl:attribute-set>
     <xsl:attribute-set name="title-toc" use-attribute-sets="title-1">
         <xsl:attribute name="margin-bottom">0cm</xsl:attribute>
-        <xsl:attribute name="padding-right">3pt</xsl:attribute>
-        <!-- this is cheating, need to check if toc page numbers can be rendered in a better way -->
     </xsl:attribute-set>
     <xsl:attribute-set name="img-title">
         <xsl:attribute name="font-style">italic</xsl:attribute>
@@ -250,11 +248,6 @@
     <!-- ToC -->
     <xsl:attribute-set name="index">
         <xsl:attribute name="break-after">page</xsl:attribute>
-    </xsl:attribute-set>
-    
-    <xsl:attribute-set name="toc-block">
-        <xsl:attribute name="text-align-last">justify</xsl:attribute>
-        <xsl:attribute name="padding-right">3pt</xsl:attribute>
     </xsl:attribute-set>
     
     <!-- Contact -->
