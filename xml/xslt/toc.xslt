@@ -7,7 +7,7 @@
         <fo:block xsl:use-attribute-sets="title-toc">Table of Contents</fo:block>
         <fo:block xsl:use-attribute-sets="index">
             <fo:block>
-                <fo:table width="100%" xsl:use-attribute-sets="toc-block">
+                <fo:table width="100%">
                     <fo:table-column/>
                     <fo:table-column column-width="7mm"/>
                     <fo:table-body>
