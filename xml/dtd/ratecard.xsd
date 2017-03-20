@@ -49,7 +49,7 @@
             <xs:element name="client_long"/>
             <xs:element name="client_short"/>
             <xs:element name="client_rate"/>
-            <xs:element name="client_average_rate"/>
+            <xs:element name="generate_average_rate"/>
             <xs:element name="company_long"/>
             <xs:element name="company_short"/>
             <xs:element name="company_poc1"/>
