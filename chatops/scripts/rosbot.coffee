@@ -192,6 +192,13 @@ module.exports = (robot) ->
     cmd = "bash/handler_invoice";
     run_cmd cmd, args, (text) -> msg.send text.replace("\n","");
 
+  robot.respond /ratecard (.*)/i, id:'chatops.ratecard', (msg) ->
+    msg.match[0] = msg.match[0].replace(/^[a-z0-9]+$/i);
+    msg.match.shift();
+    args = msg.match[0].split(" ");
+    cmd = "bash/handler_ratecard";
+    run_cmd cmd, args, (text) -> msg.send text.replace("\n","");
+
   robot.respond /quickscope (.*)/i, id:'chatops.quickscope', (msg) ->
     msg.match[0] = msg.match[0].replace(/^[a-z0-9]+$/i);
     msg.match.shift();
