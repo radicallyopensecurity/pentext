@@ -28,6 +28,7 @@
         <xsl:attribute name="font-family">LiberationSansNarrow</xsl:attribute>
         <xsl:attribute name="font-size">12pt</xsl:attribute>
         <xsl:attribute name="color">black</xsl:attribute>
+        <xsl:attribute name="line-height-shift-adjustment">disregard-shifts</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="HeaderFont" use-attribute-sets="DefaultFont"/>
     <xsl:attribute-set name="FooterFont" use-attribute-sets="DefaultFont"/>

@@ -1,17 +1,41 @@
 RELEASE NOTES
 =============
 
+March 20th, 2017
+----------------
+
+### Rate cards
+
+The file client_info.xml, now accepts standard rates for the client. These can be called from the snippet ratecard.xml to generate a rate card, i.e. a PDF specifying the rates a client can expect to pay. Note that the 'average rate per hour per pentester' indication is currently based on the average of the junior and medior pentester rate, rounded up to the nearest 5, +/- 10.
+
+In client_info.xml, we want the following info (everything except junior and medior pentester is optional, other entries can be added if needed):
+
+```
+<rates denomination="eur" lastrevisiondate="2017-03-01">
+        <rate title="juniorpentester">100</rate>
+        <rate title="mediorpentester">200</rate>
+        <rate title="seniorpentester">500</rate>
+        <rate title="expertpentester">1000</rate>
+        <rate title="juniormanager">100</rate>
+        <rate title="seniormanager">125</rate>
+</rates>
+```
+
+
+Usage: `snippets/ratecard/ratecard.xml --> ratecard.pdf (using generate_ratecard.xsl and fop)`
+
+
 February 27th, 2017
 -------------------
 
-###Optional extra info field in invoices
+### Optional extra info field in invoices
 
 An extra element with the imaginative name `<invoice_extra_field>` has been added to client_info.xml. In this field you can enter a line requested by the client, such as creditor number, cost centre, internal account number or whatever info they need for their internal administration. If not needed, delete or leave empty.
 
 February 24th, 2017
 -------------------
 
-###Pie chart linking
+### Pie chart linking
 
 All pie charts now show a finding count in the legend label.
 
@@ -21,7 +45,7 @@ The summary table is now ordered on threat level severity and each finding ID in
 
 Generated links (e.g. `<a href="#finding1"/>`) now have an optional attribute `@includepage` which can be set to `yes` or `no` (default is `yes`). If set to `yes`, the link will be generated as it was up till now (e.g. "SID-001 (page 4)"); if set to `no`, the link will be generated without the page number in parenthesis.
 
-###The big pre/code/monospace switch
+### The big pre/code/monospace switch
 
 To have better compatibility with HTML and markdown-to-xml scripts, we have slimmed down and mixed up the `<pre>`, `<code>` and `<monospace>` tags. I tried to describe what was what and is now something else, but it became way too confusing. To keep it simple, just know this:
 
@@ -31,7 +55,7 @@ To have better compatibility with HTML and markdown-to-xml scripts, we have slim
 January 12th, 2017
 ------------------
 
-###Pie charts
+### Pie charts
 
 You can now generate pie charts for any countable data that might be in the report. You can do so using the element `<generate_piechart pieAttr="x" pieElem="y" pieHeight="z">`, where `x` is the attribute value of any element `y` in the document (useful charts would be `threatLevel` for `x` and `finding` for `y` to show a pie chart of the share of findings by threat level, or `type` for `x` and `finding` for `y` to show a pie chart of the share of findings by type). The height (and width) of the pie is set in the pieHeight attribute, where `z` is the height of the pie chart in px.
 

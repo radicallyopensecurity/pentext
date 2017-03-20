@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.0" vc:maxVersion="1.1">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+        schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+    <xs:import namespace="http://www.w3.org/2001/XInclude"
+        schemaLocation="http://www.w3.org/2001/XInclude/XInclude.xsd"/>
+    <xs:include schemaLocation="common.xsd"/>
+    <xs:element name="ratecard">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="meta"/>
+                <xs:element ref="title"/>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:element ref="pre"/>
+                    <xs:element name="p" type="block"/>
+                    <xs:element ref="table"/>
+                    <xs:element ref="ul"/>
+                    <xs:element ref="ol"/>
+                    <xs:element ref="img"/>
+                    <xs:element name="div" type="block"/>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute ref="xml:lang"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="meta">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="company"/>
+                <xs:element ref="client"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="generate_raterevisiondate"/>
+    <xs:complexType name="block" mixed="true">
+        <xs:choice maxOccurs="unbounded">
+            <xs:group ref="inline-all"/>
+            <xs:group ref="placeholders"/>
+            <xs:element ref="generate_raterevisiondate"/>
+        </xs:choice>
+        <xs:attribute ref="xml:base"/>
+        <xs:attribute ref="class"/>
+    </xs:complexType>
+    <!-- Placeholders -->
+    <xs:group name="placeholders">
+        <xs:choice>
+            <xs:element name="client_long"/>
+            <xs:element name="client_short"/>
+            <xs:element name="client_rate"/>
+            <xs:element name="client_average_rate"/>
+            <xs:element name="company_long"/>
+            <xs:element name="company_short"/>
+            <xs:element name="company_poc1"/>
+        </xs:choice>
+    </xs:group>
+</xs:schema>

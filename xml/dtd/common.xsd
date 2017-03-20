@@ -99,6 +99,7 @@
         <xs:element ref="invoice_mail"/>
         <xs:element ref="invoice_extra_field" minOccurs="0"/>
         <xs:element ref="vat_no"/>
+        <xs:element ref="rates"/>
       </xs:sequence>
       <xs:attribute ref="xml:base"/>
       <xs:attribute ref="xml:lang"/>
@@ -106,6 +107,24 @@
     </xs:complexType>
   </xs:element>
 
+  <xs:element name="rates">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded" minOccurs="1">
+        <xs:element ref="rate"/>
+      </xs:choice>
+      <xs:attribute ref="denomination"/>
+      <xs:attribute name="lastrevisiondate" type="xs:date"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="rate">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:float">
+          <xs:attribute name="title" type="xs:string"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="permission_parties">
     <xs:complexType>
       <xs:sequence>
@@ -242,8 +261,11 @@
         <xs:element ref="img"/>
       </xs:choice>
       <xs:attribute ref="xml:base"/>
+      <xs:attribute ref="class" use="optional"/>
     </xs:complexType>
   </xs:element>
+  
+  <xs:attribute name="class" type="xs:string"/>
 
   <xs:element name="version_history">
     <xs:complexType>
@@ -426,6 +448,16 @@
       <xs:restriction base="xs:string">
         <xs:enumeration value="book"/>
         <xs:enumeration value="article"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+
+  <xs:attribute name="denomination" default="eur">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="eur"/>
+        <xs:enumeration value="usd"/>
+        <xs:enumeration value="gbp"/>
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
