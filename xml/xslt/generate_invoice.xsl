@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink"
-    xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="xs" version="2.0">
+    xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:my="http://radical.sexy" exclude-result-prefixes="xs my" version="2.0">
 
 
     <xsl:import href="pages.xslt"/>
@@ -72,6 +72,15 @@
             <xsl:with-param name="DATE" select="format-date($DATE, '[MNn] [D1], [Y]', 'en', (), ())"
             />
         </xsl:call-template>
+        <xsl:variable name="serviceDescription">
+            <xsl:value-of select="/offerte/meta/pentestinfo/duration"/><xsl:text>-</xsl:text><xsl:call-template name="getString"><xsl:with-param
+                                        name="stringID" select="'invoice_days'"
+                                    /></xsl:call-template>&#160;<xsl:value-of
+                                    select="/offerte/meta/offered_service_short"
+                                    />&#160;<xsl:value-of
+                                    select="/offerte/meta/permission_parties/client/short_name"
+                                />
+        </xsl:variable>
         <fo:block>
             <fo:table width="100%" table-layout="fixed"
                 xsl:use-attribute-sets="big-space-below table-shading">
@@ -80,14 +89,7 @@
                 <fo:table-body>
                     <fo:table-row>
                         <fo:table-cell xsl:use-attribute-sets="td">
-                            <fo:block><xsl:value-of select="/offerte/meta/pentestinfo/duration"/>-
-                                    <xsl:call-template name="getString"><xsl:with-param
-                                        name="stringID" select="'invoice_days'"
-                                    /></xsl:call-template>&#160;<xsl:value-of
-                                    select="/offerte/meta/offered_service_short"
-                                    />&#160;<xsl:value-of
-                                    select="/offerte/meta/permission_parties/client/short_name"
-                                /></fo:block>
+                            <fo:block><xsl:value-of select="$serviceDescription"/></fo:block>
                         </fo:table-cell>
                         <fo:table-cell xsl:use-attribute-sets="td align-right">
                             <fo:block xsl:use-attribute-sets="p"><xsl:value-of
