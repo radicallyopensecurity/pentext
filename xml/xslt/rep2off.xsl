@@ -6,11 +6,18 @@
 
     <xsl:import href="localisation.xslt"/>
     <xsl:import href="snippets.xslt"/>
-    
+
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
 
-    <xsl:variable name="lang" select="/pentest_report/@xml:lang"/>
+    <xsl:variable name="lang">
+        <xsl:choose>
+            <xsl:when test="/pentest_report/@xml:lang">
+                <xsl:value-of select="/pentest_report/@xml:lang"/>
+            </xsl:when>
+            <xsl:otherwise>en</xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     <xsl:param name="snippetBase" select="'offerte'"/>
     <xsl:variable name="snippetSelectionRoot"
         select="document('../source/snippets/snippetselection.xml')/snippet_selection/document[@type = $docType]"/>
@@ -31,18 +38,16 @@
             <meta>
                 <offered_service_long>
                     <xsl:call-template name="getString">
-                                <xsl:with-param name="stringID"
-                                    select="concat('coverpage_service_', $docSubType)"
-                                />
-                            </xsl:call-template>
+                        <xsl:with-param name="stringID"
+                            select="concat('coverpage_service_', $docSubType)"/>
+                    </xsl:call-template>
                 </offered_service_long>
                 <xsl:comment>if there is a shorter way of saying the same thing, you can type it here (it makes for more dynamic offerte text). If not, just repeat the long name.</xsl:comment>
                 <offered_service_short>
                     <xsl:call-template name="getString">
-                                <xsl:with-param name="stringID"
-                                    select="concat('coverpage_service_', $docSubType, '_short')"
-                                />
-                            </xsl:call-template>
+                        <xsl:with-param name="stringID"
+                            select="concat('coverpage_service_', $docSubType, '_short')"/>
+                    </xsl:call-template>
                 </offered_service_short>
                 <xsl:element name="xi:include">
                     <xsl:attribute name="href">snippets/company_info.xml</xsl:attribute>
@@ -61,7 +66,8 @@
                     <xsl:element name="xi:include">
                         <xsl:attribute name="href">client_info.xml</xsl:attribute>
                     </xsl:element>
-                    <xsl:for-each select="/*/third_party"><!-- TODO add to report -->
+                    <xsl:for-each select="/*/third_party">
+                        <!-- TODO add to report -->
                         <party>
                             <xsl:copy-of select="node()"/>
                         </party>
@@ -75,27 +81,35 @@
                     <xsl:comment>duration of pentest, in mandays</xsl:comment>
                     <test_planning>
                         <xsl:choose>
-                            <xsl:when test="/*/pentestinfo/test_planning"><xsl:value-of select="/*/pentest_info/test_planning"/></xsl:when>
+                            <xsl:when test="/*/pentestinfo/test_planning">
+                                <xsl:value-of select="/*/pentest_info/test_planning"/>
+                            </xsl:when>
                             <xsl:otherwise>TBD</xsl:otherwise>
                         </xsl:choose>
                     </test_planning>
                     <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2015</xsl:comment>
                     <report_due>
                         <xsl:choose>
-                            <xsl:when test="/*/pentestinfo/report_due"><xsl:value-of select="/*/pentest_info/report_due"/></xsl:when>
+                            <xsl:when test="/*/pentestinfo/report_due">
+                                <xsl:value-of select="/*/pentest_info/report_due"/>
+                            </xsl:when>
                             <xsl:otherwise>TBD</xsl:otherwise>
                         </xsl:choose>
                     </report_due>
                     <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2015</xsl:comment>
                     <nature>
                         <xsl:choose>
-                            <xsl:when test="/*/pentestinfo/nature"><xsl:value-of select="/*/pentest_info/nature"/></xsl:when>
+                            <xsl:when test="/*/pentestinfo/nature">
+                                <xsl:value-of select="/*/pentest_info/nature"/>
+                            </xsl:when>
                             <xsl:otherwise>time-boxed</xsl:otherwise>
                         </xsl:choose>
                     </nature>
                     <type>
                         <xsl:choose>
-                            <xsl:when test="/*/pentestinfo/type"><xsl:value-of select="/*/pentest_info/type"/></xsl:when>
+                            <xsl:when test="/*/pentestinfo/type">
+                                <xsl:value-of select="/*/pentest_info/type"/>
+                            </xsl:when>
                             <xsl:otherwise>crystal-box</xsl:otherwise>
                         </xsl:choose>
                     </type>
@@ -140,6 +154,6 @@
 
     </xsl:template>
 
-   
+
 
 </xsl:stylesheet>
