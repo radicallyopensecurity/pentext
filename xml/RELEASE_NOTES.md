@@ -6,9 +6,9 @@ March 20th, 2017
 
 ### Rate cards
 
-The file client_info.xml, now accepts standard rates for the client. These can be called from the snippet ratecard.xml to generate a rate card, i.e. a PDF specifying the rates a client can expect to pay. Note that the 'average rate per hour per pentester' indication is currently based on the average of the junior and medior pentester rate, rounded up to the nearest 5, +/- 10.
+The file client_info.xml, now accepts standard rates for the client. These can be called from the snippet ratecard.xml to generate a rate card, i.e. a PDF specifying the rates a client can expect to pay.
 
-In client_info.xml, we want the following info (everything except junior and medior pentester is optional, other entries can be added if needed):
+In client_info.xml, we want the following info:
 
 ```
 <rates denomination="eur" lastrevisiondate="2017-03-01">
