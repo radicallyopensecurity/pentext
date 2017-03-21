@@ -23,9 +23,10 @@
         <country>Amazonia</country>
         <coc nationality="Dutch">9999999</coc>
         <!-- chamber of commerce number; if no chamber of commerce number, please delete the whole element -->
-        <invoice_rep/>
+        <invoice_rep></invoice_rep>
         <invoice_mail>freemoney@sittingduck.com</invoice_mail>
-        <invoice_extra_field/>
+        <!-- Use the extra field to enter a line requested by the client, such as PO or creditor number, cost centre, internal account number or whatever info they need for their internal administration -->
+        <invoice_extra_field></invoice_extra_field>
         <vat_no>0000000000B01</vat_no>
         <rates denomination="eur" lastrevisiondate="2017-03-01">
                 <rate title="juniorpentester">100</rate>
