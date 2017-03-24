@@ -130,6 +130,13 @@ class NonFinding(BaseItem):
     def __init__(self):
         BaseItem.__init__(self, 'non-finding')
 
+    def __str__(self):
+        """
+        Return a XML version of the class
+        """
+        self.root_open = '<non-finding id="{0}"\n'.format(self.identifier)
+        return BaseItem.__str__(self)
+
 
 def from_issue(issue):
     """
@@ -148,6 +155,7 @@ def from_issue(issue):
                     item.technicaldescription += u'{0}\n'.format(convert_text(note.body))
     elif 'non-finding' in [x.lower() for x in issue.labels]:
         item = NonFinding()
+        item.content = convert_text(issue.description)
         for note in [x for x in reversed(issue.notes.list()) if not x.system]:
             item.content += convert_text(note.body) + '\n'
     else:
