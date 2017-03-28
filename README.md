@@ -49,7 +49,7 @@ Besides the reports and quotations, generic documents can also be created.
 Those can be found [here](xml/doc/examples)
 
 
-## The editor
+## PenText Visual Editor (Beta)
 The pentext framework is shipped with an editor that facilitates the redacting of findings and non-findings. As the pentext framework relies heavily on xml to be able to generate documents,
 the writer(s) of these documents are faced with an extra challenge. Not only do they have to worry about content, now the structure of the document is also of importance.
 In practice this has led to annoying errors like file-inclusion errors and tag mismatch errors.
