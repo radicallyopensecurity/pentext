@@ -82,7 +82,7 @@ A file is outlined red when the structure of the file does not match the framewo
 
 When a file is saved, the correct structure is used and when the directory is updated, the file should show up green and should be handled by the pentext system without hassle.
 
-'Please keep in mind that this Visual Editor is in Beta, and may still contain some bugs.  It is NOT necessary to use the Visual Editor to make use of the OWASP PenText framework.'
+**Please keep in mind that this Visual Editor is in Beta, and may still contain some bugs.  It is NOT necessary to use the Visual Editor to make use of the OWASP PenText framework.**
 
 
 
