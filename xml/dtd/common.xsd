@@ -316,7 +316,7 @@
   <xs:element name="pre">
     <xs:complexType mixed="true">
       <xs:choice>
-        <xs:group ref="inline-except-code"/>
+        <xs:group ref="inline-all"/>
         <xs:group ref="placeholders"/>
       </xs:choice>
     </xs:complexType>
