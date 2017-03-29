@@ -349,7 +349,14 @@
 
     <xsl:template match="finding_count">
         <xsl:param name="threatLevel" select="@threatLevel"/>
-            <xsl:value-of select="count(//finding[@threatLevel=$threatLevel])" />
+        <xsl:choose>
+            <xsl:when test="@threatLevel">
+                <xsl:value-of select="count(//finding[@threatLevel = $threatLevel])"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="count(//finding)"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="checkPlaceholder">
