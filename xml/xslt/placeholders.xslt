@@ -59,7 +59,8 @@
     </xsl:template>
     <xsl:template match="client_rate">
         <xsl:param name="roleTitle" select="@title"/>
-        <xsl:param name="placeholderElement" select="/*/meta//client/rates/rate[@title=$roleTitle]"/>
+        <xsl:param name="placeholderElement"
+            select="/*/meta//client/rates/rate[@title = $roleTitle]"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
@@ -345,6 +346,12 @@
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
+
+    <xsl:template match="finding_count">
+        <xsl:param name="threatLevel" select="@threatLevel"/>
+            <xsl:value-of select="count(//finding[@threatLevel=$threatLevel])" />
+    </xsl:template>
+
     <xsl:template name="checkPlaceholder">
         <xsl:param name="placeholderElement" select="/"/>
         <xsl:param name="caps" select="'none'"/>
@@ -362,7 +369,8 @@
                         <xsl:variable name="fee" select="$placeholderElement * 1"/>
                         <xsl:number value="$fee" grouping-separator="," grouping-size="3"/>
                     </xsl:when>
-                    <xsl:when test="self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate">
+                    <xsl:when
+                        test="self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate">
                         <!-- pretty printing for date -->
                         <xsl:value-of
                             select="format-date($placeholderElement, '[MNn] [D1], [Y]', 'en', (), ())"
