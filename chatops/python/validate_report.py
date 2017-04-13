@@ -6,10 +6,10 @@ Cross-checks findings, validates XML files, offerte and report files.
 This script is part of the PenText framework
                            https://pentext.org
 
-   Copyright (C) 2015-2016 Radically Open Security
+   Copyright (C) 2015-2017 Radically Open Security
                            https://www.radicallyopensecurity.com
 
-                Author(s): Peter Mosmans
+                   Author: Peter Mosmans
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -97,7 +97,7 @@ def parse_arguments():
         description=textwrap.dedent('''\
 validate_report - validates offer letters and reports
 
-Copyright (C) 2015-2016  Radically Open Security (Peter Mosmans)
+Copyright (C) 2015-2017  Radically Open Security (Peter Mosmans)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -354,8 +354,8 @@ def validate_type(tree, filename, options, speller):
         else:
             if attribute == 'threatLevel' and root.attrib[attribute] not in \
                ('Low', 'Moderate', 'Elevated', 'High', 'Extreme'):
-                print('[-] threatLevel is not Low, Moderate, High, Elevated or Extreme: {0}'.
-                      format(root.attrib[attribute]))
+                print('[-] threatLevel is not Low, Moderate, High, Elevated or Extreme: {0} {1}'.
+                      format(filename, root.attrib[attribute]))
                 result = False
             if attribute == 'type' and (options['capitalization'] and not \
                                         is_capitalized(root.attrib[attribute])):
@@ -590,7 +590,7 @@ def main():
     else:
         logging.warning('Validation failed')
     if options['spelling'] and options['learn']:
-        logging.log(STATUS('Don\'t forget to check the vocabulary file %s', VOCABULARY))
+        logging.log(STATUS, 'Don\'t forget to check the vocabulary file %s', VOCABULARY)
 
 
 if __name__ == "__main__":

@@ -56,9 +56,11 @@
                     </xsl:choose>
                 </fo:basic-link>
                 <xsl:if test="starts-with(@href, '#')">
-                    <xsl:text> (page </xsl:text>
+                    <xsl:if test="not(@includepage = 'no')">
+                        <xsl:text> (page </xsl:text>
                     <fo:page-number-citation ref-id="{substring(@href, 2)}"/>
                     <xsl:text>)</xsl:text>
+                    </xsl:if>
                 </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
@@ -124,15 +126,19 @@
         </fo:inline>
     </xsl:template>
 
-    <xsl:template match="monospace">
+    <xsl:template match="code">
         <xsl:choose>
-            <xsl:when test="parent::title">
-                <fo:inline xsl:use-attribute-sets="monospace-title">
+            <xsl:when test="ancestor::title">
+                <fo:inline xsl:use-attribute-sets="code-title">
                     <xsl:apply-templates/>
                 </fo:inline>
             </xsl:when>
+            <xsl:when test="ancestor::pre">
+                <!-- <code> in <pre> is just <pre> -->
+                <xsl:apply-templates/>
+            </xsl:when>
             <xsl:otherwise>
-                <fo:inline xsl:use-attribute-sets="monospace">
+                <fo:inline xsl:use-attribute-sets="code">
                     <xsl:apply-templates/>
                 </fo:inline>
             </xsl:otherwise>

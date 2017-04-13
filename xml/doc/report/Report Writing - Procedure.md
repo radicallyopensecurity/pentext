@@ -691,7 +691,7 @@ You can use `<div>` as a container for other block elements. This is basically o
 
 #### So what's allowed in `<div>`?
 
-All block elements: `<p>`, `<ul>`, `<ol>`, `<table>`, `<img>`, `<pre>`, `<code>`
+All block elements: `<p>`, `<ul>`, `<ol>`, `<table>`, `<img>`, `<pre>`
 
 #### And what elements can *contain* `<div>`?
 
@@ -870,13 +870,13 @@ Example:
 
 `<p><u>This text is underlined</u> and this text is not.</p>`
 
-**Monospace**
+**Monospace/code font**
 
-To have inline text in a monospace font, wrap it in `<monospace>` tags.
+To have inline text in a monospace font, wrap it in `<code>` tags.
 
 Example:
 
-`<p><monospace>This text is monospace</monospace> and this text is not.</p>`
+`<p><code>This text is monospace</code> and this text is not.</p>`
 
 **Superscript**
 

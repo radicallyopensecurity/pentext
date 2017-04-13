@@ -28,6 +28,7 @@
         <xsl:attribute name="font-family">LiberationSansNarrow</xsl:attribute>
         <xsl:attribute name="font-size">12pt</xsl:attribute>
         <xsl:attribute name="color">black</xsl:attribute>
+        <xsl:attribute name="line-height-shift-adjustment">disregard-shifts</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="HeaderFont" use-attribute-sets="DefaultFont"/>
     <xsl:attribute-set name="FooterFont" use-attribute-sets="DefaultFont"/>
@@ -37,7 +38,7 @@
     <xsl:attribute-set name="TinyFont" use-attribute-sets="DefaultFont">
         <xsl:attribute name="font-size">8pt</xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="CodeFont" use-attribute-sets="DefaultFont">
+    <xsl:attribute-set name="PreFont" use-attribute-sets="DefaultFont">
         <xsl:attribute name="font-family">LiberationMono</xsl:attribute>
         <xsl:attribute name="font-size">10pt</xsl:attribute>
     </xsl:attribute-set><!--
@@ -86,8 +87,6 @@
     </xsl:attribute-set>
     <xsl:attribute-set name="title-toc" use-attribute-sets="title-1">
         <xsl:attribute name="margin-bottom">0cm</xsl:attribute>
-        <xsl:attribute name="padding-right">3pt</xsl:attribute>
-        <!-- this is cheating, need to check if toc page numbers can be rendered in a better way -->
     </xsl:attribute-set>
     <xsl:attribute-set name="img-title">
         <xsl:attribute name="font-style">italic</xsl:attribute>
@@ -107,12 +106,12 @@
     <xsl:attribute-set name="underline">
         <xsl:attribute name="text-decoration">underline</xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="monospace" use-attribute-sets="DefaultFont">
+    <xsl:attribute-set name="code" use-attribute-sets="DefaultFont">
         <xsl:attribute name="font-family">LiberationMono</xsl:attribute>
         <xsl:attribute name="font-size">90%</xsl:attribute>
         <xsl:attribute name="background-color">#eeeeee</xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="monospace-title" use-attribute-sets="DefaultFont">
+    <xsl:attribute-set name="code-title" use-attribute-sets="DefaultFont">
         <xsl:attribute name="font-family">LiberationMono</xsl:attribute>
         <xsl:attribute name="font-size">90%</xsl:attribute>
     </xsl:attribute-set>
@@ -149,7 +148,7 @@
             <xsl:value-of select="$very-large-space"/>
         </xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="pre" use-attribute-sets="borders TableFont">
+    <xsl:attribute-set name="pre" use-attribute-sets="borders PreFont">
         <xsl:attribute name="border-style">double</xsl:attribute>
         <xsl:attribute name="border-width">2pt</xsl:attribute>
         <xsl:attribute name="margin-bottom">
@@ -158,9 +157,6 @@
         <xsl:attribute name="white-space-collapse">false</xsl:attribute>
         <xsl:attribute name="linefeed-treatment">preserve</xsl:attribute>
         <xsl:attribute name="white-space-treatment">preserve</xsl:attribute>
-    </xsl:attribute-set>
-    <xsl:attribute-set name="code" use-attribute-sets="borders pre">
-        <xsl:attribute name="font-family">LiberationMono</xsl:attribute>
         <xsl:attribute name="font-size">8pt</xsl:attribute>
         <xsl:attribute name="padding">4pt</xsl:attribute>
     </xsl:attribute-set>
@@ -241,6 +237,9 @@
     <xsl:attribute-set name="table">
         <xsl:attribute name="margin-bottom" select="$small-space"/>
     </xsl:attribute-set>
+    <xsl:attribute-set name="pieLegendTable">
+        <xsl:attribute name="background-color">#eeeeee</xsl:attribute>
+    </xsl:attribute-set>
     
     <!-- lists -->
     <xsl:attribute-set name="li">
@@ -250,11 +249,6 @@
     <!-- ToC -->
     <xsl:attribute-set name="index">
         <xsl:attribute name="break-after">page</xsl:attribute>
-    </xsl:attribute-set>
-    
-    <xsl:attribute-set name="toc-block">
-        <xsl:attribute name="text-align-last">justify</xsl:attribute>
-        <xsl:attribute name="padding-right">3pt</xsl:attribute>
     </xsl:attribute-set>
     
     <!-- Contact -->
@@ -270,7 +264,7 @@
     </xsl:attribute-set>
     
     <!-- Misc (invoice) -->
-    <xsl:attribute-set name="orange-text">
+    <xsl:attribute-set name="orange-text"><!-- 'silver' is #c0c0c0 -->
         <xsl:attribute name="color">#FF5C00</xsl:attribute>
     </xsl:attribute-set>
      <xsl:attribute-set name="align-right">

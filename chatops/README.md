@@ -34,13 +34,23 @@ The scripts use multiple environment variables, that can be set by the user unde
 + `GITWEB` :: the URL of the gitlab webinterface (defaults to `https://$GITSERVER`)
 + `NAMESPACE` :: the namespace of the user which is used to set up gitlab repositories (defaults to `ros`)
 + `PENTEXTREPO` :: the location of the PenText repository (defaults to `https://github.com/radicallyopensecurity/pentext`)
++ `KB_USER` :: The username of the kanboard account (required when using the kanboard interface)
++ `KB_APIKEY` :: The API key with which the kanboard account can be user (required when using the kanboard interface)
++ `KB_ENDPOINT` :: The URL of the kanboard API
++ `CHECKLIST_TEMPLATE_URL `:: URL of checklist template. This will be displayed when a checklist isn't available in the KBB task decription.
+
 
 ## Prerequisites
 
-The Bash scripts use the python-gitlab command-line interface to talk to the gitlab instance. This interface can be installed using `sudo pip install git+https://github.com/gpocentek/python-gitlab`. Obviously, Python needs to be installed as well.
+### python-gitlab
+The Bash scripts use the *python-gitlab* command-line interface to talk to the gitlab instance. This interface can be installed using `sudo pip install git+https://github.com/gpocentek/python-gitlab`. Obviously, Python needs to be installed as well.
 This command line interface expects a configuration file `.python-gitlab.cfg` for the user under which rosbot is running, which it uses to connect to gitlab. Make sure it contains the correct details so that you can connect to gitlab.
 
-If you want to convert and build documents, the pentext toolchain is necessary. Use the ansible playbook https://galaxy.ansible.com/PeterMosmans/docbuilder/ or install the tools (Java, Saxon and Apache FOP) by hand, see https://github.com/radicallyopensecurity/pentext/blob/master/xml/doc/Tools%20manual.md for more information.
+If you want to convert and build documents, the pentext toolchain is necessary. Use the Ansible playbook https://galaxy.ansible.com/PeterMosmans/docbuilder/ or install the tools (Java, Saxon and Apache FOP) by hand, see https://github.com/radicallyopensecurity/pentext/blob/master/xml/doc/Tools%20manual.md for more information.
+
+### Python libraries
+Pandoc is necessary in order to automatically convert gitlab issues written in markdown to XML format.
+The *pypandoc* library is also necessary: `sudo pip install pypandoc`.
 
 ## Test the configuration
 Test out whether the configuration is successful by manually executing the Bash script [bash/test_pentext](bash/test_pentext) - this should return an OK.
@@ -121,3 +131,68 @@ Handled by [bash/handler_invoice](bash/handler_invoice)
 
 
 Usage: `invoice REPO_NAME INVOICE_NO [NAMESPACE [[BRANCH]] [-PARAMETERS]`
+
+###   checklist
+Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
+
+The "checklist" family of commands are used to manipulate the checklist of a kanboard task.
+
+The following commands have been implemented:
+ * checklist show      Shows the checklist for the column the task is in.
+ * checklist toggle    Toggles a certain item
+
+### checklist show
+Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
+
+Shows the checklist for the column the kanboard task is in. It is required that the task's description contains the full checklist.
+The script will connect to kanboard, open the Pentesting project and tries to find the kanboard task. It will then pull the description
+and look for the checklist associated with the column the task is in.
+
+ Usage: `checklist show <kanboard task>`
+  * <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
+  
+###  checklist toggle
+Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
+
+Pulls the checklist from the kanboard task's description and toggles its items
+
+Usage: `checklist toggle <kanboard task> <index>`
+* <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
+* <index>           Should be an integer or comma separated list of integers as indices to the items. Mandatory.
+
+###   column
+Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
+
+The "column" family of commands are used to move a kanboard task across the board.
+
+The following commands are implemented:
+* column show      Shows the column the kanboard task is in
+* column next      Moves the kanboard task to the next column
+* column prev      Moves the kanboard task to the previous column
+
+###   column show
+Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
+
+Shows the column the kanboard task is currently in.
+
+Usage: `column show <kanboard task>`
+* <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
+
+###   column next
+Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
+
+Moves the kanboard task to the next column.
+
+Usage: `column next <kanboard task>`
+* <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
+
+###  column prev
+Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
+
+Moves the kanboard task to the previous column.
+
+Usage: `column prev <kanboard task>`
+* <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
+
+
+
