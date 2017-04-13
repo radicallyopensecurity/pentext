@@ -13,7 +13,7 @@
 # File which has to exist in the target directory to qualify as target
 FINGERPRINT="dtd"
 # List of files and directories that need to be updated
-SOURCEFILES="dtd xslt"
+SOURCEFILES="dtd xslt source/snippets"
 # Root directory within source repo
 SOURCEROOT="xml"
 
