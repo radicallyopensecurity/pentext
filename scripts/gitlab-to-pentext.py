@@ -41,7 +41,7 @@ def add_finding(issue, options):
                                           title), options)
     threatLevel = 'Moderate'
     finding_type = 'TODO'
-    finding_id = '{0}-{1}'.format(issue.iid, valid_filename(title))
+    finding_id = 'f{0}-{1}'.format(issue.iid, valid_filename(title))
     filename = 'findings/{0}.xml'.format(finding_id)
     finding = collections.OrderedDict()
     finding['title'] = title
@@ -81,7 +81,7 @@ def add_non_finding(issue, options):
     title = validate_report.capitalize(issue.title.strip())
     print_status('{0} - {1} - {2}'.format(issue.state, issue.labels,
                                           title), options)
-    non_finding_id = '{0}-{1}'.format(issue.iid, valid_filename(title))
+    non_finding_id = 'nf{0}-{1}'.format(issue.iid, valid_filename(title))
     filename = 'non-findings/{0}.xml'.format(non_finding_id)
     non_finding = collections.OrderedDict()
     non_finding['title'] = title
@@ -234,7 +234,7 @@ def valid_filename(filename):
     """
     valid_filename = ''
     for char in filename.strip():
-        if char in [':', '/', '.', '\\', ' ', '[', ']', '(', ')', '\'']:
+        if char in [':', '/', '.', '\\', ' ', '[', ']', '(', ')', '\'', '"']:
             if len(char) and not valid_filename.endswith('-'):
                 valid_filename += '-'
         else:

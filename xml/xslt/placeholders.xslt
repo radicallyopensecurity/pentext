@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:my="http://radical.sexy"
-    exclude-result-prefixes="xs"
-    version="2.0">
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fo="http://www.w3.org/1999/XSL/Format"
+    xmlns:my="http://radical.sexy" exclude-result-prefixes="xs my" version="2.0">
     <!-- PLACEHOLDERS -->
     <xsl:template match="client_long">
         <xsl:param name="placeholderElement" select="/*/meta//client/full_name"/>
@@ -35,8 +34,7 @@
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="client_legal_rep">
-        <xsl:param name="placeholderElement"
-            select="/*/meta//client/legal_rep"/>
+        <xsl:param name="placeholderElement" select="/*/meta//client/legal_rep"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
@@ -55,6 +53,14 @@
     </xsl:template>
     <xsl:template match="client_coc">
         <xsl:param name="placeholderElement" select="/*/meta//client/coc"/>
+        <xsl:call-template name="checkPlaceholder">
+            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="client_rate">
+        <xsl:param name="roleTitle" select="@title"/>
+        <xsl:param name="placeholderElement"
+            select="/*/meta//client/rates/rate[@title = $roleTitle]"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
@@ -246,9 +252,9 @@
         </xsl:call-template>
         <xsl:if test="/contract/meta/contractor/ctcompany">
             <xsl:text> (</xsl:text>
-        <xsl:call-template name="checkPlaceholder">
-            <xsl:with-param name="placeholderElement" select="$placeholderElement2"/>
-        </xsl:call-template>
+            <xsl:call-template name="checkPlaceholder">
+                <xsl:with-param name="placeholderElement" select="$placeholderElement2"/>
+            </xsl:call-template>
             <xsl:text>)</xsl:text>
         </xsl:if>
     </xsl:template>
@@ -334,6 +340,25 @@
             <xsl:with-param name="caps" select="$caps"/>
         </xsl:call-template>
     </xsl:template>
+    <xsl:template match="generate_raterevisiondate">
+        <xsl:param name="placeholderElement" select="//meta//client/rates/@lastrevisiondate"/>
+        <xsl:call-template name="checkPlaceholder">
+            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+        </xsl:call-template>
+    </xsl:template>
+
+    <xsl:template match="finding_count">
+        <xsl:param name="threatLevel" select="@threatLevel"/>
+        <xsl:choose>
+            <xsl:when test="@threatLevel">
+                <xsl:value-of select="count(//finding[@threatLevel = $threatLevel])"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="count(//finding)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
     <xsl:template name="checkPlaceholder">
         <xsl:param name="placeholderElement" select="/"/>
         <xsl:param name="caps" select="'none'"/>
@@ -341,21 +366,21 @@
             <xsl:when test="normalize-space($placeholderElement)">
                 <!-- placeholder exists and contains text -->
                 <xsl:choose>
+                    <xsl:when test="self::client_rate">
+                        <xsl:value-of select="$denomination"/>
+                        <xsl:text>&#160;</xsl:text>
+                        <xsl:value-of select="$placeholderElement"/>
+                    </xsl:when>
                     <xsl:when test="self::p_fee or self::contractor_hourly_fee">
                         <!-- pretty numbering for fee -->
                         <xsl:variable name="fee" select="$placeholderElement * 1"/>
                         <xsl:number value="$fee" grouping-separator="," grouping-size="3"/>
                     </xsl:when>
-                    <xsl:when test="self::contract_end_date">
+                    <xsl:when
+                        test="self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate">
                         <!-- pretty printing for date -->
                         <xsl:value-of
-                            select="format-date(/contract/meta/work/end_date, '[MNn] [D1], [Y]', 'en', (), ())"
-                        />
-                    </xsl:when>
-                    <xsl:when test="self::contract_start_date">
-                        <!-- pretty printing for date -->
-                        <xsl:value-of
-                            select="format-date(/contract/meta/work/start_date, '[MNn] [D1], [Y]', 'en', (), ())"
+                            select="format-date($placeholderElement, '[MNn] [D1], [Y]', 'en', (), ())"
                         />
                     </xsl:when>
                     <xsl:when
@@ -368,52 +393,70 @@
                     <xsl:when test="self::contractor_possessive_pronoun">
                         <!-- some sexy logic -->
                         <xsl:choose>
-                            <xsl:when test="//contractor/@sex = 'M'"><xsl:call-template name="getString">
-                            <xsl:with-param name="stringID" select="'possessive_m'"/>
-                            <xsl:with-param name="caps" select="$caps"/>
-                        </xsl:call-template></xsl:when>
-                            <xsl:when test="//contractor/@sex = 'F'"><xsl:call-template name="getString">
-                            <xsl:with-param name="stringID" select="'possessive_f'"/>
-                            <xsl:with-param name="caps" select="$caps"/>
-                        </xsl:call-template></xsl:when>
-                            <xsl:when test="//contractor/@sex = 'O'"><xsl:call-template name="getString">
-                            <xsl:with-param name="stringID" select="'possessive_o'"/>
-                            <xsl:with-param name="caps" select="$caps"/>
-                        </xsl:call-template></xsl:when>
+                            <xsl:when test="//contractor/@sex = 'M'">
+                                <xsl:call-template name="getString">
+                                    <xsl:with-param name="stringID" select="'possessive_m'"/>
+                                    <xsl:with-param name="caps" select="$caps"/>
+                                </xsl:call-template>
+                            </xsl:when>
+                            <xsl:when test="//contractor/@sex = 'F'">
+                                <xsl:call-template name="getString">
+                                    <xsl:with-param name="stringID" select="'possessive_f'"/>
+                                    <xsl:with-param name="caps" select="$caps"/>
+                                </xsl:call-template>
+                            </xsl:when>
+                            <xsl:when test="//contractor/@sex = 'O'">
+                                <xsl:call-template name="getString">
+                                    <xsl:with-param name="stringID" select="'possessive_o'"/>
+                                    <xsl:with-param name="caps" select="$caps"/>
+                                </xsl:call-template>
+                            </xsl:when>
                         </xsl:choose>
                     </xsl:when>
                     <xsl:when test="self::contractor_subject_pronoun">
                         <!-- some sexy logic -->
                         <xsl:choose>
-                            <xsl:when test="//contractor/@sex = 'M'"><xsl:call-template name="getString">
-                            <xsl:with-param name="stringID" select="'subject_m'"/>
-                            <xsl:with-param name="caps" select="$caps"/>
-                        </xsl:call-template></xsl:when>
-                            <xsl:when test="//contractor/@sex = 'F'"><xsl:call-template name="getString">
-                            <xsl:with-param name="stringID" select="'subject_f'"/>
-                            <xsl:with-param name="caps" select="$caps"/>
-                        </xsl:call-template></xsl:when>
-                            <xsl:when test="//contractor/@sex = 'O'"><xsl:call-template name="getString">
-                            <xsl:with-param name="stringID" select="'subject_o'"/>
-                            <xsl:with-param name="caps" select="$caps"/>
-                        </xsl:call-template></xsl:when>
+                            <xsl:when test="//contractor/@sex = 'M'">
+                                <xsl:call-template name="getString">
+                                    <xsl:with-param name="stringID" select="'subject_m'"/>
+                                    <xsl:with-param name="caps" select="$caps"/>
+                                </xsl:call-template>
+                            </xsl:when>
+                            <xsl:when test="//contractor/@sex = 'F'">
+                                <xsl:call-template name="getString">
+                                    <xsl:with-param name="stringID" select="'subject_f'"/>
+                                    <xsl:with-param name="caps" select="$caps"/>
+                                </xsl:call-template>
+                            </xsl:when>
+                            <xsl:when test="//contractor/@sex = 'O'">
+                                <xsl:call-template name="getString">
+                                    <xsl:with-param name="stringID" select="'subject_o'"/>
+                                    <xsl:with-param name="caps" select="$caps"/>
+                                </xsl:call-template>
+                            </xsl:when>
                         </xsl:choose>
                     </xsl:when>
                     <xsl:when test="self::contractor_object_pronoun">
                         <!-- some sexy logic -->
                         <xsl:choose>
-                            <xsl:when test="//contractor/@sex = 'M'"><xsl:call-template name="getString">
-                            <xsl:with-param name="stringID" select="'object_m'"/>
-                            <xsl:with-param name="caps" select="$caps"/>
-                        </xsl:call-template></xsl:when>
-                            <xsl:when test="//contractor/@sex = 'F'"><xsl:call-template name="getString">
-                            <xsl:with-param name="stringID" select="'object_f'"/>
-                            <xsl:with-param name="caps" select="$caps"/>
-                        </xsl:call-template></xsl:when>
-                            <xsl:when test="//contractor/@sex = 'O'"><xsl:call-template name="getString">
-                            <xsl:with-param name="stringID" select="'object_o'"/>
-                            <xsl:with-param name="caps" select="$caps"/>
-                        </xsl:call-template></xsl:when>
+                            <xsl:when test="//contractor/@sex = 'M'">
+                                <xsl:call-template name="getString">
+                                    <xsl:with-param name="stringID" select="'object_m'"/>
+                                    <xsl:with-param name="caps" select="$caps"/>
+                                </xsl:call-template>
+                            </xsl:when>
+                            <xsl:when test="//contractor/@sex = 'F'">
+                                <xsl:call-template name="getString">
+                                    <xsl:with-param name="stringID" select="'object_f'"/>
+                                    <xsl:with-param name="caps" select="$caps"/>
+                                </xsl:call-template>
+                            </xsl:when>
+                            <xsl:when test="//contractor/@sex = 'O'">
+                                <xsl:call-template name="getString">
+                                    <xsl:with-param name="stringID" select="'object_o'"/>
+                                    <xsl:with-param name="caps" select="$caps"/>
+                                </xsl:call-template>
+                            </xsl:when>
                         </xsl:choose>
                     </xsl:when>
                     <xsl:otherwise>
@@ -458,28 +501,28 @@
         <xsl:variable name="endMonth" as="xs:integer" select="month-from-date($enddate)"/>
         <xsl:variable name="endDay" as="xs:integer" select="day-from-date($enddate)"/>
         <xsl:variable name="startMonthNumberOfDays">
-			<xsl:choose>
-				<xsl:when test="xs:string($startMonth) = '1'">31</xsl:when>
-				<xsl:when test="xs:string($startMonth) = '2'">
-				    <!-- I hate february -->
-				    <xsl:choose>
-				        <xsl:when test="$startYear mod 4 != 0">28</xsl:when>
-				        <xsl:when test="$startYear mod 100 != 0">29</xsl:when>
-				        <xsl:when test="$startYear mod 400 != 0">28</xsl:when>
-				        <xsl:otherwise>29</xsl:otherwise>
-				    </xsl:choose>
-				</xsl:when>
-				<xsl:when test="xs:string($startMonth) = '3'">31</xsl:when>
-				<xsl:when test="xs:string($startMonth) = '4'">30</xsl:when>
-				<xsl:when test="xs:string($startMonth) = '5'">31</xsl:when>
-				<xsl:when test="xs:string($startMonth) = '6'">30</xsl:when>
-				<xsl:when test="xs:string($startMonth) = '7'">31</xsl:when>
-				<xsl:when test="xs:string($startMonth) = '8'">31</xsl:when>
-				<xsl:when test="xs:string($startMonth) = '9'">30</xsl:when>
-				<xsl:when test="xs:string($startMonth) = '10'">31</xsl:when>
-				<xsl:when test="xs:string($startMonth) = '11'">30</xsl:when>
-				<xsl:when test="xs:string($startMonth) = '12'">31</xsl:when>
-			</xsl:choose>
+            <xsl:choose>
+                <xsl:when test="xs:string($startMonth) = '1'">31</xsl:when>
+                <xsl:when test="xs:string($startMonth) = '2'">
+                    <!-- I hate february -->
+                    <xsl:choose>
+                        <xsl:when test="$startYear mod 4 != 0">28</xsl:when>
+                        <xsl:when test="$startYear mod 100 != 0">29</xsl:when>
+                        <xsl:when test="$startYear mod 400 != 0">28</xsl:when>
+                        <xsl:otherwise>29</xsl:otherwise>
+                    </xsl:choose>
+                </xsl:when>
+                <xsl:when test="xs:string($startMonth) = '3'">31</xsl:when>
+                <xsl:when test="xs:string($startMonth) = '4'">30</xsl:when>
+                <xsl:when test="xs:string($startMonth) = '5'">31</xsl:when>
+                <xsl:when test="xs:string($startMonth) = '6'">30</xsl:when>
+                <xsl:when test="xs:string($startMonth) = '7'">31</xsl:when>
+                <xsl:when test="xs:string($startMonth) = '8'">31</xsl:when>
+                <xsl:when test="xs:string($startMonth) = '9'">30</xsl:when>
+                <xsl:when test="xs:string($startMonth) = '10'">31</xsl:when>
+                <xsl:when test="xs:string($startMonth) = '11'">30</xsl:when>
+                <xsl:when test="xs:string($startMonth) = '12'">31</xsl:when>
+            </xsl:choose>
         </xsl:variable>
         <xsl:variable name="numYears">
             <xsl:choose>
@@ -525,8 +568,12 @@
                 </xsl:otherwise>
             </xsl:choose>-->
             <xsl:choose>
-                <xsl:when test="$endDay - $startDay &lt; 0"><xsl:value-of select="$startMonthNumberOfDays - $startDay + $endDay"/></xsl:when>
-                <xsl:otherwise><xsl:value-of select="$endDay - $startDay"/></xsl:otherwise>
+                <xsl:when test="$endDay - $startDay &lt; 0">
+                    <xsl:value-of select="$startMonthNumberOfDays - $startDay + $endDay"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$endDay - $startDay"/>
+                </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <xsl:if test="$numYears > 0">
@@ -535,12 +582,15 @@
             <xsl:if test="$numYears > 1">
                 <xsl:text>s</xsl:text>
             </xsl:if>
-            <xsl:choose><xsl:when test="($numMonths > 0 and $numDays = 0) or ($numMonths = 0 and $numDays > 0)">
-                <xsl:text> and</xsl:text>
-            </xsl:when>
-            <xsl:when test="$numMonths > 0 and $numDays > 0">
-                <xsl:text>,</xsl:text>
-            </xsl:when></xsl:choose>
+            <xsl:choose>
+                <xsl:when
+                    test="($numMonths > 0 and $numDays = 0) or ($numMonths = 0 and $numDays > 0)">
+                    <xsl:text> and</xsl:text>
+                </xsl:when>
+                <xsl:when test="$numMonths > 0 and $numDays > 0">
+                    <xsl:text>,</xsl:text>
+                </xsl:when>
+            </xsl:choose>
         </xsl:if>
         <xsl:if test="$numMonths > 0">
             <xsl:sequence select="$numMonths"/>

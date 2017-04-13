@@ -7,7 +7,7 @@ Gitlab bridge for PenText: imports and updates gitlab issues into PenText
 This script is part of the PenText framework
                            https://pentext.org
 
-   Copyright (C) 2016      Radically Open Security
+   Copyright (C) 2016-2017 Radically Open Security
                            https://www.radicallyopensecurity.com
 
                 Author(s): Peter Mosmans
@@ -24,100 +24,162 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import argparse
-import collections
+import io
 import os
 import sys
 import textwrap
 
 try:
     import gitlab
-    import jxmlease
+    import pypandoc
     # Path of this script. The validate_report module is on the same path.
     sys.path.append(os.path.dirname(__file__))
     import validate_report
-except ImportError as exception:
-    print('[-] This script needs python-gitlab, jxmlease and validate_report library',
+except (NameError, ImportError) as exception:
+    print('[-] This script needs python-gitlab, pypandoc and validate_report library',
           file=sys.stderr)
     print("validate_report is part of the pentext framework", file=sys.stderr)
     print("Install python-gitlab with: sudo pip install python-gitlab", file=sys.stderr)
-    print("Install jxmlease with: sudo pip install jxmlease", file=sys.stderr)
-    print("", file=sys.stderr)
+    print("Install pypandoc with: sudo pip install pypandoc\n", file=sys.stderr)
     print("Currently missing: " + exception.message, file=sys.stderr)
     sys.exit(-1)
 
 
-def add_finding(issue, options):
+class BaseItem(object):
     """
-    Writes issue as XML finding to file.
+    Base class for Pentext items
     """
-    title = validate_report.capitalize(issue.title.strip())
-    print_status('{0} - {1} - {2}'.format(issue.state, issue.labels,
-                                          title), options)
-    threat_level = 'Moderate'
-    finding_type = 'TODO'
-    finding_id = '{0}-{1}'.format(issue.iid, valid_filename(title))
-    filename = 'findings/{0}.xml'.format(finding_id)
-    finding = collections.OrderedDict()
-    finding['title'] = title
-    finding['description'] = unicode.replace(issue.description,
-                                             '\r\n', '\n')
-    finding['technicaldescription'] = ''
-    for note in [x for x in issue.notes.list() if not x.system]:
-        finding['technicaldescription'] += unicode.replace(note.body,
-                                                           '\r\n', '\n')
-    finding['impact'] = {}
-    finding['impact']['p'] = 'TODO'
-    finding['recommendation'] = {}
-    finding['recommendation']['ul'] = {}
-    finding['recommendation']['ul']['li'] = 'TODO'
-    finding_xml = jxmlease.XMLDictNode(finding, tag='finding',
-                                       xml_attrs={'id': finding_id,
-                                                  'threatLevel': threat_level,
-                                                  'type': finding_type})
-    if options['dry_run']:
-        print_line('[+] {0}'.format(filename))
-        print(finding_xml.emit_xml())
-    else:
-        if os.path.isfile(filename) and not options['overwrite']:
-            print_line('Finding {0} already exists (use --overwrite to overwrite)'.
-                       format(filename))
-        else:
-            if options['y'] or ask_permission('Create file ' + filename):
-                with open(filename, 'w') as xmlfile:
-                    xmlfile.write(finding_xml.emit_xml().encode('utf-8'))
-                print_line('[+] Created {0}'.format(filename))
+
+    DECLARATION = '<?xml version="1.0" encoding="utf-8"?>\n'
+
+    def __init__(self, item_type):
+        if item_type not in ('finding', 'non-finding'):
+            raise ValueError('Only finding and non-finding are currently supported')
+        self.item_type = item_type
+        self.__path = '{0}s'.format(self.item_type)
+        self.root_open = '<{0}>\n'.format(self.item_type)
+        self.root_close = '</{0}>\n'.format(self.item_type)
+        self.title = ''
+        self.content = ''
+
+    @property
+    def filename(self):
+        """
+        Filename.
+        """
+        return '{0}/{1}.xml'.format(self.__path, valid_filename(self.identifier))
+
+    def __str__(self):
+        """
+        Return a XML version of the class
+        """
+        return self.DECLARATION + self.root_open + self.element('title') + \
+            self.content + self.root_close
+
+    def element(self, attribute):
+        """
+        Return opening and closing attribute tags, including attribute value.
+        """
+        return '<{0}>{1}</{0}>\n'.format(attribute, getattr(self, attribute))
+
+    def write_file(self):
+        """
+        Write item as XML to file.
+        """
+        try:
+            with io.open(self.filename, 'w') as xmlfile:
+                xmlfile.write(unicode(self))
+                print_line('[+] Wrote {0}'.format(self.filename))
+        except IOError:
+            print_error('Could not write to %s', self.filename)
 
 
-def add_non_finding(issue, options):
+class Finding(BaseItem):
     """
-    Adds a non-finding.
+    Encapsulates finding.
     """
-    title = validate_report.capitalize(issue.title.strip())
-    print_status('{0} - {1} - {2}'.format(issue.state, issue.labels,
-                                          title), options)
-    non_finding_id = '{0}-{1}'.format(issue.iid, valid_filename(title))
-    filename = 'non-findings/{0}.xml'.format(non_finding_id)
-    non_finding = collections.OrderedDict()
-    non_finding['title'] = title
-    non_finding['p'] = unicode.replace(issue.description,
-                                       '\r\n', '\n')
-    for note in [x for x in issue.notes.list() if not x.system]:
-        non_finding['p'] += unicode.replace(note.body,
-                                            '\r\n', '\n')
-    non_finding_xml = jxmlease.XMLDictNode(non_finding, tag='non-finding',
-                                           xml_attrs={'id': non_finding_id})
-    if options['dry_run']:
-        print_line('[+] {0}'.format(filename))
-        print(non_finding_xml.emit_xml())
+
+    def __init__(self):
+        BaseItem.__init__(self, 'finding')
+        self.threat_level = 'Moderate'
+        self.finding_type = 'TODO'
+        self.description = '<p>TODO</p>'
+        self.technicaldescription = '<p>TODO</p>'
+        self.impact = '<p>TODO</p>'
+        self.recommendation = '<ul><li>TODO</li></ul>'
+
+    def __str__(self):
+        """
+        Return a XML version of the class
+        """
+        self.root_open = '<finding id="{0}" threatLevel="{1}" type="{2}">\n'.format(self.identifier,
+                                                                                    self.threat_level,
+                                                                                    self.finding_type)
+        self.content = self.element('description') + \
+                       self.element('technicaldescription') + \
+                       self.element('impact') + \
+                       self.element('recommendation')
+        return BaseItem.__str__(self)
+
+
+class NonFinding(BaseItem):
+    """
+    Encapsulates non-finding.
+    """
+
+    def __init__(self):
+        BaseItem.__init__(self, 'non-finding')
+
+
+def from_issue(issue):
+    """
+    Parse gitlab issue and return Finding, NonFinding or None
+    """
+    if 'finding' in [x.lower() for x in issue.labels]:
+        item = Finding()
+        item.description = convert_text(issue.description)
+        for note in [x for x in reversed(issue.notes.list()) if not x.system]:
+            if len(note.body.splitlines()):
+                if 'impact' in note.body.split()[0].lower():
+                    item.impact = convert_text(''.join(note.body.splitlines(True)[1:]))
+                elif 'recommendation' in note.body.split()[0].lower():
+                    item.recommendation = convert_text(''.join(note.body.splitlines(True)[1:]))
+                else:
+                    item.technicaldescription += u'{0}\n'.format(convert_text(note.body))
+    elif 'non-finding' in [x.lower() for x in issue.labels]:
+        item = NonFinding()
+        for note in [x for x in reversed(issue.notes.list()) if not x.system]:
+            item.content += convert_text(note.body) + '\n'
     else:
-        if os.path.isfile(filename) and not options['overwrite']:
-            print_line('Non-finding {0} already exists (use --overwrite to overwrite)'.
-                       format(filename))
-        else:
-            if options['y'] or ask_permission('Create file ' + filename):
-                with open(filename, 'w') as xmlfile:
-                    xmlfile.write(non_finding_xml.emit_xml().encode('utf-8'))
-                print_line('[+] Created {0}'.format(filename))
+        return None
+    item.title = validate_report.capitalize(issue.title.strip())
+    item.identifier = 'f{0}-{1}'.format(issue.iid, valid_filename(item.title))
+    return item
+
+
+def add_item(issue, options):
+    """
+    Convert issue into XML finding and create file.
+    """
+    item = from_issue(issue)
+    if not item:
+        return
+    if os.path.isfile(item.filename) and not options['overwrite']:
+        print_line('{0} {1} already exists (use --overwrite to overwrite)'.
+                   format(item.item_type, item.filename))
+        return
+    if options['dry_run']:
+        print_line('[+] {0}\n{1}'.format(item.filename, item))
+    else:
+        if options['y'] or ask_permission('Create file ' + item.filename):
+            item.write_file()
+
+
+def convert_text(text):
+    """
+    Convert (gitlab) markdown to 'XML' (actually HTML5).
+    """
+    return unicode.replace(pypandoc.convert_text(text, 'html5', format='markdown_github'), '\r\n', '\n')
 
 
 def ask_permission(question):
@@ -128,34 +190,15 @@ def ask_permission(question):
     return raw_input().lower() == 'y'
 
 
-def convert_markdown(text):
-    """
-    Replace markdown monospace with monospace tags
-    """
-    result = text
-    return result
-    # print('EXAMINING ' + text + ' END')
-    # monospace = re.findall("\`\`\`(.*?)\`\`\`", text, re.DOTALL)
-    # if len(monospace):
-    #     result = {}
-    #     result['monospace'] = ''.join(monospace)
-
-
 def list_issues(gitserver, options):
     """
     Lists all issues for options['issues']
     """
-    try:
-        for issue in gitserver.project_issues.list(project_id=options['issues'],
-                                                   per_page=99):
-            if issue.state == 'closed' and not options['closed']:
-                continue
-            if 'finding' in issue.labels:
-                add_finding(issue, options)
-            if 'non-finding' in issue.labels:
-                add_non_finding(issue, options)
-    except Exception as exception:
-        print_error('could not find any issues ({0})'.format(exception), -1)
+    for issue in gitserver.project_issues.list(project_id=options['issues'],
+                                               per_page=999):
+        if issue.state == 'closed' and not options['closed']:
+            continue
+        add_item(issue, options)
 
 
 def list_projects(gitserver):
@@ -176,7 +219,7 @@ def parse_arguments():
         description=textwrap.dedent('''\
 gitlab-to-pentext - imports and updates gitlab issues into PenText (XML) format
 
-Copyright (C) 2015-2016  Radically Open Security (Peter Mosmans)
+Copyright (C) 2015-2017  Radically Open Security (Peter Mosmans)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -206,11 +249,15 @@ def preflight_checks():
     Checks if all tools are there.
     Exits with 0 if everything went okilydokily.
     """
+    gitserver = None
     try:
         gitserver = gitlab.Gitlab.from_config('remote')
         gitserver.auth()
     except gitlab.config.GitlabDataError as exception:
         print_error('could not connect {0}'.format(exception), -1)
+    for path in ('findings', 'non-findings'):
+        if not os.path.isdir(path):
+            print_error('Path {0} does not exist: Is this a Pentext repository ?'.format(path), -1)
     return gitserver
 
 
@@ -252,7 +299,7 @@ def valid_filename(filename):
     """
     result = ''
     for char in filename.strip():
-        if char in ['*', ':', '/', '.', '\\', ' ', '[', ']', '(', ')', '\'']:
+        if char in ['*', ':', '/', '.', '\\', ' ', '[', ']', '(', ')', '\'', '\"']:
             if len(char) and not result.endswith('-'):
                 result += '-'
         else:

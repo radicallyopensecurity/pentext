@@ -17,15 +17,7 @@
             <xs:attribute ref="xml:lang"/>
             <xs:attribute name="invoice_no" type="xs:string"/>
             <xs:attribute name="date" type="xs:date" use="optional"/>
-            <xs:attribute name="denomination" use="optional" default="eur">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="eur"/>
-                        <xs:enumeration value="usd"/>
-                        <xs:enumeration value="gbp"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute ref="denomination" use="optional"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="meta">
