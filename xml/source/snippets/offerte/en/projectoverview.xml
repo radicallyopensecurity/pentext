@@ -20,7 +20,7 @@
     <company_short/> will test for the presence of the most common
     vulnerabilities, using both publicly available vulnerability scanning
     tools and manual testing. <company_short/> shall perform a
-    <p_duration/>-day (<p_mandays/>-manday), <p_boxtype/>, intrusive test via the
+    <p_duration/>-day (<p_persondays/>-personday), <p_boxtype/>, intrusive test via the
     internet.
   </p>
 

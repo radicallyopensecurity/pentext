@@ -153,8 +153,8 @@
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
-    <xsl:template match="p_mandays">
-        <xsl:param name="placeholderElement" select="/*/meta/pentestinfo/mandays"/>
+    <xsl:template match="p_persondays">
+        <xsl:param name="placeholderElement" select="/*/meta/pentestinfo/persondays"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>

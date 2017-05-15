@@ -151,7 +151,7 @@
   <xs:element name="invoice_extra_field" type="xs:string"/>
 
   <xs:element name="duration" type="xs:nonNegativeInteger"/>
-  <xs:element name="mandays" type="xs:nonNegativeInteger"/>
+  <xs:element name="persondays" type="xs:nonNegativeInteger"/>
   <xs:element name="test_planning" type="xs:string"/>
   <xs:element name="report_due" type="xs:string"/>
   <xs:element name="nature" type="xs:string"/>

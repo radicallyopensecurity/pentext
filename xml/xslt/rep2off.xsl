@@ -77,8 +77,8 @@
                     <!-- copy various variables from quickscope -->
                     <duration>2</duration>
                     <xsl:comment>duration of pentest, in working days</xsl:comment>
-                    <mandays>2</mandays>
-                    <xsl:comment>duration of pentest, in mandays</xsl:comment>
+                    <persondays>2</persondays>
+                    <xsl:comment>duration of pentest, in persondays</xsl:comment>
                     <test_planning>
                         <xsl:choose>
                             <xsl:when test="/*/pentestinfo/test_planning">
