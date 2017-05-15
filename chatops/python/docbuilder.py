@@ -46,7 +46,7 @@ def parse_arguments():
         description=textwrap.dedent('''\
 Builds PDF files from (intermediate fo and) XML files.
 
-Copyright (C) 2015-2016  Radically Open Security (Peter Mosmans)
+Copyright (C) 2015-2017  Radically Open Security (Peter Mosmans)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -86,6 +86,8 @@ the Free Software Foundation, either version 3 of the License, or
                         default='../target/report-latest.pdf',
                         help="""output file name (default:
                         ../target/report-latest.pdf""")
+    parser.add_argument('--tag', action='store_true',
+                        help="""Modify GITREV with git commit hash""")
     parser.add_argument('-v', '--verbose', action='store_true',
                         help='increase output verbosity')
     parser.add_argument('-w', '--warnings', action='store_true',
@@ -122,15 +124,18 @@ def change_tag(fop):
     Replaces GITREV in document by git commit shorttag.
     """
     cmd = ['git', 'log', '--pretty=format:%h', '-n', '1']
-    process = subprocess.Popen(cmd, stdout=subprocess.PIPE)
-    shorttag, _stderr = process.communicate()
-    if not process.returncode:
-        fop_file = open(fop).read()
-        if GITREV in fop_file:
-            fop_file = fop_file.replace(GITREV, shorttag)
-            with open(fop, 'w') as new_file:
-                new_file.write(fop_file)
-            print('[+] Embedding git version information into document')
+    try:
+        process = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+        shorttag, _stderr = process.communicate()
+        if not process.returncode:
+            fop_file = open(fop).read()
+            if GITREV in fop_file:
+                fop_file = fop_file.replace(GITREV, shorttag)
+                with open(fop, 'w') as new_file:
+                    new_file.write(fop_file)
+                print('[+] Embedding git version information into document')
+    except OSError:
+        print('[-] could not execute git - is git installed ?')
 
 
 def to_fo(options):
@@ -154,7 +159,8 @@ def to_fo(options):
         print_exit('[-] Error creating fo file from XML input',
                    process.returncode)
     else:
-        change_tag(options['fop'])
+        if options['tag']:
+            change_tag(options['fop'])
     return True
 
 
