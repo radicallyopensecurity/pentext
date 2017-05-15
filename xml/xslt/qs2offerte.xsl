@@ -86,35 +86,35 @@
                 <pentestinfo>
                     <!-- copy various variables from quickscope -->
                     <duration>
-                        <xsl:value-of select="/*/pentest_info/days"/>
+                        <xsl:value-of select="/*/activity_info/days"/>
                     </duration>
                     <xsl:comment>duration of pentest, in working days</xsl:comment>
                     <persondays>
-                        <xsl:value-of select="/*/pentest_info/persondays"/>
+                        <xsl:value-of select="/*/activity_info/persondays"/>
                     </persondays>
                     <xsl:comment>duration of pentest, in persondays</xsl:comment>
                     <test_planning>
-                        <xsl:value-of select="/*/pentest_info/planning"/>
+                        <xsl:value-of select="/*/activity_info/planning"/>
                     </test_planning>
                     <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2016</xsl:comment>
                     <report_due>
-                        <xsl:value-of select="/*/pentest_info/delivery"/>
+                        <xsl:value-of select="/*/activity_info/delivery"/>
                     </report_due>
                     <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2016</xsl:comment>
                     <nature>
-                        <xsl:value-of select="/*/pentest_info/nature"/>
+                        <xsl:value-of select="/*/activity_info/nature"/>
                     </nature>
                     <type>
-                        <xsl:value-of select="/*/pentest_info/type"/>
+                        <xsl:value-of select="/*/activity_info/type"/>
                     </type>
                     <xsl:comment>please choose one of the following: black-box, grey-box, crystal-box</xsl:comment>
                     <fee denomination="eur">
-                        <xsl:value-of select="/*/pentest_info/rate"/>
+                        <xsl:value-of select="/*/activity_info/rate"/>
                     </fee>
                     <xsl:comment>(eur|usd|gbp)</xsl:comment>
-                    <xsl:if test="*/pentest_info/application_name">
+                    <xsl:if test="*/activity_info/application_name">
                         <target_application>
-                            <xsl:value-of select="/*/pentest_info/application_name"/>
+                            <xsl:value-of select="/*/activity_info/application_name"/>
                         </target_application>
                         <xsl:comment>name of application/service to be tested (if any; if none, DELETE target_application element)</xsl:comment>
                     </xsl:if>
@@ -147,7 +147,7 @@
                 </xsl:element>
             </xsl:for-each>
             
-            <xsl:if test="/*/pentest_info/codeaudit/@perform = 'yes'">
+            <xsl:if test="/*/activity_info/codeaudit/@perform = 'yes'">
                 <xsl:for-each
                 select="$snippetSelectionRoot/selection[@subtype = $docSubType]/snippet_group[@set = 'additionalcodeaudit']/snippet">
                 <xsl:element name="xi:include">
@@ -213,7 +213,7 @@
                     </xsl:call-template>
                 </xsl:attribute>
             </xsl:element>-->
-            <!--<xsl:if test="/*/pentest_info/codeaudit/@perform = 'yes'">
+            <!--<xsl:if test="/*/activity_info/codeaudit/@perform = 'yes'">
                 <xsl:element name="xi:include">
                     <xsl:attribute name="href">
                         <xsl:call-template name="docCheck">
