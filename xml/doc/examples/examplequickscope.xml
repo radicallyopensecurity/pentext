@@ -38,8 +38,8 @@
     <pentest_info>
         <!-- How long would you like the test to be? (in days) -->
         <days>6</days>
-        <!-- How many mandays (if you don't know, try days * number of assigned pentesters) -->
-        <mandays>12</mandays>
+        <!-- How many persondays (if you don't know, try days * number of assigned pentesters) -->
+        <persondays>12</persondays>
         <!-- Service execution (Use one of the following values: time-boxed, subscription) -->
         <nature>time-boxed</nature>
         <!-- Testing type (Use one of the following values: crystal-box, black-box, grey-box) -->

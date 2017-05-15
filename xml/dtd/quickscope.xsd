@@ -42,7 +42,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="days"/>
-        <xs:element ref="mandays"/>
+        <xs:element ref="persondays"/>
         <xs:element ref="nature"/>
         <xs:element ref="type"/>
         <xs:element ref="planning"/>
