@@ -35,7 +35,7 @@
         <country>TP Country</country>
     </third_party>
 
-    <pentest_info>
+    <activity_info>
         <!-- How long would you like the test to be? (in days) -->
         <days>6</days>
         <!-- How many persondays (if you don't know, try days * number of assigned pentesters) -->
@@ -58,5 +58,5 @@
         <!-- rate (to be filled in by ROS ;) -->
         <rate>40000</rate>
 
-    </pentest_info>
+    </activity_info>
 </quickscope>

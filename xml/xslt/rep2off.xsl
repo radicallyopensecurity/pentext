@@ -82,7 +82,7 @@
                     <test_planning>
                         <xsl:choose>
                             <xsl:when test="/*/pentestinfo/test_planning">
-                                <xsl:value-of select="/*/pentest_info/test_planning"/>
+                                <xsl:value-of select="/*/activity_info/test_planning"/>
                             </xsl:when>
                             <xsl:otherwise>TBD</xsl:otherwise>
                         </xsl:choose>
@@ -91,7 +91,7 @@
                     <report_due>
                         <xsl:choose>
                             <xsl:when test="/*/pentestinfo/report_due">
-                                <xsl:value-of select="/*/pentest_info/report_due"/>
+                                <xsl:value-of select="/*/activity_info/report_due"/>
                             </xsl:when>
                             <xsl:otherwise>TBD</xsl:otherwise>
                         </xsl:choose>
@@ -100,7 +100,7 @@
                     <nature>
                         <xsl:choose>
                             <xsl:when test="/*/pentestinfo/nature">
-                                <xsl:value-of select="/*/pentest_info/nature"/>
+                                <xsl:value-of select="/*/activity_info/nature"/>
                             </xsl:when>
                             <xsl:otherwise>time-boxed</xsl:otherwise>
                         </xsl:choose>
@@ -108,7 +108,7 @@
                     <type>
                         <xsl:choose>
                             <xsl:when test="/*/pentestinfo/type">
-                                <xsl:value-of select="/*/pentest_info/type"/>
+                                <xsl:value-of select="/*/activity_info/type"/>
                             </xsl:when>
                             <xsl:otherwise>crystal-box</xsl:otherwise>
                         </xsl:choose>
@@ -116,9 +116,9 @@
                     <xsl:comment>please choose one of the following: black-box, grey-box, crystal-box</xsl:comment>
                     <fee denomination="eur">0</fee>
                     <xsl:comment>(eur|usd|gbp)</xsl:comment>
-                    <xsl:if test="*/pentest_info/target_application">
+                    <xsl:if test="*/activity_info/target_application">
                         <target_application>
-                            <xsl:value-of select="/*/pentest_info/target_application"/>
+                            <xsl:value-of select="/*/activity_info/target_application"/>
                         </target_application>
                     </xsl:if>
                 </pentestinfo>

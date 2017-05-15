@@ -9,7 +9,7 @@
         <xs:element ref="client"/>
         <xs:element ref="meta"/>
         <xs:element ref="third_party" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="pentest_info"/>
+        <xs:element ref="activity_info"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -38,7 +38,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="pentest_info">
+  <xs:element name="activity_info">
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="days"/>
