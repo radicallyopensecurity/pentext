@@ -57,12 +57,12 @@ the Free Software Foundation, either version 3 of the License, or
     parser.add_argument('-date', action='store',
                         help='the invoice date')
     parser.add_argument('-execsummary', action='store',
-                        help="""create an executive summary as well as a report (true/false). 
+                        help="""create an executive summary as well as a report (true/false).
                         Default: false """)
     parser.add_argument('--fop-config', action='store',
-                        default='/etc/docbuilder/rosfop.xconf',
+                        default='/etc/docbuilder/fop.xconf',
                         help="""fop configuration file (default
-                        /etc/docbuilder/rosfop.xconf""")
+                        /etc/docbuilder/fop.xconf""")
     parser.add_argument('-f', '--fop', action='store',
                         default='../target/report.fo',
                         help="""intermediate fop output file (default:
