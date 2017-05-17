@@ -63,9 +63,9 @@
     
     <xsl:variable name="denomination">
         <xsl:choose>
-            <xsl:when test="/offerte/meta/pentestinfo/fee/@denomination = 'eur'">€</xsl:when>
-            <xsl:when test="/offerte/meta/pentestinfo/fee/@denomination = 'usd'">$</xsl:when>
-            <xsl:when test="/offerte/meta/pentestinfo/fee/@denomination = 'gbp'">£</xsl:when>
+            <xsl:when test="/offerte/meta/activityinfo/fee/@denomination = 'eur'">€</xsl:when>
+            <xsl:when test="/offerte/meta/activityinfo/fee/@denomination = 'usd'">$</xsl:when>
+            <xsl:when test="/offerte/meta/activityinfo/fee/@denomination = 'gbp'">£</xsl:when>
         </xsl:choose>
     </xsl:variable>
     

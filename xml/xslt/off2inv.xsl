@@ -30,7 +30,7 @@
                 <xsl:value-of select="$lang"/>
             </xsl:attribute>
             <xsl:attribute name="denomination">
-                <xsl:value-of select="/offerte/meta/pentestinfo/fee/@denomination"/>
+                <xsl:value-of select="/offerte/meta/activityinfo/fee/@denomination"/>
             </xsl:attribute>
             <meta>
                 <xsl:element name="xi:include">
@@ -44,13 +44,13 @@
                 <xsl:comment>Add/delete &lt;service> elements as needed</xsl:comment>
                 <service>
                     <description>
-                        <xsl:value-of select="/offerte/meta/pentestinfo/duration"
+                        <xsl:value-of select="/offerte/meta/activityinfo/duration"
                             />-<xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_days'"/></xsl:call-template>&#160;<xsl:value-of select="/offerte/meta/offered_service_short"
                             />&#160;<xsl:value-of
                             select="/offerte/meta/permission_parties/client/short_name"/>
                     </description>
                     <fee vat="yes">
-                        <xsl:value-of select="/offerte/meta/pentestinfo/fee"/>
+                        <xsl:value-of select="/offerte/meta/activityinfo/fee"/>
                     </fee>
                 </service>
             </servicesdelivered>

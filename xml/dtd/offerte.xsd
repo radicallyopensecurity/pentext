@@ -29,7 +29,7 @@
         <xs:element ref="company"/>
         <xs:element ref="targets"/>
         <xs:element ref="permission_parties"/>
-        <xs:element ref="pentestinfo"/>
+        <xs:element ref="activityinfo"/>
         <xs:element ref="version_history"/>
       </xs:sequence>
     </xs:complexType>
@@ -40,7 +40,7 @@
 
 
 
-  <xs:element name="pentestinfo">
+  <xs:element name="activityinfo">
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="duration"/>

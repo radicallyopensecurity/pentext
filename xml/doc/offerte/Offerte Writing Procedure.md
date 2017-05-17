@@ -113,11 +113,11 @@ Example:
 
 ### Pentest Info
 
-The `<pentestinfo>` element contains some data about the pentest itself. This element is useful as you can refer to its content using placeholders, allowing e.g. for standard referrals to the tested application name, pentest type or pentest duration.
+The `<activityinfo>` element contains some data about the pentest itself. This element is useful as you can refer to its content using placeholders, allowing e.g. for standard referrals to the tested application name, pentest type or pentest duration.
 
 Example:
 
-    <pentestinfo>
+    <activityinfo>
             <duration>10</duration><!-- duration of pentest, in working days -->
             <test_planning>January 1st until January 12th, 2015</test_planning> <!-- date or date range in text, e.g. May 18th until May 25th, 2015 -->
             <report_writing>January 15th until January 20th, 2015</report_writing> <!-- date or date range in text, e.g. May 18th until May 25th, 2015 -->
@@ -127,7 +127,7 @@ Example:
             <fee>50000</fee><!-- euro is added automatically in the document -->
             <target_application>FishInABarrel</target_application><!-- name of application to be tested (if any) -->
             <target_application_producer>H4ckers 'R' Us</target_application_producer>
-        </pentestinfo>
+        </activityinfo>
 
 ### Version History
 

@@ -66,7 +66,7 @@
                 <targets>
                     <!-- copy targets from quickscope -->
                     <xsl:comment>one target element per target</xsl:comment>
-                    <xsl:for-each select="/*/meta/targets/target">
+                    <xsl:for-each select="//targets/target">
                         <xsl:copy>
                             <xsl:copy-of select="node()"/>
                         </xsl:copy>
@@ -83,7 +83,7 @@
                         </party>
                     </xsl:for-each>
                 </permission_parties>
-                <pentestinfo>
+                <activityinfo>
                     <!-- copy various variables from quickscope -->
                     <duration>
                         <xsl:value-of select="/*/activity_info/days"/>
@@ -119,7 +119,7 @@
                         <xsl:comment>name of application/service to be tested (if any; if none, DELETE target_application element)</xsl:comment>
                     </xsl:if>
 
-                </pentestinfo>
+                </activityinfo>
                 <version_history>
                     <xsl:comment>needed for date on frontpage and in signature boxes; it is possible to add a new &lt;version> after each review; in that case, make sure to update the date/time</xsl:comment>
                     <version number="auto">
