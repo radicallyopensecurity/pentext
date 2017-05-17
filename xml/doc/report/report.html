@@ -23,7 +23,7 @@
 <li>The document title, in the <code>&lt;title&gt;</code> element</li>
 <li>Client information, in the <code>&lt;client&gt;</code> element</li>
 <li>Targets listing, in the <code>&lt;targets&gt;</code> element</li>
-<li>(Optionally) Pentest-related information, in the <code>&lt;pentestinfo&gt;</code> element</li>
+<li>(Optionally) Pentest-related information, in the <code>&lt;activityinfo&gt;</code> element</li>
 <li>People who worked on the pentest and/or report, in the <code>&lt;collaborators&gt;</code> element</li>
 <li>Document classification, in the <code>&lt;classification&gt;</code> element</li>
 <li>The document's version history, in the <code>&lt;version_history&gt;</code> element</li>
@@ -53,9 +53,9 @@
     &lt;target&gt;Sitting Duck&#39;s support staff&lt;/target&gt;
 &lt;targets&gt;</code></pre>
 <h3 id="pentest-info">Pentest Info</h3>
-<p>The <code>&lt;pentestinfo&gt;</code> element contains some data about the pentest itself. This element is optional, but may be useful as you can refer to its content using placeholders, allowing e.g. for standard referrals to the tested application name, pentest type or pentest duration.</p>
+<p>The <code>&lt;activityinfo&gt;</code> element contains some data about the pentest itself. This element is optional, but may be useful as you can refer to its content using placeholders, allowing e.g. for standard referrals to the tested application name, pentest type or pentest duration.</p>
 <p>Example:</p>
-<pre><code>&lt;pentestinfo&gt;
+<pre><code>&lt;activityinfo&gt;
         &lt;duration&gt;10&lt;/duration&gt;&lt;!-- duration of pentest, in working days --&gt;
         &lt;test_planning&gt;January 1st until January 12th, 2015&lt;/test_planning&gt; &lt;!-- date or date range in text, e.g. May 18th until May 25th, 2015 --&gt;
         &lt;report_writing&gt;January 15th until January 20th, 2015&lt;/report_writing&gt; &lt;!-- date or date range in text, e.g. May 18th until May 25th, 2015 --&gt;
@@ -64,7 +64,7 @@
         &lt;type&gt;black-box&lt;/type&gt;&lt;!-- please choose one of the following: black-box, grey-box, crystal-box --&gt;
         &lt;target_application&gt;FishInABarrel&lt;/target_application&gt;&lt;!-- name of application to be tested (if any) --&gt;
         &lt;target_application_producer&gt;H4ckers &#39;R&#39; Us&lt;/target_application_producer&gt;
-    &lt;/pentestinfo&gt;</code></pre>
+    &lt;/activityinfo&gt;</code></pre>
 <h3 id="collaborators">Collaborators</h3>
 <p>The <code>&lt;collaborators&gt;</code> element contains three other elements, mandatory and in the listed order:</p>
 <ul>

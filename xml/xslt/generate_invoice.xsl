@@ -58,13 +58,13 @@
 
     <!-- CONTENT -->
     <xsl:template name="invoice_from_offerte">
-        <xsl:variable name="fee" select="/offerte/meta/pentestinfo/fee * 1"/>
+        <xsl:variable name="fee" select="/offerte/meta/activityinfo/fee * 1"/>
         <xsl:variable name="vat" select="$fee div 100 * 21"/>
         <xsl:variable name="denomination">
             <xsl:choose>
-                <xsl:when test="/offerte/meta/pentestinfo/fee/@denomination = 'eur'">€</xsl:when>
-                <xsl:when test="/offerte/meta/pentestinfo/fee/@denomination = 'gbp'">£</xsl:when>
-                <xsl:when test="/offerte/meta/pentestinfo/fee/@denomination = 'usd'">$</xsl:when>
+                <xsl:when test="/offerte/meta/activityinfo/fee/@denomination = 'eur'">€</xsl:when>
+                <xsl:when test="/offerte/meta/activityinfo/fee/@denomination = 'gbp'">£</xsl:when>
+                <xsl:when test="/offerte/meta/activityinfo/fee/@denomination = 'usd'">$</xsl:when>
             </xsl:choose>
         </xsl:variable>
         <xsl:call-template name="invoiceStart">
@@ -73,7 +73,7 @@
             />
         </xsl:call-template>
         <xsl:variable name="serviceDescription">
-            <xsl:value-of select="/offerte/meta/pentestinfo/duration"/><xsl:text>-</xsl:text><xsl:call-template name="getString"><xsl:with-param
+            <xsl:value-of select="/offerte/meta/activityinfo/duration"/><xsl:text>-</xsl:text><xsl:call-template name="getString"><xsl:with-param
                                         name="stringID" select="'invoice_days'"
                                     /></xsl:call-template>&#160;<xsl:value-of
                                     select="/offerte/meta/offered_service_short"

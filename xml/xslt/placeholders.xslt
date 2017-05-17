@@ -135,38 +135,38 @@
     </xsl:template>
     <xsl:template match="t_app">
         <xsl:param name="placeholderElement"
-            select="/offerte/meta/pentestinfo/target_application | /pentest_report/meta/pentestinfo/target_application"/>
+            select="/offerte/meta/activityinfo/target_application | /pentest_report/meta/activityinfo/target_application"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="t_app_producer">
         <xsl:param name="placeholderElement"
-            select="/offerte/meta/pentestinfo/target_application_producer | /pentest_report/meta/pentestinfo/target_application_producer"/>
+            select="/offerte/meta/activityinfo/target_application_producer | /pentest_report/meta/activityinfo/target_application_producer"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="p_duration">
-        <xsl:param name="placeholderElement" select="/*/meta/pentestinfo/duration"/>
+        <xsl:param name="placeholderElement" select="/*/meta/activityinfo/duration"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="p_persondays">
-        <xsl:param name="placeholderElement" select="/*/meta/pentestinfo/persondays"/>
+        <xsl:param name="placeholderElement" select="/*/meta/activityinfo/persondays"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="p_boxtype">
-        <xsl:param name="placeholderElement" select="/*/meta/pentestinfo/type"/>
+        <xsl:param name="placeholderElement" select="/*/meta/activityinfo/type"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="p_fee">
-        <xsl:param name="placeholderElement" select="/*/meta/pentestinfo/fee"/>
+        <xsl:param name="placeholderElement" select="/*/meta/activityinfo/fee"/>
         <xsl:value-of select="$denomination"/>
         <xsl:text>&#160;</xsl:text>
         <xsl:call-template name="checkPlaceholder">
@@ -174,13 +174,13 @@
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="p_testingduration">
-        <xsl:param name="placeholderElement" select="/*/meta/pentestinfo/test_planning"/>
+        <xsl:param name="placeholderElement" select="/*/meta/activityinfo/test_planning"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="p_reportdue">
-        <xsl:param name="placeholderElement" select="/*/meta/pentestinfo/report_due"/>
+        <xsl:param name="placeholderElement" select="/*/meta/activityinfo/report_due"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>

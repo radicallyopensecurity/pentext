@@ -66,9 +66,9 @@
     &lt;target&gt;Sitting Duck&#39;s support staff&lt;/target&gt;
 &lt;targets&gt;</code></pre>
 <h3 id="pentest-info">Pentest Info</h3>
-<p>The <code>&lt;pentestinfo&gt;</code> element contains some data about the pentest itself. This element is useful as you can refer to its content using placeholders, allowing e.g. for standard referrals to the tested application name, pentest type or pentest duration.</p>
+<p>The <code>&lt;activityinfo&gt;</code> element contains some data about the pentest itself. This element is useful as you can refer to its content using placeholders, allowing e.g. for standard referrals to the tested application name, pentest type or pentest duration.</p>
 <p>Example:</p>
-<pre><code>&lt;pentestinfo&gt;
+<pre><code>&lt;activityinfo&gt;
         &lt;duration&gt;10&lt;/duration&gt;&lt;!-- duration of pentest, in working days --&gt;
         &lt;test_planning&gt;January 1st until January 12th, 2015&lt;/test_planning&gt; &lt;!-- date or date range in text, e.g. May 18th until May 25th, 2015 --&gt;
         &lt;report_writing&gt;January 15th until January 20th, 2015&lt;/report_writing&gt; &lt;!-- date or date range in text, e.g. May 18th until May 25th, 2015 --&gt;
@@ -78,7 +78,7 @@
         &lt;fee&gt;50000&lt;/fee&gt;&lt;!-- euro is added automatically in the document --&gt;
         &lt;target_application&gt;FishInABarrel&lt;/target_application&gt;&lt;!-- name of application to be tested (if any) --&gt;
         &lt;target_application_producer&gt;H4ckers &#39;R&#39; Us&lt;/target_application_producer&gt;
-    &lt;/pentestinfo&gt;</code></pre>
+    &lt;/activityinfo&gt;</code></pre>
 <h3 id="version-history">Version History</h3>
 <p>The <code>&lt;version_history&gt;</code> element contains one or more <code>&lt;version&gt;</code> elements, one for each version of the document you create. Whenever you start a new version, add a <code>&lt;version&gt;</code> element to the list.</p>
 <p>The <code>&lt;version&gt;</code> element should contain the following:</p>

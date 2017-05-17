@@ -73,7 +73,7 @@
                         </party>
                     </xsl:for-each>
                 </permission_parties>
-                <pentestinfo>
+                <activityinfo>
                     <!-- copy various variables from quickscope -->
                     <duration>2</duration>
                     <xsl:comment>duration of pentest, in working days</xsl:comment>
@@ -81,7 +81,7 @@
                     <xsl:comment>duration of pentest, in persondays</xsl:comment>
                     <test_planning>
                         <xsl:choose>
-                            <xsl:when test="/*/pentestinfo/test_planning">
+                            <xsl:when test="/*/activityinfo/test_planning">
                                 <xsl:value-of select="/*/activity_info/test_planning"/>
                             </xsl:when>
                             <xsl:otherwise>TBD</xsl:otherwise>
@@ -90,7 +90,7 @@
                     <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2015</xsl:comment>
                     <report_due>
                         <xsl:choose>
-                            <xsl:when test="/*/pentestinfo/report_due">
+                            <xsl:when test="/*/activityinfo/report_due">
                                 <xsl:value-of select="/*/activity_info/report_due"/>
                             </xsl:when>
                             <xsl:otherwise>TBD</xsl:otherwise>
@@ -99,7 +99,7 @@
                     <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2015</xsl:comment>
                     <nature>
                         <xsl:choose>
-                            <xsl:when test="/*/pentestinfo/nature">
+                            <xsl:when test="/*/activityinfo/nature">
                                 <xsl:value-of select="/*/activity_info/nature"/>
                             </xsl:when>
                             <xsl:otherwise>time-boxed</xsl:otherwise>
@@ -107,7 +107,7 @@
                     </nature>
                     <type>
                         <xsl:choose>
-                            <xsl:when test="/*/pentestinfo/type">
+                            <xsl:when test="/*/activityinfo/type">
                                 <xsl:value-of select="/*/activity_info/type"/>
                             </xsl:when>
                             <xsl:otherwise>crystal-box</xsl:otherwise>
@@ -121,7 +121,7 @@
                             <xsl:value-of select="/*/activity_info/target_application"/>
                         </target_application>
                     </xsl:if>
-                </pentestinfo>
+                </activityinfo>
                 <version_history>
                     <xsl:comment>needed for date on frontpage and in signature boxes; it is possible to add a new &lt;version> after each review; in that case, make sure to update the date/time</xsl:comment>
                     <version number="auto">

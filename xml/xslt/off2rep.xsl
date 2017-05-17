@@ -21,15 +21,15 @@
                         </xsl:copy>
                     </xsl:for-each>
                 </targets>
-                <pentestinfo>
-                    <xsl:for-each select="/offerte/meta/pentestinfo/*">
+                <activityinfo>
+                    <xsl:for-each select="/offerte/meta/activityinfo/*">
                         <xsl:if test="not(self::fee)">
                             <xsl:copy>
                                 <xsl:copy-of select="node()"/>
                             </xsl:copy>
                         </xsl:if>
                     </xsl:for-each>
-                </pentestinfo>
+                </activityinfo>
                 <permission_parties>
                     <xsl:element name="xi:include">
                         <xsl:attribute name="href">client_info.xml</xsl:attribute>
