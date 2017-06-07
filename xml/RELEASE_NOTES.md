@@ -8,6 +8,8 @@ March 29th, 2017
 
 In reports, you now have access to the `<finding_count>` placeholder. It takes an optional attribute `@threatLevel` and returns the number of findings with that threatLevel in the report. If no `@threatLevel` attribute is added, it returns the total number of findings in the report. Useful for Results in a Nutshell type of texts.
 
+Example: `<finding_count threatLevel="Low"/>`
+
 March 20th, 2017
 ----------------
 
