@@ -174,8 +174,9 @@
                     <title>Non-Findings</title>
                     <p>In this section we list some of the things that were tried but turned out to
                         be dead ends.</p>
+                    <xsl:comment> Listing of Non-Findings (written by pentesters) </xsl:comment>
                 </section>
-                <xsl:comment> Listing of Non-Findings (written by pentesters) </xsl:comment>
+                
             </section>
 
             <xsl:element name="xi:include">
