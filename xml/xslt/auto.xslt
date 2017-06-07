@@ -33,9 +33,44 @@
         </fo:list-block>
     </xsl:template>
 
+    <xsl:template match="generate_teammembers">
+        <xsl:call-template name="generate_teammembers_xslt"/>
+    </xsl:template>
+
+    <xsl:template name="generate_teammembers_xslt">
+
+        <fo:list-block xsl:use-attribute-sets="list" provisional-distance-between-starts="0.75cm"
+            provisional-label-separation="2.5mm" space-after="12pt" start-indent="1cm">
+            <xsl:for-each select="//activityinfo//team/member">
+                <fo:list-item>
+                    <!-- insert a bullet -->
+                    <fo:list-item-label end-indent="label-end()">
+                        <fo:block>
+                            <fo:inline>&#8226;</fo:inline>
+                        </fo:block>
+                    </fo:list-item-label>
+                    <!-- list text -->
+                    <fo:list-item-body start-indent="body-start()">
+                        <fo:block>
+                            <fo:inline xsl:use-attribute-sets="bold"><xsl:apply-templates
+                                    select="name"/>: </fo:inline>
+                            <xsl:apply-templates select="expertise"/>
+                        </fo:block>
+                    </fo:list-item-body>
+                </fo:list-item>
+            </xsl:for-each>
+        </fo:list-block>
+    </xsl:template>
+
     <xsl:template match="generate_findings">
         <xsl:variable name="Ref" select="@Ref"/>
-        <xsl:variable name="status" select="@status"/>
+        <xsl:variable name="statusSequence" as="item()*">
+            <xsl:for-each select="@status">
+                <xsl:for-each select="tokenize(., ' ')">
+                    <xsl:value-of select="."/>
+                </xsl:for-each>
+            </xsl:for-each>
+        </xsl:variable>
         <xsl:variable name="unsortedFindingSummaryTable">
             <xsl:for-each-group select="//finding" group-by="@threatLevel">
                 <xsl:for-each select="current-group()">
@@ -85,14 +120,14 @@
                         + (number(findingThreatLevel = 'N/A') * 1)"/>
                 <findingEntry>
                     <xsl:attribute name="Ref">
-                            <xsl:value-of select="@Ref"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="status">
-                            <xsl:value-of select="@status"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="findingId">
-                            <xsl:value-of select="@findingId"/>
-                        </xsl:attribute>
+                        <xsl:value-of select="@Ref"/>
+                    </xsl:attribute>
+                    <xsl:attribute name="status">
+                        <xsl:value-of select="@status"/>
+                    </xsl:attribute>
+                    <xsl:attribute name="findingId">
+                        <xsl:value-of select="@findingId"/>
+                    </xsl:attribute>
                     <!-- add an id for the first entry of each type so that we can link to it -->
                     <xsl:if
                         test="not(preceding-sibling::findingEntry/findingThreatLevel = findingThreatLevel)">
@@ -144,14 +179,14 @@
                         <xsl:when test="@status and @Ref">
                             <!-- Only generate a table for findings in the section with this status AND this Ref -->
                             <xsl:for-each
-                                select="$findingSummaryTable/findingEntry[@status = $status][ancestor::*[@id = $Ref]]">
+                                select="$findingSummaryTable/findingEntry[@status = $statusSequence][ancestor::*[@id = $Ref]]">
                                 <xsl:call-template name="findingsSummaryContent"/>
                             </xsl:for-each>
                         </xsl:when>
                         <xsl:when test="@status and not(@Ref)">
                             <!-- Only generate a table for findings in the section with this status -->
                             <xsl:for-each
-                                select="$findingSummaryTable/findingEntry[@status = $status]">
+                                select="$findingSummaryTable/findingEntry[@status = $statusSequence]">
                                 <xsl:call-template name="findingsSummaryContent"/>
                             </xsl:for-each>
                         </xsl:when>
@@ -208,7 +243,13 @@
 
     <xsl:template match="generate_recommendations">
         <xsl:variable name="Ref" select="@Ref"/>
-        <xsl:variable name="status" select="@status"/>
+        <xsl:variable name="statusSequence" as="item()*">
+            <xsl:for-each select="@status">
+                <xsl:for-each select="tokenize(., ' ')">
+                    <xsl:value-of select="."/>
+                </xsl:for-each>
+            </xsl:for-each>
+        </xsl:variable>
         <fo:block>
             <fo:table width="100%" table-layout="fixed" xsl:use-attribute-sets="table borders">
                 <xsl:call-template name="checkIfLast"/>
@@ -234,14 +275,14 @@
                         <xsl:when test="@status and @Ref">
                             <!-- Only generate a table for findings in the section with this status AND this Ref -->
                             <xsl:for-each
-                                select="/pentest_report/descendant::finding[@status = $status][ancestor::*[@id = $Ref]]">
+                                select="/pentest_report/descendant::finding[@status = $statusSequence][ancestor::*[@id = $Ref]]">
                                 <xsl:call-template name="recommendationsSummaryContent"/>
                             </xsl:for-each>
                         </xsl:when>
                         <xsl:when test="@status and not(@Ref)">
                             <!-- Only generate a table for findings in the section with this status -->
                             <xsl:for-each
-                                select="/pentest_report/descendant::finding[@status = $status]">
+                                select="/pentest_report/descendant::finding[@status = $statusSequence]">
                                 <xsl:call-template name="recommendationsSummaryContent"/>
                             </xsl:for-each>
                         </xsl:when>

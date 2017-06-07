@@ -1,6 +1,16 @@
 RELEASE NOTES
 =============
 
+June 7th
+--------
+
+### Finetuned some retest features
+
+Specifically for retests, we now have the following nuggets of fun:
+
+- The `@status` attribute of the findings and recommendations tables can now take a space-separated list instead of a single status value, which means you can now generate a table for multiple statuses at once. Example: `<generate_recommendations status="new unresolved"/>`
+- Finding's statuses are now colour-coded in the PDF: Resolved = green, New & Unresolved = Red, Not retested = Orange. It's not tacky at all, trust me. Very understated and classy. :)
+
 March 29th, 2017
 ----------------
 
