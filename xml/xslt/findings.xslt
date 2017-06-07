@@ -4,6 +4,7 @@
     xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
 
     <xsl:template match="finding" mode="meta">
+        <xsl:variable name="status" select="@status"/>
         <fo:table width="100%" table-layout="fixed" xsl:use-attribute-sets="table" margin-bottom="{$large-space}">
             <fo:table-column column-width="proportional-column-width(70)"/>
             <fo:table-column column-width="proportional-column-width(30)"/>
@@ -20,7 +21,18 @@
             <fo:table-cell xsl:use-attribute-sets="td">
                 <fo:block xsl:use-attribute-sets="finding-meta">
                 <fo:inline xsl:use-attribute-sets="bold">Retest status: </fo:inline>
-                <xsl:value-of select="@status"/>
+                    <xsl:choose>
+                        <xsl:when test="@status = 'new' or @status = 'unresolved'">
+                            <fo:inline xsl:use-attribute-sets="status-new"><xsl:value-of select="@status"/></fo:inline>
+                        </xsl:when>
+                        <xsl:when test="@status = 'not-retested'">
+                            <fo:inline xsl:use-attribute-sets="status-not-retested"><xsl:value-of select="@status"/></fo:inline>
+                        </xsl:when>
+                        <xsl:when test="@status = 'resolved'">
+                            <fo:inline xsl:use-attribute-sets="status-resolved"><xsl:value-of select="@status"/></fo:inline>
+                        </xsl:when>
+                    </xsl:choose>
+                
             </fo:block>
             </fo:table-cell>
         </xsl:if>
