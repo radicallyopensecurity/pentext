@@ -202,11 +202,14 @@ def list_issues(gitserver, options):
     """
     Lists all issues for options['issues']
     """
-    for issue in gitserver.project_issues.list(project_id=options['issues'],
-                                               per_page=999):
-        if issue.state == 'closed' and not options['closed']:
-            continue
-        add_item(issue, options)
+    try:
+        for issue in gitserver.project_issues.list(project_id=options['issues'],
+                                                   per_page=999):
+            if issue.state == 'closed' and not options['closed']:
+                continue
+            add_item(issue, options)
+    except gitlab.exceptions.GitlabListError as exception:
+        print_error('Could not access items ({0})'.format(exception))
 
 
 def list_projects(gitserver):
