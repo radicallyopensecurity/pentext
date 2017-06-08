@@ -80,13 +80,13 @@
     
    
     <xsl:attribute-set name="status-new"><!-- also used by unresolved -->
-        <xsl:attribute name="color">red</xsl:attribute>
+        <xsl:attribute name="color">#CC4900</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="status-resolved">
-        <xsl:attribute name="color">green</xsl:attribute>
+        <xsl:attribute name="color">#b7aa5b</xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="status-not-retested">
-        <xsl:attribute name="color">orange</xsl:attribute>
+    <xsl:attribute-set name="status-not_retested">
+        <xsl:attribute name="color">#FE9920</xsl:attribute>
     </xsl:attribute-set>
    
     

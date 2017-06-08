@@ -3,7 +3,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs"
     xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0"
     xmlns:svg="http://www.w3.org/2000/svg" xmlns:math="http://www.w3.org/2005/xpath-functions/math"
-    extension-element-prefixes="math">
+    xmlns:my="http://www.radical.sexy" extension-element-prefixes="math my">
 
     <xsl:template match="generate_targets">
         <xsl:call-template name="generate_targets_xslt"/>
@@ -118,6 +118,8 @@
                         + (number(findingThreatLevel = 'Low') * 6)
                         + (number(findingThreatLevel = 'Unknown') * 3)
                         + (number(findingThreatLevel = 'N/A') * 1)"/>
+                <xsl:variable name="findingThreatLevelClean"
+                                                  select="translate(findingThreatLevel, '/', '_')"/>
                 <findingEntry>
                     <xsl:attribute name="Ref">
                         <xsl:value-of select="@Ref"/>
@@ -132,7 +134,7 @@
                     <xsl:if
                         test="not(preceding-sibling::findingEntry/findingThreatLevel = findingThreatLevel)">
                         <xsl:attribute name="id">summaryTableThreatLevel<xsl:value-of
-                                select="findingThreatLevel"/></xsl:attribute>
+                                select="$findingThreatLevelClean"/></xsl:attribute>
                     </xsl:if>
                     <findingNumber>
                         <xsl:value-of select="findingNumber"/>
@@ -218,7 +220,9 @@
                         </xsl:attribute>
                     </xsl:if>
                     <fo:basic-link color="blue">
-                        <xsl:attribute name="internal-destination"><xsl:value-of select="@findingId"/></xsl:attribute>
+                        <xsl:attribute name="internal-destination">
+                            <xsl:value-of select="@findingId"/>
+                        </xsl:attribute>
                         <xsl:value-of select="findingNumber"/>
                     </fo:basic-link>
                 </fo:block>
@@ -309,7 +313,9 @@
             <fo:table-cell xsl:use-attribute-sets="td">
                 <fo:block>
                     <fo:basic-link color="blue">
-                        <xsl:attribute name="internal-destination"><xsl:value-of select="@id"/></xsl:attribute>
+                        <xsl:attribute name="internal-destination">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
                         <xsl:apply-templates select="." mode="number"/>
                     </fo:basic-link>
                 </fo:block>
@@ -536,6 +542,7 @@
                     <xsl:with-param name="pieAttr" select="@pieAttr"/>
                     <xsl:with-param name="pieElem" select="@pieElem"/>
                     <xsl:with-param name="pieHeight" select="@pieHeight"/>
+                    <xsl:with-param name="status" select="@status"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
@@ -551,22 +558,60 @@
         <xsl:param name="pieAttr" select="@pieAttr"/>
         <xsl:param name="pieElem" select="@pieElem"/>
         <xsl:param name="pieHeight" as="xs:integer" select="@pieHeight"/>
-        <xsl:variable name="pieTotal" select="count(//*[local-name() = $pieElem])"/>
+        <xsl:param name="status" select="@status"/>
+        <xsl:variable name="statusSequence" as="item()*">
+            <xsl:for-each select="$status">
+                <xsl:for-each select="tokenize(., ' ')">
+                    <xsl:value-of select="."/>
+                </xsl:for-each>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:variable name="pieTotal">
+            <xsl:choose>
+                <xsl:when test="not(@status)">
+                    <xsl:value-of select="count(//*[local-name() = $pieElem])"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of
+                        select="count(//*[local-name() = $pieElem][@status = $statusSequence])"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         <!-- Create generic nodeset with values -->
         <xsl:variable name="unsortedPieTable">
-            <xsl:for-each-group select="//*[local-name() = $pieElem]"
-                group-by="@*[name() = $pieAttr]">
-                <pieEntry>
-                    <pieEntryLabel>
-                        <xsl:value-of select="current-grouping-key()"/>
-                    </pieEntryLabel>
-                    <pieEntryCount>
-                        <xsl:value-of
-                            select="count(//*[local-name() = $pieElem][@*[name() = $pieAttr]][@* = current-grouping-key()])"
-                        />
-                    </pieEntryCount>
-                </pieEntry>
-            </xsl:for-each-group>
+            <xsl:choose>
+                <xsl:when test="not(@status)">
+                    <xsl:for-each-group select="//*[local-name() = $pieElem]"
+                        group-by="@*[name() = $pieAttr]">
+                        <pieEntry>
+                            <pieEntryLabel>
+                                <xsl:value-of select="current-grouping-key()"/>
+                            </pieEntryLabel>
+                            <pieEntryCount>
+                                <xsl:value-of
+                                    select="count(//*[local-name() = $pieElem][@*[name() = $pieAttr]][@* = current-grouping-key()])"
+                                />
+                            </pieEntryCount>
+                        </pieEntry>
+                    </xsl:for-each-group>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:for-each-group
+                        select="//*[local-name() = $pieElem][@status = $statusSequence]"
+                        group-by="@*[name() = $pieAttr]">
+                        <pieEntry>
+                            <pieEntryLabel>
+                                <xsl:value-of select="current-grouping-key()"/>
+                            </pieEntryLabel>
+                            <pieEntryCount>
+                                <xsl:value-of
+                                    select="count(//*[local-name() = $pieElem][@*[name() = $pieAttr]][@status = $statusSequence][@* = current-grouping-key()])"
+                                />
+                            </pieEntryCount>
+                        </pieEntry>
+                    </xsl:for-each-group>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:variable>
         <xsl:variable name="pieHeightHalf" as="xs:double" select="$pieHeight div 2"/>
         <!-- Now we need to sort that pieTable - custom order for threat levels, 'count' descending order for all other types -->
@@ -583,6 +628,24 @@
                                 + (number(pieEntryLabel = 'Low') * 6)
                                 + (number(pieEntryLabel = 'Unknown') * 3)
                                 + (number(pieEntryLabel = 'N/A') * 1)"/>
+                        <pieEntry>
+                            <pieEntryLabel>
+                                <xsl:value-of select="pieEntryLabel"/>
+                            </pieEntryLabel>
+                            <pieEntryCount>
+                                <xsl:value-of select="pieEntryCount"/>
+                            </pieEntryCount>
+                        </pieEntry>
+                    </xsl:for-each>
+                </xsl:when>
+                <xsl:when test="$pieElem = 'finding' and $pieAttr = 'status'">
+                    <xsl:for-each select="$unsortedPieTable/pieEntry">
+                        <xsl:sort data-type="number" order="descending"
+                            select="
+                                (number(pieEntryLabel = 'new') * 10)
+                                + (number(pieEntryLabel = 'unresolved') * 9)
+                                + (number(pieEntryLabel = 'not_retested') * 8)
+                                + (number(pieEntryLabel = 'resolved') * 7)"/>
                         <pieEntry>
                             <pieEntryLabel>
                                 <xsl:value-of select="pieEntryLabel"/>
@@ -663,6 +726,16 @@
                                         <fo:table-column/>
                                         <fo:table-body>
                                             <xsl:for-each select="$pieTable/pieEntry">
+                                                <xsl:variable name="pieEntryLabelClean"
+                                                  select="translate(pieEntryLabel, '/', '_')"/>
+                                                <xsl:variable name="pieEntryLabel">
+                                                  <xsl:sequence
+                                                  select="
+                                                            string-join(for $x in tokenize(pieEntryLabel, '_')
+                                                            return
+                                                                my:titleCase($x), ' ')"
+                                                  />
+                                                </xsl:variable>
                                                 <fo:table-row>
                                                   <fo:table-cell xsl:use-attribute-sets="td">
                                                   <fo:block>
@@ -672,9 +745,9 @@
                                                   stroke-linejoin="round" height="11" width="11">
                                                   <xsl:attribute name="fill">
                                                   <xsl:call-template name="giveColor">
-                                                  <xsl:with-param name="i">
-                                                  <xsl:value-of select="position()"/>
-                                                  </xsl:with-param>
+                                                  <xsl:with-param name="i" select="position()"/>
+                                                  <xsl:with-param name="pieEntryLabel"
+                                                  select="pieEntryLabel"/>
                                                   </xsl:call-template>
                                                   </xsl:attribute>
                                                   </svg:rect>
@@ -684,7 +757,7 @@
                                                   </fo:table-cell>
                                                   <fo:table-cell xsl:use-attribute-sets="td">
                                                   <fo:block>
-                                                  <xsl:value-of select="pieEntryLabel"/>
+                                                  <xsl:value-of select="$pieEntryLabel"/>
                                                   <xsl:text> (</xsl:text>
                                                   <!-- for threatLevel legend, link to finding summary table -->
                                                   <xsl:choose>
@@ -692,7 +765,7 @@
                                                   <fo:basic-link text-decoration="underline">
                                                   <xsl:attribute name="internal-destination"
                                                   >summaryTableThreatLevel<xsl:value-of
-                                                  select="pieEntryLabel"/></xsl:attribute>
+                                                  select="$pieEntryLabelClean"/></xsl:attribute>
                                                   <xsl:value-of select="pieEntryCount"/>
                                                   </fo:basic-link>
                                                   </xsl:when>
@@ -752,9 +825,9 @@
         <svg:path stroke="black" stroke-width="1" stroke-linejoin="round">
             <xsl:attribute name="fill">
                 <xsl:call-template name="giveColor">
-                    <xsl:with-param name="i">
-                        <xsl:value-of select="$position"/>
-                    </xsl:with-param>
+                    <xsl:with-param name="i" select="$position"/>
+                    <xsl:with-param name="pieEntryLabel"
+                        select="//pieEntry[position() = $position]/pieEntryLabel"/>
                 </xsl:call-template>
             </xsl:attribute>
             <xsl:attribute name="d">
@@ -855,41 +928,81 @@
     </xsl:template>
     <xsl:template name="giveColor">
         <xsl:param name="i"/>
+        <xsl:param name="pieEntryLabel"/>
         <xsl:choose>
-            <xsl:when test="$i = 1">#FF5C00</xsl:when>
-            <xsl:when test="$i = 2">#FE9920</xsl:when>
-            <xsl:when test="$i = 3">#D9D375</xsl:when>
-            <xsl:when test="$i = 4">#B9A44C</xsl:when>
-            <xsl:when test="$i = 5">#BEC5AD</xsl:when>
-            <xsl:when test="$i = 6">#7CA982</xsl:when>
-            <xsl:when test="$i = 7">#566E3D</xsl:when>
-            <xsl:when test="$i = 8">#5B5F97</xsl:when>
-            <xsl:when test="$i = 9">#C200FB</xsl:when>
-            <xsl:when test="$i = 10">#A9E5BB</xsl:when>
-            <xsl:when test="$i = 11">#98C1D9</xsl:when>
-            <xsl:when test="$i = 12">#5B5F97</xsl:when>
-            <xsl:when test="$i = 13">burlywood</xsl:when>
-            <xsl:when test="$i = 14">cornflowerblue</xsl:when>
-            <xsl:when test="$i = 15">cornsilk</xsl:when>
-            <xsl:otherwise>black</xsl:otherwise>
+            <!-- specific cases -->
+            <!-- threat level -->
+            <xsl:when test="$pieEntryLabel = 'Extreme'">#CC4900</xsl:when>
+            <xsl:when test="$pieEntryLabel = 'High'">#FF5C00</xsl:when>
+            <xsl:when test="$pieEntryLabel = 'Elevated'">#FE9920</xsl:when>
+            <xsl:when test="$pieEntryLabel = 'Moderate'">#ffbf7f</xsl:when>
+            <xsl:when test="$pieEntryLabel = 'Low'">#ffed7f</xsl:when>
+            <xsl:when test="$pieEntryLabel = 'N/A'">#FFFFFF</xsl:when>
+            <xsl:when test="$pieEntryLabel = 'Unknown'">#CCCCCC</xsl:when>
+            <!-- status -->
+            <xsl:when test="$pieEntryLabel = 'new'">#CC4900</xsl:when>
+            <xsl:when test="$pieEntryLabel = 'unresolved'">#FF5C00</xsl:when>
+            <xsl:when test="$pieEntryLabel = 'not_retested'">#FE9920</xsl:when>
+            <xsl:when test="$pieEntryLabel = 'resolved'">#e5d572</xsl:when>
+            <xsl:otherwise>
+                <!-- generic pie chart -->
+                <xsl:choose>
+                    <!-- Going with shades of green and blue in all cases here so as not to imply severity levels -->
+                    <xsl:when test="$i = 1">#D9D375</xsl:when>
+                    <xsl:when test="$i = 2">#B9A44C</xsl:when>
+                    <xsl:when test="$i = 3">#BEC5AD</xsl:when>
+                    <xsl:when test="$i = 4">#7CA982</xsl:when>
+                    <xsl:when test="$i = 5">#566E3D</xsl:when>
+                    <xsl:when test="$i = 6">#5B5F97</xsl:when>
+                    <xsl:when test="$i = 7">#C200FB</xsl:when>
+                    <xsl:when test="$i = 8">#A9E5BB</xsl:when>
+                    <xsl:when test="$i = 9">#98C1D9</xsl:when>
+                    <xsl:when test="$i = 10">#5B5F97</xsl:when>
+                    <xsl:when test="$i = 11">burlywood</xsl:when>
+                    <xsl:when test="$i = 12">cornflowerblue</xsl:when><!-- that's right people, cornflower blue -->
+                    <xsl:when test="$i = 13">cornsilk</xsl:when>
+                    <xsl:otherwise>black</xsl:otherwise>
+                </xsl:choose>
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template match="generate_average_rate">
-        <xsl:if test="not(//meta//client/rates/rate[@title='juniorpentester']) or not(//meta//client/rates/rate[@title='mediorpentester'])">
-            <fo:block xsl:use-attribute-sets="errortext">Generated average rate is based on 'juniorpentester' and 'mediorpentester' roles, which cannot be found in client_info.xml</fo:block>
+        <xsl:if
+            test="not(//meta//client/rates/rate[@title = 'juniorpentester']) or not(//meta//client/rates/rate[@title = 'mediorpentester'])">
+            <fo:block xsl:use-attribute-sets="errortext">Generated average rate is based on
+                'juniorpentester' and 'mediorpentester' roles, which cannot be found in
+                client_info.xml</fo:block>
         </xsl:if>
-        <xsl:variable name="juniorrate" select="//meta//client/rates/rate[@title='juniorpentester'] * 1"/>
-        <xsl:variable name="mediorrate" select="//meta//client/rates/rate[@title='mediorpentester'] * 1"/>
+        <xsl:variable name="juniorrate"
+            select="//meta//client/rates/rate[@title = 'juniorpentester'] * 1"/>
+        <xsl:variable name="mediorrate"
+            select="//meta//client/rates/rate[@title = 'mediorpentester'] * 1"/>
         <xsl:variable name="avg" select="($juniorrate + $mediorrate) div 2"/>
         <xsl:variable name="roundedavg" select="round($avg div 5) * 5"/>
-        <xsl:value-of select="$denomination"/>
+        <xsl:call-template name="getDenomination"/>
         <xsl:text>&#160;</xsl:text>
         <xsl:value-of select="$roundedavg - 10"/>
         <xsl:text> - </xsl:text>
-        <xsl:value-of select="$denomination"/>
+        <xsl:call-template name="getDenomination"/>
         <xsl:text>&#160;</xsl:text>
         <xsl:value-of select="$roundedavg + 10"/>
     </xsl:template>
+
+    <xsl:function name="my:titleCase" as="xs:string">
+        <xsl:param name="s" as="xs:string"/>
+        <xsl:choose>
+            <xsl:when test="lower-case($s) = ('and', 'or')">
+                <xsl:value-of select="lower-case($s)"/>
+            </xsl:when>
+            <xsl:when test="$s = upper-case($s)">
+                <xsl:value-of select="$s"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of
+                    select="concat(upper-case(substring($s, 1, 1)), lower-case(substring($s, 2)))"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
 
 </xsl:stylesheet>
