@@ -8,7 +8,7 @@ June 8th ('I'm seeing the world in shades of orange' edition)
 
 Pie charts can now be filtered on finding `@status`, just like Summary and Recommendation tables. Example: `<generate_piechart pieAttr="type" pieElem="finding" pieHeight="175" status="new unresolved"/>`
 
-Also, for `status` and `threatLevel` pie charts, colours are now tied to severity, so you go from angry orange to reassuring green (in case of status) or from panicky orange to puzzled grey (in case of threatLevel -- grey is 'threatLevel Unknown' :)
+Also, for `status` and `threatLevel` pie charts, colours are now tied to severity, so you go from angry orange to reassuring green (in case of status) or from panicky orange to puzzled grey (in case of threatLevel -- grey is 'threatLevel Unknown')
 
 ### Prettier finding retest status
 
