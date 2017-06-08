@@ -72,13 +72,22 @@
     </xsl:attribute-set>
     
     
+    
     <!-- colors -->
     <xsl:attribute-set name="bg-orange">
         <xsl:attribute name="background-color">orange</xsl:attribute>
     </xsl:attribute-set>
     
    
-    
+    <xsl:attribute-set name="status-new"><!-- also used by unresolved -->
+        <xsl:attribute name="color">red</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="status-resolved">
+        <xsl:attribute name="color">green</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="status-not-retested">
+        <xsl:attribute name="color">orange</xsl:attribute>
+    </xsl:attribute-set>
    
     
     
