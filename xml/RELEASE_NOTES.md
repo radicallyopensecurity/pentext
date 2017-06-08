@@ -12,7 +12,7 @@ Also, for `status` and `threatLevel` pie charts, colours are now tied to severit
 
 ### Prettier finding retest status
 
-For findings, the not-at-all-tacky status colours from the previous update have been replaced to the still-not-tacky corresponding pie chart colours, and the status is now properly capitalized throughout the report.
+For findings, the not-at-all-tacky status colours from the previous update have been replaced with the still-not-tacky corresponding pie chart colours, and the status is now properly capitalized throughout the report.
 
 June 7th
 --------
