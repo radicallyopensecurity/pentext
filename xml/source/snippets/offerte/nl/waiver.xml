@@ -2,7 +2,7 @@
 <standard_waiver>
     <title><company_svc_short/> - VRIJWARINGSVERKLARING</title>
 
-<p><b><i><signee_long/></i> (<i><signee_short/></i>)</b>, statutair gevestigd te <signee_street/> <signee_city/> 
+<p><b><i><signee_long/></i> (<i><signee_short/></i>)</b>, statutair gevestigd te <signee_street/>, <signee_postal_code/> <signee_city/> 
 en in deze rechtsgeldig vertegenwoordigd door <b><signee_legal_rep/></b></p>
 
 <p><b>OVERWEGENDE DAT:</b></p>
@@ -28,9 +28,9 @@ in de veiligheid van deze systemen. <company_short/> zal zich daartoe toegang ve
 deze systemen om op zoek te gaan naar kwetsbaarheden. Vervolgens zal worden getracht 
 dergelijke kwetsbaarheden uit te buiten om verdere toegang en verhoogde privileges 
 te bemachtigen. <company_short/> zal de volgende doelwitten testen (de “Doelwitten”):
-<generate_targets/>
 </p>
-<p>2. <signee_short/> verklaart hierbij <company_short/> en de Consultants – op een datum die 
+<generate_targets/>
+    <p>2. <signee_short/> verklaart hierbij <company_short/> en de Consultants – op een datum die 
 per email zal worden bevestigd – de meest uitvoerige toestemming te verlenen voor 
 het uitvoeren van de opdracht, waaronder toestemming om:</p>
 
@@ -58,9 +58,6 @@ tegen <company_short/> of de Consultants die door <company_short/> zijn ingescha
 ter uitvoering van de opdracht voor de Klant, dan zal <signee_short/> zijn volledige 
 medewerking verlenen aan <company_short/> in diens verweer tegen een dergelijk onderzoek of strafzaak, 
 waaronder het verschaffen van bewijs dat verband houdt met dit onderzoek of de strafzaak.</p>
-
-<generate_waiver_signature_box/>
-
 </standard_waiver>
 </waivers>
 

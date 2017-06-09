@@ -36,6 +36,9 @@
             </xsl:attribute>
             <xsl:comment>document meta information; to be filled in by the offerte writer</xsl:comment>
             <meta>
+                <title><xsl:call-template name="getString">
+                    <xsl:with-param name="stringID" select="'coverpage_offer'"/>
+                </xsl:call-template></title>
                 <offered_service_long>
                     <xsl:call-template name="getString">
                         <xsl:with-param name="stringID"
@@ -66,7 +69,7 @@
                     <xsl:element name="xi:include">
                         <xsl:attribute name="href">client_info.xml</xsl:attribute>
                     </xsl:element>
-                    <xsl:for-each select="/*/third_party">
+                    <xsl:for-each select="//permission_parties/party">
                         <!-- TODO add to report -->
                         <party>
                             <xsl:copy-of select="node()"/>

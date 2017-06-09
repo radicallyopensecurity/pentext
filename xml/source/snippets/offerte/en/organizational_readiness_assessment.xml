@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section>
+    <title>Organizational Readiness Assessment for incident response</title>
+    <section>
+        <title>Scope</title>
+        <p>A readiness assessment analyzes the current organizational, operational, technical and
+            legal incident response capabilities of the client for specifically incident response
+            management:</p>
+
+        <ul>
+            <li>Organizational status analysis focuses on the governance and communication lines
+                both within the organization as well as with external stakeholders: <ul>
+                    <li>Are there playbooks ready in case of incidents?</li>
+                    <li>How will other departments and teams of <client_short/>
+                       be informed in case of
+                        incidents?</li>
+                    <li>How will management be informed and advised about actions to be taken?</li>
+                    <li>Will and if so how will external stakeholders of <client_short/> be informed?</li>
+                </ul></li>
+            <li>Operational status analysis focuses on the ticketing, triage, assignment,
+                processing, and closure process of an incident. Underlying documents:<ul>
+                    <li>Availability of documents, reports and logs (e.g. user accounts, contact points, etc.)</li>
+                    <li>Quality of documents, reports and logs (e.g. level of detail, retention period, etc.)</li>
+                    <li>Are there standardized procedures and systems in place for incident management?</li>
+                </ul></li>
+            <li>Technical status analysis focuses on for instance:<ul>
+                    <li>Asset management and information (do you know where
+your systems are, specifications of the systems, up-to-date
+network diagrams, etc.)</li>
+                    <li>Analytics and monitoring environment</li>
+                    <li>Other tools needed</li>
+                </ul></li>
+            <li>Legal status analysis includes questions as:<ul>
+                    <li>Communication and contacts with national authorities in
+case of responsible disclosure of incidents</li>
+                    <li>Existence and quality of procedures for contact with the
+police, prosecutors and lawyers to maintain ‘chain of custody’</li>
+                </ul></li>
+            
+        </ul>
+        <p>The readiness assessment not only provides a picture of the current state and setup, but also includes recommendations for <client_short/> to improve its organizational, operational, technical and legal capabilities for incident response handling. Advice can be given regarding the architectural design of the organization as well as how to set up monitoring.</p>
+    </section>
+    <section>
+        <title>Prerequisites</title>
+        <p>The client will provide at least one (1) single point of contact who will act as counterpart for the <company_short/> team. The point of contact will help in setting up interviews with e.g. other departments and management and respond to questions and requests from the <company_short/> team (e.g. information and/or access regarding <client_short/> systems).</p>
+        <p>An option would also be to hold a workshop and team exercise to assess incident response readiness.</p>
+    </section>
+    <section>
+        <title><company_short/> team</title>
+        <p>A <company_short/> team will carry out the readiness assessment. <company_short/> team members will be:</p>
+        <generate_teammembers/>
+    </section>
+    <section>
+        <title>Effort
+estimation and result</title>
+        <p>The duration for the assessment will be two to four weeks (depending on
+the access and speed of responses of the client’s contact persons to requests of the <company_short/> team). A report will be drafted after the assessment. The report includes a non-technical summary for management.</p>
+        <p>The number of person-hours estimated for a readiness assessment for incident response services is 160 hours. Part of the assessment will be a training day by the <company_short/> team to:</p>
+        <ul>
+            <li>to familiarize participants with the incident management process in detail; how to improve incident handling techniques, best practices for publishing communications about incidents, working with the media, and testing and verifying incident management processes.</li>
+            <li>equip participants with skills to work with information sources to
+gather critical information, including open-source intelligence and proprietary intelligence as well as examining processes for information exchange.</li>
+            <li>expose participants to methods for incident coordination with a focus on how to handle major security events and coordinate incident responses with external entities</li>
+        </ul>
+    </section>
+    <section>
+        <title>Pricing</title>
+        <p>The costs for the readiness assessment are estimated at <ir_ora_rate/> excluding tax.</p>
+    </section>
+</section>

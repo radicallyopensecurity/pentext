@@ -9,8 +9,7 @@
   The contract snippets in this repo are provided as an example and should not be used for official contracts. It is the responsibility of the end user to edit the contract snippets and code so that the resulting contract is valid and watertight in the context of their own business operations and legal system. -->
   <xi:include href="snippets/company_info.xml"/>
   <scope>
-    <contract_type>fixed_term
-    </contract_type><!-- single_engagement|fixed_term|non_zzp -->
+    <contract_type>fixed_term</contract_type><!-- single_engagement|fixed_term|non_zzp -->
     <engagement_description>battling the pirates</engagement_description>
     <secondpartyrole>Contractor
     </secondpartyrole><!-- what contractor will be referred to throughout the contract. Can be anything, but should probably be Consultant or Contracting Party. When in doubt, leave as is. -->

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section><title>Technical Artefact Analysis</title>
+   
+  
+ 
+<section><title>Scope</title>
+<p><company_short/> will support clients in analyzing technical artefacts of an
+information security incident. This includes:</p>
+<ol><li><b>Data Assessment</b><br/>
+<company_short/> will analyze data, in particular for being or containing
+malicious software</li>
+<li><b>Analysis</b><br/>
+<company_short/> will use practices and techniques to extract data and
+indicators from artefacts such as E-Mails, files or malware</li>
+<li><b>Attribution</b><br/>
+<company_short/> will attribute artefacts to the best possible to known threats,
+campaigns and exploited attack vectors</li>
+<li><b>Indicator of Compromise</b><br/>
+<company_short/> will use the incidents indicators of compromise and attribution to identify related information or other indicators</li></ol></section>
+       
+ 
+<section><title>Prerequisites</title>
+<p>The client will provide at least one (1) single point of contact who will act as counterpart for the <company_short/> team. Technical analysis requires the client to provide the correct, original data and potential context. This includes:</p>
+<ul><li>E-mails to be analyzed need to be the originally received e-mail with all its header information</li>
+<li>(Suspected) malware must be attached in a zip or tar archive with password "infected"</li>
+<li>Prior to submitting service request, the client validated that the data can be submitted for analysis without additional controls and in line with applicable policies, laws and regulations</li>
+<li><company_short/> must be informed about details on the artefact for any artefact submitted which does not contain all the original information</li></ul></section>
+<section><title>Out of scope</title>
+<p>Within the technical artefact analysis <company_short/> WILL NOT:</p>
+<ul><li>perform legally sound forensic data analysis and acquisition. <company_short/> will suggest potential partner firms to the client who are licensed for legally sound forensic data analysis. <company_short/> can support in legal forensic analysis, but the client will be responsible for the data acquisition as well as establish and ensure compliance to the necessary procedures (such as chain of custody)</li></ul></section>
+         <section><title>Service levels</title>
+<p>Technical Analysis Services can be requested between 09:00 to 18:00 CET. 24/7 support is available upon request and extra charge
+A service request can be requested through:</p>
+<ul><li>email: incident@radicallyopensecurity.com</li>
+<li>phone: to be delivered</li>
+<li>PGP KEY: to be delivered</li>
+<li>RocketChat</li></ul>
+<p>Specific service level agreements regarding response times are dependent on the current setup at and availability of <client_short/> personnel during analyses.</p></section>
+            <section><title>Effort
+estimation</title>
+<p>Technical analysis of artefacts can be easy and straight forward or be
+very complex. In order to allow for an idea on potential costs, here are some rough estimations on work items and their estimated average time to analyze. Work items include administration, preparation and reporting aspects. For each estimate:</p>
+<ul><li>Malware Automated Assessment Report: ~ 0,5 h</li>
+<li>Malware Manual Reverse Engineering: ~ 4h to 40+h</li>
+<li>E-mail Analysis (Scam): ~ 0,5 h</li>
+<li>E-mail Analysis including Malware: ~ 1,5 h</li>
+<li>Analysis of IP addresses (&lt;=10): ~ 0,25 h</li>
+<li>Analysis of IP Links: ~ 0,25 h</li></ul>
+<p><b>Important note:</b> These are average estimates to give an idea of potential budget impacts.</p></section>
+    
+<section><title>Pricing</title>
+<p>Technical artefact analysis costs <ir_taa_rate/> per person-hour excluding tax and travel expenses.
+The team will be formed based on the urgency and skills needed. Client team members can ‘peek over our shoulders’ during technical artefact analysis services.</p></section>
+</section>

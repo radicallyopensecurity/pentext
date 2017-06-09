@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+    schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+  <xs:import namespace="http://www.w3.org/2001/XInclude"
+    schemaLocation="http://www.w3.org/2001/XInclude/XInclude.xsd"/>
+  <xs:include schemaLocation="common.xsd"/>
+  <xs:element name="ir_quickscope">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="client"/>
+        <xs:element ref="meta"/>
+        <xs:element ref="activity_info"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="meta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="offer_language"/>
+        <xs:element ref="offer_type"/>
+        <xs:element ref="requested_service"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="offer_language" type="xs:NCName"/>
+  <xs:element name="offer_type" type="xs:NCName"/>
+  <xs:element name="requested_service" type="xs:string"/>
+
+  <xs:element name="activity_info">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="organizational_readiness_assessment" minOccurs="0"/>
+        <xs:element ref="security_incident_management"/>
+        <xs:element ref="technical_artefact_analysis"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="organizational_readiness_assessment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="rate"/>
+        <xs:element ref="team"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="team">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="member" maxOccurs="unbounded" minOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="member">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name"/>
+        <xs:element ref="expertise"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="expertise" type="xs:string"/>
+  <xs:element name="security_incident_management" type="ir_service"/>
+  <xs:element name="technical_artefact_analysis" type="ir_service"/>
+  
+  <xs:complexType name="ir_service">
+      <xs:sequence>
+        <xs:element ref="rate"/>
+      </xs:sequence>
+  </xs:complexType>
+  
+  
+  <xs:complexType name="block" mixed="true">
+    <xs:choice maxOccurs="unbounded">
+      <xs:group ref="inline-all"/>
+      <xs:group ref="placeholders"/>
+    </xs:choice>
+    <xs:attribute ref="xml:base"/>
+  </xs:complexType>
+  <xs:group name="placeholders">
+    <xs:choice/>
+  </xs:group>
+</xs:schema>

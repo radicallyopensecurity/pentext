@@ -1,6 +1,15 @@
 RELEASE NOTES
 =============
 
+June 9th
+--------
+
+### Implemented 'Incident Response Management' template
+
+Works the same as `quickscope.xml`, only you use `ir_quickscope.xml`. Snippet selection depends on the presence of the optional `<organization_readiness_assessment>` element and its contents (other snippets are mandatory).
+
+Various little buglets have been squashed as well.
+
 June 8th ('I'm seeing the world in shades of orange' edition)
 --------
 

@@ -33,12 +33,12 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:element name="generate_raterevisiondate"/>
+    
     <xs:complexType name="block" mixed="true">
         <xs:choice maxOccurs="unbounded">
             <xs:group ref="inline-all"/>
             <xs:group ref="placeholders"/>
-            <xs:element ref="generate_raterevisiondate"/>
+            <xs:element name="generate_raterevisiondate"/>
         </xs:choice>
         <xs:attribute ref="xml:base"/>
         <xs:attribute ref="class"/>
@@ -49,7 +49,6 @@
             <xs:element name="client_long"/>
             <xs:element name="client_short"/>
             <xs:element name="client_rate"/>
-            <xs:element name="generate_average_rate"/>
             <xs:element name="company_long"/>
             <xs:element name="company_short"/>
             <xs:element name="company_poc1"/>

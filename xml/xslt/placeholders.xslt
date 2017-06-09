@@ -2,6 +2,22 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fo="http://www.w3.org/1999/XSL/Format"
     xmlns:my="http://radical.sexy" exclude-result-prefixes="xs my" version="2.0">
+    
+    <xsl:template name="getDenomination">
+        <xsl:param name="placeholderElement" as="node()" select="/"/>
+        <xsl:choose>
+            <xsl:when test="$placeholderElement/ancestor-or-self::*/@denomination = 'eur'">€</xsl:when>
+            <xsl:when test="$placeholderElement/ancestor-or-self::*/@denomination = 'usd'">$</xsl:when>
+            <xsl:when test="$placeholderElement/ancestor-or-self::*/@denomination = 'gbp'">£</xsl:when>
+            <!--<xsl:otherwise>
+                <xsl:when test="$placeholderElement/ancestor::*/@denomination = 'eur'">€</xsl:when>
+                <xsl:when test="$placeholderElement/ancestor::*/@denomination = 'usd'">$</xsl:when>
+                <xsl:when test="$placeholderElement/ancestor::*/@denomination = 'gbp'">£</xsl:when>
+            </xsl:otherwise>-->
+            <xsl:otherwise><fo:inline xsl:use-attribute-sets="errortext">WARNING: NO DENOMINATION FOUND</fo:inline></xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
     <!-- PLACEHOLDERS -->
     <xsl:template match="client_long">
         <xsl:param name="placeholderElement" select="/*/meta//client/full_name"/>
@@ -167,7 +183,9 @@
     </xsl:template>
     <xsl:template match="p_fee">
         <xsl:param name="placeholderElement" select="/*/meta/activityinfo/fee"/>
-        <xsl:value-of select="$denomination"/>
+        <xsl:call-template name="getDenomination">
+            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+        </xsl:call-template>
         <xsl:text>&#160;</xsl:text>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
@@ -217,7 +235,7 @@
         <xsl:value-of select="my:calculatePeriod($endDate, $startDate)"/>
     </xsl:template>
     <xsl:template match="contract_total_fee">
-        <xsl:value-of select="$denomination"/>
+        <xsl:call-template name="getDenomination"/>
         <xsl:text>&#160;</xsl:text>
         <xsl:value-of select="$total_fee"/>
         <!-- no need to check for existence as it's a calculation of two checked values below -->
@@ -302,7 +320,9 @@
     </xsl:template>
     <xsl:template match="contractor_hourly_fee">
         <xsl:param name="placeholderElement" select="/contract/meta/contractor/hourly_fee"/>
-        <xsl:value-of select="$denomination"/>
+        <xsl:call-template name="getDenomination">
+            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+        </xsl:call-template>
         <xsl:text>&#160;</xsl:text>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
@@ -346,6 +366,37 @@
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
+    
+    <xsl:template match="ir_ora_rate">
+        <xsl:param name="placeholderElement" select="/*/meta/activityinfo/organizational_readiness_assessment/rate"/>
+        <xsl:call-template name="getDenomination">
+            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+        </xsl:call-template>
+        <xsl:text>&#160;</xsl:text>
+        <xsl:call-template name="checkPlaceholder">
+            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="ir_sim_rate">
+        <xsl:param name="placeholderElement" select="/*/meta/activityinfo/security_incident_management/rate"/>
+        <xsl:call-template name="getDenomination">
+            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+        </xsl:call-template>
+        <xsl:text>&#160;</xsl:text>
+        <xsl:call-template name="checkPlaceholder">
+            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="ir_taa_rate">
+        <xsl:param name="placeholderElement" select="/*/meta/activityinfo/technical_artefact_analysis/rate"/>
+        <xsl:call-template name="getDenomination">
+            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+        </xsl:call-template>
+        <xsl:text>&#160;</xsl:text>
+        <xsl:call-template name="checkPlaceholder">
+            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+        </xsl:call-template>
+    </xsl:template>
 
     <xsl:template match="finding_count">
         <xsl:param name="threatLevel" select="@threatLevel"/>
@@ -367,11 +418,13 @@
                 <!-- placeholder exists and contains text -->
                 <xsl:choose>
                     <xsl:when test="self::client_rate">
-                        <xsl:value-of select="$denomination"/>
+                        <xsl:call-template name="getDenomination">
+            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+        </xsl:call-template>
                         <xsl:text>&#160;</xsl:text>
                         <xsl:value-of select="$placeholderElement"/>
                     </xsl:when>
-                    <xsl:when test="self::p_fee or self::contractor_hourly_fee">
+                    <xsl:when test="self::p_fee or self::contractor_hourly_fee or self::ir_ora_rate">
                         <!-- pretty numbering for fee -->
                         <xsl:variable name="fee" select="$placeholderElement * 1"/>
                         <xsl:number value="$fee" grouping-separator="," grouping-size="3"/>
