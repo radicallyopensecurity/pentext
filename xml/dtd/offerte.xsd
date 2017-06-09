@@ -13,9 +13,10 @@
       <xs:sequence>
         <xs:element ref="meta"/>
         <xs:element maxOccurs="unbounded" minOccurs="0" ref="generate_index"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="div"/>
         <xs:element maxOccurs="unbounded" ref="section"/>
         <xs:element maxOccurs="unbounded" minOccurs="0" ref="annex"/>
-        <xs:element maxOccurs="unbounded" minOccurs="1" ref="waivers"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="waivers"/>
       </xs:sequence>
       <xs:attribute ref="xml:lang"/>
     </xs:complexType>
@@ -24,11 +25,12 @@
   <xs:element name="meta">
     <xs:complexType>
       <xs:sequence>
+        <xs:element ref="title"/>
         <xs:element ref="offered_service_long"/>
         <xs:element ref="offered_service_short"/>
         <xs:element ref="company"/>
-        <xs:element ref="targets"/>
-        <xs:element ref="permission_parties"/>
+        <xs:element ref="targets" minOccurs="0"/>
+        <xs:element ref="permission_parties" minOccurs="0"/>
         <xs:element ref="activityinfo"/>
         <xs:element ref="version_history"/>
       </xs:sequence>
@@ -43,18 +45,57 @@
   <xs:element name="activityinfo">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="duration"/>
-        <xs:element ref="persondays"/>
-        <xs:element ref="test_planning"/>
-        <xs:element ref="report_due"/>
-        <xs:element ref="nature"/>
-        <xs:element ref="type"/>
-        <xs:element ref="fee"/>
+        <xs:element ref="duration" minOccurs="0"/>
+        <xs:element ref="persondays" minOccurs="0"/>
+        <xs:element ref="test_planning" minOccurs="0"/>
+        <xs:element ref="report_due" minOccurs="0"/>
+        <xs:element ref="nature" minOccurs="0"/>
+        <xs:element ref="type" minOccurs="0"/>
+        <xs:element ref="fee" minOccurs="0"/>
+        <xs:element ref="organizational_readiness_assessment" minOccurs="0"/>
+        <xs:element ref="security_incident_management" minOccurs="0"/>
+        <xs:element ref="technical_artefact_analysis" minOccurs="0"/>
         <xs:element minOccurs="0" ref="target_application"/>
         <xs:element minOccurs="0" ref="target_application_producer"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  
+  <xs:element name="organizational_readiness_assessment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="rate"/>
+        <xs:element ref="team"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="team">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="member" maxOccurs="unbounded" minOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="member">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name"/>
+        <xs:element ref="expertise"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="expertise" type="xs:string"/>
+  <xs:element name="security_incident_management" type="ir_service"/>
+  <xs:element name="technical_artefact_analysis" type="ir_service"/>
+  
+  <xs:complexType name="ir_service">
+      <xs:sequence>
+        <xs:element ref="rate"/>
+      </xs:sequence>
+  </xs:complexType>
 
   <xs:element name="fee">
     <xs:complexType>
@@ -158,10 +199,12 @@
           <xs:element ref="div"/>
           <xs:element ref="contact"/>
           <xs:element ref="generate_targets"/>
+          <xs:element name="generate_teammembers"/>
           <xs:element ref="generate_offer_signature_box"/>
         </xs:choice>
       </xs:sequence>
       <xs:attribute name="id" use="optional" type="xs:ID"/>
+      <xs:attribute name="todo" use="optional" type="xs:string"/>
       <xs:attribute ref="break" use="optional"/>
       <xs:attribute ref="xml:base"/>
       <xs:attribute ref="xml:lang"/>
@@ -211,8 +254,13 @@
       <xs:element name="signee_short"/>
       <xs:element name="signee_street"/>
       <xs:element name="signee_city"/>
+      <xs:element name="signee_postal_code"/>
       <xs:element name="signee_country"/>
       <xs:element name="signee_waiver_rep"/>
+      <xs:element name="signee_legal_rep"/>
+      <xs:element name="ir_ora_rate"/>
+      <xs:element name="ir_sim_rate"/>
+      <xs:element name="ir_taa_rate"/>
     </xs:choice>
   </xs:group>
 

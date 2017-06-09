@@ -101,6 +101,7 @@
         <snippet>waiver</snippet>
       </snippet_group>
     </selection>
+    
     <selection subtype="training">
       <snippet_group set="group1">
         <snippet>introandscope</snippet>
@@ -114,6 +115,7 @@
         <snippet>waiver</snippet>
       </snippet_group>
     </selection>
+    
     <selection subtype="other">
       <!-- standard -->
       <snippet_group set="group1">
@@ -136,7 +138,23 @@
         <snippet>waiver</snippet>
       </snippet_group>
     </selection>
+    
+    <selection subtype="incident-response">
+      <snippet_group set="group1">
+        <snippet>intro_incident-response</snippet>
+      </snippet_group>
+      <snippet_group set="organizational_readiness_assessment">
+        <snippet>organizational_readiness_assessment</snippet>
+      </snippet_group>
+      <snippet_group set="group2">
+        <snippet>security_incident_management</snippet>
+        <snippet>technical_artefact_analysis</snippet>
+      </snippet_group>
+    </selection>
+    
   </document>
+  
+  
 
 
   <!-- CONTRACTS -->
@@ -401,40 +419,5 @@
     </selection>
 
 
-    <!--<selection subtype="fixed_term">
-        <snippet_group set="parties">
-            <!-\- define parties in contract -\->
-            <snippet>parties</snippet>
-        </snippet_group>
-        <snippet_group set="whereas">
-            <!-\- define conditions -\->
-            <snippet>wa_contractorcan</snippet>
-            <snippet>wa_noemploymentintention</snippet>
-        </snippet_group>
-        <snippet_group set="agree1">
-            <!-\- define agreement, first part -\->
-            <snippet>ag_period</snippet>
-            <snippet>ag_noemployment</snippet>
-            <snippet>ag_companyinstructs</snippet>
-            <snippet>ag_ownrisk</snippet>
-        </snippet_group>
-        <snippet_group set="workinghours">
-            <!-\- define working hours (this snippet is isolated because it is subject to some extra logic - not all fixed term contracts have working hours defined) -\->
-            <snippet>ag_workinghours</snippet>
-        </snippet_group>
-        <snippet_group set="agree2">
-            <!-\- define rest of agreement -\->
-            <snippet>ag_payment_fixed_term</snippet>
-            <snippet>ag_biggerscopewarning</snippet>
-            <snippet>ag_propertyrights</snippet>
-            <snippet>ag_retainrights</snippet>
-            <snippet>ag_nondisclosure</snippet>
-            <snippet>ag_responsibilities</snippet>
-            <snippet>ag_thirdparty</snippet>
-            <snippet>ag_liability</snippet>
-            <snippet>ag_provisions</snippet>
-            <snippet>ag_generaltermsandconditions</snippet>
-        </snippet_group>
-    </selection>-->
   </document>
 </snippet_selection>

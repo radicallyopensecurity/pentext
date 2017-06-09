@@ -36,14 +36,14 @@
 10. For *each* option, check PDF Invoice:
 	a. contents
 	b. layout
-11. From XML Quote, generate an XML Invoice
+11. From XML Quote, generate an XML Invoice (that is XML, not FO/PDF!)
 12. Check XML Invoice validity
 		EXPECTED OUTCOME: document is valid
 13. Edit XML Invoice:
 	a. Add some bogus description and fee to `<additionalcosts>`
 	b. Set @vat to 'no' for any service/cost
 14. Check XML Invoice validity
-		EXPECTED OUTCOME: document is valid
+		EXPECTED OUTCOME: document is still valid
 15. From XML Invoice, generate FO/PDF Invoice
 16. Check PDF Invoice:
 	a. contents
@@ -85,7 +85,7 @@
 
 1. Use the `ratecard.xml` snippet and `generate_ratecard.xsl` to generate a FO/PDF Rate Card.
 2. Check PDF Rate Card:
-	a. contents (do all placeholders resolve)
+	a. contents (do all placeholders resolve, do the rates have the correct denomination)
 	b. layout
 
 ## Contracts

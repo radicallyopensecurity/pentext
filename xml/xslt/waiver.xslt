@@ -20,6 +20,7 @@
                 <xsl:with-param name="signee_short" tunnel="yes"><xsl:value-of select="short_name"/></xsl:with-param>
             <xsl:with-param name="signee_waiver_rep" tunnel="yes"><xsl:value-of select="waiver_rep"/></xsl:with-param>
             <xsl:with-param name="signee_street" tunnel="yes"><xsl:value-of select="address"/></xsl:with-param>
+            <xsl:with-param name="signee_pc" tunnel="yes"><xsl:value-of select="postal_code"/></xsl:with-param>
             <xsl:with-param name="signee_city" tunnel="yes"><xsl:value-of select="city"/></xsl:with-param>
             <xsl:with-param name="signee_country" tunnel="yes"><xsl:value-of select="country"/>
             </xsl:with-param>
@@ -57,6 +58,7 @@
                 <xsl:with-param name="signee_short" tunnel="yes"><xsl:value-of select="short_name"/></xsl:with-param>
             <xsl:with-param name="signee_waiver_rep" tunnel="yes"><xsl:value-of select="waiver_rep"/></xsl:with-param>
             <xsl:with-param name="signee_street" tunnel="yes"><xsl:value-of select="address"/></xsl:with-param>
+            <xsl:with-param name="signee_pc" tunnel="yes"><xsl:value-of select="postal_code"/></xsl:with-param>
             <xsl:with-param name="signee_city" tunnel="yes"><xsl:value-of select="city"/></xsl:with-param>
             <xsl:with-param name="signee_country" tunnel="yes"><xsl:value-of select="country"/>
             </xsl:with-param>
@@ -201,6 +203,11 @@
     <xsl:template match="signee_street">
         <xsl:param name="signee_street" tunnel="yes"/>
         <xsl:value-of select="$signee_street"/>
+    </xsl:template>
+    
+    <xsl:template match="signee_postal_code">
+        <xsl:param name="signee_pc" tunnel="yes"/>
+        <xsl:value-of select="$signee_pc"/>
     </xsl:template>
     
     <xsl:template match="signee_city">

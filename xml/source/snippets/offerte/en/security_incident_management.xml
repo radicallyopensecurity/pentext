@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section>
+    <title>Security Incident Management</title>
+    
+    <section>
+        <title>Scope</title>
+        <p><company_short/> will work with clients and agreed subject matter experts and stakeholders to coordinate the response to information security incidents. Incidents are events that have a significant probability to compromise a client’s operations and/or assets. Incidents can be:</p>
+
+        <ul>
+                    <li>Business E-Mail Spoofing / Compromise</li>
+                    <li>System infected with malware (not detected by virus scanner)</li>
+                    <li>Website was hacked or is serving malware</li>
+                    <li>DDOS attacks</li>
+            <li>Policy breaches / bypasses of security controls</li>
+                </ul>
+        <p>Actions of <company_short/> include:</p>
+        <ol>
+            <li><b>response planning</b><br/>
+<company_short/> will work with impacted client and relevant stakeholder to assess the status of the information security incident as well as to plan and agree actions to contain and mitigate the threat for the organization</li>
+            <li><b>response advisory</b><br/><company_short/> will support clients with proposing actions to be taken to contain, investigate and communicate the information security incident</li>
+            <li><b>incident status updates and incident notifications</b><br/><company_short/> will maintain regular incident status updates and report those to given contact persons. <company_short/> can draft communications for senior manager or third parties. <company_short/> can support in incident inquiries on request</li>
+            <li><b>technical analysis and incident management</b><br/><company_short/> will provide technical assistance to resolve the incident and
+advice to the client for actions to be undertaken</li>
+            <li><b>post-incident recommendations</b><br/><company_short/> provides recommendations - to the extent possible from the information security incident - to the client organization improve their information security incidents prevention, technical and response capability</li>
+        </ol>
+    </section>
+    <section>
+        <title>Prerequisites</title>
+        <p>The client will provide at least one (1) single point of contact who will support with planning including navigate the organization, assessing impacts, making decisions and coordinate execution of organizational tasks</p>
+        <p>The client collaborates with and enables <company_short/> to deliver the services by including to:</p>
+        <ul>
+            <li>provide organizational expertise and decision making</li>
+            <li>participate in incident calls and meeting</li>
+            <li>provide access to the client’s technical environment and systems</li>
+            <li>provide relevant information and data</li>
+            <li>use a template for data incident notifications</li>
+            <li>provide guidance on organizational, industry or country specific
+policies, laws and regulations</li>
+            <li>if appropriate, provide appropriate access to communication and
+data exchange platforms as well as data (like email)</li>
+            <li>if required, review, approve and perform official notifications to
+authorities</li>
+        </ul>
+    </section>
+    <section>
+        <title>Out of Scope</title>
+        <p>Within the security incident management services <company_short/> WILL NOT:</p>
+        <ul>
+            <li>take decisions by itself that are in the remit of the client’s
+responsibility (like shutting down servers)</li>
+            <li>provide information to anyone else but the client, agreed subject
+matter experts and stakeholders during the incident</li>
+            <li>perform legally sound forensic data analysis and acquisition. <company_short/>
+will suggest potential partner firms to the client who are licensed for legally sound forensic data analysis. <company_short/> can support in legal forensic analysis, but the client will be responsible for the data acquisition as well as establish and ensure compliance to the necessary procedures (such as chain of custody)</li>
+            <li>provide 24/7 security event monitoring; the client is responsible to alert <company_short/> in case of a potential incident</li>
+        </ul>
+    </section>
+<section><title>Service levels</title>
+    <p>Security Incident Management Services are provided 09:00 to 18:00 CET. 24/7 support is available upon request and subject to extra charges.</p>
+    <p>A service request can be made through:</p>
+    <ul>
+            <li>email: incident@radicallyopensecurity.com</li>
+            <li>phone: to be delivered</li>
+            <li>PGP KEY: to be delivered</li>
+    </ul>
+    <p>Specific service level agreements regarding response times are dependent on the current setup at and availability of <client_short/> personnel during incidents.</p>
+</section>
+    <section>
+        <title>Effort estimation</title>
+        <p>By nature a security incident’s handling efforts cannot be defined
+beforehand. The case can evolve in different directions. In order to allow for a rough idea on potential costs, there are some rough estimations on work items and their estimated average time during incident handling. Work items include administration, preparation and wrap-up. All work items are discussed and agreed during incident handling.</p>
+        <p>For each work item a rough estimate is:</p>
+        <ul>
+            <li>Incident Status Call: ~ 2,5h</li>
+            <li>Incident Communication Draft: ~ 1h</li>
+            <li>Incident Update: ~ 1h</li>
+            <li>Incident Status Check: ~ 1h</li>
+            <li>Incident Interview: ~ 3h</li>
+            <li>Incident Review: ~ 4h</li>
+            <li>Technical assistance: ~ 1 to 40+h</li>
+        </ul>
+        <p>After the incident, the incident documentation is key. For incident documentation we recommend to calculate ~ 1/5 of the incident’s overall handling time.</p>
+    <p>Important note: These are average estimates to give an idea of potential budget impacts.</p>
+    </section>
+    <section>
+        <title>Pricing</title>
+        <p>Pricing
+Incident response management costs <ir_sim_rate/> per person-hour excluding tax and travel expenses.</p>
+        <p>The team will be formed based on the urgency and skills needed. Client team members can ‘peek over our shoulders’ during incident response management services.</p>
+    </section>
+</section>
+

@@ -116,15 +116,19 @@
       <xs:attribute name="lastrevisiondate" type="xs:date"/>
     </xs:complexType>
   </xs:element>
+  
   <xs:element name="rate">
     <xs:complexType>
       <xs:simpleContent>
-        <xs:extension base="xs:float">
-          <xs:attribute name="title" type="xs:string"/>
+        <xs:extension base="xs:decimal">
+          <xs:attribute name="title" type="xs:string" use="optional"/>
+          <xs:attribute name="denomination" type="xs:string" use="optional"/>
         </xs:extension>
       </xs:simpleContent>
     </xs:complexType>
   </xs:element>
+
+
   <xs:element name="permission_parties">
     <xs:complexType>
       <xs:sequence>
@@ -262,9 +266,11 @@
       </xs:choice>
       <xs:attribute ref="xml:base"/>
       <xs:attribute ref="class" use="optional"/>
+      <xs:attribute name="id" use="optional" type="xs:ID"/>
+      <xs:attribute ref="xml:lang"/>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:attribute name="class" type="xs:string"/>
 
   <xs:element name="version_history">

@@ -19,7 +19,6 @@
         <xs:element ref="offer_language"/>
         <xs:element ref="offer_type"/>
         <xs:element ref="requested_service"/>
-        <xs:element ref="targets"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -33,6 +32,7 @@
         <xs:element ref="short_name"/>
         <xs:element ref="waiver_rep"/>
         <xs:element ref="address"/>
+        <xs:element ref="postal_code"/>
         <xs:element ref="city"/>
         <xs:element ref="country"/>
       </xs:sequence>
@@ -41,6 +41,7 @@
   <xs:element name="activity_info">
     <xs:complexType>
       <xs:sequence>
+        <xs:element ref="targets"/>
         <xs:element ref="days"/>
         <xs:element ref="persondays"/>
         <xs:element ref="nature"/>
@@ -62,7 +63,6 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="application_name" type="xs:NCName"/>
-  <xs:element name="rate" type="xs:integer"/>
   
   <xs:complexType name="block" mixed="true">
     <xs:choice maxOccurs="unbounded">

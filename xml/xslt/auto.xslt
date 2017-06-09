@@ -967,28 +967,6 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="generate_average_rate">
-        <xsl:if
-            test="not(//meta//client/rates/rate[@title = 'juniorpentester']) or not(//meta//client/rates/rate[@title = 'mediorpentester'])">
-            <fo:block xsl:use-attribute-sets="errortext">Generated average rate is based on
-                'juniorpentester' and 'mediorpentester' roles, which cannot be found in
-                client_info.xml</fo:block>
-        </xsl:if>
-        <xsl:variable name="juniorrate"
-            select="//meta//client/rates/rate[@title = 'juniorpentester'] * 1"/>
-        <xsl:variable name="mediorrate"
-            select="//meta//client/rates/rate[@title = 'mediorpentester'] * 1"/>
-        <xsl:variable name="avg" select="($juniorrate + $mediorrate) div 2"/>
-        <xsl:variable name="roundedavg" select="round($avg div 5) * 5"/>
-        <xsl:call-template name="getDenomination"/>
-        <xsl:text>&#160;</xsl:text>
-        <xsl:value-of select="$roundedavg - 10"/>
-        <xsl:text> - </xsl:text>
-        <xsl:call-template name="getDenomination"/>
-        <xsl:text>&#160;</xsl:text>
-        <xsl:value-of select="$roundedavg + 10"/>
-    </xsl:template>
-
     <xsl:function name="my:titleCase" as="xs:string">
         <xsl:param name="s" as="xs:string"/>
         <xsl:choose>

@@ -10,7 +10,7 @@
     <xsl:import href="structure.xslt"/>
     <xsl:import href="att-set.xslt"/>
     <xsl:import href="block.xslt"/>
-    <xsl:import href="findings.xslt"/>
+    <!--<xsl:import href="findings.xslt"/>-->
     <xsl:import href="auto.xslt"/>
     <xsl:import href="table.xslt"/>
     <xsl:import href="lists.xslt"/>
@@ -61,13 +61,7 @@
             </xsl:for-each>
         </xsl:variable>
     
-    <xsl:variable name="denomination">
-        <xsl:choose>
-            <xsl:when test="/offerte/meta/activityinfo/fee/@denomination = 'eur'">€</xsl:when>
-            <xsl:when test="/offerte/meta/activityinfo/fee/@denomination = 'usd'">$</xsl:when>
-            <xsl:when test="/offerte/meta/activityinfo/fee/@denomination = 'gbp'">£</xsl:when>
-        </xsl:choose>
-    </xsl:variable>
+    
     
 <!-- ROOT -->
     <xsl:template match="/">
@@ -91,9 +85,7 @@
             <xsl:value-of select="upper-case(company/full_name)"/>
         </fo:block>
         <fo:block xsl:use-attribute-sets="for">
-            <xsl:call-template name="getString">
-                    <xsl:with-param name="stringID" select="'coverpage_offer'"/>
-                </xsl:call-template>
+            <xsl:value-of select="//meta/title"/>
         </fo:block>
         <fo:block xsl:use-attribute-sets="title-0">
             <xsl:value-of select="upper-case(offered_service_long)"/>

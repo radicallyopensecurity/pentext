@@ -2,12 +2,12 @@
 <section>
   <title>Planning en Betaling</title>
   <p><company_short/> houdt de volgende planning aan voor haar werkzaamheden:</p>  
-  <p>
+  
     <ul>
       <li><company_short/> voert <company_svc_short/> uit op het doelwit: <p_testingduration/>.</li>
       <li><company_short/> levert het definitieve rapport: <p_reportdue/>.</li>
     </ul>
-  </p>
+  
   
 <p>Ons vaste tarief voor de bovenstaand beschreven
   <company_svc_short/> is <p_fee/>,- excl. BTW en bijkomende kosten.
