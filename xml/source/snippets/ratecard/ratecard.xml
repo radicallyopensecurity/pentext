@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <ratecard xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../dtd/ratecard.xsd">
+    
+    <!-- PLEASE READ -->
+    <!--This rate card snippets needs rate info in client_info.xml to work properly. Make sure you have something like this in client_info.xml, and make sure the titles correspond to the
+    ones called in the snippet:
+    <rates denomination="eur" lastrevisiondate="2017-03-01">
+           <rate title="juniorpentester">100</rate>
+           <rate title="mediorpentester">125</rate>
+           <rate title="seniorpentester">150</rate>
+           <rate title="expertpentester">1000</rate>
+           <rate title="juniormanager">100</rate>
+           <rate title="seniormanager">125</rate>
+    </rates>
+    -->
+    
     <meta>
         <xi:include href="../company_info.xml"/>
         <xi:include href="../../client_info.xml"/>
