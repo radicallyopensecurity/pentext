@@ -201,9 +201,9 @@
                     </xsl:for-each>
                     <!-- TODO -->
                     <xsl:for-each-group select="servicesdelivered/service | additionalcosts/cost"
-                        group-by="fee/@vat[. = 'yes']">
+                        group-by="fee">
                         <xsl:variable name="vat">
-                            <xsl:value-of select="sum(current-group()/fee) div 100 * 21"/>
+                            <xsl:value-of select="sum(current-group()/fee[@vat = 'yes']) div 100 * 21"/>
                         </xsl:variable>
                         <xsl:variable name="total">
                             <xsl:value-of select="sum(current-group()/fee) + $vat"/>
