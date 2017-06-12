@@ -5,20 +5,6 @@
 
 
     <xsl:import href="pages.xslt"/>
-    <!--<xsl:import href="meta.xslt"/>
-    <xsl:import href="toc.xslt"/>
-    <xsl:import href="structure.xslt"/>
-    <xsl:import href="att-set.xslt"/>
-    <xsl:import href="block.xslt"/>
-    <xsl:import href="findings.xslt"/>
-    <xsl:import href="auto.xslt"/>
-    <xsl:import href="table.xslt"/>
-    <xsl:import href="lists.xslt"/>
-    <xsl:import href="inline.xslt"/>
-    <xsl:import href="graphics.xslt"/>
-    <xsl:import href="generic.xslt"/>
-    <xsl:import href="numbering.xslt"/>
-    <xsl:import href="waiver.xslt"/>-->
 
     <xsl:include href="styles_inv.xslt"/>
     <xsl:include href="localisation.xslt"/>
@@ -159,7 +145,8 @@
         </xsl:variable>
         <xsl:call-template name="invoiceStart">
             <xsl:with-param name="INVOICE_NO" select="$INVOICE_NO"/>
-            <xsl:with-param name="DATE" select="$DATE"/>
+            <xsl:with-param name="DATE" select="format-date($DATE, '[MNn] [D1], [Y]', 'en', (), ())"
+            />
         </xsl:call-template>
         <fo:block>
             <fo:table width="100%" table-layout="fixed"
