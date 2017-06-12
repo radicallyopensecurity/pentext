@@ -17,12 +17,7 @@
         <!-- Required service -->
         <!-- Note: is only used when type is 'other', if offer_type is a specific type, service name will be taken from the localisation strings -->
     <requested_service>penetration testing services</requested_service>
-    <!-- Which targets will need to be tested? 
-        (one <target> element for each piece of software/service/server address/location...), delete/add as necessary -->
-        <targets>
-            <target>target1.target.com</target>
-            <target>target2.target.com</target>
-        </targets>
+    
     </meta>
     <!-- Do we need permission from third parties? Insert as many <third_party> elements as needed under this comment -->
     <third_party>
@@ -31,11 +26,18 @@
         <!-- Name of the person who will need to sign the waiver for this vendor -->
         <waiver_rep>TP Waiver Rep</waiver_rep>
         <address>TP Street 123</address>
+        <postal_code>0001 XX</postal_code>
         <city>TP City</city>
         <country>TP Country</country>
     </third_party>
 
     <activity_info>
+        <!-- Which targets will need to be tested? 
+        (one <target> element for each piece of software/service/server address/location...), delete/add as necessary -->
+        <targets>
+            <target>target1.target.com</target>
+            <target>target2.target.com</target>
+        </targets>
         <!-- How long would you like the test to be? (in days) -->
         <days>6</days>
         <!-- How many persondays (if you don't know, try days * number of assigned pentesters) -->
