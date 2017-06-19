@@ -90,12 +90,7 @@
     </xsl:template>
 
     <xsl:template match="title" mode="toc">
-        <xsl:if test="parent::finding">
-            <!-- prepend finding id (XXX-NNN) -->
-            <xsl:apply-templates select=".." mode="number"/>
-            <xsl:text> &#8212; </xsl:text>
-        </xsl:if>
-        <!--<xsl:apply-templates select="text()|*/text()"/>-->
+        <xsl:call-template name="prependNumber"/>
         <xsl:apply-templates/>
     </xsl:template>
 
