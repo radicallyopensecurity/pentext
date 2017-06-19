@@ -7,23 +7,34 @@
     <xsl:template match="finding" mode="number">
         <!-- Output finding display number (context is finding) -->
         <xsl:variable name="sectionNumber">
-            <xsl:choose>
-                <xsl:when test="/pentest_report/@findingNumberingBase = 'Section'">
+            <xsl:if test="/pentest_report/@findingNumberingBase = 'Section'">
                     <xsl:value-of
                         select="count(ancestor::section[last()]/preceding-sibling::section) + 1"/>
-                </xsl:when>
-                <xsl:otherwise>0</xsl:otherwise>
-            </xsl:choose>
+                </xsl:if>
         </xsl:variable>
         <xsl:variable name="findingNumber" select="count(preceding::finding) + 1"/>
-        <xsl:variable name="numFormat" select="'00'"/>
+        <xsl:variable name="numFormat">
+            <xsl:choose>
+                <xsl:when test="/pentest_report/@findingNumberingBase = 'Section'">00</xsl:when>
+                <xsl:otherwise>000</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         <xsl:value-of
             select="concat(ancestor::*[@findingCode][1]/@findingCode, '-', $sectionNumber, string(format-number($findingNumber, $numFormat)))"
         />
     </xsl:template>
+    
+    <xsl:template match="non-finding" mode="number">
+        <!-- Output finding display number (context is finding) -->
+        <xsl:variable name="nonFindingNumber" select="count(preceding::non-finding) + 1"/>
+        <xsl:variable name="numFormat" select="'000'"/>
+        <xsl:value-of
+            select="concat('NF-', string(format-number($nonFindingNumber, $numFormat)))"
+        />
+    </xsl:template>
 
     <xsl:template
-        match="section[not(@visibility = 'hidden')] | appendix[not(@visibility = 'hidden')] | non-finding"
+        match="section[not(@visibility = 'hidden')] | appendix[not(@visibility = 'hidden')]"
         mode="number">
         <xsl:choose>
             <xsl:when test="$EXEC_SUMMARY = true()">
@@ -81,6 +92,21 @@
         <fo:inline>
             <xsl:number count="biblioentry" format="{$AUTO_NUMBERING_FORMAT}"/>
         </fo:inline>
+    </xsl:template>
+    
+    <xsl:template name="prependNumber">
+        <xsl:choose>
+                <xsl:when test="parent::finding">
+                    <!-- prepend finding id (XXX-NNN) -->
+                    <xsl:apply-templates select=".." mode="number"/>
+                    <xsl:text> &#8212; </xsl:text>
+                </xsl:when>
+                <xsl:when test="parent::non-finding">
+                    <!-- prepend non-finding id (NF-NNN) -->
+                    <xsl:apply-templates select=".." mode="number"/>
+                    <xsl:text> &#8212; </xsl:text>
+                </xsl:when>
+            </xsl:choose>
     </xsl:template>
 
 </xsl:stylesheet>
