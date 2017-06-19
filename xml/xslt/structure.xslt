@@ -93,11 +93,7 @@
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:text>&#160;&#160;&#160;</xsl:text>
-            <xsl:if test="parent::finding">
-                <!-- prepend finding id (XXX-NNN) -->
-                <xsl:apply-templates select=".." mode="number"/>
-                <xsl:text> &#8212; </xsl:text>
-            </xsl:if>
+            <xsl:call-template name="prependNumber"/>
             <xsl:apply-templates/>
         </fo:block>
         <xsl:if test="parent::finding">
