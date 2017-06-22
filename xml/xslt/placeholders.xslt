@@ -518,7 +518,7 @@
                 </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
-                <fo:inline xsl:use-attribute-sets="errortext">XXXXXX</fo:inline>
+                <fo:inline xsl:use-attribute-sets="errortext">[ Cannot resolve <xsl:value-of select="name()"/> - element "<xsl:value-of select="name($placeholderElement)"/>" empty or not found ]</fo:inline>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
