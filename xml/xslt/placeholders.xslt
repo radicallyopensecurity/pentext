@@ -518,9 +518,32 @@
                 </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
-                <fo:inline xsl:use-attribute-sets="errortext">[ Cannot resolve <xsl:value-of select="name()"/> - element "<xsl:value-of select="name($placeholderElement)"/>" empty or not found ]</fo:inline>
+                <fo:inline xsl:use-attribute-sets="errortext">[ <fo:inline xsl:use-attribute-sets="bold">WARNING</fo:inline>: Cannot resolve placeholder <fo:inline xsl:use-attribute-sets="bold"><xsl:value-of select="name()"/></fo:inline> in <xsl:value-of select="base-uri()"/> - <xsl:call-template name="getReason"><xsl:with-param name="placeholderElement" select="$placeholderElement"/></xsl:call-template> ]</fo:inline>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="getReason">
+        <xsl:param name="placeholderElement" select="."/>
+        <xsl:choose>
+            <xsl:when test="/$placeholderElement">
+                element <fo:inline xsl:use-attribute-sets="bold">"<xsl:value-of select="name($placeholderElement)"/>"</fo:inline> (<xsl:call-template name="getXPath"><xsl:with-param name="element" select="$placeholderElement"/></xsl:call-template>) is empty
+            </xsl:when>
+            <xsl:otherwise>
+                referenced element not found
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="getXPath">
+        <xsl:param name="element" select="."/>
+        <xsl:for-each select="$element/ancestor-or-self::*">
+            <xsl:value-of select="concat('/',local-name())"/>
+            <!--Predicate is only output when needed.-->
+            <xsl:if test="(preceding-sibling::*|following-sibling::*)[local-name()=local-name(current())]">
+                <xsl:value-of select="concat('[',count(preceding-sibling::*[local-name()=local-name(current())])+1,']')"/>
+            </xsl:if>
+        </xsl:for-each>
     </xsl:template>
 
     <xsl:template name="generate_activities_xslt">
