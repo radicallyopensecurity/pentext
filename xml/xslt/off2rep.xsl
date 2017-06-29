@@ -162,10 +162,11 @@
                     <xsl:comment> Extreme </xsl:comment>
 
                     <xsl:comment> High </xsl:comment>
+                    
+                    <xsl:comment> Elevated </xsl:comment>
 
                     <xsl:comment> Moderate </xsl:comment>
 
-                    <xsl:comment> Elevated </xsl:comment>
 
                     <xsl:comment> Low </xsl:comment>
                 </section>
