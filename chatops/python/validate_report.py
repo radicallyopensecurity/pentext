@@ -32,23 +32,25 @@ import sys
 import textwrap
 import xml.sax
 
+
 try:
     from lxml import etree as ElementTree
+    from titlecase import titlecase
+    import enchant
 except ImportError as exception:
-    print('[-] This script needs lxml',
+    print('[-] This script needs the lxml, pyenchant and titlecase libary ({0}'.format(exception),
           file=sys.stderr)
-    print("Install lxml with: sudo pip install lxml", file=sys.stderr)
+    print("    Install requirements using pip install -r requirements.txt",
+          file=sys.stderr)
     sys.exit(-1)
 
 
 # When set to True, the report will be validated using docbuilder
 DOCBUILDER = False
-VOCABULARY = 'project-vocabulary.pws'
+UPPERCASE = ['TCP', 'UDP', 'XSS']
+VOCABULARY = 'project-vocabulary.txt'
 # Snippets may contain XML fragments without the proper entities
 EXAMPLEDIR = 'examples/'
-NOT_CAPITALIZED = ['a', 'an', 'and', 'as', 'at', 'but', 'by', 'for', 'in',
-                   'jQuery', 'jQuery-UI', 'nor', 'of', 'on', 'or', 'the', 'to',
-                   'up']
 SNIPPETDIR = 'snippets/'
 STATUS = 25 # loglevel for 'generic' status messages
 TEMPLATEDIR = 'templates/'
@@ -56,15 +58,6 @@ OFFERTE = '/offerte.xml'
 REPORT = '/report.xml'
 WARN_LINE = 80  # There should be a separation character after x characters...
 MAX_LINE = 86  # ... and before y
-
-
-if DOCBUILDER:
-    import docbuilder_proxy
-    import proxy_vagrant
-try:
-    import aspell
-except ImportError:
-    print('[-] aspell not installed: spelling not available',)
 
 
 class LogFormatter(logging.Formatter):
@@ -130,34 +123,14 @@ the Free Software Foundation, either version 3 of the License, or
     return vars(parser.parse_args())
 
 
-def initialize_speller():
-    """
-    Initialize and return speller module.
-    """
-    speller = None
-    try:
-        speller = aspell.Speller(('lang', 'en'),
-                                 ('personal-dir', '.'),
-                                 ('personal', VOCABULARY))
-    except aspell.AspellConfigError as exception:  # some versions of aspell use a different path
-        logging.debug('Encountered exception when trying to intialize spelling: %s',
-                      exception)
-        try:
-            speller = aspell.Speller(('lang', 'en'),
-                                     ('personal-path', './' + VOCABULARY))
-        except aspell.AspellSpellerError as exception:
-            logging.error('Could not initialize speller: %s', exception)
-    if speller:
-        [logging.debug('%s %s', i[0], i[2]) for i in speller.ConfigKeys()]
-    return speller
-
-
-def validate_spelling(tree, filename, options, speller):
+def validate_spelling(tree, filename, options):
     """
     Check spelling of text within tags.
     If options['learn'], then unknown words will be added to the dictionary.
     """
     result = True
+    learn = []
+    speller = enchant.DictWithPWL("en_US", VOCABULARY)
     if not speller:
         options['spelling'] = False
         return result
@@ -168,17 +141,20 @@ def validate_spelling(tree, filename, options, speller):
                section.tag not in ('a', 'code', 'monospace', 'pre'):
                 for word in re.findall('([a-zA-Z]+\'?[a-zA-Z]+)', section.text):
                     if not speller.check(word):
-                        if options['learn']:
-                            speller.addtoPersonal(word)
-                        else:
-                            result = False
-                            logging.warning('Misspelled (unknown) word %s in %s',
-                                            word.encode('utf-8'), filename)
-        if options['learn']:
-            speller.saveAllwords()
-    except aspell.AspellSpellerError as exception:
-        logging.error('Disabled spelling (%s)', exception)
-        options['spelling'] = False
+                        if word.upper() not in (learned.upper() for learned in learn):
+                            learn.append(word)
+                        result = False
+                        logging.warning('Misspelled (unknown) word %s in %s',
+                                        word.encode('utf-8'), filename)
+    except:
+        print('[-] Hmm. spell exception')
+    if options['learn'] and learn:
+        try:
+            with open(VOCABULARY, mode='a+') as open_file:
+                for word in learn:
+                    open_file.write(word + '\n')
+        except IOError:
+            logging.error('Could not write to %s', open_file)
     return result
 
 
@@ -220,7 +196,6 @@ def validate_files(filenames, options):
     findings = []
     non_findings = []
     scans = []
-    speller = initialize_speller()
     for filename in filenames:
         if (filename.lower().endswith('.xml') or
                 filename.lower().endswith('xml"')):
@@ -229,7 +204,7 @@ def validate_files(filenames, options):
                    (REPORT in filename and not options['no_report']):
                     masters.append(filename)
                     # try:
-                type_result, xml_type = validate_xml(filename, options, speller)
+                type_result, xml_type = validate_xml(filename, options)
                 result = result and type_result
                 if 'non-finding' in xml_type:
                     non_findings.append(filename)
@@ -255,7 +230,7 @@ def validate_report():
     return proxy_vagrant.execute_command(host, command)
 
 
-def validate_xml(filename, options, speller):
+def validate_xml(filename, options):
     """
     Validates XML file by trying to parse it.
     Returns True if the file validated successfully.
@@ -270,7 +245,7 @@ def validate_xml(filename, options, speller):
         with open(filename, 'rb') as xml_file:
             xml.sax.parse(xml_file, xml.sax.ContentHandler())
             tree = ElementTree.parse(filename, ElementTree.XMLParser(strip_cdata=False))
-            type_result, xml_type = validate_type(tree, filename, options, speller)
+            type_result, xml_type = validate_type(tree, filename, options)
             result = validate_long_lines(tree, filename, options) and result and type_result
         if options['edit'] and not result:
             open_editor(filename)
@@ -295,29 +270,24 @@ def get_all_text(node):
     return text_string.strip()
 
 
+def abbreviations(word, **kwargs):
+    """
+    Check whether word needs to be all caps
+    """
+    if word.upper() in (UPPERCASE):
+        return word.upper()
+
+
 def is_capitalized(line):
     """
     Checks whether all words in @line start with a capital.
 
     Returns True if that's the case.
     """
-    return not line or line.strip() == capitalize(line)
+    return not line or line.strip() == titlecase(line, callback=abbreviations).strip()
 
 
-def capitalize(line):
-    """
-    Returns a capitalized version of @line, where the first word and all other
-    words not in NOT_CAPITALIZED are capitalized.
-    """
-    capitalized = ''
-    for word in line.strip().split():
-        if word not in NOT_CAPITALIZED or not len(capitalized):
-            word = word[0].upper() + word[1:]
-        capitalized += word + ' '
-    return capitalized.strip()
-
-
-def validate_type(tree, filename, options, speller):
+def validate_type(tree, filename, options):
     """
     Performs specific checks based on type.
     Currently only finding and non-finding are supported.
@@ -329,7 +299,7 @@ def validate_type(tree, filename, options, speller):
     attributes = []
     tags = []
     if options['spelling']:
-        result = validate_spelling(tree, filename, options, speller)
+        result = validate_spelling(tree, filename, options)
     if xml_type == 'pentest_report':
         attributes = ['findingCode']
     if xml_type == 'finding':
@@ -362,7 +332,7 @@ def validate_type(tree, filename, options, speller):
                 print('[A] Type missing capitalization (expected {0}, read {1})'.
                       format(capitalize(root.attrib[attribute]),
                              root.attrib[attribute]))
-                root.attrib[attribute] = capitalize(root.attrib[attribute])
+                root.attrib[attribute] = titlecase(root.attrib[attribute], callback=abbreviations)
                 fix = True
     for tag in tags:
         if root.find(tag) is None:
@@ -376,9 +346,9 @@ def validate_type(tree, filename, options, speller):
         if tag == 'title' and (options['capitalization'] and \
                                not is_capitalized(root.find(tag).text)):
             print('[A] Title missing capitalization in {0} (expected {1}, read {2})'.
-                  format(filename, capitalize(root.find(tag).text),
-                         root.find(tag).text))
-            root.find(tag).text = capitalize(root.find(tag).text)
+                  format(filename, titlecase(root.find(tag).text, callback=abbreviations).strip(),
+                         root.find(tag).text.strip()))
+            root.find(tag).text = titlecase(root.find(tag).text, callback=abbreviations)
             fix = True
         all_text = get_all_text(root.find(tag))
         if tag == 'description' and all_text.strip()[-1] != '.':
