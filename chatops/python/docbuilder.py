@@ -56,7 +56,7 @@ the Free Software Foundation, either version 3 of the License, or
                         help='overwrite output file if it already exists')
     parser.add_argument('-date', action='store',
                         help='the invoice date')
-    parser.add_argument('-execsummary', action='store',
+    parser.add_argument('-execsummary', action='store_true',
                         help="""create an executive summary as well as a report (true/false).
                         Default: false """)
     parser.add_argument('--fop-config', action='store',
@@ -151,7 +151,7 @@ def to_fo(options):
     if options['date']:
         cmd.append('DATE=' + options['date'])
     if options['execsummary']:
-        cmd.append('EXEC_SUMMARY=' + options['execsummary'])
+        cmd.append('EXEC_SUMMARY=true')
     process = subprocess.Popen(cmd, stdout=PIPE, stderr=PIPE)
     stdout, stderr = process.communicate()
     print_output(stdout, stderr)
@@ -234,7 +234,7 @@ def main():
             except OSError as exception:
                 print_exit('[-] ERR: {0}'.format(exception.strerror),
                            exception.errno)
-        if options['execsummary'] == 'true':  # we're generating a summary as well as a report
+        if options['execsummary'] == True:  # we're generating a summary as well as a report
             report_output = options['output']
             verboseprint('generating additional executive summary')
             output_dir = os.path.dirname(options['output'])
