@@ -4,7 +4,6 @@
     xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
 
     <xsl:template match="a">
-        <xsl:param name="execsummary" tunnel="yes"/>
         <xsl:variable name="destination">
             <xsl:choose>
                 <xsl:when test="starts-with(@href, '#')">
@@ -21,7 +20,7 @@
                     DOCUMENT</fo:inline>
             </xsl:when>
             <xsl:when
-                test="(starts-with(@href, '#') and //*[@id = $destination][ancestor-or-self::*[@visibility = 'hidden']]) or (starts-with(@href, '#') and $execsummary=true() and //*[@id = $destination][ancestor-or-self::*[not(@inexecsummary='yes')]])">
+                test="(starts-with(@href, '#') and //*[@id = $destination][ancestor-or-self::*[@visibility = 'hidden']]) or (starts-with(@href, '#') and $EXEC_SUMMARY=true() and //*[@id = $destination][ancestor-or-self::*[not(@inexecsummary='yes')]])">
                 <fo:inline xsl:use-attribute-sets="errortext">WARNING: LINK TARGET IS
                     HIDDEN</fo:inline>
             </xsl:when>

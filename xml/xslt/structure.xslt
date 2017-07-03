@@ -4,10 +4,9 @@
     xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
 
     <xsl:template match="section | appendix | finding | non-finding | annex">
-        <xsl:param name="execsummary" tunnel="yes"/>
         <xsl:if test="not(@visibility = 'hidden')">
             <xsl:choose>
-                <xsl:when test="$execsummary = true()">
+                <xsl:when test="$EXEC_SUMMARY = true()">
                     <xsl:if test="ancestor-or-self::*/@inexecsummary = 'yes'">
                         <fo:block xsl:use-attribute-sets="section">
                             <xsl:if test="self::appendix or self::annex">
@@ -30,7 +29,6 @@
     </xsl:template>
 
     <xsl:template match="title[not(parent::biblioentry)]">
-        <xsl:param name="execsummary" tunnel="yes"/>
         <xsl:variable name="LEVEL" select="count(ancestor::*) - 1"/>
         <xsl:variable name="CLASS">
             <!-- use title-x for all levels -->
@@ -43,7 +41,7 @@
                 <xsl:with-param name="CLASS" select="$CLASS"/>
             </xsl:call-template>
             <xsl:choose>
-                <xsl:when test="$execsummary = true()">
+                <xsl:when test="$EXEC_SUMMARY = true()">
                     <xsl:choose>
                         <xsl:when test="self::title[parent::appendix]">
                             <fo:inline> Appendix&#160;<xsl:number

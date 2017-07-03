@@ -5,7 +5,6 @@
     version="2.0">
     
       <xsl:template match="meta">
-          <xsl:param name="execsummary" tunnel="yes"/>
         <xsl:variable name="latestVersionNumber">
             <xsl:for-each select="version_history/version">
                 <xsl:sort select="xs:dateTime(@date)" order="descending"/>
@@ -21,7 +20,7 @@
         </fo:block>
         <fo:block xsl:use-attribute-sets="title-0">
             <xsl:choose>
-                <xsl:when test="$execsummary=true()">
+                <xsl:when test="$EXEC_SUMMARY=true()">
                     <xsl:text>PENETRATION TEST MANAGEMENT SUMMARY</xsl:text>
                 </xsl:when>
                 <xsl:otherwise><xsl:value-of select="upper-case(title)"/></xsl:otherwise>
@@ -62,7 +61,6 @@
     </xsl:template>
 
     <xsl:template name="DocProperties">
-        <xsl:param name="execsummary" tunnel="yes"/>
         <xsl:variable name="latestVersionNumber">
             <xsl:for-each select="version_history/version">
                 <xsl:sort select="xs:dateTime(@date)" order="descending"/>
@@ -98,7 +96,7 @@
                         <fo:table-cell xsl:use-attribute-sets="td">
                             <fo:block>
                                 <xsl:choose>
-                <xsl:when test="$execsummary=true()">
+                <xsl:when test="$EXEC_SUMMARY=true()">
                     <xsl:text>PENETRATION TEST MANAGEMENT SUMMARY</xsl:text>
                 </xsl:when>
                 <xsl:otherwise><xsl:value-of select="upper-case(title)"/></xsl:otherwise>

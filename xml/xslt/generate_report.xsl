@@ -58,28 +58,26 @@
     <!-- ROOT -->
     <xsl:template match="/">
 
-            <xsl:if test="$EXEC_SUMMARY = true()">
+        <xsl:choose>
+            <xsl:when test="$EXEC_SUMMARY = true()">
                 <xsl:result-document href="../target/execsummary.fo">
                     <fo:root xsl:use-attribute-sets="root-common">
 
                         <xsl:call-template name="layout-master-set"/>
-                        <xsl:call-template name="Content">
-                            <xsl:with-param name="execsummary" select="true()" tunnel="yes"/>
-                        </xsl:call-template>
+                        <xsl:call-template name="Content"/>
 
                     </fo:root>
                 </xsl:result-document>
-            </xsl:if>
+            </xsl:when>
+            <xsl:otherwise>
                 <fo:root xsl:use-attribute-sets="root-common">
 
                     <xsl:call-template name="layout-master-set"/>
-                    <xsl:call-template name="Content">
-                        <xsl:with-param name="execsummary" select="false()" tunnel="yes"/>
-                    </xsl:call-template>
+                    <xsl:call-template name="Content"/>
 
                 </fo:root>
-            
-        
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 
