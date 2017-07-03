@@ -58,7 +58,9 @@
         <fo:root>
 
             <xsl:call-template name="layout-master-set"/>
-            <xsl:call-template name="Content"/>
+            <xsl:call-template name="Content">
+                        <xsl:with-param name="execsummary" select="false()" tunnel="yes"/>
+                    </xsl:call-template>
 
         </fo:root>
     </xsl:template>
