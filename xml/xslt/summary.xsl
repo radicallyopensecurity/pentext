@@ -18,19 +18,30 @@
     <xsl:import href="graphics.xslt"/>
     <xsl:import href="generic.xslt"/>
     <xsl:import href="numbering.xslt"/>
-    
+    <xsl:import href="localisation.xslt"/>
+    <xsl:import href="placeholders.xslt"/>
+
     <xsl:include href="styles_rep.xslt"/>
-    
+
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no"/>
 
 
     <!-- ****** AUTO_NUMBERING_FORMAT:	value of the <xsl:number> element used for auto numbering -->
     <xsl:param name="AUTO_NUMBERING_FORMAT" select="'1.1.1'"/>
+    <xsl:param name="EXEC_SUMMARY" select="true()"/>
 
     <xsl:key name="rosid" match="section|finding|appendix|non-finding" use="@id"/>
-    
+
+    <!-- not used but needed because of shared code with contract; todo: clean these up -->
+    <xsl:variable name="fee" select="/contract/meta/contractor/hourly_fee * 1"/>
+    <xsl:variable name="plannedHours" select="/contract/meta/work/planning/hours * 1"/>
+    <xsl:variable name="total_fee" select="$fee * $plannedHours"/>
+    <xsl:variable name="denomination" select="'X'"/>
+    <!-- end -->
+
+    <xsl:variable name="lang" select="/*/@xml:lang"/>
     <xsl:variable name="CLASSES" select="document('../xslt/styles_rep.xslt')/*/xsl:attribute-set"/>
-    
+
     <xsl:variable name="latestVersionDate">
             <xsl:for-each select="/*/meta/version_history/version">
                 <xsl:sort select="xs:dateTime(@date)" order="descending"/>
