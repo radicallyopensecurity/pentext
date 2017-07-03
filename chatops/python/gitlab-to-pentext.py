@@ -310,7 +310,7 @@ def valid_filename(filename):
     """
     result = ''
     for char in filename.strip():
-        if char in ['*', ':', '/', '.', '\\', ' ', '[', ']', '(', ')', '\'', '\"']:
+        if char in ['*', ':', '/', '.', '\\', ' ', '[', ']', '(', ')', '\'', '\"', '`']:
             if len(char) and not result.endswith('-'):
                 result += '-'
         else:
