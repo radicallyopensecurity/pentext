@@ -60,9 +60,9 @@ the Free Software Foundation, either version 3 of the License, or
                         help="""create an executive summary as well as a report (true/false).
                         Default: false """)
     parser.add_argument('--fop-config', action='store',
-                        default='/etc/docbuilder/fop.conf',
+                        default='/etc/docbuilder/fop.xconf',
                         help="""fop configuration file (default
-                        /etc/docbuilder/fop.conf""")
+                        /etc/docbuilder/fop.xconf""")
     parser.add_argument('-f', '--fop', action='store',
                         default='../target/report.fo',
                         help="""intermediate fop output file (default:
