@@ -36,8 +36,9 @@
     <xsl:template
         match="section[not(@visibility = 'hidden')] | appendix[not(@visibility = 'hidden')]"
         mode="number">
+        <xsl:param name="execsummary" tunnel="yes"/>
         <xsl:choose>
-            <xsl:when test="$EXEC_SUMMARY = true()">
+            <xsl:when test="$execsummary = true()">
                 <xsl:choose>
                     <xsl:when test="self::appendix">
                         <fo:inline> Appendix&#160;<xsl:number
