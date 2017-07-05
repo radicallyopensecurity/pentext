@@ -84,23 +84,18 @@
                     <xsl:comment>duration of pentest, in persondays</xsl:comment>
                     <planning>
                         <start>
-                            <xsl:comment>date in ISO format: YYYY-MM-DD</xsl:comment>
+                            <xsl:comment>date in ISO format (YYYY-MM-DD) or TBD</xsl:comment>
                             <xsl:text>YYYY-MM-DD</xsl:text>
                         </start>
                         <end>
-                            <xsl:comment>date in ISO format: YYYY-MM-DD</xsl:comment>
+                            <xsl:comment>date in ISO format (YYYY-MM-DD) or TBD</xsl:comment>
                             <xsl:text>YYYY-MM-DD</xsl:text>
                         </end>
                     </planning>
                     <report_due>
-                        <xsl:choose>
-                            <xsl:when test="/*/activityinfo/report_due">
-                                <xsl:value-of select="/*/activityinfo/report_due"/>
-                            </xsl:when>
-                            <xsl:otherwise>TBD</xsl:otherwise>
-                        </xsl:choose>
+                        <xsl:comment>date in ISO format (YYYY-MM-DD) or TBD</xsl:comment>
+                            <xsl:text>YYYY-MM-DD</xsl:text>
                     </report_due>
-                    <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2015</xsl:comment>
                     <nature>
                         <xsl:choose>
                             <xsl:when test="/*/activityinfo/nature">
