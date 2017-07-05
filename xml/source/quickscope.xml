@@ -17,12 +17,6 @@
     <!-- Required service -->
     <!-- Note: is only used when type is 'other', if offer_type is a specific type, service name will be taken from the localisation strings -->
     <requested_service>penetration testing services</requested_service>
-    <!-- Which targets will need to be tested?
-            (one <target> element for each piece of software/service/server address/location...), delete/add as necessary -->
-    <targets>
-      <target></target>
-      <target></target>
-    </targets>
   </meta>
   <!-- Do we need permission from third parties? Insert as many <third_party> elements as needed under this comment -->
   <!-- INSERT OPTIONAL THIRD PARTIES HERE -->
@@ -35,7 +29,13 @@
       <country>XXX</country>
   </third_party> -->
   <!-- ___________________________________ -->
-  <activity_info>
+  <activityinfo>
+    <!-- Which targets will need to be tested?
+            (one <target> element for each piece of software/service/server address/location...), delete/add as necessary -->
+    <targets>
+      <target></target>
+      <target></target>
+    </targets>
     <!-- How long would you like the test to be? (in days) -->
     <days>0</days>
     <!-- How many persondays (if you don't know, try days * number of assigned pentesters) -->
@@ -45,10 +45,12 @@
     <!-- Testing type (Use one of the following values: crystal-box, black-box, grey-box) -->
     <type>crystal-box</type>
     <!-- Test planning (when would you like the test to be executed -->
-    <!-- Ideally something specific like 'December 7th - December 12th, 2015', but another description 'Beginning of December' is fine as well -->
-    <!-- do not start with a capital letter -->
-    <planning>TBD</planning>
+    <!-- dates should be in ISO format (YYY-MM-DD) -->
+    <!-- if unknown, write TBD -->
+    <planning><start>YYYY-MM-DD</start><end>TBD</end></planning>
     <!-- Pentest report delivery date (please allow at least 1 week between the end of the pentest and the report delivery date) -->
+    <!-- date should be in ISO format (YYY-MM-DD) -->
+    <!-- if unknown, write TBD -->
     <delivery>TBD</delivery>
     <!-- Do you need/want a code audit? (possible values: yes/no), only for pentest -->
     <codeaudit perform="yes"/>
@@ -59,5 +61,5 @@
 
     <!-- rate (to be filled in by ROS ;) -->
     <rate>0</rate>
-  </activity_info>
+  </activityinfo>
 </quickscope>

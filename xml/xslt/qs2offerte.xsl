@@ -89,35 +89,36 @@
                 <activityinfo>
                     <!-- copy various variables from quickscope -->
                     <duration>
-                        <xsl:value-of select="/*/activity_info/days"/>
+                        <xsl:value-of select="/*/activityinfo/days"/>
                     </duration>
                     <xsl:comment>duration of pentest, in working days</xsl:comment>
                     <persondays>
-                        <xsl:value-of select="/*/activity_info/persondays"/>
+                        <xsl:value-of select="/*/activityinfo/persondays"/>
                     </persondays>
                     <xsl:comment>duration of pentest, in persondays</xsl:comment>
-                    <test_planning>
-                        <xsl:value-of select="/*/activity_info/planning"/>
-                    </test_planning>
-                    <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2016</xsl:comment>
+                    <planning>
+                        <start><xsl:value-of select="/*/activityinfo/planning/start"/></start>
+                        <end><xsl:value-of select="/*/activityinfo/planning/end"/></end>
+                    </planning>
+                    <xsl:comment>start and end dates, in ISO format: YYYY-MM-DD</xsl:comment>
                     <report_due>
-                        <xsl:value-of select="/*/activity_info/delivery"/>
+                        <xsl:value-of select="/*/activityinfo/delivery"/>
                     </report_due>
                     <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2016</xsl:comment>
                     <nature>
-                        <xsl:value-of select="/*/activity_info/nature"/>
+                        <xsl:value-of select="/*/activityinfo/nature"/>
                     </nature>
                     <type>
-                        <xsl:value-of select="/*/activity_info/type"/>
+                        <xsl:value-of select="/*/activityinfo/type"/>
                     </type>
                     <xsl:comment>please choose one of the following: black-box, grey-box, crystal-box</xsl:comment>
                     <fee denomination="eur">
-                        <xsl:value-of select="/*/activity_info/rate"/>
+                        <xsl:value-of select="/*/activityinfo/rate"/>
                     </fee>
                     <xsl:comment>(eur|usd|gbp)</xsl:comment>
-                    <xsl:if test="*/activity_info/application_name">
+                    <xsl:if test="*/activityinfo/application_name">
                         <target_application>
-                            <xsl:value-of select="/*/activity_info/application_name"/>
+                            <xsl:value-of select="/*/activityinfo/application_name"/>
                         </target_application>
                         <xsl:comment>name of application/service to be tested (if any; if none, DELETE target_application element)</xsl:comment>
                     </xsl:if>
@@ -150,7 +151,7 @@
                 </xsl:element>
             </xsl:for-each>
             
-            <xsl:if test="/*/activity_info/codeaudit/@perform = 'yes'">
+            <xsl:if test="/*/activityinfo/codeaudit/@perform = 'yes'">
                 <xsl:for-each
                 select="$snippetSelectionRoot/selection[@subtype = $docSubType]/snippet_group[@set = 'additionalcodeaudit']/snippet">
                 <xsl:element name="xi:include">
@@ -176,134 +177,10 @@
                 </xsl:element>
             </xsl:for-each>
 
-            <!--<xsl:comment>Introduction and Scope</xsl:comment>
-            <xsl:element name="xi:include">
-                <xsl:attribute name="href">
-                    <xsl:call-template name="docCheck">
-                        <xsl:with-param name="fileNamePart">introandscope</xsl:with-param>
-                    </xsl:call-template>
-                </xsl:attribute>
-            </xsl:element>
-            <xsl:comment>Project overview section</xsl:comment>
-            <xsl:element name="xi:include">
-                <xsl:attribute name="href">
-                    <xsl:call-template name="docCheck">
-                        <xsl:with-param name="fileNamePart">projectoverview</xsl:with-param>
-                    </xsl:call-template>
-                </xsl:attribute>
-            </xsl:element>
-            <xsl:comment>Prerequisites section</xsl:comment>
-            <xsl:element name="xi:include">
-                <xsl:attribute name="href">
-                    <xsl:call-template name="docCheck">
-                        <xsl:with-param name="fileNamePart">prerequisites</xsl:with-param>
-                    </xsl:call-template>
-                </xsl:attribute>
-            </xsl:element>
-            <xsl:comment>Disclaimer section</xsl:comment>
-            <xsl:element name="xi:include">
-                <xsl:attribute name="href">
-                    <xsl:call-template name="docCheck">
-                        <xsl:with-param name="fileNamePart">disclaimer</xsl:with-param>
-                    </xsl:call-template>
-                </xsl:attribute>
-            </xsl:element>
-            <xsl:comment>Methodology section</xsl:comment>
-            <xsl:element name="xi:include">
-                <xsl:attribute name="href">
-                    <xsl:call-template name="docCheck">
-                        <xsl:with-param name="fileNamePart">methodology</xsl:with-param>
-                    </xsl:call-template>
-                </xsl:attribute>
-            </xsl:element>-->
-            <!--<xsl:if test="/*/activity_info/codeaudit/@perform = 'yes'">
-                <xsl:element name="xi:include">
-                    <xsl:attribute name="href">
-                        <xsl:call-template name="docCheck">
-                            <xsl:with-param name="fileNamePart"
-                                >codeauditmethodology</xsl:with-param>
-                        </xsl:call-template>
-                    </xsl:attribute>
-                </xsl:element>
-            </xsl:if>-->
-            <!--<xsl:element name="xi:include">
-                <xsl:attribute name="href">
-                    <xsl:call-template name="docCheck">
-                        <xsl:with-param name="fileNamePart">teamandreporting</xsl:with-param>
-                    </xsl:call-template>
-                </xsl:attribute>
-            </xsl:element>
-            <xsl:comment>Planning and payment section</xsl:comment>
-            <xsl:element name="xi:include">
-                <xsl:attribute name="href">
-                    <xsl:call-template name="docCheck">
-                        <xsl:with-param name="fileNamePart">planningandpayment</xsl:with-param>
-                    </xsl:call-template>
-                </xsl:attribute>
-            </xsl:element>
-            <xsl:comment>About Us section</xsl:comment>
-            <xsl:element name="xi:include">
-                <xsl:attribute name="href">
-                    <xsl:call-template name="docCheck">
-                        <xsl:with-param name="fileNamePart">aboutus</xsl:with-param>
-                    </xsl:call-template>
-                </xsl:attribute>
-            </xsl:element>
-            <xsl:comment>Work condition section</xsl:comment>
-            <xsl:element name="xi:include">
-                <xsl:attribute name="href">
-                    <xsl:call-template name="docCheck">
-                        <xsl:with-param name="fileNamePart">conditions</xsl:with-param>
-                    </xsl:call-template>
-                </xsl:attribute>
-            </xsl:element>
-            <xsl:comment>General terms and conditions section</xsl:comment>
-            <xsl:element name="xi:include">
-                <xsl:attribute name="href">
-                    <xsl:call-template name="docCheck">
-                        <xsl:with-param name="fileNamePart"
-                            >generaltermsandconditions</xsl:with-param>
-                    </xsl:call-template>
-                </xsl:attribute>
-            </xsl:element>
-
-
-            <xsl:comment>Waivers</xsl:comment>
-            <xsl:element name="xi:include">
-                <xsl:attribute name="href">
-                    <xsl:call-template name="docCheck">
-                        <xsl:with-param name="fileNamePart">waiver</xsl:with-param>
-                    </xsl:call-template>
-                </xsl:attribute>
-            </xsl:element>-->
+            
         </offerte>
 
 
     </xsl:template>
-
-    <!--<xsl:template name="docCheck">
-        <xsl:param name="fileNamePart" select="'none'"/>
-        <xsl:param name="typeSuffix">
-            <xsl:choose>
-                <xsl:when test="/*/meta/offer_type = 'pentest' or /*/meta/offer_type = 'other'"/>
-                <xsl:otherwise>
-                    <xsl:text>_</xsl:text>
-                    <xsl:value-of select="/*/meta/offer_type"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:param>
-        <xsl:param name="fileNameStandard"
-            select="concat('snippets/offerte/', $lang, '/', $fileNamePart, '.xml')"/>
-        <xsl:param name="fileNameExtended"
-            select="concat('snippets/offerte/', $lang, '/', $fileNamePart, $typeSuffix, '.xml')"/>
-        <xsl:choose>
-            <xsl:when test="doc-available(concat('../source/', $fileNameExtended))">
-                <xsl:value-of select="$fileNameExtended"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$fileNameStandard"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>-->
 
 </xsl:stylesheet>

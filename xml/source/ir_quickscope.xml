@@ -20,7 +20,7 @@
   </meta>
  
   <!-- ACTIVITY INFO -->
-  <activity_info>
+  <activityinfo>
     <organizational_readiness_assessment><!-- Delete complete organizational_readiness_assessment element if not needed! -->
       <rate denomination="eur">100000</rate><!-- flat rate! -->
       <team>
@@ -35,6 +35,6 @@
     <technical_artefact_analysis>
       <rate denomination="eur">250</rate><!-- rate per person-hour -->
     </technical_artefact_analysis>
-  </activity_info>
+  </activityinfo>
   
 </ir_quickscope>
