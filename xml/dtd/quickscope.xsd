@@ -55,7 +55,11 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="days" type="xs:integer"/>
-  <xs:element name="delivery" type="xs:NCName"/>
+  <xs:element name="delivery">
+    <xs:simpleType>
+      <xs:union memberTypes="xs:date xs:string"/>
+    </xs:simpleType>
+  </xs:element>
   <xs:element name="codeaudit">
     <xs:complexType>
       <xs:attribute name="perform" use="required" type="xs:NCName"/>

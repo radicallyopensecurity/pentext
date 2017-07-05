@@ -116,7 +116,7 @@
       <xs:attribute name="lastrevisiondate" type="xs:date"/>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:element name="rate">
     <xs:complexType>
       <xs:simpleContent>
@@ -159,12 +159,16 @@
   <xs:element name="planning">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="start" type="xs:date"/>
-        <xs:element name="end" type="xs:date"/>
+        <xs:element ref="start"/>
+        <xs:element ref="end"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="report_due" type="xs:string"/>
+  <xs:element name="report_due">
+    <xs:simpleType>
+      <xs:union memberTypes="xs:date xs:string"/>
+    </xs:simpleType>
+  </xs:element>
   <xs:element name="nature" type="xs:string"/>
   <xs:element name="type">
     <xs:simpleType>
@@ -175,7 +179,21 @@
       </xs:restriction>
     </xs:simpleType>
   </xs:element>
+
+  <xs:element name="start">
+    <xs:simpleType>
+      <xs:union memberTypes="xs:date xs:string"/>
+    </xs:simpleType>
+  </xs:element>
+
+  <xs:element name="end">
+    <xs:simpleType>
+      <xs:union memberTypes="xs:date xs:string"/>
+    </xs:simpleType>
+  </xs:element>
   
+  
+
   <xs:element name="target_application" type="xs:string"/>
   <xs:element name="target_application_producer" type="xs:string"/>
 
