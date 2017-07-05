@@ -82,9 +82,9 @@
                 <title>Executive Summary</title>
                 <section id="introduction">
                     <title>Introduction</title>
-                    <p>...</p>
+                    <p>Between <p_startdate/> and <p_enddate/>, <company_long/> carried out a penetration test for <client_long/></p>
                     <p>This report contains our findings as well as detailed explanations of exactly
-                        how ROS performed the penetration test.</p>
+                        how <company_short/> performed the penetration test.</p>
                 </section>
                 <section id="scope">
                     <title>Scope of work</title>

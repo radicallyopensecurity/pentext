@@ -31,7 +31,7 @@
         <country>TP Country</country>
     </third_party>
 
-    <activity_info>
+    <activityinfo>
         <!-- Which targets will need to be tested? 
         (one <target> element for each piece of software/service/server address/location...), delete/add as necessary -->
         <targets>
@@ -60,5 +60,5 @@
         <!-- rate (to be filled in by ROS ;) -->
         <rate>40000</rate>
 
-    </activity_info>
+    </activityinfo>
 </quickscope>

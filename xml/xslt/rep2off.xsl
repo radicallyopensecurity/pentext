@@ -82,28 +82,24 @@
                     <xsl:comment>duration of pentest, in working days</xsl:comment>
                     <persondays>2</persondays>
                     <xsl:comment>duration of pentest, in persondays</xsl:comment>
-                    <test_planning>
-                        <xsl:choose>
-                            <xsl:when test="/*/activityinfo/test_planning">
-                                <xsl:value-of select="/*/activity_info/test_planning"/>
-                            </xsl:when>
-                            <xsl:otherwise>TBD</xsl:otherwise>
-                        </xsl:choose>
-                    </test_planning>
-                    <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2015</xsl:comment>
+                    <planning>
+                        <start>
+                            <xsl:comment>date in ISO format (YYYY-MM-DD) or TBD</xsl:comment>
+                            <xsl:text>YYYY-MM-DD</xsl:text>
+                        </start>
+                        <end>
+                            <xsl:comment>date in ISO format (YYYY-MM-DD) or TBD</xsl:comment>
+                            <xsl:text>YYYY-MM-DD</xsl:text>
+                        </end>
+                    </planning>
                     <report_due>
-                        <xsl:choose>
-                            <xsl:when test="/*/activityinfo/report_due">
-                                <xsl:value-of select="/*/activity_info/report_due"/>
-                            </xsl:when>
-                            <xsl:otherwise>TBD</xsl:otherwise>
-                        </xsl:choose>
+                        <xsl:comment>date in ISO format (YYYY-MM-DD) or TBD</xsl:comment>
+                            <xsl:text>YYYY-MM-DD</xsl:text>
                     </report_due>
-                    <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2015</xsl:comment>
                     <nature>
                         <xsl:choose>
                             <xsl:when test="/*/activityinfo/nature">
-                                <xsl:value-of select="/*/activity_info/nature"/>
+                                <xsl:value-of select="/*/activityinfo/nature"/>
                             </xsl:when>
                             <xsl:otherwise>time-boxed</xsl:otherwise>
                         </xsl:choose>
@@ -111,7 +107,7 @@
                     <type>
                         <xsl:choose>
                             <xsl:when test="/*/activityinfo/type">
-                                <xsl:value-of select="/*/activity_info/type"/>
+                                <xsl:value-of select="/*/activityinfo/type"/>
                             </xsl:when>
                             <xsl:otherwise>crystal-box</xsl:otherwise>
                         </xsl:choose>
@@ -119,9 +115,9 @@
                     <xsl:comment>please choose one of the following: black-box, grey-box, crystal-box</xsl:comment>
                     <fee denomination="eur">0</fee>
                     <xsl:comment>(eur|usd|gbp)</xsl:comment>
-                    <xsl:if test="*/activity_info/target_application">
+                    <xsl:if test="*/activityinfo/target_application">
                         <target_application>
-                            <xsl:value-of select="/*/activity_info/target_application"/>
+                            <xsl:value-of select="/*/activityinfo/target_application"/>
                         </target_application>
                     </xsl:if>
                 </activityinfo>
