@@ -35,7 +35,7 @@
       <country>XXX</country>
   </third_party> -->
   <!-- ___________________________________ -->
-  <activity_info>
+  <activityinfo>
     <!-- How long would you like the test to be? (in days) -->
     <days>0</days>
     <!-- How many persondays (if you don't know, try days * number of assigned pentesters) -->
@@ -59,5 +59,5 @@
 
     <!-- rate (to be filled in by ROS ;) -->
     <rate>0</rate>
-  </activity_info>
+  </activityinfo>
 </quickscope>

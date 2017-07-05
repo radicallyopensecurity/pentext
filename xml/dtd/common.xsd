@@ -156,7 +156,14 @@
 
   <xs:element name="duration" type="xs:nonNegativeInteger"/>
   <xs:element name="persondays" type="xs:nonNegativeInteger"/>
-  <xs:element name="test_planning" type="xs:string"/>
+  <xs:element name="planning">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="start" type="xs:date"/>
+        <xs:element name="end" type="xs:date"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="report_due" type="xs:string"/>
   <xs:element name="nature" type="xs:string"/>
   <xs:element name="type">
@@ -168,6 +175,7 @@
       </xs:restriction>
     </xs:simpleType>
   </xs:element>
+  
   <xs:element name="target_application" type="xs:string"/>
   <xs:element name="target_application_producer" type="xs:string"/>
 

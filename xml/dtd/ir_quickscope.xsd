@@ -11,7 +11,7 @@
       <xs:sequence>
         <xs:element ref="client"/>
         <xs:element ref="meta"/>
-        <xs:element ref="activity_info"/>
+        <xs:element ref="activityinfo"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -28,7 +28,7 @@
   <xs:element name="offer_type" type="xs:NCName"/>
   <xs:element name="requested_service" type="xs:string"/>
 
-  <xs:element name="activity_info">
+  <xs:element name="activityinfo">
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="organizational_readiness_assessment" minOccurs="0"/>
