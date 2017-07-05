@@ -191,8 +191,14 @@
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
-    <xsl:template match="p_testingduration">
-        <xsl:param name="placeholderElement" select="/*/meta/activityinfo/test_planning"/>
+    <xsl:template match="p_startdate">
+        <xsl:param name="placeholderElement" select="/*/meta/activityinfo/planning/start"/>
+        <xsl:call-template name="checkPlaceholder">
+            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="p_enddate">
+        <xsl:param name="placeholderElement" select="/*/meta/activityinfo/planning/end"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
@@ -424,17 +430,23 @@
                         <xsl:text>&#160;</xsl:text>
                         <xsl:value-of select="$placeholderElement"/>
                     </xsl:when>
+                    <!-- PRETTY FORMATTING FOR AMOUNTS OF MONEY -->
                     <xsl:when test="self::p_fee or self::contractor_hourly_fee or self::ir_ora_rate">
-                        <!-- pretty numbering for fee -->
                         <xsl:variable name="fee" select="$placeholderElement * 1"/>
                         <xsl:number value="$fee" grouping-separator="," grouping-size="3"/>
                     </xsl:when>
+                    <!-- PRETTY FORMATTING FOR DATES -->
                     <xsl:when
-                        test="self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate">
+                        test="(self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate or self::start or self::end) and string(.) castable as xs:date">
                         <!-- pretty printing for date -->
                         <xsl:value-of
                             select="format-date($placeholderElement, '[MNn] [D1], [Y]', 'en', (), ())"
                         />
+                    </xsl:when>
+                    <xsl:when
+                        test="(self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate or self::start or self::end) and not(string(.) castable as xs:date)">
+                        <!-- pretty printing for date -->
+                        <fo:inline xsl:use-attribute-sets="errortext">TBD</fo:inline>
                     </xsl:when>
                     <xsl:when
                         test="self::contract_period_unit and /contract/meta/scope/contract_type = 'single_engagement'">
