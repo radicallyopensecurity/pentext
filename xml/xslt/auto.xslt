@@ -851,7 +851,7 @@
         <xsl:choose>
             <xsl:when test="$percentage >= 3.5">
                 <!--on the edge-->
-                <svg:text text-anchor="middle" xsl:use-attribute-sets="TableFont">
+                <svg:text text-anchor="middle" xsl:use-attribute-sets="PieFont">
                     <xsl:attribute name="x">
                         <xsl:value-of select="$middle_x + $text_line_x"/>
                     </xsl:attribute>
@@ -890,7 +890,7 @@
                         />
                     </xsl:attribute>
                 </svg:path>
-                <svg:text text-anchor="end" xsl:use-attribute-sets="TableFont">
+                <svg:text text-anchor="end" xsl:use-attribute-sets="PieFont">
                     <xsl:attribute name="x">
                         <!-- placement of text depends on where extra line is pointing -->
                         <xsl:value-of select="$text_x_relative_to_line"/>
