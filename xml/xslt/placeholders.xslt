@@ -437,14 +437,14 @@
                     </xsl:when>
                     <!-- PRETTY FORMATTING FOR DATES -->
                     <xsl:when
-                        test="(self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate or self::start or self::end) and string(.) castable as xs:date">
+                        test="(self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate or self::p_startdate or self::p_enddate) and string($placeholderElement) castable as xs:date">
                         <!-- pretty printing for date -->
                         <xsl:value-of
                             select="format-date($placeholderElement, '[MNn] [D1], [Y]', 'en', (), ())"
                         />
                     </xsl:when>
                     <xsl:when
-                        test="(self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate or self::start or self::end) and not(string(.) castable as xs:date)">
+                        test="(self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate or self::p_startdate or self::p_enddate) and not(string($placeholderElement) castable as xs:date)">
                         <!-- pretty printing for date -->
                         <fo:inline xsl:use-attribute-sets="errortext">TBD</fo:inline>
                     </xsl:when>
