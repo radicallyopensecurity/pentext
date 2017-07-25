@@ -20,8 +20,8 @@
   </p>
   <contact>
     <name><company_legal_rep/></name>
-    <address><company_long/><br/>Overdiemerweg 28<br/>1111 PP Diemen</address>
-    <email>melanie@radicallyopensecurity.com</email>
+    <address><company_long/><br/><company_address/><br/><company_postalcode/> <company_city/></address>
+    <email><company_email/></email>
   </contact>
   <generate_offer_signature_box/>
 </section>
