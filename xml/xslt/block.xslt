@@ -38,10 +38,19 @@
             <xsl:apply-templates/>
         </fo:block>
     </xsl:template>
+    
+    <!-- special case for p in summary table to avoid checkiflast - all other elements can ignore mode -->
+    
+    <xsl:template match="*" mode="summarytable">
+        <xsl:apply-templates select="."/>
+    </xsl:template>
 
+    <!-- p is more specific so has higher prio -->
     <xsl:template match="p" mode="summarytable">
         <xsl:apply-templates mode="summarytable"/>
     </xsl:template>
+    
+    
 
     <xsl:template match="pre">
         <fo:block xsl:use-attribute-sets="pre">
