@@ -437,7 +437,7 @@
                         <xsl:value-of select="$placeholderElement"/>
                     </xsl:when>
                     <!-- PRETTY FORMATTING FOR AMOUNTS OF MONEY -->
-                    <xsl:when test="self::p_fee or self::contractor_hourly_fee or self::ir_ora_rate">
+                    <xsl:when test="(self::p_fee or self::contractor_hourly_fee or self::ir_ora_rate) and string($placeholderElement) castable as xs:float">
                         <xsl:variable name="fee" select="$placeholderElement * 1"/>
                         <xsl:number value="$fee" grouping-separator="," grouping-size="3"/>
                     </xsl:when>
