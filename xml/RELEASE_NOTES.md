@@ -1,6 +1,21 @@
 RELEASE NOTES
 =============
 
+July 5th
+--------
+
+### New `planning` elements in `activityinfo/meta`
+
+The old `<testingduration>` element has been replaced by the following elements:
+```
+<planning>
+    <start><!--date in ISO format (YYYY-MM-DD) or TBD-->2017-06-08</start>
+    <end><!--date in ISO format (YYYY-MM-DD) or TBD-->YYYY-MM-DD</end>
+</planning>
+```
+
+Accordingly, the old `<p_testingduration/>` placeholder element has been replaced by `<p_startdate>` and `<p_enddate>`.
+
 June 9th
 --------
 
