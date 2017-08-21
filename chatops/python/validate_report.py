@@ -245,6 +245,7 @@ def validate_xml(filename, options):
         with open(filename, 'rb') as xml_file:
             xml.sax.parse(xml_file, xml.sax.ContentHandler())
             tree = ElementTree.parse(filename, ElementTree.XMLParser(strip_cdata=False))
+            tree.xinclude() # Include everything
             type_result, xml_type = validate_type(tree, filename, options)
             result = validate_long_lines(tree, filename, options) and result and type_result
         if options['edit'] and not result:
@@ -413,6 +414,7 @@ def validate_master(filename, findings, non_findings, scans, options):
     try:
         xmltree = ElementTree.parse(filename,
                                     ElementTree.XMLParser(strip_cdata=False))
+        xmltree.xinclude() # include all stuff
         if not find_keyword(xmltree, 'TODO', filename):
             print('[-] Keyword checks failed for {0}'.format(filename))
             result = False
@@ -498,6 +500,7 @@ def close_file(filename):
     f.close()
     tree = ElementTree.parse(filename, ElementTree.XMLParser(strip_cdata=False))
     tree.write(filename, encoding="utf-8", xml_declaration=True, pretty_print=True)
+
 
 def find_keyword(xmltree, keyword, filename):
     """
