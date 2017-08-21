@@ -188,8 +188,8 @@ def open_editor(filename):
 
 def validate_files(filenames, options):
     """
-    Checks file extensions and calls appropriate validator function.
-    Returns True if all files validated succesfully.
+    Check file extensions and calls appropriate validator function.
+    Returns True if all files validated successfully.
     """
     result = True
     masters = []
@@ -203,7 +203,6 @@ def validate_files(filenames, options):
                 if (OFFERTE in filename and options['offer']) or \
                    (REPORT in filename and not options['no_report']):
                     masters.append(filename)
-                    # try:
                 type_result, xml_type = validate_xml(filename, options)
                 result = result and type_result
                 if 'non-finding' in xml_type:
@@ -214,9 +213,8 @@ def validate_files(filenames, options):
                     else:
                         if 'scans' in xml_type:
                             scans.append(filename)
-    if len(masters):
-        for master in masters:
-            result = validate_master(master, findings, non_findings, scans, options) and result
+    for master in masters:
+        result = validate_master(master, findings, non_findings, scans, options) and result
     return result
 
 
@@ -412,7 +410,8 @@ def validate_long_lines(tree, filename, options):
 
 def validate_master(filename, findings, non_findings, scans, options):
     """
-    Validates master file.
+    Validate master file.
+    Returns True if master file was successfully validated.
     """
     result = True
     include_findings = []
@@ -425,11 +424,10 @@ def validate_master(filename, findings, non_findings, scans, options):
         if not find_keyword(xmltree, 'TODO', filename):
             print('[-] Keyword checks failed for {0}'.format(filename))
             result = False
-            logging.info('Performing cross check on findings, non-findings and scans...')
+        logging.info('Performing cross check on findings, non-findings and scans...')
         for finding in findings:
             if not cross_check_file(filename, finding):
-                print('[A] Cross check failed for finding {0}'.
-                      format(finding))
+                print('[A] Cross check failed for finding {0}'.format(finding))
                 include_findings.append(finding)
                 result = False
         for non_finding in non_findings:
