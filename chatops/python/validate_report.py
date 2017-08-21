@@ -279,6 +279,13 @@ def abbreviations(word, **kwargs):
         return word.upper()
 
 
+def capitalize(sentence):
+    """
+    Return capitalized version of @sentence
+    """
+    return titlecase(sentence, callback=abbreviations)
+
+
 def is_capitalized(line):
     """
     Checks whether all words in @line start with a capital.
