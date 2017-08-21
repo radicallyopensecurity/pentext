@@ -255,7 +255,7 @@ the Free Software Foundation, either version 3 of the License, or
     return vars(parser.parse_args())
 
 
-def preflight_checks():
+def preflight_checks(options):
     """
     Checks if all tools are there.
     Exits with 0 if everything went okilydokily.
@@ -266,9 +266,10 @@ def preflight_checks():
         gitserver.auth()
     except gitlab.config.GitlabDataError as exception:
         print_error('could not connect {0}'.format(exception), -1)
-    for path in ('findings', 'non-findings'):
-        if not os.path.isdir(path):
-            print_error('Path {0} does not exist: Is this a Pentext repository ?'.format(path), -1)
+    if not options['projects']:
+        for path in ('findings', 'non-findings'):
+            if not os.path.isdir(path):
+                print_error('Path {0} does not exist: Is this a Pentext repository ?'.format(path), -1)
     return gitserver
 
 
@@ -323,7 +324,7 @@ def main():
     The main program.
     """
     options = parse_arguments()
-    gitserver = preflight_checks()
+    gitserver = preflight_checks(options)
     if options['projects']:
         list_projects(gitserver)
     if options['issues']:
