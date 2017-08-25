@@ -124,7 +124,7 @@ def locate_id(findings, args):
     Show finding corresponding to an identifier
     """
     try:
-        print("{0:2d} {1}".format(args.id, findings[args.id-1]))
+        print("{0:2d} {1}".format(args.id, findings[args.id - 1]))
     except IndexError:
         logging.error('Finding %s could not be located', args.id)
 
