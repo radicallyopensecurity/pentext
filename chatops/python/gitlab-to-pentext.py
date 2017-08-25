@@ -116,9 +116,9 @@ class Finding(BaseItem):
                                                                                     self.threat_level,
                                                                                     self.finding_type)
         self.content = self.element('description') + \
-                       self.element('technicaldescription') + \
-                       self.element('impact') + \
-                       self.element('recommendation')
+            self.element('technicaldescription') + \
+            self.element('impact') + \
+            self.element('recommendation')
         return BaseItem.__str__(self)
 
 
