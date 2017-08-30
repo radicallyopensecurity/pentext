@@ -4,7 +4,7 @@
   <p><company_short/> houdt de volgende planning aan voor haar werkzaamheden:</p>  
   
     <ul>
-      <li><company_short/> voert <company_svc_short/> uit op het doelwit: <p_startdate/>.</li>
+      <li><company_short/> voert een <p_duration/>-daagse <company_svc_short/> uit op het doelwit: <p_startdate/>.</li>
       <li><company_short/> levert het definitieve rapport: <p_reportdue/>.</li>
     </ul>
   
