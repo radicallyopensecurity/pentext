@@ -2,8 +2,7 @@
 <section>
   <title>Planning and Payment</title>
   <p>
-    <company_short/>
-    will uphold the following dates for scheduling the services:
+    <company_short/> will uphold the following schedule for the services:
   </p>
   <ul>
     <li><company_short/> performs a <p_duration/>-day <company_svc_short/> starting <p_startdate/>.</li>
