@@ -16,7 +16,7 @@
     criteria into account:
   </p>
   <ol>
-    <li>Risk Assessment and "Threat Modeling"
+    <li>Risk Assessment and Threat Modeling
       <br/>
       In this step, we analyze the risks of a particular application or system.
       Threat Modeling is a specific, structured approach to risk analysis that
@@ -28,9 +28,9 @@
     </li>
     <li>Purpose and Context
       <br/>
-      Here we focus on risks, especially in the quick and easy sharing of
-      internal documents and itineraries. Account details aren't so secret when
-      we know who will be in meetings, but what's being discussed is secret.
+      Here we focus on risks related to the purpose of the code. Context related
+      risks can differ for, for instance, upload and access source code compared
+      to source code for web applications.
     </li>
     <li>Complexity
       <br/>
