@@ -99,7 +99,7 @@
         <xs:element ref="invoice_mail"/>
         <xs:element ref="invoice_extra_field" minOccurs="0"/>
         <xs:element ref="vat_no"/>
-        <xs:element ref="rates"/>
+        <xs:element ref="rates" minOccurs="0"/>
       </xs:sequence>
       <xs:attribute ref="xml:base"/>
       <xs:attribute ref="xml:lang"/>
