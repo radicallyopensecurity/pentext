@@ -38,7 +38,7 @@ except ImportError as exception:
     sys.exit(-1)
 
 
-VERSION = '0.1'
+VERSION = '0.2.0'
 
 
 class LogFormatter(logging.Formatter):
@@ -146,6 +146,8 @@ def main():
     try:
         # Parse document into an ElementTree
         tree = etree.parse(filename, etree.XMLParser(strip_cdata=False))
+        # Read finding code
+        code = tree.getroot().attrib['findingCode']
         # Grab all elements from the findings section
         for elements in tree.xpath('//section[@id="findings"]'):
             # Iterate through all elements, looking for the findings
@@ -160,7 +162,7 @@ def main():
         locate_finding(findings, args)
     else:
         for i, href in enumerate(findings, start=1):
-            print("{0:2d} {1}".format(i, href))
+            print("{0}-{1:02d} {2}".format(code, i, href))
 
 
 if __name__ == "__main__":
