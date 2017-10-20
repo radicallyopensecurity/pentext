@@ -412,9 +412,26 @@
 
     <xsl:template match="finding_count">
         <xsl:param name="threatLevel" select="@threatLevel"/>
+        <xsl:variable name="statusSequence" as="item()*">
+            <xsl:for-each select="@status">
+                <xsl:for-each select="tokenize(., ' ')">
+                    <xsl:value-of select="."/>
+                </xsl:for-each>
+            </xsl:for-each>
+        </xsl:variable>
         <xsl:choose>
             <xsl:when test="@threatLevel">
-                <xsl:value-of select="count(//finding[@threatLevel = $threatLevel])"/>
+                <xsl:choose>
+                    <xsl:when test="$statusSequence">
+                        <xsl:value-of select="count(//finding[@threatLevel =
+                                              $threatLevel][@status =
+                                              $statusSequence])"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="count(//finding[@threatLevel =
+                                              $threatLevel])"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="count(//finding)"/>
