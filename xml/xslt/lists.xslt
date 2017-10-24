@@ -72,36 +72,48 @@
         <fo:list-block provisional-distance-between-starts="0.85cm"
             provisional-label-separation="2.5mm">
             <xsl:call-template name="checkIfLast"/>
-            <xsl:attribute name="space-after">
+            <xsl:call-template name="do_ol"/>
+        </fo:list-block>
+    </xsl:template>
+    
+    <xsl:template match="ol" mode="summarytable">
+        <fo:list-block provisional-distance-between-starts="0.85cm"
+            provisional-label-separation="2.5mm">
+            <xsl:call-template name="do_ol"/>
+        </fo:list-block>
+    </xsl:template>
+    
+    <xsl:template name="do_ol">
+        <xsl:attribute name="space-after">
+            <xsl:choose>
+                <xsl:when test="ancestor::ul or ancestor::ol">
+                    <xsl:text>0pt</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:text>12pt</xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:attribute>
+        <xsl:attribute name="start-indent">
+            <xsl:variable name="ancestors">
                 <xsl:choose>
-                    <xsl:when test="ancestor::ul or ancestor::ol">
-                        <xsl:text>0pt</xsl:text>
+                    <xsl:when test="count(ancestor::ol) or count(ancestor::ul)">
+                        <xsl:value-of
+                            select="
+                                1 +
+                                (count(ancestor::ol) +
+                                count(ancestor::ul)) *
+                                1.25"
+                        />
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:text>12pt</xsl:text>
+                        <xsl:text>1</xsl:text>
                     </xsl:otherwise>
                 </xsl:choose>
-            </xsl:attribute>
-            <xsl:attribute name="start-indent">
-                <xsl:variable name="ancestors">
-                    <xsl:choose>
-                        <xsl:when test="count(ancestor::ol) or count(ancestor::ul)">
-                            <xsl:value-of
-                                select="1 + 
-                                (count(ancestor::ol) + 
-                                count(ancestor::ul)) * 
-                                1.25"
-                            />
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:text>1</xsl:text>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:variable>
-                <xsl:value-of select="concat($ancestors, 'cm')"/>
-            </xsl:attribute>
-            <xsl:apply-templates select="*"/>
-        </fo:list-block>
+            </xsl:variable>
+            <xsl:value-of select="concat($ancestors, 'cm')"/>
+        </xsl:attribute>
+        <xsl:apply-templates select="*"/>
     </xsl:template>
     
     <xsl:template match="ol/li">
