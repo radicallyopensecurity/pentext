@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-pentext_id - Identify findings from report
+"""pentext_id - Identify findings from report.
 
 This script is part of the PenText framework
                            https://pentext.org
@@ -38,7 +37,7 @@ except ImportError as exception:
     sys.exit(-1)
 
 
-VERSION = '0.2.0'
+VERSION = '0.2.1'
 
 
 class LogFormatter(logging.Formatter):
@@ -162,7 +161,7 @@ def main():
         locate_finding(findings, args)
     else:
         for i, href in enumerate(findings, start=1):
-            print("{0}-{1:02d} {2}".format(code, i, href))
+            print("{0}-{1:03d} {2}".format(code, i, href))
 
 
 if __name__ == "__main__":
