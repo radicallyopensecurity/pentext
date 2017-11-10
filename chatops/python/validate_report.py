@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
-"""
-Cross-checks findings, validates XML files, offerte and report files.
+"""Cross-checks findings, validates XML files, offerte and report files.
 
 This script is part of the PenText framework
                            https://pentext.org
@@ -278,24 +277,18 @@ def abbreviations(word, **kwargs):
 
 
 def capitalize(sentence):
-    """
-    Return capitalized version of @sentence
-    """
+    """Return capitalized version of @sentence."""
     return titlecase(sentence, callback=abbreviations)
 
 
 def is_capitalized(line):
-    """
-    Checks whether all words in @line start with a capital.
-
-    Returns True if that's the case.
-    """
+    """Check whether all words in @line start with a capital."""
     return not line or line.strip() == titlecase(line, callback=abbreviations).strip()
 
 
 def validate_type(tree, filename, options):
-    """
-    Performs specific checks based on type.
+    """Perform specific checks based on type.
+
     Currently only finding and non-finding are supported.
     """
     result = True
