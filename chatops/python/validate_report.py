@@ -302,7 +302,7 @@ def validate_type(tree, filename, options):
     if xml_type == 'pentest_report':
         attributes = ['findingCode']
     if xml_type == 'finding':
-        attributes = ['threatLevel', 'type', 'id']
+        attributes = ['threatLevel', 'type', 'id', 'status']
         tags = ['title', 'description', 'technicaldescription', 'impact',
                 'recommendation']
     if xml_type == 'non-finding':
