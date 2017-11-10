@@ -64,76 +64,62 @@ class BaseItem(object):
 
     @property
     def filename(self):
-        """
-        Filename.
-        """
+        """Filename."""
         return '{0}/{1}.xml'.format(self.__path, valid_filename(self.identifier))
 
     def __str__(self):
-        """
-        Return a XML version of the class
-        """
+        """Return an XML representation of the class."""
         return self.DECLARATION + self.root_open + self.element('title') + \
             self.content + self.root_close
 
     def element(self, attribute):
-        """
-        Return opening and closing attribute tags, including attribute value.
-        """
+        """Return opening and closing attribute tags, including attribute value."""
         return '<{0}>{1}</{0}>\n'.format(attribute, getattr(self, attribute))
 
     def write_file(self):
-        """
-        Write item as XML to file.
-        """
+        """Serialize item to file as XML."""
         try:
             with io.open(self.filename, 'w') as xmlfile:
                 xmlfile.write(unicode(self))
                 print_line('[+] Wrote {0}'.format(self.filename))
         except IOError:
-            print_error('Could not write to %s', self.filename)
+            print('Could not write to %s', self.filename, file=sys.stderr)
+            sys.exit(-1)
 
 
 class Finding(BaseItem):
-    """
-    Encapsulates finding.
-    """
+    """Encapsulates finding."""
 
     def __init__(self):
         BaseItem.__init__(self, 'finding')
         self.threat_level = 'Moderate'
         self.finding_type = 'TODO'
+        self.status = 'new'
         self.description = '<p>TODO</p>'
         self.technicaldescription = '<p>TODO</p>'
         self.impact = '<p>TODO</p>'
         self.recommendation = '<ul><li>TODO</li></ul>'
 
     def __str__(self):
-        """
-        Return a XML version of the class
-        """
-        self.root_open = '<finding id="{0}" threatLevel="{1}" type="{2}">\n'.format(self.identifier,
-                                                                                    self.threat_level,
-                                                                                    self.finding_type)
+        """Return an XML representation of the class."""
+        self.root_open = '<finding id="{0}" threatLevel="{1}" type="{2}"' + \
+            ' status="{3}">\n'.format(self.identifier, self.threat_level,
+                                      self.finding_type, self.status)
         self.content = self.element('description') + \
-                       self.element('technicaldescription') + \
-                       self.element('impact') + \
-                       self.element('recommendation')
+            self.element('technicaldescription') + \
+            self.element('impact') + \
+            self.element('recommendation')
         return BaseItem.__str__(self)
 
 
 class NonFinding(BaseItem):
-    """
-    Encapsulates non-finding.
-    """
+    """Encapsulates non-finding."""
 
     def __init__(self):
         BaseItem.__init__(self, 'non-finding')
 
     def __str__(self):
-        """
-        Return a XML version of the class
-        """
+        """Return an XML representation of the class."""
         self.root_open = '<non-finding id="{0}"\n'.format(self.identifier)
         return BaseItem.__str__(self)
 
