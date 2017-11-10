@@ -333,6 +333,11 @@ def validate_type(tree, filename, options):
                              root.attrib[attribute]))
                 root.attrib[attribute] = titlecase(root.attrib[attribute], callback=abbreviations)
                 fix = True
+            if attribute == 'status' and root.attrib[attribute] not in \
+               ('new', 'unresolved', 'not_retested', 'resolved'):
+                print('[-] status ({0}) should be one of: new, unresolved, not_retested or resolved: {1}'.
+                      format(root.attrib[attribute], filename))
+                result = False
     for tag in tags:
         if root.find(tag) is None:
             logging.warning('Missing tag in %s: %s', filename, tag)
