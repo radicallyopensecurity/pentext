@@ -191,7 +191,8 @@ def list_issues(gitserver, options):
                 continue
             add_item(issue, options)
     except gitlab.exceptions.GitlabListError as exception:
-        print_error('Could not access items ({0})'.format(exception))
+        print('Could not access items ({0})'.format(exception), file=sys.stderr)
+        sys.exit(-1)
 
 
 def list_projects(gitserver):
@@ -238,32 +239,21 @@ the Free Software Foundation, either version 3 of the License, or
 
 
 def preflight_checks(options):
-    """
-    Checks if all tools are there.
-    Exits with 0 if everything went okilydokily.
-    """
+    """Check if all tools are there, return gitlab.Gitlab object."""
     gitserver = None
     try:
         gitserver = gitlab.Gitlab.from_config('remote')
         gitserver.auth()
     except gitlab.config.GitlabDataError as exception:
-        print_error('could not connect {0}'.format(exception), -1)
+        print('could not connect {0}'.format(exception), file=sys.stderr)
+        sys.exit(-1)
     if not options['projects']:
         for path in ('findings', 'non-findings'):
             if not os.path.isdir(path):
-                print_error('Path {0} does not exist: Is this a Pentext repository ?'.format(path), -1)
+                print('Path {0} does not exist: Is this a PenText repository ?'.format(path),
+                      file=sys.stderr)
+                sys.exit(-1)
     return gitserver
-
-
-def print_error(text, result=False):
-    """
-    Prints error message.
-    When @result, exits with result.
-    """
-    if len(text):
-        print_line('[-] ' + text, True)
-    if result:
-        sys.exit(result)
 
 
 def print_line(text, error=False):
