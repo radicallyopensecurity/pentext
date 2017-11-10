@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
-"""
-Gitlab bridge for PenText: imports and updates gitlab issues into PenText
-(XML) format
+"""Gitlab bridge for PenText: imports and updates gitlab issues into PenText.
 
 This script is part of the PenText framework
                            https://pentext.org
@@ -38,7 +36,7 @@ try:
 except (NameError, ImportError) as exception:
     print('[-] This script needs python-gitlab, pypandoc and validate_report library',
           file=sys.stderr)
-    print("validate_report is part of the pentext framework", file=sys.stderr)
+    print("validate_report is part of the PenText framework", file=sys.stderr)
     print("Install python-gitlab with: sudo pip install python-gitlab", file=sys.stderr)
     print("Install pypandoc with: sudo pip install pypandoc\n", file=sys.stderr)
     print("Currently missing: " + exception.message, file=sys.stderr)
@@ -46,9 +44,7 @@ except (NameError, ImportError) as exception:
 
 
 class BaseItem(object):
-    """
-    Base class for Pentext items
-    """
+    """Base class for PenText items."""
 
     DECLARATION = '<?xml version="1.0" encoding="utf-8"?>\n'
 
