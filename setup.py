@@ -1,4 +1,4 @@
-# Copyright 2016 RadicallyOpenSecurity B.V.
+# Copyright 2017 RadicallyOpenSecurity B.V.
 
 import os
 
@@ -30,7 +30,7 @@ SETUP = {
         'chatops/python/pentext_id.py',
         'chatops/python/validate_report.py',
     ],
-    # 'license': "Apache 2.0 (ASL)",
+    'license': "GPLv3",
     'long_description': open('README.md').read(),
     'description': 'PenText system ',
 }
