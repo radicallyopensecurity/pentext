@@ -75,7 +75,7 @@ class BaseItem(object):
     def write_file(self):
         """Serialize item to file as XML."""
         try:
-            with io.open(self.filename, 'w') as xmlfile:
+            with io.open(self.filename, 'w', encoding='utf-8') as xmlfile:
                 xmlfile.write(unicode(self))
                 print_line('[+] Wrote {0}'.format(self.filename))
         except IOError:
@@ -121,9 +121,7 @@ class NonFinding(BaseItem):
 
 
 def from_issue(issue):
-    """
-    Parse gitlab issue and return Finding, NonFinding or None
-    """
+    """Parse gitlab issue and return Finding, NonFinding or None."""
     if 'finding' in [x.lower() for x in issue.labels]:
         item = Finding()
         item.description = convert_text(issue.description)
@@ -181,9 +179,7 @@ def ask_permission(question):
 
 
 def list_issues(gitserver, options):
-    """
-    Lists all issues for options['issues']
-    """
+    """List all issues for options['issues']"""
     try:
         for issue in gitserver.project_issues.list(project_id=options['issues'],
                                                    per_page=999):
