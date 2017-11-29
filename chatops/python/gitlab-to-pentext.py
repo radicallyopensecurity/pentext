@@ -141,7 +141,7 @@ def from_issue(issue):
     else:
         return None
     item.title = validate_report.capitalize(issue.title.strip())
-    item.identifier = 'f{0}-{1}'.format(issue.iid, valid_filename(item.title))
+    item.identifier = 'f{0:02}-{1}'.format(issue.iid, valid_filename(item.title))
     return item
 
 
