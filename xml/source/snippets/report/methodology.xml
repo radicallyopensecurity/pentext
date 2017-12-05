@@ -18,7 +18,7 @@
                 systems they are running. Research into these services would be carried out to
                 tailor the test to the discovered services.</li>
             <li><b>Scanning</b><br/>Through the use of vulnerability scanners, all discovered hosts would be tested
-                for vulnerabilities. The result would be analyzed to determine if there any
+                for vulnerabilities. The result would be analyzed to determine if there are any
                 vulnerabilities that could be exploited to gain access to a target host on a
                 network.</li>
             <li><b>Obtaining Access</b><br/>Through the use of published exploits or weaknesses found in
@@ -28,7 +28,7 @@
     </section>
     <section id="riskClassification">
         <title>Risk Classification</title>
-        <p>Throughout the document, each vulnerability or risk identified has been labeled and
+        <p>Throughout the document, vulnerabilities or risks are labeled and
             categorized as:</p>
         <ul>
             <li><b>Extreme</b><br/>Extreme risk of security controls being compromised with the possibility
