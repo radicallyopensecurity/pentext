@@ -8,3 +8,6 @@ xml/PenText.xpr
 
 .DS_Store
 *.orig
+
+chatops.egg-info
+.tox
