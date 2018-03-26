@@ -23,7 +23,7 @@ These:
 
 The schemas can be used to validate any document at any stage of the workflow, ensuring that the document structure provides space for all necessary information contained within it.
   
-### Set of Python scripts to bridge the usability gap between the user and the saxon/fop command line tools
+### 4. Set of Python scripts to bridge the usability gap between the user and the saxon/fop command line tools
 
 * docbuilder.py gives the user an interface to build documents without knowledge of the xslt framework or the saxon and fop command line tools
 * validate_report.py adds extra validation to reports beyond the structural soundness checks XML Schema provides
