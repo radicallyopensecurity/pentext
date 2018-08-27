@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <!-- variable placeholders that can be used by the report writer throughout the offerte -->
     <!-- NOTE: values are taken from <meta> section below! -->
         
@@ -53,8 +52,9 @@
             <target>...</target>
         </targets>
         <permission_parties>
-            <xi:include href="client_info.xml"/>
-            <party><!-- optional; if no other party needs to give permission, please remove whole party element -->
+        <xi:include href="client_info.xml"/>
+            <!-- the party section is optional; if no other party needs to give permission, please remove whole party element -->
+            <party>
                 <full_name>...</full_name>
                 <short_name>...</short_name><!-- short party name; if no short name: same as long name -->
                 <waiver_rep>...</waiver_rep>
@@ -68,7 +68,7 @@
             <test_planning>...</test_planning><!-- date or date range in text, e.g. May 18th until May 25th, 2015 -->
             <report_writing>...</report_writing><!-- date or date range in text, e.g. May 18th until May 25th, 2015 -->
             <report_due>...</report_due><!-- date or date range in text, e.g. May 18th until May 25th, 2015 -->
-            <nature></nature>
+            <nature>...</nature>
             <type>...</type><!-- please choose one of the following: black-box, grey-box, crystal-box -->
             <fee denomination="euro">...</fee><!-- euro|dollar -->
             <target_application>...</target_application><!-- name of application to be tested (if any; if none, delete target_application element) -->
@@ -83,15 +83,15 @@
     </meta>
     
     
+    <!-- section with some more info on the application (if any) -->
     <section>
-        <!-- section with some more info on the application (if any) -->
         <title>The <t_app/>; Application</title>
         <p><t_app/> is a ...</p>
         <p>...</p>
     </section>
     
+    <!-- section with some more info on the target infrastructure-->
     <section>
-        <!-- section with some more info on the target infrastructure-->
         <title>The <client_short/> Infrastructure</title>
         <p>...</p>
     </section>
@@ -111,8 +111,8 @@
     <xi:include href="snippets/offerte/nl/disclaimer.xml"/>
 
     <!-- Pentest Methodology section (complete section is in a snippet) -->
-    <xi:include href="snippets/offerte/nl/pentestmethodology.xml"/>
-    <xi:include href="snippets/offerte/nl/codeauditmethodology.xml"/>
+    <xi:include href="snippets/offerte/nl/methodology.xml"/>
+    <xi:include href="snippets/offerte/nl/methodology_basic-scan.xml"/>
 
     <!-- Team and Reporting section (complete section is in a snippet) -->
     <xi:include href="snippets/offerte/nl/teamandreporting.xml"/>
