@@ -82,7 +82,8 @@
                 <title>Executive Summary</title>
                 <section id="introduction">
                     <title>Introduction</title>
-                    <p>Between <p_startdate/> and <p_enddate/>, <company_long/> carried out a penetration test for <client_long/></p>
+                    <p>Between <p_startdate/> and <p_enddate/>, <company_long/> carried out a
+                        penetration test for <client_long/></p>
                     <p>This report contains our findings as well as detailed explanations of exactly
                         how <company_short/> performed the penetration test.</p>
                 </section>
@@ -152,32 +153,28 @@
                 </section>
             </section>
 
-            <section id="techSummary" inexecsummary="no">
-                <title>Pentest Technical Summary</title>
-                <section id="findings">
-                    <title>Findings</title>
+            <section id="findings">
+                <title>Findings</title>
 
-                    <p>We have identified the following issues:</p>
-                    <xsl:comment> Listing of Findings (written by pentesters) </xsl:comment>
-                    <xsl:comment> Extreme </xsl:comment>
-
-                    <xsl:comment> High </xsl:comment>
-                    
-                    <xsl:comment> Elevated </xsl:comment>
-
-                    <xsl:comment> Moderate </xsl:comment>
-
-
-                    <xsl:comment> Low </xsl:comment>
-                </section>
-
-                <section id="nonFindings">
-                    <title>Non-Findings</title>
-                    <p>In this section we list some of the things that were tried but turned out to
-                        be dead ends.</p>
-                    <xsl:comment> Listing of Non-Findings (written by pentesters) </xsl:comment>
-                </section>
+                <p>We have identified the following issues:</p>
+                <xsl:comment> Listing of Findings (written by pentesters) </xsl:comment>
                 
+                <xsl:comment> Extreme </xsl:comment>
+
+                <xsl:comment> High </xsl:comment>
+
+                <xsl:comment> Elevated </xsl:comment>
+
+                <xsl:comment> Moderate </xsl:comment>
+
+                <xsl:comment> Low </xsl:comment>
+            </section>
+
+            <section id="nonFindings">
+                <title>Non-Findings</title>
+                <p>In this section we list some of the things that were tried but turned out to be
+                    dead ends.</p>
+                <xsl:comment> Listing of Non-Findings (written by pentesters) </xsl:comment>
             </section>
 
             <xsl:element name="xi:include">

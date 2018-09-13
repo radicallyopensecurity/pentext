@@ -25,6 +25,7 @@
             <xs:sequence>
                 <xs:element ref="company"/>
                 <xs:element ref="client"/>
+                <xs:element ref="client_reference" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

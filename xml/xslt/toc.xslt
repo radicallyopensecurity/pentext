@@ -7,9 +7,10 @@
         <fo:block xsl:use-attribute-sets="title-toc">Table of Contents</fo:block>
         <fo:block xsl:use-attribute-sets="index">
             <fo:block>
-                <fo:table width="100%">
-                    <fo:table-column/>
-                    <fo:table-column column-width="7mm"/>
+                <fo:table table-layout="fixed" width="100%">
+                    <fo:table-column column-width="proportional-column-width(14)"/>
+                    <fo:table-column column-width="proportional-column-width(79)"/>
+                    <fo:table-column column-width="proportional-column-width(7)"/>
                     <fo:table-body>
                         <xsl:apply-templates select="/" mode="toc"/>
                     </fo:table-body>
@@ -42,21 +43,41 @@
     <xsl:template name="ToC">
         <xsl:param name="execsummary" tunnel="yes"/>
         <fo:table-row>
-            <fo:table-cell text-align-last="justify">
+            <fo:table-cell xsl:use-attribute-sets="tocCell">
                 <fo:block>
+                    <xsl:if test="parent::pentest_report">
+                        <!-- We're in a top-level section, so add some extra styling -->
+                        <xsl:call-template name="topLevelToCEntry"/>
+                    </xsl:if>
                     <fo:basic-link>
                         <xsl:attribute name="internal-destination">
                             <xsl:value-of select="@id"/>
                         </xsl:attribute>
-                        <xsl:call-template name="tocContent"/>
+                        <xsl:call-template name="tocContent_Numbering"/>
                     </fo:basic-link>
-                    <xsl:text>&#xA0;</xsl:text>
-                    <fo:leader leader-pattern="dots" leader-alignment="reference-area"
-                        leader-length.maximum="21cm"/>
                 </fo:block>
             </fo:table-cell>
-            <fo:table-cell padding-right="3pt" display-align="after">
+            <fo:table-cell xsl:use-attribute-sets="tocCell">
+                <fo:block>
+                    <xsl:if test="parent::pentest_report">
+                        <!-- We're in a top-level section, so add some extra styling -->
+                        <xsl:call-template name="topLevelToCEntry"/>
+                    </xsl:if>
+                    <fo:basic-link>
+                        <xsl:attribute name="internal-destination">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                        <xsl:call-template name="tocContent_Title"/>
+                    </fo:basic-link>
+                </fo:block>
+            </fo:table-cell>
+            <fo:table-cell padding-right="3pt" display-align="after"
+                xsl:use-attribute-sets="tocCell">
                 <fo:block text-align="right">
+                    <xsl:if test="parent::pentest_report">
+                        <!-- We're in a top-level section, so add some extra styling -->
+                        <xsl:call-template name="topLevelToCEntry"/>
+                    </xsl:if>
                     <fo:basic-link>
                         <xsl:attribute name="internal-destination">
                             <xsl:value-of select="@id"/>
@@ -79,19 +100,18 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
-    <xsl:template name="tocContent">
-        <xsl:call-template name="tocContent_Numbering"/>
-        <xsl:text>&#xA0;&#xA0;</xsl:text>
-        <xsl:call-template name="tocContent_Title"/>
+    <xsl:template name="topLevelToCEntry">
+        <xsl:attribute name="font-weight">bold</xsl:attribute>
+        <xsl:attribute name="margin-top">4mm</xsl:attribute>
     </xsl:template>
+
 
     <xsl:template name="tocContent_Title">
         <xsl:apply-templates select="title" mode="toc"/>
     </xsl:template>
 
     <xsl:template match="title" mode="toc">
-        <xsl:call-template name="prependNumber"/>
+        <xsl:call-template name="prependId"/>
         <xsl:apply-templates/>
     </xsl:template>
 

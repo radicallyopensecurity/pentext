@@ -8,8 +8,8 @@
   <!-- THIS you can change/expand! -->
   <!-- COVERPAGE AND HEADERS/FOOTERS -->
   <string id="coverpage_offer">
-    <translation xml:lang="nl">OFFERTE</translation>
-    <translation xml:lang="en">QUOTE</translation>
+    <translation xml:lang="nl">Offerte</translation>
+    <translation xml:lang="en">Quote</translation>
   </string>
   <string id="coverpage_service_pentest">
     <translation xml:lang="nl">penetratietestdiensten</translation>
@@ -74,6 +74,10 @@
   <string id="page_kvk">
     <translation xml:lang="nl">Kamer van Koophandel</translation>
     <translation xml:lang="en">Chamber of Commerce</translation>
+  </string>
+  <string id="page_of">
+    <translation xml:lang="nl">van</translation>
+    <translation xml:lang="en">of</translation>
   </string>
   <!-- INVOICES -->
   <string id="invoice_no">
@@ -142,11 +146,15 @@
   <string id="invoice_yaygreen">
     <translation xml:lang="nl">Spaar papier — niet afdrukken tenzij absoluut
       noodzakelijk. Lees onze (unieke) voorwaarden op:
-      https://radicallyopensecurity.com/TermsandConditions.pdf
     </translation>
     <translation xml:lang="en">Please keep digital unless absolutely required.
       Read the (unique) terms and conditions of Radically Open Security at:
-      https://radicallyopensecurity.com/TermsandConditions.pdf
+    </translation>
+  </string>
+  <string id="invoice_terms">
+    <translation xml:lang="nl">https://radicallyopensecurity.com/TermsandConditions.pdf
+    </translation>
+    <translation xml:lang="en">https://radicallyopensecurity.com/TermsandConditions.pdf
     </translation>
   </string>
   <!-- QUICKSCOPING 2 QUOTE -->

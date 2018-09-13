@@ -26,6 +26,8 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="title"/>
+        <xs:element ref="subtitle" minOccurs="0"/>
+        <xs:element ref="client_reference" minOccurs="0"/>
         <xs:element ref="offered_service_long"/>
         <xs:element ref="offered_service_short"/>
         <xs:element ref="company"/>
@@ -145,6 +147,7 @@
       </xs:sequence>
       <xs:attribute ref="xml:base"/>
       <xs:attribute ref="xml:lang"/>
+      <xs:attribute name="annex_number" type="xs:integer"/>
     </xs:complexType>
   </xs:element>
 
@@ -236,11 +239,17 @@
       <xs:element name="client_legal_rep"/>
       <xs:element name="client_waiver_rep"/>
       <xs:element name="client_poc1"/>
+      <xs:element name="client_ref"/>
       <xs:element name="company_long"/>
       <xs:element name="company_short"/>
       <xs:element name="company_svc_long"/>
       <xs:element name="company_svc_short"/>
       <xs:element name="company_legal_rep"/>
+      <xs:element name="company_address"/>
+      <xs:element name="company_postalcode"/>
+      <xs:element name="company_city"/>
+      <xs:element name="company_country"/>
+      <xs:element name="company_coc"/>
       <xs:element name="company_poc1"/>
       <xs:element name="t_app"/>
       <xs:element name="t_app_producer"/>
@@ -250,6 +259,8 @@
       <xs:element name="p_fee"/>
       <xs:element name="p_testingduration"/>
       <xs:element name="p_reportdue"/>
+      <xs:element name="p_startdate"/>
+      <xs:element name="p_enddate"/>
       <xs:element name="signee_long"/>
       <xs:element name="signee_short"/>
       <xs:element name="signee_street"/>
@@ -261,6 +272,7 @@
       <xs:element name="ir_ora_rate"/>
       <xs:element name="ir_sim_rate"/>
       <xs:element name="ir_taa_rate"/>
+      <xs:element name="todo"/>
     </xs:choice>
   </xs:group>
 

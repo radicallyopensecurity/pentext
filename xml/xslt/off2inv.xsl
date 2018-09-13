@@ -48,6 +48,8 @@
                             />-<xsl:call-template name="getString"><xsl:with-param name="stringID" select="'invoice_days'"/></xsl:call-template>&#160;<xsl:value-of select="/offerte/meta/offered_service_short"
                             />&#160;<xsl:value-of
                             select="/offerte/meta/permission_parties/client/short_name"/>
+                        <xsl:if test="/offerte/meta/client_reference"><xsl:text>&#32;</xsl:text>(<xsl:value-of
+                select="/offerte/meta/client_reference"/>)</xsl:if>
                     </description>
                     <fee vat="yes">
                         <xsl:value-of select="/offerte/meta/activityinfo/fee"/>

@@ -32,7 +32,7 @@
             <xsl:apply-templates/>
         </fo:block>
     </xsl:template>
-
+    
     <xsl:template match="li/p">
         <fo:block xsl:use-attribute-sets="li">
             <xsl:apply-templates/>

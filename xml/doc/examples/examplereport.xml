@@ -10,7 +10,10 @@
                 <activityinfo>
                         <duration>4</duration>
                         <persondays>4</persondays>
-                        <test_planning>bla</test_planning>
+                        <planning>
+                                <start>TBD</start>
+                                <end>TBD</end>
+                        </planning>
                         <report_due>bla</report_due>
                         <nature>something</nature>
                         <type>black-box</type>
@@ -230,111 +233,104 @@ Raw packets sent: 1681 (73.962KB) | Rcvd: 1681 (77.322KB)</pre>
                 </section>
 
         </section>
-        <section id="techSummary">
-                <title>Pentest Technical Summary</title>
-                <section id="findings">
-                        <title>Findings</title>
 
-                        <p>We have identified the following issues:</p>
+        <section id="findings">
+                <title>Findings</title>
 
-                        <finding id="f1" threatLevel="Moderate" type="Information Leak">
-                                <title>PHPInfo Disclosure</title>
-                                <description>
-                                        <p>The phpinfo() function of the PHP language is readable,
-                                                resulting in a listing of all the runtime
-                                                information of the environment, thus disclosing
-                                                potentially valuable information to attackers.</p>
-                                </description>
-                                <technicaldescription>
-                                        <p>This is where the good stuff goes. We give a detailed
-                                                technical description of the problem.</p>
-                                        <p>Illustrative picture of an evil hacker pondering dark
-                                                deeds:</p>
-                                        <img height="10" src="../graphics/screenshot.jpg"/>
-                                </technicaldescription>
-                                <impact>
-                                        <p>This is where we explain how the sh*t is hitting the fan,
-                                                exactly.</p>
-                                </impact>
-                                <recommendation>
-                                        <p>Here is where we write some tips to solve the
-                                                problem.</p>
-                                </recommendation>
-                        </finding>
+                <p>We have identified the following issues:</p>
 
-                        <finding id="f2" threatLevel="High" type="XSS">
-                                <title>A terrible XSS issue</title>
-                                <description>
-                                        <p>A general description of the problem.</p>
-                                </description>
-                                <technicaldescription>
-                                        <p>This is we go into great detail about the
-                                                vulnerability.</p>
-                                </technicaldescription>
-                                <impact>
-                                        <p>This is where we explain why this vulnerability is a
-                                                problem.</p>
-                                </impact>
-                                <recommendation>
-                                        <p>This is where we solve everything and the sun starts
-                                                shining again.</p>
-                                </recommendation>
-                        </finding>
+                <finding id="f1" threatLevel="Moderate" type="Information Leak">
+                        <title>PHPInfo Disclosure</title>
+                        <description>
+                                <p>The phpinfo() function of the PHP language is readable, resulting
+                                        in a listing of all the runtime information of the
+                                        environment, thus disclosing potentially valuable
+                                        information to attackers.</p>
+                        </description>
+                        <technicaldescription>
+                                <p>This is where the good stuff goes. We give a detailed technical
+                                        description of the problem.</p>
+                                <p>Illustrative picture of an evil hacker pondering dark deeds:</p>
+                                <img height="10" src="../graphics/screenshot.jpg"/>
+                        </technicaldescription>
+                        <impact>
+                                <p>This is where we explain how the sh*t is hitting the fan,
+                                        exactly.</p>
+                        </impact>
+                        <recommendation>
+                                <p>Here is where we write some tips to solve the problem.</p>
+                        </recommendation>
+                </finding>
 
-                        <finding id="f3" threatLevel="Low" type="XSS">
-                                <title>A not quite so terrible XSS issue</title>
-                                <description>
-                                        <p>A description of the problem.</p>
-                                </description>
-                                <technicaldescription>
-                                        <p>Vulnerability described in detail.</p>
-                                </technicaldescription>
-                                <impact>
-                                        <p>Impact on security.</p>
-                                </impact>
-                                <recommendation>
-                                        <p>A ready solution.</p>
-                                </recommendation>
-                        </finding>
-                </section>
+                <finding id="f2" threatLevel="High" type="XSS">
+                        <title>A terrible XSS issue</title>
+                        <description>
+                                <p>A general description of the problem.</p>
+                        </description>
+                        <technicaldescription>
+                                <p>This is we go into great detail about the vulnerability.</p>
+                        </technicaldescription>
+                        <impact>
+                                <p>This is where we explain why this vulnerability is a problem.</p>
+                        </impact>
+                        <recommendation>
+                                <p>This is where we solve everything and the sun starts shining
+                                        again.</p>
+                        </recommendation>
+                </finding>
 
-                <section id="nonFindings">
-                        <title>Non-Findings</title>
-                        <p>In this section we list some of the things that were tried but turned out
-                                to be dead ends.</p>
+                <finding id="f3" threatLevel="Low" type="XSS">
+                        <title>A not quite so terrible XSS issue</title>
+                        <description>
+                                <p>A description of the problem.</p>
+                        </description>
+                        <technicaldescription>
+                                <p>Vulnerability described in detail.</p>
+                        </technicaldescription>
+                        <impact>
+                                <p>Impact on security.</p>
+                        </impact>
+                        <recommendation>
+                                <p>A ready solution.</p>
+                        </recommendation>
+                </finding>
+        </section>
 
-                        <non-finding id="ftp">
-                                <title>FTP</title>
-                                <p>The server was running FTPserver ABC, the most recent version of
-                                        this particular piece of software. Anonymous login was
-                                        turned off and no relevant vulnerabilities or exploits were
-                                        found.</p>
-                        </non-finding>
-                        <non-finding id="mail">
-                                <title>Mail Server</title>
-                                <p>The server was running Mailserver XYZ, the most recent version of
-                                        this particular piece of software. No relevant
-                                        vulnerabilities or exploits were found. </p>
-                        </non-finding>
-                        <non-finding id="sqlInjection">
-                                <title>SQL Code Injection</title>
-                                <p>The following parameters are not vulnerable to SQL injection. </p>
-                                <p>All parameters have been checked manually.</p>
-                                <pre>-file1.php
+        <section id="nonFindings">
+                <title>Non-Findings</title>
+                <p>In this section we list some of the things that were tried but turned out to be
+                        dead ends.</p>
+
+                <non-finding id="ftp">
+                        <title>FTP</title>
+                        <p>The server was running FTPserver ABC, the most recent version of this
+                                particular piece of software. Anonymous login was turned off and no
+                                relevant vulnerabilities or exploits were found.</p>
+                </non-finding>
+                <non-finding id="mail">
+                        <title>Mail Server</title>
+                        <p>The server was running Mailserver XYZ, the most recent version of this
+                                particular piece of software. No relevant vulnerabilities or
+                                exploits were found. </p>
+                </non-finding>
+                <non-finding id="sqlInjection">
+                        <title>SQL Code Injection</title>
+                        <p>The following parameters are not vulnerable to SQL injection. </p>
+                        <p>All parameters have been checked manually.</p>
+                        <pre>-file1.php
 -file2.php
 -file3.php
 </pre>
-                        </non-finding>
-                        <non-finding id="heartbleed">
-                                <title>Heartbleed</title>
-                                <p>System was not vulnerable to heartbleed.</p>
-                        </non-finding>
-                        <non-finding id="sp2">
-                                <title>Windows XP</title>
-                                <p>The host is running Windows XP. As we all know, Windows XP is
-                                        bulletproof.</p>
-                        </non-finding>
-                </section>
+                </non-finding>
+                <non-finding id="heartbleed">
+                        <title>Heartbleed</title>
+                        <p>System was not vulnerable to heartbleed.</p>
+                </non-finding>
+                <non-finding id="sp2">
+                        <title>Windows XP</title>
+                        <p>The host is running Windows XP. As we all know, Windows XP is
+                                bulletproof.</p>
+                </non-finding>
         </section>
         <section id="conclusion">
                 <title>Conclusion</title>
