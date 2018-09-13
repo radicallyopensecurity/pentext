@@ -49,6 +49,7 @@
     
     <xsl:template name="calculate_indent">
         <xsl:attribute name="start-indent">
+            <xsl:variable name="base-indent">0.2</xsl:variable>
             <xsl:variable name="ancestors">
                 <xsl:choose>
                     <xsl:when test="count(ancestor::ol) or count(ancestor::ul)">
@@ -56,11 +57,11 @@
                             select="
                                 (count(ancestor::ol) +
                                 count(ancestor::ul)) *
-                                0.75"
+                                0.75 + $base-indent"
                         />
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:text>0.2</xsl:text>
+                        <xsl:value-of select="$base-indent"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:variable>

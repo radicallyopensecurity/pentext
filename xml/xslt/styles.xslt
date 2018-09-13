@@ -378,12 +378,10 @@
     <xsl:attribute-set name="list">
         <xsl:attribute name="provisional-distance-between-starts">0.7cm</xsl:attribute>
         <xsl:attribute name="provisional-label-separation">2mm</xsl:attribute>
-        <xsl:attribute name="start-indent">2mm</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="li">
-        <xsl:attribute name="line-height">5.5mm</xsl:attribute>
+        <xsl:attribute name="line-height">6.5mm</xsl:attribute>
         <xsl:attribute name="keep-together.within-page">always</xsl:attribute>
-        <xsl:attribute name="margin-bottom" select="$small-space"/>
     </xsl:attribute-set>
 
     <!-- ToC -->
