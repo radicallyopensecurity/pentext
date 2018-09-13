@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:my="http://www.radical.sexy" exclude-result-prefixes="xs my"
-    xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:my="http://www.radical.sexy"
+    exclude-result-prefixes="xs my" xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
 
     <xsl:template match="finding" mode="meta">
         <xsl:variable name="status" select="@status"/>
@@ -13,8 +13,10 @@
                         my:titleCase($x), ' ')"
             />
         </xsl:variable>
-        <fo:table width="100%" table-layout="fixed" xsl:use-attribute-sets="table"
-            margin-bottom="{$large-space}">
+        <fo:table xsl:use-attribute-sets="findingTable">
+            <xsl:attribute name="border-top">4px solid <xsl:call-template name="selectColor"
+                        ><xsl:with-param name="label" select="@threatLevel"/></xsl:call-template>
+            </xsl:attribute>
             <fo:table-column column-width="proportional-column-width(70)"/>
             <fo:table-column column-width="proportional-column-width(30)"/>
             <fo:table-body>
@@ -84,8 +86,8 @@
     <xsl:template match="description_summary | recommendation_summary"/>
 
     <xsl:template match="description">
-        <fo:block xsl:use-attribute-sets="title-4">Description:</fo:block>
-        <fo:block margin-bottom="{$large-space}">
+        <fo:block xsl:use-attribute-sets="title-findingsection">Description:</fo:block>
+        <fo:block xsl:use-attribute-sets="finding-content">
             <xsl:apply-templates/>
         </fo:block>
     </xsl:template>
@@ -100,22 +102,22 @@
     </xsl:template>
 
     <xsl:template match="technicaldescription">
-        <fo:block xsl:use-attribute-sets="title-4">Technical description:</fo:block>
-        <fo:block margin-bottom="{$large-space}">
+        <fo:block xsl:use-attribute-sets="title-findingsection">Technical description:</fo:block>
+        <fo:block xsl:use-attribute-sets="finding-content">
             <xsl:apply-templates/>
         </fo:block>
     </xsl:template>
 
     <xsl:template match="impact">
-        <fo:block xsl:use-attribute-sets="title-4">Impact:</fo:block>
-        <fo:block margin-bottom="{$large-space}">
+        <fo:block xsl:use-attribute-sets="title-findingsection">Impact:</fo:block>
+        <fo:block xsl:use-attribute-sets="finding-content">
             <xsl:apply-templates/>
         </fo:block>
     </xsl:template>
 
     <xsl:template match="recommendation">
-        <fo:block xsl:use-attribute-sets="title-4">Recommendation:</fo:block>
-        <fo:block margin-bottom="{$large-space}">
+        <fo:block xsl:use-attribute-sets="title-findingsection">Recommendation:</fo:block>
+        <fo:block xsl:use-attribute-sets="finding-content">
             <xsl:apply-templates/>
         </fo:block>
     </xsl:template>
@@ -126,6 +128,13 @@
                 the finding summary table. Consider using a recommendation_summary element
                 instead.</xsl:message>
         </xsl:if>
+        <xsl:apply-templates mode="summarytable"/>
+    </xsl:template>
+    
+    <xsl:template match="recommendation_summary" mode="summarytable">
+        <xsl:apply-templates mode="summarytable"/>
+    </xsl:template>
+    <xsl:template match="description_summary" mode="summarytable">
         <xsl:apply-templates mode="summarytable"/>
     </xsl:template>
 

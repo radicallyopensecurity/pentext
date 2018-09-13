@@ -6,6 +6,7 @@
          xsi:noNamespaceSchemaLocation="../dtd/offerte.xsd"
          xml:lang="en"><!--document meta information; to be filled in by the offerte writer-->
    <meta>
+      <title>quote</title>
       <offered_service_long>penetration testing services</offered_service_long>
       <!--if there is a shorter way of saying the same thing, you can type it here (it makes for more dynamic offerte text). If not, just repeat the long name.-->
       <offered_service_short>penetration test</offered_service_short>
@@ -23,6 +24,7 @@
             <!--short party name; if no short name: same as long name-->
             <waiver_rep>Hotshot Dev Lawyer</waiver_rep>
             <address>Silicon Valley St. 50</address>
+            <postal_code>10000</postal_code>
             <city>San Francisco</city>
             <country>US</country>
          </party>
@@ -30,15 +32,17 @@
       <activityinfo>
          <duration>10</duration>
          <!--duration of pentest, in working days-->
-         <test_planning>August 1st, 2016, lasting until August 13th, 2016</test_planning>
+         <persondays>20</persondays>
+         <planning>
+            <start>2018-01-01</start>
+            <end>2018-02-02</end>
+         </planning>
          <!--date or date range in text, e.g. May 18th until May 25th, 2015-->
-         <report_writing>August 26th, 2016</report_writing>
-         <!--date or date range in text, e.g. May 18th until May 25th, 2015-->
-         <report_due>August 26th, 2016</report_due>
+         <report_due>2018-03-03</report_due>
          <nature>time-boxed</nature>
          <type>crystal-box</type>
          <!--please choose one of the following: black-box, grey-box, crystal-box-->
-         <fee denomination="euro">1000000</fee>
+         <fee denomination="eur">1000000</fee>
          <!--(euro|dollar)-->
          <target_application>FishInABarrel</target_application>
          <!--name of application/service to be tested (if any; if none, DELETE target_application element)-->
@@ -62,7 +66,6 @@
    <xi:include href="snippets/offerte/en/disclaimer.xml"/>
    <!--Methodology section-->
    <xi:include href="snippets/offerte/en/methodology.xml"/>
-   <xi:include href="snippets/offerte/en/codeauditmethodology.xml"/>
    <xi:include href="snippets/offerte/en/teamandreporting.xml"/>
    <!--Planning and payment section-->
    <xi:include href="snippets/offerte/en/planningandpayment.xml"/>

@@ -2,22 +2,23 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fo="http://www.w3.org/1999/XSL/Format"
     xmlns:my="http://radical.sexy" exclude-result-prefixes="xs my" version="2.0">
-    
+
     <xsl:template name="getDenomination">
         <xsl:param name="placeholderElement" as="node()" select="/"/>
         <xsl:choose>
-            <xsl:when test="$placeholderElement/ancestor-or-self::*/@denomination = 'eur'">€</xsl:when>
-            <xsl:when test="$placeholderElement/ancestor-or-self::*/@denomination = 'usd'">$</xsl:when>
-            <xsl:when test="$placeholderElement/ancestor-or-self::*/@denomination = 'gbp'">£</xsl:when>
-            <!--<xsl:otherwise>
-                <xsl:when test="$placeholderElement/ancestor::*/@denomination = 'eur'">€</xsl:when>
-                <xsl:when test="$placeholderElement/ancestor::*/@denomination = 'usd'">$</xsl:when>
-                <xsl:when test="$placeholderElement/ancestor::*/@denomination = 'gbp'">£</xsl:when>
-            </xsl:otherwise>-->
-            <xsl:otherwise><fo:inline xsl:use-attribute-sets="errortext">WARNING: NO DENOMINATION FOUND</fo:inline></xsl:otherwise>
+            <xsl:when test="$placeholderElement/ancestor-or-self::*/@denomination = 'eur'"
+                >€</xsl:when>
+            <xsl:when test="$placeholderElement/ancestor-or-self::*/@denomination = 'usd'"
+                >$</xsl:when>
+            <xsl:when test="$placeholderElement/ancestor-or-self::*/@denomination = 'gbp'"
+                >£</xsl:when>
+            <xsl:otherwise>
+                <fo:inline xsl:use-attribute-sets="errortext">WARNING: NO DENOMINATION
+                    FOUND</fo:inline>
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <!-- PLACEHOLDERS -->
     <xsl:template match="client_long">
         <xsl:param name="placeholderElement" select="/*/meta//client/full_name"/>
@@ -75,6 +76,12 @@
     </xsl:template>
     <xsl:template match="client_coc">
         <xsl:param name="placeholderElement" select="/*/meta//client/coc"/>
+        <xsl:call-template name="checkPlaceholder">
+            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="client_ref">
+        <xsl:param name="placeholderElement" select="/*/meta/client_reference"/>
         <xsl:call-template name="checkPlaceholder">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
@@ -378,9 +385,10 @@
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
-    
+
     <xsl:template match="ir_ora_rate">
-        <xsl:param name="placeholderElement" select="/*/meta/activityinfo/organizational_readiness_assessment/rate"/>
+        <xsl:param name="placeholderElement"
+            select="/*/meta/activityinfo/organizational_readiness_assessment/rate"/>
         <xsl:call-template name="getDenomination">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
@@ -390,7 +398,8 @@
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="ir_sim_rate">
-        <xsl:param name="placeholderElement" select="/*/meta/activityinfo/security_incident_management/rate"/>
+        <xsl:param name="placeholderElement"
+            select="/*/meta/activityinfo/security_incident_management/rate"/>
         <xsl:call-template name="getDenomination">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
@@ -400,7 +409,8 @@
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="ir_taa_rate">
-        <xsl:param name="placeholderElement" select="/*/meta/activityinfo/technical_artefact_analysis/rate"/>
+        <xsl:param name="placeholderElement"
+            select="/*/meta/activityinfo/technical_artefact_analysis/rate"/>
         <xsl:call-template name="getDenomination">
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
@@ -423,20 +433,26 @@
             <xsl:when test="@threatLevel">
                 <xsl:choose>
                     <xsl:when test="$statusSequence">
-                        <xsl:value-of select="count(//finding[@threatLevel =
-                                              $threatLevel][@status =
-                                              $statusSequence])"/>
+                        <xsl:value-of
+                            select="
+                                count(//finding[@threatLevel =
+                                $threatLevel][@status =
+                                $statusSequence])"
+                        />
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:value-of select="count(//finding[@threatLevel =
-                                              $threatLevel])"/>
-                    </xsl:otherwise>
+                        <xsl:value-of select="count(//finding[@threatLevel = $threatLevel])"/>
+                        $threatLevel])"/> </xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="count(//finding)"/>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+
+    <xsl:template match="todo">
+        <fo:inline xsl:use-attribute-sets="errortext">###TODO###</fo:inline>
     </xsl:template>
 
     <xsl:template name="checkPlaceholder">
@@ -448,13 +464,14 @@
                 <xsl:choose>
                     <xsl:when test="self::client_rate">
                         <xsl:call-template name="getDenomination">
-            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
-        </xsl:call-template>
+                            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+                        </xsl:call-template>
                         <xsl:text>&#160;</xsl:text>
                         <xsl:value-of select="$placeholderElement"/>
                     </xsl:when>
                     <!-- PRETTY FORMATTING FOR AMOUNTS OF MONEY -->
-                    <xsl:when test="(self::p_fee or self::contractor_hourly_fee or self::ir_ora_rate) and string($placeholderElement) castable as xs:float">
+                    <xsl:when
+                        test="(self::p_fee or self::contractor_hourly_fee or self::ir_ora_rate) and string($placeholderElement) castable as xs:float">
                         <xsl:variable name="fee" select="$placeholderElement * 1"/>
                         <xsl:number value="$fee" grouping-separator="," grouping-size="3"/>
                     </xsl:when>
@@ -465,6 +482,11 @@
                         <xsl:value-of
                             select="format-date($placeholderElement, '[MNn] [D1], [Y]', 'en', (), ())"
                         />
+                    </xsl:when>
+                    <xsl:when
+                        test="(self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate or self::p_startdate or self::p_enddate) and normalize-space(.) = 'TBD'">
+                        <!-- actual TBD, don't mess with it -->
+                        <fo:text>TBD</fo:text>
                     </xsl:when>
                     <xsl:when
                         test="(self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate or self::p_startdate or self::p_enddate) and not(string($placeholderElement) castable as xs:date)">
@@ -553,30 +575,38 @@
                 </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
-                <fo:inline xsl:use-attribute-sets="errortext">[ <fo:inline xsl:use-attribute-sets="bold">WARNING</fo:inline>: Cannot resolve placeholder <fo:inline xsl:use-attribute-sets="bold"><xsl:value-of select="name()"/></fo:inline> in <xsl:value-of select="base-uri()"/> - <xsl:call-template name="getReason"><xsl:with-param name="placeholderElement" select="$placeholderElement"/></xsl:call-template> ]</fo:inline>
+                <fo:inline xsl:use-attribute-sets="errortext">[ <fo:inline
+                        xsl:use-attribute-sets="bold">WARNING</fo:inline>: Cannot resolve
+                    placeholder <fo:inline xsl:use-attribute-sets="bold"><xsl:value-of
+                            select="name()"/></fo:inline> in <xsl:value-of select="base-uri()"/> -
+                        <xsl:call-template name="getReason"><xsl:with-param
+                            name="placeholderElement" select="$placeholderElement"
+                        /></xsl:call-template> ]</fo:inline>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template name="getReason">
         <xsl:param name="placeholderElement" select="."/>
         <xsl:choose>
-            <xsl:when test="/$placeholderElement">
-                element <fo:inline xsl:use-attribute-sets="bold">"<xsl:value-of select="name($placeholderElement)"/>"</fo:inline> (<xsl:call-template name="getXPath"><xsl:with-param name="element" select="$placeholderElement"/></xsl:call-template>) is empty
-            </xsl:when>
-            <xsl:otherwise>
-                referenced element not found
-            </xsl:otherwise>
+            <xsl:when test="/$placeholderElement"> element <fo:inline xsl:use-attribute-sets="bold"
+                        >"<xsl:value-of select="name($placeholderElement)"/>"</fo:inline>
+                    (<xsl:call-template name="getXPath"><xsl:with-param name="element"
+                        select="$placeholderElement"/></xsl:call-template>) is empty </xsl:when>
+            <xsl:otherwise> referenced element not found </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template name="getXPath">
         <xsl:param name="element" select="."/>
         <xsl:for-each select="$element/ancestor-or-self::*">
-            <xsl:value-of select="concat('/',local-name())"/>
+            <xsl:value-of select="concat('/', local-name())"/>
             <!--Predicate is only output when needed.-->
-            <xsl:if test="(preceding-sibling::*|following-sibling::*)[local-name()=local-name(current())]">
-                <xsl:value-of select="concat('[',count(preceding-sibling::*[local-name()=local-name(current())])+1,']')"/>
+            <xsl:if
+                test="(preceding-sibling::* | following-sibling::*)[local-name() = local-name(current())]">
+                <xsl:value-of
+                    select="concat('[', count(preceding-sibling::*[local-name() = local-name(current())]) + 1, ']')"
+                />
             </xsl:if>
         </xsl:for-each>
     </xsl:template>

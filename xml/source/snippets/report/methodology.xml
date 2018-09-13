@@ -44,6 +44,6 @@
         </ul>
         <p>Please note that this risk rating system was taken from the Penetration Testing Execution
             Standard (PTES). For more information, see:
-            http://www.pentest-standard.org/index.php/Reporting. </p>
+            <a href="http://www.pentest-standard.org/index.php/Reporting">http://www.pentest-standard.org/index.php/Reporting</a>. </p>
     </section>
 </section>
