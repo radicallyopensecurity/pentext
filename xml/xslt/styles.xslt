@@ -207,6 +207,7 @@
         <xsl:attribute name="white-space-treatment">preserve</xsl:attribute>
         <xsl:attribute name="font-size">8pt</xsl:attribute>
         <xsl:attribute name="padding">4pt</xsl:attribute>
+        <xsl:attribute name="line-height">4mm</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="finding-meta">
         <xsl:attribute name="margin-bottom" select="$small-space"/>
