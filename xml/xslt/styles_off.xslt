@@ -8,13 +8,18 @@
     
     <!-- variables -->
     
-    <xsl:variable name="medium-space">8pt</xsl:variable>
-    
     <!-- Text -->
     <xsl:attribute-set name="p">
         <xsl:attribute name="margin-bottom">
             <xsl:value-of select="$small-space"/>
         </xsl:attribute>
+    </xsl:attribute-set>
+    
+    <xsl:attribute-set name="title-2" use-attribute-sets="title">
+        <xsl:attribute name="color">black</xsl:attribute><!--
+        <xsl:attribute name="font-size">13pt</xsl:attribute>
+        <xsl:attribute name="margin-bottom">0.3cm</xsl:attribute>
+        <xsl:attribute name="margin-top">0.3cm</xsl:attribute>-->
     </xsl:attribute-set>
     
     <!-- Pages -->
