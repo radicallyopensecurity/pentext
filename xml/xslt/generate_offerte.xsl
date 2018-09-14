@@ -100,10 +100,15 @@
             <fo:inline/>
             <fo:footnote-body>
                 <xsl:call-template name="Contact"/>
+                <xsl:call-template name="ImageAttribution"/>
             </fo:footnote-body>
         </fo:footnote>
     </xsl:template>
 
+    <xsl:template name="ImageAttribution">
+        <fo:block xsl:use-attribute-sets="coc" break-after="page"> Front page image by Slava
+            (https://secure.flickr.com/photos/slava/496607907/), "Mango HaX0ring", Image styling by Patricia Piolon, https://creativecommons.org/licenses/by-sa/2.0/legalcode. </fo:block>
+    </xsl:template>
 
 
     <!-- CONTACT BOX (comes at the end, is just the address, no title/table) -->
