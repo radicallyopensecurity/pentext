@@ -19,7 +19,7 @@
     <xsl:variable name="border-width">1pt</xsl:variable>
     <xsl:variable name="border-style">solid</xsl:variable>
     <xsl:variable name="tabbed-numbering-tabwidth">20mm</xsl:variable>
-    <xsl:variable name="small-space">5pt</xsl:variable>
+    <xsl:variable name="small-space">2mm</xsl:variable>
     <xsl:variable name="medium-space">4mm</xsl:variable>
     <xsl:variable name="large-space">8mm</xsl:variable>
     <xsl:variable name="very-large-space">1.3cm</xsl:variable>
