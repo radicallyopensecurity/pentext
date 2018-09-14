@@ -34,6 +34,7 @@
         <xsl:call-template name="DocProperties"/>
         <xsl:call-template name="VersionControl"/>
         <xsl:call-template name="Contact"/>
+        <xsl:call-template name="ImageAttribution"/>
     </xsl:template>
 
     <xsl:template name="front">
@@ -402,9 +403,13 @@
                 </fo:table-body>
             </fo:table>
         </fo:block>
-        <fo:block xsl:use-attribute-sets="coc" break-after="page">
+        <fo:block xsl:use-attribute-sets="coc">
             <xsl:value-of select="company/full_name"/> is registered at the trade register of the
             Dutch chamber of commerce under number <xsl:value-of select="company/coc"/>. </fo:block>
+    </xsl:template>
+    <xsl:template name="ImageAttribution">
+        <fo:block xsl:use-attribute-sets="coc" break-after="page">
+             kallerna (https://commons.wikimedia.org/wiki/File:Rock_climber_Phra_Nang_1.jpg), "Rock climber Phra Nang 1", Image styling by Patricia Piolon, https://creativecommons.org/licenses/by-sa/3.0/legalcode </fo:block>
     </xsl:template>
 
     <xsl:template match="subtitle">
