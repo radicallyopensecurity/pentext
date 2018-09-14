@@ -407,9 +407,10 @@
             <xsl:value-of select="company/full_name"/> is registered at the trade register of the
             Dutch chamber of commerce under number <xsl:value-of select="company/coc"/>. </fo:block>
     </xsl:template>
+
     <xsl:template name="ImageAttribution">
-        <fo:block xsl:use-attribute-sets="coc" break-after="page">
-             kallerna (https://commons.wikimedia.org/wiki/File:Rock_climber_Phra_Nang_1.jpg), "Rock climber Phra Nang 1", Image styling by Patricia Piolon, https://creativecommons.org/licenses/by-sa/3.0/legalcode </fo:block>
+        <fo:block xsl:use-attribute-sets="coc" break-after="page"> Front page image by Slava
+            (https://secure.flickr.com/photos/slava/496607907/), "Mango HaX0ring", Image styling by Patricia Piolon, https://creativecommons.org/licenses/by-sa/2.0/legalcode. </fo:block>
     </xsl:template>
 
     <xsl:template match="subtitle">
