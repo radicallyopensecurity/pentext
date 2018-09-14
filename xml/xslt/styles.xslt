@@ -88,8 +88,8 @@
     <xsl:attribute-set name="title-2" use-attribute-sets="title">
         <xsl:attribute name="color"><xsl:value-of select="$c_support_dark"/></xsl:attribute>
         <xsl:attribute name="font-size">13pt</xsl:attribute>
-        <xsl:attribute name="margin-bottom">0.5cm</xsl:attribute>
-        <xsl:attribute name="margin-top">0.4cm</xsl:attribute>
+        <xsl:attribute name="margin-bottom">0.3cm</xsl:attribute>
+        <xsl:attribute name="margin-top">0.3cm</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="title-3" use-attribute-sets="title">
         <xsl:attribute name="color"><xsl:value-of select="$c_support_dark"/></xsl:attribute>
