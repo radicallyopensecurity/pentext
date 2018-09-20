@@ -488,7 +488,7 @@
 <!-- ............................................................ -->
 <xsl:template match="postscript">
   <section id="{generate-id()}" inexecsummary="no">
-    <title>Post-Scan Script Putput</title>
+    <title>Post-Scan Script Output</title>
 
   <table border="1">
     <tr class="head">
