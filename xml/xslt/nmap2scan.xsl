@@ -55,10 +55,11 @@
 <!-- root -->
 <!-- ............................................................ -->
 <xsl:template match="/nmaprun">
-<section id="nmap">
-	<xsl:comment>generated with nmap.xsl - version <xsl:value-of select="$nmap_xsl_version" /> by Benjamin Erb - http://www.benjamin-erb.de/nmap_xsl.php - adapted for pentext by Pierre Pronchery - https://www.defora.org/</xsl:comment>
+  <section id="nmap">
+  <xsl:comment>generated with nmap.xsl - version <xsl:value-of select="$nmap_xsl_version" /> by Benjamin Erb - http://www.benjamin-erb.de/nmap_xsl.php - adapted for pentext by Pierre Pronchery - https://www.defora.org/</xsl:comment>
   <title>Nmap Scan Report</title>
-    <h2>Scan Summary</h2>
+  <section id="{generate-id()}" inexecsummary="no">
+    <title>Scan Summary</title>
 
     <p>
       Nmap <xsl:value-of select="@version" /> was initiated at <xsl:value-of select="$start" /> with these arguments:<br/>
@@ -71,6 +72,7 @@
     <p>
     <xsl:value-of select="/nmaprun/runstats/finished/@summary" />
     </p>
+  </section>
 
     <xsl:apply-templates select="prescript"/>
 
@@ -137,7 +139,8 @@
 
 
   <xsl:if test="count(address) > 0">
-    <h3>Address</h3>
+    <section id="{generate-id()}" inexecsummary="no">
+    <title>Address</title>
 
       <ul>
         <xsl:for-each select="address">
@@ -151,6 +154,7 @@
           </li>
         </xsl:for-each>
       </ul>
+      </section>
   </xsl:if>
     
 
@@ -221,7 +225,7 @@
 <!-- hostnames -->
 <!-- ............................................................ -->
 <xsl:template match="hostnames">
-  <xsl:if test="hostname/@name != ''"><h3>Hostnames</h3><ul>	<xsl:apply-templates/></ul></xsl:if>
+  <xsl:if test="hostname/@name != ''"><section id="{generate-id()}" inexecsummary="no"><title>Hostnames</title><ul>	<xsl:apply-templates/></ul></section></xsl:if>
 </xsl:template>
 <!-- ............................................................ -->
 
@@ -236,7 +240,7 @@
 <!-- ............................................................ -->
 <xsl:template match="ports">
   <xsl:variable name="var_address" select="../address/@addr" />
-  <h3>Ports</h3>
+  <section id="{generate-id()}" inexecsummary="no"><title>Ports</title>
   <xsl:for-each select="extraports">
     <xsl:if test="@count > 0">
       <p>The <xsl:value-of select="@count" /> ports scanned but not shown below are in state: <b><xsl:value-of select="@state" /></b></p>
@@ -276,6 +280,7 @@
       <xsl:apply-templates/>
     </xsl:element>
   </xsl:if>
+  </section>
 </xsl:template>
 <!-- ............................................................ -->
 
@@ -374,7 +379,8 @@
 <!-- os -->
 <!-- ............................................................ -->
 <xsl:template match="os">
-  <h3>Remote Operating System Detection</h3>
+  <section id="{generate-id()}" inexecsummary="no">
+  <title>Remote Operating System Detection</title>
 
   <xsl:if test="count(osmatch) = 0"><p>Unable to identify operating system.</p></xsl:if>
 
@@ -390,6 +396,7 @@
   
   <xsl:apply-templates select="osfingerprint"/>
 
+  </section>
 </xsl:template>
 <!-- ............................................................ -->
 
@@ -449,7 +456,8 @@
 <!-- Pre-Scan script -->
 <!-- ............................................................ -->
 <xsl:template match="prescript">
-  <h2>Pre-Scan Script Output</h2>
+  <section id="{generate-id()}" inexecsummary="no">
+  <title>Pre-Scan Script Output</title>
 
   <table>
     <tr class="head">
@@ -471,13 +479,15 @@
 
   </xsl:for-each>
   </table>
+  </section>
 </xsl:template>
 <!-- ............................................................ -->
 
 <!-- Post-Scan script -->
 <!-- ............................................................ -->
 <xsl:template match="postscript">
-  <h2>Post-Scan Script Putput</h2>
+  <section id="{generate-id()}" inexecsummary="no">
+    <title>Post-Scan Script Putput</title>
 
   <table>
     <tr class="head">
@@ -499,6 +509,7 @@
 
   </xsl:for-each>
   </table>
+  </section>
 </xsl:template>
 <!-- ............................................................ -->
 
@@ -506,7 +517,8 @@
 <!-- Host Script Scan -->
 <!-- ............................................................ -->
 <xsl:template match="hostscript">
-  <h3>Host Script Output</h3>
+  <section id="{generate-id()}" inexecsummary="no">
+  <title>Host Script Output</title>
 
     <table>
       <tr class="head">
@@ -528,16 +540,18 @@
   </xsl:for-each>
 
     </table>
+  </section>
 </xsl:template>
 <!-- ............................................................ -->
 
 <!-- smurf -->
 <!-- ............................................................ -->
 <xsl:template match="smurf">
-  <xsl:if test="@responses != ''"><h3>Smurf Responses</h3>
+  <xsl:if test="@responses != ''"><section id="{generate-id()}" inexecsummary="no"><title>Smurf Responses</title>
     <ul>
       <li><xsl:value-of select="@responses" /> responses counted</li>
     </ul>
+    </section>
   </xsl:if>
 </xsl:template>
 <!-- ............................................................ -->
