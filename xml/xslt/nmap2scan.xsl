@@ -89,10 +89,6 @@
 
   <xsl:variable name="var_address" select="address/@addr" />
   
-  <xsl:element name="a">
-    <xsl:attribute name="name">host_<xsl:value-of select="translate(address/@addr, '.', '_') " /></xsl:attribute>
-  </xsl:element>
-
   <xsl:choose>
 
     <xsl:when test="status/@state = 'up'">
