@@ -166,10 +166,10 @@
     <xsl:attribute name="id">metrics_<xsl:value-of select="$var_address"/></xsl:attribute>
     <xsl:attribute name="class">hidden</xsl:attribute>
 
-    <table cellspacing="1">
+    <table border="1" cellspacing="1">
       <tr class="head">
-        <td>Metric</td>
-        <td>Value</td>
+        <th>Metric</th>
+        <th>Value</th>
       </tr>
 
       <tr>
@@ -265,16 +265,17 @@
   
     <xsl:element name="table">
       <xsl:attribute name="id">porttable_<xsl:value-of select="$var_address"/></xsl:attribute>
+      <xsl:attribute name="border">1</xsl:attribute>
       <xsl:attribute name="cellspacing">1</xsl:attribute>
     
     <tr class="head">
-        <td colspan="2">Port</td>
-        <td>State</td>
-        <td>Service</td>
-        <td>Reason</td>
-        <td>Product</td>
-        <td>Version</td>
-        <td>Extra info</td>
+        <th colspan="2">Port</th>
+        <th>State</th>
+        <th>Service</th>
+        <th>Reason</th>
+        <th>Product</th>
+        <th>Version</th>
+        <th>Extra info</th>
       </tr>
 
       <xsl:apply-templates/>
@@ -414,9 +415,9 @@
         <li>Cannot determine exact operating system.  Fingerprint provided below.</li>
         <li>If you know what OS is running on it, see https://nmap.org/submit/</li>
       </ul>
-      <table cellspacing="1">
+      <table border="1" cellspacing="1">
         <tr class="head">
-          <td>Operating System fingerprint</td>
+          <th>Operating System fingerprint</th>
         </tr>
         <tr>
           <td><pre><xsl:value-of select="@fingerprint" /></pre></td>
@@ -435,9 +436,9 @@
         <xsl:attribute name="id">osblock_<xsl:value-of select="$var_address"/></xsl:attribute>
         <xsl:attribute name="class">hidden</xsl:attribute>
 
-        <table class="noprint" cellspacing="1">
+        <table class="noprint" border="1" cellspacing="1">
           <tr class="head">
-            <td>Operating System fingerprint</td>
+            <th>Operating System fingerprint</th>
           </tr>
           <tr>
             <td><pre><xsl:value-of select="@fingerprint" /></pre></td>
@@ -459,10 +460,10 @@
   <section id="{generate-id()}" inexecsummary="no">
   <title>Pre-Scan Script Output</title>
 
-  <table>
+  <table border="1">
     <tr class="head">
-      <td>Script Name</td>
-      <td>Output</td>
+      <th>Script Name</th>
+      <th>Output</th>
     </tr>
     <xsl:for-each select="script">
 
@@ -489,10 +490,10 @@
   <section id="{generate-id()}" inexecsummary="no">
     <title>Post-Scan Script Putput</title>
 
-  <table>
+  <table border="1">
     <tr class="head">
-      <td>Script Name</td>
-      <td>Output</td>
+      <th>Script Name</th>
+      <th>Output</th>
     </tr>
 
   <xsl:for-each select="script">
@@ -520,10 +521,10 @@
   <section id="{generate-id()}" inexecsummary="no">
   <title>Host Script Output</title>
 
-    <table>
+    <table border="1">
       <tr class="head">
-        <td>Script Name</td>
-        <td>Output</td>
+        <th>Script Name</th>
+        <th>Output</th>
       </tr>
 
   <xsl:for-each select="script">
@@ -575,7 +576,7 @@
       </xsl:when>
     </xsl:choose>
   
-    <table cellspacing="1">
+    <table border="1" cellspacing="1">
       <tr class="head">
         <td>Hop</td>
         <td>Rtt</td>
