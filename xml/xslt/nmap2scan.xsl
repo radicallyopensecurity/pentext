@@ -57,7 +57,7 @@
 <xsl:template match="/nmaprun">
 <section id="nmap">
 	<xsl:comment>generated with nmap.xsl - version <xsl:value-of select="$nmap_xsl_version" /> by Benjamin Erb - http://www.benjamin-erb.de/nmap_xsl.php - adapted for pentext by Pierre Pronchery - https://www.defora.org/</xsl:comment>
-  <title>Nmap Scan Report - Scanned at <xsl:value-of select="$start" /></title>
+  <title>Nmap Scan Report</title>
     <h2>Scan Summary</h2>
 
     <p>
