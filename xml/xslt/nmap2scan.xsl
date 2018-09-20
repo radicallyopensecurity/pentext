@@ -265,13 +265,7 @@
     
     <tr class="head">
         <td colspan="2">Port</td>
-        <td>State 
-            <span class="noprint"><small> (toggle closed [<xsl:value-of select="$closed_count"/>] </small></span>
-          <xsl:element name="a">
-            <xsl:attribute name="href">javascript:togglePorts('porttable_<xsl:value-of select="$var_address"/>','filtered');</xsl:attribute>
-            <span class="noprint"><small> | filtered [<xsl:value-of select="$filtered_count"/>])</small></span>
-          </xsl:element>
-        </td>
+        <td>State</td>
         <td>Service</td>
         <td>Reason</td>
         <td>Product</td>
@@ -555,13 +549,6 @@
 <xsl:template match="trace">
   <xsl:if test="@port">
   <xsl:variable name="var_address" select="../address/@addr" /> 
- 
-
-  
- <xsl:element name="a">
-    <xsl:attribute name="href">javascript:toggle('trace_<xsl:value-of select="$var_address"/>');</xsl:attribute>
-    Traceroute Information <span class="noprint"><small> (click to expand)</small></span>
-  </xsl:element>
 
   <xsl:element name="div">
     <xsl:attribute name="id">trace_<xsl:value-of select="$var_address"/></xsl:attribute>
