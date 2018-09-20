@@ -77,7 +77,7 @@
     <xsl:apply-templates select="host">
       <xsl:sort select="substring ( address/@addr, 1, string-length ( substring-before ( address/@addr, '.' ) ) )* (256*256*256) + substring ( substring-after ( address/@addr, '.' ), 1, string-length ( substring-before ( substring-after ( address/@addr, '.' ), '.' ) ) )* (256*256) + substring ( substring-after ( substring-after ( address/@addr, '.' ), '.' ), 1, string-length ( substring-before ( substring-after ( substring-after ( address/@addr, '.' ), '.' ), '.' ) ) ) * 256 + substring ( substring-after ( substring-after ( substring-after ( address/@addr, '.' ), '.' ), '.' ), 1 )" order="ascending" data-type="number"/>
     </xsl:apply-templates>
-	
+
     <xsl:apply-templates select="postscript"/>
 </section>
 </xsl:template>
@@ -153,7 +153,7 @@
       </ul>
   </xsl:if>
     
-	
+
   <xsl:apply-templates/>
 
   <br />
@@ -161,13 +161,13 @@
   <xsl:element name="div">
     <xsl:attribute name="id">metrics_<xsl:value-of select="$var_address"/></xsl:attribute>
     <xsl:attribute name="class">hidden</xsl:attribute>
-		
+
     <table cellspacing="1">
       <tr class="head">
         <td>Metric</td>
         <td>Value</td>
       </tr>
-		
+
       <tr>
         <td>Ping Results</td>
         <td><xsl:value-of select="status/@reason"/>
@@ -177,7 +177,7 @@
           </xsl:if>
         </td>
       </tr>
-			
+
     <xsl:if test="uptime/@seconds != ''">
       <tr>
         <td>System Uptime</td>
@@ -185,34 +185,34 @@
         </td>
       </tr>
     </xsl:if>
-		
+
     <xsl:if test="distance/@value != ''">
       <tr>
         <td>Network Distance</td>
         <td><xsl:value-of select="distance/@value" /> hops</td>
       </tr>
     </xsl:if>
-		
-		
+
+
     <xsl:if test="tcpsequence/@index != ''">
       <tr>
         <td>TCP Sequence Prediction</td>
         <td>Difficulty=<xsl:value-of select="tcpsequence/@index" /> (<xsl:value-of select="tcpsequence/@difficulty" />)</td>
       </tr>
     </xsl:if>
-		
+
     <xsl:if test="ipidsequence/@class != ''">
       <tr>
         <td>IP ID Sequence Generation</td>
         <td><xsl:value-of select="ipidsequence/@class" /></td>
       </tr>
     </xsl:if>
-		
+
       </table>
     </xsl:element>
 
   </xsl:element>
-	
+
 </xsl:template>
 <!-- ............................................................ -->
 
@@ -375,7 +375,7 @@
 <!-- ............................................................ -->
 <xsl:template match="os">
   <h3>Remote Operating System Detection</h3>
-		
+
   <xsl:if test="count(osmatch) = 0"><p>Unable to identify operating system.</p></xsl:if>
 
   <ul>
@@ -478,7 +478,7 @@
 <!-- ............................................................ -->
 <xsl:template match="postscript">
   <h2>Post-Scan Script Putput</h2>
-	
+
   <table>
     <tr class="head">
       <td>Script Name</td>
