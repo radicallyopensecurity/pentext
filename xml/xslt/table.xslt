@@ -219,7 +219,7 @@
 
     <xsl:template match="tr">
         <xsl:choose>
-            <xsl:when test="not(child::td)">
+            <xsl:when test="not(td)">
                 <!-- don't have th widows -->
                 <fo:table-row keep-with-next.within-column="always">
                     <xsl:apply-templates select="* | text()"/>
@@ -227,7 +227,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <fo:table-row>
-                    <xsl:if test="position() mod 2 = 0">
+                    <xsl:if test="(count(preceding-sibling::tr) + 1) mod 2 = 0">
                         <xsl:attribute name="background-color">#ededed</xsl:attribute>
                     </xsl:if>
                     <xsl:apply-templates select="* | text()"/>
