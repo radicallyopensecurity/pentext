@@ -452,7 +452,15 @@
     </xsl:template>
 
     <xsl:template match="todo">
-        <fo:inline xsl:use-attribute-sets="errortext">###TODO###</fo:inline>
+        <xsl:choose>
+            <xsl:when test="@desc">
+                <fo:inline xsl:use-attribute-sets="errortext">### TODO: <xsl:value-of select="@desc"
+                    /> ###</fo:inline>
+            </xsl:when>
+            <xsl:otherwise>
+                <fo:inline xsl:use-attribute-sets="errortext">### TODO ###</fo:inline>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="checkPlaceholder">
