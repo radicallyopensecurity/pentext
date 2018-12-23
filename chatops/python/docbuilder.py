@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Builds PDF files from (intermediate fo and) XML files.
@@ -6,7 +6,7 @@ Builds PDF files from (intermediate fo and) XML files.
 This script is part of the PenText framework
                            https://pentext.org
 
-   Copyright (C) 2015-2016 Radically Open Security
+   Copyright (C) 2015-2018 Radically Open Security
                            https://www.radicallyopensecurity.com
 
                 Author(s): Peter Mosmans
@@ -47,7 +47,7 @@ def parse_arguments():
         description=textwrap.dedent('''\
 Builds PDF files from (intermediate fo and) XML files.
 
-Copyright (C) 2015-2017  Radically Open Security (Peter Mosmans)
+Copyright (C) 2015-2018  Radically Open Security (Peter Mosmans)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
