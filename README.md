@@ -1,5 +1,11 @@
 # Pentext
 
+![](https://img.shields.io/github/issues/radicallyopensecurity/pentext.svg)
+![](https://img.shields.io/github/forks/radicallyopensecurity/pentext.svg)
+![](https://img.shields.io/github/stars/radicallyopensecurity/pentext.svg)
+![](https://img.shields.io/github/license/radicallyopensecurity/pentext.svg)
+[![Rawsec's CyberSecurity Inventory](https://inventory.rawsec.ml/img/badges/Rawsec-inventoried-FF5050_flat.svg)](https://inventory.rawsec.ml/tools.html#OWASP%20PenText)
+
 The PenText XML documentation project is a collection of XML templates, XML schemas and XSLT code, which combined provide an easy way to generate IT security documents including test reports (for penetration tests, load tests, code audits, etc), offers (to companies requesting these tests) and invoices. 
 
 ### How it Works
