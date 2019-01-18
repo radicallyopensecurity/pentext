@@ -1,0 +1,16 @@
+<finding id="xss_netmon" threatLevel="Elevated" type="Cross-Site Scripting">
+    <title>Cross-Site Scripting</title>
+                        	
+    <description>
+	<p>The 'view/' site of NetMon is vulnerable to URL-based XSS, allowing an attacker to inject JavaScript code into the website; see <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-7400">CVE-2013-7400</a>. This could be used in a spear phishing campaign to steal session cookies, which would enable compromise of the NetMon host using <a href="#remote_code_execution" />.</p>
+    </description>
+                        	
+    <technicaldescription>
+    <p>The PoC below gets around this by using the onfocus attribute of an &lt;input&gt; tag in order to get a JavaScript execution environment. From here, the attacker could run arbitrary (possibly encoded) JavaScript code.</p>
+    <pre>https://monitoring.sittingduck.bv/view/%3Cinput%20autofocus%20onfocus%3Dalert(1)%3E</pre>
+    </technicaldescription>
+    
+    <recommendation>
+    <p>Update NetMon to the latest version, where this issue is fixed.</p>
+    </recommendation>
+</finding>

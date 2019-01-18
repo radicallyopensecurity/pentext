@@ -1,0 +1,15 @@
+<finding id="pe_management" threatLevel="Moderate" type="Privilege Escalation">
+    <title>Privilege Escalation</title>
+                        	
+    <description>
+    <p>On the Linux management machine mgmt1, a home directory contains a world-readable script containing the MySQL root user password for the Open Server Watch backend on mgmt2.</p>
+    </description>
+                        	
+    <technicaldescription>
+    <p>See <a href="#pe" />.</p>
+    </technicaldescription>
+                        
+    <recommendation>
+    <p>Strongly advise/educate your Unix users in getting their permissions masks right.</p>
+	</recommendation>
+</finding>

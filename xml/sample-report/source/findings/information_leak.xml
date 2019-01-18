@@ -1,0 +1,15 @@
+<finding id="information_leak" threatLevel="Low" type="Information Leak">
+	<title>Information Leak</title>
+							
+	<description>
+	<p>The '/support' site of NetMon Viewer is publicly accessible, and could possibly disclose sensitive information about the infrastructure.</p>
+	</description>
+
+	<technicaldescription>
+	<p>Open <a href="https://monitoring.sittingduck.bv/support">https://monitoring.sittingduck.bv/support</a> in any unauthenticated browser.</p>
+	</technicaldescription>
+	
+	<recommendation>
+	<p>NetMon recommends to "remove the public access” to disable this behavior, see <a href="http://docs.netmon.io/docs/core/support">http://docs.netmon.io/docs/core/support</a>.</p>
+	</recommendation>
+</finding>

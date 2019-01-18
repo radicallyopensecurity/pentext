@@ -1,0 +1,15 @@
+<finding id="spearphising" threatLevel="High" type="Social engineering">
+	<title>Social engineering</title> 
+						
+	<description>
+	<p>A spearphishing email targeting Sitting Duck support engineers successfully exploited an XSS/CSRF in NetMon.  For more detailed information on the attack, see the Attack Narrative in <a href="#attack_narrative" />.</p>
+	</description>
+						
+	<technicaldescription>
+	<p>Not applicable.</p>
+	</technicaldescription>
+	
+	<recommendation>
+	<p>Awareness training (DON'T CLICK!) combined with back-up technical solutions (detection of newly registered domains, sandboxing the email client, etc..).</p>
+	</recommendation>
+</finding>

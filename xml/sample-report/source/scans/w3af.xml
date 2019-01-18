@@ -1,0 +1,14 @@
+<section id="w3af">
+    <title>w3af</title>
+    
+    <p>We ran the OWASP Top Ten profile against Open Server Watch and NetMon.</p>
+    <pre>$ w3af_console
+w3af>>> target
+w3af/config:target>>> set target http://monitoring.sittingduck.bv
+w3af/config:target>>> back
+w3af>>> profiles
+w3af/profiles>>> use OWASP_TOP10
+w3af/profiles>>> back
+w3af>>> start</pre>
+    <p>Nothing relevant (that hadn't already been found by manual analysis) was reported.</p>
+</section>

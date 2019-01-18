@@ -1,0 +1,94 @@
+<section id="nmap">
+    <title>nmap</title>
+    
+    <p>We ran nmap with the following commands:</p>
+    <p>Command:</p>
+    <pre>$ sudo nmap -sS 10.0.23.0/28</pre>
+    <p>Outcome (condensed):</p>
+    <pre>Starting Nmap 6.47 ( http://nmap.org ) at 2014-10-19 22:32 CEST
+Nmap scan report for osw004.sittingduck.bv (10.0.23.37)
+Host is up (0.034s latency).
+Not shown: 998 filtered ports
+PORT    STATE SERVICE
+80/tcp  open  http
+443/tcp open  https
+Nmap scan report for 10.0.23.101
+Host is up (0.016s latency).
+All 1000 scanned ports on 10.0.23.101 are filtered
+Nmap scan report for aud028.sittingduck.bv (10.0.23.105)
+Host is up (0.014s latency).
+All 1000 scanned ports on aud028.sittingduck.bv (10.0.23.105) are filtered
+Nmap scan report for monitoring28.sittingduck.bv (10.0.23.166)
+Host is up (0.061s latency).
+Not shown: 998 filtered ports
+PORT    STATE SERVICE
+80/tcp  open  http
+443/tcp open  https
+Nmap done: 12 IP addresses (4 hosts up) scanned in 102.34 seconds</pre>
+    
+    <p>Command:</p>                       
+    <pre>$ nmap -A -Pn 172.16.1.0/24</pre>
+    <p>Outcome (Condensed):</p>
+    <pre>Nmap scan report for osw06.sittingduck.bv (172.16.1.94)
+Host is up (0.28s latency).
+Not shown: 998 filtered ports
+PORT    STATE SERVICE VERSION
+80/tcp  open  http    nginx
+443/tcp open  http    nginx
+Nmap scan report for 172.16.1.103
+Host is up (0.39s latency).
+Not shown: 999 filtered ports
+PORT    STATE  SERVICE VERSION
+Nmap scan report for 172.16.1.106
+Host is up (0.31s latency).
+Not shown: 999 filtered ports
+PORT    STATE  SERVICE VERSION
+646/tcp closed ldp
+Nmap scan report for 172.16.1.105
+Host is up (0.28s latency).
+Not shown: 999 filtered ports
+PORT    STATE  SERVICE VERSION
+179/tcp closed bgp
+Nmap scan report for monitoring17.sittingduck.bv (172.16.1.109)
+Host is up (0.28s latency).
+Not shown: 998 filtered ports
+PORT    STATE SERVICE  VERSION
+80/tcp  open  http     Apache httpd 2.2.3
+443/tcp open  ssl/http Apache httpd 2.2.3
+Nmap scan report for ns3.sittingduck.bv (172.16.1.115)
+Host is up (0.27s latency).
+Not shown: 999 filtered ports
+PORT   STATE SERVICE VERSION
+53/tcp open  domain
+</pre>
+	
+	<p>Command:</p>
+	<pre>$ nmap -A -Pn 172.16.4.0/24</pre>
+	<p>Outcome (condensed):</p>
+	<pre>Nmap scan report for 172.16.4.23
+Host is up (0.23s latency).
+Not shown: 999 filtered ports
+PORT    STATE  SERVICE VERSION
+179/tcp closed bgp
+Nmap scan report for osw00.sittingduck.bv (172.16.4.27)
+Host is up (0.24s latency).
+Not shown: 998 filtered ports
+PORT    STATE SERVICE VERSION
+80/tcp  open  http    nginx
+443/tcp open  http    nginx
+Nmap scan report for 172.16.4.253
+Host is up (0.23s latency).
+Not shown: 998 filtered ports
+PORT    STATE SERVICE  VERSION
+80/tcp  open  http     Apache httpd 2.2.15
+443/tcp open  ssl/http Apache httpd 2.2.15
+Nmap scan report for 172.16.4.254
+Host is up (0.24s latency).
+Not shown: 998 filtered ports
+PORT    STATE SERVICE  VERSION
+80/tcp  open  http     Apache httpd 2.2.15     
+443/tcp open  ssl/http Apache httpd 2.2.15     
+</pre>
+    
+    <p>Nothing relevant was reported.</p>
+</section>

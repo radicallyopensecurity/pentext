@@ -1,0 +1,22 @@
+<finding id="pe" threatLevel="High" type="Privilege Escalation">
+    <title>Privilege Escalation</title>
+
+	<description>
+	<p>On one of the Sitting Duck Linux management machines, user gdehaas has a world readable file containing the clear text credentials of aspaans in his home directory. This allows the attacker to escalate, e.g. from the netmonclientd user, to the user aspaans. As aspaans has passwordless sudo rights, the attacker can further escalate to root access.</p>
+	</description>
+	<description_summary>
+	<p>User gdehaas has a world readable file containing clear text credentials of user aspaans, who has passwordless sudo rights and can thus be used to further escalate to root access.</p>
+	</description_summary>
+
+	<technicaldescription>
+	<p>The command line</p>
+	<pre>find /home/* -perm -o+r 2>/dev/null</pre>
+	<p>lists all world-readable files under /home .</p>
+	<p>The password in this issue can also be found by running</p>
+	<pre>grep -rin "password" /home/* 2>/dev/null</pre>
+	</technicaldescription>
+
+	<recommendation>
+	<p>Don't store clear text passwords in files. Strongly advise/educate your Unix users in getting their permissions masks right. Avoid giving out passwordless sudo rights to Unix users that don't require it.</p>
+	</recommendation>
+</finding>
