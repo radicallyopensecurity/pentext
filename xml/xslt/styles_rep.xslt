@@ -26,8 +26,7 @@
     
     <!-- Pages -->
     <xsl:attribute-set name="region-body-cover">
-        <xsl:attribute name="background-image"
-            >url(../graphics/frontpage_report.jpg)</xsl:attribute>
+        
     </xsl:attribute-set>
    
     <!-- Findings -->

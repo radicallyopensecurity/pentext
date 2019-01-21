@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<frontpage_graphics>
+    <!-- doctype name should be equal to doc root element -->
+    <doctype name="pentest_report">
+        <!-- list available covers below -->
+        <file name="frontpage_report_1.jpg"/>
+        <file name="frontpage_report_2.jpg"/>
+        <!--<file name="frontpage_report_3.jpg"/>-->
+    </doctype>
+    <doctype name="offerte">
+        <file name="frontpage_quote.jpg"/>
+    </doctype>
+</frontpage_graphics>
