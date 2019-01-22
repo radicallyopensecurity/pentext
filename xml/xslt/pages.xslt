@@ -14,6 +14,7 @@
                 >
                     <xsl:call-template name="select_frontpage_graphic">
                         <xsl:with-param name="doctype" select="local-name(/*)"/>
+                        <xsl:with-param name="current_second" select="$current_second"/>
                     </xsl:call-template>
                 </fo:region-body>
             </fo:simple-page-master>
@@ -85,10 +86,11 @@
     
     <xsl:template name="select_frontpage_graphic">
         <xsl:param name="doctype" select="'generic'"/>
+        <xsl:param name="current_second" select="1"/>
         <xsl:variable name="graphicsdoc"
         select="document('../graphics/frontpage_graphics.xml')/frontpage_graphics/doctype[@name = $doctype]"/>
         <xsl:variable name="available_frontpage_graphics" select="count($graphicsdoc/file)"/>
-        <xsl:variable name="current_second" select="seconds-from-dateTime(current-dateTime())"/>
+        
         <xsl:message><xsl:value-of select="$current_second"/></xsl:message>
         <!-- taking the current second as a 'random number generator' -->
         <xsl:variable name="selected_graphic" select="ceiling(number($available_frontpage_graphics div 60 * $current_second))"/>

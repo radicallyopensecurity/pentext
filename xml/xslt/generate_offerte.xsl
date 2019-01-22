@@ -104,12 +104,6 @@
             </fo:footnote-body>
         </fo:footnote>
     </xsl:template>
-    
-    <xsl:template name="ImageAttribution">
-        <fo:block xsl:use-attribute-sets="coc" break-after="page">
-             kallerna (https://commons.wikimedia.org/wiki/File:Rock_climber_Phra_Nang_1.jpg), "Rock climber Phra Nang 1", Image styling by Patricia Piolon, https://creativecommons.org/licenses/by-sa/3.0/legalcode </fo:block>
-    </xsl:template>
-
 
     <!-- CONTACT BOX (comes at the end, is just the address, no title/table) -->
     <xsl:template match="contact">

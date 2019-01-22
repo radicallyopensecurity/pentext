@@ -22,6 +22,9 @@
     <xsl:variable name="hourly_fee" select="/contract/meta/contractor/hourly_fee * 1"/>
     <xsl:variable name="plannedHours" select="/contract/meta/work/planning/hours * 1"/>
     <xsl:variable name="total_fee" select="$hourly_fee * $plannedHours"/>
+    
+    <!-- current second ('random' seed) -->
+    <xsl:variable name="current_second" select="ceiling(seconds-from-dateTime(current-dateTime()))"/>
 
     <!-- finding colors (used in findings & pie charts) -->
     <!-- threatlevel -->

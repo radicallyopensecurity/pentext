@@ -409,14 +409,34 @@
     </xsl:template>
 
     <xsl:template name="ImageAttribution">
-        <fo:block xsl:use-attribute-sets="coc" break-after="page"> Front page image by Slava
-            (https://secure.flickr.com/photos/slava/496607907/), "Mango HaX0ring", Image styling by Patricia Piolon, https://creativecommons.org/licenses/by-sa/2.0/legalcode. </fo:block>
+        <fo:block xsl:use-attribute-sets="coc" break-after="page">
+            <xsl:call-template name="select_frontpage_graphic_attribution">
+                <xsl:with-param name="doctype" select="local-name(/*)"/>
+                <xsl:with-param name="current_second" select="$current_second"/>
+            </xsl:call-template>
+        </fo:block>
     </xsl:template>
 
     <xsl:template match="subtitle">
         <xsl:apply-templates/>
     </xsl:template>
 
+    <xsl:template name="select_frontpage_graphic_attribution">
+        <xsl:param name="doctype" select="'generic'"/>
+        <xsl:param name="current_second" select="1"/>
+        <xsl:variable name="graphicsdoc"
+            select="document('../graphics/frontpage_graphics.xml')/frontpage_graphics/doctype[@name = $doctype]"/>
+        <xsl:variable name="available_frontpage_graphics" select="count($graphicsdoc/file)"/>
 
+        <xsl:message>
+            <xsl:value-of select="$current_second"/>
+        </xsl:message>
+        <!-- taking the current second as a 'random number generator' -->
+        <xsl:variable name="selected_graphic"
+            select="ceiling(number($available_frontpage_graphics div 60 * $current_second))"/>
+        <xsl:variable name="frontpage_graphic_attribution"
+            select="$graphicsdoc/file[$selected_graphic]/attribution"/>
+        <xsl:value-of select="$frontpage_graphic_attribution"/>
+    </xsl:template>
 
 </xsl:stylesheet>
