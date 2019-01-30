@@ -11,3 +11,5 @@ xml/PenText.xpr
 
 chatops.egg-info
 .tox
+/xml/source/offerte.xml
+/xml/source/report.xml
