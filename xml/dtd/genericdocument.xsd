@@ -30,8 +30,6 @@
     </xs:complexType>
   </xs:element>
 
-  <xs:element name="subtitle" type="xs:string"/>
-
   <xs:element name="collaborators">
     <xs:complexType>
       <xs:sequence>
