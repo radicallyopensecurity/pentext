@@ -90,8 +90,6 @@
         <xsl:variable name="graphicsdoc"
         select="document('../graphics/frontpage_graphics.xml')/frontpage_graphics/doctype[@name = $doctype]"/>
         <xsl:variable name="available_frontpage_graphics" select="count($graphicsdoc/file)"/>
-        
-        <xsl:message><xsl:value-of select="$current_second"/></xsl:message>
         <!-- taking the current second as a 'random number generator' -->
         <xsl:variable name="selected_graphic" select="ceiling(number($available_frontpage_graphics div 60 * $current_second))"/>
         <xsl:variable name="frontpage_graphic" select="$graphicsdoc/file[$selected_graphic]/@name"/>
