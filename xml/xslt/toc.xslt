@@ -45,7 +45,7 @@
         <fo:table-row>
             <fo:table-cell xsl:use-attribute-sets="tocCell">
                 <fo:block>
-                    <xsl:if test="parent::pentest_report">
+                    <xsl:if test="parent::pentest_report or parent::generic_document">
                         <!-- We're in a top-level section, so add some extra styling -->
                         <xsl:call-template name="topLevelToCEntry"/>
                     </xsl:if>
@@ -59,7 +59,7 @@
             </fo:table-cell>
             <fo:table-cell xsl:use-attribute-sets="tocCell">
                 <fo:block>
-                    <xsl:if test="parent::pentest_report">
+                    <xsl:if test="parent::pentest_report or parent::generic_document">
                         <!-- We're in a top-level section, so add some extra styling -->
                         <xsl:call-template name="topLevelToCEntry"/>
                     </xsl:if>
@@ -74,7 +74,7 @@
             <fo:table-cell padding-right="3pt" display-align="after"
                 xsl:use-attribute-sets="tocCell">
                 <fo:block text-align="right">
-                    <xsl:if test="parent::pentest_report">
+                    <xsl:if test="parent::pentest_report or parent::generic_document">
                         <!-- We're in a top-level section, so add some extra styling -->
                         <xsl:call-template name="topLevelToCEntry"/>
                     </xsl:if>

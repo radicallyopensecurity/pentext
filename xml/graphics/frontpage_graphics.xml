@@ -25,4 +25,9 @@
                 https://creativecommons.org/licenses/by-sa/3.0/legalcode</attribution>
         </file>
     </doctype>
+    <doctype name="generic_document">
+        <file name="frontpage_doc_1.jpg">
+            <attribution>Front page styling by Patricia Piolon</attribution>
+        </file>
+    </doctype>
 </frontpage_graphics>

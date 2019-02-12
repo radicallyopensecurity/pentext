@@ -7,7 +7,7 @@
     <xsl:param name="AUTO_NUMBERING_FORMAT" select="'1.1.1'"/>
 
     <!-- executive summary (report only) -->
-    <xsl:param name="EXEC_SUMMARY" select="true()"/>
+    <xsl:param name="EXEC_SUMMARY" select="false()"/>
 
     <!-- language parameter for localization (quote & invoice) -->
     <xsl:param name="lang" select="/*/@xml:lang"/>

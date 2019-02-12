@@ -120,16 +120,18 @@
                 <fo:table-column column-width="proportional-column-width(25)"/>
                 <fo:table-column column-width="proportional-column-width(75)"/>
                 <fo:table-body>
-                    <fo:table-row xsl:use-attribute-sets="borders">
-                        <fo:table-cell xsl:use-attribute-sets="th">
-                            <fo:block>Client</fo:block>
-                        </fo:table-cell>
-                        <fo:table-cell xsl:use-attribute-sets="td">
-                            <fo:block>
-                                <xsl:value-of select="//client/full_name"/>
-                            </fo:block>
-                        </fo:table-cell>
-                    </fo:table-row>
+                    <xsl:if test="not(/generic_document)">
+                        <fo:table-row xsl:use-attribute-sets="borders">
+                            <fo:table-cell xsl:use-attribute-sets="th">
+                                <fo:block>Client</fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell xsl:use-attribute-sets="td">
+                                <fo:block>
+                                    <xsl:value-of select="//client/full_name"/>
+                                </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                    </xsl:if>
                     <fo:table-row xsl:use-attribute-sets="borders">
                         <fo:table-cell xsl:use-attribute-sets="th">
                             <fo:block>Title</fo:block>
@@ -154,31 +156,33 @@
                             </xsl:choose>
                         </fo:table-cell>
                     </fo:table-row>
-                    <fo:table-row xsl:use-attribute-sets="borders">
-                        <fo:table-cell xsl:use-attribute-sets="th">
-                            <fo:block>Target<xsl:if test="targets/target[2]">s</xsl:if>
-                            </fo:block>
-                        </fo:table-cell>
-                        <fo:table-cell xsl:use-attribute-sets="td">
-                            <fo:block>
-                                <xsl:choose>
-                                    <xsl:when test="targets/target[2]">
-                                        <!-- more than one target -->
-                                        <xsl:for-each select="targets/target">
-                                            <fo:block>
-                                                <xsl:value-of select="."/>
-                                            </fo:block>
-                                        </xsl:for-each>
-                                        <!-- end list -->
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <!-- just the one -->
-                                        <xsl:value-of select="targets/target"/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </fo:block>
-                        </fo:table-cell>
-                    </fo:table-row>
+                    <xsl:if test="not(/generic_document)">
+                        <fo:table-row xsl:use-attribute-sets="borders">
+                            <fo:table-cell xsl:use-attribute-sets="th">
+                                <fo:block>Target<xsl:if test="targets/target[2]">s</xsl:if>
+                                </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell xsl:use-attribute-sets="td">
+                                <fo:block>
+                                    <xsl:choose>
+                                        <xsl:when test="targets/target[2]">
+                                            <!-- more than one target -->
+                                            <xsl:for-each select="targets/target">
+                                                <fo:block>
+                                                  <xsl:value-of select="."/>
+                                                </fo:block>
+                                            </xsl:for-each>
+                                            <!-- end list -->
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <!-- just the one -->
+                                            <xsl:value-of select="targets/target"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                    </xsl:if>
                     <fo:table-row xsl:use-attribute-sets="borders">
                         <fo:table-cell xsl:use-attribute-sets="th">
                             <fo:block>Version</fo:block>
@@ -189,24 +193,27 @@
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>
-                    <fo:table-row xsl:use-attribute-sets="borders">
-                        <fo:table-cell xsl:use-attribute-sets="th">
-                            <fo:block>Pentester<xsl:if test="collaborators/pentesters/pentester[2]"
+                    <xsl:if test="not(/generic_document)">
+                        <fo:table-row xsl:use-attribute-sets="borders">
+                            <fo:table-cell xsl:use-attribute-sets="th">
+                                <fo:block>Pentester<xsl:if
+                                        test="collaborators/pentesters/pentester[2]"
                                     >s</xsl:if></fo:block>
-                        </fo:table-cell>
-                        <fo:table-cell xsl:use-attribute-sets="td">
-                            <fo:block>
-                                <xsl:for-each select="collaborators/pentesters/pentester">
-                                    <fo:inline>
-                                        <xsl:value-of select="name"/>
-                                    </fo:inline>
-                                    <xsl:if test="following-sibling::pentester">
-                                        <xsl:text>, </xsl:text>
-                                    </xsl:if>
-                                </xsl:for-each>
-                            </fo:block>
-                        </fo:table-cell>
-                    </fo:table-row>
+                            </fo:table-cell>
+                            <fo:table-cell xsl:use-attribute-sets="td">
+                                <fo:block>
+                                    <xsl:for-each select="collaborators/pentesters/pentester">
+                                        <fo:inline>
+                                            <xsl:value-of select="name"/>
+                                        </fo:inline>
+                                        <xsl:if test="following-sibling::pentester">
+                                            <xsl:text>, </xsl:text>
+                                        </xsl:if>
+                                    </xsl:for-each>
+                                </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                    </xsl:if>
                     <fo:table-row xsl:use-attribute-sets="borders">
                         <fo:table-cell xsl:use-attribute-sets="th">
                             <fo:block>Author<xsl:if test="$authors[2]">s</xsl:if></fo:block>
@@ -428,9 +435,6 @@
             select="document('../graphics/frontpage_graphics.xml')/frontpage_graphics/doctype[@name = $doctype]"/>
         <xsl:variable name="available_frontpage_graphics" select="count($graphicsdoc/file)"/>
 
-        <xsl:message>
-            <xsl:value-of select="$current_second"/>
-        </xsl:message>
         <!-- taking the current second as a 'random number generator' -->
         <xsl:variable name="selected_graphic"
             select="ceiling(number($available_frontpage_graphics div 60 * $current_second))"/>
