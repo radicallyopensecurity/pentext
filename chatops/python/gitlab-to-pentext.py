@@ -91,9 +91,9 @@ class Finding(BaseItem):
         self.threat_level = 'Moderate'
         self.finding_type = 'TODO'
         self.status = 'new'
-        self.description = '<p>TODO</p>'
-        self.technicaldescription = '<p>TODO</p>'
-        self.impact = '<p>TODO</p>'
+        self.description = 'TODO'
+        self.technicaldescription = 'TODO'
+        self.impact = 'TODO'
         self.recommendation = '<ul><li>TODO</li></ul>'
 
     def __str__(self):
