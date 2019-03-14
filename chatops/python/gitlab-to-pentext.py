@@ -5,7 +5,7 @@
 This script is part of the PenText framework
                            https://pentext.org
 
-   Copyright (C) 2016-2017 Radically Open Security
+   Copyright (C) 2016-2019 Radically Open Security
                            https://www.radicallyopensecurity.com
 
                 Author(s): Peter Mosmans
@@ -91,10 +91,10 @@ class Finding(BaseItem):
         self.threat_level = 'Moderate'
         self.finding_type = 'TODO'
         self.status = 'new'
-        self.description = '<p>TODO</p>'
-        self.technicaldescription = '<p>TODO</p>'
-        self.impact = '<p>TODO</p>'
-        self.recommendation = '<ul><li>TODO</li></ul>'
+        self.description = '<p></p>'
+        self.technicaldescription = '<p></p>'
+        self.impact = '<p></p>'
+        self.recommendation = '<ul><li></li></ul>'
 
     def __str__(self):
         """Return an XML representation of the class."""
