@@ -20,6 +20,7 @@
     <xsl:import href="numbering.xslt"/>
     <xsl:import href="localisation.xslt"/>
     <xsl:import href="placeholders.xslt"/>
+    <xsl:import href="secrets.xslt"/>
     
 
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no"/>

@@ -63,7 +63,14 @@
         <xsl:attribute name="background-color">black</xsl:attribute>
         <xsl:attribute name="color"><xsl:value-of select="$color_moderate"/></xsl:attribute>
     </xsl:attribute-set>
-
+    <xsl:attribute-set name="censoredblock" use-attribute-sets="censoredtext">
+        <xsl:attribute name="padding">5mm</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="censoredtext">
+        <xsl:attribute name="background-color">black</xsl:attribute>
+        <xsl:attribute name="color">white</xsl:attribute>
+        <xsl:attribute name="font-weight">bold</xsl:attribute>
+    </xsl:attribute-set>
 
     <xsl:attribute-set name="title">
         <xsl:attribute name="keep-with-next.within-page">always</xsl:attribute>

@@ -4,7 +4,7 @@ RELEASE NOTES
 April 6th 2019
 --------------
 
-### Improved pie charts (groundhog edition)
+### Improved pie charts
 
 Pie charts now need a `@threshold`. This is used to determine which labels get thrown into the 'Other' bin. Useful for long reports with many, many findings of each a different type. Example: 
 
@@ -15,6 +15,11 @@ Pie charts now need a `@threshold`. This is used to determine which labels get t
 This piechart for findings by type will lump all types that have a count below __2__ into one big __Other__ bin. 
 
 __Note:__ To turn this off for a pie chart, set `@threshold` to 1.
+
+### Implementing secrets
+
+Your very own cold war style censoring mechanism! Censor blocks or inline text in your report by wrapping whatever you don't want visible in `<secret>` tags! Don't forget to add `secrets="hide"` to the `<pentest_report>` root element though, or your classified stuff will be out in the open for all to see!
+
 
 July 5th
 --------
