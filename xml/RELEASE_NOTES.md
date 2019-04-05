@@ -1,6 +1,21 @@
 RELEASE NOTES
 =============
 
+April 6th 2019
+--------------
+
+### Improved pie charts (groundhog edition)
+
+Pie charts now need a `@threshold`. This is used to determine which labels get thrown into the 'Other' bin. Useful for long reports with many, many findings of each a different type. Example: 
+
+```
+<generate_piechart pieAttr="type" pieElem="finding" pieHeight="175" status="new unresolved" threshold=2 />
+```
+
+This piechart for findings by type will lump all types that have a count below __2__ into one big __Other__ bin. 
+
+__Note:__ To turn this off for a pie chart, set `@threshold` to 1.
+
 July 5th
 --------
 
