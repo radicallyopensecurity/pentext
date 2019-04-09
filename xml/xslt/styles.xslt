@@ -157,6 +157,8 @@
         <xsl:attribute name="font-family">LiberationMono</xsl:attribute>
         <xsl:attribute name="font-size">85%</xsl:attribute>
         <xsl:attribute name="background-color">#eeeeee</xsl:attribute>
+        <xsl:attribute name="padding-top">2pt</xsl:attribute>
+        <xsl:attribute name="padding-bottom">1pt</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="code-title" use-attribute-sets="DefaultFont">
         <xsl:attribute name="font-family">LiberationMono</xsl:attribute>
