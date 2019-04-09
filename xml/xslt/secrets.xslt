@@ -5,17 +5,22 @@
 
     <!-- black out anything you don't want seen -->
     <xsl:template match="secret">
-        <xsl:if test="/pentest_report[@secrets = 'hide']">
-            <xsl:choose>
-                <xsl:when
-                    test="img | p | div | table | section | appendix | ol | ul | pre">
-                    <fo:block xsl:use-attribute-sets="censoredtext" >[ CENSORED ]</fo:block>
-                </xsl:when>
-                <xsl:otherwise>
-                    <fo:inline xsl:use-attribute-sets="censoredtext">[ CENSORED ]</fo:inline>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="/pentest_report[@secrets = 'hide']">
+                <xsl:choose>
+                    <xsl:when
+                        test="img | generate_piechart | p | div | table | section | ol | ul | pre">
+                        <fo:block xsl:use-attribute-sets="censoredtext">[ CENSORED ]</fo:block>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <fo:inline xsl:use-attribute-sets="censoredtext">[ CENSORED ]</fo:inline>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 </xsl:stylesheet>
