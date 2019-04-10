@@ -12,7 +12,12 @@
                     <xsl:with-param name="pieElem" select="@pieElem"/>
                     <xsl:with-param name="pieHeight" select="@pieHeight"/>
                     <xsl:with-param name="status" select="@status"/>
-                    <xsl:with-param name="threshold" select="@threshold"/>
+                    <xsl:with-param name="threshold">
+                        <xsl:choose>
+                            <xsl:when test="@threshold"><xsl:value-of select="@threshold"/></xsl:when>
+                            <xsl:otherwise>1</xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:with-param>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
