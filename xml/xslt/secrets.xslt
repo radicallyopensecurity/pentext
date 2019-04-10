@@ -10,7 +10,9 @@
                 <xsl:choose>
                     <xsl:when
                         test="img | generate_piechart | p | div | table | section | ol | ul | pre">
-                        <fo:block xsl:use-attribute-sets="censoredblock">[ CENSORED ]</fo:block>
+                        <fo:block xsl:use-attribute-sets="censoredblock">
+                            <xsl:call-template name="checkIfLast"/>
+                            <xsl:text>[ CENSORED ]</xsl:text></fo:block>
                     </xsl:when>
                     <xsl:otherwise>
                         <fo:inline xsl:use-attribute-sets="censoredtext">[ CENSORED ]</fo:inline>
