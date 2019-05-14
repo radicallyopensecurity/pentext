@@ -21,9 +21,19 @@
                     DOCUMENT</fo:inline>
             </xsl:when>
             <xsl:when
-                test="(starts-with(@href, '#') and //*[@id = $destination][ancestor-or-self::*[@visibility = 'hidden']]) or (starts-with(@href, '#') and $execsummary=true() and //*[@id = $destination][ancestor-or-self::*[not(@inexecsummary='yes')]])">
+                test="(starts-with(@href, '#') and //*[@id = $destination][ancestor-or-self::*[@visibility = 'hidden']])">
                 <fo:inline xsl:use-attribute-sets="errortext">WARNING: LINK TARGET IS
                     HIDDEN</fo:inline>
+            </xsl:when>
+            <xsl:when
+                test="starts-with(@href, '#') and $execsummary = true() and //*[@id = $destination][ancestor-or-self::*[not(@inexecsummary = 'yes')]]">
+                <!-- linking to something that is not in the exec summary -->
+                <xsl:value-of select="local-name(*[@id = $destination])"/>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="linkText">
+                    <xsl:with-param name="destination" select="$destination"/>
+                    <xsl:with-param name="execsummary_linking_to_content_not_in_report" select="true()"></xsl:with-param>
+                </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
                 <fo:basic-link xsl:use-attribute-sets="link">
@@ -39,30 +49,49 @@
                             </xsl:attribute>
                         </xsl:otherwise>
                     </xsl:choose>
-                    <xsl:choose>
-                        <xsl:when test="starts-with(@href, '#') and not(text())">
-                            <xsl:for-each select="key('rosid', $destination)">
-                                <xsl:if
-                                    test="not(local-name() = 'appendix' or local-name() = 'finding')">
-                                    <!-- appendix already has 'appendix' as part of its numbering, findings should not be prefixed with the word 'finding' -->
-                                    <xsl:value-of select="local-name()"/>
-                                    <xsl:text> </xsl:text>
-                                </xsl:if>
-                                <xsl:apply-templates select="." mode="number"/>
-                            </xsl:for-each>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:apply-templates select="* | text()"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
+                    <xsl:call-template name="linkText">
+                        <xsl:with-param name="destination" select="$destination"/>
+                    </xsl:call-template>
                 </fo:basic-link>
                 <xsl:if test="starts-with(@href, '#')">
                     <xsl:if test="not(@includepage = 'no')">
                         <xsl:text> (page </xsl:text>
-                    <fo:page-number-citation ref-id="{substring(@href, 2)}"/>
-                    <xsl:text>)</xsl:text>
+                        <fo:page-number-citation ref-id="{substring(@href, 2)}"/>
+                        <xsl:text>)</xsl:text>
                     </xsl:if>
                 </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="linkText">
+        <xsl:param name="execsummary_linking_to_content_not_in_report" select="false()"/>
+        <xsl:param name="destination"/>
+        <xsl:choose>
+            <xsl:when test="starts-with(@href, '#') and not(text())">
+                <xsl:for-each select="key('rosid', $destination)">
+                    <xsl:choose>
+                    <xsl:when test="$execsummary_linking_to_content_not_in_report = false()">
+                    <xsl:if test="not(local-name() = 'appendix' or local-name() = 'finding')">
+                        <!-- appendix already has 'appendix' as part of its numbering, findings should not be prefixed with the word 'finding' -->
+                        <xsl:value-of select="local-name()"/>
+                        <xsl:text> </xsl:text>
+                    </xsl:if>
+                    <xsl:apply-templates select="." mode="number"/>
+                        </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:if test="not(local-name() = 'appendix')">
+                        <!-- appendix already has 'appendix' as part of its numbering, findings should not be prefixed with the word 'finding' -->
+                        <xsl:value-of select="local-name()"/>
+                        <xsl:text> </xsl:text>
+                    </xsl:if>
+                    <xsl:apply-templates select="." mode="number"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="* | text()"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -196,8 +225,8 @@
                     </xsl:attribute>
                     <xsl:text>[</xsl:text>
                     <xsl:for-each select="key('biblioid', $bibid)">
-                                <xsl:apply-templates select="." mode="number"/>
-                            </xsl:for-each>
+                        <xsl:apply-templates select="." mode="number"/>
+                    </xsl:for-each>
                     <xsl:text>]</xsl:text>
                 </fo:basic-link>
             </xsl:otherwise>
@@ -330,7 +359,9 @@
     <xsl:template match="link">
         <xsl:apply-templates select="a"/>
         <xsl:text>. </xsl:text>
-        <xsl:if test="accessed"><xsl:apply-templates select="accessed"/></xsl:if>
+        <xsl:if test="accessed">
+            <xsl:apply-templates select="accessed"/>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="accessed">
