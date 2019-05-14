@@ -163,15 +163,12 @@
                                             </fo:inline>
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <xsl:if test="not(../.. = /)">
-                                                <!-- no numbering for top-level sections -->
-                                                <fo:inline>
+                                            <fo:inline>
                                                   <xsl:number
                                                   count="section[not(@visibility = 'hidden')][ancestor-or-self::*/@inexecsummary = 'yes'] | finding | non-finding"
                                                   level="multiple" format="{$AUTO_NUMBERING_FORMAT}"
                                                   />
                                                 </fo:inline>
-                                            </xsl:if>
                                         </xsl:otherwise>
                                     </xsl:choose>
                                 </xsl:when>
