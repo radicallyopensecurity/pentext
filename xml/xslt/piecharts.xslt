@@ -166,12 +166,12 @@
                     </xsl:for-each>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:copy-of select="$sortedPieTable"/>
+                    <xsl:copy-of select="$sortedPieTable" copy-namespaces="no"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="pieTable">
-            <xsl:copy-of select="$pieTable_thresholdApplied"/>
+            <xsl:copy-of select="$pieTable_thresholdApplied" copy-namespaces="no"/>
             <xsl:if test="$threshold &gt; 1">
                 <pieEntry>
                     <pieEntryLabel>

@@ -16,16 +16,16 @@
                 <targets>
                     <xsl:comment>one target element per target</xsl:comment>
                     <xsl:for-each select="/*/meta/targets/target">
-                        <xsl:copy>
-                            <xsl:copy-of select="node()"/>
+                        <xsl:copy copy-namespaces="no">
+                            <xsl:copy-of select="node()" copy-namespaces="no"/>
                         </xsl:copy>
                     </xsl:for-each>
                 </targets>
                 <activityinfo>
                     <xsl:for-each select="/offerte/meta/activityinfo/*">
                         <xsl:if test="not(self::fee)">
-                            <xsl:copy>
-                                <xsl:copy-of select="node()"/>
+                            <xsl:copy copy-namespaces="no">
+                                <xsl:copy-of select="node()" copy-namespaces="no"/>
                             </xsl:copy>
                         </xsl:if>
                     </xsl:for-each>
@@ -35,8 +35,8 @@
                         <xsl:attribute name="href">client_info.xml</xsl:attribute>
                     </xsl:element>
                     <xsl:for-each select="/offerte/meta/permission_parties/party">
-                        <xsl:copy>
-                            <xsl:copy-of select="node()"/>
+                        <xsl:copy copy-namespaces="no">
+                            <xsl:copy-of select="node()" copy-namespaces="no"/>
                         </xsl:copy>
                     </xsl:for-each>
                 </permission_parties>

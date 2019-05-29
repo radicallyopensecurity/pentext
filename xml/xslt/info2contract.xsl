@@ -31,7 +31,7 @@
                 <xsl:element name="xi:include">
                     <xsl:attribute name="href">snippets/company_info.xml</xsl:attribute>
                 </xsl:element>
-                <xsl:copy-of select="contract_info/company/following-sibling::node()"/>
+                <xsl:copy-of select="contract_info/company/following-sibling::node()" copy-namespaces="no"/>
             </meta>
 
 

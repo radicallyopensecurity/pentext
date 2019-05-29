@@ -70,8 +70,8 @@
                     <!-- copy targets from quickscope -->
                     <xsl:comment>one target element per target</xsl:comment>
                     <xsl:for-each select="//targets/target">
-                        <xsl:copy>
-                            <xsl:copy-of select="node()"/>
+                        <xsl:copy copy-namespaces="no">
+                            <xsl:copy-of select="node()" copy-namespaces="no"/>
                         </xsl:copy>
                     </xsl:for-each>
                 </targets>
@@ -82,7 +82,7 @@
                     </xsl:element>
                     <xsl:for-each select="/*/third_party">
                         <party>
-                            <xsl:copy-of select="node()"/>
+                            <xsl:copy-of select="node()" copy-namespaces="no"/>
                         </party>
                     </xsl:for-each>
                 </permission_parties>

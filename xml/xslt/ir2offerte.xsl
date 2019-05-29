@@ -71,8 +71,8 @@
                 </permission_parties>
                 <activityinfo>
                     <xsl:for-each select="//activityinfo/*">
-                        <xsl:copy>
-                            <xsl:copy-of select="node()"/>
+                        <xsl:copy copy-namespaces="no">
+                            <xsl:copy-of select="node()" copy-namespaces="no"/>
                         </xsl:copy>
                     </xsl:for-each>
                 </activityinfo>
