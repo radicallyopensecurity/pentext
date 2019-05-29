@@ -56,7 +56,14 @@
                     <xsl:apply-templates select="offerte"/>
                 </fo:block>
                 <xsl:if test="not(following-sibling::*)">
-                    <fo:block id="EndOfDoc"/>
+                    <fo:block id="EndOfDoc">
+                        <fo:footnote>
+                            <fo:inline/>
+                            <fo:footnote-body>
+                                <xsl:call-template name="ImageAttribution"/>
+                            </fo:footnote-body>
+                        </fo:footnote>
+                    </fo:block>
                 </xsl:if>
             </fo:flow>
         </fo:page-sequence>
@@ -100,7 +107,6 @@
             <fo:inline/>
             <fo:footnote-body>
                 <xsl:call-template name="Contact"/>
-                <xsl:call-template name="ImageAttribution"/>
             </fo:footnote-body>
         </fo:footnote>
     </xsl:template>

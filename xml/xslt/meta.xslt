@@ -34,7 +34,6 @@
         <xsl:call-template name="DocProperties"/>
         <xsl:call-template name="VersionControl"/>
         <xsl:call-template name="Contact"/>
-        <xsl:call-template name="ImageAttribution"/>
     </xsl:template>
 
     <xsl:template name="front">

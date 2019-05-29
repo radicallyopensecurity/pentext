@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fo="http://www.w3.org/1999/XSL/Format"
-     xmlns:my="http://www.radical.sexy" 
-    exclude-result-prefixes="my xs" version="2.0">
+    xmlns:my="http://www.radical.sexy" exclude-result-prefixes="my xs" version="2.0">
 
 
     <xsl:template name="layout-master-set">
@@ -10,8 +9,7 @@
         <fo:layout-master-set>
             <!-- Cover page -->
             <fo:simple-page-master master-name="Front-Cover" xsl:use-attribute-sets="PortraitPage">
-                <fo:region-body region-name="cover-flow" xsl:use-attribute-sets="region-body-cover"
-                >
+                <fo:region-body region-name="cover-flow" xsl:use-attribute-sets="region-body-cover">
                     <xsl:call-template name="select_frontpage_graphic">
                         <xsl:with-param name="doctype" select="local-name(/*)"/>
                         <xsl:with-param name="current_second" select="$current_second"/>
@@ -83,18 +81,19 @@
             </fo:page-sequence-master>
         </fo:layout-master-set>
     </xsl:template>
-    
+
     <xsl:template name="select_frontpage_graphic">
         <xsl:param name="doctype" select="'generic'"/>
         <xsl:param name="current_second" select="1"/>
         <xsl:variable name="graphicsdoc"
-        select="document('../graphics/frontpage_graphics.xml')/frontpage_graphics/doctype[@name = $doctype]"/>
+            select="document('../graphics/frontpage_graphics.xml')/frontpage_graphics/doctype[@name = $doctype]"/>
         <xsl:variable name="available_frontpage_graphics" select="count($graphicsdoc/file)"/>
         <!-- taking the current second as a 'random number generator' -->
-        <xsl:variable name="selected_graphic" select="ceiling(number($available_frontpage_graphics div 60 * $current_second))"/>
+        <xsl:variable name="selected_graphic"
+            select="ceiling(number($available_frontpage_graphics div 60 * $current_second))"/>
         <xsl:variable name="frontpage_graphic" select="$graphicsdoc/file[$selected_graphic]/@name"/>
-        <xsl:attribute name="background-image"
-            >url(../graphics/<xsl:value-of select="$frontpage_graphic"/>)</xsl:attribute>
+        <xsl:attribute name="background-image">url(../graphics/<xsl:value-of
+                select="$frontpage_graphic"/>)</xsl:attribute>
     </xsl:template>
 
     <xsl:template name="page_footer">
@@ -111,7 +110,7 @@
             <fo:block xsl:use-attribute-sets="footer-even">
                 <fo:inline>
                     <fo:page-number/>
-                </fo:inline> 
+                </fo:inline>
                 <fo:leader leader-pattern="space"/>
                 <xsl:value-of select="//meta/company/full_name"/>
             </fo:block>
@@ -126,13 +125,14 @@
 
     <xsl:template name="page_header">
         <fo:static-content flow-name="region-before-content-odd" xsl:use-attribute-sets="FooterFont">
-            <fo:block xsl:use-attribute-sets="header-odd"><xsl:value-of select="//meta/classification"/>
+            <fo:block xsl:use-attribute-sets="header-odd">
+                <xsl:value-of select="//meta/classification"/>
             </fo:block>
         </fo:static-content>
-        
-        <fo:static-content flow-name="region-before-content-even" xsl:use-attribute-sets="FooterFont">
-            <fo:block>
-            </fo:block>
+
+        <fo:static-content flow-name="region-before-content-even"
+            xsl:use-attribute-sets="FooterFont">
+            <fo:block> </fo:block>
         </fo:static-content>
     </xsl:template>
 
@@ -191,7 +191,14 @@
                     <xsl:apply-templates select="."/>
                 </fo:block>
                 <xsl:if test="not(following-sibling::*)">
-                    <fo:block id="EndOfDoc"/>
+                    <fo:block id="EndOfDoc">
+                        <fo:footnote>
+                            <fo:inline/>
+                            <fo:footnote-body>
+                                <xsl:call-template name="ImageAttribution"/>
+                            </fo:footnote-body>
+                        </fo:footnote>
+                    </fo:block>
                 </xsl:if>
             </fo:flow>
         </fo:page-sequence>
