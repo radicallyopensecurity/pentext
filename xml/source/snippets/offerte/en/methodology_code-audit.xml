@@ -19,10 +19,10 @@
       with the user and other systems. Having detailed documentation (manuals, flow charts, system
       sequence diagrams, design documentation) at this stage is very helpful, as they aid the
       understanding of the application </li>
-    <li><b>Comprehensive code reading</b></li><br/> goals of the comprehensive code reading are:
-        <ul><li>to get an understanding of the whole code</li>
-      <li>identify adversary controlled inputs and trace their paths</li>
-      <li>identify issues</li></ul>
+    <li><b>Comprehensive code reading</b><br/> goals of the comprehensive code reading are:
+          <ul><li>to get an understanding of the whole code</li>
+        <li>identify adversary controlled inputs and trace their paths</li>
+        <li>identify issues</li></ul></li>
     <li><b>Static analysis</b>
       <br/> Using the understanding we gained in the previous step, we will use static code analysis
       to uncover any vulnerabilities. Static analysis means the specialist will analyze the code and
@@ -39,8 +39,11 @@
       exploited by the specialist. This is usually done to confirm a vulnerability and as such
       follows the result of the static analysis. </li>
     <li><b>Fuzzing</b>
-    <br/> Fuzz testing or Fuzzing is a software testing technique which in essence consists of finding implementation bugs using malformed/semi-malformed data injection in an automated fashion.</li>
+      <br/> Fuzz testing or Fuzzing is a software testing technique which in essence consists of
+      finding implementation bugs using malformed/semi-malformed data injection in an automated
+      fashion.</li>
     <li><b>Concolic analysis</b>
-    <br/> If the specialist thinks it useful, additional concolic analysis may be performed on selected subsets of the code.</li>
+      <br/> If the specialist thinks it useful, additional concolic analysis may be performed on
+      selected subsets of the code.</li>
   </ol>
 </section>
