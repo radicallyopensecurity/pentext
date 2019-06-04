@@ -586,8 +586,8 @@
     <!-- hide any attributes that are not explicitly handled -->
     <xsl:template match="@*"/>
 
-    <xsl:template match="@id">
-        <!-- copy all ids! -->
+    <xsl:template match="@id | @src | @alt">
+        <!-- copy these! -->
         <xsl:copy/>
     </xsl:template>
 
@@ -596,22 +596,11 @@
         <xsl:apply-templates/>
     </xsl:template>
 
-    <xsl:template match="br | p | ul | ol | li | pre | div">
+    <xsl:template match="br | p | ul | ol | li | pre | div | img">
         <xsl:copy copy-namespaces="no">
             <xsl:apply-templates select="@* | node()"/>
         </xsl:copy>
     </xsl:template>
-
-
-    <!--<!-\- special case for p in summary table to avoid checkiflast - all other elements can ignore mode -\->
-    <xsl:template match="*" mode="summarytable">
-        <xsl:apply-templates select="."/>
-    </xsl:template>
-
-    <!-\- p is more specific so has higher prio -\->
-    <xsl:template match="p" mode="summarytable">
-        <xsl:apply-templates mode="summarytable"/>
-    </xsl:template>-->
 
     <xsl:template match="a">
         <xsl:variable name="destination">

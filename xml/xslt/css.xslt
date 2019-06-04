@@ -624,7 +624,12 @@ there.
 }
 
 h1, h2, h3, h4 {
-    margin-top: 2rem;
+    margin-top: 5rem;
+}
+
+img {
+  width: 100%;
+  height: auto;
 }
         
     </xsl:template>
