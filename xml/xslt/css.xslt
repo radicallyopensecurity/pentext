@@ -632,6 +632,10 @@ img {
   height: auto;
 }
 
+.logo {
+  width: 60%;
+}
+
 .title-client {
   font-weight: bold;
 }
