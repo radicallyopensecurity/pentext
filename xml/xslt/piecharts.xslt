@@ -14,14 +14,7 @@
                 <xsl:call-template name="do_generate_piechart">
                     <xsl:with-param name="pieAttr" select="@pieAttr"/>
                     <xsl:with-param name="pieElem" select="@pieElem"/>
-                    <xsl:with-param name="pieHeight" select="@pieHeight"/>
                     <xsl:with-param name="status" select="@status"/>
-                    <xsl:with-param name="threshold">
-                        <xsl:choose>
-                            <xsl:when test="@threshold"><xsl:value-of select="@threshold"/></xsl:when>
-                            <xsl:otherwise>1</xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:with-param>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
@@ -38,9 +31,9 @@
         <!-- generate_piechart @type="type" or "threatLevel" -->
         <xsl:param name="pieAttr" select="@pieAttr"/>
         <xsl:param name="pieElem" select="@pieElem"/>
-        <xsl:param name="pieHeight" as="xs:integer" select="@pieHeight"/>
+        <xsl:param name="pieHeight" as="xs:integer" select="200"/>
         <xsl:param name="status" select="@status"/>
-        <xsl:param name="threshold" select="@threshold"/>
+        <xsl:param name="threshold" select="2"/>
         <xsl:variable name="statusSequence" as="item()*">
             <xsl:for-each select="$status">
                 <xsl:for-each select="tokenize(., ' ')">
@@ -158,7 +151,7 @@
         </xsl:variable>
         <xsl:variable name="pieTable_thresholdApplied">
             <xsl:choose>
-                <xsl:when test="$threshold &gt; 1">
+                <xsl:when test="not($pieAttr = 'threatLevel') and $sumBelowThreshold > 4">
                     <xsl:for-each
                         select="$sortedPieTable/pieEntry[child::pieEntryCount &gt;= $threshold]">
                         <pieEntry>
@@ -178,7 +171,7 @@
         </xsl:variable>
         <xsl:variable name="pieTable">
             <xsl:copy-of select="$pieTable_thresholdApplied" copy-namespaces="no"/>
-            <xsl:if test="$threshold &gt; 1">
+            <xsl:if test="not($pieAttr = 'threatLevel') and $sumBelowThreshold > 4">
                 <pieEntry>
                     <pieEntryLabel>
                         <xsl:text>Other</xsl:text>
@@ -206,8 +199,7 @@
         <xsl:param name="pieTotal"/>
         <xsl:param name="no_entries"/>
         <xsl:param name="pieHeightHalf"/>
-        <xsl:variable name="spacing_for_percentage_labels">40</xsl:variable>
-        <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="-40 0 300 300">
+        <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="-40 -20 300 300">
             <!-- The bit below tried to configure the piechart size but basically nobody ever changes it and it just makes it all way too difficult -->
             <!-- width and height of the viewport -->
             <!--<xsl:attribute name="width">

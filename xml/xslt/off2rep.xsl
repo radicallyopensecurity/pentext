@@ -109,11 +109,11 @@
                     <xsl:comment> generated from Findings section </xsl:comment>
                     <section id="threatlevelpie">
                         <title>Findings by Threat Level</title>
-                        <generate_piechart pieAttr="threatLevel" pieElem="finding" pieHeight="200" threshold="1"/>
+                        <generate_piechart pieAttr="threatLevel" pieElem="finding"/>
                     </section>
                     <section id="typepie">
                         <title>Findings by Type</title>
-                        <generate_piechart pieAttr="type" pieElem="finding" pieHeight="200" threshold="2"/>
+                        <generate_piechart pieAttr="type" pieElem="finding"/>
                     </section>
                 </section>
                 <section id="recommendationSummary">
