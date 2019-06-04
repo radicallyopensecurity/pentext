@@ -409,13 +409,13 @@
                 </fo:table-body>
             </fo:table>
         </fo:block>
-        <fo:block xsl:use-attribute-sets="coc">
+        <fo:block xsl:use-attribute-sets="coc" break-after="page">
             <xsl:value-of select="company/full_name"/> is registered at the trade register of the
             Dutch chamber of commerce under number <xsl:value-of select="company/coc"/>. </fo:block>
     </xsl:template>
 
     <xsl:template name="ImageAttribution">
-        <fo:block xsl:use-attribute-sets="coc" break-after="page">
+        <fo:block xsl:use-attribute-sets="coc">
             <xsl:call-template name="select_frontpage_graphic_attribution">
                 <xsl:with-param name="doctype" select="local-name(/*)"/>
                 <xsl:with-param name="current_second" select="$current_second"/>
