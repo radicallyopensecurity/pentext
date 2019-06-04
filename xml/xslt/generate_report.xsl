@@ -14,7 +14,7 @@
     <xsl:import href="fo_piecharts.xslt"/>
     <xsl:import href="table.xslt"/>
     <xsl:import href="lists.xslt"/>
-    <xsl:import href="inline.xslt"/>
+    <xsl:import href="fo_inline.xslt"/>
     <xsl:import href="graphics.xslt"/>
     <xsl:import href="generic.xslt"/>
     <xsl:import href="numbering.xslt"/>
