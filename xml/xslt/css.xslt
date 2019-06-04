@@ -537,7 +537,7 @@ hr {
   margin-top: 3rem;
   margin-bottom: 3.5rem;
   border-width: 0;
-  border-top: 1px solid <xsl:value-of select="$c_support_light"/>; }
+  border-top: 1px solid <xsl:value-of select="$c_main"/>; }
 
 
 /* Clearing
@@ -628,8 +628,21 @@ h1, h2, h3, h4 {
 }
 
 img {
-  width: 100%;
+  width: 80%;
   height: auto;
+}
+
+.title-client {
+  font-weight: bold;
+}
+
+.contents {
+  margin-bottom: 5rem;
+}
+
+.endOfDoc {
+  width: 25%;
+  margin-bottom: 10rem;
 }
         
     </xsl:template>

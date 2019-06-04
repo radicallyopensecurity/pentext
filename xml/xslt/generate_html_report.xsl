@@ -41,58 +41,45 @@
             <body>
                 <xsl:apply-templates select="/*/meta" mode="frontmatter"/>
                 <xsl:apply-templates select="/*/generate_index"/>
-                <div class="container">
+                <div class="container contents">
                     <xsl:for-each select="/*/section | /*/appendix">
                         <xsl:apply-templates select="."/>
                     </xsl:for-each>
                 </div>
+                <hr class="endOfDoc"/>
             </body>
         </html>
     </xsl:template>
 
     <xsl:template match="meta" mode="frontmatter">
-
-
         <div class="section">
             <div class="container">
                 <div class="row">
-                    <div class="two-thirds column">
+                    <div class="offset-by-two columns">
                         <img src="../graphics/logo.png" class="logo"/>
                     </div>
-                    <div class="one-third column">
-                        <div>
-                            <h1>
-                                <xsl:sequence
-                                    select="
-                                        string-join(for $x in tokenize(normalize-space(title), ' ')
-                                        return
-                                            my:titleCase($x), ' ')"
-                                />
-                            </h1>
+                </div>
+                <div class="row">
+                    <div class="u-full-width">
+                        <h1>
+                            <xsl:sequence
+                                select="
+                                    string-join(for $x in tokenize(normalize-space(title), ' ')
+                                    return
+                                        my:titleCase($x), ' ')"
+                            />
+                        </h1>
+                    
+                        <div class="title-client">
+                            <xsl:value-of select="//client/full_name"/>
                         </div>
-                        <div>
-                            <div class="title-client">
-                                <xsl:value-of select="//client/full_name"/>
+                        <xsl:if test="normalize-space(//meta/subtitle) or //meta/subtitle/*">
+                            <div class="title-sub">
+                                <xsl:apply-templates select="subtitle"/>
                             </div>
-                            <xsl:if test="/offerte">
-                                <div class="title-sub">
-                                    <xsl:sequence
-                                        select="
-                                            string-join(for $x in tokenize(normalize-space(//meta/offered_service_long), ' ')
-                                            return
-                                                my:titleCase($x), ' ')"
-                                    />
-                                </div>
-                            </xsl:if>
-                            <xsl:if test="normalize-space(//meta/subtitle) or //meta/subtitle/*">
-                                <div class="title-sub">
-                                    <xsl:apply-templates select="subtitle"/>
-                                </div>
-                            </xsl:if>
-                        </div>
+                        </xsl:if>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -597,7 +584,7 @@
         <xsl:apply-templates/>
     </xsl:template>
 
-    
+
     <xsl:template match="finding" mode="meta">
         <xsl:variable name="status" select="@status"/>
         <xsl:variable name="prettyStatus">
