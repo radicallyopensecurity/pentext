@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fo="http://www.w3.org/1999/XSL/Format"
-    xmlns:my="http://radical.sexy" exclude-result-prefixes="xs my" version="2.0">
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:my="http://www.radical.sexy"
+    exclude-result-prefixes="xs my" version="2.0">
 
     <xsl:template name="getDenomination">
         <xsl:param name="placeholderElement" as="node()" select="/"/>
         <xsl:choose>
-            <xsl:when test="$placeholderElement/ancestor-or-self::*/@denomination = 'eur'"
+            <xsl:when
+                test="$placeholderElement/ancestor-or-self::*[@denomination][1]/@denomination = 'eur'"
                 >€</xsl:when>
-            <xsl:when test="$placeholderElement/ancestor-or-self::*/@denomination = 'usd'"
+            <xsl:when
+                test="$placeholderElement/ancestor-or-self::*[@denomination][1]/@denomination = 'usd'"
                 >$</xsl:when>
-            <xsl:when test="$placeholderElement/ancestor-or-self::*/@denomination = 'gbp'"
+            <xsl:when
+                test="$placeholderElement/ancestor-or-self::*[@denomination][1]/@denomination = 'gbp'"
                 >£</xsl:when>
             <xsl:otherwise>
-                <fo:inline xsl:use-attribute-sets="errortext">WARNING: NO DENOMINATION
-                    FOUND</fo:inline>
+                <xsl:call-template name="displayErrorText">
+                    <xsl:with-param name="string">WARNING: NO DENOMINATION FOUND</xsl:with-param>
+                </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
 
     <!-- PLACEHOLDERS -->
     <xsl:template match="client_long">
@@ -274,10 +279,12 @@
     <xsl:template match="contract_activities">
         <xsl:choose>
             <xsl:when test="/contract/meta/work/activities/activity">
-                <xsl:call-template name="generate_activities_xslt"/>
+                <xsl:call-template name="generate_activities"/>
             </xsl:when>
             <xsl:otherwise>
-                <fo:inline xsl:use-attribute-sets="errortext">XXXXXX</fo:inline>
+                <xsl:call-template name="displayErrorText">
+                    <xsl:with-param name="string">WARNING: NO ACTIVITIES FOUND</xsl:with-param>
+                </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -442,7 +449,7 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="count(//finding[@threatLevel = $threatLevel])"/>
-                        $threatLevel])"/> </xsl:otherwise>
+                    </xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
@@ -454,11 +461,15 @@
     <xsl:template match="todo">
         <xsl:choose>
             <xsl:when test="@desc">
-                <fo:inline xsl:use-attribute-sets="errortext">### TODO: <xsl:value-of select="@desc"
-                    /> ###</fo:inline>
+                <xsl:call-template name="displayErrorText">
+                    <xsl:with-param name="string">### TODO: <xsl:value-of select="@desc"/>
+                        ###</xsl:with-param>
+                </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <fo:inline xsl:use-attribute-sets="errortext">### TODO ###</fo:inline>
+                <xsl:call-template name="displayErrorText">
+                    <xsl:with-param name="string">### TODO ###</xsl:with-param>
+                </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -493,13 +504,12 @@
                     </xsl:when>
                     <xsl:when
                         test="(self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate or self::p_startdate or self::p_enddate) and normalize-space(.) = 'TBD'">
-                        <!-- actual TBD, don't mess with it -->
-                        <fo:text>TBD</fo:text>
-                    </xsl:when>
+                        <!-- actual TBD, don't mess with it --> TBD </xsl:when>
                     <xsl:when
                         test="(self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate or self::p_startdate or self::p_enddate) and not(string($placeholderElement) castable as xs:date)">
-                        <!-- pretty printing for date -->
-                        <fo:inline xsl:use-attribute-sets="errortext">TBD</fo:inline>
+                        <xsl:call-template name="displayErrorText">
+                            <xsl:with-param name="string">TBD</xsl:with-param>
+                        </xsl:call-template>
                     </xsl:when>
                     <xsl:when
                         test="self::contract_period_unit and /contract/meta/scope/contract_type = 'single_engagement'">
@@ -583,13 +593,13 @@
                 </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
-                <fo:inline xsl:use-attribute-sets="errortext">[ <fo:inline
-                        xsl:use-attribute-sets="bold">WARNING</fo:inline>: Cannot resolve
-                    placeholder <fo:inline xsl:use-attribute-sets="bold"><xsl:value-of
-                            select="name()"/></fo:inline> in <xsl:value-of select="base-uri()"/> -
-                        <xsl:call-template name="getReason"><xsl:with-param
-                            name="placeholderElement" select="$placeholderElement"
-                        /></xsl:call-template> ]</fo:inline>
+                <xsl:call-template name="displayErrorText">
+                    <xsl:with-param name="string">[ WARNING: Cannot resolve placeholder
+                            <xsl:value-of select="name()"/> in <xsl:value-of select="base-uri()"/> -
+                            <xsl:call-template name="getReason"><xsl:with-param
+                                name="placeholderElement" select="$placeholderElement"
+                            /></xsl:call-template> ]</xsl:with-param>
+                </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -597,10 +607,10 @@
     <xsl:template name="getReason">
         <xsl:param name="placeholderElement" select="."/>
         <xsl:choose>
-            <xsl:when test="/$placeholderElement"> element <fo:inline xsl:use-attribute-sets="bold"
-                        >"<xsl:value-of select="name($placeholderElement)"/>"</fo:inline>
-                    (<xsl:call-template name="getXPath"><xsl:with-param name="element"
-                        select="$placeholderElement"/></xsl:call-template>) is empty </xsl:when>
+            <xsl:when test="/$placeholderElement"> element "<xsl:value-of
+                    select="name($placeholderElement)"/>" (<xsl:call-template name="getXPath"
+                        ><xsl:with-param name="element" select="$placeholderElement"
+                    /></xsl:call-template>) is empty </xsl:when>
             <xsl:otherwise> referenced element not found </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -619,144 +629,6 @@
         </xsl:for-each>
     </xsl:template>
 
-    <xsl:template name="generate_activities_xslt">
-        <fo:list-block xsl:use-attribute-sets="list">
-            <xsl:for-each select="/contract/meta/work/activities/activity">
-                <fo:list-item>
-                    <!-- insert a bullet -->
-                    <fo:list-item-label end-indent="label-end()">
-                        <fo:block>
-                            <fo:inline>&#8226;</fo:inline>
-                        </fo:block>
-                    </fo:list-item-label>
-                    <!-- list text -->
-                    <fo:list-item-body start-indent="body-start()">
-                        <fo:block>
-                            <xsl:value-of select="."/>
-                        </fo:block>
-                    </fo:list-item-body>
-                </fo:list-item>
-            </xsl:for-each>
-        </fo:list-block>
-    </xsl:template>
 
-    <xsl:function name="my:calculatePeriod">
-        <xsl:param name="enddate"/>
-        <xsl:param name="startdate"/>
-        <xsl:variable name="startYear" as="xs:integer" select="year-from-date($startdate)"/>
-        <xsl:variable name="startMonth" as="xs:integer" select="month-from-date($startdate)"/>
-        <xsl:variable name="startDay" as="xs:integer" select="day-from-date($startdate)"/>
-        <xsl:variable name="endYear" as="xs:integer" select="year-from-date($enddate)"/>
-        <xsl:variable name="endMonth" as="xs:integer" select="month-from-date($enddate)"/>
-        <xsl:variable name="endDay" as="xs:integer" select="day-from-date($enddate)"/>
-        <xsl:variable name="startMonthNumberOfDays">
-            <xsl:choose>
-                <xsl:when test="xs:string($startMonth) = '1'">31</xsl:when>
-                <xsl:when test="xs:string($startMonth) = '2'">
-                    <!-- I hate february -->
-                    <xsl:choose>
-                        <xsl:when test="$startYear mod 4 != 0">28</xsl:when>
-                        <xsl:when test="$startYear mod 100 != 0">29</xsl:when>
-                        <xsl:when test="$startYear mod 400 != 0">28</xsl:when>
-                        <xsl:otherwise>29</xsl:otherwise>
-                    </xsl:choose>
-                </xsl:when>
-                <xsl:when test="xs:string($startMonth) = '3'">31</xsl:when>
-                <xsl:when test="xs:string($startMonth) = '4'">30</xsl:when>
-                <xsl:when test="xs:string($startMonth) = '5'">31</xsl:when>
-                <xsl:when test="xs:string($startMonth) = '6'">30</xsl:when>
-                <xsl:when test="xs:string($startMonth) = '7'">31</xsl:when>
-                <xsl:when test="xs:string($startMonth) = '8'">31</xsl:when>
-                <xsl:when test="xs:string($startMonth) = '9'">30</xsl:when>
-                <xsl:when test="xs:string($startMonth) = '10'">31</xsl:when>
-                <xsl:when test="xs:string($startMonth) = '11'">30</xsl:when>
-                <xsl:when test="xs:string($startMonth) = '12'">31</xsl:when>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="numYears">
-            <xsl:choose>
-                <xsl:when test="$endMonth > $startMonth">
-                    <xsl:sequence select="$endYear - $startYear"/>
-                </xsl:when>
-                <xsl:when test="$endMonth &lt; $startMonth">
-                    <xsl:sequence select="$endYear - $startYear - 1"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:choose>
-                        <xsl:when test="$endDay >= $startDay">
-                            <xsl:sequence select="$endYear - $startYear"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <!-- $endDay &lt; $startDay -->
-                            <xsl:sequence select="$endYear - $startYear - 1"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="numMonths">
-            <xsl:choose>
-                <xsl:when test="$endDay &lt; $startDay">
-                    <xsl:sequence select="$endMonth - $startMonth - 1"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <!-- $endDay >= $startDay -->
-                    <xsl:sequence select="$endMonth - $startMonth"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="numDays">
-            <!--<xsl:choose>
-                <xsl:when test="$numMonths &lt; 1 and $numYears &lt; 1">
-                    <!-\- only displaying days if contract is for less than a month -\->
-                    <xsl:sequence select="($enddate - $startdate) div xs:dayTimeDuration('P1D')"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <!-\- if contract is longer than a month, don't count days -\->
-                    <xsl:sequence select="0"/>
-                </xsl:otherwise>
-            </xsl:choose>-->
-            <xsl:choose>
-                <xsl:when test="$endDay - $startDay &lt; 0">
-                    <xsl:value-of select="$startMonthNumberOfDays - $startDay + $endDay"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="$endDay - $startDay"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:if test="$numYears > 0">
-            <xsl:sequence select="$numYears"/>
-            <xsl:text>year</xsl:text>
-            <xsl:if test="$numYears > 1">
-                <xsl:text>s</xsl:text>
-            </xsl:if>
-            <xsl:choose>
-                <xsl:when
-                    test="($numMonths > 0 and $numDays = 0) or ($numMonths = 0 and $numDays > 0)">
-                    <xsl:text> and</xsl:text>
-                </xsl:when>
-                <xsl:when test="$numMonths > 0 and $numDays > 0">
-                    <xsl:text>,</xsl:text>
-                </xsl:when>
-            </xsl:choose>
-        </xsl:if>
-        <xsl:if test="$numMonths > 0">
-            <xsl:sequence select="$numMonths"/>
-            <xsl:text>month</xsl:text>
-            <xsl:if test="$numMonths > 1">
-                <xsl:text>s</xsl:text>
-            </xsl:if>
-            <xsl:if test="$numDays > 0">
-                <xsl:text> and</xsl:text>
-            </xsl:if>
-        </xsl:if>
-        <xsl:if test="$numDays > 0">
-            <xsl:sequence select="$numDays"/>
-            <xsl:text>day</xsl:text>
-            <xsl:if test="$numDays > 1">
-                <xsl:text>s</xsl:text>
-            </xsl:if>
-        </xsl:if>
-    </xsl:function>
+
 </xsl:stylesheet>
