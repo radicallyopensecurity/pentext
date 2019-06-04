@@ -4,10 +4,10 @@
     xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
 
     <xsl:template match="generate_targets">
-        <xsl:call-template name="generate_targets_xslt"/>
+        <xsl:call-template name="targets"/>
     </xsl:template>
 
-    <xsl:template name="generate_targets_xslt">
+    <xsl:template name="targets">
         <xsl:param name="Ref" select="@Ref"/>
         <fo:list-block xsl:use-attribute-sets="list">
             <xsl:for-each
@@ -31,11 +31,10 @@
     </xsl:template>
 
     <xsl:template match="generate_teammembers">
-        <xsl:call-template name="generate_teammembers_xslt"/>
+        <xsl:call-template name="teammembers"/>
     </xsl:template>
 
-    <xsl:template name="generate_teammembers_xslt">
-
+    <xsl:template name="teammembers">
         <fo:list-block xsl:use-attribute-sets="list" provisional-distance-between-starts="0.75cm"
             provisional-label-separation="2.5mm" space-after="12pt" start-indent="1cm">
             <xsl:for-each select="//activityinfo//team/member">
