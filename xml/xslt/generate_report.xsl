@@ -11,16 +11,16 @@
     <xsl:import href="block.xslt"/>
     <xsl:import href="findings.xslt"/>
     <xsl:import href="auto.xslt"/>
-    <xsl:import href="piecharts.xslt"/>
+    <xsl:import href="fo_piecharts.xslt"/>
     <xsl:import href="table.xslt"/>
     <xsl:import href="lists.xslt"/>
-    <xsl:import href="inline.xslt"/>
+    <xsl:import href="fo_inline.xslt"/>
     <xsl:import href="graphics.xslt"/>
     <xsl:import href="generic.xslt"/>
     <xsl:import href="numbering.xslt"/>
     <xsl:import href="localisation.xslt"/>
-    <xsl:import href="placeholders.xslt"/>
-    <xsl:import href="secrets.xslt"/>
+    <xsl:import href="fo_placeholders.xslt"/>
+    <xsl:import href="fo_secrets.xslt"/>
     
 
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no"/>

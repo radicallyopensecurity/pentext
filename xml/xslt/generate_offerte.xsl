@@ -19,7 +19,7 @@
     <xsl:import href="generic.xslt"/>
     <xsl:import href="numbering.xslt"/>
     <xsl:import href="localisation.xslt"/>
-    <xsl:import href="placeholders.xslt"/>
+    <xsl:import href="fo_placeholders.xslt"/>
     <xsl:import href="waiver.xslt"/>
     <xsl:include href="functions_params_vars.xslt"/>
     <xsl:include href="styles_off.xslt"/>

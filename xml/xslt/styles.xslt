@@ -4,15 +4,7 @@
     xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
 
 
-    <!-- color scheme, just change these to change colors throughout the suite -->
-    <xsl:variable name="c_main">#e2632a</xsl:variable>
-    <xsl:variable name="c_support_light">#ededed</xsl:variable>
-    <xsl:variable name="c_support_subtlydarkerlight">#e4e4e4</xsl:variable><!-- used for subtle light border around support_light background -->
-    <xsl:variable name="c_support_medium">#999999</xsl:variable><!-- used for subtle light border around support_light background -->
-    <xsl:variable name="c_support_dark">#444444</xsl:variable>
-    <xsl:variable name="c_main_contrast">white</xsl:variable>
     
-    <xsl:variable name="border-color">#444444</xsl:variable>
     <!-- Note: pie chart colors can be customized in functions_params_vars.xslt -->
     
     <!-- variables -->

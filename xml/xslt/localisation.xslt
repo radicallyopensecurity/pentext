@@ -6,9 +6,6 @@
     
     <xsl:variable name="strdoc"
         select="document('../source/snippets/localisationstrings.xml')/localised_strings"/>
-
-
-    
     
     <xsl:template name="getString">
         <xsl:param name="stringID" select="'none'"/>

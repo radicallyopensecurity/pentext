@@ -8,7 +8,7 @@
     <xsl:import href="block.xslt"/>
     <xsl:import href="inline.xslt"/>
     <xsl:import href="auto.xslt"/>
-    <xsl:import href="placeholders.xslt"/>
+    <xsl:import href="fo_placeholders.xslt"/>
     <xsl:import href="structure.xslt"/>
     <xsl:import href="lists.xslt"/>
     <xsl:import href="generic.xslt"/>
