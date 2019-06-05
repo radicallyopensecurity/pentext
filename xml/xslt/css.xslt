@@ -608,6 +608,7 @@ there.
 .errortext {
     background-color: black;
     color: <xsl:value-of select="$color_moderate"/>;
+    font-weight: bold;
 }
 
 .censoredblock, .censoredtext {
