@@ -16,7 +16,7 @@
     <!-- numbered titles or not? -->
     <xsl:param name="NUMBERING" select="true()"/>
 
-    <xsl:output method="xml" indent="no"/>
+    <xsl:output method="html" indent="no"/>
 
 
     <!-- ROOT -->
