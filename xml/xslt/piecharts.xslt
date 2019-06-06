@@ -3,10 +3,10 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fo="http://www.w3.org/1999/XSL/Format"
     xmlns:svg="http://www.w3.org/2000/svg" xmlns:math="http://www.w3.org/2005/xpath-functions/math"
     xmlns:my="http://www.radical.sexy" exclude-result-prefixes="xs math" version="2.0">
-    
-    
+
+
     <!-- Note: any svg here should be output as <svg xmlns:svg="http://www.w3.org/2000/svg"> rather than <svg:svg> to make the result readable both by xsl-fo parsers and html5 parsers (fop and browsers, specifically ;) -->
-    
+
     <xsl:template match="generate_piechart">
         <xsl:choose>
             <xsl:when test="//finding">
@@ -19,8 +19,8 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="displayErrorText">
-                    <xsl:with-param name="string">Pie chart can only be generated when
-                    there are findings in the report. Get to work! ;)</xsl:with-param>
+                    <xsl:with-param name="string">Pie chart can only be generated when there are
+                        findings in the report. Get to work! ;)</xsl:with-param>
                 </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
@@ -33,7 +33,6 @@
         <xsl:param name="pieElem" select="@pieElem"/>
         <xsl:param name="pieHeight" as="xs:integer" select="200"/>
         <xsl:param name="status" select="@status"/>
-        <xsl:param name="threshold" select="2"/>
         <xsl:variable name="statusSequence" as="item()*">
             <xsl:for-each select="$status">
                 <xsl:for-each select="tokenize(., ' ')">
@@ -146,12 +145,27 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
+        <xsl:variable name="threshold" as="xs:integer">
+            <!-- threshold is usually 2 (everything below it gets thrown in 'other' bin if they get too numerous)
+            sometimes it's three if the 2-type slices also get too numerous and take up too much space -->
+            <xsl:choose>
+                <!--  -->
+                <xsl:when test="(count($sortedPieTable/pieEntry) > 16) and (count($sortedPieTable/pieEntry/pieEntryCount[. = 2]) &gt; 5) and ((1 div $pieTotal * 100) &lt; 2.5) and (sum($sortedPieTable/pieEntry/pieEntryCount[. &lt; 3]) div $pieTotal * 100 &lt; 50)">3</xsl:when>
+                <xsl:otherwise>2</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         <xsl:variable name="sumBelowThreshold">
             <xsl:value-of select="sum($sortedPieTable/pieEntry/pieEntryCount[. &lt; $threshold])"/>
         </xsl:variable>
-        <xsl:variable name="pieTable_thresholdApplied">
+        <xsl:variable name="pieTable">
             <xsl:choose>
-                <xsl:when test="not($pieAttr = 'threatLevel') and $sumBelowThreshold > 4">
+                <xsl:when
+                    test="(not($pieAttr = 'threatLevel') and $sumBelowThreshold > 4 and (1 div $pieTotal * 100) &lt; 5 and ($sumBelowThreshold div $pieTotal * 100) &lt; 50) or (not($pieAttr = 'threatLevel') and count($sortedPieTable/pieEntry) > 16)">
+                    <!-- Group below-threshold pie slices into 'Other' if: 
+                    - there are more than 4 single-type slices and 
+                    - they are small percentages (i.e. 1 single-type slice is less than 5%) and
+                    - they take up less than 50% of the chart 
+                (otherwise just print them out) -->
                     <xsl:for-each
                         select="$sortedPieTable/pieEntry[child::pieEntryCount &gt;= $threshold]">
                         <pieEntry>
@@ -168,10 +182,8 @@
                     <xsl:copy-of select="$sortedPieTable" copy-namespaces="no"/>
                 </xsl:otherwise>
             </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="pieTable">
-            <xsl:copy-of select="$pieTable_thresholdApplied" copy-namespaces="no"/>
-            <xsl:if test="not($pieAttr = 'threatLevel') and $sumBelowThreshold > 4">
+            <xsl:if
+                test="(not($pieAttr = 'threatLevel') and $sumBelowThreshold > 4 and (1 div $pieTotal * 100) &lt; 5 and ($sumBelowThreshold div $pieTotal * 100) &lt; 50) or (not($pieAttr = 'threatLevel') and count($sortedPieTable/pieEntry) > 16)">
                 <pieEntry>
                     <pieEntryLabel>
                         <xsl:text>Other</xsl:text>
@@ -192,8 +204,8 @@
             <xsl:with-param name="pieAttr" select="$pieAttr"/>
         </xsl:call-template>
     </xsl:template>
-    
-    
+
+
     <xsl:template name="pie_svg">
         <xsl:param name="pieHeight"/>
         <xsl:param name="pieTotal"/>
@@ -226,7 +238,7 @@
             </xsl:call-template>
         </svg>
     </xsl:template>
-    
+
 
     <xsl:template name="pie_chart_slice">
         <xsl:param name="pieTotal"/>
@@ -259,7 +271,8 @@
         <xsl:variable name="d"
             select="concat($middle, ' ', $first_line, ' ', 'a ', $radius, ',', $radius, ' ', $arc_move, ' ', $x, ',', $radius - $y, ' ', 'z')"/>
         <!--put it all together-->
-        <path xmlns="http://www.w3.org/2000/svg" stroke="white" stroke-width="1" stroke-linejoin="round">
+        <path xmlns="http://www.w3.org/2000/svg" stroke="white" stroke-width="1"
+            stroke-linejoin="round">
             <xsl:attribute name="fill">
                 <xsl:call-template name="selectColor">
                     <xsl:with-param name="position" select="$position"/>
@@ -319,7 +332,8 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:variable>
-                <path xmlns="http://www.w3.org/2000/svg" stroke="black" stroke-width="1" stroke-linejoin="round">
+                <path xmlns="http://www.w3.org/2000/svg" stroke="black" stroke-width="1"
+                    stroke-linejoin="round">
                     <xsl:attribute name="fill">none</xsl:attribute>
                     <xsl:attribute name="d">
                         <xsl:value-of
@@ -348,7 +362,7 @@
             </xsl:call-template>
         </xsl:if>
     </xsl:template>
-    
+
     <xsl:template name="pie_percentage_small_slice_content">
         <xsl:param name="text_x_relative_to_line"/>
         <xsl:param name="middle_y"/>
@@ -364,7 +378,7 @@
         <xsl:value-of select="format-number($percentage, '##,##0.0')"/>
         <xsl:text>%</xsl:text>
     </xsl:template>
-    
+
     <xsl:template name="pie_percentage_large_slice_content">
         <xsl:param name="text_angle"/>
         <xsl:param name="middle_x"/>
@@ -604,5 +618,5 @@
         <xsl:message>TEXT ANGLE: <xsl:value-of select="$text_angle"/></xsl:message>-->
     </xsl:template>
 
-    
+
 </xsl:stylesheet>
