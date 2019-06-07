@@ -293,6 +293,7 @@
       <xs:attribute name="width" use="optional" type="xs:integer"/>
       <xs:attribute name="src" use="required"/>
       <xs:attribute name="title" use="optional"/>
+      <xs:attribute name="alt" use="optional"/>
     </xs:complexType>
   </xs:element>
 
