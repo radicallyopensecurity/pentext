@@ -150,7 +150,9 @@
             sometimes it's three if the 2-type slices also get too numerous and take up too much space -->
             <xsl:choose>
                 <!--  -->
-                <xsl:when test="(count($sortedPieTable/pieEntry) > 16) and (count($sortedPieTable/pieEntry/pieEntryCount[. = 2]) &gt; 5) and ((1 div $pieTotal * 100) &lt; 2.5) and (sum($sortedPieTable/pieEntry/pieEntryCount[. &lt; 3]) div $pieTotal * 100 &lt; 50)">3</xsl:when>
+                <xsl:when
+                    test="(count($sortedPieTable/pieEntry) > 16) and (count($sortedPieTable/pieEntry/pieEntryCount[. = 2]) &gt; 5) and ((1 div $pieTotal * 100) &lt; 2.5) and (sum($sortedPieTable/pieEntry/pieEntryCount[. &lt; 3]) div $pieTotal * 100 &lt; 50)"
+                    >3</xsl:when>
                 <xsl:otherwise>2</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
@@ -195,6 +197,16 @@
             </xsl:if>
         </xsl:variable>
         <xsl:variable name="no_entries" select="count($pieTable/pieEntry)"/>
+        <xsl:if
+            test="($pieAttr = 'type' and //finding[not(@type)]) or ($pieAttr = 'type' and //finding[@type = ''])">
+            <xsl:call-template name="displayErrorText">
+                <xsl:with-param name="string"> WARNING: Piechart may look weird - the following
+                    findings are missing a type attribute:<xsl:for-each
+                        select="//finding[@type = ''] | //finding[not(@type)]"> [<xsl:value-of
+                            select="@id"/>] </xsl:for-each>
+                </xsl:with-param>
+            </xsl:call-template>
+        </xsl:if>
         <xsl:call-template name="output_piechart_with_legend">
             <xsl:with-param name="pieTable" select="$pieTable"/>
             <xsl:with-param name="pieHeight" select="$pieHeight"/>
