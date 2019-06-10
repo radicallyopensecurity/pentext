@@ -29,7 +29,7 @@
         <xsl:param name="execsummary" tunnel="yes"/>
         <xsl:choose>
             <xsl:when test="$execsummary = true()">
-                <xsl:if test="ancestor-or-self::*/@inexecsummary = 'yes'">
+                <xsl:if test="ancestor-or-self::*[@inexecsummary][1]/@inexecsummary = 'yes'">
                     <xsl:call-template name="ToC"/>
                 </xsl:if>
             </xsl:when>
@@ -90,7 +90,7 @@
         <xsl:choose>
             <xsl:when test="$execsummary = true()">
                 <xsl:apply-templates
-                    select="section[not(@visibility = 'hidden')][not(../@visibility = 'hidden')][ancestor-or-self::*/@inexecsummary = 'yes']"
+                    select="section[not(@visibility = 'hidden')][not(../@visibility = 'hidden')][ancestor-or-self::*[@inexecsummary][1]/@inexecsummary = 'yes']"
                     mode="toc"/>
             </xsl:when>
             <xsl:otherwise>
@@ -139,7 +139,7 @@
                             <fo:inline> App&#160;<xsl:number
                                     count="appendix[not(@visibility = 'hidden')][@inexecsummary = 'yes']"
                                     level="multiple" format="{$AUTO_NUMBERING_FORMAT}"/>.<xsl:number
-                                    count="section[not(@visibility = 'hidden')][ancestor-or-self::*/@inexecsummary = 'yes'][ancestor::appendix[not(@visibility = 'hidden')]]"
+                                    count="section[not(@visibility = 'hidden')][ancestor-or-self::*[@inexecsummary][1]/@inexecsummary = 'yes'][ancestor::appendix[not(@visibility = 'hidden')]]"
                                     level="multiple" format="{$AUTO_NUMBERING_FORMAT}"/>
                             </fo:inline>
                         </xsl:if>
@@ -158,7 +158,7 @@
                 <xsl:choose>
                     <xsl:when test="$execsummary = true()">
                         <xsl:number
-                            count="section[not(@visibility = 'hidden')][ancestor-or-self::*/@inexecsummary = 'yes']"
+                            count="section[not(@visibility = 'hidden')][ancestor-or-self::*[@inexecsummary][1]/@inexecsummary = 'yes']"
                             level="multiple" format="{$AUTO_NUMBERING_FORMAT}"/>
                     </xsl:when>
                     <xsl:otherwise>

@@ -12,7 +12,7 @@
         <xsl:if test="not(@visibility = 'hidden')">
             <xsl:choose>
                 <xsl:when test="$execsummary = true()">
-                    <xsl:if test="ancestor-or-self::*/@inexecsummary = 'yes'">
+                    <xsl:if test="ancestor-or-self::*[@inexecsummary][1]/@inexecsummary = 'yes'">
                         <fo:block xsl:use-attribute-sets="section">
                             <xsl:if test="self::appendix or self::annex">
                                 <xsl:attribute name="break-before">page</xsl:attribute>
@@ -165,7 +165,7 @@
                                         <xsl:otherwise>
                                             <fo:inline>
                                                   <xsl:number
-                                                  count="section[not(@visibility = 'hidden')][ancestor-or-self::*/@inexecsummary = 'yes'] | finding | non-finding"
+                                                  count="section[not(@visibility = 'hidden')][ancestor-or-self::*[@inexecsummary][1]/@inexecsummary = 'yes'] | finding | non-finding"
                                                   level="multiple" format="{$AUTO_NUMBERING_FORMAT}"
                                                   />
                                                 </fo:inline>
