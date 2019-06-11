@@ -92,7 +92,7 @@ class Finding(BaseItem):
         self.finding_type = 'TODO'
         self.status = 'new'
         self.description = '<p></p>'
-        self.technicaldescription = '<p></p>'
+        self.technicaldescription = ''
         self.impact = '<p></p>'
         self.recommendation = '<ul><li></li></ul>'
 
@@ -132,7 +132,7 @@ def from_issue(issue):
                 elif 'recommendation' in note.body.split()[0].lower():
                     item.recommendation = convert_text(''.join(note.body.splitlines(True)[1:]))
                 else:
-                    item.technicaldescription += u'{0}\n'.format(convert_text(note.body))
+                    item.technicaldescription = u'{0}\n'.format(convert_text(note.body))
     elif 'non-finding' in [x.lower() for x in issue.labels]:
         item = NonFinding()
         item.content = convert_text(issue.description)
