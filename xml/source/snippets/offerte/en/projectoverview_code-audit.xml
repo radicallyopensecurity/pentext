@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section>
+<section id="projectoverview_code-audit">
     <title>Project Overview</title>
     <p>
         <company_short/> will perform a <company_svc_long/> of the source code files described below
