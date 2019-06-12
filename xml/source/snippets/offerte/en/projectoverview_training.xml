@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section>
+<section id="projectoverview_training">
   <title>Project Overview
   </title>
   <p>
     <company_short/>
-    will provide xxx training sessions, for xxx different groups,
-    on-site/off-site at xxx venue, with a maximum of xxx participants per event.
+    will provide <todo desc="replace this todo element with number"/> training sessions, for <todo desc="replace this todo element with number"/> different groups,
+    on-site/off-site at <todo desc="replace this todo element with venue"/>, with a maximum of <todo desc="replace this todo element with number"/> participants per event.
     The training will focus on the top 5 vulnerabilities from the OWASP Top 10.
   </p>
   <p>As part of this training, <company_short/>
