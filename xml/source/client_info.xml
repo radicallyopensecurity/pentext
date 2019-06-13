@@ -11,6 +11,8 @@
         <!-- long client name, e.g. Sitting Duck B.V. -->
         <short_name>Sitting Duck</short_name>
         <!-- short client name, e.g. Sitting Duck; if no short name: same as long name -->
+        <short_code></short_code>
+        <!-- 3-letter shortcode for use in pentest reports, e.g. SID (or leave empty to use system default) -->
         <legal_rep>I.M. Portant</legal_rep>
         <!-- customer legal representative (to sign offer) -->
         <waiver_rep>B.I.G. Wig</waiver_rep>
