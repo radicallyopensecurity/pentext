@@ -25,6 +25,9 @@
 
 
     <!-- PLACEHOLDERS -->
+    <xsl:template match="latest_version_date">
+        <xsl:value-of select="$latestVersionDate"/>
+    </xsl:template>
     <xsl:template match="client_long">
         <xsl:param name="placeholderElement" select="/*/meta//client/full_name"/>
         <xsl:call-template name="checkPlaceholder">
