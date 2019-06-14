@@ -129,8 +129,8 @@
     <xsl:template name="findingsSummaryContent">
         <fo:table-row xsl:use-attribute-sets="TableFont">
             <xsl:if test="position() mod 2 != 0">
-                        <xsl:attribute name="background-color">#ededed</xsl:attribute>
-                    </xsl:if>
+                <xsl:attribute name="background-color">#ededed</xsl:attribute>
+            </xsl:if>
             <fo:table-cell xsl:use-attribute-sets="td">
                 <fo:block>
                     <!-- attach id to first finding of each threatLevel so pie charts can link to it -->
@@ -231,8 +231,8 @@
     <xsl:template name="recommendationsSummaryContent">
         <fo:table-row xsl:use-attribute-sets="TableFont">
             <xsl:if test="position() mod 2 != 0">
-                        <xsl:attribute name="background-color">#ededed</xsl:attribute>
-                    </xsl:if>
+                <xsl:attribute name="background-color">#ededed</xsl:attribute>
+            </xsl:if>
             <fo:table-cell xsl:use-attribute-sets="td">
                 <fo:block>
                     <fo:basic-link xsl:use-attribute-sets="link">
@@ -252,7 +252,8 @@
                 <fo:block>
                     <xsl:choose>
                         <xsl:when test="recommendation_summary">
-                            <xsl:apply-templates select="recommendation_summary" mode="summarytable"/>
+                            <xsl:apply-templates select="recommendation_summary" mode="summarytable"
+                            />
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:apply-templates select="recommendation" mode="summarytable"/>
@@ -455,6 +456,151 @@
             <xsl:value-of select="full_name"/>
             <xsl:if test="../party[2]">, </xsl:if>
         </xsl:for-each>
+    </xsl:template>
+
+    <xsl:template match="generate_service_breakdown">
+        <xsl:choose>
+            <xsl:when test="@format = 'list'">
+                <fo:list-block xsl:use-attribute-sets="list">
+                    <xsl:for-each select="//service_list/service">
+                        <xsl:if test="duration">
+                            <fo:list-item xsl:use-attribute-sets="li">
+                                <!-- insert a bullet -->
+                                <fo:list-item-label end-indent="label-end()">
+                                    <fo:block>
+                                        <fo:inline>&#8226;</fo:inline>
+                                    </fo:block>
+                                </fo:list-item-label>
+                                <!-- list text -->
+                                <fo:list-item-body start-indent="body-start()">
+                                    <fo:block>
+                                        <xsl:value-of select="description"/>
+                                        <xsl:text>: </xsl:text>
+                                        <xsl:value-of select="duration"/>
+                                        <xsl:text> </xsl:text>
+                                        <xsl:value-of select="duration/@in"/>
+                                    </fo:block>
+                                </fo:list-item-body>
+                            </fo:list-item>
+                        </xsl:if>
+                    </xsl:for-each>
+                </fo:list-block>
+                <xsl:call-template name="displayErrorText">
+                    <xsl:with-param name="string">TODO: total!</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@format = 'table'">
+                <fo:block>
+                    <fo:table xsl:use-attribute-sets="fwtable borders">
+                        <fo:table-column column-width="proportional-column-width(70)"
+                            xsl:use-attribute-sets="borders"/>
+                        <fo:table-column column-width="proportional-column-width(10)"
+                            xsl:use-attribute-sets="borders"/>
+                        <fo:table-column column-width="proportional-column-width(10)"
+                            xsl:use-attribute-sets="borders"/>
+                        <fo:table-column column-width="proportional-column-width(10)"
+                            xsl:use-attribute-sets="borders"/>
+                        <fo:table-body>
+                            <fo:table-row>
+                                <fo:table-cell xsl:use-attribute-sets="th">
+                                    <fo:block> Description </fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell xsl:use-attribute-sets="th">
+                                    <fo:block> Duration </fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell xsl:use-attribute-sets="th">
+                                    <fo:block> Hourly rate </fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell xsl:use-attribute-sets="th">
+                                    <fo:block> Fee </fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
+                            <xsl:for-each select="//service_list/service">
+                                <fo:table-row>
+                                    <fo:table-cell xsl:use-attribute-sets="td">
+                                        <fo:block>
+                                            <xsl:value-of select="description"/>
+                                        </fo:block>
+                                    </fo:table-cell>
+                                    <fo:table-cell xsl:use-attribute-sets="td">
+                                        <xsl:choose>
+                                            <xsl:when test="duration and duration/@in">
+                                                <fo:block>
+                                                  <xsl:value-of select="duration"/>
+                                                  <xsl:text> </xsl:text>
+                                                  <xsl:value-of select="duration/@in"/>
+                                                </fo:block>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:attribute name="number-columns-spanned"
+                                                  >2</xsl:attribute>
+                                                <fo:block>(flat rate)</fo:block>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </fo:table-cell>
+                                    <xsl:if test="duration and hourly_rate">
+                                        <fo:table-cell xsl:use-attribute-sets="td">
+                                            <fo:block>
+                                                <xsl:call-template name="getDenomination">
+                                                  <xsl:with-param name="placeholderElement"
+                                                  select="hourly_rate"/>
+                                                </xsl:call-template>
+                                                <xsl:value-of select="hourly_rate"/>
+                                            </fo:block>
+                                        </fo:table-cell>
+                                    </xsl:if>
+                                    <fo:table-cell xsl:use-attribute-sets="td">
+                                        <xsl:choose>
+                                            <xsl:when test="not(fee/computed)">
+                                                <!-- hardcoded fee, we'll need a denomination -->
+                                                <fo:block xsl:use-attribute-sets="moneycell">
+                                                  <xsl:call-template name="getDenomination">
+                                                  <xsl:with-param name="placeholderElement"
+                                                  select="fee"/>
+                                                  </xsl:call-template>
+                                                  <fo:leader leader-pattern="space"/>
+                                                  <xsl:value-of select="fee"/>
+                                                </fo:block>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <!-- computed fee; compute using duration and use hourly rate denomination -->
+                                                <fo:block xsl:use-attribute-sets="moneycell">
+                                                  <xsl:call-template name="getDenomination">
+                                                  <xsl:with-param name="placeholderElement"
+                                                  select="hourly_rate"/>
+                                                  </xsl:call-template>
+                                                  <fo:leader leader-pattern="space"/>
+                                                  <xsl:choose>
+                                                  <xsl:when test="duration/@in = 'hours'">
+                                                  <!-- multiply with hourly rate -->
+                                                  <xsl:value-of select="duration * hourly_rate"/>
+                                                  </xsl:when>
+                                                  <xsl:when test="duration/@in = 'days'">
+                                                  <!-- multiply with hourly rate * 8 -->
+                                                  <xsl:value-of select="duration * hourly_rate * 8"
+                                                  />
+                                                  </xsl:when>
+                                                  </xsl:choose>
+                                                </fo:block>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </fo:table-cell>
+                                </fo:table-row>
+                            </xsl:for-each>
+                        </fo:table-body>
+                    </fo:table>
+                </fo:block>
+                <xsl:call-template name="displayErrorText">
+                    <xsl:with-param name="string">TODO total</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="displayErrorText">
+                    <xsl:with-param name="string">ERROR: unknown service breakdown format (use
+                        'list' or 'table')</xsl:with-param>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 </xsl:stylesheet>

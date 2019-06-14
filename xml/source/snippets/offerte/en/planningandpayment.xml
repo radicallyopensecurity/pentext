@@ -18,4 +18,6 @@
     Any additional work will be charged separately. An hourly 
     rate for additional work will be agreed upon before starting this work.
   </p>
+  
+  <generate_service_breakdown format="table"/>
 </section>

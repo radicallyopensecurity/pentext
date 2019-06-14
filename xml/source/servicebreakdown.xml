@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service_list>
+  <service>
+    <description>Determine and set up attack vectors</description>
+    <duration in="days">2</duration>
+    <hourly_rate vat="excl" denomination="eur">1</hourly_rate>
+    <fee>
+      <computed/>
+    </fee>
+  </service>
+  <service>
+    <description>Set up infrastructure and support</description>
+    <duration in="hours">20</duration>
+    <hourly_rate vat="excl" denomination="eur">2</hourly_rate>
+    <fee>
+      <computed/>
+    </fee>
+  </service>
+  <service>
+    <description>Attacking and reporting</description>
+    <duration in="days">5</duration>
+    <hourly_rate vat="excl" denomination="eur">3</hourly_rate>
+    <fee>
+      <computed/>
+    </fee>
+  </service>
+  <service>
+    <description>Travel and hotel</description>
+    <fee vat="excl" denomination="eur">50</fee>
+  </service>
+  <service>
+    <description>Optional: presentation of findings</description>
+    <duration in="days"><min>0</min><max>2</max></duration>
+    <hourly_rate vat="incl" denomination="eur">100</hourly_rate>
+    <fee>
+      <computed/>
+    </fee>
+  </service>
+</service_list>
