@@ -442,4 +442,7 @@
         <xsl:attribute name="start-indent">0</xsl:attribute>
         <xsl:attribute name="end-indent">0</xsl:attribute>
     </xsl:attribute-set>
+    
+    <xsl:attribute-set name="totalRow"/>
+    <xsl:attribute-set name="totalcell"/>
 </xsl:stylesheet>

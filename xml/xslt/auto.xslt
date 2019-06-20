@@ -461,8 +461,8 @@
         <xsl:choose>
             <xsl:when test="@format = 'list'">
                 <fo:list-block xsl:use-attribute-sets="list">
-                    <xsl:for-each select="//service_list/service">
-                        <xsl:if test="duration">
+                    <xsl:for-each select="$serviceNodeSet/entry[@type = 'service']">
+                        <xsl:if test="d">
                             <fo:list-item xsl:use-attribute-sets="li">
                                 <!-- insert a bullet -->
                                 <fo:list-item-label end-indent="label-end()">
@@ -473,31 +473,26 @@
                                 <!-- list text -->
                                 <fo:list-item-body start-indent="body-start()">
                                     <fo:block>
-                                        <xsl:value-of select="description"/>
+                                        <xsl:value-of select="desc"/>
                                         <xsl:text>: </xsl:text>
-                                        <xsl:value-of select="duration"/>
-                                        <xsl:text> </xsl:text>
-                                        <xsl:value-of select="duration/@in"/>
+                                        <xsl:value-of select="d"/>
                                     </fo:block>
                                 </fo:list-item-body>
                             </fo:list-item>
                         </xsl:if>
                     </xsl:for-each>
                 </fo:list-block>
-                <xsl:call-template name="displayErrorText">
-                    <xsl:with-param name="string">TODO: total!</xsl:with-param>
-                </xsl:call-template>
             </xsl:when>
             <xsl:when test="@format = 'table'">
                 <fo:block>
                     <fo:table xsl:use-attribute-sets="fwtable borders">
-                        <fo:table-column column-width="proportional-column-width(70)"
+                        <fo:table-column column-width="proportional-column-width(6)"
                             xsl:use-attribute-sets="borders"/>
-                        <fo:table-column column-width="proportional-column-width(10)"
+                        <fo:table-column column-width="proportional-column-width(2)"
                             xsl:use-attribute-sets="borders"/>
-                        <fo:table-column column-width="proportional-column-width(10)"
+                        <fo:table-column column-width="proportional-column-width(3)"
                             xsl:use-attribute-sets="borders"/>
-                        <fo:table-column column-width="proportional-column-width(10)"
+                        <fo:table-column column-width="proportional-column-width(4)"
                             xsl:use-attribute-sets="borders"/>
                         <fo:table-body>
                             <fo:table-row>
@@ -505,7 +500,7 @@
                                     <fo:block> Description </fo:block>
                                 </fo:table-cell>
                                 <fo:table-cell xsl:use-attribute-sets="th">
-                                    <fo:block> Duration </fo:block>
+                                    <fo:block> Effort </fo:block>
                                 </fo:table-cell>
                                 <fo:table-cell xsl:use-attribute-sets="th">
                                     <fo:block> Hourly rate </fo:block>
@@ -514,84 +509,107 @@
                                     <fo:block> Fee </fo:block>
                                 </fo:table-cell>
                             </fo:table-row>
-                            <xsl:for-each select="//service_list/service">
+                            <xsl:for-each select="$serviceNodeSet/entry">
                                 <fo:table-row>
-                                    <fo:table-cell xsl:use-attribute-sets="td">
-                                        <fo:block>
-                                            <xsl:value-of select="description"/>
-                                        </fo:block>
-                                    </fo:table-cell>
-                                    <fo:table-cell xsl:use-attribute-sets="td">
-                                        <xsl:choose>
-                                            <xsl:when test="duration and duration/@in">
-                                                <fo:block>
-                                                  <xsl:value-of select="duration"/>
-                                                  <xsl:text> </xsl:text>
-                                                  <xsl:value-of select="duration/@in"/>
-                                                </fo:block>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:attribute name="number-columns-spanned"
-                                                  >2</xsl:attribute>
-                                                <fo:block>(flat rate)</fo:block>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                    </fo:table-cell>
-                                    <xsl:if test="duration and hourly_rate">
-                                        <fo:table-cell xsl:use-attribute-sets="td">
-                                            <fo:block>
-                                                <xsl:call-template name="getDenomination">
-                                                  <xsl:with-param name="placeholderElement"
-                                                  select="hourly_rate"/>
-                                                </xsl:call-template>
-                                                <xsl:value-of select="hourly_rate"/>
-                                            </fo:block>
-                                        </fo:table-cell>
+                                    <xsl:if test="position() mod 2 != 0">
+                                        <xsl:attribute name="background-color"
+                                            >#ededed</xsl:attribute>
                                     </xsl:if>
                                     <fo:table-cell xsl:use-attribute-sets="td">
+                                        <xsl:if
+                                            test="not(normalize-space(d)) and not(normalize-space(h))">
+                                            <xsl:attribute name="number-columns-spanned"
+                                                >3</xsl:attribute>
+                                        </xsl:if>
+                                        <fo:block>
+                                            <xsl:value-of select="desc"/>
+                                        </fo:block>
+                                    </fo:table-cell>
+                                    <xsl:if test="d">
+                                        <fo:table-cell xsl:use-attribute-sets="td">
+                                            <fo:block>
+                                                <xsl:value-of select="d"/>
+                                            </fo:block>
+                                        </fo:table-cell>
                                         <xsl:choose>
-                                            <xsl:when test="not(fee/computed)">
-                                                <!-- hardcoded fee, we'll need a denomination -->
-                                                <fo:block xsl:use-attribute-sets="moneycell">
+                                            <xsl:when test="normalize-space(h)">
+                                                <fo:table-cell xsl:use-attribute-sets="td">
+                                                  <fo:block text-align="right">
                                                   <xsl:call-template name="getDenomination">
                                                   <xsl:with-param name="placeholderElement"
-                                                  select="fee"/>
+                                                  select="."/>
                                                   </xsl:call-template>
-                                                  <fo:leader leader-pattern="space"/>
-                                                  <xsl:value-of select="fee"/>
-                                                </fo:block>
+                                                  <xsl:call-template name="prettyMissingDecimal">
+                                                  <xsl:with-param name="n" select="h"/>
+                                                  </xsl:call-template>
+                                                  <xsl:text> excl. VAT</xsl:text>
+                                                  </fo:block>
+                                                </fo:table-cell>
                                             </xsl:when>
                                             <xsl:otherwise>
-                                                <!-- computed fee; compute using duration and use hourly rate denomination -->
-                                                <fo:block xsl:use-attribute-sets="moneycell">
-                                                  <xsl:call-template name="getDenomination">
-                                                  <xsl:with-param name="placeholderElement"
-                                                  select="hourly_rate"/>
-                                                  </xsl:call-template>
-                                                  <fo:leader leader-pattern="space"/>
-                                                  <xsl:choose>
-                                                  <xsl:when test="duration/@in = 'hours'">
-                                                  <!-- multiply with hourly rate -->
-                                                  <xsl:value-of select="duration * hourly_rate"/>
-                                                  </xsl:when>
-                                                  <xsl:when test="duration/@in = 'days'">
-                                                  <!-- multiply with hourly rate * 8 -->
-                                                  <xsl:value-of select="duration * hourly_rate * 8"
-                                                  />
-                                                  </xsl:when>
-                                                  </xsl:choose>
-                                                </fo:block>
+                                                <fo:table-cell xsl:use-attribute-sets="td">
+                                                  <fo:block text-align="right">-</fo:block>
+                                                </fo:table-cell>
                                             </xsl:otherwise>
                                         </xsl:choose>
+                                    </xsl:if>
+                                    <fo:table-cell xsl:use-attribute-sets="td">
+                                        <fo:block text-align="right">
+                                            <xsl:choose>
+                                                <xsl:when test="not(f/min = f/max)">
+                                                  <xsl:call-template name="getDenomination">
+                                                  <xsl:with-param name="placeholderElement"
+                                                  select="."/>
+                                                  </xsl:call-template>
+                                                  <xsl:value-of select="f/min"/>
+                                                  <xsl:text> - </xsl:text>
+                                                  <xsl:call-template name="getDenomination">
+                                                  <xsl:with-param name="placeholderElement"
+                                                  select="."/>
+                                                  </xsl:call-template>
+                                                  <xsl:call-template name="prettyMissingDecimal">
+                                                  <xsl:with-param name="n" select="f/max"/>
+                                                  </xsl:call-template>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                  <xsl:call-template name="getDenomination">
+                                                  <xsl:with-param name="placeholderElement"
+                                                  select="."/>
+                                                  </xsl:call-template>
+                                                  <xsl:call-template name="prettyMissingDecimal">
+                                                  <xsl:with-param name="n" select="f/min"/>
+                                                  </xsl:call-template>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                            <xsl:text> excl. VAT</xsl:text>
+                                            <xsl:if test="@estimate = true()">*</xsl:if>
+                                        </fo:block>
                                     </fo:table-cell>
                                 </fo:table-row>
                             </xsl:for-each>
+                            <fo:table-row xsl:use-attribute-sets="totalRow">
+                                <fo:table-cell number-columns-spanned="4"
+                                    xsl:use-attribute-sets="td">
+                                    <fo:block xsl:use-attribute-sets="totalcell">
+                                        <xsl:text>Total</xsl:text>
+                                        <xsl:if test="$serviceNodeSet/entry/@estimate">
+                                            (estimate)</xsl:if>
+                                        <xsl:text>:</xsl:text>
+                                        <fo:leader leader-pattern="space"/>
+                                        <xsl:call-template name="calculateTotal"/>
+                                        <xsl:text> excl. VAT</xsl:text>
+                                    </fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
                         </fo:table-body>
                     </fo:table>
                 </fo:block>
-                <xsl:call-template name="displayErrorText">
-                    <xsl:with-param name="string">TODO total</xsl:with-param>
-                </xsl:call-template>
+
+                <xsl:if test="$serviceNodeSet/entry/@estimate = true()">
+                    <fo:block text-align="right">
+                        <xsl:text>* Estimate</xsl:text>
+                    </fo:block>
+                </xsl:if>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="displayErrorText">
@@ -600,6 +618,96 @@
                 </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="calculateTotal">
+        <xsl:param name="denoms" tunnel="yes">
+            <xsl:for-each-group select="$serviceNodeSet/entry" group-by="@denomination">
+                <denom denomination="{current-grouping-key()}"/>
+            </xsl:for-each-group>
+        </xsl:param>
+        <xsl:variable name="allDenominationsAreEqual" select="count($denoms/denom) = 1"/>
+        <xsl:variable name="minmaxesPresent"
+            select="boolean($serviceNodeSet/entry/f/min and $serviceNodeSet/entry/f/max)"/>
+        <xsl:variable name="estimatePresent" select="$serviceNodeSet/entry/@estimate"/>
+        <xsl:variable name="totalMinFees" select="sum($serviceNodeSet/entry/f/min)"/>
+        <xsl:variable name="totalMaxFees" select="sum($serviceNodeSet/entry/f/max)"/>
+        <xsl:choose>
+            <xsl:when test="not($totalMinFees = $totalMaxFees)">
+                <!-- We have different min and max fees, print range -->
+                <xsl:call-template name="checkDenomination">
+                    <xsl:with-param name="allDenominationsAreEqual"
+                        select="$allDenominationsAreEqual"/>
+                    <xsl:with-param name="denoms" select="$denoms"/>
+                </xsl:call-template>
+                <xsl:value-of select="$totalMinFees"/>
+                <xsl:text> - </xsl:text>
+                <xsl:call-template name="checkDenomination">
+                    <xsl:with-param name="allDenominationsAreEqual"
+                        select="$allDenominationsAreEqual"/>
+                    <xsl:with-param name="denoms" select="$denoms"/>
+                </xsl:call-template>
+                <xsl:call-template name="prettyMissingDecimal">
+                    <xsl:with-param name="n" select="$totalMaxFees"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- Min and max are equal; print single price -->
+                <xsl:call-template name="checkDenomination">
+                    <xsl:with-param name="allDenominationsAreEqual"
+                        select="$allDenominationsAreEqual"/>
+                    <xsl:with-param name="denoms" select="$denoms"/>
+                </xsl:call-template>
+                <xsl:call-template name="prettyMissingDecimal">
+                    <xsl:with-param name="n" select="$totalMinFees"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="checkDenomination">
+        <xsl:param name="allDenominationsAreEqual"/>
+        <xsl:param name="denoms"/>
+        <xsl:choose>
+            <xsl:when test="$allDenominationsAreEqual">
+                <xsl:call-template name="getDenomination">
+                    <xsl:with-param name="placeholderElement" select="$denoms/denom"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="displayErrorText">
+                    <xsl:with-param name="string">Cannot print denomination: not all fees in
+                        service_breakdown have an equal denomination (tip: if most services are in
+                        eur but one is in usd, add the usd fee to the description for that service
+                        and use an estimated eur for the hourly rate or fee).</xsl:with-param>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="calculatePersonDays">
+        <xsl:variable name="totalMinDurations"
+            select="sum($serviceNodeSet/entry[@type = 'service']/dh/min)"/>
+        <xsl:variable name="totalMaxDurations"
+            select="sum($serviceNodeSet/entry[@type = 'service']/dh/max)"/>
+        <xsl:choose>
+            <xsl:when test="not($totalMinDurations = $totalMaxDurations)">
+                <xsl:value-of select="sum($totalMinDurations) div 8"/>
+                <xsl:text> - </xsl:text>
+                <xsl:value-of select="sum($totalMaxDurations) div 8"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="sum($totalMinDurations) div 8"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="prettyMissingDecimal">
+        <xsl:param name="n"/>
+        <xsl:if test="floor($n) = $n">
+            <xsl:value-of select="$n"/>
+            <xsl:text>.-</xsl:text>
+        </xsl:if>
     </xsl:template>
 
 </xsl:stylesheet>

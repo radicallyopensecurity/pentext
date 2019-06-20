@@ -26,4 +26,13 @@
     <xsl:attribute-set name="region-body-cover">
     </xsl:attribute-set>
     
+    <!-- service breakdown -->
+    <xsl:attribute-set name="totalcell">
+        <xsl:attribute name="text-align-last">justify</xsl:attribute>
+        <xsl:attribute name="font-weight">bold</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="totalRow">
+        <xsl:attribute name="border-top">1px solid black</xsl:attribute>
+    </xsl:attribute-set>
+    
 </xsl:stylesheet>

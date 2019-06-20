@@ -6,6 +6,7 @@
     schemaLocation="http://www.w3.org/2001/xml.xsd"/>
   <xs:import namespace="http://www.w3.org/2001/XInclude"
     schemaLocation="http://www.w3.org/2001/XInclude/XInclude.xsd"/>
+  <xs:include schemaLocation="servicebreakdown.xsd"/>
   <xs:include schemaLocation="common.xsd"/>
 
   <xs:element name="offerte">
@@ -46,7 +47,7 @@
 
   <xs:element name="activityinfo">
     <xs:complexType>
-      <xs:sequence>
+      <xs:all>
         <xs:element ref="duration" minOccurs="1"/>
         <xs:element ref="persondays" minOccurs="1"/>
         <xs:element ref="planning" minOccurs="1"/>
@@ -59,10 +60,11 @@
         <xs:element ref="technical_artefact_analysis" minOccurs="0"/>
         <xs:element minOccurs="0" ref="target_application"/>
         <xs:element minOccurs="0" ref="target_application_producer"/>
-      </xs:sequence>
+        <xs:element ref="breakdown" minOccurs="0"/>
+      </xs:all>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:element name="organizational_readiness_assessment">
     <xs:complexType>
       <xs:sequence>
@@ -71,7 +73,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:element name="team">
     <xs:complexType>
       <xs:sequence>
@@ -79,7 +81,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:element name="member">
     <xs:complexType>
       <xs:sequence>
@@ -88,34 +90,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:element name="expertise" type="xs:string"/>
   <xs:element name="security_incident_management" type="ir_service"/>
   <xs:element name="technical_artefact_analysis" type="ir_service"/>
-  
+
   <xs:complexType name="ir_service">
-      <xs:sequence>
-        <xs:element ref="rate"/>
-      </xs:sequence>
+    <xs:sequence>
+      <xs:element ref="rate"/>
+    </xs:sequence>
   </xs:complexType>
 
-  <xs:element name="fee">
-    <xs:complexType>
-      <xs:simpleContent>
-        <xs:extension base="xs:integer">
-          <xs:attribute name="denomination" use="required">
-            <xs:simpleType>
-              <xs:restriction base="xs:string">
-                <xs:enumeration value="eur"/>
-                <xs:enumeration value="gbp"/>
-                <xs:enumeration value="usd"/>
-              </xs:restriction>
-            </xs:simpleType>
-          </xs:attribute>
-        </xs:extension>
-      </xs:simpleContent>
-    </xs:complexType>
-  </xs:element>
 
   <xs:element name="annex">
     <xs:complexType>
@@ -203,6 +188,18 @@
           <xs:element ref="contact"/>
           <xs:element ref="generate_targets"/>
           <xs:element name="generate_teammembers"/>
+          <xs:element name="generate_service_breakdown">
+            <xs:complexType>
+              <xs:attribute name="format" use="required">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:enumeration value="list"/>
+                    <xs:enumeration value="table"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:attribute>
+            </xs:complexType>
+          </xs:element>
           <xs:element ref="generate_offer_signature_box"/>
         </xs:choice>
       </xs:sequence>

@@ -1,39 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<service_list>
+<breakdown xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../dtd/servicebreakdown.xsd">
   <service>
-    <description>Determine and set up attack vectors</description>
-    <duration in="days">2</duration>
-    <hourly_rate vat="excl" denomination="eur">1</hourly_rate>
-    <fee>
+    <description>Example Service 1: set duration in days and with hourly rate.</description>
+    <effort in="days">2</effort>
+    <hourly_rate>10</hourly_rate>
+    <fee denomination="eur">
       <computed/>
     </fee>
   </service>
   <service>
-    <description>Set up infrastructure and support</description>
-    <duration in="hours">20</duration>
-    <hourly_rate vat="excl" denomination="eur">2</hourly_rate>
-    <fee>
+    <description>Example Service 2: variable duration with min/max parameters and with hourly
+      rate.</description>
+    <effort in="days">
+      <min>3</min>
+      <max>4</max>
+    </effort>
+    <hourly_rate>10</hourly_rate>
+    <fee denomination="eur">
       <computed/>
     </fee>
   </service>
   <service>
-    <description>Attacking and reporting</description>
-    <duration in="days">5</duration>
-    <hourly_rate vat="excl" denomination="eur">3</hourly_rate>
-    <fee>
-      <computed/>
+    <description>Example Service 3: set duration in days with CUSTOM (non-computed) set
+      fee.</description>
+    <effort in="days">5</effort>
+    <fee denomination="eur">500</fee>
+  </service>
+  <service>
+    <description>Example Service 4: set duration in hours with CUSTOM (non-computed) variable fee
+      (min/max).</description>
+    <effort in="hours">4</effort>
+    <fee denomination="eur">
+      <min>100</min>
+      <max>200</max>
     </fee>
   </service>
   <service>
-    <description>Travel and hotel</description>
-    <fee vat="excl" denomination="eur">50</fee>
+    <description>Example Service 5: set duration in days with CUSTOM (non-computed) estimated
+      fee.</description>
+    <effort in="hours">4</effort>
+    <fee denomination="eur" estimate="yes">1000</fee>
   </service>
-  <service>
-    <description>Optional: presentation of findings</description>
-    <duration in="days"><min>0</min><max>2</max></duration>
-    <hourly_rate vat="incl" denomination="eur">100</hourly_rate>
-    <fee>
+  <service optional="yes">
+    <description>Example Service 6: optional service</description>
+    <effort in="days">
+      <min>1</min>
+      <max>2</max>
+    </effort>
+    <hourly_rate>50</hourly_rate>
+    <fee denomination="eur">
       <computed/>
     </fee>
   </service>
-</service_list>
+  <extra>
+    <description>Example Extra Cost 1: set fee</description>
+    <fee denomination="eur">1000</fee>
+  </extra>
+  <extra>
+    <description>Example Extra Cost 2: variable min/max fee</description>
+    <fee denomination="eur">
+      <min>1000</min>
+      <max>1200</max>
+    </fee>
+  </extra>
+  <extra>
+    <description>Example Extra Cost 3: estimated fee</description>
+    <fee denomination="eur" estimate="yes">600</fee>
+  </extra>
+  <extra>
+    <description>Example Extra Cost 4: with duration</description>
+    <effort in="days">6</effort>
+    <fee denomination="eur">600</fee>
+  </extra>
+</breakdown>

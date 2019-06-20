@@ -189,9 +189,17 @@
     </xsl:template>
     <xsl:template match="p_persondays">
         <xsl:param name="placeholderElement" select="/*/meta/activityinfo/persondays"/>
-        <xsl:call-template name="checkPlaceholder">
-            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
-        </xsl:call-template>
+        <xsl:choose>
+            <xsl:when
+                test="$placeholderElement = '' or $placeholderElement = '0' or not($placeholderElement)">
+                <xsl:call-template name="calculatePersonDays"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="checkPlaceholder">
+                    <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="p_boxtype">
         <xsl:param name="placeholderElement" select="/*/meta/activityinfo/type"/>
@@ -201,13 +209,21 @@
     </xsl:template>
     <xsl:template match="p_fee">
         <xsl:param name="placeholderElement" select="/*/meta/activityinfo/fee"/>
-        <xsl:call-template name="getDenomination">
-            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
-        </xsl:call-template>
-        <xsl:text>&#160;</xsl:text>
-        <xsl:call-template name="checkPlaceholder">
-            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
-        </xsl:call-template>
+        <xsl:choose>
+            <xsl:when
+                test="$placeholderElement = '' or $placeholderElement = '0' or not($placeholderElement)">
+                <xsl:call-template name="calculateTotal"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="getDenomination">
+                    <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+                </xsl:call-template>
+                <xsl:text>&#160;</xsl:text>
+                <xsl:call-template name="checkPlaceholder">
+                    <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="p_startdate">
         <xsl:param name="placeholderElement" select="/*/meta/activityinfo/planning/start"/>
@@ -496,17 +512,17 @@
                     </xsl:when>
                     <!-- PRETTY FORMATTING FOR DATES -->
                     <xsl:when
-                        test="(self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate or self::p_startdate or self::p_enddate) and string($placeholderElement) castable as xs:date">
+                        test="(self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate or self::p_startdate or self::p_enddate or self::p_reportdue) and string($placeholderElement) castable as xs:date">
                         <!-- pretty printing for date -->
                         <xsl:value-of
                             select="format-date($placeholderElement, '[MNn] [D1], [Y]', 'en', (), ())"
                         />
                     </xsl:when>
                     <xsl:when
-                        test="(self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate or self::p_startdate or self::p_enddate) and normalize-space(.) = 'TBD'">
+                        test="(self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate or self::p_startdate or self::p_enddate or self::p_reportdue) and normalize-space(.) = 'TBD'">
                         <!-- actual TBD, don't mess with it --> TBD </xsl:when>
                     <xsl:when
-                        test="(self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate or self::p_startdate or self::p_enddate) and not(string($placeholderElement) castable as xs:date)">
+                        test="(self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate or self::p_startdate or self::p_enddate or self::p_reportdue) and not(string($placeholderElement) castable as xs:date)">
                         <xsl:call-template name="displayErrorText">
                             <xsl:with-param name="string">TBD</xsl:with-param>
                         </xsl:call-template>

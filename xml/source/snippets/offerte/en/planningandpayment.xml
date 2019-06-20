@@ -6,10 +6,12 @@
   </p>
   <ul>
     <li><company_short/> performs a <p_duration/>-day <company_svc_short/> starting <p_startdate/>.</li>
-    <li><company_short/> delivers the final report on <p_reportdue/>.</li>
+    <li><company_short/> delivers the final report on 
+      <p_reportdue/>.</li>
   </ul>
   <p>
-    Our fixed-fee price quote for the above described <company_svc_short/> is <p_fee/>.-
+    Our fixed-fee price quote for the above described <company_svc_short/> is 
+    <p_fee/>
     excl. VAT and out-of-pocket expenses.
     <company_short/> will send an invoice after the completion of this assignment. 
     <client_short/> will pay the agreed amount within 14 days of the invoice date.

@@ -2,15 +2,17 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:my="http://www.radical.sexy"
     exclude-result-prefixes="xs my" version="2.0">
-    
+
     <!-- color scheme, just change these to change colors throughout the suite -->
     <xsl:variable name="c_main">#e2632a</xsl:variable>
     <xsl:variable name="c_support_light">#ededed</xsl:variable>
-    <xsl:variable name="c_support_subtlydarkerlight">#e4e4e4</xsl:variable><!-- used for subtle light border around support_light background -->
-    <xsl:variable name="c_support_medium">#999999</xsl:variable><!-- used for subtle light border around support_light background -->
+    <xsl:variable name="c_support_subtlydarkerlight">#e4e4e4</xsl:variable>
+    <!-- used for subtle light border around support_light background -->
+    <xsl:variable name="c_support_medium">#999999</xsl:variable>
+    <!-- used for subtle light border around support_light background -->
     <xsl:variable name="c_support_dark">#444444</xsl:variable>
     <xsl:variable name="c_main_contrast">white</xsl:variable>
-    
+
     <xsl:variable name="border-color">#444444</xsl:variable>
 
     <!-- auto numbering format (used in various docs) -->
@@ -32,7 +34,7 @@
     <xsl:variable name="hourly_fee" select="/contract/meta/contractor/hourly_fee * 1"/>
     <xsl:variable name="plannedHours" select="/contract/meta/work/planning/hours * 1"/>
     <xsl:variable name="total_fee" select="$hourly_fee * $plannedHours"/>
-    
+
     <!-- current second ('random' seed) -->
     <xsl:variable name="current_second" select="ceiling(seconds-from-dateTime(current-dateTime()))"/>
 
@@ -75,7 +77,194 @@
     <xsl:variable name="generic_piecolor_20">mediumturquoise</xsl:variable>
     <xsl:variable name="generic_piecolor_21">navy</xsl:variable>
     <xsl:variable name="generic_piecolor_other">black</xsl:variable>
-    
+
+    <xsl:variable name="serviceNodeSet">
+        <!-- putting the logic for all calculation in this imaginary nodeset; output to fo comes below -->
+        <xsl:for-each select="//breakdown/service | //breakdown/extra">
+            <xsl:variable name="minmaxeffortPresent"
+                select="boolean(effort/min and effort/max)"/>
+            <xsl:variable name="minmaxFeePresent" select="boolean(fee/min and fee/max)"/>
+            <xsl:variable name="effortPresent"
+                select="boolean(normalize-space(effort) and normalize-space(effort/@in))"/>
+            <xsl:variable name="optional" select="@optional = 'yes'"/>
+            <entry>
+                <xsl:attribute name="denomination">
+                    <xsl:value-of select="fee/@denomination"/>
+                </xsl:attribute>
+                <xsl:attribute name="estimate">
+                    <xsl:value-of select="fee/@estimate = 'yes'"/>
+                </xsl:attribute>
+                <xsl:attribute name="type">
+                    <xsl:value-of select="local-name(.)"/>
+                </xsl:attribute>
+                <xsl:attribute name="optional">
+                    <xsl:value-of select="@optional"/>
+                </xsl:attribute>
+                <desc>
+                    <xsl:if test="$optional">
+                        <xsl:text>(Optional) </xsl:text>
+                    </xsl:if>
+                    <xsl:value-of select="description"/>
+                </desc>
+                <xsl:if test="$effortPresent">
+                    <d>
+                        <xsl:choose>
+                            <xsl:when test="$minmaxeffortPresent">
+                                <!-- Estimated effort -->
+                                <xsl:value-of select="effort/min"/>
+                                <xsl:text>-</xsl:text>
+                                <xsl:value-of select="effort/max"/>
+                                <xsl:text> </xsl:text>
+                                <xsl:value-of select="effort/@in"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <!-- Actual effort -->
+                                <xsl:value-of select="effort"/>
+                                <xsl:text> </xsl:text>
+                                <xsl:value-of select="effort/@in"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </d>
+                    <dh>
+                        <!-- effort in hours, for calculation of persondays -->
+                        <xsl:choose>
+                            <xsl:when test="$minmaxeffortPresent">
+                                <!-- computed + estimated fee; compute for min and max using effort and use hourly rate denomination -->
+                                <min>
+                                    <xsl:choose>
+                                        <xsl:when test="$optional">0</xsl:when>
+                                        <xsl:when test="effort/@in = 'hours'">
+                                            <xsl:value-of select="effort/min"/>
+                                        </xsl:when>
+                                        <xsl:when test="effort/@in = 'days'">
+                                            <xsl:value-of select="effort/min * 8"/>
+                                        </xsl:when>
+                                    </xsl:choose>
+                                </min>
+                                <max>
+                                    <xsl:choose>
+                                        <xsl:when test="effort/@in = 'hours'">
+                                            <xsl:value-of select="effort/max"/>
+                                        </xsl:when>
+                                        <xsl:when test="effort/@in = 'days'">
+                                            <xsl:value-of select="effort/max * 8"/>
+                                        </xsl:when>
+                                    </xsl:choose>
+                                </max>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <min>
+                                    <xsl:choose>
+                                        <xsl:when test="$optional">0</xsl:when>
+                                        <xsl:when test="effort/@in = 'hours'">
+                                            <xsl:value-of select="effort"/>
+                                        </xsl:when>
+                                        <xsl:when test="effort/@in = 'days'">
+                                            <xsl:value-of select="effort * 8"/>
+                                        </xsl:when>
+                                    </xsl:choose>
+                                </min>
+                                <max>
+                                    <xsl:choose>
+                                        <xsl:when test="effort/@in = 'hours'">
+                                            <xsl:value-of select="effort"/>
+                                        </xsl:when>
+                                        <xsl:when test="effort/@in = 'days'">
+                                            <xsl:value-of select="effort * 8"/>
+                                        </xsl:when>
+                                    </xsl:choose>
+                                </max>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </dh>
+                    <h>
+                        <xsl:value-of select="hourly_rate"/>
+                    </h>
+                </xsl:if>
+                <f>
+                    <xsl:choose>
+                        <xsl:when test="fee/computed">
+                            <!-- Fee computed; need effort and rate -->
+                            <xsl:choose>
+                                <xsl:when test="not($effortPresent) or not(hourly_rate)">
+                                    <xsl:message terminate="yes">ERROR: cannot compute fee for
+                                            <xsl:value-of select="local-name(.)"/> "<xsl:value-of
+                                            select="description"/>" - effort and/or hourly rate
+                                        missing </xsl:message>
+                                </xsl:when>
+                                <xsl:when test="$effortPresent and $minmaxeffortPresent">
+                                    <!-- computed + estimated fee; compute for min and max using effort and use hourly rate denomination -->
+                                    <min>
+                                        <xsl:choose>
+                                            <xsl:when test="$optional">0</xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:call-template name="computeFee">
+                                                  <xsl:with-param name="for" select="effort/min"/>
+                                                </xsl:call-template>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </min>
+                                    <max>
+                                        <xsl:call-template name="computeFee">
+                                            <xsl:with-param name="for" select="effort/max"/>
+                                        </xsl:call-template>
+                                    </max>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <!-- computed fee; compute using effort and use hourly rate denomination -->
+                                    <min>
+                                        <xsl:choose>
+                                            <xsl:when test="$optional">0</xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:call-template name="computeFee">
+                                                  <xsl:with-param name="for" select="effort"/>
+                                                </xsl:call-template>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </min>
+                                    <max>
+                                        <xsl:call-template name="computeFee">
+                                            <xsl:with-param name="for" select="effort"/>
+                                        </xsl:call-template>
+                                    </max>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <!-- Fee set by user -->
+                            <xsl:choose>
+                                <xsl:when test="$minmaxFeePresent">
+                                    <xsl:copy-of select="fee/node()"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <min>
+                                        <xsl:copy-of select="fee/text()"/>
+                                    </min>
+                                    <max>
+                                        <xsl:copy-of select="fee/text()"/>
+                                    </max>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </f>
+            </entry>
+        </xsl:for-each>
+    </xsl:variable>
+    <xsl:template name="computeFee">
+        <xsl:param name="for"/>
+        <xsl:choose>
+            <xsl:when test="effort/@in = 'hours'">
+                <!-- multiply with hourly rate -->
+                <xsl:value-of select="$for * hourly_rate"/>
+            </xsl:when>
+            <xsl:when test="effort/@in = 'days'">
+                <!-- multiply with hourly rate * 8 -->
+                <xsl:value-of select="$for * hourly_rate * 8"/>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+
     <xsl:template name="selectColor">
         <xsl:param name="label"/>
         <xsl:param name="position"/>
@@ -239,57 +428,11 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    
+
     <!-- Finding stuff -->
-            <xsl:variable name="unsortedFindingSummaryTable">
-            <xsl:for-each-group select="//finding" group-by="@threatLevel">
-                <xsl:for-each select="current-group()">
-                    <findingEntry>
-                        <xsl:attribute name="Ref">
-                            <xsl:value-of select="@Ref"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="status">
-                            <xsl:value-of select="@status"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="findingId">
-                            <xsl:value-of select="@id"/>
-                        </xsl:attribute>
-                        <findingNumber>
-                            <xsl:apply-templates select="." mode="number"/>
-                        </findingNumber>
-                        <findingType>
-                            <xsl:value-of select="@type"/>
-                        </findingType>
-                        <findingDescription>
-                            <xsl:choose>
-                                <xsl:when test="description_summary">
-                                    <xsl:value-of select="description_summary"/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:apply-templates select="description" mode="summarytable"/>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </findingDescription>
-                        <findingThreatLevel>
-                            <xsl:value-of select="current-grouping-key()"/>
-                        </findingThreatLevel>
-                    </findingEntry>
-                </xsl:for-each>
-            </xsl:for-each-group>
-        </xsl:variable>
-        <xsl:variable name="findingSummaryTable">
-            <xsl:for-each select="$unsortedFindingSummaryTable/findingEntry">
-                <xsl:sort data-type="number" order="descending"
-                    select="
-                        (number(findingThreatLevel = 'Extreme') * 10)
-                        + (number(findingThreatLevel = 'High') * 9)
-                        + (number(findingThreatLevel = 'Elevated') * 8)
-                        + (number(findingThreatLevel = 'Moderate') * 7)
-                        + (number(findingThreatLevel = 'Low') * 6)
-                        + (number(findingThreatLevel = 'Unknown') * 3)
-                        + (number(findingThreatLevel = 'N/A') * 1)"/>
-                <xsl:variable name="findingThreatLevelClean"
-                                                  select="translate(findingThreatLevel, '/', '_')"/>
+    <xsl:variable name="unsortedFindingSummaryTable">
+        <xsl:for-each-group select="//finding" group-by="@threatLevel">
+            <xsl:for-each select="current-group()">
                 <findingEntry>
                     <xsl:attribute name="Ref">
                         <xsl:value-of select="@Ref"/>
@@ -298,29 +441,75 @@
                         <xsl:value-of select="@status"/>
                     </xsl:attribute>
                     <xsl:attribute name="findingId">
-                        <xsl:value-of select="@findingId"/>
+                        <xsl:value-of select="@id"/>
                     </xsl:attribute>
-                    <!-- add an id for the first entry of each type so that we can link to it -->
-                    <xsl:if
-                        test="not(preceding-sibling::findingEntry/findingThreatLevel = findingThreatLevel)">
-                        <xsl:attribute name="id">summaryTableThreatLevel<xsl:value-of
-                                select="$findingThreatLevelClean"/></xsl:attribute>
-                    </xsl:if>
                     <findingNumber>
-                        <xsl:value-of select="findingNumber"/>
+                        <xsl:apply-templates select="." mode="number"/>
                     </findingNumber>
                     <findingType>
-                        <xsl:value-of select="findingType"/>
+                        <xsl:value-of select="@type"/>
                     </findingType>
                     <findingDescription>
-                        <xsl:value-of select="findingDescription"/>
+                        <xsl:choose>
+                            <xsl:when test="description_summary">
+                                <xsl:value-of select="description_summary"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:apply-templates select="description" mode="summarytable"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </findingDescription>
                     <findingThreatLevel>
-                        <xsl:value-of select="findingThreatLevel"/>
+                        <xsl:value-of select="current-grouping-key()"/>
                     </findingThreatLevel>
                 </findingEntry>
             </xsl:for-each>
-        </xsl:variable>
+        </xsl:for-each-group>
+    </xsl:variable>
+    <xsl:variable name="findingSummaryTable">
+        <xsl:for-each select="$unsortedFindingSummaryTable/findingEntry">
+            <xsl:sort data-type="number" order="descending"
+                select="
+                    (number(findingThreatLevel = 'Extreme') * 10)
+                    + (number(findingThreatLevel = 'High') * 9)
+                    + (number(findingThreatLevel = 'Elevated') * 8)
+                    + (number(findingThreatLevel = 'Moderate') * 7)
+                    + (number(findingThreatLevel = 'Low') * 6)
+                    + (number(findingThreatLevel = 'Unknown') * 3)
+                    + (number(findingThreatLevel = 'N/A') * 1)"/>
+            <xsl:variable name="findingThreatLevelClean"
+                select="translate(findingThreatLevel, '/', '_')"/>
+            <findingEntry>
+                <xsl:attribute name="Ref">
+                    <xsl:value-of select="@Ref"/>
+                </xsl:attribute>
+                <xsl:attribute name="status">
+                    <xsl:value-of select="@status"/>
+                </xsl:attribute>
+                <xsl:attribute name="findingId">
+                    <xsl:value-of select="@findingId"/>
+                </xsl:attribute>
+                <!-- add an id for the first entry of each type so that we can link to it -->
+                <xsl:if
+                    test="not(preceding-sibling::findingEntry/findingThreatLevel = findingThreatLevel)">
+                    <xsl:attribute name="id">summaryTableThreatLevel<xsl:value-of
+                            select="$findingThreatLevelClean"/></xsl:attribute>
+                </xsl:if>
+                <findingNumber>
+                    <xsl:value-of select="findingNumber"/>
+                </findingNumber>
+                <findingType>
+                    <xsl:value-of select="findingType"/>
+                </findingType>
+                <findingDescription>
+                    <xsl:value-of select="findingDescription"/>
+                </findingDescription>
+                <findingThreatLevel>
+                    <xsl:value-of select="findingThreatLevel"/>
+                </findingThreatLevel>
+            </findingEntry>
+        </xsl:for-each>
+    </xsl:variable>
 
     <!-- Money stuff -->
     <xsl:variable name="eur" select="'eur'"/>
@@ -402,7 +591,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
-    
+
     <xsl:function name="my:calculatePeriod">
         <xsl:param name="enddate"/>
         <xsl:param name="startdate"/>

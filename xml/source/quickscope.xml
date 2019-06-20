@@ -38,28 +38,30 @@
     </targets>
     <!-- How long would you like the test to be? (in days) -->
     <days>0</days>
-    <!-- How many persondays (if you don't know, try days * number of assigned pentesters) -->
+    <!-- How many persondays -->
     <persondays>0</persondays>
+    <!-- LAAT PERSONDAYS OP 0 STAAN OM AUTOMATISCH TE LATEN BEREKENEN VIA SERVICE BREAKDOWN -->
     <!-- Service execution (Use one of the following values: time-boxed, subscription) -->
     <nature>time-boxed</nature>
     <!-- Testing type (Use one of the following values: crystal-box, black-box, grey-box) -->
     <type>crystal-box</type>
     <!-- Test planning (when would you like the test to be executed -->
-    <!-- dates should be in ISO format (YYY-MM-DD) -->
+    <!-- dates should be in ISO format (YYYY-MM-DD) -->
     <!-- if unknown, write TBD -->
     <planning><start>YYYY-MM-DD</start><end>TBD</end></planning>
     <!-- Pentest report delivery date (please allow at least 1 week between the end of the pentest and the report delivery date) -->
-    <!-- date should be in ISO format (YYY-MM-DD) -->
+    <!-- date should be in ISO format (YYYY-MM-DD) -->
     <!-- if unknown, write TBD -->
     <delivery>TBD</delivery>
-    <!-- Do you need/want a code audit? (possible values: yes/no), only for pentest -->
+    <!-- Do you need/want an additional code audit? (possible values: yes/no), only for pentest -->
     <codeaudit perform="yes"/>
     <!-- Is there an application that needs to be tested? Add an <application_name> element below. -->
     <!-- INSERT OPTIONAL APPLICATION NAME HERE -->
 
-    <!-- ___________________________________ -->
+    <!-- <application_name>AppToTest</application_name> -->
 
     <!-- rate (to be filled in by ROS ;) -->
     <rate>0</rate>
+    <!-- LAAT RATE OP 0 STAAN OM FEE AUTOMATISCH TE LATEN BEREKENEN VIA SERVICE BREAKDOWN -->
   </activityinfo>
 </quickscope>
