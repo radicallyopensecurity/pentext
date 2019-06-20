@@ -6,7 +6,7 @@
 
     <xsl:import href="localisation.xslt"/>
     <xsl:import href="snippets.xslt"/>
-    
+
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
 
@@ -29,9 +29,11 @@
             </xsl:attribute>
             <xsl:comment>document meta information; to be filled in by the offerte writer</xsl:comment>
             <meta>
-                <title><xsl:call-template name="getString">
-                    <xsl:with-param name="stringID" select="'coverpage_offer'"/>
-                </xsl:call-template></title>
+                <title>
+                    <xsl:call-template name="getString">
+                        <xsl:with-param name="stringID" select="'coverpage_offer'"/>
+                    </xsl:call-template>
+                </title>
                 <offered_service_long>
                     <!-- if known type, use long service name from localisationstrings.xml; otherwise, use long service name provided in quickscope -->
                     <xsl:choose>
@@ -97,8 +99,12 @@
                     </persondays>
                     <xsl:comment>duration of pentest, in persondays</xsl:comment>
                     <planning>
-                        <start><xsl:value-of select="/*/activityinfo/planning/start"/></start>
-                        <end><xsl:value-of select="/*/activityinfo/planning/end"/></end>
+                        <start>
+                            <xsl:value-of select="/*/activityinfo/planning/start"/>
+                        </start>
+                        <end>
+                            <xsl:value-of select="/*/activityinfo/planning/end"/>
+                        </end>
                     </planning>
                     <xsl:comment>start and end dates, in ISO format: YYYY-MM-DD</xsl:comment>
                     <report_due>
@@ -122,7 +128,9 @@
                         </target_application>
                         <xsl:comment>name of application/service to be tested (if any; if none, DELETE target_application element)</xsl:comment>
                     </xsl:if>
-
+                    <xsl:element name="xi:include">
+                        <xsl:attribute name="href">servicebreakdown.xml</xsl:attribute>
+                    </xsl:element>
                 </activityinfo>
                 <version_history>
                     <xsl:comment>needed for date on frontpage and in signature boxes; it is possible to add a new &lt;version> after each review; in that case, make sure to update the date/time</xsl:comment>
@@ -150,21 +158,21 @@
                     </xsl:attribute>
                 </xsl:element>
             </xsl:for-each>
-            
+
             <xsl:if test="/*/activityinfo/codeaudit/@perform = 'yes'">
                 <xsl:for-each
-                select="$snippetSelectionRoot/selection[@subtype = $docSubType]/snippet_group[@set = 'additionalcodeaudit']/snippet">
-                <xsl:element name="xi:include">
-                    <xsl:attribute name="href">
-                        <xsl:call-template name="docCheck">
-                            <xsl:with-param name="fileNameBase" select="."/>
-                            <xsl:with-param name="snippetDirectory" select="$snippetBase"/>
-                        </xsl:call-template>
-                    </xsl:attribute>
-                </xsl:element>
-            </xsl:for-each>
+                    select="$snippetSelectionRoot/selection[@subtype = $docSubType]/snippet_group[@set = 'additionalcodeaudit']/snippet">
+                    <xsl:element name="xi:include">
+                        <xsl:attribute name="href">
+                            <xsl:call-template name="docCheck">
+                                <xsl:with-param name="fileNameBase" select="."/>
+                                <xsl:with-param name="snippetDirectory" select="$snippetBase"/>
+                            </xsl:call-template>
+                        </xsl:attribute>
+                    </xsl:element>
+                </xsl:for-each>
             </xsl:if>
-            
+
             <xsl:for-each
                 select="$snippetSelectionRoot/selection[@subtype = $docSubType]/snippet_group[@set = 'group2']/snippet">
                 <xsl:element name="xi:include">
@@ -177,7 +185,7 @@
                 </xsl:element>
             </xsl:for-each>
 
-            
+
         </offerte>
 
 
