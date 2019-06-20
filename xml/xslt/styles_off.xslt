@@ -41,4 +41,5 @@
 <!-- Signature box -->
     <xsl:attribute-set name="moneycell">
         <xsl:attribute name="text-align-last">justify</xsl:attribute>
+    </xsl:attribute-set>
 </xsl:stylesheet>
