@@ -26,9 +26,4 @@
     <xsl:attribute-set name="region-body-cover">
     </xsl:attribute-set>
     
-    <!-- service breakdown -->
-    <xsl:attribute-set name="moneycell">
-        <xsl:attribute name="text-align-last">justify</xsl:attribute>
-    </xsl:attribute-set>
-    
 </xsl:stylesheet>

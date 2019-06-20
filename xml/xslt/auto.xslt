@@ -129,8 +129,8 @@
     <xsl:template name="findingsSummaryContent">
         <fo:table-row xsl:use-attribute-sets="TableFont">
             <xsl:if test="position() mod 2 != 0">
-                <xsl:attribute name="background-color">#ededed</xsl:attribute>
-            </xsl:if>
+                        <xsl:attribute name="background-color">#ededed</xsl:attribute>
+                    </xsl:if>
             <fo:table-cell xsl:use-attribute-sets="td">
                 <fo:block>
                     <!-- attach id to first finding of each threatLevel so pie charts can link to it -->
@@ -231,8 +231,8 @@
     <xsl:template name="recommendationsSummaryContent">
         <fo:table-row xsl:use-attribute-sets="TableFont">
             <xsl:if test="position() mod 2 != 0">
-                <xsl:attribute name="background-color">#ededed</xsl:attribute>
-            </xsl:if>
+                        <xsl:attribute name="background-color">#ededed</xsl:attribute>
+                    </xsl:if>
             <fo:table-cell xsl:use-attribute-sets="td">
                 <fo:block>
                     <fo:basic-link xsl:use-attribute-sets="link">
@@ -252,8 +252,7 @@
                 <fo:block>
                     <xsl:choose>
                         <xsl:when test="recommendation_summary">
-                            <xsl:apply-templates select="recommendation_summary" mode="summarytable"
-                            />
+                            <xsl:apply-templates select="recommendation_summary" mode="summarytable"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:apply-templates select="recommendation" mode="summarytable"/>
