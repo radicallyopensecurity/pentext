@@ -62,7 +62,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-
+  
   <xs:element name="organizational_readiness_assessment">
     <xs:complexType>
       <xs:sequence>
@@ -71,7 +71,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-
+  
   <xs:element name="team">
     <xs:complexType>
       <xs:sequence>
@@ -79,7 +79,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-
+  
   <xs:element name="member">
     <xs:complexType>
       <xs:sequence>
@@ -88,15 +88,15 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-
+  
   <xs:element name="expertise" type="xs:string"/>
   <xs:element name="security_incident_management" type="ir_service"/>
   <xs:element name="technical_artefact_analysis" type="ir_service"/>
-
+  
   <xs:complexType name="ir_service">
-    <xs:sequence>
-      <xs:element ref="rate"/>
-    </xs:sequence>
+      <xs:sequence>
+        <xs:element ref="rate"/>
+      </xs:sequence>
   </xs:complexType>
 
   <xs:element name="fee">
@@ -203,7 +203,7 @@
           <xs:element ref="contact"/>
           <xs:element ref="generate_targets"/>
           <xs:element name="generate_teammembers"/>
-          <xs:element ref="signature_box"/>
+          <xs:element ref="generate_offer_signature_box"/>
         </xs:choice>
       </xs:sequence>
       <xs:attribute name="id" use="optional" type="xs:ID"/>
@@ -223,32 +223,13 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="generate_offer_signature_box"/>
   <xs:element name="generate_permission_parties"/>
 
-  <xs:element name="signature_box">
-    <xs:complexType>
-      <xs:all>
-        <xs:element ref="client_side"/>
-        <xs:element ref="company_side"/>
-      </xs:all>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="client_side" type="signature_box_column"/>
-  <xs:element name="company_side" type="signature_box_column"/>
-
-  <xs:complexType name="signature_box_column">
-    <xs:sequence>
-      <xs:element name="signee" minOccurs="1" maxOccurs="unbounded"/>
-      <xs:element name="date"/>
-      <xs:element name="place"/>
-    </xs:sequence>
-  </xs:complexType>
 
   <!-- Placeholders -->
   <xs:group name="placeholders">
     <xs:choice>
-      <xs:element name="latest_version_date"/>
       <xs:element name="client_long"/>
       <xs:element name="client_short"/>
       <xs:element name="client_street"/>

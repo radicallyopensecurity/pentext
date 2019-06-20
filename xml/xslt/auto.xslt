@@ -309,6 +309,142 @@
         </fo:block>
     </xsl:template>
 
+    <xsl:template match="generate_offer_signature_box">
+
+        <xsl:call-template name="generateSignatureBox">
+            <xsl:with-param name="latestVersionDate" select="$latestVersionDate"/>
+        </xsl:call-template>
+    </xsl:template>
+
+    <xsl:template name="generateSignatureBox">
+        <xsl:param name="latestVersionDate"/>
+        <fo:block keep-together.within-page="always" xsl:use-attribute-sets="signaturebox">
+            <fo:block xsl:use-attribute-sets="title-client">
+                <xsl:call-template name="getString">
+                    <xsl:with-param name="stringID" select="'signed_dupe'"/>
+                </xsl:call-template>
+            </fo:block>
+            <fo:block>
+                <fo:table xsl:use-attribute-sets="fwtable borders">
+                    <fo:table-column column-width="proportional-column-width(50)"
+                        xsl:use-attribute-sets="borders"/>
+                    <fo:table-column column-width="proportional-column-width(50)"
+                        xsl:use-attribute-sets="borders"/>
+                    <fo:table-body>
+                        <fo:table-row>
+                            <fo:table-cell xsl:use-attribute-sets="td">
+                                <fo:block>
+                                    <xsl:value-of select="$latestVersionDate"/>
+                                </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell xsl:use-attribute-sets="td">
+                                <fo:block>
+                                    <xsl:value-of select="$latestVersionDate"/>
+                                </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                        <fo:table-row>
+                            <fo:table-cell xsl:use-attribute-sets="td">
+                                <fo:block>
+                                    <xsl:value-of select="/*/meta/permission_parties/client/city"/>
+                                </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell xsl:use-attribute-sets="td">
+                                <fo:block>
+                                    <xsl:value-of select="/*/meta/company/city"/>
+                                </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                        <fo:table-row>
+                            <fo:table-cell xsl:use-attribute-sets="td">
+                                <fo:block>&#160;</fo:block>
+                                <fo:block>&#160;</fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell xsl:use-attribute-sets="td">
+                                <fo:block>&#160;</fo:block>
+                                <fo:block>&#160;</fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                        <fo:table-row>
+                            <fo:table-cell xsl:use-attribute-sets="td">
+                                <fo:block>
+                                    <xsl:choose>
+                                        <xsl:when test="/offerte">
+
+                                            <xsl:value-of
+                                                select="/*/meta/permission_parties/client/legal_rep"/>
+
+                                        </xsl:when>
+                                        <xsl:when test="/quickscope">
+
+                                            <xsl:value-of select="/*/customer/legal_rep"/>
+
+                                        </xsl:when>
+                                    </xsl:choose>
+
+                                </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell xsl:use-attribute-sets="td">
+                                <fo:block>
+                                    <xsl:choose>
+                                        <xsl:when test="/offerte">
+
+                                            <xsl:value-of select="/*/meta/company/legal_rep"/>
+
+                                        </xsl:when>
+                                        <xsl:when test="/quickscope">
+
+                                            <xsl:value-of select="/*/company/legal_rep"/>
+
+                                        </xsl:when>
+                                    </xsl:choose>
+
+                                </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                        <fo:table-row>
+                            <fo:table-cell xsl:use-attribute-sets="td">
+                                <fo:block xsl:use-attribute-sets="bold">
+                                    <xsl:choose>
+                                        <xsl:when test="/offerte">
+
+                                            <xsl:value-of
+                                                select="/*/meta/permission_parties/client/full_name"/>
+
+                                        </xsl:when>
+                                        <xsl:when test="/quickscope">
+
+                                            <xsl:value-of select="/*/customer/full_name"/>
+
+                                        </xsl:when>
+                                    </xsl:choose>
+
+                                </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell xsl:use-attribute-sets="td">
+                                <fo:block xsl:use-attribute-sets="bold">
+                                    <xsl:choose>
+                                        <xsl:when test="/offerte">
+
+                                            <xsl:value-of select="/*/meta/company/full_name"/>
+
+                                        </xsl:when>
+                                        <xsl:when test="/quickscope">
+
+                                            <xsl:value-of select="/*/company/full_name"/>
+
+                                        </xsl:when>
+                                    </xsl:choose>
+
+                                </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                    </fo:table-body>
+                </fo:table>
+            </fo:block>
+        </fo:block>
+    </xsl:template>
+
     <xsl:template match="generate_permission_parties">
         <xsl:for-each select="/*/meta/permission_parties/client | /*/meta/permission_parties/party">
             <xsl:if test="self::party and not(following-sibling::party)">
