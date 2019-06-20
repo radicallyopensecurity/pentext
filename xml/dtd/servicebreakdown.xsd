@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+    schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+  <xs:import namespace="http://www.w3.org/2001/XInclude"
+    schemaLocation="http://www.w3.org/2001/XInclude/XInclude.xsd"/>
+  <xs:element name="breakdown">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element ref="service"/>
+        <xs:element ref="extra"/>
+      </xs:choice>
+      <xs:attributeGroup ref="xml:specialAttrs"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="service">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="description"/>
+        <xs:element minOccurs="0" ref="effort"/>
+        <xs:element minOccurs="0" ref="hourly_rate"/>
+        <xs:element ref="fee"/>
+      </xs:sequence>
+      <xs:attribute name="optional" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>  
+  <xs:element name="fee">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="max"/>
+        <xs:element ref="min"/>
+        <xs:element ref="computed"/>
+      </xs:choice>
+      <xs:attribute name="denomination" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="eur"/>
+            <xs:enumeration value="gbp"/>
+            <xs:enumeration value="usd"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="estimate" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="hourly_rate" type="xs:integer"/>
+  <xs:element name="extra">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="description"/>
+        <xs:element minOccurs="0" ref="effort"/>
+        <xs:element minOccurs="0" ref="hourly_rate"/>
+        <xs:element ref="fee"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="description" type="xs:string"/>
+  <xs:element name="effort">
+    <xs:complexType mixed="true">
+      <xs:all minOccurs="0">
+        <xs:element ref="max"/>
+        <xs:element ref="min"/>
+      </xs:all>
+      <xs:attribute name="in" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="computed">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="min" type="xs:integer"/>
+  <xs:element name="max" type="xs:integer"/>
+</xs:schema>
