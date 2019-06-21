@@ -18,7 +18,7 @@
 
     <!-- User-accessible classes -->
     <xsl:attribute-set name="keep-together">
-        <xsl:attribute name="keep-together">always</xsl:attribute>
+        <xsl:attribute name="keep-together.within-page">always</xsl:attribute>
     </xsl:attribute-set>
 
     <!-- Common settings -->

@@ -500,7 +500,7 @@
                 </fo:list-block>
             </xsl:when>
             <xsl:when test="@format = 'table'">
-                <fo:table xsl:use-attribute-sets="breakdowntable">
+                <fo:block xsl:use-attribute-sets="keep-together"><fo:table xsl:use-attribute-sets="breakdowntable">
                     <fo:table-column column-width="proportional-column-width(6)"
                         xsl:use-attribute-sets="borders"/>
                     <fo:table-column column-width="proportional-column-width(2)"
@@ -616,7 +616,7 @@
                             </fo:table-cell>
                         </fo:table-row>
                     </fo:table-body>
-                </fo:table>
+                </fo:table></fo:block>
 
 
                 <xsl:if test="$serviceNodeSet/entry/@estimate = true()">
