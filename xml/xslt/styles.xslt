@@ -451,4 +451,8 @@
     </xsl:attribute-set>
     <xsl:attribute-set name="totalRow"/>
     <xsl:attribute-set name="totalcell"/>
+    <xsl:attribute-set name="signee"/>
+    <xsl:attribute-set name="signee_name"/>
+    <xsl:attribute-set name="signee_dottedline"/>
+    
 </xsl:stylesheet>

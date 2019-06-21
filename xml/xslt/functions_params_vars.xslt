@@ -104,7 +104,7 @@
                     <xsl:if test="$optional">
                         <xsl:text>(Optional) </xsl:text>
                     </xsl:if>
-                    <xsl:value-of select="description"/>
+                    <xsl:value-of select="specification"/>
                 </desc>
                 <xsl:if test="$effortPresent">
                     <d>
@@ -189,7 +189,7 @@
                                 <xsl:when test="not($effortPresent) or not(hourly_rate)">
                                     <xsl:message terminate="yes">ERROR: cannot compute fee for
                                             <xsl:value-of select="local-name(.)"/> "<xsl:value-of
-                                            select="description"/>" - effort and/or hourly rate
+                                            select="specification"/>" - effort and/or hourly rate
                                         missing </xsl:message>
                                 </xsl:when>
                                 <xsl:when test="$effortPresent and $minmaxeffortPresent">

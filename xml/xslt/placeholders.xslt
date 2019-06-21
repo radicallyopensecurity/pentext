@@ -184,12 +184,6 @@
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
-    <xsl:template match="p_duration">
-        <xsl:param name="placeholderElement" select="/*/meta/activityinfo/duration"/>
-        <xsl:call-template name="checkPlaceholder">
-            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
-        </xsl:call-template>
-    </xsl:template>
     <xsl:template match="p_persondays">
         <xsl:param name="placeholderElement" select="/*/meta/activityinfo/persondays"/>
         <xsl:choose>

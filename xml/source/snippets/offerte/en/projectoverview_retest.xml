@@ -15,7 +15,7 @@
   <p>
     <company_short/> will test using both publicly available vulnerability
     scanning tools and manual testing. <company_short/> shall perform a
-    <p_duration/>-day, <p_boxtype/> follow-up penetration test via the internet.
+   <p_boxtype/> follow-up penetration test via the internet between <p_startdate/> and <p_enddate/>.
   </p>
 
   <!--Not Needed if Disclaimer is Included; Duplicate Text-->

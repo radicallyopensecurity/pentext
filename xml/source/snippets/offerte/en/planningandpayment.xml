@@ -5,7 +5,7 @@
     <company_short/> will uphold the following schedule for the services:
   </p>
   <ul>
-    <li><company_short/> performs a <p_duration/>-day <company_svc_short/> starting <p_startdate/>.</li>
+    <li><company_short/> performs a <company_svc_short/> starting <p_startdate/>.</li>
     <li><company_short/> delivers the final report on 
       <p_reportdue/>.</li>
   </ul>

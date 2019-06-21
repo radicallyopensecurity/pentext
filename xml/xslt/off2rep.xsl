@@ -167,10 +167,12 @@
                     <title>Scope of work</title>
                     <p>The scope of the penetration test was limited to the following target:</p>
                     <generate_targets/>
+                    <p>A breakdown of the scoped services can be found below: </p>
+                    <generate_service_breakdown format="list"/>
                 </section>
                 <section id="objectives">
                     <title>Project objectives</title>
-                    <p>...</p>
+                    <p><todo/></p>
                 </section>
                 <section id="timeline">
                     <title>Timeline</title>

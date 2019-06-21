@@ -42,7 +42,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="targets"/>
-        <xs:element ref="days"/>
         <xs:element ref="persondays"/>
         <xs:element ref="nature"/>
         <xs:element ref="type"/>

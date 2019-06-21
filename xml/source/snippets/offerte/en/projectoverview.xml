@@ -18,10 +18,9 @@
   <p>
     <company_short/> will test for the presence of the most common
     vulnerabilities, using both publicly available vulnerability scanning
-    tools and manual testing. <company_short/> shall perform a
-    <p_duration/>-day 
+    tools and manual testing. <company_short/> shall perform a 
     <p_boxtype/> intrusive test via the
-    internet (total estimated effort is <p_persondays/> persondays). A breakdown of the requested services can be found below:
+    internet (total estimated effort: <p_persondays/> persondays). A breakdown of the requested services can be found below:
   </p>
   
  

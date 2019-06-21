@@ -92,7 +92,6 @@
             <xs:element name="company_poc1"/>
             <xs:element name="t_app"/>
             <xs:element name="t_app_producer"/>
-            <xs:element name="p_duration"/>
         </xs:choice>
     </xs:group>
 </xs:schema>

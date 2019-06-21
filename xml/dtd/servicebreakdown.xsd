@@ -16,7 +16,7 @@
   <xs:element name="service">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="description"/>
+        <xs:element ref="specification"/>
         <xs:element minOccurs="0" ref="effort"/>
         <xs:element minOccurs="0" ref="hourly_rate"/>
         <xs:element ref="fee"/>
@@ -47,14 +47,14 @@
   <xs:element name="extra">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="description"/>
+        <xs:element ref="specification"/>
         <xs:element minOccurs="0" ref="effort"/>
         <xs:element minOccurs="0" ref="hourly_rate"/>
         <xs:element ref="fee"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="description" type="xs:string"/>
+  <xs:element name="specification" type="xs:string"/>
   <xs:element name="effort">
     <xs:complexType mixed="true">
       <xs:all minOccurs="0">

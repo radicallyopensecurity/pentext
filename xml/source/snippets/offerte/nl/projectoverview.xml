@@ -19,8 +19,8 @@
   <p>
     <company_short/> zal testen op de aanwezigheid van de meest voorkomende
     kwetsbaarheden, gebruik makend van zowel publiek beschikbare scanning tools,
-    als door handmatig testen. <company_short/> zal een grondige <p_duration/>-daagse
-    (<p_persondays/> persoondagen), <p_boxtype/> test uitvoeren via internet.
+    als door handmatig testen. <company_short/> zal een grondige 
+    <p_boxtype/> test van <p_persondays/> persoondagen uitvoeren via internet.
   </p>
 
   <section todo="yes">

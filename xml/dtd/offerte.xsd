@@ -48,7 +48,6 @@
   <xs:element name="activityinfo">
     <xs:complexType>
       <xs:all>
-        <xs:element ref="duration" minOccurs="1"/>
         <xs:element ref="persondays" minOccurs="1"/>
         <xs:element ref="planning" minOccurs="1"/>
         <xs:element ref="report_due" minOccurs="1"/>
@@ -188,7 +187,7 @@
           <xs:element ref="contact"/>
           <xs:element ref="generate_targets"/>
           <xs:element name="generate_teammembers"/>
-          <xs:element ref="signature_box"/>
+          <xs:element name="generate_service_breakdown">
             <xs:complexType>
               <xs:attribute name="format" use="required">
                 <xs:simpleType>
@@ -200,7 +199,7 @@
               </xs:attribute>
             </xs:complexType>
           </xs:element>
-          <xs:element ref="generate_offer_signature_box"/>
+          <xs:element ref="signature_box"/>
         </xs:choice>
       </xs:sequence>
       <xs:attribute name="id" use="optional" type="xs:ID"/>
@@ -213,11 +212,11 @@
 
   <xs:element name="contact">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="name"/>
-        <xs:element ref="address"/>
-        <xs:element ref="email"/>
-      </xs:sequence>
+      <xs:all>
+        <xs:element ref="name" minOccurs="0"/>
+        <xs:element ref="address" minOccurs="0"/>
+        <xs:element ref="email" minOccurs="0"/>
+      </xs:all>
     </xs:complexType>
   </xs:element>
   <xs:element name="generate_permission_parties"/>

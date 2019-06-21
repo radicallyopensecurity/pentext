@@ -16,8 +16,7 @@
     <p>
         <company_short/> will test for the presence of the most common vulnerabilities using a
         combination of publicly available (static, dynamic and concolic) analytic tools, fuzzing and
-        code reading. <company_short/> will perform this code audit in <p_duration/> days
-        (<p_persondays/> persondays). </p>
+        code reading. <company_short/> will need <p_persondays/> persondays for this code audit. </p>
     
 
     <!--Not Needed if Disclaimer is Included; Duplicate Text-->
