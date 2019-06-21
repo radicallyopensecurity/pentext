@@ -188,7 +188,7 @@
           <xs:element ref="contact"/>
           <xs:element ref="generate_targets"/>
           <xs:element name="generate_teammembers"/>
-          <xs:element name="generate_service_breakdown">
+          <xs:element ref="signature_box"/>
             <xs:complexType>
               <xs:attribute name="format" use="required">
                 <xs:simpleType>
@@ -220,13 +220,32 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="generate_offer_signature_box"/>
   <xs:element name="generate_permission_parties"/>
 
+  <xs:element name="signature_box">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="client_side"/>
+        <xs:element ref="company_side"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="client_side" type="signature_box_column"/>
+  <xs:element name="company_side" type="signature_box_column"/>
+
+  <xs:complexType name="signature_box_column">
+    <xs:sequence>
+      <xs:element name="signee" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="date"/>
+      <xs:element name="place"/>
+    </xs:sequence>
+  </xs:complexType>
 
   <!-- Placeholders -->
   <xs:group name="placeholders">
     <xs:choice>
+      <xs:element name="latest_version_date"/>
       <xs:element name="client_long"/>
       <xs:element name="client_short"/>
       <xs:element name="client_street"/>

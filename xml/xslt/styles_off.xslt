@@ -34,5 +34,16 @@
     <xsl:attribute-set name="totalRow">
         <xsl:attribute name="border-top">1px solid black</xsl:attribute>
     </xsl:attribute-set>
-    
+
+    <!-- Signature box -->
+    <xsl:attribute-set name="signee">
+        <xsl:attribute name="height">2.75cm</xsl:attribute>
+    </xsl:attribute-set><xsl:attribute-set name="signee_name">
+        <xsl:attribute name="text-align">right</xsl:attribute>
+        <xsl:attribute name="margin-right">0.75cm</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="signee_dottedline">
+        <xsl:attribute name="margin-top">1.75cm</xsl:attribute>
+        <xsl:attribute name="text-align">right</xsl:attribute>
+    </xsl:attribute-set>
 </xsl:stylesheet>
