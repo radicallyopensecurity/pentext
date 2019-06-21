@@ -129,8 +129,8 @@
     <xsl:template name="findingsSummaryContent">
         <fo:table-row xsl:use-attribute-sets="TableFont">
             <xsl:if test="position() mod 2 != 0">
-                        <xsl:attribute name="background-color">#ededed</xsl:attribute>
-                    </xsl:if>
+                <xsl:attribute name="background-color">#ededed</xsl:attribute>
+            </xsl:if>
             <fo:table-cell xsl:use-attribute-sets="td">
                 <fo:block>
                     <!-- attach id to first finding of each threatLevel so pie charts can link to it -->
@@ -231,8 +231,8 @@
     <xsl:template name="recommendationsSummaryContent">
         <fo:table-row xsl:use-attribute-sets="TableFont">
             <xsl:if test="position() mod 2 != 0">
-                        <xsl:attribute name="background-color">#ededed</xsl:attribute>
-                    </xsl:if>
+                <xsl:attribute name="background-color">#ededed</xsl:attribute>
+            </xsl:if>
             <fo:table-cell xsl:use-attribute-sets="td">
                 <fo:block>
                     <fo:basic-link xsl:use-attribute-sets="link">
@@ -252,7 +252,8 @@
                 <fo:block>
                     <xsl:choose>
                         <xsl:when test="recommendation_summary">
-                            <xsl:apply-templates select="recommendation_summary" mode="summarytable"/>
+                            <xsl:apply-templates select="recommendation_summary" mode="summarytable"
+                            />
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:apply-templates select="recommendation" mode="summarytable"/>
@@ -481,60 +482,73 @@
                             </fo:list-item>
                         </xsl:if>
                     </xsl:for-each>
+                    <fo:list-item xsl:use-attribute-sets="li">
+                        <!-- insert a bullet -->
+                        <fo:list-item-label end-indent="label-end()">
+                            <fo:block>
+                                <fo:inline>&#8226;</fo:inline>
+                            </fo:block>
+                        </fo:list-item-label>
+                        <fo:list-item-body start-indent="body-start()">
+                            <fo:block xsl:use-attribute-sets="bold">
+                                <xsl:text>Total effort: </xsl:text>
+                                <xsl:call-template name="calculatePersonDays"/>
+                                <xsl:text> days</xsl:text>
+                            </fo:block>
+                        </fo:list-item-body>
+                    </fo:list-item>
                 </fo:list-block>
             </xsl:when>
             <xsl:when test="@format = 'table'">
-                <fo:block>
-                    <fo:table xsl:use-attribute-sets="fwtable borders">
-                        <fo:table-column column-width="proportional-column-width(6)"
-                            xsl:use-attribute-sets="borders"/>
-                        <fo:table-column column-width="proportional-column-width(2)"
-                            xsl:use-attribute-sets="borders"/>
-                        <fo:table-column column-width="proportional-column-width(3)"
-                            xsl:use-attribute-sets="borders"/>
-                        <fo:table-column column-width="proportional-column-width(4)"
-                            xsl:use-attribute-sets="borders"/>
-                        <fo:table-body>
+                <fo:table xsl:use-attribute-sets="breakdowntable">
+                    <fo:table-column column-width="proportional-column-width(6)"
+                        xsl:use-attribute-sets="borders"/>
+                    <fo:table-column column-width="proportional-column-width(2)"
+                        xsl:use-attribute-sets="borders"/>
+                    <fo:table-column column-width="proportional-column-width(3)"
+                        xsl:use-attribute-sets="borders"/>
+                    <fo:table-column column-width="proportional-column-width(4)"
+                        xsl:use-attribute-sets="borders"/>
+                    <fo:table-body>
+                        <fo:table-row>
+                            <fo:table-cell xsl:use-attribute-sets="th">
+                                <fo:block> Description </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell xsl:use-attribute-sets="th">
+                                <fo:block> Effort </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell xsl:use-attribute-sets="th">
+                                <fo:block> Hourly rate </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell xsl:use-attribute-sets="th">
+                                <fo:block> Fee </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                        <xsl:for-each select="$serviceNodeSet/entry">
                             <fo:table-row>
-                                <fo:table-cell xsl:use-attribute-sets="th">
-                                    <fo:block> Description </fo:block>
-                                </fo:table-cell>
-                                <fo:table-cell xsl:use-attribute-sets="th">
-                                    <fo:block> Effort </fo:block>
-                                </fo:table-cell>
-                                <fo:table-cell xsl:use-attribute-sets="th">
-                                    <fo:block> Hourly rate </fo:block>
-                                </fo:table-cell>
-                                <fo:table-cell xsl:use-attribute-sets="th">
-                                    <fo:block> Fee </fo:block>
-                                </fo:table-cell>
-                            </fo:table-row>
-                            <xsl:for-each select="$serviceNodeSet/entry">
-                                <fo:table-row>
-                                    <xsl:if test="position() mod 2 != 0">
-                                        <xsl:attribute name="background-color"
-                                            >#ededed</xsl:attribute>
+                                <xsl:if test="position() mod 2 != 0">
+                                    <xsl:attribute name="background-color">#ededed</xsl:attribute>
+                                </xsl:if>
+                                <fo:table-cell xsl:use-attribute-sets="td">
+                                    <xsl:if
+                                        test="not(normalize-space(d)) and not(normalize-space(h))">
+                                        <xsl:attribute name="number-columns-spanned"
+                                            >3</xsl:attribute>
                                     </xsl:if>
+                                    <fo:block>
+                                        <xsl:value-of select="desc"/>
+                                    </fo:block>
+                                </fo:table-cell>
+                                <xsl:if test="d">
                                     <fo:table-cell xsl:use-attribute-sets="td">
-                                        <xsl:if
-                                            test="not(normalize-space(d)) and not(normalize-space(h))">
-                                            <xsl:attribute name="number-columns-spanned"
-                                                >3</xsl:attribute>
-                                        </xsl:if>
                                         <fo:block>
-                                            <xsl:value-of select="desc"/>
+                                            <xsl:value-of select="d"/>
                                         </fo:block>
                                     </fo:table-cell>
-                                    <xsl:if test="d">
-                                        <fo:table-cell xsl:use-attribute-sets="td">
-                                            <fo:block>
-                                                <xsl:value-of select="d"/>
-                                            </fo:block>
-                                        </fo:table-cell>
-                                        <xsl:choose>
-                                            <xsl:when test="normalize-space(h)">
-                                                <fo:table-cell xsl:use-attribute-sets="td">
-                                                  <fo:block text-align="right">
+                                    <xsl:choose>
+                                        <xsl:when test="normalize-space(h)">
+                                            <fo:table-cell xsl:use-attribute-sets="td">
+                                                <fo:block text-align="right">
                                                   <xsl:call-template name="getDenomination">
                                                   <xsl:with-param name="placeholderElement"
                                                   select="."/>
@@ -543,67 +557,67 @@
                                                   <xsl:with-param name="n" select="h"/>
                                                   </xsl:call-template>
                                                   <xsl:text> excl. VAT</xsl:text>
-                                                  </fo:block>
-                                                </fo:table-cell>
+                                                </fo:block>
+                                            </fo:table-cell>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <fo:table-cell xsl:use-attribute-sets="td">
+                                                <fo:block text-align="right">-</fo:block>
+                                            </fo:table-cell>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:if>
+                                <fo:table-cell xsl:use-attribute-sets="td">
+                                    <fo:block text-align="right">
+                                        <xsl:choose>
+                                            <xsl:when test="not(f/min = f/max)">
+                                                <xsl:call-template name="getDenomination">
+                                                  <xsl:with-param name="placeholderElement"
+                                                  select="."/>
+                                                </xsl:call-template>
+                                                <xsl:number value="f/min" grouping-separator=","
+                                                  grouping-size="3"/>
+                                                <xsl:text> - </xsl:text>
+                                                <xsl:call-template name="getDenomination">
+                                                  <xsl:with-param name="placeholderElement"
+                                                  select="."/>
+                                                </xsl:call-template>
+                                                <xsl:call-template name="prettyMissingDecimal">
+                                                  <xsl:with-param name="n" select="f/max"/>
+                                                </xsl:call-template>
                                             </xsl:when>
                                             <xsl:otherwise>
-                                                <fo:table-cell xsl:use-attribute-sets="td">
-                                                  <fo:block text-align="right">-</fo:block>
-                                                </fo:table-cell>
+                                                <xsl:call-template name="getDenomination">
+                                                  <xsl:with-param name="placeholderElement"
+                                                  select="."/>
+                                                </xsl:call-template>
+                                                <xsl:call-template name="prettyMissingDecimal">
+                                                  <xsl:with-param name="n" select="f/min"/>
+                                                </xsl:call-template>
                                             </xsl:otherwise>
                                         </xsl:choose>
-                                    </xsl:if>
-                                    <fo:table-cell xsl:use-attribute-sets="td">
-                                        <fo:block text-align="right">
-                                            <xsl:choose>
-                                                <xsl:when test="not(f/min = f/max)">
-                                                  <xsl:call-template name="getDenomination">
-                                                  <xsl:with-param name="placeholderElement"
-                                                  select="."/>
-                                                  </xsl:call-template>
-                                                  <xsl:value-of select="f/min"/>
-                                                  <xsl:text> - </xsl:text>
-                                                  <xsl:call-template name="getDenomination">
-                                                  <xsl:with-param name="placeholderElement"
-                                                  select="."/>
-                                                  </xsl:call-template>
-                                                  <xsl:call-template name="prettyMissingDecimal">
-                                                  <xsl:with-param name="n" select="f/max"/>
-                                                  </xsl:call-template>
-                                                </xsl:when>
-                                                <xsl:otherwise>
-                                                  <xsl:call-template name="getDenomination">
-                                                  <xsl:with-param name="placeholderElement"
-                                                  select="."/>
-                                                  </xsl:call-template>
-                                                  <xsl:call-template name="prettyMissingDecimal">
-                                                  <xsl:with-param name="n" select="f/min"/>
-                                                  </xsl:call-template>
-                                                </xsl:otherwise>
-                                            </xsl:choose>
-                                            <xsl:text> excl. VAT</xsl:text>
-                                            <xsl:if test="@estimate = true()">*</xsl:if>
-                                        </fo:block>
-                                    </fo:table-cell>
-                                </fo:table-row>
-                            </xsl:for-each>
-                            <fo:table-row xsl:use-attribute-sets="totalRow">
-                                <fo:table-cell number-columns-spanned="4"
-                                    xsl:use-attribute-sets="td">
-                                    <fo:block xsl:use-attribute-sets="totalcell">
-                                        <xsl:text>Total</xsl:text>
-                                        <xsl:if test="$serviceNodeSet/entry/@estimate">
-                                            (estimate)</xsl:if>
-                                        <xsl:text>:</xsl:text>
-                                        <fo:leader leader-pattern="space"/>
-                                        <xsl:call-template name="calculateTotal"/>
                                         <xsl:text> excl. VAT</xsl:text>
+                                        <xsl:if test="@estimate = true()">*</xsl:if>
                                     </fo:block>
                                 </fo:table-cell>
                             </fo:table-row>
-                        </fo:table-body>
-                    </fo:table>
-                </fo:block>
+                        </xsl:for-each>
+                        <fo:table-row xsl:use-attribute-sets="totalRow">
+                            <fo:table-cell number-columns-spanned="4" xsl:use-attribute-sets="td">
+                                <fo:block xsl:use-attribute-sets="totalcell">
+                                    <xsl:text>Total</xsl:text>
+                                    <xsl:if test="$serviceNodeSet/entry/@estimate">
+                                        (estimate)</xsl:if>
+                                    <xsl:text>:</xsl:text>
+                                    <fo:leader leader-pattern="space"/>
+                                    <xsl:call-template name="calculateTotal"/>
+                                    <xsl:text> excl. VAT</xsl:text>
+                                </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                    </fo:table-body>
+                </fo:table>
+
 
                 <xsl:if test="$serviceNodeSet/entry/@estimate = true()">
                     <fo:block text-align="right">
@@ -640,7 +654,7 @@
                         select="$allDenominationsAreEqual"/>
                     <xsl:with-param name="denoms" select="$denoms"/>
                 </xsl:call-template>
-                <xsl:value-of select="$totalMinFees"/>
+                <xsl:number value="$totalMinFees" grouping-separator="," grouping-size="3"/>
                 <xsl:text> - </xsl:text>
                 <xsl:call-template name="checkDenomination">
                     <xsl:with-param name="allDenominationsAreEqual"
@@ -705,7 +719,7 @@
     <xsl:template name="prettyMissingDecimal">
         <xsl:param name="n"/>
         <xsl:if test="floor($n) = $n">
-            <xsl:value-of select="$n"/>
+            <xsl:number value="$n" grouping-separator="," grouping-size="3"/>
             <xsl:text>.-</xsl:text>
         </xsl:if>
     </xsl:template>

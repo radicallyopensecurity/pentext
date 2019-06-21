@@ -378,6 +378,8 @@
     <xsl:attribute-set name="list">
         <xsl:attribute name="provisional-distance-between-starts">0.7cm</xsl:attribute>
         <xsl:attribute name="provisional-label-separation">2mm</xsl:attribute>
+        <xsl:attribute name="padding-top">0.2cm</xsl:attribute>
+        <xsl:attribute name="padding-bottom">0.5cm</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="li">
         <xsl:attribute name="line-height">6.5mm</xsl:attribute>
@@ -443,6 +445,10 @@
         <xsl:attribute name="end-indent">0</xsl:attribute>
     </xsl:attribute-set>
     
+    <xsl:attribute-set name="breakdowntable" use-attribute-sets="fwtable borders">
+        <xsl:attribute name="margin-top">0.5cm</xsl:attribute>
+        <xsl:attribute name="margin-bottom">0.2cm</xsl:attribute>
+    </xsl:attribute-set>
     <xsl:attribute-set name="totalRow"/>
     <xsl:attribute-set name="totalcell"/>
 </xsl:stylesheet>

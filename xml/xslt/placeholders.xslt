@@ -8,13 +8,13 @@
         <xsl:choose>
             <xsl:when
                 test="$placeholderElement/ancestor-or-self::*[@denomination][1]/@denomination = 'eur'"
-                >€</xsl:when>
+                ><xsl:text>€ </xsl:text></xsl:when>
             <xsl:when
                 test="$placeholderElement/ancestor-or-self::*[@denomination][1]/@denomination = 'usd'"
-                >$</xsl:when>
+                ><xsl:text>$ </xsl:text></xsl:when>
             <xsl:when
                 test="$placeholderElement/ancestor-or-self::*[@denomination][1]/@denomination = 'gbp'"
-                >£</xsl:when>
+                ><xsl:text>£ </xsl:text></xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="displayErrorText">
                     <xsl:with-param name="string">WARNING: NO DENOMINATION FOUND</xsl:with-param>
@@ -475,19 +475,9 @@
     </xsl:template>
 
     <xsl:template match="todo">
-        <xsl:choose>
-            <xsl:when test="@desc">
-                <xsl:call-template name="displayErrorText">
-                    <xsl:with-param name="string">### TODO: <xsl:value-of select="@desc"/>
-                        ###</xsl:with-param>
+        <xsl:call-template name="displayErrorText">
+                    <xsl:with-param name="string">### TODO<xsl:if test="@desc">: <xsl:value-of select="@desc"/></xsl:if> ###</xsl:with-param>
                 </xsl:call-template>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:call-template name="displayErrorText">
-                    <xsl:with-param name="string">### TODO ###</xsl:with-param>
-                </xsl:call-template>
-            </xsl:otherwise>
-        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="checkPlaceholder">

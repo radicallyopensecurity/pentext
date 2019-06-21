@@ -20,6 +20,7 @@
     Any additional work will be charged separately. An hourly 
     rate for additional work will be agreed upon before starting this work.
   </p>
+  <p>A detailed breakdown of the requested services can be found below:</p>
   
   <generate_service_breakdown format="table"/>
 </section>
