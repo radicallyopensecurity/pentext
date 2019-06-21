@@ -30,19 +30,5 @@
       <company_city/>
     </address>
   </contact>
-
-  <signature_box>
-    <client_side>
-      <signee><client_legal_rep/></signee>
-      <!--<signee>Second signee for company</signee>-->
-      <date><latest_version_date/></date>
-      <place><client_city/></place>
-    </client_side>
-    <company_side>
-      <signee><company_legal_rep/></signee>
-      <!--<signee>Second signee for company</signee>-->
-      <date><latest_version_date/></date>
-      <place><company_city/></place>
-    </company_side>
-  </signature_box>
+  <generate_offer_signature_box/>
 </section>
