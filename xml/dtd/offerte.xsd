@@ -268,7 +268,6 @@
       <xs:element name="company_poc1"/>
       <xs:element name="t_app"/>
       <xs:element name="t_app_producer"/>
-      <xs:element name="p_duration"/>
       <xs:element name="p_persondays"/>
       <xs:element name="p_boxtype"/>
       <xs:element name="p_fee"/>
