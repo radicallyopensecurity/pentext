@@ -98,7 +98,8 @@
                             <fo:table-cell xsl:use-attribute-sets="td">
                                 <xsl:if test="$signee-difference &lt; 0">
                                     <xsl:call-template name="insertEmptyBlocks">
-                                        <xsl:with-param name="times" select="abs($signee-difference)"/>
+                                        <xsl:with-param name="times"
+                                            select="abs($signee-difference)"/>
                                     </xsl:call-template>
                                 </xsl:if>
                                 <xsl:for-each select="client_side/signee">
@@ -156,21 +157,34 @@
     </xsl:template>
 
     <xsl:template name="signeeBlock">
-            <fo:block-container xsl:use-attribute-sets="signee">
-                <fo:block xsl:use-attribute-sets="signee_dottedline">
-                    <fo:leader leader-pattern="dots" leader-length="8cm"/>
-                </fo:block>
-                <fo:block xsl:use-attribute-sets="signee_name">
-                    <xsl:apply-templates/>
-                </fo:block>
-            </fo:block-container>
-        
+        <xsl:choose>
+            <xsl:when
+                test="(client_legal_rep and not(normalize-space(//client/legal_rep))) or (not(normalize-space(.)) and not(*))">
+                <!-- don't have a name, add dotted name line -->
+                <fo:block-container xsl:use-attribute-sets="signee">
+                    <fo:block xsl:use-attribute-sets="signee_signaturespace">
+                        <fo:leader xsl:use-attribute-sets="signee_dottedline" leader-length="8cm"/>
+                    </fo:block>
+                    <fo:block margin-top="0.2cm" margin-bottom="0.2cm">(Name:<fo:leader xsl:use-attribute-sets="signee_dottedline" leader-length="7cm"/>)</fo:block>
+                </fo:block-container>
+            </xsl:when>
+            <xsl:otherwise>
+                <fo:block-container xsl:use-attribute-sets="signee">
+                    <fo:block xsl:use-attribute-sets="signee_signaturespace">
+                        <fo:leader xsl:use-attribute-sets="signee_dottedline" leader-length="8cm"/>
+                    </fo:block>
+                    <fo:block xsl:use-attribute-sets="signee_name">
+                        <xsl:apply-templates/>
+                    </fo:block>
+                </fo:block-container>
+            </xsl:otherwise>
+        </xsl:choose>
+
     </xsl:template>
 
     <xsl:template name="emptyBlock">
         <fo:block-container xsl:use-attribute-sets="signee">
-            <fo:block>&#160;
-            </fo:block>
+            <fo:block>&#160; </fo:block>
         </fo:block-container>
     </xsl:template>
 

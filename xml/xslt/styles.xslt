@@ -453,6 +453,7 @@
     <xsl:attribute-set name="totalcell"/>
     <xsl:attribute-set name="signee"/>
     <xsl:attribute-set name="signee_name"/>
+    <xsl:attribute-set name="signee_signaturespace"/>
     <xsl:attribute-set name="signee_dottedline"/>
     
 </xsl:stylesheet>
