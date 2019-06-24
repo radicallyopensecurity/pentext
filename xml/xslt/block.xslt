@@ -73,7 +73,7 @@
         <fo:block keep-together.within-page="always" xsl:use-attribute-sets="signaturebox">
             <fo:block xsl:use-attribute-sets="title-client">
                 <xsl:call-template name="getString">
-                    <xsl:with-param name="stringID" select="'signed_dupe'"/>
+                    <xsl:with-param name="stringID" select="'signed'"/>
                 </xsl:call-template>
             </fo:block>
             <fo:block>

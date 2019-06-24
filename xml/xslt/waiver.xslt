@@ -140,66 +140,57 @@
         <xsl:param name="signee_long" tunnel="yes"/>
         <xsl:param name="signee_waiver_rep" tunnel="yes"/>
         <xsl:param name="signee_city" tunnel="yes"/>
+        
         <fo:block keep-together.within-page="always" xsl:use-attribute-sets="signaturebox">
-            <fo:table width="100%" table-layout="fixed">
-                <fo:table-column column-width="proportional-column-width(10)"/>
-                <fo:table-column column-width="proportional-column-width(90)"/>
-                <fo:table-body>
-                    <fo:table-row>
-                        <fo:table-cell xsl:use-attribute-sets="td" number-rows-spanned="4">
-                            <fo:block>
-                                <xsl:call-template name="getString">
-                                    <xsl:with-param name="stringID" select="'waiver_signed'"/>
-                                </xsl:call-template>
-                            </fo:block>
-                        </fo:table-cell>
-                        <fo:table-cell xsl:use-attribute-sets="td">
-                            <fo:block xsl:use-attribute-sets="p"><xsl:call-template name="getString">
-                                    <xsl:with-param name="stringID" select="'waiver_signed_on'"/>
-                                </xsl:call-template> &#160;&#160;&#160;<xsl:value-of
-                                    select="$latestVersionDate"/></fo:block>
-                        </fo:table-cell>
-                    </fo:table-row>
-                    <fo:table-row>
-                        <fo:table-cell xsl:use-attribute-sets="td">
-                            <fo:block xsl:use-attribute-sets="p"><xsl:call-template name="getString">
-                                    <xsl:with-param name="stringID" select="'waiver_signed_in'"/>
-                                </xsl:call-template> &#160;&#160;&#160; <xsl:value-of
-                                    select="$signee_city"/></fo:block>
-                        </fo:table-cell>
-                    </fo:table-row>
-                    <fo:table-row>
-                        <fo:table-cell xsl:use-attribute-sets="td">
-                            <xsl:choose>
-                                <xsl:when test="$signee_waiver_rep">
-                                    <fo:block xsl:use-attribute-sets="p"><xsl:call-template
-                                            name="getString">
-                                            <xsl:with-param name="stringID"
-                                                select="'waiver_signed_by'"/>
-                                        </xsl:call-template> &#160;&#160;&#160;<xsl:value-of
-                                            select="$signee_waiver_rep"/></fo:block>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <fo:block xsl:use-attribute-sets="p"><xsl:call-template
-                                            name="getString">
-                                            <xsl:with-param name="stringID"
-                                                select="'waiver_signed_by'"/>
-                                        </xsl:call-template>
-                                        &#160;&#160;&#160;__________________________________</fo:block>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </fo:table-cell>
-                    </fo:table-row>
-                    <fo:table-row>
-                        <fo:table-cell xsl:use-attribute-sets="td">
-                            <fo:block xsl:use-attribute-sets="p"><xsl:call-template name="getString">
-                                    <xsl:with-param name="stringID" select="'waiver_signed_for'"/>
-                                </xsl:call-template> &#160;&#160;&#160;<xsl:value-of
-                                    select="$signee_long"/></fo:block>
-                        </fo:table-cell>
-                    </fo:table-row>
-                </fo:table-body>
-            </fo:table>
+            <fo:block xsl:use-attribute-sets="title-client">
+                <xsl:call-template name="getString">
+                    <xsl:with-param name="stringID" select="'signed'"/>
+                </xsl:call-template>
+            </fo:block>
+            <fo:block>
+                <fo:table xsl:use-attribute-sets="fwtable borders">
+                    <fo:table-column column-width="proportional-column-width(50)"/>
+                    <fo:table-column column-width="proportional-column-width(50)"/>
+                    <fo:table-body>
+                        <fo:table-row>
+                            <fo:table-cell xsl:use-attribute-sets="td">
+                                <fo:block>For <fo:inline xsl:use-attribute-sets="bold"><xsl:value-of
+                                            select="$signee_long"/></fo:inline></fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell><fo:block></fo:block></fo:table-cell>
+                        </fo:table-row>
+                        <fo:table-row>
+                            <!-- client side -->
+                            <fo:table-cell xsl:use-attribute-sets="td">
+                                <xsl:for-each select="$signee_waiver_rep">
+                                    <xsl:call-template name="signeeBlock"/>
+                                </xsl:for-each>
+                            </fo:table-cell>
+                            <fo:table-cell><fo:block></fo:block></fo:table-cell>
+                        </fo:table-row>
+                        <fo:table-row>
+                            <fo:table-cell xsl:use-attribute-sets="td">
+                                <xsl:for-each select="$signee_city">
+                                    <fo:block>
+                                        <xsl:apply-templates/>
+                                    </fo:block>
+                                </xsl:for-each>
+                            </fo:table-cell>
+                            <fo:table-cell><fo:block></fo:block></fo:table-cell>
+                        </fo:table-row>
+                        <fo:table-row>
+                            <fo:table-cell xsl:use-attribute-sets="td">
+                                <xsl:for-each select="$latestVersionDate">
+                                    <fo:block>
+                                        <xsl:apply-templates/>
+                                    </fo:block>
+                                </xsl:for-each>
+                            </fo:table-cell>
+                            <fo:table-cell><fo:block></fo:block></fo:table-cell>
+                        </fo:table-row>
+                    </fo:table-body>
+                </fo:table>
+            </fo:block>
         </fo:block>
     </xsl:template>
 

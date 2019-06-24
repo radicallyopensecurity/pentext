@@ -204,9 +204,9 @@
     <translation xml:lang="nl">namens</translation>
     <translation xml:lang="en">for</translation>
   </string>
-  <string id="signed_dupe">
-    <translation xml:lang="nl">In duplicaat getekend</translation>
-    <translation xml:lang="en">Signed in duplicate</translation>
+  <string id="signed">
+    <translation xml:lang="nl">Getekend</translation>
+    <translation xml:lang="en">Signed</translation>
   </string>
   <!-- CONTRACTS -->
   <string id="contract_title">
