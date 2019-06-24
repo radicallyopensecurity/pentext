@@ -470,7 +470,7 @@
                             <fo:table-cell number-columns-spanned="4" xsl:use-attribute-sets="td">
                                 <fo:block xsl:use-attribute-sets="totalcell">
                                     <xsl:text>Total</xsl:text>
-                                    <xsl:if test="$serviceNodeSet/entry/@estimate">
+                                    <xsl:if test="$serviceNodeSet/entry/@estimate = true()">
                                         (estimate)</xsl:if>
                                     <xsl:text>:</xsl:text>
                                     <fo:leader leader-pattern="space"/>
