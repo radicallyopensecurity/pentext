@@ -140,7 +140,7 @@
         <xsl:param name="signee_long" tunnel="yes"/>
         <xsl:param name="signee_waiver_rep" tunnel="yes"/>
         <xsl:param name="signee_city" tunnel="yes"/>
-        
+
         <fo:block keep-together.within-page="always" xsl:use-attribute-sets="signaturebox">
             <fo:block xsl:use-attribute-sets="title-client">
                 <xsl:call-template name="getString">
@@ -157,16 +157,40 @@
                                 <fo:block>For <fo:inline xsl:use-attribute-sets="bold"><xsl:value-of
                                             select="$signee_long"/></fo:inline></fo:block>
                             </fo:table-cell>
-                            <fo:table-cell><fo:block></fo:block></fo:table-cell>
+                            <fo:table-cell>
+                                <fo:block/>
+                            </fo:table-cell>
                         </fo:table-row>
                         <fo:table-row>
-                            <!-- client side -->
                             <fo:table-cell xsl:use-attribute-sets="td">
-                                <xsl:for-each select="$signee_waiver_rep">
-                                    <xsl:call-template name="signeeBlock"/>
-                                </xsl:for-each>
+                                <xsl:choose>
+                                    <xsl:when test="not($signee_waiver_rep = '')">
+                                        <!-- we have a name for the signee -->
+                                        <fo:block-container xsl:use-attribute-sets="signee">
+                                            <fo:block xsl:use-attribute-sets="signee_dottedline">
+                                                <fo:leader leader-pattern="dots" leader-length="8cm"
+                                                />
+                                            </fo:block>
+                                            <fo:block xsl:use-attribute-sets="signee_name">
+                                                <xsl:value-of select="$signee_waiver_rep"/>
+                                            </fo:block>
+                                        </fo:block-container>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <fo:block-container xsl:use-attribute-sets="signee">
+                                            <fo:block xsl:use-attribute-sets="signee_dottedline">
+                                                <fo:leader leader-pattern="dots" leader-length="8cm"
+                                                />
+                                            </fo:block>
+                                        </fo:block-container>
+                                            <fo:block margin-top="0.2cm" margin-bottom="0.2cm">Name: <fo:leader leader-pattern="dots" leader-length="7.1cm"
+                                                /></fo:block>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </fo:table-cell>
-                            <fo:table-cell><fo:block></fo:block></fo:table-cell>
+                            <fo:table-cell>
+                                <fo:block/>
+                            </fo:table-cell>
                         </fo:table-row>
                         <fo:table-row>
                             <fo:table-cell xsl:use-attribute-sets="td">
@@ -176,7 +200,9 @@
                                     </fo:block>
                                 </xsl:for-each>
                             </fo:table-cell>
-                            <fo:table-cell><fo:block></fo:block></fo:table-cell>
+                            <fo:table-cell>
+                                <fo:block/>
+                            </fo:table-cell>
                         </fo:table-row>
                         <fo:table-row>
                             <fo:table-cell xsl:use-attribute-sets="td">
@@ -186,7 +212,9 @@
                                     </fo:block>
                                 </xsl:for-each>
                             </fo:table-cell>
-                            <fo:table-cell><fo:block></fo:block></fo:table-cell>
+                            <fo:table-cell>
+                                <fo:block/>
+                            </fo:table-cell>
                         </fo:table-row>
                     </fo:table-body>
                 </fo:table>
