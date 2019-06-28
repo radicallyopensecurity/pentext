@@ -105,10 +105,13 @@ build() {
         TARGETPDF="target/quote_${REPO/off-/}.pdf"
     elif [[ $TARGET == "report" ]]; then
         TARGETPDF="target/report_${REPO/pen-/}.pdf"
+	    TARGETHTML="target/report_${REPO/pen-/}.html"
+	    TARGETMD="target/report_${REPO/pen-/}.md"
     fi
-    $DOCBUILDER -c -i $TARGET.xml -o ../$TARGETPDF -x ../xslt/generate_$TARGET.xsl $PARMS
+    TARGETFO="target/${TARGET}.fo"
+    $DOCBUILDER -c -i $TARGET.xml -f $TARGETFO -o ../$TARGETPDF -x ../xslt/generate_$TARGET.xsl $PARAMS $NOPRINT
     if [[ $? -ne 0 ]]; then
-        echo "[-] Sorry, failed to parse $TARGET. Use \`builder $TARGET $REPO $NAMESPACE $BRANCH -v\` for more information."
+        echo "[-] Sorry, failed to parse $TARGET. Use \`build $TARGET $REPO $NAMESPACE $BRANCH -v\` for more information."
         exit 1
     fi
     popd &>/dev/null
@@ -116,10 +119,23 @@ build() {
         echo "[-] hmmm... failed to build PDF file (could not find $TARGETPDF)"
         exit 1
     fi
+    if [ $TARGET == "report" ]; then
+	java -jar /usr/local/bin/saxon/saxon9he.jar -s:source/$TARGET.xml -o:$TARGETHTML -xsl:xslt/generate_html_$TARGET.xsl -xi
+    	if [ ! -f $TARGETHTML ]; then
+        	echo "[-] Note: failed to build HTML file (could not find $TARGETHTML)"
+	else
+	   pandoc $TARGETHTML -t markdown_strict -o $TARGETMD
+	   if [ ! -f $TARGETMD ]; then
+                echo "[-] Note: failed to build markdown file (could not find $TARGETMD)"
+	   fi
+	fi
+    fi
 }
 
 add_to_repo() {
     git add $TARGETPDF
+    git add $TARGETHTML &>/dev/null
+    git add $TARGETMD &>/dev/null
     git add target/waiver_?*.pdf &>/dev/null
     git add target/execsummary.pdf &>/dev/null
     git commit -q -m "$TARGETPDF proudly manufactured using ChatOps" &>/dev/null
@@ -131,5 +147,14 @@ echo "builder v$VERSION - Rocking your world, one build at a time..."
 clone_repo
 build
 add_to_repo
-echo "[+] listo! Check out $GITWEB/$NAMESPACE/$REPO/raw/$BRANCH/$TARGETPDF"
+echo " [+] Get PDF: $GITWEB/$NAMESPACE/$REPO/raw/$BRANCH/$TARGETPDF"
+if [[ -f target/execsummary.pdf ]]; then
+        echo " [+] Get exec summary PDF: $GITWEB/$NAMESPACE/$REPO/raw/$BRANCH/target/execsummary.pdf"
+fi
+if [[ $TARGET == "report" && -f $TARGETHTML ]]; then
+	echo " [+] Download HTML: $GITWEB/$NAMESPACE/$REPO/raw/$BRANCH/$TARGETHTML"
+fi
+if [[ $TARGET == "report" && -f $TARGETMD ]]; then
+        echo " [+] Quick look (rendered MarkDown): $GITWEB/$NAMESPACE/$REPO/blob/$BRANCH/$TARGETMD"
+fi
 exit 0
