@@ -16,7 +16,7 @@
 #    (at your option) any later version.
 
 
-VERSION=0.11
+VERSION=0.12
 DOCBUILDER=/usr/local/bin/docbuilder.py
 TEMPLOC=$(mktemp -d)
 
@@ -33,24 +33,25 @@ BRANCH=master
 # Set the default PDF name based on the target name
 TARGETPDF="target/$TARGET-latest.pdf"
 
+# Read optional arguments
 # Reading positional parms is a bit ugly, shifting parms or getopt would be nicer
 if [[ ! -z $3 ]]; then
     if [[ ! $3 == -* ]]; then
         NAMESPACE=$3
     else
-        PARMS=$3
+        PARAMS=$3
     fi
 fi
 if [[ ! -z $4 ]]; then
     if [[ ! $3 == -* ]]; then
         BRANCH=$4
     else
-        PARMS="$PARMS $4"
+        PARAMS="$PARAMS $4"
     fi
 fi
 if [[ $# -ge 5 ]]; then
     shift 4
-    PARMS="$PARMS $@"
+    PARAMS="$PARAMS $@"
 fi
 
 trap cleanup EXIT QUIT
