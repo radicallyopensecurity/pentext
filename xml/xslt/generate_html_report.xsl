@@ -966,5 +966,95 @@
             </div>
         </xsl:for-each>
     </xsl:template>
+    
+    <xsl:template name="checkDenomination">
+        <xsl:param name="allDenominationsAreEqual"/>
+        <xsl:param name="denoms"/>
+        <xsl:choose>
+            <xsl:when test="$allDenominationsAreEqual">
+                <xsl:call-template name="getDenomination">
+                    <xsl:with-param name="placeholderElement" select="$denoms/denom"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="displayErrorText">
+                    <xsl:with-param name="string">Cannot print denomination: not all fees in
+                        service_breakdown have an equal denomination (tip: if most services are in
+                        eur but one is in usd, add the usd fee to the description for that service
+                        and use an estimated eur for the hourly rate or fee).</xsl:with-param>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="calculatePersonDays">
+        <xsl:variable name="totalMinDurations"
+            select="sum($serviceNodeSet/entry[@type = 'service']/dh/min)"/>
+        <xsl:variable name="totalMaxDurations"
+            select="sum($serviceNodeSet/entry[@type = 'service']/dh/max)"/>
+        <xsl:choose>
+            <xsl:when test="not($totalMinDurations = $totalMaxDurations)">
+                <xsl:value-of select="sum($totalMinDurations) div 8"/>
+                <xsl:text> - </xsl:text>
+                <xsl:value-of select="sum($totalMaxDurations) div 8"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="sum($totalMinDurations) div 8"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="prettyMissingDecimal">
+        <xsl:param name="n"/>
+        <xsl:if test="floor($n) = $n">
+            <xsl:number value="$n" grouping-separator="," grouping-size="3"/>
+            <xsl:text>.-</xsl:text>
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template name="calculateTotal">
+        <xsl:param name="denoms" tunnel="yes">
+            <xsl:for-each-group select="$serviceNodeSet/entry" group-by="@denomination">
+                <denom denomination="{current-grouping-key()}"/>
+            </xsl:for-each-group>
+        </xsl:param>
+        <xsl:variable name="allDenominationsAreEqual" select="count($denoms/denom) = 1"/>
+        <xsl:variable name="minmaxesPresent"
+            select="boolean($serviceNodeSet/entry/f/min and $serviceNodeSet/entry/f/max)"/>
+        <xsl:variable name="estimatePresent" select="$serviceNodeSet/entry/@estimate"/>
+        <xsl:variable name="totalMinFees" select="sum($serviceNodeSet/entry/f/min)"/>
+        <xsl:variable name="totalMaxFees" select="sum($serviceNodeSet/entry/f/max)"/>
+        <xsl:choose>
+            <xsl:when test="not($totalMinFees = $totalMaxFees)">
+                <!-- We have different min and max fees, print range -->
+                <xsl:call-template name="checkDenomination">
+                    <xsl:with-param name="allDenominationsAreEqual"
+                        select="$allDenominationsAreEqual"/>
+                    <xsl:with-param name="denoms" select="$denoms"/>
+                </xsl:call-template>
+                <xsl:number value="$totalMinFees" grouping-separator="," grouping-size="3"/>
+                <xsl:text> - </xsl:text>
+                <xsl:call-template name="checkDenomination">
+                    <xsl:with-param name="allDenominationsAreEqual"
+                        select="$allDenominationsAreEqual"/>
+                    <xsl:with-param name="denoms" select="$denoms"/>
+                </xsl:call-template>
+                <xsl:call-template name="prettyMissingDecimal">
+                    <xsl:with-param name="n" select="$totalMaxFees"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- Min and max are equal; print single price -->
+                <xsl:call-template name="checkDenomination">
+                    <xsl:with-param name="allDenominationsAreEqual"
+                        select="$allDenominationsAreEqual"/>
+                    <xsl:with-param name="denoms" select="$denoms"/>
+                </xsl:call-template>
+                <xsl:call-template name="prettyMissingDecimal">
+                    <xsl:with-param name="n" select="$totalMinFees"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
 </xsl:stylesheet>
