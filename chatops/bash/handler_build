@@ -101,6 +101,7 @@ build() {
     fi
     pushd source &>/dev/null
     backwards_compatible
+    TARGETFO="target/${TARGET}.fo"
     if ([[ $TARGET == "quote" ]] || [[ $TARGET == "offerte" ]]); then
         TARGETPDF="target/quote_${REPO/off-/}.pdf"
     elif [[ $TARGET == "report" ]]; then
@@ -108,8 +109,7 @@ build() {
 	    TARGETHTML="target/report_${REPO/pen-/}.html"
 	    TARGETMD="target/report_${REPO/pen-/}.md"
     fi
-    TARGETFO="target/${TARGET}.fo"
-    $DOCBUILDER -c -i $TARGET.xml -f $TARGETFO -o ../$TARGETPDF -x ../xslt/generate_$TARGET.xsl $PARAMS $NOPRINT
+    $DOCBUILDER -c -i $TARGET.xml -f ../$TARGETFO -o ../$TARGETPDF -x ../xslt/generate_$TARGET.xsl $PARAMS $NOPRINT
     if [[ $? -ne 0 ]]; then
         echo "[-] Sorry, failed to parse $TARGET. Use \`build $TARGET $REPO $NAMESPACE $BRANCH -v\` for more information."
         exit 1
