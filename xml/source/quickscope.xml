@@ -36,9 +36,7 @@
       <target></target>
       <target></target>
     </targets>
-    <!-- How long would you like the test to be? (in days) -->
-    <days>0</days>
-    <!-- How many persondays -->
+    <!-- How many persondays will the pentest be -->
     <persondays>0</persondays>
     <!-- LAAT PERSONDAYS OP 0 STAAN OM AUTOMATISCH TE LATEN BEREKENEN VIA SERVICE BREAKDOWN -->
     <!-- Service execution (Use one of the following values: time-boxed, subscription) -->
