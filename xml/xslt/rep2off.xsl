@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink"
-    xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="xs" version="2.0">
+    xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="xs xlink fo" version="2.0">
 
 
     <xsl:import href="localisation.xslt"/>
@@ -59,8 +59,8 @@
                     <!-- copy targets from quickscope -->
                     <xsl:comment>one target element per target</xsl:comment>
                     <xsl:for-each select="/*/meta/targets/target">
-                        <xsl:copy>
-                            <xsl:copy-of select="node()"/>
+                        <xsl:copy copy-namespaces="no">
+                            <xsl:copy-of select="node()" copy-namespaces="no"/>
                         </xsl:copy>
                     </xsl:for-each>
                 </targets>
@@ -72,7 +72,7 @@
                     <xsl:for-each select="//permission_parties/party">
                         <!-- TODO add to report -->
                         <party>
-                            <xsl:copy-of select="node()"/>
+                            <xsl:copy-of select="node()" copy-namespaces="no"/>
                         </party>
                     </xsl:for-each>
                 </permission_parties>

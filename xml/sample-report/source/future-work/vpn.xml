@@ -1,0 +1,4 @@
+<non-finding id="VPN">
+    <title>VPN</title>
+    <p>We could Man-in-the-Middle the VPN, but we'd need to have perfect timing in catching an employee accessing the VPN from a public location for the VPNs. We didn't spend any time looking at this.</p>
+</non-finding>  

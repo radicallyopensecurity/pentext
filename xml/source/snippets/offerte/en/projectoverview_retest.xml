@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section>
+<section id="projectoverview_retest">
   <title>Project Overview</title>
   <p>
     <company_short/> will perform <company_svc_long/> for <client_short/>
-    as a follow-up on the previous test in <b>XXXXXXXXXX TODO XXXXXXXXXX
-    (timeframe of previous pentest)</b>. The services are intended to see if the
+    as a follow-up on the previous test in <b><todo desc="replace this todo element with [timeframe of previous pentest]"/>
+    </b>. The services are intended to see if the
     previously discovered exploits are patched correctly. To do so,
     <company_short/> will access the systems again and test the findings
     from the previous penetration test (the “<b>Targets</b>”):
@@ -15,7 +15,7 @@
   <p>
     <company_short/> will test using both publicly available vulnerability
     scanning tools and manual testing. <company_short/> shall perform a
-    <p_duration/>-day, <p_boxtype/> follow-up penetration test via the internet.
+   <p_boxtype/> follow-up penetration test via the internet between <p_startdate/> and <p_enddate/>.
   </p>
 
   <!--Not Needed if Disclaimer is Included; Duplicate Text-->

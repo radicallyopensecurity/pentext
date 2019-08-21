@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section>
+<section id="projectoverview_pentest">
   <title>Project Overview</title>
   <p>
     <company_short/> will perform <company_svc_long/> for <client_short/>
@@ -18,10 +18,13 @@
   <p>
     <company_short/> will test for the presence of the most common
     vulnerabilities, using both publicly available vulnerability scanning
-    tools and manual testing. <company_short/> shall perform a
-    <p_duration/>-day (<p_persondays/>-personday), <p_boxtype/>, intrusive test via the
-    internet.
+    tools and manual testing. <company_short/> shall perform a 
+    <p_boxtype/> intrusive test via the
+    internet (total estimated effort: <p_persondays/> persondays). A breakdown of the requested services can be found below:
   </p>
+  
+ 
+  <generate_service_breakdown format="list"/>
 
   <!--Not Needed if Disclaimer is Included; Duplicate Text-->
   <!--p>It is possible that in the course of the penetration

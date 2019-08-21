@@ -1,0 +1,16 @@
+<finding id="xss" threatLevel="Elevated" type="Cross Site Scripting">
+	<title>Cross-Site Scripting</title>
+	<description>
+	<p>An open redirect vulnerability in NetMon allows an attacker to redirect users to arbitrary websites, e.g. to conduct phishing attacks; see <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-130000">CVE-2014-130000</a>.</p>
+	<p>This vulnerability might also be used in conjunction with <a href="#remote_code_execution" /> and <a href="#csrf" /> to compromise the NetMon host in a spear phishing campaign.</p>
+	</description>
+	
+	<technicaldescription>
+	<p>This link points at NetMon, but the user is redirected to google.com:</p>
+	<pre>https://monitoring.sittingduck.bv/viewer/?back=http://google.com/</pre>
+	</technicaldescription>
+	
+	<recommendation>
+	Update NetMon to the latest version, where this issue is fixed.
+	</recommendation>
+</finding>

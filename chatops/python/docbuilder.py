@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Builds PDF files from (intermediate fo and) XML files.
@@ -6,7 +6,7 @@ Builds PDF files from (intermediate fo and) XML files.
 This script is part of the PenText framework
                            https://pentext.org
 
-   Copyright (C) 2015-2016 Radically Open Security
+   Copyright (C) 2015-2018 Radically Open Security
                            https://www.radicallyopensecurity.com
 
                 Author(s): Peter Mosmans
@@ -23,6 +23,7 @@ from __future__ import print_function
 
 import argparse
 import os
+import random
 import subprocess
 from subprocess import PIPE
 import sys
@@ -32,7 +33,7 @@ import textwrap
 GITREV = 'GITREV'  # Magic tag which gets replaced by the git short commit hash
 OFFERTE = 'generate_offerte.xsl'  # XSL for generating waivers
 WAIVER = 'waiver_'  # prefix for waivers
-EXECSUMMARY = 'execsummary' # generating an executive summary instead of a report
+EXECSUMMARY = 'execsummary'  # generating an executive summary instead of a report
 
 
 def parse_arguments():
@@ -46,7 +47,7 @@ def parse_arguments():
         description=textwrap.dedent('''\
 Builds PDF files from (intermediate fo and) XML files.
 
-Copyright (C) 2015-2017  Radically Open Security (Peter Mosmans)
+Copyright (C) 2015-2018  Radically Open Security (Peter Mosmans)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -56,8 +57,11 @@ the Free Software Foundation, either version 3 of the License, or
                         help='overwrite output file if it already exists')
     parser.add_argument('-date', action='store',
                         help='the invoice date')
-    parser.add_argument('-execsummary', action='store_true',
+    parser.add_argument('--execsummary', action='store_true',
                         help="""create an executive summary as well as a report (true/false).
+                        Default: false """)
+    parser.add_argument('--pw', action='store_true',
+                        help="""password-protect the pdf.
                         Default: false """)
     parser.add_argument('--fop-config', action='store',
                         default='/etc/docbuilder/fop.xconf',
@@ -106,7 +110,7 @@ the Free Software Foundation, either version 3 of the License, or
     else:
         verboseprint = lambda *a: None
         verboseerror = lambda *a: None
-    return vars(parser.parse_args())
+    return vars(args)
 
 
 def print_output(stdout, stderr):
@@ -136,6 +140,13 @@ def change_tag(fop):
                 print('[+] Embedding git version information into document')
     except OSError:
         print('[-] could not execute git - is git installed ?')
+
+
+def generate_pw():
+    s = "abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()?"
+    length = 12
+    p = "".join(random.sample(s, length))
+    return(p)
 
 
 def to_fo(options):
@@ -171,6 +182,9 @@ def to_pdf(options):
     """
     cmd = [options['fop_binary'], '-c', options['fop_config'], options['fop'],
            options['output']]
+    if options['pw']:
+        pw = generate_pw()
+        cmd = cmd + ['-u', pw]
     try:
         verboseprint('Converting {0} to {1}'.format(options['fop'],
                                                     options['output']))
@@ -180,6 +194,8 @@ def to_pdf(options):
         print_output(stdout, stderr)
         if result == 0:
             print('[+] Succesfully built ' + options['output'])
+            if options['pw']:
+                print('\n[+] Password for this pdf is ' + pw)
     except OSError as exception:
         print_exit('[-] ERR: {0}'.format(exception.strerror), exception.errno)
     return result == 0
@@ -234,7 +250,7 @@ def main():
             except OSError as exception:
                 print_exit('[-] ERR: {0}'.format(exception.strerror),
                            exception.errno)
-        if options['execsummary'] == True:  # we're generating a summary as well as a report
+        if options['execsummary']:  # we're generating a summary as well as a report
             report_output = options['output']
             verboseprint('generating additional executive summary')
             output_dir = os.path.dirname(options['output'])

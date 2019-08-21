@@ -89,7 +89,7 @@
       <!-- no additional code audit presumed :) -->
       <snippet_group set="group1">
         <snippet>introandscope</snippet>
-        <snippet>projectoverview</snippet>
+        <snippet>projectoverview_code-audit</snippet>
         <snippet>prerequisites</snippet>
         <snippet>disclaimer_code-audit</snippet>
         <snippet>methodology_code-audit</snippet>

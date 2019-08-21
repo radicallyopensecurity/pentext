@@ -1,0 +1,17 @@
+<finding id="csrf" threatLevel="Elevated" type="Cross-Site Request Forgery">
+	<title>Cross-Site Request Forgery</title>
+							
+	<description>
+	<p>No CSRF mitigation techniques are used to protect the NetMon Viewer submit routine script at 'client/submit'. Thus, if a logged-in user navigates to an attacker-controlled site, the attacker can forge requests with the user's session.</p>
+	<p>Combined with <a href="#remote_code_execution" />, this vulnerability allows to compromise of the NetMon host by tricking a user with a logged-in NetMon Viewer session into clicking a malicious link or even by inserting images into user-frequented websites.</p>
+	</description>
+							
+	<technicaldescription>
+	<p>Insert the following HTML into a website that is visited by the victim:</p>
+	<pre>&lt;img href="http://monitoring.sittingduck.bv/client/submit"&gt;</pre>
+	</technicaldescription>
+							
+	<recommendation>
+	<p>Update NetMon to the latest version, in which the vulnerability has been fixed.</p>
+	</recommendation>
+</finding>

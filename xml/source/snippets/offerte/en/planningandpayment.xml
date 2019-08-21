@@ -5,17 +5,22 @@
     <company_short/> will uphold the following schedule for the services:
   </p>
   <ul>
-    <li><company_short/> performs a <p_duration/>-day <company_svc_short/> starting <p_startdate/>.</li>
-    <li><company_short/> delivers the final report on <p_reportdue/>.</li>
+    <li><company_short/> performs a <company_svc_short/> starting <p_startdate/>.</li>
+    <li><company_short/> delivers the final report on 
+      <p_reportdue/>.</li>
   </ul>
   <p>
-    Our fixed-fee price quote for the above described <company_svc_short/> is <p_fee/>.-
+    Our fixed-fee price quote for the above described <company_svc_short/> is 
+    <p_fee/>
     excl. VAT and out-of-pocket expenses.
     <company_short/> will send an invoice after the completion of this assignment. 
-    <client_short/> will pay the agreed amount within 30 days of the invoice date.
+    <client_short/> will pay the agreed amount within 14 days of the invoice date.
   </p>
   <p>
     Any additional work will be charged separately. An hourly 
     rate for additional work will be agreed upon before starting this work.
   </p>
+  <p>A detailed breakdown of the requested services can be found below:</p>
+  
+  <generate_service_breakdown format="table"/>
 </section>

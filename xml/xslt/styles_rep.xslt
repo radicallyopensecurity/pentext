@@ -6,89 +6,54 @@
     
     <xsl:import href="styles.xslt"/>
     
-    <!-- variables -->
-    
-    <xsl:variable name="medium-space">8pt</xsl:variable>
-    
-    
-    
+    <!-- Retest status colors -->
+    <xsl:attribute-set name="status-new"><!-- also used by unresolved -->
+        <xsl:attribute name="color"><xsl:value-of select="$color_new"/></xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="status-resolved">
+        <xsl:attribute name="color"><xsl:value-of select="$color_resolved"/></xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="status-not_retested">
+        <xsl:attribute name="color"><xsl:value-of select="$color_notretested"/></xsl:attribute>
+    </xsl:attribute-set>
     
     <!-- Text -->
- 
-    <xsl:attribute-set name="title">
-        <xsl:attribute name="keep-with-next.within-page">always</xsl:attribute>
-        <xsl:attribute name="font-weight">bold</xsl:attribute>
-    </xsl:attribute-set>
-    <xsl:attribute-set name="title-0" use-attribute-sets="title">
-        <xsl:attribute name="text-align">center</xsl:attribute>
-        <xsl:attribute name="font-size">16pt</xsl:attribute>
-        <xsl:attribute name="margin-bottom">1cm</xsl:attribute>
-        <xsl:attribute name="background-color">orange</xsl:attribute>
-    </xsl:attribute-set>
-    <xsl:attribute-set name="title-1" use-attribute-sets="title">
-        <xsl:attribute name="font-size">16pt</xsl:attribute>
-        <xsl:attribute name="margin-bottom">1cm</xsl:attribute>
-        <xsl:attribute name="background-color">orange</xsl:attribute>
-    </xsl:attribute-set>
-    <xsl:attribute-set name="title-2" use-attribute-sets="title">
-        <xsl:attribute name="font-style">italic</xsl:attribute>
-        <xsl:attribute name="font-size">14pt</xsl:attribute>
-        <xsl:attribute name="margin-bottom">0.8cm</xsl:attribute>
-        <xsl:attribute name="background-color">silver</xsl:attribute>
-    </xsl:attribute-set>
-    <xsl:attribute-set name="title-3" use-attribute-sets="title">
-        <xsl:attribute name="font-size">14pt</xsl:attribute>
-        <xsl:attribute name="margin-bottom">0.8cm</xsl:attribute>
-        <xsl:attribute name="background-color">silver</xsl:attribute>
-    </xsl:attribute-set>
-    <xsl:attribute-set name="title-4" use-attribute-sets="title">
-        <xsl:attribute name="margin-bottom">5pt</xsl:attribute>
-    </xsl:attribute-set>
-    <xsl:attribute-set name="title-client" use-attribute-sets="title-0">
-        <xsl:attribute name="background-color">silver</xsl:attribute>
-        <xsl:attribute name="margin-bottom">6cm</xsl:attribute>
-        <xsl:attribute name="text-transform">capitalize</xsl:attribute>
-    </xsl:attribute-set>
-    <xsl:attribute-set name="for">
-        <xsl:attribute name="text-align">center</xsl:attribute>
-        <xsl:attribute name="margin-bottom">1cm</xsl:attribute>
-    </xsl:attribute-set>
     <xsl:attribute-set name="p">
         <xsl:attribute name="margin-bottom">
             <xsl:value-of select="$small-space"/>
         </xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="toc-block">
-        <xsl:attribute name="background-color">orange</xsl:attribute>
-    </xsl:attribute-set>
-    <xsl:attribute-set name="logo">
-        <xsl:attribute name="padding-top">2cm</xsl:attribute>
-        <xsl:attribute name="padding-bottom">3cm</xsl:attribute>
-        <xsl:attribute name="src">url(../graphics/logo.png)</xsl:attribute>
-        <xsl:attribute name="width">70mm</xsl:attribute>
-        <xsl:attribute name="content-width">scale-to-fit</xsl:attribute>
-        <xsl:attribute name="content-height">scale-to-fit</xsl:attribute>
-        <xsl:attribute name="scaling">uniform</xsl:attribute>
-    </xsl:attribute-set>
     
-    
-    
-    <!-- colors -->
-    <xsl:attribute-set name="bg-orange">
-        <xsl:attribute name="background-color">orange</xsl:attribute>
-    </xsl:attribute-set>
-    
-   
-    <xsl:attribute-set name="status-new"><!-- also used by unresolved -->
-        <xsl:attribute name="color">#CC4900</xsl:attribute>
-    </xsl:attribute-set>
-    <xsl:attribute-set name="status-resolved">
-        <xsl:attribute name="color">#b7aa5b</xsl:attribute>
-    </xsl:attribute-set>
-    <xsl:attribute-set name="status-not_retested">
-        <xsl:attribute name="color">#FE9920</xsl:attribute>
+    <!-- Pages -->
+    <xsl:attribute-set name="region-body-cover">
+        
     </xsl:attribute-set>
    
+    <!-- Findings -->
+    <xsl:attribute-set name="findingTable">
+        <xsl:attribute name="background-color"><xsl:value-of select="$c_support_light"/></xsl:attribute>
+        <xsl:attribute name="border-color"><xsl:value-of select="$c_support_subtlydarkerlight"/></xsl:attribute>
+        <xsl:attribute name="margin-bottom" select="$large-space"/>
+        <xsl:attribute name="padding-left">-8pt</xsl:attribute>
+        <xsl:attribute name="border-style">solid</xsl:attribute>
+        <xsl:attribute name="border-left-width">1px</xsl:attribute>
+        <xsl:attribute name="border-right-width">1px</xsl:attribute>
+        <xsl:attribute name="border-bottom-width">1px</xsl:attribute>
+        <xsl:attribute name="table-layout">fixed</xsl:attribute>
+        <xsl:attribute name="width">100%</xsl:attribute>
+        <xsl:attribute name="keep-together.within-page">always</xsl:attribute>
+    </xsl:attribute-set>
     
+    <!-- Charts -->
+    <xsl:attribute-set name="pieChartTable" use-attribute-sets="indent">
+        <xsl:attribute name="table-layout">fixed</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="pieLegendTable">
+        <xsl:attribute name="background-color"><xsl:value-of select="$c_support_light"/></xsl:attribute>
+        <xsl:attribute name="border-color"><xsl:value-of select="$c_support_subtlydarkerlight"/></xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="pieLegendTableCell" use-attribute-sets="indent_reset">
+        <xsl:attribute name="padding-left">4pt</xsl:attribute>
+    </xsl:attribute-set>
     
 </xsl:stylesheet>

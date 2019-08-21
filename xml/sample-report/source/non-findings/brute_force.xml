@@ -1,0 +1,14 @@
+<non-finding id="brute_force">
+    <title>Brute Forcing</title>
+        <p>For brute forcing, we used Hydra with the 'rockyou' (see <a href="https://wiki.skullsecurity.org/Passwords">https://wiki.skullsecurity.org/Passwords</a>) wordlist.</p>
+        <p>All parameters have been checked manually.</p>
+                                
+        <p><b>Against Basic Auth:</b></p>
+        <p>The basic auth box says that it requires a one-time passcode as the password, so this isn't going to be brute-forceable. The chance of hitting an OTP passcode is minimal, and it's also irreproducible.</p>
+                        
+        <p><b>Against NetMon:</b></p>
+		<pre>./hydra monitoring.sittingduck.bv https-form-post "/login:u=^USER^&amp;p=^PASS^&amp;login=Log+In:Username or password mismatch" -l admin -P rockyou.txt</pre>
+    	
+    	<p>It appeared that NetMon Viewer has no bruteforce protection or captcha of any kind.</p>
+        <p>We were unable to compromise the NetMon Viewer login page. A brute-force attack, even with prior knowledge of the password format, was deemed infeasible. We ran HTC-Hydra against it, but the login process is CPU bound on the webserver to between 150 and 200 tries per minute. Additionally, after ramping up aggressiveness of this attack, we tripped some alarms with the Sitting Duck NOC.</p>
+</non-finding>

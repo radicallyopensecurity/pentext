@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="projectoverview_code-audit">
+    <title>Project Overview</title>
+    <p>
+        <company_short/> will perform a <company_svc_long/> of the source code files described below
+        for <client_short/>. The code audit is intended to gain insight into the security of the
+        source code. To do so, <company_short/> will analyze the code, attempt to find
+        vulnerabilities, and gain further access and elevated privileges by exploiting any
+        vulnerabilities found. </p>
+
+    <p>
+        <company_short/> will test the following code (the “<b>Targets</b>”): </p>
+
+    <generate_targets/>
+
+    <p>
+        <company_short/> will test for the presence of the most common vulnerabilities using a
+        combination of publicly available (static, dynamic and concolic) analytic tools, fuzzing and
+        code reading. <company_short/> will need <p_persondays/> persondays for this code audit. </p>
+    
+
+    <!--Not Needed if Disclaimer is Included; Duplicate Text-->
+    <!--p>It is possible that in the course of the penetration
+  testing, <company_short/> might hinder the operations of the Targets or
+  cause damage to the Targets. <client_short/> gives permission for this, to
+  the extent that <company_short/> does not act negligently or
+  recklessly. <client_short/> also warrants it has the authority to give such
+  permission.</p-->
+
+    <!--Not Needed if Disclaimer is Included; Duplicate Text-->
+    <!--p>It is important to understand the limits of
+  <company_short/>'s services. <company_short/> does not (and cannot)
+  give guarantees that something is secure. <company_short/> instead has
+  an obligation to make reasonable efforts (in Dutch:
+  “<i>inspanningsverplichting</i>”) to perform the agreed services.</p-->
+
+    <!--REMOVE commented-out text above if not including Disclaimer-->
+</section>

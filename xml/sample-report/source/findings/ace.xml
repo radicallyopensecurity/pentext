@@ -1,0 +1,18 @@
+<finding id="ace" threatLevel="High" type="Arbitrary Command Execution">
+    <title>Arbitrary Command Execution</title>
+    
+    <description>
+    <p>As described in <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-31337">CVE-2014-31337</a>, netmonclientd agents have an option to receive additional arguments, which are not filtered at all. This allows injection of arbitrary commands to be executed on the host monitored by the netmonclientd agent.</p>
+    </description>
+                        	
+    <technicaldescription>
+	<p>The following command line can be used to reproduce the issue and execute arbitrary commands on a machine running netmonclientd agent:</p>
+    <pre>netmonclientd -Q $'a\nARBITRARY_COMMAND_GOES_HERE\n# ' 4</pre>
+	<p>	In this example command line we rely on the $'' notation of bash to insert arbitrary newline characters in the command line argument. Alternatively the following notation can be used:</p>
+    <pre>netmonclientd -Q 'a $(ARBITRARY_COMMAND_GOES_HERE) # ' 4</pre>
+    </technicaldescription>
+                        
+    <recommendation>
+    <p>Where possible, restrict the user access to netmonclientd to mitigate the issue.</p>
+    </recommendation>
+</finding>    

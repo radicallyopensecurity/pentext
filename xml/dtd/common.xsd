@@ -2,20 +2,21 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified"
   vc:minVersion="1.0" vc:maxVersion="1.1">
-  <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+<xs:import namespace="http://www.w3.org/XML/1998/namespace"
     schemaLocation="http://www.w3.org/2001/xml.xsd"/>
   <xs:import namespace="http://www.w3.org/2001/XInclude"
     schemaLocation="http://www.w3.org/2001/XInclude/XInclude.xsd"/>
 
-  <!-- company -->
+  
+  <xs:complexType name="emailAddressType" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="1">
+      <xs:element name="company_email"/>
+      <xs:element name="client_email"/>
+      <xs:element name="contractor_email"/>
+    </xs:choice>
+  </xs:complexType>
 
-
-  <xs:simpleType name="emailAddress">
-    <xs:restriction base="xs:string">
-      <xs:pattern value="[^@]+@[^\.]+\..+"/>
-    </xs:restriction>
-  </xs:simpleType>
-
+  <xs:element name="email" type="emailAddressType"/>
 
   <xs:element name="company">
     <xs:complexType>
@@ -37,10 +38,14 @@
   </xs:element>
 
   <xs:group name="name-group">
-    <xs:sequence>
-      <xs:element ref="full_name"/>
-      <xs:element ref="short_name"/>
-    </xs:sequence>
+    <xs:choice>
+      <xs:sequence>
+        <xs:element ref="full_name"/>
+        <xs:element ref="short_name"/>
+        <xs:element ref="short_code" minOccurs="0"/>
+      </xs:sequence>
+      <xs:group ref="placeholders"/>
+    </xs:choice>
   </xs:group>
   <xs:group name="address-group">
     <xs:sequence>
@@ -53,6 +58,7 @@
 
   <xs:element name="full_name" type="xs:string"/>
   <xs:element name="short_name" type="xs:string"/>
+  <xs:element name="short_code" type="xs:string"/>
   <xs:element name="poc1" type="xs:string"/>
   <xs:element name="legal_rep" type="xs:string"/>
   <xs:element name="address">
@@ -63,11 +69,15 @@
       </xs:choice>
     </xs:complexType>
   </xs:element>
-  <xs:element name="postal_code" type="xs:string"/>
-  <xs:element name="city" type="xs:string"/>
-  <xs:element name="country" type="xs:string"/>
+  <xs:element name="postal_code" type="addresstype"/>
+  <xs:element name="city" type="addresstype"/>
+  <xs:element name="country" type="addresstype"/>
+  <xs:complexType name="addresstype" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="1">
+      <xs:group ref="placeholders"/>
+    </xs:choice>
+  </xs:complexType>
   <xs:element name="phone" type="xs:string"/>
-  <xs:element name="email" type="emailAddress"/>
   <xs:element name="website" type="xs:anyURI"/>
   <xs:element name="vat_no" type="xs:string"/>
   <xs:element name="iban" type="xs:string"/>
@@ -75,7 +85,7 @@
   <xs:element name="coc">
     <xs:complexType>
       <xs:simpleContent>
-        <xs:extension base="xs:integer">
+        <xs:extension base="xs:string">
           <xs:attribute name="nationality" type="xs:string"/>
         </xs:extension>
       </xs:simpleContent>
@@ -94,12 +104,12 @@
         <xs:element ref="waiver_rep"/>
         <xs:element ref="poc1"/>
         <xs:group ref="address-group"/>
-        <xs:element ref="coc"/>
+        <xs:element ref="coc" minOccurs="0"/>
         <xs:element ref="invoice_rep"/>
         <xs:element ref="invoice_mail"/>
         <xs:element ref="invoice_extra_field" minOccurs="0"/>
         <xs:element ref="vat_no"/>
-        <xs:element ref="rates"/>
+        <xs:element ref="rates" minOccurs="0"/>
       </xs:sequence>
       <xs:attribute ref="xml:base"/>
       <xs:attribute ref="xml:lang"/>
@@ -151,11 +161,11 @@
   </xs:element>
 
   <xs:element name="invoice_rep" type="xs:string"/>
-  <xs:element name="invoice_mail" type="emailAddress"/>
+  <xs:element name="invoice_mail" type="xs:string"/>
   <xs:element name="invoice_extra_field" type="xs:string"/>
 
-  <xs:element name="duration" type="xs:nonNegativeInteger"/>
-  <xs:element name="persondays" type="xs:nonNegativeInteger"/>
+  <xs:element name="duration" type="xs:float"/>
+  <xs:element name="persondays" type="xs:float"/>
   <xs:element name="planning">
     <xs:complexType>
       <xs:sequence>
@@ -191,14 +201,22 @@
       <xs:union memberTypes="xs:date xs:string"/>
     </xs:simpleType>
   </xs:element>
-  
-  
+
+
 
   <xs:element name="target_application" type="xs:string"/>
   <xs:element name="target_application_producer" type="xs:string"/>
 
   <!-- doc -->
   <xs:element name="title">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="placeholders"/>
+        <xs:group ref="inline-all"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="subtitle">
     <xs:complexType mixed="true">
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="placeholders"/>
@@ -216,6 +234,7 @@
       </xs:sequence>
       <xs:attribute name="border" use="optional" type="xs:integer"/>
       <xs:attribute name="cols" use="optional" type="xs:string"/>
+      <xs:attribute name="width" use="optional" type="xs:string"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="tr">
@@ -276,6 +295,7 @@
       <xs:attribute name="width" use="optional" type="xs:integer"/>
       <xs:attribute name="src" use="required"/>
       <xs:attribute name="title" use="optional"/>
+      <xs:attribute name="alt" use="optional"/>
     </xs:complexType>
   </xs:element>
 
@@ -298,6 +318,8 @@
   </xs:element>
 
   <xs:attribute name="class" type="xs:string"/>
+
+  <xs:element name="client_reference" type="xs:string"/>
 
   <xs:element name="version_history">
     <xs:complexType>
@@ -361,12 +383,12 @@
       <xs:simpleContent>
         <xs:extension base="xs:string">
           <xs:attribute name="href" use="required" type="xs:anyURI"/>
+          <xs:attribute name="class" use="optional" type="xs:string"/>
           <xs:attribute name="includepage" use="optional">
             <xs:simpleType>
               <xs:restriction base="xs:string">
-                <xs:enumeration value="black-box"/>
-                <xs:enumeration value="crystal-box"/>
-                <xs:enumeration value="grey-box"/>
+                <xs:enumeration value="yes"/>
+                <xs:enumeration value="no"/>
               </xs:restriction>
             </xs:simpleType>
           </xs:attribute>

@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-pentext_id - Identify findings from report
+"""pentext_id - Identify findings from report.
 
 This script is part of the PenText framework
                            https://pentext.org
@@ -38,7 +37,7 @@ except ImportError as exception:
     sys.exit(-1)
 
 
-VERSION = '0.1'
+VERSION = '0.2.1'
 
 
 class LogFormatter(logging.Formatter):
@@ -124,7 +123,7 @@ def locate_id(findings, args):
     Show finding corresponding to an identifier
     """
     try:
-        print("{0:2d} {1}".format(args.id, findings[args.id-1]))
+        print("{0:2d} {1}".format(args.id, findings[args.id - 1]))
     except IndexError:
         logging.error('Finding %s could not be located', args.id)
 
@@ -146,6 +145,8 @@ def main():
     try:
         # Parse document into an ElementTree
         tree = etree.parse(filename, etree.XMLParser(strip_cdata=False))
+        # Read finding code
+        code = tree.getroot().attrib['findingCode']
         # Grab all elements from the findings section
         for elements in tree.xpath('//section[@id="findings"]'):
             # Iterate through all elements, looking for the findings
@@ -160,7 +161,7 @@ def main():
         locate_finding(findings, args)
     else:
         for i, href in enumerate(findings, start=1):
-            print("{0:2d} {1}".format(i, href))
+            print("{0}-{1:03d} {2}".format(code, i, href))
 
 
 if __name__ == "__main__":

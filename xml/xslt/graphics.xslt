@@ -7,7 +7,8 @@
     <xsl:template match="img">
         <fo:block xsl:use-attribute-sets="graphics-block">
             <xsl:call-template name="checkIfLast"/>
-            <fo:block><fo:external-graphic src="{@src}">
+            <fo:block>
+                <fo:external-graphic src="{@src}">
                 <xsl:choose>
                     <xsl:when test="@width">
                         <xsl:attribute name="width">
@@ -37,14 +38,15 @@
                         <!-- No height or width set; should plop down graphic as-is, unless it's larger than the page, in which case scale down to page size -->
                         <!-- Note: this is just making things page-width regardless of size... could be much more robust but I'm going to assume we're working with large graphics for now :/ -->
                         <xsl:attribute name="width">
-                            <xsl:text>17cm</xsl:text>
-                            <!-- 21cm - 2*2cm for the margins -->
+                            <xsl:text>15.5cm</xsl:text>
+                            <!-- 21cm - 5.5cm for the margins -->
                         </xsl:attribute>
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:attribute name="content-width">scale-to-fit</xsl:attribute>
                 <xsl:attribute name="content-height">scale-to-fit</xsl:attribute>
-            </fo:external-graphic></fo:block>
+            </fo:external-graphic>
+            </fo:block>
             <fo:block xsl:use-attribute-sets="img-title"><xsl:value-of select="@title"/></fo:block>
         </fo:block>
     </xsl:template>

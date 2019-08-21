@@ -1,0 +1,4 @@
+<non-finding id="juniper">
+    <title>Juniper NetScreen</title>
+    <p>Beyond verifying the CVEs from the nipper-ng scan by hand, we didn't look at the Juniper NetScreen device in detail.</p>
+</non-finding>

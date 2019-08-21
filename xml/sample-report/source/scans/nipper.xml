@@ -1,0 +1,8 @@
+<section id="nipper">
+    <title>nipper-ng</title>
+                	
+    <p>We used nipper-ng with the following command:</p>
+    <pre>nipper --screenos --input=config.conf --output=audit.html</pre>
+    <p>to audit the Juniper NetScreen firewall config that Sitting Duck NOC provided us with.</p>
+<p>The reported CVEs were checked manually, none were deemed relevant to this scenario.</p>
+</section>

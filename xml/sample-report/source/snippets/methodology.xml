@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="methodology" xml:base="methodology.xml">
+    <title>Methodology</title>
+    <section id="planning">
+        <title>Planning</title>
+        <p>Our general approach during this penetration test was as follows:</p>
+        <ol>
+            <li><b>Reconnaissance</b><br/>We attempted to gather as much information as possible about the
+                target. Reconnaissance can take two forms i.e. active and passive. A
+                passive attack is always the best starting point as this would normally defeat
+                intrusion detection systems and other forms of protection etc. afforded to the
+                network. This would usually involve trying to discover publicly available
+                information by utilizing a web browser and visiting newsgroups etc. An active form
+                would be more intrusive and may show up in audit logs and may take the form of a
+                social engineering type of attack.</li>
+            <li><b>Enumeration</b><br/>We used varied operating system fingerprinting tools to determine
+                what hosts are alive on the network and more importantly what services and operating
+                systems they are running. Research into these services would then be carried out to
+                tailor the test to the discovered services.</li>
+            <li><b>Scanning</b><br/>By use of vulnerability scanners all discovered hosts would be tested
+                for vulnerabilities. The result would then be analyzed to determine if there any
+                vulnerabilities that could be exploited to gain access to a target host on a
+                network.</li>
+            <li><b>Obtaining Access</b><br/>By use of published exploits or weaknesses found in
+                applications, operating system and services access would then be attempted. This may
+                be done surreptitiously or by more brute force methods.</li>
+        </ol>
+    </section>
+    <section id="riskClassification">
+        <title>Risk Classification</title>
+        <p>Throughout the document, each vulnerability or risk identified has been labeled and
+            categorized as:</p>
+        <ul>
+            <li><b>Extreme</b><br/>Extreme risk of security controls being compromised with the possibility
+                of catastrophic financial/reputational losses occurring as a result.</li>
+            <li><b>High</b><br/>High risk of security controls being compromised with the potential for
+                significant financial/reputational losses occurring as a result.</li>
+            <li><b>Elevated</b><br/>Elevated risk of security controls being compromised with the potential
+                for material financial/reputational losses occurring as a result.</li>
+            <li><b>Moderate</b><br/>Moderate risk of security controls being compromised with the potential
+                for limited financial/reputational losses occurring as a result.</li>
+            <li><b>Low</b><br/>Low risk of security controls being compromised with measurable negative
+                impacts as a result.</li>
+        </ul>
+        <p>Please note that this risk rating system was taken from the Penetration Testing Execution
+            Standard (PTES). For more information, see:
+            http://www.pentest-standard.org/index.php/Reporting. </p>
+    </section>
+</section>

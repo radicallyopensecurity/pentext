@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 
-"""
-Gitlab bridge for PenText: imports and updates gitlab issues into PenText
-(XML) format
+"""Gitlab bridge for PenText: imports and updates gitlab issues into PenText.
 
 This script is part of the PenText framework
                            https://pentext.org
 
-   Copyright (C) 2016-2017 Radically Open Security
+   Copyright (C) 2016-2019 Radically Open Security
                            https://www.radicallyopensecurity.com
 
                 Author(s): Peter Mosmans
@@ -38,7 +36,7 @@ try:
 except (NameError, ImportError) as exception:
     print('[-] This script needs python-gitlab, pypandoc and validate_report library',
           file=sys.stderr)
-    print("validate_report is part of the pentext framework", file=sys.stderr)
+    print("validate_report is part of the PenText framework", file=sys.stderr)
     print("Install python-gitlab with: sudo pip install python-gitlab", file=sys.stderr)
     print("Install pypandoc with: sudo pip install pypandoc\n", file=sys.stderr)
     print("Currently missing: " + exception.message, file=sys.stderr)
@@ -46,9 +44,7 @@ except (NameError, ImportError) as exception:
 
 
 class BaseItem(object):
-    """
-    Base class for Pentext items
-    """
+    """Base class for PenText items."""
 
     DECLARATION = '<?xml version="1.0" encoding="utf-8"?>\n'
 
@@ -64,84 +60,68 @@ class BaseItem(object):
 
     @property
     def filename(self):
-        """
-        Filename.
-        """
+        """Filename."""
         return '{0}/{1}.xml'.format(self.__path, valid_filename(self.identifier))
 
     def __str__(self):
-        """
-        Return a XML version of the class
-        """
+        """Return an XML representation of the class."""
         return self.DECLARATION + self.root_open + self.element('title') + \
             self.content + self.root_close
 
     def element(self, attribute):
-        """
-        Return opening and closing attribute tags, including attribute value.
-        """
+        """Return opening and closing attribute tags, including attribute value."""
         return '<{0}>{1}</{0}>\n'.format(attribute, getattr(self, attribute))
 
     def write_file(self):
-        """
-        Write item as XML to file.
-        """
+        """Serialize item to file as XML."""
         try:
-            with io.open(self.filename, 'w') as xmlfile:
+            with io.open(self.filename, 'w', encoding='utf-8') as xmlfile:
                 xmlfile.write(unicode(self))
                 print_line('[+] Wrote {0}'.format(self.filename))
         except IOError:
-            print_error('Could not write to %s', self.filename)
+            print('Could not write to %s', self.filename, file=sys.stderr)
+            sys.exit(-1)
 
 
 class Finding(BaseItem):
-    """
-    Encapsulates finding.
-    """
+    """Encapsulates finding."""
 
     def __init__(self):
         BaseItem.__init__(self, 'finding')
         self.threat_level = 'Moderate'
         self.finding_type = 'TODO'
-        self.description = '<p>TODO</p>'
-        self.technicaldescription = '<p>TODO</p>'
-        self.impact = '<p>TODO</p>'
-        self.recommendation = '<ul><li>TODO</li></ul>'
+        self.status = 'new'
+        self.description = '<p></p>'
+        self.technicaldescription = '<p></p>'
+        self.impact = '<p></p>'
+        self.recommendation = '<ul><li></li></ul>'
 
     def __str__(self):
-        """
-        Return a XML version of the class
-        """
-        self.root_open = '<finding id="{0}" threatLevel="{1}" type="{2}">\n'.format(self.identifier,
-                                                                                    self.threat_level,
-                                                                                    self.finding_type)
+        """Return an XML representation of the class."""
+        self.root_open = '<finding id="{0}" threatLevel="{1}" type="{2}"' + \
+            ' status="{3}">\n'.format(self.identifier, self.threat_level,
+                                      self.finding_type, self.status)
         self.content = self.element('description') + \
-                       self.element('technicaldescription') + \
-                       self.element('impact') + \
-                       self.element('recommendation')
+            self.element('technicaldescription') + \
+            self.element('impact') + \
+            self.element('recommendation')
         return BaseItem.__str__(self)
 
 
 class NonFinding(BaseItem):
-    """
-    Encapsulates non-finding.
-    """
+    """Encapsulates non-finding."""
 
     def __init__(self):
         BaseItem.__init__(self, 'non-finding')
 
     def __str__(self):
-        """
-        Return a XML version of the class
-        """
+        """Return an XML representation of the class."""
         self.root_open = '<non-finding id="{0}"\n'.format(self.identifier)
         return BaseItem.__str__(self)
 
 
 def from_issue(issue):
-    """
-    Parse gitlab issue and return Finding, NonFinding or None
-    """
+    """Parse gitlab issue and return Finding, NonFinding or None."""
     if 'finding' in [x.lower() for x in issue.labels]:
         item = Finding()
         item.description = convert_text(issue.description)
@@ -161,7 +141,7 @@ def from_issue(issue):
     else:
         return None
     item.title = validate_report.capitalize(issue.title.strip())
-    item.identifier = 'f{0}-{1}'.format(issue.iid, valid_filename(item.title))
+    item.identifier = 'f{0:02}-{1}'.format(issue.iid, valid_filename(item.title))
     return item
 
 
@@ -199,9 +179,7 @@ def ask_permission(question):
 
 
 def list_issues(gitserver, options):
-    """
-    Lists all issues for options['issues']
-    """
+    """List all issues for options['issues']"""
     try:
         for issue in gitserver.project_issues.list(project_id=options['issues'],
                                                    per_page=999):
@@ -209,7 +187,8 @@ def list_issues(gitserver, options):
                 continue
             add_item(issue, options)
     except gitlab.exceptions.GitlabListError as exception:
-        print_error('Could not access items ({0})'.format(exception))
+        print('Could not access items ({0})'.format(exception), file=sys.stderr)
+        sys.exit(-1)
 
 
 def list_projects(gitserver):
@@ -256,32 +235,21 @@ the Free Software Foundation, either version 3 of the License, or
 
 
 def preflight_checks(options):
-    """
-    Checks if all tools are there.
-    Exits with 0 if everything went okilydokily.
-    """
+    """Check if all tools are there, return gitlab.Gitlab object."""
     gitserver = None
     try:
         gitserver = gitlab.Gitlab.from_config('remote')
         gitserver.auth()
     except gitlab.config.GitlabDataError as exception:
-        print_error('could not connect {0}'.format(exception), -1)
+        print('could not connect {0}'.format(exception), file=sys.stderr)
+        sys.exit(-1)
     if not options['projects']:
         for path in ('findings', 'non-findings'):
             if not os.path.isdir(path):
-                print_error('Path {0} does not exist: Is this a Pentext repository ?'.format(path), -1)
+                print('Path {0} does not exist: Is this a PenText repository ?'.format(path),
+                      file=sys.stderr)
+                sys.exit(-1)
     return gitserver
-
-
-def print_error(text, result=False):
-    """
-    Prints error message.
-    When @result, exits with result.
-    """
-    if len(text):
-        print_line('[-] ' + text, True)
-    if result:
-        sys.exit(result)
 
 
 def print_line(text, error=False):

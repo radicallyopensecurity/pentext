@@ -95,9 +95,9 @@
         </fo:inline>
     </xsl:template>
     
-    <xsl:template name="prependNumber">
+    <xsl:template name="prependId">
         <xsl:choose>
-                <xsl:when test="parent::finding">
+                <xsl:when test="parent::finding or parent::non-finding">
                     <!-- prepend finding id (XXX-NNN) -->
                     <xsl:apply-templates select=".." mode="number"/>
                     <xsl:text> &#8212; </xsl:text>

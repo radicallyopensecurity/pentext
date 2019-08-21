@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs"
-    xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0"
-    xmlns:svg="http://www.w3.org/2000/svg" xmlns:math="http://www.w3.org/2005/xpath-functions/math"
-    xmlns:my="http://www.radical.sexy" extension-element-prefixes="math my">
+    xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
 
     <xsl:template match="generate_targets">
-        <xsl:call-template name="generate_targets_xslt"/>
+        <xsl:call-template name="targets"/>
     </xsl:template>
 
-    <xsl:template name="generate_targets_xslt">
+    <xsl:template name="targets">
         <xsl:param name="Ref" select="@Ref"/>
-        <fo:list-block xsl:use-attribute-sets="list" provisional-distance-between-starts="0.75cm"
-            provisional-label-separation="2.5mm" space-after="12pt" start-indent="1cm">
+        <fo:list-block xsl:use-attribute-sets="list">
             <xsl:for-each
                 select="/*/meta/targets/target[@Ref = $Ref] | /*/meta/targets/target[not(@Ref)]">
-                <fo:list-item>
+                <fo:list-item xsl:use-attribute-sets="li">
                     <!-- insert a bullet -->
                     <fo:list-item-label end-indent="label-end()">
                         <fo:block>
@@ -25,7 +22,7 @@
                     <!-- list text -->
                     <fo:list-item-body start-indent="body-start()">
                         <fo:block>
-                            <xsl:value-of select="."/>
+                            <xsl:apply-templates/>
                         </fo:block>
                     </fo:list-item-body>
                 </fo:list-item>
@@ -34,11 +31,10 @@
     </xsl:template>
 
     <xsl:template match="generate_teammembers">
-        <xsl:call-template name="generate_teammembers_xslt"/>
+        <xsl:call-template name="teammembers"/>
     </xsl:template>
 
-    <xsl:template name="generate_teammembers_xslt">
-
+    <xsl:template name="teammembers">
         <fo:list-block xsl:use-attribute-sets="list" provisional-distance-between-starts="0.75cm"
             provisional-label-separation="2.5mm" space-after="12pt" start-indent="1cm">
             <xsl:for-each select="//activityinfo//team/member">
@@ -71,88 +67,8 @@
                 </xsl:for-each>
             </xsl:for-each>
         </xsl:variable>
-        <xsl:variable name="unsortedFindingSummaryTable">
-            <xsl:for-each-group select="//finding" group-by="@threatLevel">
-                <xsl:for-each select="current-group()">
-                    <findingEntry>
-                        <xsl:attribute name="Ref">
-                            <xsl:value-of select="@Ref"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="status">
-                            <xsl:value-of select="@status"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="findingId">
-                            <xsl:value-of select="@id"/>
-                        </xsl:attribute>
-                        <findingNumber>
-                            <xsl:apply-templates select="." mode="number"/>
-                        </findingNumber>
-                        <findingType>
-                            <xsl:value-of select="@type"/>
-                        </findingType>
-                        <findingDescription>
-                            <xsl:choose>
-                                <xsl:when test="description_summary">
-                                    <xsl:value-of select="description_summary"/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:apply-templates select="description" mode="summarytable"/>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </findingDescription>
-                        <findingThreatLevel>
-                            <xsl:value-of select="current-grouping-key()"/>
-                        </findingThreatLevel>
-                    </findingEntry>
-                </xsl:for-each>
-            </xsl:for-each-group>
-        </xsl:variable>
-        <xsl:variable name="findingSummaryTable">
-            <xsl:for-each select="$unsortedFindingSummaryTable/findingEntry">
-                <xsl:sort data-type="number" order="descending"
-                    select="
-                        (number(findingThreatLevel = 'Extreme') * 10)
-                        + (number(findingThreatLevel = 'High') * 9)
-                        + (number(findingThreatLevel = 'Elevated') * 8)
-                        + (number(findingThreatLevel = 'Moderate') * 7)
-                        + (number(findingThreatLevel = 'Low') * 6)
-                        + (number(findingThreatLevel = 'Unknown') * 3)
-                        + (number(findingThreatLevel = 'N/A') * 1)"/>
-                <xsl:variable name="findingThreatLevelClean"
-                                                  select="translate(findingThreatLevel, '/', '_')"/>
-                <findingEntry>
-                    <xsl:attribute name="Ref">
-                        <xsl:value-of select="@Ref"/>
-                    </xsl:attribute>
-                    <xsl:attribute name="status">
-                        <xsl:value-of select="@status"/>
-                    </xsl:attribute>
-                    <xsl:attribute name="findingId">
-                        <xsl:value-of select="@findingId"/>
-                    </xsl:attribute>
-                    <!-- add an id for the first entry of each type so that we can link to it -->
-                    <xsl:if
-                        test="not(preceding-sibling::findingEntry/findingThreatLevel = findingThreatLevel)">
-                        <xsl:attribute name="id">summaryTableThreatLevel<xsl:value-of
-                                select="$findingThreatLevelClean"/></xsl:attribute>
-                    </xsl:if>
-                    <findingNumber>
-                        <xsl:value-of select="findingNumber"/>
-                    </findingNumber>
-                    <findingType>
-                        <xsl:value-of select="findingType"/>
-                    </findingType>
-                    <findingDescription>
-                        <xsl:value-of select="findingDescription"/>
-                    </findingDescription>
-                    <findingThreatLevel>
-                        <xsl:value-of select="findingThreatLevel"/>
-                    </findingThreatLevel>
-                </findingEntry>
-            </xsl:for-each>
-        </xsl:variable>
         <fo:block>
-            <fo:table width="100%" table-layout="fixed" xsl:use-attribute-sets="table borders">
+            <fo:table xsl:use-attribute-sets="fwtable table borders">
                 <xsl:call-template name="checkIfLast"/>
                 <fo:table-column column-width="proportional-column-width(12)"
                     xsl:use-attribute-sets="borders"/>
@@ -163,17 +79,17 @@
                 <fo:table-column column-width="proportional-column-width(16)"
                     xsl:use-attribute-sets="borders"/>
                 <fo:table-body>
-                    <fo:table-row xsl:use-attribute-sets="bg-orange borders">
-                        <fo:table-cell xsl:use-attribute-sets="td">
+                    <fo:table-row keep-with-next.within-column="always">
+                        <fo:table-cell xsl:use-attribute-sets="th">
                             <fo:block>ID</fo:block>
                         </fo:table-cell>
-                        <fo:table-cell xsl:use-attribute-sets="td">
+                        <fo:table-cell xsl:use-attribute-sets="th">
                             <fo:block>Type</fo:block>
                         </fo:table-cell>
-                        <fo:table-cell xsl:use-attribute-sets="td">
+                        <fo:table-cell xsl:use-attribute-sets="th">
                             <fo:block>Description</fo:block>
                         </fo:table-cell>
-                        <fo:table-cell xsl:use-attribute-sets="td">
+                        <fo:table-cell xsl:use-attribute-sets="th">
                             <fo:block>Threat level</fo:block>
                         </fo:table-cell>
                     </fo:table-row>
@@ -211,15 +127,19 @@
     </xsl:template>
 
     <xsl:template name="findingsSummaryContent">
-        <fo:table-row xsl:use-attribute-sets="borders TableFont">
+        <fo:table-row xsl:use-attribute-sets="TableFont">
+            <xsl:if test="position() mod 2 != 0">
+                <xsl:attribute name="background-color">#ededed</xsl:attribute>
+            </xsl:if>
             <fo:table-cell xsl:use-attribute-sets="td">
                 <fo:block>
+                    <!-- attach id to first finding of each threatLevel so pie charts can link to it -->
                     <xsl:if test="@id">
                         <xsl:attribute name="id">
                             <xsl:value-of select="@id"/>
                         </xsl:attribute>
                     </xsl:if>
-                    <fo:basic-link color="blue">
+                    <fo:basic-link xsl:use-attribute-sets="link">
                         <xsl:attribute name="internal-destination">
                             <xsl:value-of select="@findingId"/>
                         </xsl:attribute>
@@ -255,7 +175,7 @@
             </xsl:for-each>
         </xsl:variable>
         <fo:block>
-            <fo:table width="100%" table-layout="fixed" xsl:use-attribute-sets="table borders">
+            <fo:table xsl:use-attribute-sets="fwtable table borders">
                 <xsl:call-template name="checkIfLast"/>
                 <fo:table-column column-width="proportional-column-width(12)"
                     xsl:use-attribute-sets="borders"/>
@@ -264,14 +184,14 @@
                 <fo:table-column column-width="proportional-column-width(66)"
                     xsl:use-attribute-sets="borders"/>
                 <fo:table-body>
-                    <fo:table-row xsl:use-attribute-sets="bg-orange borders">
-                        <fo:table-cell xsl:use-attribute-sets="td">
+                    <fo:table-row keep-with-next.within-column="always">
+                        <fo:table-cell xsl:use-attribute-sets="th">
                             <fo:block>ID</fo:block>
                         </fo:table-cell>
-                        <fo:table-cell xsl:use-attribute-sets="td">
+                        <fo:table-cell xsl:use-attribute-sets="th">
                             <fo:block>Type</fo:block>
                         </fo:table-cell>
-                        <fo:table-cell xsl:use-attribute-sets="td">
+                        <fo:table-cell xsl:use-attribute-sets="th">
                             <fo:block>Recommendation</fo:block>
                         </fo:table-cell>
                     </fo:table-row>
@@ -309,10 +229,13 @@
     </xsl:template>
 
     <xsl:template name="recommendationsSummaryContent">
-        <fo:table-row xsl:use-attribute-sets="TableFont borders">
+        <fo:table-row xsl:use-attribute-sets="TableFont">
+            <xsl:if test="position() mod 2 != 0">
+                <xsl:attribute name="background-color">#ededed</xsl:attribute>
+            </xsl:if>
             <fo:table-cell xsl:use-attribute-sets="td">
                 <fo:block>
-                    <fo:basic-link color="blue">
+                    <fo:basic-link xsl:use-attribute-sets="link">
                         <xsl:attribute name="internal-destination">
                             <xsl:value-of select="@id"/>
                         </xsl:attribute>
@@ -329,7 +252,8 @@
                 <fo:block>
                     <xsl:choose>
                         <xsl:when test="recommendation_summary">
-                            <xsl:value-of select="recommendation_summary"/>
+                            <xsl:apply-templates select="recommendation_summary" mode="summarytable"
+                            />
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:apply-templates select="recommendation" mode="summarytable"/>
@@ -343,7 +267,7 @@
 
     <xsl:template match="generate_testteam">
         <fo:block>
-            <fo:table width="100%" table-layout="fixed" xsl:use-attribute-sets="borders">
+            <fo:table xsl:use-attribute-sets="fwtable borders">
                 <fo:table-column column-width="proportional-column-width(25)"
                     xsl:use-attribute-sets="borders"/>
                 <fo:table-column column-width="proportional-column-width(75)"
@@ -385,142 +309,6 @@
         </fo:block>
     </xsl:template>
 
-    <xsl:template match="generate_offer_signature_box">
-
-        <xsl:call-template name="generateSignatureBox">
-            <xsl:with-param name="latestVersionDate" select="$latestVersionDate"/>
-        </xsl:call-template>
-    </xsl:template>
-
-    <xsl:template name="generateSignatureBox">
-        <xsl:param name="latestVersionDate"/>
-        <fo:block keep-together.within-page="always" xsl:use-attribute-sets="signaturebox">
-            <fo:block xsl:use-attribute-sets="title-client">
-                <xsl:call-template name="getString">
-                    <xsl:with-param name="stringID" select="'signed_dupe'"/>
-                </xsl:call-template>
-            </fo:block>
-            <fo:block>
-                <fo:table width="100%" table-layout="fixed" xsl:use-attribute-sets="borders">
-                    <fo:table-column column-width="proportional-column-width(50)"
-                        xsl:use-attribute-sets="borders"/>
-                    <fo:table-column column-width="proportional-column-width(50)"
-                        xsl:use-attribute-sets="borders"/>
-                    <fo:table-body>
-                        <fo:table-row>
-                            <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block>
-                                    <xsl:value-of select="$latestVersionDate"/>
-                                </fo:block>
-                            </fo:table-cell>
-                            <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block>
-                                    <xsl:value-of select="$latestVersionDate"/>
-                                </fo:block>
-                            </fo:table-cell>
-                        </fo:table-row>
-                        <fo:table-row>
-                            <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block>
-                                    <xsl:value-of select="/*/meta/permission_parties/client/city"/>
-                                </fo:block>
-                            </fo:table-cell>
-                            <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block>
-                                    <xsl:value-of select="/*/meta/company/city"/>
-                                </fo:block>
-                            </fo:table-cell>
-                        </fo:table-row>
-                        <fo:table-row>
-                            <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block>&#160;</fo:block>
-                                <fo:block>&#160;</fo:block>
-                            </fo:table-cell>
-                            <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block>&#160;</fo:block>
-                                <fo:block>&#160;</fo:block>
-                            </fo:table-cell>
-                        </fo:table-row>
-                        <fo:table-row>
-                            <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block>
-                                    <xsl:choose>
-                                        <xsl:when test="/offerte">
-
-                                            <xsl:value-of
-                                                select="/*/meta/permission_parties/client/legal_rep"/>
-
-                                        </xsl:when>
-                                        <xsl:when test="/quickscope">
-
-                                            <xsl:value-of select="/*/customer/legal_rep"/>
-
-                                        </xsl:when>
-                                    </xsl:choose>
-
-                                </fo:block>
-                            </fo:table-cell>
-                            <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block>
-                                    <xsl:choose>
-                                        <xsl:when test="/offerte">
-
-                                            <xsl:value-of select="/*/meta/company/legal_rep"/>
-
-                                        </xsl:when>
-                                        <xsl:when test="/quickscope">
-
-                                            <xsl:value-of select="/*/company/legal_rep"/>
-
-                                        </xsl:when>
-                                    </xsl:choose>
-
-                                </fo:block>
-                            </fo:table-cell>
-                        </fo:table-row>
-                        <fo:table-row>
-                            <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block xsl:use-attribute-sets="bold">
-                                    <xsl:choose>
-                                        <xsl:when test="/offerte">
-
-                                            <xsl:value-of
-                                                select="/*/meta/permission_parties/client/full_name"/>
-
-                                        </xsl:when>
-                                        <xsl:when test="/quickscope">
-
-                                            <xsl:value-of select="/*/customer/full_name"/>
-
-                                        </xsl:when>
-                                    </xsl:choose>
-
-                                </fo:block>
-                            </fo:table-cell>
-                            <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block xsl:use-attribute-sets="bold">
-                                    <xsl:choose>
-                                        <xsl:when test="/offerte">
-
-                                            <xsl:value-of select="/*/meta/company/full_name"/>
-
-                                        </xsl:when>
-                                        <xsl:when test="/quickscope">
-
-                                            <xsl:value-of select="/*/company/full_name"/>
-
-                                        </xsl:when>
-                                    </xsl:choose>
-
-                                </fo:block>
-                            </fo:table-cell>
-                        </fo:table-row>
-                    </fo:table-body>
-                </fo:table>
-            </fo:block>
-        </fo:block>
-    </xsl:template>
-
     <xsl:template match="generate_permission_parties">
         <xsl:for-each select="/*/meta/permission_parties/client | /*/meta/permission_parties/party">
             <xsl:if test="self::party and not(following-sibling::party)">
@@ -534,453 +322,270 @@
         </xsl:for-each>
     </xsl:template>
 
-    <xsl:template match="generate_piechart">
+    <xsl:template match="generate_service_breakdown">
         <xsl:choose>
-            <xsl:when test="//finding">
-                <!-- only generate pie chart if there are findings in the report - otherwise we get into trouble with empty percentages and divisions by zero -->
-                <xsl:call-template name="do_generate_piechart">
-                    <xsl:with-param name="pieAttr" select="@pieAttr"/>
-                    <xsl:with-param name="pieElem" select="@pieElem"/>
-                    <xsl:with-param name="pieHeight" select="@pieHeight"/>
-                    <xsl:with-param name="status" select="@status"/>
-                </xsl:call-template>
+            <xsl:when test="@format = 'list'">
+                <fo:list-block xsl:use-attribute-sets="list">
+                    <xsl:for-each select="$serviceNodeSet/entry[@type = 'service']">
+                        <xsl:if test="d">
+                            <fo:list-item xsl:use-attribute-sets="li">
+                                <!-- insert a bullet -->
+                                <fo:list-item-label end-indent="label-end()">
+                                    <fo:block>
+                                        <fo:inline>&#8226;</fo:inline>
+                                    </fo:block>
+                                </fo:list-item-label>
+                                <!-- list text -->
+                                <fo:list-item-body start-indent="body-start()">
+                                    <fo:block>
+                                        <xsl:value-of select="desc"/>
+                                        <xsl:text>: </xsl:text>
+                                        <xsl:value-of select="d"/>
+                                    </fo:block>
+                                </fo:list-item-body>
+                            </fo:list-item>
+                        </xsl:if>
+                    </xsl:for-each>
+                    <fo:list-item xsl:use-attribute-sets="li">
+                        <!-- insert a bullet -->
+                        <fo:list-item-label end-indent="label-end()">
+                            <fo:block>
+                                <fo:inline>&#8226;</fo:inline>
+                            </fo:block>
+                        </fo:list-item-label>
+                        <fo:list-item-body start-indent="body-start()">
+                            <fo:block xsl:use-attribute-sets="bold">
+                                <xsl:text>Total effort: </xsl:text>
+                                <xsl:call-template name="calculatePersonDays"/>
+                                <xsl:text> days</xsl:text>
+                            </fo:block>
+                        </fo:list-item-body>
+                    </fo:list-item>
+                </fo:list-block>
             </xsl:when>
-            <xsl:otherwise>
-                <fo:block xsl:use-attribute-sets="errortext">Pie chart can only be generated when
-                    there are findings in the report. Get to work! ;)</fo:block>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-    <xsl:template name="do_generate_piechart">
-        <!-- Get the numbers -->
-        <!-- generate_piechart @type="type" or "threatLevel" -->
-        <xsl:param name="pieAttr" select="@pieAttr"/>
-        <xsl:param name="pieElem" select="@pieElem"/>
-        <xsl:param name="pieHeight" as="xs:integer" select="@pieHeight"/>
-        <xsl:param name="status" select="@status"/>
-        <xsl:variable name="statusSequence" as="item()*">
-            <xsl:for-each select="$status">
-                <xsl:for-each select="tokenize(., ' ')">
-                    <xsl:value-of select="."/>
-                </xsl:for-each>
-            </xsl:for-each>
-        </xsl:variable>
-        <xsl:variable name="pieTotal">
-            <xsl:choose>
-                <xsl:when test="not(@status)">
-                    <xsl:value-of select="count(//*[local-name() = $pieElem])"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of
-                        select="count(//*[local-name() = $pieElem][@status = $statusSequence])"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <!-- Create generic nodeset with values -->
-        <xsl:variable name="unsortedPieTable">
-            <xsl:choose>
-                <xsl:when test="not(@status)">
-                    <xsl:for-each-group select="//*[local-name() = $pieElem]"
-                        group-by="@*[name() = $pieAttr]">
-                        <pieEntry>
-                            <pieEntryLabel>
-                                <xsl:value-of select="current-grouping-key()"/>
-                            </pieEntryLabel>
-                            <pieEntryCount>
-                                <xsl:value-of
-                                    select="count(//*[local-name() = $pieElem][@*[name() = $pieAttr]][@* = current-grouping-key()])"
-                                />
-                            </pieEntryCount>
-                        </pieEntry>
-                    </xsl:for-each-group>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:for-each-group
-                        select="//*[local-name() = $pieElem][@status = $statusSequence]"
-                        group-by="@*[name() = $pieAttr]">
-                        <pieEntry>
-                            <pieEntryLabel>
-                                <xsl:value-of select="current-grouping-key()"/>
-                            </pieEntryLabel>
-                            <pieEntryCount>
-                                <xsl:value-of
-                                    select="count(//*[local-name() = $pieElem][@*[name() = $pieAttr]][@status = $statusSequence][@* = current-grouping-key()])"
-                                />
-                            </pieEntryCount>
-                        </pieEntry>
-                    </xsl:for-each-group>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="pieHeightHalf" as="xs:double" select="$pieHeight div 2"/>
-        <!-- Now we need to sort that pieTable - custom order for threat levels, 'count' descending order for all other types -->
-        <xsl:variable name="pieTable">
-            <xsl:choose>
-                <xsl:when test="$pieElem = 'finding' and $pieAttr = 'threatLevel'">
-                    <xsl:for-each select="$unsortedPieTable/pieEntry">
-                        <xsl:sort data-type="number" order="descending"
-                            select="
-                                (number(pieEntryLabel = 'Extreme') * 10)
-                                + (number(pieEntryLabel = 'High') * 9)
-                                + (number(pieEntryLabel = 'Elevated') * 8)
-                                + (number(pieEntryLabel = 'Moderate') * 7)
-                                + (number(pieEntryLabel = 'Low') * 6)
-                                + (number(pieEntryLabel = 'Unknown') * 3)
-                                + (number(pieEntryLabel = 'N/A') * 1)"/>
-                        <pieEntry>
-                            <pieEntryLabel>
-                                <xsl:value-of select="pieEntryLabel"/>
-                            </pieEntryLabel>
-                            <pieEntryCount>
-                                <xsl:value-of select="pieEntryCount"/>
-                            </pieEntryCount>
-                        </pieEntry>
-                    </xsl:for-each>
-                </xsl:when>
-                <xsl:when test="$pieElem = 'finding' and $pieAttr = 'status'">
-                    <xsl:for-each select="$unsortedPieTable/pieEntry">
-                        <xsl:sort data-type="number" order="descending"
-                            select="
-                                (number(pieEntryLabel = 'new') * 10)
-                                + (number(pieEntryLabel = 'unresolved') * 9)
-                                + (number(pieEntryLabel = 'not_retested') * 8)
-                                + (number(pieEntryLabel = 'resolved') * 7)"/>
-                        <pieEntry>
-                            <pieEntryLabel>
-                                <xsl:value-of select="pieEntryLabel"/>
-                            </pieEntryLabel>
-                            <pieEntryCount>
-                                <xsl:value-of select="pieEntryCount"/>
-                            </pieEntryCount>
-                        </pieEntry>
-                    </xsl:for-each>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:for-each select="$unsortedPieTable/pieEntry">
-                        <xsl:sort data-type="number" order="descending" select="pieEntryCount"/>
-                        <pieEntry>
-                            <pieEntryLabel>
-                                <xsl:value-of select="pieEntryLabel"/>
-                            </pieEntryLabel>
-                            <pieEntryCount>
-                                <xsl:value-of select="pieEntryCount"/>
-                            </pieEntryCount>
-                        </pieEntry>
-                    </xsl:for-each>
-                </xsl:otherwise>
-            </xsl:choose>
-
-        </xsl:variable>
-        <xsl:variable name="no_entries" select="count($pieTable/pieEntry)"/>
-        <xsl:for-each select="$pieTable">
-            <fo:block xsl:use-attribute-sets="p">
-                <fo:table margin-top="15px">
-                    <!-- need some margin to make space for percentages that can't fit in the pie... -->
-                    <fo:table-column column-width="{$pieHeight + 50}px"/>
-                    <fo:table-column/>
+            <xsl:when test="@format = 'table'">
+                <fo:block xsl:use-attribute-sets="keep-together"><fo:table xsl:use-attribute-sets="breakdowntable">
+                    <fo:table-column column-width="proportional-column-width(6)"
+                        xsl:use-attribute-sets="borders"/>
+                    <fo:table-column column-width="proportional-column-width(2)"
+                        xsl:use-attribute-sets="borders"/>
+                    <fo:table-column column-width="proportional-column-width(3)"
+                        xsl:use-attribute-sets="borders"/>
+                    <fo:table-column column-width="proportional-column-width(4)"
+                        xsl:use-attribute-sets="borders"/>
                     <fo:table-body>
-                        <fo:table-row keep-together.within-column="always">
-                            <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block>
-                                    <fo:instream-foreign-object
-                                        xmlns:svg="http://www.w3.org/2000/svg">
-                                        <!--set the display-->
-                                        <svg:svg>
-                                            <!-- width and height of the viewport -->
-                                            <xsl:attribute name="width">
-                                                <xsl:value-of select="$pieHeight"/>
-                                            </xsl:attribute>
-                                            <xsl:attribute name="height">
-                                                <xsl:value-of select="$pieHeight"/>
-                                            </xsl:attribute>
-                                            <!-- viewBox to scale -->
-                                            <xsl:attribute name="viewBox">
-                                                <xsl:value-of
-                                                  select="concat('0 0 ', $pieHeight, ' ', $pieHeight)"
-                                                />
-                                            </xsl:attribute>
-                                            <!--call the template starting at the last slice-->
-                                            <xsl:call-template name="pie_chart_slice">
-                                                <xsl:with-param name="pieTotal" select="$pieTotal"/>
-                                                <xsl:with-param name="no_entries"
-                                                  select="$no_entries"/>
-                                                <xsl:with-param name="position" select="$no_entries"/>
-                                                <xsl:with-param name="middle_x"
-                                                  select="$pieHeightHalf"/>
-                                                <xsl:with-param name="middle_y"
-                                                  select="$pieHeightHalf"/>
-                                                <xsl:with-param name="move_x" select="0"/>
-                                                <xsl:with-param name="radius"
-                                                  select="$pieHeightHalf"/>
-                                            </xsl:call-template>
-                                        </svg:svg>
-                                    </fo:instream-foreign-object>
-                                </fo:block>
+                        <fo:table-row>
+                            <fo:table-cell xsl:use-attribute-sets="th">
+                                <fo:block> Description </fo:block>
                             </fo:table-cell>
-                            <!-- PIE CHART LEGEND -->
-                            <fo:table-cell>
-                                <fo:block>
-                                    <fo:table xsl:use-attribute-sets="pieLegendTable">
-                                        <fo:table-column column-width="20px"/>
-                                        <fo:table-column/>
-                                        <fo:table-body>
-                                            <xsl:for-each select="$pieTable/pieEntry">
-                                                <xsl:variable name="pieEntryLabelClean"
-                                                  select="translate(pieEntryLabel, '/', '_')"/>
-                                                <xsl:variable name="pieEntryLabel">
-                                                  <xsl:sequence
-                                                  select="
-                                                            string-join(for $x in tokenize(pieEntryLabel, '_')
-                                                            return
-                                                                my:titleCase($x), ' ')"
-                                                  />
-                                                </xsl:variable>
-                                                <fo:table-row>
-                                                  <fo:table-cell xsl:use-attribute-sets="td">
-                                                  <fo:block>
-                                                  <fo:instream-foreign-object>
-                                                  <svg:svg height="13" width="13">
-                                                  <svg:rect stroke="black" stroke-width="1"
-                                                  stroke-linejoin="round" height="11" width="11">
-                                                  <xsl:attribute name="fill">
-                                                  <xsl:call-template name="giveColor">
-                                                  <xsl:with-param name="i" select="position()"/>
-                                                  <xsl:with-param name="pieEntryLabel"
-                                                  select="pieEntryLabel"/>
+                            <fo:table-cell xsl:use-attribute-sets="th">
+                                <fo:block> Effort </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell xsl:use-attribute-sets="th">
+                                <fo:block> Hourly rate </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell xsl:use-attribute-sets="th">
+                                <fo:block> Fee </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                        <xsl:for-each select="$serviceNodeSet/entry">
+                            <fo:table-row>
+                                <xsl:if test="position() mod 2 != 0">
+                                    <xsl:attribute name="background-color">#ededed</xsl:attribute>
+                                </xsl:if>
+                                <fo:table-cell xsl:use-attribute-sets="td">
+                                    <xsl:if
+                                        test="not(normalize-space(d)) and not(normalize-space(h))">
+                                        <xsl:attribute name="number-columns-spanned"
+                                            >3</xsl:attribute>
+                                    </xsl:if>
+                                    <fo:block>
+                                        <xsl:value-of select="desc"/>
+                                    </fo:block>
+                                </fo:table-cell>
+                                <xsl:if test="d">
+                                    <fo:table-cell xsl:use-attribute-sets="td">
+                                        <fo:block>
+                                            <xsl:value-of select="d"/>
+                                        </fo:block>
+                                    </fo:table-cell>
+                                    <xsl:choose>
+                                        <xsl:when test="normalize-space(h)">
+                                            <fo:table-cell xsl:use-attribute-sets="td">
+                                                <fo:block text-align="right">
+                                                  <xsl:call-template name="getDenomination">
+                                                  <xsl:with-param name="placeholderElement"
+                                                  select="."/>
                                                   </xsl:call-template>
-                                                  </xsl:attribute>
-                                                  </svg:rect>
-                                                  </svg:svg>
-                                                  </fo:instream-foreign-object>
-                                                  </fo:block>
-                                                  </fo:table-cell>
-                                                  <fo:table-cell xsl:use-attribute-sets="td">
-                                                  <fo:block>
-                                                  <xsl:value-of select="$pieEntryLabel"/>
-                                                  <xsl:text> (</xsl:text>
-                                                  <!-- for threatLevel legend, link to finding summary table -->
-                                                  <xsl:choose>
-                                                  <xsl:when test="$pieAttr = 'threatLevel'">
-                                                  <fo:basic-link text-decoration="underline">
-                                                  <xsl:attribute name="internal-destination"
-                                                  >summaryTableThreatLevel<xsl:value-of
-                                                  select="$pieEntryLabelClean"/></xsl:attribute>
-                                                  <xsl:value-of select="pieEntryCount"/>
-                                                  </fo:basic-link>
-                                                  </xsl:when>
-                                                  <xsl:otherwise>
-                                                  <xsl:value-of select="pieEntryCount"/>
-                                                  </xsl:otherwise>
-                                                  </xsl:choose>
-                                                  <xsl:text>)</xsl:text>
-                                                  </fo:block>
-                                                  </fo:table-cell>
-                                                </fo:table-row>
-                                            </xsl:for-each>
-                                        </fo:table-body>
-                                    </fo:table>
+                                                  <xsl:call-template name="prettyMissingDecimal">
+                                                  <xsl:with-param name="n" select="h"/>
+                                                  </xsl:call-template>
+                                                  <xsl:text> excl. VAT</xsl:text>
+                                                </fo:block>
+                                            </fo:table-cell>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <fo:table-cell xsl:use-attribute-sets="td">
+                                                <fo:block text-align="right">-</fo:block>
+                                            </fo:table-cell>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:if>
+                                <fo:table-cell xsl:use-attribute-sets="td">
+                                    <fo:block text-align="right">
+                                        <xsl:choose>
+                                            <xsl:when test="not(f/min = f/max)">
+                                                <xsl:call-template name="getDenomination">
+                                                  <xsl:with-param name="placeholderElement"
+                                                  select="."/>
+                                                </xsl:call-template>
+                                                <xsl:number value="f/min" grouping-separator=","
+                                                  grouping-size="3"/>
+                                                <xsl:text> - </xsl:text>
+                                                <xsl:call-template name="getDenomination">
+                                                  <xsl:with-param name="placeholderElement"
+                                                  select="."/>
+                                                </xsl:call-template>
+                                                <xsl:call-template name="prettyMissingDecimal">
+                                                  <xsl:with-param name="n" select="f/max"/>
+                                                </xsl:call-template>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:call-template name="getDenomination">
+                                                  <xsl:with-param name="placeholderElement"
+                                                  select="."/>
+                                                </xsl:call-template>
+                                                <xsl:call-template name="prettyMissingDecimal">
+                                                  <xsl:with-param name="n" select="f/min"/>
+                                                </xsl:call-template>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                        <xsl:text> excl. VAT</xsl:text>
+                                        <xsl:if test="@estimate = true()">*</xsl:if>
+                                    </fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
+                        </xsl:for-each>
+                        <fo:table-row xsl:use-attribute-sets="totalRow">
+                            <fo:table-cell number-columns-spanned="4" xsl:use-attribute-sets="td">
+                                <fo:block xsl:use-attribute-sets="totalcell">
+                                    <xsl:text>Total</xsl:text>
+                                    <xsl:if test="$serviceNodeSet/entry/@estimate = true()">
+                                        (estimate)</xsl:if>
+                                    <xsl:text>:</xsl:text>
+                                    <fo:leader leader-pattern="space"/>
+                                    <xsl:call-template name="calculateTotal"/>
+                                    <xsl:text> excl. VAT</xsl:text>
                                 </fo:block>
                             </fo:table-cell>
                         </fo:table-row>
                     </fo:table-body>
-                </fo:table>
+                </fo:table></fo:block>
 
-            </fo:block>
-        </xsl:for-each>
 
-    </xsl:template>
-
-    <xsl:template name="pie_chart_slice">
-        <xsl:param name="pieTotal"/>
-        <xsl:param name="position"/>
-        <xsl:param name="no_entries"/>
-        <xsl:param name="middle_x"/>
-        <xsl:param name="middle_y"/>
-        <xsl:param name="move_x"/>
-        <xsl:param name="radius"/>
-        <!--prepare the middle part of the arc command-->
-        <xsl:variable name="middle" select="concat('M', ' ', $middle_x, ',', $middle_y)"/>
-        <xsl:variable name="part" as="xs:double"
-            select="sum(//pieEntry[position() &lt;= $position]/pieEntryCount)"/>
-        <!-- sum of pieEntryCounts up to this point -->
-        <xsl:variable name="angle" select="($part div $pieTotal) * 360"/>
-        <xsl:variable name="x" select="math:sin(3.1415292 * $angle div 180.0) * $radius"/>
-        <xsl:variable name="y" select="math:cos(3.1415292 * $angle div 180.0) * $radius"/>
-        <xsl:variable name="move_y" select="-$radius"/>
-        <xsl:variable name="first_line" select="concat('l', ' ', $move_x, ',', $move_y)"/>
-        <xsl:variable name="arc_move1" select="'0'"/>
-        <xsl:variable name="arc_move2">
-            <xsl:choose>
-                <!--check the direction of the arc: inward or outward-->
-                <xsl:when test="$angle &lt;= 180">0</xsl:when>
-                <xsl:otherwise>1</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="arc_move3" select="'1'"/>
-        <xsl:variable name="arc_move" select="concat($arc_move1, ' ', $arc_move2, ',', $arc_move3)"/>
-        <xsl:variable name="d"
-            select="concat($middle, ' ', $first_line, ' ', 'a', $radius, ',', $radius, ' ', $arc_move, ' ', $x, ',', $radius - $y, ' ', 'z')"/>
-        <!--put it all together-->
-        <svg:path stroke="black" stroke-width="1" stroke-linejoin="round">
-            <xsl:attribute name="fill">
-                <xsl:call-template name="giveColor">
-                    <xsl:with-param name="i" select="$position"/>
-                    <xsl:with-param name="pieEntryLabel"
-                        select="//pieEntry[position() = $position]/pieEntryLabel"/>
-                </xsl:call-template>
-            </xsl:attribute>
-            <xsl:attribute name="d">
-                <xsl:value-of select="$d"/>
-            </xsl:attribute>
-        </svg:path>
-        <!--now the percentage-->
-        <xsl:variable name="percentage" as="xs:double"
-            select="(//pieEntry[position() = $position]/pieEntryCount div sum(//pieEntry/pieEntryCount)) * 100"/>
-        <xsl:variable name="part_half" as="xs:double"
-            select="(//pieEntry[position() = $position]/pieEntryCount div sum(//pieEntry/pieEntryCount)) div 2 * 360"/>
-        <xsl:variable name="text_x"
-            select="math:sin(3.1415292 * (($angle - $part_half) div 180.0)) * ($radius * 0.8)"/>
-        <xsl:variable name="text_y"
-            select="math:cos(3.1415292 * (($angle - $part_half) div 180.0)) * ($radius * 0.8)"/>
-        <xsl:variable name="text_line_x"
-            select="math:sin(3.1415292 * (($angle - $part_half) div 180.0)) * ($radius * 1.15)"/>
-        <xsl:variable name="text_line_y"
-            select="math:cos(3.1415292 * (($angle - $part_half) div 180.0)) * ($radius * 1.15)"/>
-        <!--we either put it on the edge of the pie directly or have a line pointing into the slice, depending on how thick the slice is-->
-        <xsl:choose>
-            <xsl:when test="$percentage >= 3.5">
-                <!--on the edge-->
-                <svg:text text-anchor="middle" xsl:use-attribute-sets="PieFont">
-                    <xsl:attribute name="x">
-                        <xsl:value-of select="$middle_x + $text_line_x"/>
-                    </xsl:attribute>
-                    <xsl:attribute name="y">
-                        <xsl:value-of select="$middle_y - $text_line_y"/>
-                    </xsl:attribute>
-                    <xsl:value-of select="format-number($percentage, '##,##0.0')"/>
-                    <xsl:text>%</xsl:text>
-                </svg:text>
+                <xsl:if test="$serviceNodeSet/entry/@estimate = true()">
+                    <fo:block text-align="right">
+                        <xsl:text>* Estimate</xsl:text>
+                    </fo:block>
+                </xsl:if>
             </xsl:when>
             <xsl:otherwise>
-                <!--extra line pointing into the slice-->
-                <xsl:variable name="line_dir">
-                    <xsl:choose>
-                        <!--when in the first half of the pie, have the line point to the right, otherwise to the left -->
-                        <xsl:when test="$angle &lt;= 180">+10</xsl:when>
-                        <xsl:otherwise>-10</xsl:otherwise>
-                    </xsl:choose>
-                </xsl:variable>
-                <xsl:variable name="text_x_relative_to_line">
-                    <xsl:choose>
-                        <!--when in the first half of the pie, have the text be on the right of the line, otherwise on the left -->
-                        <xsl:when test="$angle &lt;= 180">
-                            <xsl:value-of select="$middle_x + $text_line_x + $line_dir * 2 + 11"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:value-of select="$middle_x + $text_line_x - 11"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:variable>
-                <svg:path stroke="black" stroke-width="1" stroke-linejoin="round">
-                    <xsl:attribute name="fill">none</xsl:attribute>
-                    <xsl:attribute name="d">
-                        <xsl:value-of
-                            select="concat('M', ' ', $middle_x + $text_x, ',', $middle_y - $text_y, ' ', 'L', ' ', $middle_x + $text_line_x, ',', $middle_y - $text_line_y, ' ', 'H', ' ', $middle_x + $text_line_x + $line_dir)"
-                        />
-                    </xsl:attribute>
-                </svg:path>
-                <svg:text text-anchor="end" xsl:use-attribute-sets="PieFont">
-                    <xsl:attribute name="x">
-                        <!-- placement of text depends on where extra line is pointing -->
-                        <xsl:value-of select="$text_x_relative_to_line"/>
-                    </xsl:attribute>
-                    <xsl:attribute name="y">
-                        <xsl:value-of select="$middle_y - $text_line_y + 1"/>
-                    </xsl:attribute>
-                    <xsl:value-of select="format-number($percentage, '##,##0.0')"/>
-                    <xsl:text>%</xsl:text>
-                </svg:text>
+                <xsl:call-template name="displayErrorText">
+                    <xsl:with-param name="string">ERROR: unknown service breakdown format (use
+                        'list' or 'table')</xsl:with-param>
+                </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
-        <!--<svg:text text-anchor="middle" xsl:use-attribute-sets="DefaultFont">
-                    <xsl:attribute name="x">
-                        <xsl:value-of select="$middle_x + $text_line_x"/>
-                    </xsl:attribute>
-                    <xsl:attribute name="y">
-                        <xsl:value-of select="$middle_y - $text_line_y"/>
-                    </xsl:attribute>
-                    <xsl:value-of select="format-number($percentage, '##,##0.0')"/>
-                    <xsl:text>%</xsl:text>
-                </svg:text>-->
-        <!--loop until we reach the first part-->
-        <xsl:if test="$position > 1">
-            <xsl:call-template name="pie_chart_slice">
-                <xsl:with-param name="pieTotal" select="$pieTotal"/>
-                <xsl:with-param name="position" select="$position - 1"/>
-                <xsl:with-param name="no_entries" select="$no_entries"/>
-                <xsl:with-param name="middle_x" select="$middle_x"/>
-                <xsl:with-param name="middle_y" select="$middle_y"/>
-                <xsl:with-param name="move_x" select="$move_x"/>
-                <xsl:with-param name="radius" select="$radius"/>
-            </xsl:call-template>
+    </xsl:template>
+
+    <xsl:template name="calculateTotal">
+        <xsl:param name="denoms" tunnel="yes">
+            <xsl:for-each-group select="$serviceNodeSet/entry" group-by="@denomination">
+                <denom denomination="{current-grouping-key()}"/>
+            </xsl:for-each-group>
+        </xsl:param>
+        <xsl:variable name="allDenominationsAreEqual" select="count($denoms/denom) = 1"/>
+        <xsl:variable name="minmaxesPresent"
+            select="boolean($serviceNodeSet/entry/f/min and $serviceNodeSet/entry/f/max)"/>
+        <xsl:variable name="estimatePresent" select="$serviceNodeSet/entry/@estimate"/>
+        <xsl:variable name="totalMinFees" select="sum($serviceNodeSet/entry/f/min)"/>
+        <xsl:variable name="totalMaxFees" select="sum($serviceNodeSet/entry/f/max)"/>
+        <xsl:choose>
+            <xsl:when test="not($totalMinFees = $totalMaxFees)">
+                <!-- We have different min and max fees, print range -->
+                <xsl:call-template name="checkDenomination">
+                    <xsl:with-param name="allDenominationsAreEqual"
+                        select="$allDenominationsAreEqual"/>
+                    <xsl:with-param name="denoms" select="$denoms"/>
+                </xsl:call-template>
+                <xsl:number value="$totalMinFees" grouping-separator="," grouping-size="3"/>
+                <xsl:text> - </xsl:text>
+                <xsl:call-template name="checkDenomination">
+                    <xsl:with-param name="allDenominationsAreEqual"
+                        select="$allDenominationsAreEqual"/>
+                    <xsl:with-param name="denoms" select="$denoms"/>
+                </xsl:call-template>
+                <xsl:call-template name="prettyMissingDecimal">
+                    <xsl:with-param name="n" select="$totalMaxFees"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- Min and max are equal; print single price -->
+                <xsl:call-template name="checkDenomination">
+                    <xsl:with-param name="allDenominationsAreEqual"
+                        select="$allDenominationsAreEqual"/>
+                    <xsl:with-param name="denoms" select="$denoms"/>
+                </xsl:call-template>
+                <xsl:call-template name="prettyMissingDecimal">
+                    <xsl:with-param name="n" select="$totalMinFees"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="checkDenomination">
+        <xsl:param name="allDenominationsAreEqual"/>
+        <xsl:param name="denoms"/>
+        <xsl:choose>
+            <xsl:when test="$allDenominationsAreEqual">
+                <xsl:call-template name="getDenomination">
+                    <xsl:with-param name="placeholderElement" select="$denoms/denom"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="displayErrorText">
+                    <xsl:with-param name="string">Cannot print denomination: not all fees in
+                        service_breakdown have an equal denomination (tip: if most services are in
+                        eur but one is in usd, add the usd fee to the description for that service
+                        and use an estimated eur for the hourly rate or fee).</xsl:with-param>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="calculatePersonDays">
+        <xsl:variable name="totalMinDurations"
+            select="sum($serviceNodeSet/entry[@type = 'service']/dh/min)"/>
+        <xsl:variable name="totalMaxDurations"
+            select="sum($serviceNodeSet/entry[@type = 'service']/dh/max)"/>
+        <xsl:choose>
+            <xsl:when test="not($totalMinDurations = $totalMaxDurations)">
+                <xsl:value-of select="sum($totalMinDurations) div 8"/>
+                <xsl:text> - </xsl:text>
+                <xsl:value-of select="sum($totalMaxDurations) div 8"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="sum($totalMinDurations) div 8"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="prettyMissingDecimal">
+        <xsl:param name="n"/>
+        <xsl:if test="floor($n) = $n">
+            <xsl:number value="$n" grouping-separator="," grouping-size="3"/>
+            <xsl:text>.-</xsl:text>
         </xsl:if>
     </xsl:template>
-    <xsl:template name="giveColor">
-        <xsl:param name="i"/>
-        <xsl:param name="pieEntryLabel"/>
-        <xsl:choose>
-            <!-- specific cases -->
-            <!-- threat level -->
-            <xsl:when test="$pieEntryLabel = 'Extreme'">#CC4900</xsl:when>
-            <xsl:when test="$pieEntryLabel = 'High'">#FF5C00</xsl:when>
-            <xsl:when test="$pieEntryLabel = 'Elevated'">#FE9920</xsl:when>
-            <xsl:when test="$pieEntryLabel = 'Moderate'">#ffbf7f</xsl:when>
-            <xsl:when test="$pieEntryLabel = 'Low'">#ffed7f</xsl:when>
-            <xsl:when test="$pieEntryLabel = 'N/A'">#FFFFFF</xsl:when>
-            <xsl:when test="$pieEntryLabel = 'Unknown'">#CCCCCC</xsl:when>
-            <!-- status -->
-            <xsl:when test="$pieEntryLabel = 'new'">#CC4900</xsl:when>
-            <xsl:when test="$pieEntryLabel = 'unresolved'">#FF5C00</xsl:when>
-            <xsl:when test="$pieEntryLabel = 'not_retested'">#FE9920</xsl:when>
-            <xsl:when test="$pieEntryLabel = 'resolved'">#e5d572</xsl:when>
-            <xsl:otherwise>
-                <!-- generic pie chart -->
-                <xsl:choose>
-                    <!-- Going with shades of green and blue in all cases here so as not to imply severity levels -->
-                    <xsl:when test="$i = 1">#D9D375</xsl:when>
-                    <xsl:when test="$i = 2">#B9A44C</xsl:when>
-                    <xsl:when test="$i = 3">#BEC5AD</xsl:when>
-                    <xsl:when test="$i = 4">#7CA982</xsl:when>
-                    <xsl:when test="$i = 5">#566E3D</xsl:when>
-                    <xsl:when test="$i = 6">#5B5F97</xsl:when>
-                    <xsl:when test="$i = 7">#C200FB</xsl:when>
-                    <xsl:when test="$i = 8">#A9E5BB</xsl:when>
-                    <xsl:when test="$i = 9">#98C1D9</xsl:when>
-                    <xsl:when test="$i = 10">#5B5F97</xsl:when>
-                    <xsl:when test="$i = 11">burlywood</xsl:when>
-                    <xsl:when test="$i = 12">cornflowerblue</xsl:when><!-- that's right people, cornflower blue -->
-                    <xsl:when test="$i = 13">cornsilk</xsl:when>
-                    <xsl:otherwise>black</xsl:otherwise>
-                </xsl:choose>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-    <xsl:function name="my:titleCase" as="xs:string">
-        <xsl:param name="s" as="xs:string"/>
-        <xsl:choose>
-            <xsl:when test="lower-case($s) = ('and', 'or')">
-                <xsl:value-of select="lower-case($s)"/>
-            </xsl:when>
-            <xsl:when test="$s = upper-case($s)">
-                <xsl:value-of select="$s"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of
-                    select="concat(upper-case(substring($s, 1, 1)), lower-case(substring($s, 2)))"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:function>
 
 </xsl:stylesheet>

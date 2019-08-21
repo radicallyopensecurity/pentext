@@ -1,0 +1,17 @@
+<finding id="pe_management_2" threatLevel="High" type="Privilege Escalation">
+    <title>Privilege Escalation</title>
+                        	
+    <description>
+    <p>On the Linux management machines, the netmond user can execute the following script via sudo:</p>
+    <pre>/usr/local/netmonclientd/init</pre>
+    <p>This script is writable by the netmonclientd user. This allows escalating from the netmonclientd user to root.</p>
+    </description>
+                        	
+    <technicaldescription>
+    <p>Edit ''/usr/local/netmonclientd/init'' on the management machines as the netmonclientd user, since the script can be invoked with "/bin/bash" to elevate privileges to root (uid=0).</p>
+    </technicaldescription>
+    
+    <recommendation>
+	<p>Change owner of the ''/usr/local/netmonclientd/init'' (on the management machines)  to root so the netmonclientd user cannot write to it.</p>
+    </recommendation>
+</finding> 

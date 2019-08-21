@@ -24,53 +24,22 @@
 
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no"/>
 
-
-    <!-- ****** AUTO_NUMBERING_FORMAT:	value of the <xsl:number> element used for auto numbering -->
-    <xsl:param name="AUTO_NUMBERING_FORMAT" select="'1.1.1'"/>
-
-
-    <xsl:key name="rosid" match="section | finding | appendix | non-finding" use="@id"/>
-    <xsl:key name="biblioid" match="biblioentry" use="@id"/>
-
-
-    <xsl:variable name="CLASSES" select="document('../xslt/styles_con.xslt')/*/xsl:attribute-set"/>
-
-    <xsl:variable name="lang" select="/*/@xml:lang"/>
-    <xsl:variable name="localDateFormat" select="$strdoc/date/format[lang($lang)]"/>
-    <xsl:variable name="fee" select="/contract/meta/contractor/hourly_fee * 1"/>
-    <xsl:variable name="plannedHours" select="/contract/meta/work/planning/hours * 1"/>
-    <xsl:variable name="total_fee" select="$fee * $plannedHours"/>
-    <xsl:variable name="denomination">
-        <xsl:choose>
-            <xsl:when test="/contract/meta/contractor/hourly_fee/@denomination = 'eur'">€</xsl:when>
-            <xsl:when test="/contract/meta/contractor/hourly_fee/@denomination = 'gbp'">£</xsl:when>
-            <xsl:when test="/contract/meta/contractor/hourly_fee/@denomination = 'usd'">$</xsl:when>
-        </xsl:choose>
-    </xsl:variable>
-
-    <xsl:param name="latestVersionDate"><!-- we're not using versions for contracts, but the contract date will do just fine -->
-            <xsl:value-of select="format-date(/contract/meta/work/start_date, '[MNn] [D1], [Y]', 'en', (), ())"/>
-    </xsl:param>
+    <xsl:include href="functions_params_vars.xslt"/>
 
     <!-- ROOT -->
     <xsl:template match="/">
-
         <fo:root>
-
             <xsl:call-template name="layout-master-set"/>
             <xsl:call-template name="Content">
-                        <xsl:with-param name="execsummary" select="false()" tunnel="yes"/>
-                    </xsl:call-template>
-
+                <xsl:with-param name="execsummary" select="false()" tunnel="yes"/>
+            </xsl:call-template>
         </fo:root>
     </xsl:template>
 
     <!-- OVERRIDES -->
-
-
+    
     <!-- NO FRONT PAGE FOR META, JUST A HEADER -->
     <xsl:template match="meta"/>
-    
 
     <!-- TITLES (NO NUMBERING) -->
     <xsl:template match="title">
@@ -106,13 +75,13 @@
                     <fo:table-body>
                         <fo:table-row>
                             <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block><xsl:value-of
-                                                select="/contract/meta/contractor/city"/>
+                                <fo:block>
+                                    <xsl:value-of select="/contract/meta/contractor/city"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block><xsl:value-of
-                                                select="/*/meta/company/city"/>
+                                <fo:block>
+                                    <xsl:value-of select="/*/meta/company/city"/>
                                 </fo:block>
                             </fo:table-cell>
                         </fo:table-row>
@@ -128,19 +97,25 @@
                         </fo:table-row>
                         <fo:table-row>
                             <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block><xsl:value-of
-                                                select="/*/meta/contractor/name"/></fo:block>
+                                <fo:block>
+                                    <xsl:value-of select="/*/meta/contractor/name"/>
+                                </fo:block>
                             </fo:table-cell>
                             <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block><xsl:value-of select="/*/meta/company/legal_rep"/></fo:block>
+                                <fo:block>
+                                    <xsl:value-of select="/*/meta/company/legal_rep"/>
+                                </fo:block>
                             </fo:table-cell>
                         </fo:table-row>
                         <fo:table-row>
                             <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block xsl:use-attribute-sets="bold"><xsl:value-of select="/*/meta/contractor/ctcompany"/></fo:block>
+                                <fo:block xsl:use-attribute-sets="bold">
+                                    <xsl:value-of select="/*/meta/contractor/ctcompany"/>
+                                </fo:block>
                             </fo:table-cell>
                             <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block xsl:use-attribute-sets="bold"><xsl:value-of select="/*/meta/company/full_name"/>
+                                <fo:block xsl:use-attribute-sets="bold">
+                                    <xsl:value-of select="/*/meta/company/full_name"/>
                                 </fo:block>
                             </fo:table-cell>
                         </fo:table-row>
@@ -149,39 +124,56 @@
             </fo:block>
         </fo:block>
     </xsl:template>
-    
+
     <xsl:template name="page_header">
         <fo:static-content flow-name="region-before-cover" xsl:use-attribute-sets="HeaderFont">
             <fo:block>
-            <fo:table width="100%" table-layout="fixed">
-                <fo:table-column column-width="proportional-column-width(40)"/>
-                <fo:table-column column-width="proportional-column-width(20)"/>
-                <fo:table-column column-width="proportional-column-width(40)"/>
-                <fo:table-body>
-                    <fo:table-row>
-                        <fo:table-cell text-align="right" display-align="after" padding-bottom="5mm">
-                            <fo:block xsl:use-attribute-sets="TinyFont">
-                                <fo:block xsl:use-attribute-sets="bold orange-text"><xsl:value-of select="/*/meta/company/full_name"/></fo:block>
-                                <fo:block><xsl:value-of select="/*/meta/company/address"/></fo:block>
-                                <fo:block><xsl:value-of select="/*/meta/company/postal_code"/>&#160;<xsl:value-of select="/*/meta/company/city"/></fo:block>
-                                <fo:block><xsl:value-of select="/*/meta/company/country"/></fo:block>
-                            </fo:block>
-                        </fo:table-cell>
-                        <fo:table-cell text-align="center">
-                            <fo:block><fo:external-graphic xsl:use-attribute-sets="logo"/></fo:block>
-                        </fo:table-cell>
-                        <fo:table-cell display-align="after" padding-bottom="5mm">
-                            <fo:block xsl:use-attribute-sets="TinyFont">
-                                <fo:block xsl:use-attribute-sets="bold orange-text"><xsl:value-of select="/*/meta/company/website"/></fo:block>
-                                <fo:block><xsl:value-of select="/*/meta/company/email"/></fo:block>
-                                <fo:block>Chamber of Commerce <xsl:value-of select="/*/meta/company/coc"/></fo:block>
-                                <fo:block>VAT number <xsl:value-of select="/*/meta/company/vat_no"/></fo:block>
-                            </fo:block>
-                        </fo:table-cell>
-                    </fo:table-row>
-                </fo:table-body>
-            </fo:table>
-        </fo:block>
+                <fo:table width="100%" table-layout="fixed">
+                    <fo:table-column column-width="proportional-column-width(40)"/>
+                    <fo:table-column column-width="proportional-column-width(20)"/>
+                    <fo:table-column column-width="proportional-column-width(40)"/>
+                    <fo:table-body>
+                        <fo:table-row>
+                            <fo:table-cell text-align="right" display-align="after"
+                                padding-bottom="5mm">
+                                <fo:block xsl:use-attribute-sets="TinyFont">
+                                    <fo:block xsl:use-attribute-sets="bold orange-text">
+                                        <xsl:value-of select="/*/meta/company/full_name"/>
+                                    </fo:block>
+                                    <fo:block>
+                                        <xsl:value-of select="/*/meta/company/address"/>
+                                    </fo:block>
+                                    <fo:block><xsl:value-of select="/*/meta/company/postal_code"
+                                            />&#160;<xsl:value-of select="/*/meta/company/city"
+                                        /></fo:block>
+                                    <fo:block>
+                                        <xsl:value-of select="/*/meta/company/country"/>
+                                    </fo:block>
+                                </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell text-align="center">
+                                <fo:block>
+                                    <fo:external-graphic xsl:use-attribute-sets="logo"/>
+                                </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell display-align="after" padding-bottom="5mm">
+                                <fo:block xsl:use-attribute-sets="TinyFont">
+                                    <fo:block xsl:use-attribute-sets="bold orange-text">
+                                        <xsl:value-of select="/*/meta/company/website"/>
+                                    </fo:block>
+                                    <fo:block>
+                                        <xsl:value-of select="/*/meta/company/email"/>
+                                    </fo:block>
+                                    <fo:block>Chamber of Commerce <xsl:value-of
+                                            select="/*/meta/company/coc"/></fo:block>
+                                    <fo:block>VAT number <xsl:value-of
+                                            select="/*/meta/company/vat_no"/></fo:block>
+                                </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                    </fo:table-body>
+                </fo:table>
+            </fo:block>
         </fo:static-content>
         <fo:static-content flow-name="region-before-content" xsl:use-attribute-sets="HeaderFont">
             <fo:block xsl:use-attribute-sets="header"/>

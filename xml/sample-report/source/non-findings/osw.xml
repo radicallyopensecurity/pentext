@@ -1,0 +1,10 @@
+<non-finding id="osw">
+    <title>Open Server Watch</title>
+    <p>No vulnerabilities could be found in Sitting Duck's installation of Open Server Watch, even after quite a bit of scrutiny.</p>
+    <p>An overview of some of the issues we looked at:</p>
+    <ul>
+    	<li>The request parameter in the login form is an arbitrary redirect (lame),</li>
+        <li>Cookies are not HTTP only, which could allow stealing if we found a XSS attack,</li>
+        <li>CSRF protection is done by adding half of the SessionID to the URL which is not optimal, however, this seems to be effective at this point.</li>
+    </ul>
+</non-finding>
