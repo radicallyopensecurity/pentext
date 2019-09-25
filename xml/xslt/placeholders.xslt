@@ -466,7 +466,14 @@
                 </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="count(//finding)"/>
+              <xsl:choose>
+                <xsl:when test="$statusSequence">
+                  <xsl:value-of select="count(//finding[@status = $statusSequence])"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="count(//finding)"/>
+                </xsl:otherwise>
+              </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
