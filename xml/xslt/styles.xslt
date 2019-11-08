@@ -134,6 +134,9 @@
             <xsl:value-of select="$very-large-space"/>
         </xsl:attribute>
     </xsl:attribute-set>
+    <xsl:attribute-set name="h2" use-attribute-sets="title-2"/>
+    <xsl:attribute-set name="h3" use-attribute-sets="title-3"/>
+    <xsl:attribute-set name="h4" use-attribute-sets="title-4"/>
     <xsl:attribute-set name="bold">
         <xsl:attribute name="font-weight">bold</xsl:attribute>
     </xsl:attribute-set>

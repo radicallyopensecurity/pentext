@@ -165,7 +165,9 @@
                     <fo:block xsl:use-attribute-sets="signee_signaturespace">
                         <fo:leader xsl:use-attribute-sets="signee_dottedline" leader-length="8cm"/>
                     </fo:block>
-                    <fo:block margin-top="0.2cm" margin-bottom="0.2cm">(Name:<fo:leader xsl:use-attribute-sets="signee_dottedline" leader-length="7cm"/>)</fo:block>
+                    <fo:block margin-top="0.2cm" margin-bottom="0.2cm">(Name:<fo:leader
+                            xsl:use-attribute-sets="signee_dottedline" leader-length="7cm"
+                        />)</fo:block>
                 </fo:block-container>
             </xsl:when>
             <xsl:otherwise>
@@ -200,6 +202,22 @@
                 <xsl:with-param name="times" select="$times"/>
             </xsl:call-template>
         </xsl:if>
+    </xsl:template>
+
+    <xsl:template match="h2">
+        <fo:block xsl:use-attribute-sets="h2">
+            <xsl:apply-templates/>
+        </fo:block>
+    </xsl:template>
+    <xsl:template match="h3">
+        <fo:block xsl:use-attribute-sets="h3">
+            <xsl:apply-templates/>
+        </fo:block>
+    </xsl:template>
+    <xsl:template match="h4">
+        <fo:block xsl:use-attribute-sets="h4">
+            <xsl:apply-templates/>
+        </fo:block>
     </xsl:template>
 
 </xsl:stylesheet>

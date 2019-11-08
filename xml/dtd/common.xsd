@@ -224,6 +224,30 @@
       </xs:choice>
     </xs:complexType>
   </xs:element>
+  <xs:element name="h2">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="placeholders"/>
+        <xs:group ref="inline-all"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="h3">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="placeholders"/>
+        <xs:group ref="inline-all"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="h4">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="placeholders"/>
+        <xs:group ref="inline-all"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="br">
     <xs:complexType/>
   </xs:element>
