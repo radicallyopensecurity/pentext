@@ -223,7 +223,7 @@
         <xsl:param name="pieTotal"/>
         <xsl:param name="no_entries"/>
         <xsl:param name="pieHeightHalf"/>
-        <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="-40 -20 300 300">
+        <svg xmlns="http://www.w3.org/2000/svg" width="300" height="225" viewBox="-40 -20 300 250">
             <!-- The bit below tried to configure the piechart size but basically nobody ever changes it and it just makes it all way too difficult -->
             <!-- width and height of the viewport -->
             <!--<xsl:attribute name="width">
