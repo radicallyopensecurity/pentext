@@ -53,7 +53,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="days" type="xs:integer"/>
+  <xs:element name="days" type="xs:float"/>
   <xs:element name="delivery">
     <xs:simpleType>
       <xs:union memberTypes="xs:date xs:string"/>

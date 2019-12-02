@@ -43,7 +43,7 @@
       <xs:attribute name="estimate" type="xs:NCName"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="hourly_rate" type="xs:integer"/>
+  <xs:element name="hourly_rate" type="xs:float"/>
   <xs:element name="extra">
     <xs:complexType>
       <xs:sequence>
@@ -67,6 +67,6 @@
   <xs:element name="computed">
     <xs:complexType/>
   </xs:element>
-  <xs:element name="min" type="xs:integer"/>
-  <xs:element name="max" type="xs:integer"/>
+  <xs:element name="min" type="xs:float"/>
+  <xs:element name="max" type="xs:float"/>
 </xs:schema>
