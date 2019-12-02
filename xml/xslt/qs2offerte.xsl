@@ -90,10 +90,6 @@
                 </permission_parties>
                 <activityinfo>
                     <!-- copy various variables from quickscope -->
-                    <duration>
-                        <xsl:value-of select="/*/activityinfo/days"/>
-                    </duration>
-                    <xsl:comment>duration of pentest, in working days</xsl:comment>
                     <persondays>
                         <xsl:value-of select="/*/activityinfo/persondays"/>
                     </persondays>
