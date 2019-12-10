@@ -2,6 +2,8 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="2.0">
 
+    <xsl:output indent="yes" method="xml"/>
+    
     <xsl:template match="@* | node()">
         <xsl:copy>
             <xsl:apply-templates select="@* | node()"/>
@@ -29,8 +31,10 @@
     <!-- remove @class from a -->
     <xsl:template match="a/@class"/>
     
-    <!-- remove @alt from img -->
-    <xsl:template match="img/@alt"/>
+    <!-- remove h*, make bold paragraph -->
+    <xsl:template match="h2 | h3 | h4 | h5">
+        <p><b><xsl:apply-templates/></b></p>
+    </xsl:template>
     
     <!-- TODO: change <img src="/uploads/ac943b3c98d3630f7b1d787c00aa9417/file.png"/> to 
     <img src="../screenshots/file.png"/> -->
