@@ -385,7 +385,8 @@
         <xsl:attribute name="padding-bottom">0.5cm</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="list_summarytable" use-attribute-sets="list">                  
-        <xsl:attribute name="padding-bottom">0.2cm</xsl:attribute>
+        <xsl:attribute name="padding-bottom">0cm</xsl:attribute>
+        <xsl:attribute name="padding-top">0cm</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="li">
         <xsl:attribute name="line-height">6.5mm</xsl:attribute>
