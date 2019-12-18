@@ -134,8 +134,8 @@
             <xsl:value-of select="$very-large-space"/>
         </xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="h2" use-attribute-sets="title-2"/>
-    <xsl:attribute-set name="h3" use-attribute-sets="title-3"/>
+    <xsl:attribute-set name="h2" use-attribute-sets="title-4"/>
+    <xsl:attribute-set name="h3" use-attribute-sets="title-4"/>
     <xsl:attribute-set name="h4" use-attribute-sets="title-4"/>
     <xsl:attribute-set name="bold">
         <xsl:attribute name="font-weight">bold</xsl:attribute>
@@ -384,10 +384,14 @@
         <xsl:attribute name="padding-top">0.2cm</xsl:attribute>
         <xsl:attribute name="padding-bottom">0.5cm</xsl:attribute>
     </xsl:attribute-set>
+    <xsl:attribute-set name="list_summarytable" use-attribute-sets="list">                  
+        <xsl:attribute name="padding-bottom">0.2cm</xsl:attribute>
+    </xsl:attribute-set>
     <xsl:attribute-set name="li">
         <xsl:attribute name="line-height">6.5mm</xsl:attribute>
         <xsl:attribute name="keep-together.within-page">always</xsl:attribute>
     </xsl:attribute-set>
+    
 
     <!-- ToC -->
     <xsl:attribute-set name="index">

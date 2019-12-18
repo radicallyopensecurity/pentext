@@ -14,7 +14,7 @@
     
     <xsl:template match="ul" mode="summarytable">
         <!-- skip 'check if last' template -->
-        <fo:list-block xsl:use-attribute-sets="list">
+        <fo:list-block xsl:use-attribute-sets="list_summarytable">
             <xsl:call-template name="do_ul_summarytable"/>
         </fo:list-block>
     </xsl:template>
