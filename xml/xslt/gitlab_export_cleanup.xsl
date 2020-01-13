@@ -40,8 +40,12 @@
         </p>
     </xsl:template>
 
-    <!-- TODO: change <img src="/uploads/ac943b3c98d3630f7b1d787c00aa9417/file.png"/> to 
-    <img src="../screenshots/file.png"/> -->
+    <!-- add .. to <img src="/uploads/[long code]/file.png"/> -->
+    <xsl:template match="img/@src">
+        <xsl:if test="starts-with(., '/uploads/')">
+            <xsl:attribute name="src" select="concat('..', .)"/>
+        </xsl:if>
+    </xsl:template>
 
     <!-- get rid of superfluous breaks before images or h3 tags -->
     <!-- (not perfect, ideally post-process result later to flatten img or h3 out of p -->
@@ -62,5 +66,8 @@
         <xsl:apply-templates/>
     </xsl:template>
 
+<xsl:template match="p[child::img[not(preceding-sibling::*)][not(following-sibling::*)]]">
+        <xsl:apply-templates select="@* | node()"/>
+    </xsl:template>
 
 </xsl:stylesheet>
