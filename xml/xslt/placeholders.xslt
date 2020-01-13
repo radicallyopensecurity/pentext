@@ -478,12 +478,6 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="todo">
-        <xsl:call-template name="displayErrorText">
-                    <xsl:with-param name="string">### TODO<xsl:if test="@desc">: <xsl:value-of select="@desc"/></xsl:if> ###</xsl:with-param>
-                </xsl:call-template>
-    </xsl:template>
-
     <xsl:template name="checkPlaceholder">
         <xsl:param name="placeholderElement" select="/"/>
         <xsl:param name="caps" select="'none'"/>

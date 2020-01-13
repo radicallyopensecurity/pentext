@@ -10,5 +10,11 @@
             </xsl:call-template>
         </xsl:if>
     </xsl:template>
+    
+    <xsl:template match="todo">
+        <xsl:call-template name="displayErrorText">
+                    <xsl:with-param name="string">### TODO<xsl:if test="@desc or not(normalize-space() = '')">: <xsl:value-of select="@desc"/><xsl:value-of select="."/></xsl:if> ###</xsl:with-param>
+                </xsl:call-template>
+    </xsl:template>
 
 </xsl:stylesheet>
