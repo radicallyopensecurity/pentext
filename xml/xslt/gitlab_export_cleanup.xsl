@@ -25,11 +25,22 @@
         <xsl:apply-templates/>
     </xsl:template>
 
-    <!-- remove @class from pre -->
-    <xsl:template match="pre/@class"/>
-
-    <!-- remove @class from a -->
-    <xsl:template match="a/@class"/>
+    <!-- remove selected attributes from selected elements -->
+    <xsl:template match="pre/@class | a/@class | tr/@class | img/@alt"/>
+    
+    <!-- change em to i -->
+    <xsl:template match="em">
+            <i>
+                <xsl:apply-templates/>
+            </i>
+    </xsl:template>
+    
+    <!-- change strong to b -->
+    <xsl:template match="strong">
+            <b>
+                <xsl:apply-templates/>
+            </b>
+    </xsl:template>
 
     <!-- remove h*, make bold paragraph -->
     <xsl:template match="h2 | h3 | h4 | h5">
@@ -42,9 +53,9 @@
 
     <!-- add .. to <img src="/uploads/[long code]/file.png"/> -->
     <xsl:template match="img/@src">
-        <xsl:if test="starts-with(., '/uploads/')">
+        <xsl:choose><xsl:when test="starts-with(., '/uploads/')">
             <xsl:attribute name="src" select="concat('..', .)"/>
-        </xsl:if>
+        </xsl:when><xsl:otherwise><xsl:copy></xsl:copy></xsl:otherwise></xsl:choose>
     </xsl:template>
 
     <!-- get rid of superfluous breaks before images or h3 tags -->
