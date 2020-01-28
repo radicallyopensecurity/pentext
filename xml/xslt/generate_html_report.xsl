@@ -69,7 +69,7 @@
                                         my:titleCase($x), ' ')"
                             />
                         </h1>
-                    
+
                         <div class="title-client">
                             <xsl:value-of select="//client/full_name"/>
                         </div>
@@ -966,7 +966,162 @@
             </div>
         </xsl:for-each>
     </xsl:template>
-    
+
+    <xsl:template match="generate_service_breakdown">
+        <xsl:choose>
+            <xsl:when test="@format = 'list'">
+                <ul>
+                    <xsl:for-each select="$serviceNodeSet/entry[@type = 'service']">
+                        <xsl:if test="d">
+                            <li>
+                                <xsl:value-of select="desc"/>
+                                <xsl:text>: </xsl:text>
+                                <xsl:value-of select="d"/>
+                            </li>
+                        </xsl:if>
+                    </xsl:for-each>
+                    <li>
+                        <b>
+                            <xsl:text>Total effort: </xsl:text>
+                            <xsl:call-template name="calculatePersonDays"/>
+                            <xsl:text> days</xsl:text>
+                        </b>
+                    </li>
+                </ul>
+            </xsl:when>
+            <xsl:when test="@format = 'table'">
+                <div>
+                    <table class="fwtable table borders u-full-width">
+                        <colgroup>
+                            <col style="width:40%"/>
+                            <col style="width:12%"/>
+                            <col style="width:20%"/>
+                            <col style="width:28%"/>
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th> Description </th>
+                                <th> Effort </th>
+                                <th> Hourly rate </th>
+                                <th> Fee </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <xsl:for-each select="$serviceNodeSet/entry">
+                                <tr>
+                                    <xsl:if test="position() mod 2 != 0">
+                                        <xsl:attribute name="background-color"
+                                            >#ededed</xsl:attribute>
+                                    </xsl:if>
+                                    <td>
+                                        <xsl:if
+                                            test="not(normalize-space(d)) and not(normalize-space(h))">
+                                            <xsl:attribute name="number-columns-spanned"
+                                                >3</xsl:attribute>
+                                        </xsl:if>
+                                        
+                                            <xsl:value-of select="desc"/>
+                                        
+                                    </td>
+                                    <xsl:if test="d">
+                                        <td>
+                                            
+                                                <xsl:value-of select="d"/>
+                                            
+                                        </td>
+                                        <xsl:choose>
+                                            <xsl:when test="normalize-space(h)">
+                                                <td>
+                                                  <div align="right">
+                                                  <xsl:call-template name="getDenomination">
+                                                  <xsl:with-param name="placeholderElement"
+                                                  select="."/>
+                                                  </xsl:call-template>
+                                                  <xsl:call-template name="prettyMissingDecimal">
+                                                  <xsl:with-param name="n" select="h"/>
+                                                  </xsl:call-template>
+                                                  <xsl:text> excl. VAT</xsl:text>
+                                                  </div>
+                                                </td>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <td>
+                                                  <div align="right">-</div>
+                                                </td>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:if>
+                                    <td>
+                                        <div align="right">
+                                            <xsl:choose>
+                                                <xsl:when test="not(f/min = f/max)">
+                                                  <xsl:call-template name="getDenomination">
+                                                  <xsl:with-param name="placeholderElement"
+                                                  select="."/>
+                                                  </xsl:call-template>
+                                                  <xsl:number value="f/min" grouping-separator=","
+                                                  grouping-size="3"/>
+                                                  <xsl:text> - </xsl:text>
+                                                  <xsl:call-template name="getDenomination">
+                                                  <xsl:with-param name="placeholderElement"
+                                                  select="."/>
+                                                  </xsl:call-template>
+                                                  <xsl:call-template name="prettyMissingDecimal">
+                                                  <xsl:with-param name="n" select="f/max"/>
+                                                  </xsl:call-template>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                  <xsl:call-template name="getDenomination">
+                                                  <xsl:with-param name="placeholderElement"
+                                                  select="."/>
+                                                  </xsl:call-template>
+                                                  <xsl:call-template name="prettyMissingDecimal">
+                                                  <xsl:with-param name="n" select="f/min"/>
+                                                  </xsl:call-template>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                            <xsl:text> excl. VAT</xsl:text>
+                                            <xsl:if test="@estimate = true()">*</xsl:if>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </xsl:for-each>
+                            <tr>
+                                <td colspan="4">
+                                    <b>
+                                        <span>
+                                            <xsl:text>Total</xsl:text>
+                                            <xsl:if test="$serviceNodeSet/entry/@estimate = true()">
+                                                (estimate)</xsl:if>
+                                            <xsl:text>:</xsl:text>
+                                        </span>
+                                        <span>
+                                            <xsl:call-template name="calculateTotal"/>
+                                            <xsl:text> excl. VAT</xsl:text>
+                                        </span>
+                                    </b>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <xsl:if test="$serviceNodeSet/entry/@estimate = true()">
+                    <div align="right">
+                        <xsl:text>* Estimate</xsl:text>
+                    </div>
+                </xsl:if>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="displayErrorText">
+                    <xsl:with-param name="string">ERROR: unknown service breakdown format (use
+                        'list' or 'table')</xsl:with-param>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
     <xsl:template name="checkDenomination">
         <xsl:param name="allDenominationsAreEqual"/>
         <xsl:param name="denoms"/>
@@ -1011,7 +1166,7 @@
             <xsl:text>.-</xsl:text>
         </xsl:if>
     </xsl:template>
-    
+
     <xsl:template name="calculateTotal">
         <xsl:param name="denoms" tunnel="yes">
             <xsl:for-each-group select="$serviceNodeSet/entry" group-by="@denomination">
