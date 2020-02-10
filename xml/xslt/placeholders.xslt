@@ -460,6 +460,11 @@
                                 $statusSequence])"
                         />
                     </xsl:when>
+                    <xsl:when test="@threatLevel = 'all'">
+                        <xsl:for-each-group select="//finding" group-by="@threatLevel">
+                                                <xsl:if test="position() = last()"><xsl:text> and </xsl:text></xsl:if>
+        <xsl:value-of select="count(current-group())"/><xsl:text> </xsl:text><xsl:value-of select="current-grouping-key()"/><xsl:if test="not(position() = last())"><xsl:text>, </xsl:text></xsl:if>                        </xsl:for-each-group>
+                    </xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="count(//finding[@threatLevel = $threatLevel])"/>
                     </xsl:otherwise>
