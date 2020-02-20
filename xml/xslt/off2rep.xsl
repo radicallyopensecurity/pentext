@@ -91,7 +91,7 @@
                 </targets>
                 <activityinfo>
                     <xsl:for-each select="/offerte/meta/activityinfo/*">
-                        <xsl:if test="not(self::fee) and not(self::planning)">
+                        <xsl:if test="not(self::fee) and not(self::planning) and not(self::duration)">
                             <xsl:copy copy-namespaces="no">
                                 <xsl:copy-of select="node()" copy-namespaces="no"/>
                             </xsl:copy>
@@ -165,7 +165,7 @@
                 </section>
                 <section id="scope">
                     <title>Scope of work</title>
-                    <p>The scope of the penetration test was limited to the following target:</p>
+                    <p>The scope of the penetration test was limited to the following target(s):</p>
                     <generate_targets/>
                     <p>A breakdown of the scoped services can be found below: </p>
                     <generate_service_breakdown format="list"/>
@@ -207,8 +207,8 @@
 
             <section id="recon" inexecsummary="no">
                 <title>Reconnaissance and Fingerprinting</title>
-                <p>Through automated scans we were able to gain the following information about the
-                    software and infrastructure. Detailed scan output can be found in the sections
+                <p>We were able to gain information about the
+                    software and infrastructure through automated scans. Detailed scan output can be found in the sections
                     below.</p>
 
                 <section id="scans">
