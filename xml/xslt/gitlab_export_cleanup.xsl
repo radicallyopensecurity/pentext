@@ -2,6 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="2.0">
 
+    <xsl:strip-space elements="*"/>
     <xsl:output indent="yes" method="xml"/>
 
     <xsl:template match="@* | node()">
@@ -10,13 +11,8 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- remove all spans; they are not used in pentext -->
-    <xsl:template match="span">
-        <xsl:apply-templates/>
-    </xsl:template>
-
-    <!-- remove all divs; they are not used in findings -->
-    <xsl:template match="div">
+    <!-- remove all of the following elements; they are not used in pentext -->
+    <xsl:template match="span | div | font">
         <xsl:apply-templates/>
     </xsl:template>
 
@@ -27,19 +23,19 @@
 
     <!-- remove selected attributes from selected elements -->
     <xsl:template match="pre/@class | a/@class | tr/@class | img/@alt"/>
-    
+
     <!-- change em to i -->
     <xsl:template match="em">
-            <i>
-                <xsl:apply-templates/>
-            </i>
+        <i>
+            <xsl:apply-templates/>
+        </i>
     </xsl:template>
-    
+
     <!-- change strong to b -->
     <xsl:template match="strong">
-            <b>
-                <xsl:apply-templates/>
-            </b>
+        <b>
+            <xsl:apply-templates/>
+        </b>
     </xsl:template>
 
     <!-- remove h*, make bold paragraph -->
@@ -53,9 +49,14 @@
 
     <!-- add .. to <img src="/uploads/[long code]/file.png"/> -->
     <xsl:template match="img/@src">
-        <xsl:choose><xsl:when test="starts-with(., '/uploads/')">
-            <xsl:attribute name="src" select="concat('..', .)"/>
-        </xsl:when><xsl:otherwise><xsl:copy></xsl:copy></xsl:otherwise></xsl:choose>
+        <xsl:choose>
+            <xsl:when test="starts-with(., '/uploads/')">
+                <xsl:attribute name="src" select="concat('..', .)"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <!-- get rid of superfluous breaks before images or h3 tags -->
@@ -63,7 +64,7 @@
     <xsl:template
         match="br[following-sibling::img] | br[following-sibling::h3] | br[following-sibling::p]"> </xsl:template>
 
-    <!-- insert default img width to nudge pentesters :) -->
+    <!-- insert default img width to familiarize pentesters with the concept of image size :) -->
     <xsl:template match="img[not(@height) and not(@width)]">
         <xsl:copy>
             <xsl:attribute name="width">17</xsl:attribute>
@@ -77,8 +78,6 @@
         <xsl:apply-templates/>
     </xsl:template>
 
-<xsl:template match="p[child::img[not(preceding-sibling::*)][not(following-sibling::*)]]">
-        <xsl:apply-templates select="@* | node()"/>
-    </xsl:template>
+    
 
 </xsl:stylesheet>
