@@ -19,7 +19,7 @@
                         <xsl:attribute name="column-width" select="@width"/>
                     </xsl:when>
                         <xsl:otherwise><!-- if not, we got to take a gamble -->
-                            <xsl:attribute name="column-width" select="'proportional-column-width(2)'"/>
+                            <xsl:attribute name="column-width" select="'proportional-column-width(4)'"/>
                         </xsl:otherwise>
                     </xsl:choose>
                 </fo:table-column>
