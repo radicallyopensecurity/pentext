@@ -6,27 +6,16 @@
 
     <xsl:template match="finding" mode="number">
         <!-- Output finding display number (context is finding) -->
-        <xsl:variable name="sectionNumber">
-            <xsl:if test="/pentest_report/@findingNumberingBase = 'Section'">
-                    <xsl:value-of
-                        select="count(ancestor::section[last()]/preceding-sibling::section) + 1"/>
-                </xsl:if>
-        </xsl:variable>
-        <xsl:variable name="findingNumber" select="count(preceding::finding) + 1"/>
-        <xsl:variable name="numFormat">
-            <xsl:choose>
-                <xsl:when test="/pentest_report/@findingNumberingBase = 'Section'">00</xsl:when>
-                <xsl:otherwise>000</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
+        <xsl:variable name="findingNumber" select="./@number"/>
+        <xsl:variable name="numFormat" select="'000'"/>
         <xsl:value-of
-            select="concat(ancestor::*[@findingCode][1]/@findingCode, '-', $sectionNumber, string(format-number($findingNumber, $numFormat)))"
+            select="concat(ancestor::*[@findingCode][1]/@findingCode, '-', string(format-number($findingNumber, $numFormat)))"
         />
     </xsl:template>
     
     <xsl:template match="non-finding" mode="number">
         <!-- Output finding display number (context is finding) -->
-        <xsl:variable name="nonFindingNumber" select="count(preceding::non-finding) + 1"/>
+        <xsl:variable name="nonFindingNumber" select="./@number" as="xs:integer"/>
         <xsl:variable name="numFormat" select="'000'"/>
         <xsl:value-of
             select="concat('NF-', string(format-number($nonFindingNumber, $numFormat)))"

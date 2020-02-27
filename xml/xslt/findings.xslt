@@ -30,7 +30,7 @@
                             <xsl:apply-templates select="." mode="number"/>
                         </fo:block>
                     </fo:table-cell>
-                    <xsl:if test="@status">
+                    <xsl:if test="@status = 'new' or @status = 'resolved' or @status = 'unresolved' or @status = 'not_retested'">
                         <fo:table-cell xsl:use-attribute-sets="td">
                             <fo:block xsl:use-attribute-sets="finding-meta">
                                 <fo:inline xsl:use-attribute-sets="bold">Retest status: </fo:inline>
