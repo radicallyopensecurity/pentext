@@ -12,7 +12,7 @@
     </xsl:template>
 
     <!-- remove all of the following elements; they are not used in pentext -->
-    <xsl:template match="span | div | font">
+    <xsl:template match="span | div | font | hr">
         <xsl:apply-templates/>
     </xsl:template>
 
