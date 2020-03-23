@@ -230,7 +230,7 @@
             />
         </xsl:variable>
         <fo:block line-height="0.7cm">
-            <xsl:if test="parent::finding">
+            <xsl:if test="parent::finding or parent::non-finding">
                 <xsl:call-template name="prependId"/>
             </xsl:if>
             <!-- some hard waiver logic here (unfortunately): if we're still in the quote, the waiver is an annex and should be numbered as such... -->
