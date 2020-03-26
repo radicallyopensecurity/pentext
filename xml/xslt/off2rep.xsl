@@ -91,7 +91,8 @@
                 </targets>
                 <activityinfo>
                     <xsl:for-each select="/offerte/meta/activityinfo/*">
-                        <xsl:if test="not(self::fee) and not(self::planning) and not(self::duration)">
+                        <xsl:if
+                            test="not(self::fee) and not(self::planning) and not(self::duration)">
                             <xsl:copy copy-namespaces="no">
                                 <xsl:copy-of select="node()" copy-namespaces="no"/>
                             </xsl:copy>
@@ -172,7 +173,13 @@
                 </section>
                 <section id="objectives">
                     <title>Project objectives</title>
-                    <p><todo/></p>
+                    <p>
+                        <company_short/> will perform a penetration test with <client_short/> of the
+                        <todo desc="INSERT-THE-SCOPE"/>. The test is intended to gain insight into the security of
+                        <todo desc="INSERT-THE-SCOPE"/>. To do so, <company_short/> will access this
+                        <todo desc="INSERT-THE-SCOPE"/>. and will guide <client_short/> in attempting to find
+                        vulnerabilities, and gain further access and elevated privileges by
+                        exploiting any vulnerabilities found.</p>
                 </section>
                 <section id="timeline">
                     <title>Timeline</title>
@@ -207,9 +214,8 @@
 
             <section id="recon" inexecsummary="no">
                 <title>Reconnaissance and Fingerprinting</title>
-                <p>We were able to gain information about the
-                    software and infrastructure through automated scans. Detailed scan output can be found in the sections
-                    below.</p>
+                <p>We were able to gain information about the software and infrastructure through
+                    automated scans. Detailed scan output can be found in the sections below.</p>
 
                 <section id="scans">
                     <title>Automated Scans</title>

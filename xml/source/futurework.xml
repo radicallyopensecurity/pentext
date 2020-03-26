@@ -3,9 +3,17 @@
   <title>Future Work</title>
   <ul>
     <li>
-      <b>Title</b>
-      <br/>
-      Description
+      <b>Retest of findings</b>
+      <br/> When mitigations for the vulnerabilities described in this report have been deployed, a
+      repeat test should be performed to ensure that they are effective and have not introduced
+      other security problems. </li>
+    <li>
+      <b>Regular security assessments</b>
+      <br/> Security is an ongoing process and not a product, so we advise undertaking regular
+      security assessments and penetration tests, ideally prior to every major release or every
+      quarter. </li>
+    <li>
+      <todo desc="Add any specific future work for this project or remove this list item"/>
     </li>
   </ul>
 </section>
