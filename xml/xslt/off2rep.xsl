@@ -214,13 +214,9 @@
 
             <section id="recon" inexecsummary="no">
                 <title>Reconnaissance and Fingerprinting</title>
-                <p>We were able to gain information about the software and infrastructure through
-                    automated scans. Detailed scan output can be found in the sections below.</p>
+                <p>We were able to gain information about the software and infrastructure through the following automated
+         scans. Any relevant scan output will be referred to in the findings.</p>
 
-                <section id="scans">
-                    <title>Automated Scans</title>
-                    <p>As part of our active reconnaissance we used the following automated
-                        scans:</p>
                     <ul>
                         <xsl:comment>
                             <li>analyze_hosts - <a href="https://github.com/PeterMosmans/security-scripts">https://github.com/PeterMosmans/security-scripts</a></li>
@@ -232,9 +228,10 @@
                       <li>sqlmap – <a href="https://github.com/sqlmapproject/sqlmap">https://github.com/sqlmapproject/sqlmap</a></li>
                       <li>testssl.sh –
         <a href="https://github.com/drwetter/testssl.sh">https://github.com/drwetter/testssl.sh</a></li>
+                            <li>SSLscan –
+               <a href="https://github.com/rbsec/sslscan">https://github.com/rbsec/sslscan</a></li>
                         </xsl:comment>
                     </ul>
-                </section>
             </section>
 
             <section id="findings">
