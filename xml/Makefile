@@ -39,4 +39,7 @@ distclean: clean
 export-csv: sample-report/source/report.xml
 	@$(XSLTPROC) "xslt/findings2csv.xsl" "sample-report/source/report.xml"
 
-.PHONY: clean distclean export-csv
+export-json: sample-report/source/report.xml
+	@$(XSLTPROC) "xslt/findings2json.xsl" "sample-report/source/report.xml"
+
+.PHONY: clean distclean export-csv export-json
