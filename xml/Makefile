@@ -8,6 +8,7 @@ MV	= mv -f
 RM	= rm -f
 UNZIP	= unzip
 WGET	= wget
+XSLTPROC= xsltproc --nonet --xinclude
 
 
 all: $(TARGETS)
@@ -35,4 +36,7 @@ clean:
 distclean: clean
 	$(RM) -- $(TARGETS)
 
-.PHONY: clean distclean
+export-csv: sample-report/source/report.xml
+	@$(XSLTPROC) "xslt/findings2csv.xsl" "sample-report/source/report.xml"
+
+.PHONY: clean distclean export-csv
