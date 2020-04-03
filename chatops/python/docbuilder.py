@@ -233,43 +233,20 @@ def main():
                    format(options['output'], exception.strerror), result)
     result = to_fo(options)
     if result:
-        if OFFERTE in options['xslt']:  # an offerte can generate multiple fo's
-            report_output = options['output']
-            verboseprint('generating separate waivers detected')
-            output_dir = os.path.dirname(options['output'])
-            fop_dir = os.path.dirname(options['fop'])
-            try:
-                for fop in [os.path.splitext(x)[0] for x in
-                            os.listdir(fop_dir) if x.endswith('fo')]:
-                    if WAIVER in fop:
-                        options['output'] = output_dir + os.sep + fop + '.pdf'
-                    else:
-                        options['output'] = report_output
-                    options['fop'] = fop_dir + os.sep + fop + '.fo'
-                    result = to_pdf(options) and result
-            except OSError as exception:
-                print_exit('[-] ERR: {0}'.format(exception.strerror),
-                           exception.errno)
-        if options['execsummary']:  # we're generating a summary as well as a report
-            report_output = options['output']
-            verboseprint('generating additional executive summary')
-            output_dir = os.path.dirname(options['output'])
-            fop_dir = os.path.dirname(options['fop'])
-            try:
-                for fop in [os.path.splitext(x)[0] for x in
-                            os.listdir(fop_dir) if x.endswith('fo')]:
-                    if EXECSUMMARY in fop:
-                        options['output'] = output_dir + os.sep + fop + '.pdf'
-                    else:
-                        options['output'] = report_output
-                    options['fop'] = fop_dir + os.sep + fop + '.fo'
-                    result = to_pdf(options) and result
-            except OSError as exception:
-                print_exit('[-] ERR: {0}'.format(exception.strerror),
-                           exception.errno)
-        else:
-            result = to_pdf(options)
-
+        output_dir = os.path.dirname(options['output'])
+        fop_dir = os.path.dirname(options['fop'])
+        remaining_fo = [os.path.splitext(x)[0] for x in os.listdir(fop_dir) if x.endswith('fo') and not 'offerte' in x and not 'report' in x]
+        result = to_pdf(options)
+        if len(remaining_fo) > 0:
+            print('[+] Generating additional .fo files...')
+        try:
+            for fo in remaining_fo:
+                options['output'] = output_dir + os.sep + fo + '.pdf'
+                options['fop'] = fop_dir + os.sep + fo + '.fo'
+                result = to_pdf(options) and result
+        except OSError as exception:
+            print_exit('[-] ERR: {0}'.format(exception.strerror),
+                       exception.errno)
     else:
         print_exit('[-] Unsuccessful (error {0})'.format(result), result)
     sys.exit(not result)
