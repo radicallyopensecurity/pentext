@@ -94,9 +94,9 @@
 
     <xsl:template match="description" mode="summarytable">
         <xsl:if test="img | table">
-            <xsl:message>WARNING: description containing img or table may not look very good in the
-                finding summary table. Consider using a description_summary element
-                instead.</xsl:message>
+            <xsl:message>WARNING: a description containing an img or table may be confusing or look weird in the
+                finding summary table. Consider adding a description_summary element
+                 for finding <xsl:value-of select="parent::finding/@id"/>.</xsl:message>
         </xsl:if>
         <xsl:apply-templates mode="summarytable"/>
     </xsl:template>
@@ -124,9 +124,9 @@
 
     <xsl:template match="recommendation" mode="summarytable">
         <xsl:if test="img | table">
-            <xsl:message>WARNING: recommendation containing img or table may not look very good in
-                the finding summary table. Consider using a recommendation_summary element
-                instead.</xsl:message>
+            <xsl:message>WARNING: a recommendation containing an img or table may be confusing or look weird in
+                the recommendation summary table. Consider adding a recommendation_summary element 
+                for finding <xsl:value-of select="parent::finding/@id"/>.</xsl:message>
         </xsl:if>
         <xsl:apply-templates mode="summarytable"/>
     </xsl:template>
