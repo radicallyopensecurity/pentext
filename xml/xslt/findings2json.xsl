@@ -71,7 +71,7 @@
 	<xsl:template match="finding">	    {
 		"status": "To Do",
 		"reporter": "ROS",
-		"externalId": "<xsl:value-of select="concat(/pentest_report/@findingCode,'-',string(format-number(position(),'000')))"/>",
+		"externalId": "<xsl:value-of select="concat(/pentest_report/@findingCode,'-',string(format-number(@number,'000')))"/>",
 		"issueType": "<xsl:value-of select="@type"/>",
 		"priority": "<xsl:value-of select="@threatLevel"/>",
 		"summary": "<xsl:call-template name="value-escape"><xsl:with-param name="value" select="description"/></xsl:call-template>",
