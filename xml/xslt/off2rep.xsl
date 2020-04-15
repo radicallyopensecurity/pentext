@@ -96,6 +96,7 @@
                             <xsl:copy copy-namespaces="no">
                                 <xsl:copy-of select="node()" copy-namespaces="no"/>
                             </xsl:copy>
+                        <xsl:comment>0 means 'computed automatically from service breakdown' so leave at 0 unless there is a clear reason not to</xsl:comment>
                         </xsl:if>
                     </xsl:for-each>
                     <planning>
