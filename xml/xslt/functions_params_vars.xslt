@@ -51,7 +51,7 @@
     <xsl:variable name="color_new">#CC4900</xsl:variable>
     <xsl:variable name="color_unresolved">#FF5C00</xsl:variable>
     <xsl:variable name="color_notretested">#FE9920</xsl:variable>
-    <xsl:variable name="color_resolved">#e5d572</xsl:variable>
+    <xsl:variable name="color_resolved">#15B01A</xsl:variable>
 
     <!-- generic pie chart colors -->
     <xsl:variable name="generic_piecolor_1">#D9D375</xsl:variable>
