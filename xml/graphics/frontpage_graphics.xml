@@ -17,6 +17,21 @@
         </file>
         <!--<file name="frontpage_report_3.jpg"/>-->
     </doctype>
+    <doctype name="tiny_report">
+        <!-- list available covers below -->
+        <file name="frontpage_tiny_report_1.jpg">
+            <attribution>Front page image by PickPik
+                (https://www.pickpik.com/), "Dogs paw on the wooden keyboard", Image styling
+                by Patricia Piolon, royalty-free stock photo.</attribution>
+        </file>
+        <file name="frontpage_report_2.jpg">
+            <attribution>Front page image by dougwoods
+                (https://www.flickr.com/photos/deerwooduk/682390157/), "Cat on laptop", Image
+                styling by Patricia Piolon,
+                https://creativecommons.org/licenses/by-sa/2.0/legalcode.</attribution>
+        </file>
+        <!--<file name="frontpage_report_3.jpg"/>-->
+    </doctype>
     <doctype name="offerte">
         <file name="frontpage_quote.jpg">
             <attribution>Front page image by kallerna
