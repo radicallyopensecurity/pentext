@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<offerte xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:xi="http://www.w3.org/2001/XInclude" xsi:noNamespaceSchemaLocation="../dtd/offerte.xsd"
+   xml:lang="en">
+   <!--document meta information; to be filled in by the offerte writer-->
+   <meta>
+      <title>Quote</title>
+      <offered_service_long>penetration retesting services</offered_service_long>
+      <!--if there is a shorter way of saying the same thing, you can type it here (it makes for more dynamic offerte text). If not, just repeat the long name.-->
+      <offered_service_short>test</offered_service_short>
+      <xi:include href="snippets/company_info.xml"/>
+      <targets>
+         <!--one target element per target-->
+         <target>Target 1</target>
+         <target>Target 2</target>
+      </targets>
+      <permission_parties>
+         <xi:include href="client_info.xml"/>
+      </permission_parties>
+      <activityinfo>
+         <persondays>0</persondays>
+         <!--duration of pentest, in persondays-->
+         <planning>
+            <start><!--date in ISO format (YYYY-MM-DD) or TBD-->2222-02-02</start>
+            <end><!--date in ISO format (YYYY-MM-DD) or TBD-->3333-03-03</end>
+         </planning>
+         <report_due><!--date in ISO format (YYYY-MM-DD) or TBD-->4444-04-04</report_due>
+         <nature>time-boxed</nature>
+         <type>crystal-box</type>
+         <!--please choose one of the following: black-box, grey-box, crystal-box-->
+         <fee denomination="eur">0</fee>
+      </activityinfo>
+      <version_history>
+         <!--needed for date on frontpage and in signature boxes; it is possible to add a new <version> after each review; in that case, make sure to update the date/time-->
+         <version number="auto" date="5555-05-05T10:00:00">
+            <!--actual date-time here; you can leave the number attribute alone-->
+            <v_author>ROS Writer</v_author>
+            <!--name of the author here; for internal use only-->
+            <v_description>Dummy quote</v_description>
+            <!--for internal use only-->
+         </version>
+      </version_history>
+   </meta>
+   <section>
+      <title>Empty quote</title>
+      <p>Create a full quote through quickscope.</p>
+   </section>
+</offerte>
