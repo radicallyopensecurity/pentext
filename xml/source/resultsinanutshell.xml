@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section id="resultsinanutshell" xml:base="resultsinanutshell.xml">
   <title>Results In A Nutshell</title>
-  <p>During this <todo desc="INSERT-SORT-OF-TEST"/> penetration test we found <finding_count threatLevel="all"/>-severity
+  <p>During this <p_boxtype/> penetration test we found <finding_count threatLevel="all"/>-severity
     issues.</p>
   <p><todo desc="Describe what the findings relate to"/></p>
 
