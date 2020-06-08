@@ -7,35 +7,35 @@
 
 <client xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../dtd/offerte.xsd" id="client">
-        <full_name>Sitting Duck B.V.</full_name>
+        <full_name>CLIENTFULLNAME</full_name>
         <!-- long client name, e.g. Sitting Duck B.V. -->
-        <short_name>Sitting Duck</short_name>
+        <short_name>CLIENTSHORTNAME</short_name>
         <!-- short client name, e.g. Sitting Duck; if no short name: same as long name -->
         <short_code></short_code>
         <!-- 3-letter shortcode for use in pentest reports, e.g. SID (or leave empty to use system default) -->
-        <legal_rep>I.M. Portant</legal_rep>
+        <legal_rep>CLIENTLEGALREP</legal_rep>
         <!-- customer legal representative (to sign offer) -->
-        <waiver_rep>B.I.G. Wig</waiver_rep>
+        <waiver_rep>CLIENTWAIVERREP</waiver_rep>
         <!-- customer legal representative (to sign waiver; can be same person as legal_rep) -->
-        <poc1>Sir Knowsalot</poc1>
+        <poc1>CLIENTLEGALREP</poc1>
         <!-- first point of contact for customer (during pentest); can be same person as above -->
-        <address>Reed Street 42</address>
+        <address>STREETANDNUMBER</address>
         <postal_code>0000</postal_code>
-        <city>Pond City</city>
-        <country>Amazonia</country>
+        <city>CITY</city>
+        <country>COUNTRY</country>
         <coc nationality="Dutch">9999999</coc>
         <!-- chamber of commerce number; if no chamber of commerce number, please delete the whole element -->
         <invoice_rep></invoice_rep>
-        <invoice_mail>freemoney@sittingduck.com</invoice_mail>
+        <invoice_mail>EMAIL@ADDRESS.COM</invoice_mail>
         <!-- Use the extra field to enter a line requested by the client, such as PO or creditor number, cost centre, internal account number or whatever info they need for their internal administration -->
         <invoice_extra_field></invoice_extra_field>
         <vat_no>0000000000B01</vat_no>
         <rates denomination="eur" lastrevisiondate="2017-03-01">
-                <rate title="juniorpentester">100</rate>
-                <rate title="mediorpentester">125</rate>
-                <rate title="seniorpentester">150</rate>
-                <rate title="expertpentester">1000</rate>
-                <rate title="juniormanager">100</rate>
-                <rate title="seniormanager">125</rate>
+                <rate title="juniorpentester">1</rate>
+                <rate title="mediorpentester">2</rate>
+                <rate title="seniorpentester">3</rate>
+                <rate title="expertpentester">5</rate>
+                <rate title="juniormanager">1</rate>
+                <rate title="seniormanager">2</rate>
         </rates>
 </client>
