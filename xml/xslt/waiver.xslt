@@ -168,8 +168,9 @@
                                         <!-- we have a name for the signee -->
                                         <fo:block-container xsl:use-attribute-sets="signee">
                                             <fo:block xsl:use-attribute-sets="signee_signaturespace">
-                                                <fo:leader xsl:use-attribute-sets="signee_dottedline" leader-length="8cm"
-                                                />
+                                                <fo:leader
+                                                  xsl:use-attribute-sets="signee_dottedline"
+                                                  leader-length="8cm"/>
                                             </fo:block>
                                             <fo:block xsl:use-attribute-sets="signee_name">
                                                 <xsl:value-of select="$signee_waiver_rep"/>
@@ -179,10 +180,14 @@
                                     <xsl:otherwise>
                                         <fo:block-container xsl:use-attribute-sets="signee">
                                             <fo:block xsl:use-attribute-sets="signee_signaturespace">
-                                                <fo:leader xsl:use-attribute-sets="signee_dottedline" leader-length="8cm"
-                                                />
+                                                <fo:leader
+                                                  xsl:use-attribute-sets="signee_dottedline"
+                                                  leader-length="8cm"/>
                                             </fo:block>
-                    <fo:block margin-top="0.2cm" margin-bottom="0.2cm">(Name:<fo:leader xsl:use-attribute-sets="signee_dottedline" leader-length="7cm"/>)</fo:block>
+                                            <fo:block margin-top="0.2cm" margin-bottom="0.2cm"
+                                                  >(Name:<fo:leader
+                                                  xsl:use-attribute-sets="signee_dottedline"
+                                                  leader-length="7cm"/>)</fo:block>
                                         </fo:block-container>
                                     </xsl:otherwise>
                                 </xsl:choose>
@@ -258,6 +263,14 @@
 
     <xsl:template match="signee_waiver_rep">
         <xsl:param name="signee_waiver_rep" tunnel="yes"/>
-        <xsl:value-of select="$signee_waiver_rep"/>
+        <xsl:choose>
+            <xsl:when test="not($signee_waiver_rep = '')">
+                <!-- we have a name for the signee -->
+
+                <xsl:value-of select="$signee_waiver_rep"/>
+            </xsl:when>
+            <xsl:otherwise> (Name:) <fo:leader xsl:use-attribute-sets="signee_dottedline"
+                    leader-length="7cm"/></xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 </xsl:stylesheet>
