@@ -30,7 +30,8 @@
                             <xsl:apply-templates select="." mode="number"/>
                         </fo:block>
                     </fo:table-cell>
-                    <xsl:if test="@status = 'new' or @status = 'resolved' or @status = 'unresolved' or @status = 'not_retested'">
+                    <xsl:if
+                        test="@status = 'new' or @status = 'resolved' or @status = 'unresolved' or @status = 'not_retested'">
                         <fo:table-cell xsl:use-attribute-sets="td">
                             <fo:block xsl:use-attribute-sets="finding-meta">
                                 <fo:inline xsl:use-attribute-sets="bold">Retest status: </fo:inline>
@@ -94,9 +95,9 @@
 
     <xsl:template match="description" mode="summarytable">
         <xsl:if test="img | table">
-            <xsl:message>WARNING: a description containing an img or table may be confusing or look weird in the
-                finding summary table. Consider adding a description_summary element
-                 for finding <xsl:value-of select="parent::finding/@id"/>.</xsl:message>
+            <xsl:message>WARNING: a description containing an img or table may be confusing or look
+                weird in the finding summary table. Consider adding a description_summary element
+                for finding <xsl:value-of select="parent::finding/@id"/>.</xsl:message>
         </xsl:if>
         <xsl:apply-templates mode="summarytable"/>
     </xsl:template>
@@ -124,13 +125,41 @@
 
     <xsl:template match="recommendation" mode="summarytable">
         <xsl:if test="img | table">
-            <xsl:message>WARNING: a recommendation containing an img or table may be confusing or look weird in
-                the recommendation summary table. Consider adding a recommendation_summary element 
-                for finding <xsl:value-of select="parent::finding/@id"/>.</xsl:message>
+            <xsl:message>WARNING: a recommendation containing an img or table may be confusing or
+                look weird in the recommendation summary table. Consider adding a
+                recommendation_summary element for finding <xsl:value-of
+                    select="parent::finding/@id"/>.</xsl:message>
         </xsl:if>
         <xsl:apply-templates mode="summarytable"/>
     </xsl:template>
-    
+
+    <xsl:template match="update">
+        <xsl:if
+            test="../@status = 'new' or ../@status = 'resolved' or ../@status = 'unresolved' or ../@status = 'not_retested'">
+            <fo:block xsl:use-attribute-sets="title-findingsection">
+                <xsl:choose>
+                <xsl:when test="../@status = 'new' or @status = 'unresolved'">
+                    <fo:inline xsl:use-attribute-sets="status-new">
+                        Retest update:
+                    </fo:inline>
+                </xsl:when>
+                <xsl:when test="../@status = 'not_retested'">
+                    <fo:inline xsl:use-attribute-sets="status-not_retested">
+                        Retest update:
+                    </fo:inline>
+                </xsl:when>
+                <xsl:when test="../@status = 'resolved'">
+                    <fo:inline xsl:use-attribute-sets="status-resolved">
+                        Retest update:
+                    </fo:inline>
+                </xsl:when>
+            </xsl:choose></fo:block>
+            <fo:block xsl:use-attribute-sets="finding-content">
+                <xsl:apply-templates/>
+            </fo:block>
+        </xsl:if>
+    </xsl:template>
+
     <xsl:template match="recommendation_summary" mode="summarytable">
         <xsl:apply-templates mode="summarytable"/>
     </xsl:template>
