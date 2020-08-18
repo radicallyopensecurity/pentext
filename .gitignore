@@ -14,3 +14,5 @@ chatops.egg-info
 /xml/source/offerte.xml
 /xml/source/report.xml
 /xml/target
+xml/findings/*.xml
+xml/non-findings/*.xml
