@@ -2,6 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fo="http://www.w3.org/1999/XSL/Format"
     exclude-result-prefixes="xs" version="2.0">
+
     <xsl:template match="waivers">
         <xsl:for-each
             select="/offerte/meta/permission_parties/client | /offerte/meta/permission_parties/party">
@@ -56,10 +57,10 @@
                     </xsl:variable>
                     <xsl:result-document href="{$filename}">
                         <fo:root>
-                            <xsl:call-template name="layout-master-set"/>
-                            <fo:page-sequence master-reference="Sections">
-                                <xsl:call-template name="page_header"/>
-                                <xsl:call-template name="page_footer"/>
+                            <xsl:call-template name="layout-master-set-flimsy"/>
+                            <fo:page-sequence master-reference="Flimsy">
+                                <xsl:call-template name="page_header_flimsy"/>
+                                <xsl:call-template name="page_footer_flimsy"/>
                                 <fo:flow flow-name="region-body"
                                     xsl:use-attribute-sets="DefaultFont">
                                     <fo:block>
@@ -185,9 +186,9 @@
                                                   leader-length="8cm"/>
                                             </fo:block>
                                             <fo:block margin-top="0.2cm" margin-bottom="0.2cm"
-                                                  >(Name:<fo:leader
+                                                  >Name:<fo:leader
                                                   xsl:use-attribute-sets="signee_dottedline"
-                                                  leader-length="7cm"/>)</fo:block>
+                                                  leader-length="7.2cm"/></fo:block>
                                         </fo:block-container>
                                     </xsl:otherwise>
                                 </xsl:choose>
@@ -197,24 +198,16 @@
                             </fo:table-cell>
                         </fo:table-row>
                         <fo:table-row>
-                            <fo:table-cell xsl:use-attribute-sets="td">
-                                <xsl:for-each select="$signee_city">
-                                    <fo:block>
-                                        <xsl:apply-templates/>
-                                    </fo:block>
-                                </xsl:for-each>
-                            </fo:table-cell>
                             <fo:table-cell>
                                 <fo:block/>
                             </fo:table-cell>
                         </fo:table-row>
                         <fo:table-row>
                             <fo:table-cell xsl:use-attribute-sets="td">
-                                <xsl:for-each select="$latestVersionDate">
-                                    <fo:block>
-                                        <xsl:apply-templates/>
-                                    </fo:block>
-                                </xsl:for-each>
+                                <fo:block> Date: <fo:leader
+                                        xsl:use-attribute-sets="signee_dottedline"
+                                        leader-length="7.32cm"/>
+                                </fo:block>
                             </fo:table-cell>
                             <fo:table-cell>
                                 <fo:block/>

@@ -7,7 +7,8 @@
         <!-- Invoices, Ratecards and Contracts need their own page layout; quite different from other docs so just create a different set -->
         <fo:layout-master-set>
             <!-- first page -->
-            <fo:simple-page-master master-name="Flimsy-First" xsl:use-attribute-sets="PortraitPage">
+            <fo:simple-page-master master-name="Flimsy-First"
+                xsl:use-attribute-sets="PortraitPage_flimsy">
                 <fo:region-body region-name="region-body" xsl:use-attribute-sets="region-body-first"/>
                 <fo:region-before region-name="region-before-first"
                     xsl:use-attribute-sets="region-before-first"/>
@@ -15,7 +16,8 @@
                     xsl:use-attribute-sets="region-after-first"/>
             </fo:simple-page-master>
             <!-- all other pages -->
-            <fo:simple-page-master master-name="Flimsy-Rest" xsl:use-attribute-sets="PortraitPage">
+            <fo:simple-page-master master-name="Flimsy-Rest"
+                xsl:use-attribute-sets="PortraitPage_flimsy">
                 <fo:region-body region-name="region-body" xsl:use-attribute-sets="region-body-rest"/>
                 <fo:region-before region-name="region-before-rest"
                     xsl:use-attribute-sets="region-before-rest"/>
@@ -100,7 +102,7 @@
         </fo:static-content>
     </xsl:template>
 
-    <xsl:template name="page_footer">
+    <xsl:template name="page_footer_invoice">
         <fo:static-content flow-name="region-after-first" xsl:use-attribute-sets="FooterFont">
             <fo:block xsl:use-attribute-sets="footer">
                 <fo:inline xsl:use-attribute-sets="TinyFont main-color">
@@ -131,5 +133,26 @@
                 </fo:inline>
             </fo:block>
         </fo:static-content>
+    </xsl:template>
+    <xsl:template name="page_footer">
+        <fo:static-content flow-name="region-after-first"
+                    xsl:use-attribute-sets="FooterFont">
+                    <fo:block xsl:use-attribute-sets="footer">
+                        <fo:retrieve-marker retrieve-class-name="tab"/>
+                        <fo:leader leader-pattern="space"/>
+                        <fo:inline>
+                            <fo:page-number/>
+                        </fo:inline>
+                    </fo:block>
+                </fo:static-content>
+                <fo:static-content flow-name="region-after-rest" xsl:use-attribute-sets="FooterFont">
+                    <fo:block xsl:use-attribute-sets="footer">
+                        <fo:inline>
+                            <fo:page-number/>
+                        </fo:inline>
+                        <fo:leader leader-pattern="space"/>
+                        <xsl:value-of select="//meta/company/full_name"/>
+                    </fo:block>
+                </fo:static-content>
     </xsl:template>
 </xsl:stylesheet>
