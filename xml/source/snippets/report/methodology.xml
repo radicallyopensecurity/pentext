@@ -12,11 +12,11 @@
         We attempt to gather as much information as possible about the target.
         Reconnaissance can take two forms: active and passive. A passive attack
         is always the best starting point as this would normally defeat
-        intrusion detection systems and other forms of protection, etc.,
-        afforded to the network. This usually involves trying to discover
-        publicly available information by utilizing a web browser, visiting
-        newsgroups, etc. An active form would be more intrusive and may show up
-        in audit logs and may take the form of a social engineering type of
+        intrusion detection systems and other forms of protection
+        afforded to the app or network. This usually involves trying to discover
+        publicly available information by visiting websites, 
+        newsgroups, etc. An active form would be more intrusive, could possibly show up
+        in audit logs and might take the form of a social engineering type of
         attack.
       </li>
       <li>
