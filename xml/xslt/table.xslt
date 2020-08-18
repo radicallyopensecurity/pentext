@@ -48,12 +48,12 @@
                                         </xsl:otherwise>
                                     </xsl:choose>
                                     <fo:table-body>
-                                        <xsl:if test="@border = '1'">
+                                        <xsl:if test="@border = '1' or @border='yes'">
                                             <xsl:attribute name="border-style">
                                                 <xsl:text>solid</xsl:text>
                                             </xsl:attribute>
                                             <xsl:attribute name="border-color">
-                                                <xsl:text>black</xsl:text>
+                                                <xsl:value-of select="$border-color"/>
                                             </xsl:attribute>
                                             <xsl:attribute name="border-width">
                                                 <xsl:text>1pt</xsl:text>

@@ -256,7 +256,16 @@
       <xs:sequence>
         <xs:element maxOccurs="unbounded" ref="tr"/>
       </xs:sequence>
-      <xs:attribute name="border" use="optional" type="xs:integer"/>
+      <xs:attribute name="border" use="optional">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="cols" use="optional" type="xs:string"/>
       <xs:attribute name="width" use="optional" type="xs:string"/>
     </xs:complexType>
@@ -320,6 +329,16 @@
       <xs:attribute name="src" use="required"/>
       <xs:attribute name="title" use="optional"/>
       <xs:attribute name="alt" use="optional"/>
+      <xs:attribute name="border" use="optional">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
 

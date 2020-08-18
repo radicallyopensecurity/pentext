@@ -38,13 +38,24 @@
                         <!-- No height or width set; should plop down graphic as-is, unless it's larger than the page, in which case scale down to page size -->
                         <!-- Note: this is just making things page-width regardless of size... could be much more robust but I'm going to assume we're working with large graphics for now :/ -->
                         <xsl:attribute name="width">
-                            <xsl:text>15.5cm</xsl:text>
+                            <xsl:text>17cm</xsl:text>
                             <!-- 21cm - 5.5cm for the margins -->
                         </xsl:attribute>
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:attribute name="content-width">scale-to-fit</xsl:attribute>
                 <xsl:attribute name="content-height">scale-to-fit</xsl:attribute>
+                    <xsl:if test="@border = '1' or @border='yes'">
+                        <xsl:attribute name="border-style">
+                            <xsl:text>solid</xsl:text>
+                        </xsl:attribute>
+                        <xsl:attribute name="border-color">
+                            <xsl:value-of select="$border-color"/>
+                        </xsl:attribute>
+                        <xsl:attribute name="border-width">
+                            <xsl:text>1pt</xsl:text>
+                        </xsl:attribute>
+                    </xsl:if>
             </fo:external-graphic>
             </fo:block>
             <fo:block xsl:use-attribute-sets="img-title"><xsl:value-of select="@title"/></fo:block>
