@@ -96,6 +96,8 @@
                             <xsl:copy copy-namespaces="no">
                                 <xsl:copy-of select="node()" copy-namespaces="no"/>
                             </xsl:copy>
+                        </xsl:if>
+                        <xsl:if test="self::persondays>
                         <xsl:comment>0 means 'computed automatically from service breakdown' so leave at 0 unless there is a clear reason not to</xsl:comment>
                         </xsl:if>
                     </xsl:for-each>
@@ -144,9 +146,8 @@
                             />T10:00:00</xsl:attribute>
                         <xsl:comment>actual date-time here; you can leave the number attribute alone</xsl:comment>
                         <v_author>ROS Writer</v_author>
-                        <xsl:comment>name of the author here; for internal use only</xsl:comment>
+                        <xsl:comment>name of the author here</xsl:comment>
                         <v_description>Initial draft</v_description>
-                        <xsl:comment>for internal use only</xsl:comment>
                     </version>
                 </version_history>
                 <xsl:element name="xi:include">
@@ -175,12 +176,11 @@
                 <section id="objectives">
                     <title>Project objectives</title>
                     <p>
-                        <company_short/> will perform a penetration test with <client_short/> of the
-                        <todo desc="INSERT-THE-SCOPE"/>. The test is intended to gain insight into the security of
+                        <company_short/> will perform a penetration test of the
+                        <todo desc="INSERT-THE-SCOPE"/> with <client_short/>. The test is intended to gain insight into the security of
                         <todo desc="INSERT-THE-SCOPE"/>. To do so, <company_short/> will access this
-                        <todo desc="INSERT-THE-SCOPE"/>. and will guide <client_short/> in attempting to find
-                        vulnerabilities, and gain further access and elevated privileges by
-                        exploiting any vulnerabilities found.</p>
+                        <todo desc="INSERT-THE-SCOPE"/> and guide <client_short/> in attempting to find
+                        vulnerabilities, exploiting any such found to try and gain further access and elevated privileges.</p>
                 </section>
                 <section id="timeline">
                     <title>Timeline</title>
