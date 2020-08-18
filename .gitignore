@@ -16,3 +16,4 @@ chatops.egg-info
 /xml/target
 xml/findings/*.xml
 xml/non-findings/*.xml
+/target
