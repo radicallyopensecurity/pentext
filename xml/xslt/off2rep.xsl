@@ -97,7 +97,7 @@
                                 <xsl:copy-of select="node()" copy-namespaces="no"/>
                             </xsl:copy>
                         </xsl:if>
-                        <xsl:if test="self::persondays>
+                        <xsl:if test="self::persondays">
                         <xsl:comment>0 means 'computed automatically from service breakdown' so leave at 0 unless there is a clear reason not to</xsl:comment>
                         </xsl:if>
                     </xsl:for-each>
