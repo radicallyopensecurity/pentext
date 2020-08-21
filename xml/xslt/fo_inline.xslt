@@ -22,12 +22,12 @@
         <xsl:call-template name="checkLinkValidity"/>
         <xsl:choose>
             <xsl:when test="starts-with(@href, '#') and not(//*[@id = $destination])">
-                <fo:inline xsl:use-attribute-sets="errortext">WARNING: LINK TARGET '<xsl:value-of select="concat($destination)"/>' NOT FOUND IN
+                <fo:inline xsl:use-attribute-sets="errortext">WARNING: LINK TARGET '<xsl:value-of select="$destination"/>' NOT FOUND IN
                     DOCUMENT</fo:inline>
             </xsl:when>
             <xsl:when
                 test="(starts-with(@href, '#') and //*[@id = $destination][ancestor-or-self::*[@visibility = 'hidden']])">
-                <fo:inline xsl:use-attribute-sets="errortext">WARNING: LINK TARGET '<xsl:value-of select="concat($destination)"/>' IS
+                <fo:inline xsl:use-attribute-sets="errortext">WARNING: LINK TARGET '<xsl:value-of select="$destination"/>' IS
                     HIDDEN</fo:inline>
             </xsl:when>
             <xsl:when
