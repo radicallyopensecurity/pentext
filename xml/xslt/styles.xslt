@@ -509,14 +509,6 @@
         <xsl:attribute name="content-height">scale-to-fit</xsl:attribute>
         <xsl:attribute name="scaling">uniform</xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="title-1" use-attribute-sets="title">
-        <xsl:attribute name="color">
-            <xsl:value-of select="$c_main"/>
-        </xsl:attribute>
-        <xsl:attribute name="font-size">18pt</xsl:attribute>
-        <xsl:attribute name="padding-top">2cm</xsl:attribute>
-        <xsl:attribute name="padding-bottom">1cm</xsl:attribute>
-    </xsl:attribute-set>
     <xsl:attribute-set name="border-top">
         <xsl:attribute name="border-before-width">
             <xsl:value-of select="$border-width"/>
