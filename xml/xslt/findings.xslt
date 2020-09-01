@@ -34,7 +34,7 @@
                         test="@status = 'new' or @status = 'resolved' or @status = 'unresolved' or @status = 'not_retested'">
                         <fo:table-cell xsl:use-attribute-sets="td">
                             <fo:block xsl:use-attribute-sets="finding-meta">
-                                <fo:inline xsl:use-attribute-sets="bold">Retest status: </fo:inline>
+                                <fo:inline xsl:use-attribute-sets="bold">Status: </fo:inline>
                                 <xsl:choose>
                                     <xsl:when test="@status = 'new' or @status = 'unresolved'">
                                         <fo:inline xsl:use-attribute-sets="status-new">
@@ -133,27 +133,41 @@
         <xsl:apply-templates mode="summarytable"/>
     </xsl:template>
 
-    <xsl:template match="update">
+    <xsl:template match="update" name="update">
         <xsl:if
-            test="../@status = 'new' or ../@status = 'resolved' or ../@status = 'unresolved' or ../@status = 'not_retested'">
+            test="../@status = 'resolved' or ../@status = 'unresolved' or ../@status = 'not_retested'">
             <fo:block xsl:use-attribute-sets="title-findingsection">
                 <xsl:choose>
-                <xsl:when test="../@status = 'new' or @status = 'unresolved'">
+                <xsl:when test="../@status = 'unresolved'">
                     <fo:inline xsl:use-attribute-sets="status-new">
-                        Retest update:
+                        Update
                     </fo:inline>
                 </xsl:when>
                 <xsl:when test="../@status = 'not_retested'">
                     <fo:inline xsl:use-attribute-sets="status-not_retested">
-                        Retest update:
+                        Update
                     </fo:inline>
                 </xsl:when>
                 <xsl:when test="../@status = 'resolved'">
                     <fo:inline xsl:use-attribute-sets="status-resolved">
-                        Retest update:
+                        Update
                     </fo:inline>
                 </xsl:when>
-            </xsl:choose></fo:block>
+            </xsl:choose>
+                <xsl:if test="@date">
+                    <xsl:text> </xsl:text>
+                    <fo:inline xsl:use-attribute-sets="status-tag">
+                        <xsl:value-of select="@date"/>                            
+                    </fo:inline>
+                </xsl:if>
+                <xsl:if test="@version">
+                    <xsl:text> </xsl:text>
+                    <fo:inline xsl:use-attribute-sets="status-tag">
+                        <xsl:value-of select="@version"/>                            
+                    </fo:inline>
+                </xsl:if>
+                <xsl:text>:</xsl:text>
+            </fo:block>
             <fo:block xsl:use-attribute-sets="finding-content">
                 <xsl:apply-templates/>
             </fo:block>

@@ -17,6 +17,12 @@
         <xsl:attribute name="color"><xsl:value-of select="$color_notretested"/></xsl:attribute>
     </xsl:attribute-set>
     
+    <!-- Status tags -->
+    <xsl:attribute-set name="status-tag">
+        <xsl:attribute name="background-color"><xsl:value-of select="$c_support_light"/></xsl:attribute>
+        <xsl:attribute name="font-size">70%</xsl:attribute>
+    </xsl:attribute-set>
+    
     <!-- Text -->
     <xsl:attribute-set name="p">
         <xsl:attribute name="margin-bottom">
