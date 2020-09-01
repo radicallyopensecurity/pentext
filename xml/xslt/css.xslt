@@ -168,7 +168,8 @@ mark {
  * Address inconsistent and variable font size in all browsers.
  */
 
-small {
+small,
+.small {
   font-size: 80%;
 }
 
@@ -604,6 +605,10 @@ there.
 .status-resolved {
     color: <xsl:value-of select="$color_resolved"/>;
 }
+
+.status-tag {
+    background-color: <xsl:value-of select="$c_support_light"/>;
+}      
 
 .errortext {
     background-color: black;

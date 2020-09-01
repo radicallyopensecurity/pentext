@@ -96,24 +96,6 @@
 
     </xsl:template>
 
-
-    <xsl:template name="VersionNumber">
-        <!-- COMMON WITH FO -->
-        <xsl:param name="number" select="@number"/>
-        <xsl:choose>
-            <!-- if value is auto, do some autonumbering magic -->
-            <xsl:when test="string(@number) = 'auto'"> 0.<xsl:number count="version"
-                    level="multiple" format="{$AUTO_NUMBERING_FORMAT}"/>
-                <!-- this is really unrobust :D - todo: follow fixed numbering if provided -->
-            </xsl:when>
-            <xsl:otherwise>
-                <!-- just plop down the value -->
-                <!-- todo: guard numbering format in schema -->
-                <xsl:value-of select="@number"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
     <xsl:template name="DocProperties">
         <xsl:variable name="authors"
             select="version_history/version/v_author[not(. = ../preceding::version/v_author)]"/>
@@ -697,6 +679,27 @@
                 instead.</xsl:message>
         </xsl:if>
         <xsl:apply-templates mode="summarytable"/>
+    </xsl:template>
+    
+    <xsl:template match="update">
+        <h5 class="title-findingsection">Update
+            <xsl:if test="@date">
+                <xsl:text> </xsl:text>
+                <span class="status-tag small">
+                    <xsl:value-of select="@date"/>                            
+                </span>
+            </xsl:if>
+            <xsl:if test="@version">
+                <xsl:text> </xsl:text>
+                <span class="status-tag small">
+                    <xsl:value-of select="@version"/>                            
+                </span>
+            </xsl:if>
+            <xsl:text>:</xsl:text>
+        </h5>
+        <div class="finding-content">
+            <xsl:apply-templates/>
+        </div>
     </xsl:template>
 
     <xsl:template match="recommendation_summary" mode="summarytable">
