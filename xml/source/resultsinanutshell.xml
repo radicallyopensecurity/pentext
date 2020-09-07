@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section id="resultsinanutshell" xml:base="resultsinanutshell.xml">
   <title>Results In A Nutshell</title>
-  <p>During this <p_boxtype/> penetration test we found <finding_count threatLevel="all"/>-severity
+  <p>During this <p_boxtype/> penetration test we found <finding_count/>-severity
     issues.</p>
-  <p><todo desc="Describe what the findings relate to"/></p>
+  <p>
+    <todo desc="Describe what the findings relate to"/></p>
 
   <p>By exploiting these issues, an attacker might be able to <todo desc="Loosely enumerate impact of findings"/>.</p>
 </section>

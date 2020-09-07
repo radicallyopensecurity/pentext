@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section id="conclusion" xml:base="conclusion.xml" break="before" inexecsummary="yes">
   <title>Conclusion</title>
-  <p>We discovered <finding_count threatLevel="all"/>-severity issues during this penetration test.</p>
+  <p>We discovered <finding_count/>-severity issues during this penetration test.</p>
 
   <p><todo desc="Add some paragraphs describing in high level the impact of these findings on the organization, priorities in fixing them"/></p>
 
