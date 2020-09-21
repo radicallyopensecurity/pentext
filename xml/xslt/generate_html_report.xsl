@@ -10,6 +10,7 @@
     <xsl:import href="html_placeholders.xslt"/>
     <xsl:import href="html_secrets.xslt"/>
     <xsl:import href="localisation.xslt"/>
+    <xsl:import href="numbering.xslt"/>
     <xsl:import href="css.xslt"/>
     <xsl:include href="functions_params_vars.xslt"/>
 
