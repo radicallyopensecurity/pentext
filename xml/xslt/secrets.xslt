@@ -9,7 +9,7 @@
             <xsl:when test="/pentest_report[@secrets = 'hide']">
                 <xsl:choose>
                     <xsl:when
-                        test="img | generate_piechart | p | div | table | section | ol | ul | pre">
+                        test="img | generate_piechart | p | child::div | table | section | ol | ul | pre">
                         <xsl:call-template name="censoredBlock"/>
                     </xsl:when>
                     <xsl:otherwise>
