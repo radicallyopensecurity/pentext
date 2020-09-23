@@ -264,6 +264,22 @@
             </table>
         </div>
     </xsl:template>
+    
+    <xsl:template name="VersionNumber">
+        <xsl:param name="number" select="@number"/>
+        <xsl:choose>
+            <!-- if value is auto, do some autonumbering magic -->
+            <xsl:when test="string(@number) = 'auto'"> 0.<xsl:number count="version"
+                level="multiple" format="{$AUTO_NUMBERING_FORMAT}"/>
+                <!-- this is really unrobust :D - todo: follow fixed numbering if provided -->
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- just plop down the value -->
+                <!-- todo: guard numbering format in schema -->
+                <xsl:value-of select="@number"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
     <xsl:template name="Contact">
         <div class="container">
