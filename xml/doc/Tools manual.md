@@ -32,7 +32,7 @@ Download Apache FOP 2.1 at https://xmlgraphics.apache.org/fop/download.html and 
 
 ### Fonts
 
-Download the Liberation Sans font from http://www.fontsquirrel.com/fonts/liberation-sans and install.
+Download the Liberation Sans font from https://releases.pagure.org/liberation-fonts/liberation-fonts-ttf-1.07.4.tar.gz and install.
 
 Download the Liberation Mono font from http://www.fontsquirrel.com/fonts/Liberation-Mono and install.
 
