@@ -191,6 +191,10 @@
             <xsl:apply-templates/>
         </fo:inline>
     </xsl:template>
+    
+    <xsl:template match="span">
+            <fo:inline><xsl:apply-templates select="@*|*|text()"/></fo:inline>
+    </xsl:template>
 
     <xsl:template match="fnref">
         <xsl:variable name="fnCount" select="count(preceding::fnref) + 1"/>

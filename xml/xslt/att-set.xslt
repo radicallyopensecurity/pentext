@@ -3,11 +3,9 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs"
     xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
 
-    <xsl:template match="@class">
-        <xsl:call-template name="use-att-set">
-            <xsl:with-param name="CLASS" select="string(.)"/>
-        </xsl:call-template>
-    </xsl:template>
+    
+
+
 
     <xsl:template name="use-att-set">
         <xsl:param name="CLASS" select="."/>
@@ -34,18 +32,19 @@
     <!-- att-set handles only one single class -->
     <xsl:template name="att-set">
         <xsl:param name="CLASS"/>
+        <xsl:variable name="HIGHLIGHTS" select="document('styles_syntaxhighlighting.xslt')/xsl:stylesheet"/>
 
         <xsl:choose>
             <xsl:when test="normalize-space($CLASS) = ''"/>
             <xsl:otherwise>
-                <xsl:if test="$CLASSES[@name = $CLASS]/@use-attribute-sets">
+                <xsl:if test="$HIGHLIGHTS/xsl:attribute-set[@name = $CLASS]/@use-attribute-sets">
                     <xsl:call-template name="use-att-set">
                         <xsl:with-param name="CLASS"
-                            select="$CLASSES[@name = $CLASS]/@use-attribute-sets"/>
+                            select="$HIGHLIGHTS/xsl:attribute-set[@name = $CLASS]/@use-attribute-sets"/>
                     </xsl:call-template>
                 </xsl:if>
 
-                <xsl:for-each select="$CLASSES[@name = $CLASS]/xsl:attribute">
+                <xsl:for-each select="$HIGHLIGHTS/xsl:attribute-set[@name = $CLASS]/xsl:attribute">
                     <xsl:attribute name="{@name}">
                         <xsl:apply-templates/>
                     </xsl:attribute>

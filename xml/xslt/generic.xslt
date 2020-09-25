@@ -21,6 +21,12 @@
         </xsl:choose>
     </xsl:template>
     
+    <xsl:template match="@class">
+        <xsl:call-template name="use-att-set">
+            <xsl:with-param name="CLASS" select="string(.)"/>
+        </xsl:call-template>
+    </xsl:template>
+    
     <xsl:template match="@*"/>
     <!-- hide any attributes that are not explicitly handled -->
     

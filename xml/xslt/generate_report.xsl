@@ -3,7 +3,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="xs" version="2.0">
 
-
+    
     <xsl:import href="pages.xslt"/>
     <xsl:import href="meta.xslt"/>
     <xsl:import href="toc.xslt"/>
@@ -15,6 +15,7 @@
     <xsl:import href="table.xslt"/>
     <xsl:import href="lists.xslt"/>
     <xsl:import href="fo_inline.xslt"/>
+    <xsl:import href="att-set.xslt"/>
     <xsl:import href="graphics.xslt"/>
     <xsl:import href="generic.xslt"/>
     <xsl:import href="numbering.xslt"/>
