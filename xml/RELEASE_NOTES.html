@@ -1,4 +1,8 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><style>body {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <style>body {
   width: 45em;
   border: 1px solid #ddd;
   outline: 1300px solid #fff;
@@ -21,7 +25,6 @@ body .markdown-body
 }
 
 .markdown-body {
-  font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   color: #333333;
@@ -156,29 +159,17 @@ body .markdown-body
 .markdown-body .linenodiv pre,
 .markdown-body .linenodiv {
   border: 0;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0;
-  -webkit-border-top-left-radius: 3px;
-  -webkit-border-bottom-left-radius: 3px;
-  -moz-border-radius-topleft: 3px;
-  -moz-border-radius-bottomleft: 3px;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
+  -webkit-border-radius: 3px 0 0 3px;
+  -moz-border-radius: 3px 0 0 3px;
+  border-radius: 3px 0 0 3px;
 }
 
 .markdown-body .code div pre,
 .markdown-body .code div {
   border: 0;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0;
-  -webkit-border-top-right-radius: 3px;
-  -webkit-border-bottom-right-radius: 3px;
-  -moz-border-radius-topright: 3px;
-  -moz-border-radius-bottomright: 3px;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
+  -webkit-border-radius: 0 3px 3px 0;
+  -moz-border-radius: 0 3px 3px 0;
+  border-radius: 0 3px 3px 0;
 }
 
 .markdown-body * {
@@ -483,7 +474,6 @@ body .markdown-body
   display: block;
   width: 100%;
   overflow: auto;
-  word-break: normal;
   word-break: keep-all;
 }
 
@@ -514,9 +504,7 @@ body .markdown-body
 
 .markdown-body code,
 .markdown-body samp {
-  padding: 0;
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
+  padding: 0.2em 0;
   margin: 0;
   font-size: 85%;
   background-color: rgba(0,0,0,0.04);
@@ -655,7 +643,7 @@ body .markdown-body
 
 .markdown-body .admonition:before {
   content: "\f056\00a0";
-  color: 333;
+  color: #333;
 }
 
 .markdown-body .attention:before {
@@ -965,7 +953,6 @@ body .markdown-body
   }
 
   .markdown-body pre {
-    white-space: pre;
     white-space: pre-wrap;
     word-wrap: break-word;
   }
