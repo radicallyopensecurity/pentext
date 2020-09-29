@@ -1,9 +1,8 @@
 /* CSS declarations go here */
 body {
-    background: url('ros-logo.gif') no-repeat left 50px top 100px;
-    font-family:Droid-Sans;
+    font-family:Droid-Sans, sans-serif;
     color: #cd7e00;
-    background-color: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.75) url('ros-logo.gif') no-repeat left 50px top 100px;
 }
 
 fieldset {

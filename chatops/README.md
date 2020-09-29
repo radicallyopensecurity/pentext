@@ -108,7 +108,7 @@ Usage: `startpentest PROJECT_NAME`
 
 ### convert
 Converts gitlab issues labeled with `finding` and `non-finding` into XML files, and adds those to the repository
-Handled by [bash/handler_convert](bash/hander_convert)
+Handled by [bash/handler_convert](bash/handler_convert)
 
 Converts gitlab items to XML findings
 
@@ -149,7 +149,7 @@ The script will connect to kanboard, open the Pentesting project and tries to fi
 and look for the checklist associated with the column the task is in.
 
  Usage: `checklist show <kanboard task>`
-  * <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
+  * `<kanboard task>`   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
   
 ###  checklist toggle
 Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
@@ -157,8 +157,8 @@ Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
 Pulls the checklist from the kanboard task's description and toggles its items
 
 Usage: `checklist toggle <kanboard task> <index>`
-* <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
-* <index>           Should be an integer or comma separated list of integers as indices to the items. Mandatory.
+* `<kanboard task>`   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
+* `<index>`           Should be an integer or comma separated list of integers as indices to the items. Mandatory.
 
 ###   column
 Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
@@ -176,7 +176,7 @@ Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
 Shows the column the kanboard task is currently in.
 
 Usage: `column show <kanboard task>`
-* <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
+* `<kanboard task>`   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
 
 ###   column next
 Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
@@ -184,7 +184,7 @@ Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
 Moves the kanboard task to the next column.
 
 Usage: `column next <kanboard task>`
-* <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
+* `<kanboard task>`   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
 
 ###  column prev
 Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
@@ -192,7 +192,7 @@ Handled by [python/kanboard_pm.py](python/kanboard_pm.py)
 Moves the kanboard task to the previous column.
 
 Usage: `column prev <kanboard task>`
-* <kanboard task>   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
+* `<kanboard task>`   Specifies the title of the kanboard task. This should be an exact match and is mandatory.
 
 
 
