@@ -21,6 +21,11 @@
     <xsl:template match="pre/code">
         <xsl:apply-templates/>
     </xsl:template>
+    
+    <!-- convert <li><p> to <li> -->
+    <xsl:template match="li/p">
+        <xsl:apply-templates/>
+    </xsl:template>
 
     <!-- remove selected attributes from selected elements -->
     <xsl:template match="pre/@class | a/@class | tr/@class | img/@alt"/>
