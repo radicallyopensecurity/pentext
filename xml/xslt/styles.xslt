@@ -192,6 +192,14 @@
         </xsl:attribute>
         <xsl:attribute name="line-height">6mm</xsl:attribute>
     </xsl:attribute-set>
+    <xsl:attribute-set name="blockquote">
+        <xsl:attribute name="background-color"><xsl:value-of select="$c_support_light"/></xsl:attribute>
+        <xsl:attribute name="border-color"><xsl:value-of select="$c_support_subtlydarkerlight"/></xsl:attribute>
+        <xsl:attribute name="border-style">solid</xsl:attribute>
+        <xsl:attribute name="border-width">1pt</xsl:attribute>
+        <xsl:attribute name="margin-bottom" select="$medium-space"/>
+        <xsl:attribute name="padding">4pt</xsl:attribute>
+    </xsl:attribute-set>
     <xsl:attribute-set name="biblioentry" use-attribute-sets="indent">
         <xsl:attribute name="margin-bottom">
             <xsl:value-of select="$small-space"/>

@@ -33,6 +33,13 @@
         </fo:block>
     </xsl:template>
 
+    <xsl:template match="blockquote">
+        <fo:block xsl:use-attribute-sets="p blockquote">
+            <xsl:call-template name="checkIfLast"/>
+            <xsl:apply-templates/>
+        </fo:block>
+    </xsl:template>
+    
     <xsl:template match="li/p">
         <fo:block xsl:use-attribute-sets="li">
             <xsl:apply-templates/>
