@@ -379,6 +379,25 @@
     </xs:complexType>
   </xs:element>
 
+  <xs:element name="blockquote">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="pre"/>
+        <xs:element ref="code"/>
+        <xs:element name="p" type="block"/>
+        <xs:element ref="table"/>
+        <xs:element ref="ul"/>
+        <xs:element ref="ol"/>
+        <xs:element ref="img"/>
+        <xs:group ref="placeholders"/>
+      </xs:choice>
+      <xs:attribute ref="xml:base"/>
+      <xs:attribute ref="class" use="optional"/>
+      <xs:attribute name="id" use="optional" type="xs:ID"/>
+      <xs:attribute ref="xml:lang"/>
+    </xs:complexType>
+  </xs:element>
+  
   <xs:attribute name="class" type="xs:string"/>
 
   <xs:element name="client_reference" type="xs:string"/>
