@@ -9,7 +9,7 @@
     <xsl:import href="meta.xslt"/>
     <xsl:import href="toc.xslt"/>
     <xsl:import href="structure.xslt"/>
-    <!--<xsl:import href="att-set.xslt"/>-->
+    <xsl:import href="att-set.xslt"/>
     <xsl:import href="block.xslt"/>
     <xsl:import href="auto.xslt"/>
     <xsl:import href="table.xslt"/>
