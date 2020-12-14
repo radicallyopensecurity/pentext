@@ -507,6 +507,16 @@
       </xs:choice>
     </xs:complexType>
   </xs:element>
+  <xs:element name="span">
+    <xs:complexType mixed="true">
+      <xs:choice maxOccurs="unbounded">
+        <xs:group ref="inline-except-span"/>
+        <xs:group ref="placeholders"/>
+      </xs:choice>
+      <xs:attribute name="class" use="required" type="xs:string"/>
+      <xs:attribute name="style" use="optional" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="sup">
     <xs:complexType mixed="true">
       <xs:choice maxOccurs="unbounded">
@@ -646,6 +656,7 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="fnref"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="span"/>
     </xs:choice>
   </xs:group>
   <xs:group name="inline-except-fnref">
@@ -659,6 +670,7 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sup"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="span"/>
     </xs:choice>
   </xs:group>
   <xs:group name="inline-except-b">
@@ -672,6 +684,7 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="fnref"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="span"/>
     </xs:choice>
   </xs:group>
   <xs:group name="inline-except-sup">
@@ -685,6 +698,7 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="fnref"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="span"/>
     </xs:choice>
   </xs:group>
   <xs:group name="inline-except-sub">
@@ -698,6 +712,7 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sup"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="fnref"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="span"/>
     </xs:choice>
   </xs:group>
   <xs:group name="inline-except-i">
@@ -711,6 +726,7 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="fnref"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="span"/>
     </xs:choice>
   </xs:group>
   <xs:group name="inline-except-u">
@@ -724,6 +740,7 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="fnref"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="span"/>
     </xs:choice>
   </xs:group>
   <xs:group name="inline-except-code">
@@ -737,6 +754,21 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="fnref"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="span"/>
+    </xs:choice>
+  </xs:group>
+  <xs:group name="inline-except-span">
+    <xs:choice>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="a"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="br"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="i"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="b"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="u"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="sup"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="sub"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="bibref"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fnref"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="code"/>
     </xs:choice>
   </xs:group>
 

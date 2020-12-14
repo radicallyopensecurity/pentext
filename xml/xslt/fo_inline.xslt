@@ -378,4 +378,10 @@
         <xsl:apply-templates/>
         <xsl:text>.</xsl:text>
     </xsl:template>
+    
+    <xsl:template match="span[@font-family]">
+        <fo:inline font-family="{./@font-family}">
+            <xsl:apply-templates/>
+        </fo:inline>
+    </xsl:template>
 </xsl:stylesheet>
