@@ -35,6 +35,11 @@
         <xsl:attribute name="color">#73528b</xsl:attribute>
     </xsl:attribute-set>
     
+    <!-- attribute -->
+    <xsl:attribute-set name="at">
+        <xsl:attribute name="font-weight">bold</xsl:attribute>
+    </xsl:attribute-set>
+    
     <!-- example? path, anyway -->
     <xsl:attribute-set name="ex">
         
