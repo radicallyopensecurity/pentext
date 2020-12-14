@@ -514,7 +514,7 @@
         <xs:group ref="placeholders"/>
       </xs:choice>
       <xs:attribute name="class" use="required" type="xs:string"/>
-      <xs:attribute name="style" use="optional" type="xs:string"/>
+      <xs:attribute name="font-family" use="optional" type="xs:string"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="sup">
