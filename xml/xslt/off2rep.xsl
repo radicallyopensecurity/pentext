@@ -176,9 +176,9 @@
                 <section id="objectives">
                     <title>Project objectives</title>
                     <p>
-                        <company_short/> will perform a penetration test of the
-                        <todo desc="INSERT-THE-SCOPE"/> with <client_short/>. The test is intended to gain insight into the security of
-                        <todo desc="INSERT-THE-SCOPE"/>. To do so, <company_short/> will access this
+                        <company_short/> will perform a penetration test of
+                        <todo desc="INSERT-THE-SCOPE"/> with <client_short/> in order to assess the security of
+                        <todo desc="INSERT-THE-SCOPE"/>. To do so <company_short/> will access 
                         <todo desc="INSERT-THE-SCOPE"/> and guide <client_short/> in attempting to find
                         vulnerabilities, exploiting any such found to try and gain further access and elevated privileges.</p>
                 </section>
