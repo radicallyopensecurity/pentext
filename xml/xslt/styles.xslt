@@ -136,11 +136,14 @@
     </xsl:attribute-set>
     <xsl:attribute-set name="h-title">
         <xsl:attribute name="padding-top">3pt</xsl:attribute>
+        <xsl:attribute name="padding-bottom">3pt</xsl:attribute>
         <xsl:attribute name="keep-with-next.within-page">always</xsl:attribute>
     </xsl:attribute-set>
-    <xsl:attribute-set name="h2" use-attribute-sets="bold h-title"/>
-    <xsl:attribute-set name="h3" use-attribute-sets="bold h-title"/>
-    <xsl:attribute-set name="h4" use-attribute-sets="bold h-title"/>
+    <xsl:attribute-set name="h2" use-attribute-sets="bold h-title">
+        <xsl:attribute name="font-size">13pt</xsl:attribute></xsl:attribute-set>
+    <xsl:attribute-set name="h3" use-attribute-sets="bold h-title">
+        <xsl:attribute name="font-size">12pt</xsl:attribute></xsl:attribute-set>
+    <xsl:attribute-set name="h4" use-attribute-sets="bold h-title"></xsl:attribute-set>
     <xsl:attribute-set name="bold">
         <xsl:attribute name="font-weight">bold</xsl:attribute>
     </xsl:attribute-set>
