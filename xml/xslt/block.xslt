@@ -144,16 +144,12 @@
                         <fo:table-row>
                             <fo:table-cell xsl:use-attribute-sets="td">
                                 <xsl:for-each select="client_side/date">
-                                    <fo:block>
-                                        <xsl:apply-templates/>
-                                    </fo:block>
+                                    <xsl:call-template name="dateBlock"/>
                                 </xsl:for-each>
                             </fo:table-cell>
                             <fo:table-cell xsl:use-attribute-sets="td">
                                 <xsl:for-each select="company_side/date">
-                                    <fo:block>
-                                        <xsl:apply-templates/>
-                                    </fo:block>
+                                    <xsl:call-template name="dateBlock"/>
                                 </xsl:for-each>
                             </fo:table-cell>
                         </fo:table-row>
@@ -161,6 +157,23 @@
                 </fo:table>
             </fo:block>
         </fo:block>
+    </xsl:template>
+    
+    <xsl:template name="dateBlock">
+        <xsl:choose>
+            <xsl:when
+                test="not(normalize-space(.)) and not(child::*)">
+                <!-- don't have a date, insert dotted name line -->
+                    <fo:block margin-top="0.2cm" margin-bottom="0.2cm">(Date:<fo:leader
+                        xsl:use-attribute-sets="signee_dottedline" leader-length="7.2cm"
+                    />)</fo:block>
+            </xsl:when>
+            <xsl:otherwise>
+                <fo:block>
+                    <xsl:apply-templates/>
+                </fo:block>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="signeeBlock">
