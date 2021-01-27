@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<contact xml:base="contact.xml">
-    <name>Melanie Rieback</name>
-    <address>Radically Open Security BV<br/><company_address/>, <company_postalcode/> <company_city/></address>
-    <phone>+31 6 10 21 32 40</phone>
-    <email><company_email/></email>
-</contact>

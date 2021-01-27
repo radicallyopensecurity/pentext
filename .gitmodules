@@ -1,0 +1,3 @@
+[submodule "xml"]
+	path = xml
+	url = https://github.com/radicallyopensecurity/pentext-project.git
