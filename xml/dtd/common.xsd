@@ -180,14 +180,7 @@
     </xs:simpleType>
   </xs:element>
   <xs:element name="nature" type="xs:string"/>
-  <xs:element name="type">
-    <xs:simpleType>
-      <xs:restriction base="xs:string">
-        <xs:enumeration value="black-box"/>
-        <xs:enumeration value="crystal-box"/>
-        <xs:enumeration value="grey-box"/>
-      </xs:restriction>
-    </xs:simpleType>
+  <xs:element name="type" type="xs:string">
   </xs:element>
 
   <xs:element name="start">
@@ -317,6 +310,7 @@
       <xs:group ref="inline-all"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="ul"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="ol"/>
+      <xs:element ref="pre"/>
       <xs:group ref="placeholders"/>
     </xs:choice>
   </xs:complexType>
