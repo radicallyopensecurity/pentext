@@ -223,6 +223,7 @@
         <xs:group ref="placeholders"/>
         <xs:group ref="inline-all"/>
       </xs:choice>
+      <xs:attribute name="id" type="xs:ID"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="h3">
@@ -231,6 +232,7 @@
         <xs:group ref="placeholders"/>
         <xs:group ref="inline-all"/>
       </xs:choice>
+      <xs:attribute name="id" type="xs:ID"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="h4">
@@ -239,6 +241,16 @@
         <xs:group ref="placeholders"/>
         <xs:group ref="inline-all"/>
       </xs:choice>
+      <xs:attribute name="id" type="xs:ID"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="h5">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="placeholders"/>
+        <xs:group ref="inline-all"/>
+      </xs:choice>
+      <xs:attribute name="id" type="xs:ID"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="br">
