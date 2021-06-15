@@ -123,10 +123,17 @@
         <xsl:variable name="available_frontpage_graphics" select="count($graphicsdoc/file)"/>
         <!-- taking the current second as a 'random number generator' -->
         <xsl:variable name="selected_graphic"
-            select="ceiling(number($available_frontpage_graphics div 60 * $current_second))"/>
-        <xsl:variable name="frontpage_graphic" select="$graphicsdoc/file[$selected_graphic]/@name"/>
-        <xsl:attribute name="background-image">url(../graphics/<xsl:value-of
-                select="$frontpage_graphic"/>)</xsl:attribute>
+            select="ceiling(number($available_frontpage_graphics div 60 *
+                    $current_second))"/>
+        <xsl:choose>
+          <xsl:when test="not($graphicsdoc/file[$selected_graphic]/@name)">
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:variable name="frontpage_graphic" select="$graphicsdoc/file[$selected_graphic]/@name"/>
+            <xsl:attribute name="background-image">url(../graphics/<xsl:value-of
+            select="$frontpage_graphic"/>)</xsl:attribute>
+          </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="page_footer">
