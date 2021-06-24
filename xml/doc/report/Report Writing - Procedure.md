@@ -345,24 +345,28 @@ edit/elaborate.
 A finding consists of a `<finding>` element with the following
 attributes:
 
--   `id` - to uniquely identify the finding in the document
--   `threatLevel` - which can be set to 'N/A', 'Low', 'Moderate',
-    'Elevated', 'High', or 'Extreme'
--   `type` - the finding type (free text, but keep it short)
+- `id` - to uniquely identify the finding in the document
+- `threatLevel` - which can be set to 'N/A', 'Low', 'Moderate',
+  'Elevated', 'High', or 'Extreme'
+- `type` - the finding type (free text, but keep it short)
+- `number` - the numerical identifier of the finding
+
+Optionally there's a `status` field, which can denote whether the finding is
+`new`, `unresolved`, `not_retested` or `resolved`.
 
 Furthermore, the `<finding>` is made up of several sub-elements:
 
--   `<title>`, a title for the finding
--   `<description>`, a short, general description of the finding
--   `<description_summary>`, an *optional* shorter description for use
-    in the summary tables
--   `<technicaldescription>`, a technical elaboration on what the
-    problem entails
--   `<impact>`, the finding's impact on the target's security
--   `<recommendation>`, instructions or advice on how to improve
-    security
--   `<recommendation_summary>`, an *optional* shorter recommendation for
-    use in the summary tables
+- `<title>`, a title for the finding
+- `<description>`, a short, general description of the finding
+- `<description_summary>`, an _optional_ shorter description for use
+  in the summary tables
+- `<technicaldescription>`, a technical elaboration on what the
+  problem entails
+- `<impact>`, the finding's impact on the target's security
+- `<recommendation>`, instructions or advice on how to improve
+  security
+- `<recommendation_summary>`, an _optional_ shorter recommendation for
+  use in the summary tables
 
 For more details, see the sections below.
 
