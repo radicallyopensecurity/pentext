@@ -1,54 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<section>
-    <title>Pentestmethodologie</title>
-    <p>Tijdens het uitvoeren van de penetratietests volgt <company_long/> in grote lijnen de volgende stappen:</p>
-
-            <ol>
-                <li>Vaststellen voorwaarden/vereisten en Scoping;</li>
-                <li>Onderzoek;</li>
-                <li>Validatie;</li>
-                <li>Verzamelen gegevens;</li>
-                <li>Analyse van Risico's en Kwetsbaarheden;</li>
-                <li>Exploitatie;</li>
-                <li>Rapportage.</li>
-            </ol>
-          
-
-<p><b>Stap 1: Vaststellen voorwaarden/vereisten en Scoping</b> <br/>
+<?xml version="1.0" encoding="UTF-8" ?>
+<section xmlns:xi="http://www.w3.org/2001/XInclude" id="methodology">
+  <title>Pentest methodologie</title>
+  <p>Tijdens het uitvoeren van de penetratietests volgt <company_long
+    /> in grote lijnen de volgende stappen:</p>
+  <ol>
+    <li>Vaststellen voorwaarden/vereisten en Scoping;</li>
+    <li>Onderzoek;</li>
+    <li>Validatie;</li>
+    <li>Verzamelen gegevens;</li>
+    <li>Analyse van Risico's en Kwetsbaarheden;</li>
+    <li>Exploitatie;</li>
+    <li>Rapportage.</li>
+  </ol>
+  <p><b>Stap 1: Vaststellen voorwaarden/vereisten en Scoping</b> <br />
 De verwachtingen van beide partijen worden besproken en overeenkomsten worden gemaakt
 betreffende het uitvoeren van de test(s). Tijdens deze stap worden bijvoorbeeld alle contactgegevens verzameld en vastgesteld wat de
 scope van de pentest is.</p>
-
-<p><b>Stap 2: Onderzoek</b><br/>
+  <p><b>Stap 2: Onderzoek</b><br />
 Er word zo veel mogelijk informatie betreffende de te testen organisatie en doelwitten verzameld. Deze informatie wordt passief verzameld, voornamelijk uit publieke bronnen.</p>
-
-<p><b>Stap 3: Validatie</b><br/>
+  <p><b>Stap 3: Validatie</b><br />
 Alle door de klant gespecificeerde systemen worden nagelopen aan de hand van wat tijdens de Onderzoeksstap is ontdekt. We doen dit om te garanderen dat de ontdekte systemen
 wettelijk eigendom van de klant zijn en om de scope met de klant te verifiëren.</p>
-
-<p><b>Stap 4: Verzamelen gegevens</b><br/>
+  <p><b>Stap 4: Verzamelen gegevens</b><br />
 Informatie uit Stap 2 wordt hier gebruikt om actief informatie betreffende de
-systemen te verzamelen. Mogelijke activiteiten gedurende deze fase zijn: 
+systemen te verzamelen. Mogelijke activiteiten gedurende deze fase zijn:
 Vaststellen welke onderdelen van de verscheidene componenten zullen worden getest;
 met behulp van geautomatiseerde tests controleren op de aanwezigheid van bekende kwetsbaarheden;
 identificeren welke diensten op de onderzochte systemen worden aangeboden en de gebruikte software te "fingerprinten".</p>
-
-<p><b>Stap 5: Analyse van Risico's en Kwetsbaarheden</b><br/>
+  <p><b>Stap 5: Analyse van Risico's en Kwetsbaarheden</b><br />
 Potentiële risico's en kwetsbaarheden worden geïndexeerd op basis van de verzamelde informatie.</p>
-
-<p><b>Stap 6: Exploitatie</b><br/>
+  <p><b>Stap 6: Exploitatie</b><br />
 Hier wordt gepoogd om kwetsbaarheden in de verscheidene componenten uit te buiten.
 De diverse applicaties en componenten van de infrastructuur van de klant worden
 grondig gecontroleerd op vaak voorkomende ontwerp-, configuratie- en programmeerfouten.</p>
-
-<p>Opmerking: <company_long/> gebruikt open-source scanning tools als basis, maar 
+  <p>Opmerking: <company_long
+    /> gebruikt open-source scanning tools als basis, maar
 voert in de regel de meeste exploitatiepogingen handmatig uit.</p>
-
-<p><b>Stap 7: Rapportage</b><br/>
+  <p><b>Stap 7: Rapportage</b><br />
 Na het afronden van de test zal een rapport worden geleverd waarin de resultaten en ontdekte kwetsbaarheden stap voor stap worden beschreven. Het rapport en de resultaten worden eventueel gepresenteerd aan de verantwoordelijke projectleider of -manager in het kantoor van de klant.</p>
-
-<p>Stappen 4-6 kunnen meerdere malen herhaald worden per test. Zo kan er bijvoorbeeld door exploitatie van kwetsbaarheden toegang worden
+  <p
+  >Stappen 4-6 kunnen meerdere malen herhaald worden per test. Zo kan er bijvoorbeeld door exploitatie van kwetsbaarheden toegang worden
 verkregen tot een extern systeem dat fungeert als een opstapje tot het interne netwerk.
 Het interne netwerk zal vervolgens worden verkend in Stappen 4 en 5, om vervolgens te worden geëxploiteerd in Stap 6.</p>
 </section>
