@@ -1,43 +1,39 @@
-Writing a test report
-=====================
+# Writing a test report
 
-Tools
------
+## Tools
 
 First of all, make sure you have the right tools installed. Check the
 tools manual for more info.
 
-Main structure
---------------
+## Main structure
 
 The report's main element is `<pentest_report>`. It contains four major
 parts:
 
--   Document information (metadata), in the element `<meta>`
--   The index, in the element `<generate_index>`
--   A variable number of sections (main content), in several `<section>`
-    elements
--   A variable number of appendices (extra content), in one or more
-    `<appendix>` elements
+- Document information (metadata), in the element `<meta>`
+- The index, in the element `<generate_index>`
+- A variable number of sections (main content), in several `<section>`
+  elements
+- A variable number of appendices (extra content), in one or more
+  `<appendix>` elements
 
 Additionally, the `<pentest_report>` element has two attributes:
 
--   `findingCode`, which is a three-letter prefix for the finding
-    numbers, derived from the client name (e.g. 'SID' for Sitting Duck
-    BV, 'BIC' for Big International Company Ltd, etc.). When this is not 
-    filled in you will see three question marks '???' in the finding ID columns 
-    in the Table of Contents and detailed finding sections. 
--   `findingNumberingBase`, which can be set to 'Report' or 'Section' -
-    this configures whether the numbering of findings in the report is
-    report-based (i.e. starting with XXX-001 and continuing upwards) or
-    section-based (i.e. findings in section 3 are numbered XXX-301 and
-    up, findings in section 5 are numbered XXX-501 and up). Use 'Report'
-    for smaller pentest reports and 'Section' for large ones.
+- `findingCode`, which is a three-letter prefix for the finding
+  numbers, derived from the client name (e.g. 'SID' for Sitting Duck
+  BV, 'BIC' for Big International Company Ltd, etc.). When this is not
+  filled in you will see three question marks '???' in the finding ID columns
+  in the Table of Contents and detailed finding sections.
+- `findingNumberingBase`, which can be set to 'Report' or 'Section' -
+  this configures whether the numbering of findings in the report is
+  report-based (i.e. starting with XXX-001 and continuing upwards) or
+  section-based (i.e. findings in section 3 are numbered XXX-301 and
+  up, findings in section 5 are numbered XXX-501 and up). Use 'Report'
+  for smaller pentest reports and 'Section' for large ones.
 
-Document information / metadata
--------------------------------
+## Document information / metadata
 
-This is the part where we put all information that is *about the report*
+This is the part where we put all information that is _about the report_
 rather than about the pentest itself (hence the term metadata): who has
 been working on it, what is the document title, what versions has it
 gone through, etc.
@@ -47,15 +43,15 @@ following elements (mandatory and in the listed order):
 
 TODO
 
--   The document title, in the `<title>` element
--   Client information, in the `<client>` element
--   Targets listing, in the `<targets>` element
--   (Optionally) Pentest-related information, in the `<activityinfo>` element
--   People who worked on the pentest and/or report, in the
-    `<collaborators>` element
--   Document classification, in the `<classification>` element
--   The document's version history, in the `<version_history>` element
--   Your company contact information, in the `<company>` element
+- The document title, in the `<title>` element
+- Client information, in the `<client>` element
+- Targets listing, in the `<targets>` element
+- (Optionally) Pentest-related information, in the `<activityinfo>` element
+- People who worked on the pentest and/or report, in the
+  `<collaborators>` element
+- Document classification, in the `<classification>` element
+- The document's version history, in the `<version_history>` element
+- Your company contact information, in the `<company>` element
 
 For more details, see the sections below.
 
@@ -71,11 +67,11 @@ Example: `<title>`Penetration Test Report`</title>`
 
 The `<client>` element contains two other elements:
 
--   `<full_name>`, in which you should type the client's official name,
-    e.g. 'Sitting Duck BV', or 'Big International Company Ltd'
--   `<short_name>`, in which you should type the client's shorter name,
-    e.g. 'Sitting Duck' or 'Big International' (or, if there is no
-    shorter name, just type the long name again)
+- `<full_name>`, in which you should type the client's official name,
+  e.g. 'Sitting Duck BV', or 'Big International Company Ltd'
+- `<short_name>`, in which you should type the client's shorter name,
+  e.g. 'Sitting Duck' or 'Big International' (or, if there is no
+  shorter name, just type the long name again)
 
 Example:
 
@@ -122,15 +118,15 @@ Example:
 The `<collaborators>` element contains three other elements, mandatory
 and in the listed order:
 
--   `<reviewers>`, containing one or more `<reviewer>` elements (same
-    system as `<targets>`; put the name of each reviewer in its own
-    `<reviewer>` element.)
--   `<approver>`, containing only text. Here you put the name of the
-    person who has approved the document for distribution to the client
-    (usually this is Melanie)
--   `<pentesters>`, containing one or more `<pentester>` elements (*not*
-    the same system as targets, see the section on pentesters for more
-    details)
+- `<reviewers>`, containing one or more `<reviewer>` elements (same
+  system as `<targets>`; put the name of each reviewer in its own
+  `<reviewer>` element.)
+- `<approver>`, containing only text. Here you put the name of the
+  person who has approved the document for distribution to the client
+  (usually this is Melanie)
+- `<pentesters>`, containing one or more `<pentester>` elements (_not_
+  the same system as targets, see the section on pentesters for more
+  details)
 
 Example:
 
@@ -149,11 +145,11 @@ elements.
 
 The `<pentester>` element contains two other elements:
 
--   `<name>`, containing the pentester's name (in text)
--   `<bio>`, containing a paragraph about the pentester's l33tness :) -
-    For many pentesters, you can get this bio from a previous pentest.
-    If we're working with a new guy or girl, ask them for some info
-    about themselves.
+- `<name>`, containing the pentester's name (in text)
+- `<bio>`, containing a paragraph about the pentester's l33tness :) -
+  For many pentesters, you can get this bio from a previous pentest.
+  If we're working with a new guy or girl, ask them for some info
+  about themselves.
 
 The names of the pentesters will appear on the document info page and
 their names and bios will be listed automatically in a table wherever
@@ -166,14 +162,14 @@ Example:
         <pentesters>
             <pentester>
                 <name>Melanie Rieback</name>
-                <bio>Melanie Rieback is a former Asst. Prof. of Computer Science 
-                from the VU, who is also the co-founder/CEO of 
+                <bio>Melanie Rieback is a former Asst. Prof. of Computer Science
+                from the VU, who is also the co-founder/CEO of
                 Radically Open Security.</bio>
             </pentester>
             <pentester>
                 <name>William of Ockham</name>
-                <bio>English Franciscan friar and scholastic philosopher and theologian. 
-                Considered to be one of the major figures of medieval thought. 
+                <bio>English Franciscan friar and scholastic philosopher and theologian.
+                Considered to be one of the major figures of medieval thought.
                 At the centre of some major intellectual and political controversies.</bio>
             </pentester>
         </pentesters>
@@ -199,19 +195,19 @@ start a new version, add a `<version>` element to the list.
 
 The `<version>` element should contain the following:
 
--   a `date` attribute with a date of your version as a value, in the
-    format YYYY-MM-DDT00:00:00, e.g. 2015-04-18T00:00:00
--   a `number` attribute with the version number as a value. This value
-    can either be 'auto' or an actual version number, e.g. 1.0. If you
-    use the 'auto' value, the system will automatically count it
-    (starting with 0.1 for the first `<version>` element and going up
-    from there: 0.2, 0.3, etc...).
--   One or more `<v_author>` elements, each containing the name of the
-    person who worked on this version (that would be you at least, and
-    perhaps a pentester or colleague who did significant work on it)
--   A `<v_description>` element with a (very short!) description of what
-    has been done in this version, e.g. 'Added non-findings' or
-    'Revision'
+- a `date` attribute with a date of your version as a value, in the
+  format YYYY-MM-DDT00:00:00, e.g. 2015-04-18T00:00:00
+- a `number` attribute with the version number as a value. This value
+  can either be 'auto' or an actual version number, e.g. 1.0. If you
+  use the 'auto' value, the system will automatically count it
+  (starting with 0.1 for the first `<version>` element and going up
+  from there: 0.2, 0.3, etc...).
+- One or more `<v_author>` elements, each containing the name of the
+  person who worked on this version (that would be you at least, and
+  perhaps a pentester or colleague who did significant work on it)
+- A `<v_description>` element with a (very short!) description of what
+  has been done in this version, e.g. 'Added non-findings' or
+  'Revision'
 
 Example:
 
@@ -238,8 +234,7 @@ from the main document with an `<xi:include>` element:
 If you need to edit the contact information, edit that file. But it's
 extremely likely that you won't need to.
 
-The index
----------
+## The index
 
 The document index is generated at the location of the element
 `<generate_index/>`. To make sure the index works (meaning that a
@@ -250,8 +245,7 @@ and non-findings) that need to be listed in the index.
 Insert the `<generate_index/>` element immediately after the `<meta>`
 element.
 
-Sections
---------
+## Sections
 
 The main bulk of the pentest report is made up of normal content. We
 divide our content into sections using the `<section>` element.
@@ -295,27 +289,26 @@ Example:
 
 As said, after the title, anything goes (well, almost):
 
--   A section can be subdivided into smaller sections (section 1 can be
-    subdivided into 1.1, 1.2, etc.)
--   A section can contain generic content, that is to say any number and
-    order of:
-    -   paragraphs (`<p>`)
-    -   lists (ordered `<ol>` or unordered `<ul>`)
-    -   tables (`<table>`)
-    -   command input/output boxes (`<pre>`)
-    -   div containers (`<div>`)
--   A section can contain any number of findings (`<finding>`)
--   A section can contain any number of non-findings (`<non-finding>`)
--   A section can contain any number of finding or recommendation
-    summary tables (`<generate_findings>`, `<generate_recommendations>`)
--   A section can contain a listing of targets, taken from the
-    `<targets>` element in the meta section (`<generate_targets>`)
+- A section can be subdivided into smaller sections (section 1 can be
+  subdivided into 1.1, 1.2, etc.)
+- A section can contain generic content, that is to say any number and
+  order of:
+  - paragraphs (`<p>`)
+  - lists (ordered `<ol>` or unordered `<ul>`)
+  - tables (`<table>`)
+  - command input/output boxes (`<pre>`)
+  - div containers (`<div>`)
+- A section can contain any number of findings (`<finding>`)
+- A section can contain any number of non-findings (`<non-finding>`)
+- A section can contain any number of finding or recommendation
+  summary tables (`<generate_findings>`, `<generate_recommendations>`)
+- A section can contain a listing of targets, taken from the
+  `<targets>` element in the meta section (`<generate_targets>`)
 
 All of these elements are described elsewhere in this document; see the
 appropriate sections for details.
 
-Appendices
-----------
+## Appendices
 
 Appendices (using the `<appendix>` element) work the same as sections,
 they just come last in the report. Like sections, they must have a
@@ -334,8 +327,7 @@ Example:
         <generate_testteam/>
     </appendix>
 
-Findings
---------
+## Findings
 
 Findings are special sections with a specific structure. Findings are
 written by the pentesters. It is the job of a report writer to copy them
@@ -345,24 +337,28 @@ edit/elaborate.
 A finding consists of a `<finding>` element with the following
 attributes:
 
--   `id` - to uniquely identify the finding in the document
--   `threatLevel` - which can be set to 'N/A', 'Low', 'Moderate',
-    'Elevated', 'High', or 'Extreme'
--   `type` - the finding type (free text, but keep it short)
+- `id` - to uniquely identify the finding in the document
+- `threatLevel` - which can be set to 'N/A', 'Low', 'Moderate',
+  'Elevated', 'High', or 'Extreme'
+- `type` - the finding type (free text, but keep it short)
+- `number` - the numerical identifier of the finding
+
+Optionally there's a `status` field, which can denote whether the finding is
+`new`, `unresolved`, `not_retested` or `resolved`.
 
 Furthermore, the `<finding>` is made up of several sub-elements:
 
--   `<title>`, a title for the finding
--   `<description>`, a short, general description of the finding
--   `<description_summary>`, an *optional* shorter description for use
-    in the summary tables
--   `<technicaldescription>`, a technical elaboration on what the
-    problem entails
--   `<impact>`, the finding's impact on the target's security
--   `<recommendation>`, instructions or advice on how to improve
-    security
--   `<recommendation_summary>`, an *optional* shorter recommendation for
-    use in the summary tables
+- `<title>`, a title for the finding
+- `<description>`, a short, general description of the finding
+- `<description_summary>`, an _optional_ shorter description for use
+  in the summary tables
+- `<technicaldescription>`, a technical elaboration on what the
+  problem entails
+- `<impact>`, the finding's impact on the target's security
+- `<recommendation>`, instructions or advice on how to improve
+  security
+- `<recommendation_summary>`, an _optional_ shorter recommendation for
+  use in the summary tables
 
 For more details, see the sections below.
 
@@ -370,13 +366,13 @@ For more details, see the sections below.
 
 **PENTESTERS** should only use the `<finding>` element containing:
 
--   the `threatLevel` attribute
--   the `type` attribute
--   the `<title>` element
--   the `<description>` element
--   the `<technicaldescription>` element
--   the `<impact>` element, and
--   the `<recommendation>` element
+- the `threatLevel` attribute
+- the `type` attribute
+- the `<title>` element
+- the `<description>` element
+- the `<technicaldescription>` element
+- the `<impact>` element, and
+- the `<recommendation>` element
 
 The contents of these elements is free - write whatever you like. The
 report writer will mark up your text.
@@ -415,7 +411,7 @@ listed elsewhere in this document - with paragraphs, lists, tables,
 images).
 
 The contents of the `<description>` element will be used verbatim in the
-finding summary table **unless** the finding *also* contains a
+finding summary table **unless** the finding _also_ contains a
 `<description_summary>` element, in which case that element will be
 used.
 
@@ -447,12 +443,12 @@ Example:
             <p>This is a more elaborate general description:</p>
             <img src="../graphics/screenshot.png"/>
             <p>In this case, the screenshot above makes this description a bad candidate for inclusion in the summary table.</p>
-            <p>Additionally, the description is very very very very very very very very very very very very 
-            very very very very very very very very very very very very very very very very very very very 
-            very very very very very very very very very very very very very very very very very very very very 
-            very very very very very very very very very very very very very very very very very very very 
-            very very very very very very very very very very very very very very very very very very very very very 
-            very very very very very very very very very very very very very very very very very very very 
+            <p>Additionally, the description is very very very very very very very very very very very very
+            very very very very very very very very very very very very very very very very very very very
+            very very very very very very very very very very very very very very very very very very very very
+            very very very very very very very very very very very very very very very very very very very
+            very very very very very very very very very very very very very very very very very very very very very
+            very very very very very very very very very very very very very very very very very very very
             very very very very very very very long.</p>
         </description>
         <description_summary>
@@ -511,7 +507,7 @@ the Generic content elements listed elsewhere in this document - with
 paragraphs, lists, tables, images).
 
 The contents of the `<recommendation>` element will be used verbatim in
-the recommendation summary table **unless** the finding *also* contains
+the recommendation summary table **unless** the finding _also_ contains
 a `<recommendation_summary>` element, in which case that element will be
 used.
 
@@ -552,8 +548,7 @@ Example:
         </recommendation_summary>
     </finding>
 
-Non-findings
-------------
+## Non-findings
 
 Non-findings are much more freeform than findings. They consist of a
 `<non-finding>` element with: - a `<title>` - generic elements such as
@@ -568,8 +563,8 @@ Example:
     <non-finding id="nf_xss">
         <title>Mail Server</title>
         <p>
-            The server was running MailServer ABC for SMTP, POP3 and IMAP. This is 
-            the most recent version of this particular piece of software. 
+            The server was running MailServer ABC for SMTP, POP3 and IMAP. This is
+            the most recent version of this particular piece of software.
             No relevant vulnerabilities or exploits were found.
         </p>
         <p>
@@ -578,8 +573,7 @@ Example:
     </p>
     </non-finding>
 
-Summary tables
---------------
+## Summary tables
 
 Every pentest report should include summary tables for all findings and
 recommendations. This is easy, however, as these tables are generated
@@ -599,8 +593,7 @@ Example:
         <generate_findings Ref="section2"/>
     </section>
 
-Generic content
----------------
+## Generic content
 
 Generic content is modeled on very basic HTML.
 
@@ -637,12 +630,14 @@ Ordered lists are numbered by default. You can configure a different
 ordering system by setting its `type` attribute to one of the following
 values:
 
-  type   ordering
-  ------ ----------------------
-  a      lowercase alphabetic
-  A      uppercase alphabetic
-  i      lowercase roman
-  I      uppercase roman
+type ordering
+
+---
+
+a lowercase alphabetic
+A uppercase alphabetic
+i lowercase roman
+I uppercase roman
 
 Example:
 
@@ -656,8 +651,8 @@ Example:
 Whenever you need to display some command line input/output or code, use
 the `<pre>` element. It will conserve any whitespace you leave, so you
 can format the contents of this element in a pleasant/readable way. Use
-spaces for indents. Note that text in the `<pre>` element *will not
-wrap*.
+spaces for indents. Note that text in the `<pre>` element _will not
+wrap_.
 
 Example:
 
@@ -678,14 +673,13 @@ Example:
 
 You can escape the \< character by replacing it with its entity `&lt;`.
 
-
 ### Div containers
 
 #### What does `<div>` do?
 
-Nothing. `<div>` just *is*.
+Nothing. `<div>` just _is_.
 
-#### Sigh. Ok, why *is* `<div>`?
+#### Sigh. Ok, why _is_ `<div>`?
 
 You can use `<div>` as a container for other block elements. This is basically only (but very) useful for snippets, as snippets need to be well-formed XML documentlets and can therefore only have one root element. If the snippet is a complete section, this is not a problem. If the snippet is a bunch of paragraphs or something, your snippet can be `<div>` (root element), containing everything you want. Well, everything that's allowed, anyway.
 
@@ -693,7 +687,7 @@ You can use `<div>` as a container for other block elements. This is basically o
 
 All block elements: `<p>`, `<ul>`, `<ol>`, `<table>`, `<img>`, `<pre>`
 
-#### And what elements can *contain* `<div>`?
+#### And what elements can _contain_ `<div>`?
 
 `<section>` and `<appendix>`.
 
@@ -761,7 +755,6 @@ Example:
 You can also turn borders on or off (`border="0"`) on lower levels (on
 the row level, for example) for finer-tuned border control.
 
-
 **Setting column width**
 
 To set the width for your columns, add a number for each column to the `cols` element. This number is in millimeters (you can either type 200mm or just 200; don't use cm or pt or px or other measures though). The total width between the margins is 17cm, so 170mm.
@@ -778,7 +771,6 @@ Example:
     </table>
 
 This will give the first column a width of 50mm (5cm), the second as well, and the third a width of 70mm (7cm).
-
 
 **Spanning multiple rows/columns**
 
@@ -813,19 +805,20 @@ Example:
 Set the `align` attribute of any cell, row or table to one of the
 following values to change the text alignment in that cell/row/table:
 
-  align     result
-  --------- -----------------
-  right     right alignment
-  center    centered
-  justify   justified
+align result
 
-Images
-------
+---
+
+right right alignment
+center centered
+justify justified
+
+## Images
 
 To insert an image, use the `<img>` element. In its `src` attribute,
 enter the relative path to the image file you want to reference.
 
-To set the height or width, use *either* the `height` or `width`
+To set the height or width, use _either_ the `height` or `width`
 attribute. Any numerical value you enter will be interpreted as
 centimeters.
 
@@ -903,33 +896,32 @@ example 2).
 
 In the `href` attribute of the `<a>` element, type:
 
--   # + the id of the section you're linking to (when linking to a section
-    in the report), or
--   the url of the website you're linking to (when linking to a website)
+- # + the id of the section you're linking to (when linking to a section
+  in the report), or
+- the url of the website you're linking to (when linking to a website)
 
 Example 1 - linking with an empty element:
 
 `<p>Please refer to <a href="#xss_finding"/>.</p>`
 
 (Note that in this case, we would need to have an element with id
-"xss\_finding" in the report, otherwise the link wouldn't resolve.)
+"xss_finding" in the report, otherwise the link wouldn't resolve.)
 
-This will auto-generate the linked text: 'Please refer to 
+This will auto-generate the linked text: 'Please refer to
 SID-004 (page 4).', or 'Please refer to section 2 (page 13).'
 
 Example 2:
 
 `<p>Please refer to <a href="#xss_finding">our finding on insecure mailservers</a>.</p>`
 
-(Again, we would need to have an element with id "xss\_finding" in the
+(Again, we would need to have an element with id "xss_finding" in the
 report, otherwise the link wouldn't resolve.)
 
 Example 3:
 
 `<p>Please refer to <a href="http://www.radicallyopensecurity.com">our amazing website</a>.</p>`
 
-Manual breaks
--------------
+## Manual breaks
 
 ### Line breaks
 
