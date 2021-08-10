@@ -40,17 +40,6 @@
       <client_short/> en <company_short/> worden besproken.
     </p>
 
-                <p>Een voorbeeld van een pentestrapport vindt u hier:</p>
-                <ul>
-                        <li>
-                                <a
-                                        href="https://github.com/radicallyopensecurity/templates/blob/master/sample-report/REP_SittingDuck-
-					pentestreport-v10.pdf"
-                                        >https://github.com/radicallyopensecurity/templates/blob/master/sample-report/REP_SittingDuck-
-                                        pentestreport-v10.pdf</a>
-                        </li>
-                </ul>
-
                 <p>Een van de kernwaarden van <company_short/> is het "Teach To Fish"-principe - ook
                         bekend als het "Peek over our Shoulder (PooS)"-principe. Wij streven ernaar
                         om onze diensten en rapporten zodanig te structureren dat onze klanten ze
