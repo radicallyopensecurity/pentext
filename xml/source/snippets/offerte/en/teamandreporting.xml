@@ -46,15 +46,6 @@
       these vulnerabilities.
     </p>
 
-    <p>A sample Pentest report can be found here: </p>
-    <ul>
-      <li>
-        <a
-          href="https://github.com/radicallyopensecurity/templates/blob/master/sample-report/REP_SittingDuck-pentestreport-v10.pdf">
-          https://github.com/radicallyopensecurity/templates/blob/master/sample-report/REP_SittingDuck-pentestreport-v10.pdf</a>
-      </li>
-    </ul>
-
     <p>One of <company_short/>'s core principles is “Teach To Fish”, otherwise
       known as “Peek over our Shoulder” (PooS); We strive to structure our
       services so they can also serve as teaching or training opportunities for
