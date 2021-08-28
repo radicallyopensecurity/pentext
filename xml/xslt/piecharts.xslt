@@ -63,7 +63,7 @@
                             </pieEntryLabel>
                             <pieEntryCount>
                                 <xsl:value-of
-                                    select="count(//*[local-name() = $pieElem][@*[name() = $pieAttr]][@* = current-grouping-key()])"
+                                    select="count(//*[local-name() = $pieElem][@*[name() = $pieAttr] = current-grouping-key()])"
                                 />
                             </pieEntryCount>
                         </pieEntry>
@@ -79,7 +79,7 @@
                             </pieEntryLabel>
                             <pieEntryCount>
                                 <xsl:value-of
-                                    select="count(//*[local-name() = $pieElem][@*[name() = $pieAttr]][@status = $statusSequence][@* = current-grouping-key()])"
+                                    select="count(//*[local-name() = $pieElem][@status = $statusSequence][@*[name() = $pieAttr] = current-grouping-key()])"
                                 />
                             </pieEntryCount>
                         </pieEntry>
