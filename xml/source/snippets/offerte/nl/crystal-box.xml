@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div>
+<section id="crystalboxing">
   <p>
     Crystal-Box vs. Black-Box pentesting verwijst naar de hoeveelheid informatie
     over de doelwit omgeving, architectuur, en/of applicaties die de klant in
     eerste instantie deelt met de pentesters. Bij Black-Box testing ontvangen de
-    pentester helemaal geen informatie over het doelwit. Bij Crystal-Box tests
-    ontvangen de pentesters alle informatie die opgevraagd wordt betreffende het
-    doelwit, inclusief source code (wanneer dit relevant is), toegang tot
-    developers of systeembeheer, etc...
+    pentesters helemaal geen informatie over het doelwit. In tegenstelling tot
+    Crystal-Box tests, waarbij pentesters alle informatie ontvangen die
+    opgevraagd wordt betreffende het doelwit, inclusief source code (wanneer dit
+    relevant is), toegang tot developers of systeembeheer, etcetera.
   </p>
   <p>
     <company_short/>
@@ -19,4 +19,4 @@
     sluit de Crystal-box pentest het beste aan bij de "meekijk"-optie die
     <company_short/> <client_short/> biedt.
   </p>
-</div>
+</section>
