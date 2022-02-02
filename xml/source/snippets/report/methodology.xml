@@ -41,16 +41,16 @@
       </li>
       <li>
         <b>Obtaining Access</b>
-        <br/>
+        <br />
         We use the results of the scans to assist in attempting to obtain access
         to target systems and services, or to escalate privileges where access
         has been obtained (either legitimately though provided credentials, or
         via vulnerabilities). This may be done surreptitiously (for example to
         try to evade intrusion detection systems or rate limits) or by more
         aggressive brute-force methods. This step also consist of manually testing the
-        application against the latest (2017) list of OWASP Top 10 risks. The discovered 
+        application against the latest (2021) list of OWASP Top 10 risks. The discovered
         vulnerabilities from scanning and manual testing are moreover used to further elevate
-        access on the application. 
+        access on the application.
       </li>
     </ol>
   </section>
