@@ -234,6 +234,12 @@
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
+    <xsl:template match="p_draftdue">
+        <xsl:param name="placeholderElement" select="/*/meta/activityinfo/draft"/>
+        <xsl:call-template name="checkPlaceholder">
+            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+        </xsl:call-template>
+    </xsl:template>
     <xsl:template match="p_reportdue">
         <xsl:param name="placeholderElement" select="/*/meta/activityinfo/report_due"/>
         <xsl:call-template name="checkPlaceholder">
@@ -523,14 +529,22 @@
                     </xsl:when>
                     <!-- PRETTY FORMATTING FOR DATES -->
                     <xsl:when
-                        test="(self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate or self::p_startdate or self::p_enddate or self::p_reportdue) and string($placeholderElement) castable as xs:date">
+                        test="(self::contract_end_date or
+                              self::contract_start_date or
+                              self::generate_raterevisiondate or
+                              self::p_startdate or self::p_enddate or
+                              self::p_draftdue or self::p_reportdue) and string($placeholderElement) castable as xs:date">
                         <!-- pretty printing for date -->
                         <xsl:value-of
                             select="format-date($placeholderElement, '[MNn] [D1], [Y]', 'en', (), ())"
                         />
                     </xsl:when>
                     <xsl:when
-                        test="(self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate or self::p_startdate or self::p_enddate or self::p_reportdue) and normalize-space(.) = 'TBD'">
+                        test="(self::contract_end_date or
+                              self::contract_start_date or
+                              self::generate_raterevisiondate or
+                              self::p_startdate or self::p_enddate or
+                              self::p_draftdue or self::p_reportdue) and normalize-space(.) = 'TBD'">
                         <!-- actual TBD, don't mess with it --> TBD </xsl:when>
                     <xsl:when
                         test="(self::contract_end_date or self::contract_start_date or self::generate_raterevisiondate or self::p_startdate or self::p_enddate or self::p_reportdue) and not(string($placeholderElement) castable as xs:date)">

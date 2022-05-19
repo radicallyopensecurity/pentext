@@ -119,6 +119,10 @@ Agreed fee (can be used in QUOTES only!)
 *Refers to:* /*/meta/activityinfo/planning/start
 Start date of test
 
+###p_draftdue
+*Refers to:* /*/meta/activityinfo/planning/draft
+When the first draft version is due
+
 ###p_enddate
 *Refers to:* /*/meta/activityinfo/planning/end
 End date of test
