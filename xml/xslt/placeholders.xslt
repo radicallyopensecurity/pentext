@@ -465,7 +465,12 @@
                         //finding[@status =
                         $statusSequence]"
                     group-by="@threatLevel">
-                    <xsl:call-template name="print_threatlevel_counts"/>
+                  <xsl:call-template name="print_threatlevel_counts">
+                    <xsl:with-param name="threatLevels"
+                                    select="count(distinct-values(//finding[@status
+                                            = $statusSequence]/@threatLevel))"
+            as="xs:integer"/>
+                  </xsl:call-template>
                 </xsl:for-each-group>
             </xsl:when>
             <xsl:when test="@threatLevel and not(@status)">
@@ -477,15 +482,17 @@
             <xsl:otherwise>
                 <!-- all statuses, all threatLevels -->
                 <xsl:for-each-group select="//finding" group-by="@threatLevel">
-                    <xsl:call-template name="print_threatlevel_counts"/>
+                  <xsl:call-template name="print_threatlevel_counts">
+                    <xsl:with-param name="threatLevels" select="count(distinct-values(//finding/@threatLevel))"
+            as="xs:integer"/>
+                  </xsl:call-template>
                 </xsl:for-each-group>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
     <xsl:template name="print_threatlevel_counts">
-        <xsl:variable name="threatLevels" select="count(distinct-values(//finding/@threatLevel))"
-            as="xs:integer"/>
+      <xsl:param name="threatLevels"/>
         <xsl:value-of select="count(current-group())"/>
         <xsl:text> </xsl:text>
         <xsl:value-of select="current-grouping-key()"/>
