@@ -75,3 +75,8 @@ See for more detailed information the
 
 Besides the reports and quotations, generic documents can also be created. Those
 can be found [here](doc/examples)
+
+## Important note
+
+From version 2.0 onwards, the structure of the PenText repository has been
+simplified. Please see the [CHANGELOG](CHANGELOG.md) for more information.
