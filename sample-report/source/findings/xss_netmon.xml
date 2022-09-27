@@ -1,4 +1,4 @@
-<finding id="xss_netmon" threatLevel="Elevated" type="Cross-Site Scripting">
+<finding id="xss_netmon" threatLevel="Elevated" type="Cross-Site Scripting" number="12">
     <title>Cross-Site Scripting</title>
                         	
     <description>

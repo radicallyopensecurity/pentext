@@ -1,4 +1,4 @@
-<finding id="dos" threatLevel="Low" type="Denial of Service">
+<finding id="dos" threatLevel="Low" type="Denial of Service" number="03">
 	<title>Denial of Service</title>
 
 	<description>
