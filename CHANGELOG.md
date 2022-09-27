@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.0.0](https://github.com/radicallyopensecurity/pentext/compare/1.1.0...2.0.0) (2022-09-27)
+
+### ⚠ BREAKING CHANGES
+
+- move framework from xml subdirectory to root
+
+### Features
+
+- move framework from xml subdirectory to root
+  ([4cf2c5a](https://github.com/radicallyopensecurity/pentext/commit/4cf2c5afbffbe144d8dff1468f6a096d68e9e927))
+- remove chatops setup scripts /remnants
+  ([2af48c3](https://github.com/radicallyopensecurity/pentext/commit/2af48c3d6cd47ff98b0dbb5a28380b72d3108d71))
+- remove chatops tools from repository
+  ([36c8164](https://github.com/radicallyopensecurity/pentext/commit/36c8164d249910abebb18e971ac24fc614bfa233))
+- remove PenText framework update script
+  ([bb15ff4](https://github.com/radicallyopensecurity/pentext/commit/bb15ff4ec58864f942aec21c7b1bd43fad61183a))
+- remove previous roadmap
+  ([c4c5f8c](https://github.com/radicallyopensecurity/pentext/commit/c4c5f8c8485475a636734a25fb1800d3fbfc058a))
+- remove unmaintained editor
+  ([f25410a](https://github.com/radicallyopensecurity/pentext/commit/f25410aa389fec3d4f4733dfb1158e963fb96ab1))
+
 ## 1.1.0 (2022-09-16)
 
 ### Features
