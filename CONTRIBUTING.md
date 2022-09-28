@@ -41,3 +41,9 @@ All Markdown files are formatted and linted with
 
 All Python scripts are formatted with
 [black](https://black.readthedocs.io/en/stable/).
+
+## License
+
+We want to ensure that PenText remains free and open source software. By
+contributing, you agree that your contributions will be licensed under the same
+license PenText falls under, [the GPLv2 license](LICENSE).
