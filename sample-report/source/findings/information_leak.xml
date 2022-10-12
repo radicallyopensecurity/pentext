@@ -1,4 +1,4 @@
-<finding id="information_leak" threatLevel="Low" type="Information Leak">
+<finding id="information_leak" threatLevel="Low" type="Information Leak" number="04">
 	<title>Information Leak</title>
 							
 	<description>

@@ -1,4 +1,4 @@
-<non-finding id="osw">
+<non-finding id="osw" number="14">
     <title>Open Server Watch</title>
     <p>No vulnerabilities could be found in Sitting Duck's installation of Open Server Watch, even after quite a bit of scrutiny.</p>
     <p>An overview of some of the issues we looked at:</p>

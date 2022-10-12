@@ -1,4 +1,4 @@
-<non-finding id="brute_force">
+<non-finding id="brute_force" number="13">
     <title>Brute Forcing</title>
         <p>For brute forcing, we used Hydra with the 'rockyou' (see <a href="https://wiki.skullsecurity.org/Passwords">https://wiki.skullsecurity.org/Passwords</a>) wordlist.</p>
         <p>All parameters have been checked manually.</p>

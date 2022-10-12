@@ -1,4 +1,4 @@
-<finding id="pe_management" threatLevel="Moderate" type="Privilege Escalation">
+<finding id="pe_management" threatLevel="Moderate" type="Privilege Escalation" number="07">
     <title>Privilege Escalation</title>
                         	
     <description>

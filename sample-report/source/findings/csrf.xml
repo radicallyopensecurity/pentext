@@ -1,4 +1,4 @@
-<finding id="csrf" threatLevel="Elevated" type="Cross-Site Request Forgery">
+<finding id="csrf" threatLevel="Elevated" type="Cross-Site Request Forgery" number="02">
 	<title>Cross-Site Request Forgery</title>
 							
 	<description>

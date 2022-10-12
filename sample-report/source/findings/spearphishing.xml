@@ -1,4 +1,4 @@
-<finding id="spearphising" threatLevel="High" type="Social engineering">
+<finding id="spearphising" threatLevel="High" type="Social engineering" number="10">
 	<title>Social engineering</title> 
 						
 	<description>
