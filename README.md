@@ -60,7 +60,17 @@ supplied Makefile:
 `make report`
 
 See for more detailed information the
-[tools manual](https://github.com/radicallyopensecurity/pentext/blob/master/xml/doc/Tools%20manual.md)
+[tools manual](/doc/tools-manual.md)
+
+### Building CSVs
+
+To compile a CSV run:
+
+```sh
+make export-csv
+```
+
+This will output all columns as separate fields as well as a "Jira Formatted Description" field that can be used in Jira.
 
 ## Adding and Modifying Content
 
