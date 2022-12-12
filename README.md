@@ -86,6 +86,27 @@ To compile a CSV run:
 make export-csv
 ```
 
+### Exporting CSV
+
+Copy over the latest `xslt/findings2csv` to your project.
+
+Make sure the build step in `gitlab-ci.yml` saves `.csv` files:
+
+```yml
+build:
+  tags:
+    - docbuilder
+  stage: build
+  script:
+    - echo "Building documents!"
+  artifacts:
+    paths:
+      - target/*.pdf
+      - target/*.csv
+```
+
+CSVs will now be generated alongside every pdf.
+
 This will output all columns as separate fields as well as a "Jira Formatted Description" field that can be used in Jira.
 
 ## Adding and Modifying Content
