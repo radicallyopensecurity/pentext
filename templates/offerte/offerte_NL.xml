@@ -52,7 +52,7 @@
             <target>...</target>
         </targets>
         <permission_parties>
-        <xi:include href="client_info.xml"/>
+            <xi:include href="client_info.xml"/>
             <!-- the party section is optional; if no other party needs to give permission, please remove whole party element -->
             <party>
                 <full_name>...</full_name>
