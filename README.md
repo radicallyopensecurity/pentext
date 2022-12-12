@@ -52,6 +52,12 @@ text editor like _JEdit_, to a full IDE- for editing of course ;). Preferably
 something that can check XML file validity. To view the resulting PDF files a
 PDF viewer is necessary.
 
+### Building PDF's
+
+Manually compiling a quotation, report or other document can be done using `java -jar path-to-Saxon-jar -s:name-of-xml-file -xsl:name-of-xsl-file-in-xsl-directory -o:name-for-pdf-output`
+
+But why do it manually when the [ChatOps](https://github.com/radicallyopensecurity/pentext/tree/master/chatops) directory contains so much nice scripts to do just that ?
+
 ### Building PDFs
 
 Manually compiling a quotation, report or other document can be done using the
@@ -63,6 +69,16 @@ See for more detailed information the
 [tools manual](/doc/tools-manual.md)
 
 ### Building CSVs
+
+To compile a CSV run:
+
+```sh
+make export-csv
+```
+
+This will output all columns as separate fields as well as a "Jira Formatted Description" field that can be used in Jira.
+
+### Building CSV's
 
 To compile a CSV run:
 
