@@ -1,19 +1,10 @@
-xml/PenText.xpr
+PenText.xpr
 # (Emacs) (temporary) files
 .#*
 \#*#
 .projectile
-# Compiled Python stuff
-*.pyc
 
 .DS_Store
 *.orig
 
-chatops.egg-info
-.tox
-/xml/source/offerte.xml
-/xml/source/report.xml
-/xml/target
-xml/findings/*.xml
-xml/non-findings/*.xml
 /target
