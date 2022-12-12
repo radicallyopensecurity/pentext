@@ -2,8 +2,7 @@
 <company>
   <full_name>Radically Open Security B.V.</full_name>
   <short_name>ROS</short_name>
-  <legal_rep>Melanie Rieback
-  </legal_rep><!-- ROS legal representative (to sign offerte) -->
+  <legal_rep>Melanie Rieback</legal_rep><!-- ROS legal representative (to sign offerte) -->
   <poc1>Melanie Rieback</poc1><!-- first point of contact for ROS -->
   <address>Science Park 608</address>
   <postal_code>1098 XH</postal_code>
