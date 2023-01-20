@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.1.0](https://github.com/radicallyopensecurity/pentext/compare/2.0.0...2.1.0) (2023-01-20)
+
+### Features
+
+- add support for finding labels
+  ([8d966b2](https://github.com/radicallyopensecurity/pentext/commit/8d966b2cb0d0ec3209a5a396288be21719eb463c))
+- ensure sample report builds again
+  ([b70dcf0](https://github.com/radicallyopensecurity/pentext/commit/b70dcf004321d35d93a6513695d2dcd8133cde39))
+- **xsl:** add jira csv target
+  ([18234d7](https://github.com/radicallyopensecurity/pentext/commit/18234d724a2ac0726fd1dbd9246327c6d07c6536))
+
 ## [2.0.0](https://github.com/radicallyopensecurity/pentext/compare/1.1.0...2.0.0) (2022-09-27)
 
 ### ⚠ BREAKING CHANGES
