@@ -232,6 +232,16 @@
     <xsl:attribute-set name="finding-content" use-attribute-sets="p">
         <xsl:attribute name="margin-bottom" select="$large-space"/>
     </xsl:attribute-set>
+    <xsl:attribute-set name="labels">
+        <xsl:attribute name="margin-top">1px</xsl:attribute>
+        <xsl:attribute name="overflow">hidden</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="label">
+        <xsl:attribute name="margin-left">0px</xsl:attribute>
+        <xsl:attribute name="margin-right">0px</xsl:attribute>
+        <xsl:attribute name="margin-bottom">3px</xsl:attribute>
+        <xsl:attribute name="padding">3px</xsl:attribute>
+    </xsl:attribute-set>
 
     <!-- Pages -->
     <xsl:attribute-set name="PortraitPage">

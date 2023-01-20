@@ -58,15 +58,39 @@
                     </xsl:if>
                 </fo:table-row>
                 <fo:table-row>
-                    <fo:table-cell xsl:use-attribute-sets="td" number-columns-spanned="2">
+                    <fo:table-cell xsl:use-attribute-sets="td" number-columns-spanned="1">
                         <fo:block xsl:use-attribute-sets="finding-meta">
                             <fo:inline xsl:use-attribute-sets="bold">Vulnerability type: </fo:inline>
                             <xsl:value-of select="@type"/>
                         </fo:block>
                     </fo:table-cell>
+                    <xsl:choose>
+                        <xsl:when test="count(labels/label) > 0">
+                            <fo:table-cell xsl:use-attribute-sets="td" number-columns-spanned="1" number-rows-spanned="2">
+                                <fo:block xsl:use-attribute-sets="finding-meta">
+                                    <fo:inline xsl:use-attribute-sets="bold">Labels: </fo:inline>
+
+                                    <fo:block xsl:use-attribute-sets="labels">
+                                        <xsl:for-each select="labels/label">
+                                            <fo:block xsl:use-attribute-sets="label">
+                                                <xsl:attribute name="background-color">
+                                                    <xsl:value-of select="/pentest_report/meta/labels/label[@name=current()]/@color" />
+                                                </xsl:attribute>
+                                                <xsl:attribute name="color">
+                                                    <xsl:value-of select="/pentest_report/meta/labels/label[@name=current()]/@text" />
+                                                </xsl:attribute>
+                                                <xsl:value-of select="." />
+                                            </fo:block>
+                                            &#xA;
+                                        </xsl:for-each>
+                                    </fo:block>
+                                </fo:block>
+                            </fo:table-cell>
+                        </xsl:when>
+                    </xsl:choose>
                 </fo:table-row>
                 <fo:table-row>
-                    <fo:table-cell xsl:use-attribute-sets="td" number-columns-spanned="2">
+                    <fo:table-cell xsl:use-attribute-sets="td" number-columns-spanned="1">
                         <fo:block xsl:use-attribute-sets="finding-meta">
                             <fo:inline xsl:use-attribute-sets="bold">Threat level: </fo:inline>
                             <xsl:value-of select="@threatLevel"/>
