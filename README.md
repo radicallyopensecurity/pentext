@@ -52,6 +52,12 @@ text editor like _JEdit_, to a full IDE- for editing of course ;). Preferably
 something that can check XML file validity. To view the resulting PDF files a
 PDF viewer is necessary.
 
+### Building PDF's
+
+Manually compiling a quotation, report or other document can be done using `java -jar path-to-Saxon-jar -s:name-of-xml-file -xsl:name-of-xsl-file-in-xsl-directory -o:name-for-pdf-output`
+
+But why do it manually when the [ChatOps](https://github.com/radicallyopensecurity/pentext/tree/master/chatops) directory contains so much nice scripts to do just that ?
+
 ### Building PDFs
 
 Manually compiling a quotation, report or other document can be done using the
@@ -69,6 +75,37 @@ To compile a CSV run:
 ```sh
 make export-csv
 ```
+
+This will output all columns as separate fields as well as a "Jira Formatted Description" field that can be used in Jira.
+
+### Building CSV's
+
+To compile a CSV run:
+
+```sh
+make export-csv
+```
+
+### Exporting CSV
+
+Copy over the latest `xslt/findings2csv` to your project.
+
+Make sure the build step in `gitlab-ci.yml` saves `.csv` files:
+
+```yml
+build:
+  tags:
+    - docbuilder
+  stage: build
+  script:
+    - echo "Building documents!"
+  artifacts:
+    paths:
+      - target/*.pdf
+      - target/*.csv
+```
+
+CSVs will now be generated alongside every pdf.
 
 This will output all columns as separate fields as well as a "Jira Formatted Description" field that can be used in Jira.
 

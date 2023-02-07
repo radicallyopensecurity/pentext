@@ -9,8 +9,7 @@
     </fee>
   </service>
   <service>
-    <specification>Example Service 2: variable duration with min/max parameters and with hourly
-      rate.</specification>
+    <specification>Example Service 2: variable duration with min/max parameters and with hourly rate.</specification>
     <effort in="days">
       <min>3</min>
       <max>4</max>
@@ -21,14 +20,12 @@
     </fee>
   </service>
   <service>
-    <specification>Example Service 3: set duration in days with CUSTOM (non-computed) set
-      fee.</specification>
+    <specification>Example Service 3: set duration in days with CUSTOM (non-computed) set fee.</specification>
     <effort in="days">5</effort>
     <fee denomination="eur">500</fee>
   </service>
   <service>
-    <specification>Example Service 4: set duration in hours with CUSTOM (non-computed) variable fee
-      (min/max).</specification>
+    <specification>Example Service 4: set duration in hours with CUSTOM (non-computed) variable fee (min/max).</specification>
     <effort in="hours">4</effort>
     <fee denomination="eur">
       <min>100</min>
@@ -36,8 +33,7 @@
     </fee>
   </service>
   <service>
-    <specification>Example Service 5: set duration in days with CUSTOM (non-computed) estimated
-      fee.</specification>
+    <specification>Example Service 5: set duration in days with CUSTOM (non-computed) estimated fee.</specification>
     <effort in="hours">4</effort>
     <fee denomination="eur" estimate="yes">1000</fee>
   </service>
