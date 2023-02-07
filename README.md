@@ -10,8 +10,8 @@ code audits, etc), offers (to companies requesting these tests), and invoices.
 The OWASP PenText project is based on XML. A PenText Report, Quote, Invoice or
 Generic Document is in fact a (modular) XML document, conforming to an XML
 Schema. The XML Schema ensures that the documents are structured correctly, so
-that they can then be transformed into other formats using XSLT and the SAXON
-XSLT processor.
+that they can then be transformed into other formats like PDF, CSV and JSON
+using XSLT and the SAXON XSLT processor.
 
 To produce a PDF document, the report, offer, invoice or generic document XML is
 first transformed into XSL-FO (XSL Formatting Objects), which is then converted
@@ -52,12 +52,6 @@ text editor like _JEdit_, to a full IDE- for editing of course ;). Preferably
 something that can check XML file validity. To view the resulting PDF files a
 PDF viewer is necessary.
 
-### Building PDF's
-
-Manually compiling a quotation, report or other document can be done using `java -jar path-to-Saxon-jar -s:name-of-xml-file -xsl:name-of-xsl-file-in-xsl-directory -o:name-for-pdf-output`
-
-But why do it manually when the [ChatOps](https://github.com/radicallyopensecurity/pentext/tree/master/chatops) directory contains so much nice scripts to do just that ?
-
 ### Building PDFs
 
 Manually compiling a quotation, report or other document can be done using the
@@ -65,28 +59,23 @@ supplied Makefile:
 
 `make report`
 
-See for more detailed information the
-[tools manual](/doc/tools-manual.md)
+This performs
+`java -jar path-to-Saxon-jar -s:name-of-xml-file -xsl:name-of-xsl-file-in-xsl-directory -o:name-for-pdf-output`
+
+See for more detailed information the [tools manual](/doc/tools-manual.md)
 
 ### Building CSVs
 
-To compile a CSV run:
+To export all findings as CSV file run:
 
 ```sh
 make export-csv
 ```
 
-This will output all columns as separate fields as well as a "Jira Formatted Description" field that can be used in Jira.
+This will output all columns as separate fields as well as a "Jira Formatted
+Description" field that can be used in Jira.
 
-### Building CSV's
-
-To compile a CSV run:
-
-```sh
-make export-csv
-```
-
-### Exporting CSV
+#### Building CSVs using CI/CD
 
 Copy over the latest `xslt/findings2csv` to your project.
 
@@ -105,9 +94,7 @@ build:
       - target/*.csv
 ```
 
-CSVs will now be generated alongside every pdf.
-
-This will output all columns as separate fields as well as a "Jira Formatted Description" field that can be used in Jira.
+CSVs will now be generated alongside every PDF.
 
 ## Adding and Modifying Content
 
