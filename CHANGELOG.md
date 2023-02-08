@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.1](https://github.com/radicallyopensecurity/pentext/compare/2.1.0...2.1.1) (2023-02-08)
+
+### Bug Fixes
+
+- **snippet:** point to website for portfolio
+  ([89ca1d6](https://github.com/radicallyopensecurity/pentext/commit/89ca1d6740726a93718570e636d5fac322beb7db))
+
 ## [2.1.0](https://github.com/radicallyopensecurity/pentext/compare/2.0.0...2.1.0) (2023-01-20)
 
 ### Features
