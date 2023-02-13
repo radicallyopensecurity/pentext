@@ -272,7 +272,7 @@ Linda Valkenburg (Kinderen Museum Voor Nieuwe Kunst)</pre>
                         <title>Automated Scans</title>
                         <p>As part of our active reconnaissance we used the following automated scans:</p>
                         <ul>
-                                <li>nmap – <a href="http://nmap.org">http://nmap.org</a></li>
+                                <li>nmap – <a href="https://nmap.org">https://nmap.org</a></li>
                                 <li>w3af - <a href="http://w3af.org">http://w3af.org</a></li>
                                 <li>nipper-ng - <a href="http://sectools.org/tool/nipper/">http://sectools.org/tool/nipper/</a></li>
                         </ul>

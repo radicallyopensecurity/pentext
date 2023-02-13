@@ -181,7 +181,7 @@ who is also the co-founder/CEO of Radically Open Security.</bio>
                         <p>As part of our active reconnaissance we used the following automated
                                 scans:</p>
                         <ul>
-                                <li>nmap – <a href="http://nmap.org">http://nmap.org</a></li>
+                                <li>nmap – <a href="https://nmap.org">https://nmap.org</a></li>
                                 <li>skipfish -
                                         <a href="https://code.google.com/p/skipfish/">https://code.google.com/p/skipfish/</a></li>
                                 <li>sqlmap – <a href="http://sqlmap.org">http://sqlmap.org</a></li>
