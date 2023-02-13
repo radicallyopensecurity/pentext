@@ -277,12 +277,10 @@ Linda Valkenburg (Kinderen Museum Voor Nieuwe Kunst)</pre>
                                 <li>nipper-ng - <a href="http://sectools.org/tool/nipper/">http://sectools.org/tool/nipper/</a></li>
                         </ul>
                         <p>Of these scans, none of the outcomes turned out to be useful.</p>
-
-                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="scans/nmap.xml" />
-                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="scans/w3af.xml" />
-                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="scans/nipper.xml" />
-            </section>
-
+                        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="scans/nmap.xml" />
+                        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="scans/w3af.xml" />
+                        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="scans/nipper.xml" />
+                </section>
         </section>
         <section id="techSummary">
                 <title>Pentest Technical Summary</title>
@@ -297,38 +295,38 @@ Linda Valkenburg (Kinderen Museum Voor Nieuwe Kunst)</pre>
                         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/ace.xml" />
                         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/pe.xml" />
                         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/pe_management.xml" />
-                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/pe_management_2.xml" />
-                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/information_leak.xml" />
-                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/dos.xml" />
-                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/password_reuse.xml" />
-                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/spearphishing.xml" />
+                        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/pe_management_2.xml" />
+                        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/information_leak.xml" />
+                        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/dos.xml" />
+                        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/password_reuse.xml" />
+                        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findings/spearphishing.xml" />
                 </section>
 
- <section id="nonFindings">
-                     <title>Non-Findings and Future Work</title>
-                     <p>In this section we list some of the things that were tried but turned out to be dead ends.</p>
+                <section id="nonFindings">
+                        <title>Non-Findings and Future Work</title>
+                        <p>In this section we list some of the things that were tried but turned out to be dead ends.</p>
 
-                     <section id="dead_ends">
-                       <title>Non-Findings</title>
-                       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="non-findings/osw.xml" />
-                       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="non-findings/shielded_webapps.xml" />
-                       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="non-findings/brute_force.xml" />
-                     </section>
-                     <!-- 
-                     <section id="future_work">
-                     <title>Future Work</title>
-                     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="future-work/juniper.xml" />
-                     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="future-work/vpn.xml" />
-                     </section>
-                     -->
-                     </section>
+                        <section id="dead_ends">
+                                <title>Non-Findings</title>
+                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="non-findings/osw.xml" />
+                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="non-findings/shielded_webapps.xml" />
+                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="non-findings/brute_force.xml" />
+                        </section>
+                        <!-- 
+                        <section id="future_work">
+                        <title>Future Work</title>
+                        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="future-work/juniper.xml" />
+                        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="future-work/vpn.xml" />
+                        </section>
+                        -->
+             </section>
         </section>
         <section id="conclusion">
                 <title>Conclusion</title>
                 <p>We demonstrated a complete attack chain, from beginning to end, that totally compromises the Sitting Duck NOC. We conducted a multi-stage attack: a spearshishing email that exploited an XSS/CSRF in NetMon; we then leveraged a netmonclientd vulnerability for lateral movement to any machine in the network; and we then used found clear text credentials + passwordless sudo rights (or alternatively the netmonclient init script) to escalate to root. Beyond the vulnerabilities that led to compromise of the NOC, we also found a number of other issues: information leaks, XSS, more clear text credentials, password reuse, privilege escalation, Denial of Service, and arbitrary command execution.</p>
                 <p>Fortunately, a number of the technical security issues highlighted in this report have fairly simple solutions. (See <a href="#recommendationSummary" /> for our recommendations.) The most critical of the issues to fix is NetMon. </p>
                 <p>Sitting Duck's vulnerability to our spearphishing attack is a more difficult problem to solve. Awareness training certainly helps. However, technical solutions are also required as a backup, because awareness training will only get you so far. There is a number of points where our phishing Proof of Concept (PoC) could have been easily detected. Most prominently, ''Kinderen Museum Voor Nieuwe Kunst'' did not actually have a account with Sitting Duck.. so this would not have survived the least amount of scrutiny by the Support Engineer. Furthermore, the phishing domain was registered a couple of days prior to our sending the actual phishing email. (Anomaly detection hooked up to Sitting Duck's email gateway might be able to help here.) While a bit unwieldy, isolating the email client (like sandboxing it in a dedicated VM) might also help.
-</p>
+                </p>
                 <p>We finally want to emphasize that security is a process – and this penetration test is just a one-time snapshot. Security posture must be continuously evaluated and improved. Regular audits and ongoing improvements are essential in order to maintain control of your corporate information security. We hope that this pentest report (and the detailed explanations of our findings) will contribute meaningfully towards that end. Don't hesitate to let us know if you have any further questions or need further clarification of anything in this report.</p>
         </section>
 
@@ -337,5 +335,5 @@ Linda Valkenburg (Kinderen Museum Voor Nieuwe Kunst)</pre>
                 <generate_testteam/>
         </appendix>
 
-                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="appendix/payload_script.xml" />
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="appendix/payload_script.xml" />
 </pentest_report>
