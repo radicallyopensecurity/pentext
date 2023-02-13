@@ -919,7 +919,7 @@ report, otherwise the link wouldn't resolve.)
 
 Example 3:
 
-`<p>Please refer to <a href="http://www.radicallyopensecurity.com">our amazing website</a>.</p>`
+`<p>Please refer to <a href="https://www.radicallyopensecurity.com">our amazing website</a>.</p>`
 
 ## Manual breaks
 
