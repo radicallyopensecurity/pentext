@@ -522,7 +522,7 @@ In the `href` attribute of the `<a>` element, type the url of the website you're
 
 Example:
 
-`<p>Please refer to <a href="http://www.radicallyopensecurity.com">our amazing website</a>.</p>`
+`<p>Please refer to <a href="https://www.radicallyopensecurity.com">our amazing website</a>.</p>`
 
 Manual breaks
 -------------

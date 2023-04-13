@@ -218,21 +218,19 @@
                 <p>We were able to gain information about the software and infrastructure through the following automated
          scans. Any relevant scan output will be referred to in the findings.</p>
 
-                    <ul>
-                        <xsl:comment>
-                            <li>analyze_hosts - <a href="https://github.com/PeterMosmans/security-scripts">https://github.com/PeterMosmans/security-scripts</a></li>
-                        </xsl:comment>
-                        <li>nmap – <a href="http://nmap.org">http://nmap.org</a></li>
-                        <xsl:comment>
-                      <li>OWASP Zed Attack Proxy - <a href="https://github.com/zaproxy/zaproxy">https://github.com/zaproxy/zaproxy</a></li>
-                      <li>Skipfish – <a href="https://code.google.com/p/skipfish/">https://code.google.com/p/skipfish/</a></li>
-                      <li>sqlmap – <a href="https://github.com/sqlmapproject/sqlmap">https://github.com/sqlmapproject/sqlmap</a></li>
-                      <li>testssl.sh –
-        <a href="https://github.com/drwetter/testssl.sh">https://github.com/drwetter/testssl.sh</a></li>
-                            <li>SSLscan –
-               <a href="https://github.com/rbsec/sslscan">https://github.com/rbsec/sslscan</a></li>
-                        </xsl:comment>
-                    </ul>
+                <ul>
+                    <xsl:comment>
+                        <li>analyze_hosts - <a href="https://github.com/PeterMosmans/security-scripts">https://github.com/PeterMosmans/security-scripts</a></li>
+                    </xsl:comment>
+                    <li>nmap – <a href="https://nmap.org">https://nmap.org</a></li>
+                    <xsl:comment>
+                        <li>OWASP Zed Attack Proxy - <a href="https://github.com/zaproxy/zaproxy">https://github.com/zaproxy/zaproxy</a></li>
+                        <li>Skipfish – <a href="https://code.google.com/p/skipfish/">https://code.google.com/p/skipfish/</a></li>
+                        <li>sqlmap – <a href="https://github.com/sqlmapproject/sqlmap">https://github.com/sqlmapproject/sqlmap</a></li>
+                        <li>testssl.sh – <a href="https://github.com/drwetter/testssl.sh">https://github.com/drwetter/testssl.sh</a></li>
+                        <li>SSLscan – <a href="https://github.com/rbsec/sslscan">https://github.com/rbsec/sslscan</a></li>
+                    </xsl:comment>
+                </ul>
             </section>
 
             <section id="findings">
@@ -275,7 +273,5 @@
 
 
     </xsl:template>
-
-
 
 </xsl:stylesheet>
