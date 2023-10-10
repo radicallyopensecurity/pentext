@@ -101,11 +101,10 @@
 
             </fo:table-body>
         </fo:table>
+      </xsl:template>
 
-
-
-
-    </xsl:template>
+    <!-- ignore label content in the findings -->
+    <xsl:template match="label" />
 
     <!-- ignore summary-table-only elements in the findings -->
     <xsl:template match="description_summary | recommendation_summary"/>
