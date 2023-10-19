@@ -3,7 +3,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="xs" version="2.0">
 
-    
+
     <xsl:import href="pages.xslt"/>
     <xsl:import href="meta.xslt"/>
     <xsl:import href="toc.xslt"/>
@@ -22,14 +22,11 @@
     <xsl:import href="localisation.xslt"/>
     <xsl:import href="fo_placeholders.xslt"/>
     <xsl:import href="fo_secrets.xslt"/>
-    
 
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no"/>
     
     <xsl:include href="functions_params_vars.xslt"/>
     <xsl:include href="styles_rep.xslt"/>
-    
-    
     
     <!-- numbered titles or not? -->
     <xsl:param name="NUMBERING" select="true()"/>
@@ -59,6 +56,5 @@
                     </xsl:call-template>
         </fo:root>
     </xsl:template>
-
 
 </xsl:stylesheet>

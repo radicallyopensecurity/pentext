@@ -606,6 +606,10 @@ there.
     color: <xsl:value-of select="$color_resolved"/>;
 }
 
+.status-accepted {
+    color: <xsl:value-of select="$color_accepted"/>;
+}
+
 .status-tag {
     background-color: <xsl:value-of select="$c_support_light"/>;
 }      

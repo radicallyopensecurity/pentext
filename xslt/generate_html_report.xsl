@@ -626,6 +626,11 @@
                                     <xsl:value-of select="$prettyStatus"/>
                                 </span>
                             </xsl:when>
+                            <xsl:when test="@status = 'accepted'">
+                                <span class="accepted"> 
+                                    <xsl:value-of select="$prettyStatus"/>
+                                </span>
+                            </xsl:when>
                         </xsl:choose>
                     </div>
                 </xsl:if>
