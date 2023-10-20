@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:my="http://www.radical.sexy"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:my="http://www.radical.sexy"
+    xmlns:fo="http://www.w3.org/1999/XSL/Format"
     exclude-result-prefixes="xs my" version="2.0">
 
     <!-- color scheme, just change these to change colors throughout the suite -->
@@ -139,9 +141,6 @@
                                         <xsl:when test="effort/@in = 'days'">
                                             <xsl:value-of select="effort/min * 8"/>
                                         </xsl:when>
-                                        <xsl:when test="effort/@in = 'weeks'">
-                                            <xsl:value-of select="effort/min * 8 * 5"/>
-                                        </xsl:when>
                                     </xsl:choose>
                                 </min>
                                 <max>
@@ -151,9 +150,6 @@
                                         </xsl:when>
                                         <xsl:when test="effort/@in = 'days'">
                                             <xsl:value-of select="effort/max * 8"/>
-                                        </xsl:when>
-                                        <xsl:when test="effort/@in = 'weeks'">
-                                            <xsl:value-of select="effort/max * 8 * 5"/>
                                         </xsl:when>
                                     </xsl:choose>
                                 </max>
@@ -168,9 +164,6 @@
                                         <xsl:when test="effort/@in = 'days'">
                                             <xsl:value-of select="effort * 8"/>
                                         </xsl:when>
-                                        <xsl:when test="effort/@in = 'weeks'">
-                                            <xsl:value-of select="effort * 8 * 5"/>
-                                        </xsl:when>
                                     </xsl:choose>
                                 </min>
                                 <max>
@@ -180,9 +173,6 @@
                                         </xsl:when>
                                         <xsl:when test="effort/@in = 'days'">
                                             <xsl:value-of select="effort * 8"/>
-                                        </xsl:when>
-                                        <xsl:when test="effort/@in = 'weeks'">
-                                            <xsl:value-of select="effort * 8 * 5"/>
                                         </xsl:when>
                                     </xsl:choose>
                                 </max>
@@ -273,10 +263,6 @@
             <xsl:when test="effort/@in = 'days'">
                 <!-- multiply with hourly rate * 8 -->
                 <xsl:value-of select="$for * hourly_rate * 8"/>
-            </xsl:when>
-            <xsl:when test="effort/@in = 'weeks'">
-                <!-- multiply with hourly rate * 8 * 5 -->
-                <xsl:value-of select="$for * hourly_rate * 8 * 5"/>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
@@ -478,6 +464,17 @@
                     <findingThreatLevel>
                         <xsl:value-of select="current-grouping-key()"/>
                     </findingThreatLevel>
+                    <xsl:for-each select="labels/label">
+                        <findingLabel>
+                            <xsl:attribute name="color">
+                                <xsl:value-of select="/pentest_report/meta/labels/label[@name=current()]/@color" />
+                            </xsl:attribute>
+                            <xsl:attribute name="text">
+                                <xsl:value-of select="/pentest_report/meta/labels/label[@name=current()]/@text" />
+                            </xsl:attribute>
+                            <xsl:value-of select="."/>
+                        </findingLabel>
+                    </xsl:for-each>
                 </findingEntry>
             </xsl:for-each>
         </xsl:for-each-group>
@@ -523,6 +520,17 @@
                 <findingThreatLevel>
                     <xsl:value-of select="findingThreatLevel"/>
                 </findingThreatLevel>
+                <xsl:for-each select="findingLabel">
+                    <findingLabel>
+                        <!-- <xsl:attribute name="color"><xsl:value-of select="@color"/></xsl:attribute> -->
+                        <xsl:attribute name="color"><xsl:value-of select="@color"/></xsl:attribute>
+                        <xsl:attribute name="text"><xsl:value-of select="@text"/></xsl:attribute>
+                        <xsl:value-of select="."/>
+                    </findingLabel>
+                </xsl:for-each>
+                <findingLabels>
+                    <xsl:value-of select="findingLabels"/>
+                </findingLabels>
             </findingEntry>
         </xsl:for-each>
     </xsl:variable>

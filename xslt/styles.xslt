@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs"
+    xmlns:fox="http://xmlgraphics.apache.org/fop/extensions"
     xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
 
 
@@ -143,7 +144,7 @@
         <xsl:attribute name="font-size">13pt</xsl:attribute></xsl:attribute-set>
     <xsl:attribute-set name="h3" use-attribute-sets="bold h-title">
         <xsl:attribute name="font-size">12pt</xsl:attribute></xsl:attribute-set>
-    <xsl:attribute-set name="h4" use-attribute-sets="bold h-title"></xsl:attribute-set><xsl:attribute-set name="h5" use-attribute-sets="italic h-title"></xsl:attribute-set>
+    <xsl:attribute-set name="h4" use-attribute-sets="bold h-title"></xsl:attribute-set>
     <xsl:attribute-set name="bold">
         <xsl:attribute name="font-weight">bold</xsl:attribute>
     </xsl:attribute-set>
@@ -240,7 +241,12 @@
         <xsl:attribute name="margin-left">0px</xsl:attribute>
         <xsl:attribute name="margin-right">0px</xsl:attribute>
         <xsl:attribute name="margin-bottom">3px</xsl:attribute>
-        <xsl:attribute name="padding">3px</xsl:attribute>
+        <xsl:attribute name="padding-top">2px</xsl:attribute>
+        <xsl:attribute name="padding-bottom">2px</xsl:attribute>
+        <xsl:attribute name="padding-left">4px</xsl:attribute>
+        <xsl:attribute name="padding-right">4px</xsl:attribute>
+        <xsl:attribute name="fox:border-radius">5px</xsl:attribute>
+        <xsl:attribute name="font-size">9pt</xsl:attribute>
     </xsl:attribute-set>
 
     <!-- Pages -->
