@@ -180,7 +180,14 @@
     </xs:simpleType>
   </xs:element>
   <xs:element name="nature" type="xs:string"/>
-  <xs:element name="type" type="xs:string">
+  <xs:element name="type">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="black-box"/>
+        <xs:enumeration value="crystal-box"/>
+        <xs:enumeration value="grey-box"/>
+      </xs:restriction>
+    </xs:simpleType>
   </xs:element>
 
   <xs:element name="start">
