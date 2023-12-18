@@ -9,6 +9,7 @@
     <!-- <client_short/>         short client name;                  value taken from /offerte/meta/client/short_name -->
     <!-- <client_coc/>           Chamber of Commerce number;         value taken from /offerte/meta/client/coc -->
     <!-- <client_street/>        client street & number;             value taken from /offerte/meta/client/address -->
+    <!-- <client_postalcode/>    client postal code;                 value taken from /offerte/meta/client/postal_code -->
     <!-- <client_city/>          client city;                        value taken from /offerte/meta/client/city -->
     <!-- <client_country/>       client country;                     value taken from /offerte/meta/client/country -->
     <!-- <client_legal_rep/>     client legal representative;        value taken from /offerte/meta/client/legal_rep -->

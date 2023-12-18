@@ -12,6 +12,10 @@ Client's shorter name (e.g. Sitting Duck)
 *Refers to:* /*/meta//client/address
 Client's street + number
 
+###client_postalcode
+*Refers to:* /*/meta//client/postal_code
+Client's postal code
+
 ###client_city
 *Refers to:* /*/meta//client/city
 Client's city

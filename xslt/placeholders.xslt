@@ -46,6 +46,12 @@
             <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
         </xsl:call-template>
     </xsl:template>
+    <xsl:template match="client_postal_code">
+        <xsl:param name="placeholderElement" select="/*/meta//client/postal_code"/>
+        <xsl:call-template name="checkPlaceholder">
+            <xsl:with-param name="placeholderElement" select="$placeholderElement"/>
+        </xsl:call-template>
+    </xsl:template>
     <xsl:template match="client_city">
         <xsl:param name="placeholderElement" select="/*/meta//client/city"/>
         <xsl:call-template name="checkPlaceholder">
