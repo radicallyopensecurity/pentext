@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.2](https://github.com/radicallyopensecurity/pentext/compare/2.1.1...2.1.2) (2023-12-18)
+
+
+### Bug Fixes
+
+* don't show the content of labels in the finding itself ([aa0f479](https://github.com/radicallyopensecurity/pentext/commit/aa0f4798bcc6c2df6d63e48860dbf42e980fc610))
+* ensure that (sample) generic documents can be created again ([ae23ce9](https://github.com/radicallyopensecurity/pentext/commit/ae23ce9279a41c4070b8a14db713e0cfd1be13e6))
+* ensure that template contains number ([497365b](https://github.com/radicallyopensecurity/pentext/commit/497365bded4ca7f8b3bac6a651e2a2614315de87))
+
 ## [2.1.1](https://github.com/radicallyopensecurity/pentext/compare/2.1.0...2.1.1) (2023-02-08)
 
 ### Bug Fixes
