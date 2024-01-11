@@ -7,7 +7,7 @@
     <xsl:variable name="quote" select="'&quot;'" />
     <xsl:template match="/pentest_report">
         <!-- Output headers so Jira understands what's going on -->
-        <xsl:text>Title,Finding ID,Threat Level,Type,Impact,Recommendation,Short Description, Technical Description, Jira Formatted Description</xsl:text>
+        <xsl:text>Title,Finding ID,Threat Level,Type,Retest Status,Impact,Recommendation,Short Description, Technical Description, Jira Formatted Description</xsl:text>
         <xsl:text>&#xa;</xsl:text>
         <xsl:apply-templates select="//finding"/>
     </xsl:template>
@@ -67,6 +67,9 @@
         <xsl:value-of select="$delimiter"/>
         <!-- type column -->
         <xsl:value-of select="@type"/>
+        <xsl:value-of select="$delimiter"/>
+        <!-- status column -->
+        <xsl:value-of select="@status"/>
         <xsl:value-of select="$delimiter"/>
         <!-- impact column -->
         <xsl:value-of select="$impact"/>
