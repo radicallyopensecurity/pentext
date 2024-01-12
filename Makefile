@@ -1,7 +1,7 @@
 PROJECT	= sample-report
 TARGETS	= target/report_$(PROJECT).pdf
 OBJS	= target/report_$(PROJECT).fo
-FOP	= fop -c rosbot/fop.conf
+FOP	= fop -c fonts/fop.conf
 JAVA	= java
 MKDIR	= mkdir -p
 MV	= mv -f
