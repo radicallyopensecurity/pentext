@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.2.0](https://github.com/radicallyopensecurity/pentext/compare/2.1.1...2.2.0) (2024-01-16)
+
+
+### Features
+
+* add ability to create multiple tables ([9ceba05](https://github.com/radicallyopensecurity/pentext/commit/9ceba05dfbfcf9d50f7c1685cb1395509d5e989c))
+* add retest-status to CSV finding export ([c4b9de7](https://github.com/radicallyopensecurity/pentext/commit/c4b9de79536d6174aaa1274024edd999ef8e5b29))
+* add retest-status to CSV finding export ([040c122](https://github.com/radicallyopensecurity/pentext/commit/040c122ecc48b9df8949fb6cc4b4611d76a0c450))
+* change type of pentest from string to enum ([5367dd9](https://github.com/radicallyopensecurity/pentext/commit/5367dd9e22e58f026657936fc56c0f7008ce89fd))
+* pentest type is an enum ([6e5edc7](https://github.com/radicallyopensecurity/pentext/commit/6e5edc7a870979a42cf8e6797d98068709724ebd))
+
+
+### Bug Fixes
+
+* don't show the content of labels in the finding itself ([aa0f479](https://github.com/radicallyopensecurity/pentext/commit/aa0f4798bcc6c2df6d63e48860dbf42e980fc610))
+* ensure that (sample) generic documents can be created again ([ae23ce9](https://github.com/radicallyopensecurity/pentext/commit/ae23ce9279a41c4070b8a14db713e0cfd1be13e6))
+* ensure that template contains number ([497365b](https://github.com/radicallyopensecurity/pentext/commit/497365bded4ca7f8b3bac6a651e2a2614315de87))
+
 ## [2.1.1](https://github.com/radicallyopensecurity/pentext/compare/2.1.0...2.1.1) (2023-02-08)
 
 ### Bug Fixes
