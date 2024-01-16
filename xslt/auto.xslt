@@ -59,6 +59,7 @@
     </xsl:template>
 
     <xsl:template match="generate_findings">
+        <xsl:variable name="match-labels" select="@match-labels"/>
         <xsl:variable name="Ref" select="@Ref"/>
         <xsl:variable name="statusSequence" as="item()*">
             <xsl:for-each select="@status">
@@ -116,8 +117,8 @@
                             </xsl:for-each>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:for-each select="$findingSummaryTable/findingEntry">
-                                <xsl:call-template name="findingsSummaryContent"/>
+                            <xsl:for-each select="$findingSummaryTable/findingEntry[matches(concat('//', string-join(findingLabel, '//')), concat('//', $match-labels))]">
+                                <xsl:call-template name="findingsSummaryContent" />
                             </xsl:for-each>
                         </xsl:otherwise>
                     </xsl:choose>
@@ -133,18 +134,20 @@
             </xsl:if>
             <fo:table-cell xsl:use-attribute-sets="td">
                 <fo:block>
-                    <!-- attach id to first finding of each threatLevel so pie charts can link to it -->
-                    <xsl:if test="@id">
-                        <xsl:attribute name="id">
-                            <xsl:value-of select="@id"/>
-                        </xsl:attribute>
-                    </xsl:if>
-                    <fo:basic-link xsl:use-attribute-sets="link">
-                        <xsl:attribute name="internal-destination">
-                            <xsl:value-of select="@findingId"/>
-                        </xsl:attribute>
-                        <xsl:value-of select="findingNumber"/>
-                    </fo:basic-link>
+                    <fo:inline>
+                        <!-- attach id to first finding of each threatLevel so pie charts can link to it -->
+                        <xsl:if test="@id">
+                            <xsl:attribute name="id">
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <fo:basic-link xsl:use-attribute-sets="link">
+                            <xsl:attribute name="internal-destination">
+                                <xsl:value-of select="@findingId"/>
+                            </xsl:attribute>
+                            <xsl:value-of select="findingNumber"/>
+                        </fo:basic-link>
+                    </fo:inline>
                 </fo:block>
             </fo:table-cell>
             <fo:table-cell xsl:use-attribute-sets="td">
@@ -166,6 +169,7 @@
     </xsl:template>
 
     <xsl:template match="generate_recommendations">
+        <xsl:variable name="match-labels" select="@match-labels"/>
         <xsl:variable name="Ref" select="@Ref"/>
         <xsl:variable name="statusSequence" as="item()*">
             <xsl:for-each select="@status">
@@ -214,6 +218,14 @@
                             <!-- Only generate a table for findings in the section with this Ref -->
                             <xsl:for-each
                                 select="/pentest_report/descendant::finding[ancestor::*[@id = $Ref]]">
+                                <xsl:call-template name="recommendationsSummaryContent"/>
+                            </xsl:for-each>
+                        </xsl:when>
+                        <xsl:when test="not(@Ref) and not(@status) and $match-labels">
+                            <xsl:for-each select="/pentest_report/descendant::finding[matches(
+                                concat('//', string-join(labels/label, '//')),
+                                concat('//', $match-labels))]
+                            ">
                                 <xsl:call-template name="recommendationsSummaryContent"/>
                             </xsl:for-each>
                         </xsl:when>
@@ -587,5 +599,7 @@
             <xsl:text>.-</xsl:text>
         </xsl:if>
     </xsl:template>
+
+    <xsl:template match="labels"/>
 
 </xsl:stylesheet>
