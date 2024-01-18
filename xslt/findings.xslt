@@ -175,13 +175,13 @@
                 <xsl:if test="@date">
                     <xsl:text> </xsl:text>
                     <fo:inline xsl:use-attribute-sets="status-tag">
-                        <xsl:value-of select="@date"/>                            
+                        <xsl:value-of select="@date"/>
                     </fo:inline>
                 </xsl:if>
                 <xsl:if test="@version">
                     <xsl:text> </xsl:text>
                     <fo:inline xsl:use-attribute-sets="status-tag">
-                        <xsl:value-of select="@version"/>                            
+                        <xsl:value-of select="@version"/>
                     </fo:inline>
                 </xsl:if>
                 <xsl:text>:</xsl:text>
