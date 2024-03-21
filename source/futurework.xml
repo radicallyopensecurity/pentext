@@ -9,9 +9,11 @@
       other security problems. </li>
     <li>
       <b>Regular security assessments</b>
-      <br/> Security is an ongoing process and not a product, so we advise undertaking regular
-      security assessments and penetration tests, ideally prior to every major release or every
-      quarter. </li>
+      <br/>
+      Let us emphasize that security is a process, and this penetration test is just a single snapshot.
+      Security must be continuously evaluated and improved.
+      Regular audits and ongoing improvements are essential in order to maintain control of your corporate information security.
+    </li>
     <li>
       <todo desc="Add any specific future work for this project or remove this list item"/>
     </li>
