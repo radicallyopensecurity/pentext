@@ -40,6 +40,9 @@
                     <xsl:with-param name="execsummary_linking_to_content_not_in_report" select="true()"></xsl:with-param>
                 </xsl:call-template>
             </xsl:when>
+            <xsl:when test="(@aria-hidden='true') or (@aria-hidden)">
+                <!-- ignore hidden links -->
+            </xsl:when>
             <xsl:otherwise>
                 <fo:basic-link xsl:use-attribute-sets="link">
                     <xsl:choose>
