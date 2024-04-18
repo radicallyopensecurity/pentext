@@ -1,0 +1,56 @@
+stages:
+  - quickscope2off
+  - off2rep
+  - convert
+  - build
+
+convert:
+  tags:
+    - convert
+  stage: convert
+  script:
+    - echo "Convert all the things!"
+  artifacts:
+    untracked: true
+    paths:
+      - source/**.xml
+      - findings/*.xml
+      - non-findings/*.xml
+      - uploads/**
+  rules:
+    - exists:
+      - source/report.xml
+
+build:
+  tags:
+    - docbuilder
+  stage: build
+  script:
+    - echo "Building documents!"
+  artifacts:
+    paths:
+      - target/*.pdf
+      - target/*.csv
+
+quickscope2off:
+  when: manual
+  tags:
+    - quickscope
+  stage: quickscope2off
+  script:
+    - echo "Converting Quickscope to Offerte"
+  artifacts:
+    paths:
+      - source/offerte.xml
+
+off2rep:
+  when: manual
+  tags:
+    - off2rep
+  stage: off2rep
+  script:
+    - echo "Converting Offerte to Report"
+  artifacts:
+    paths:
+      - source/report.xml
+
