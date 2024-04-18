@@ -1,5 +1,41 @@
 # Changelog
 
+## [2.3.0](https://github.com/radicallyopensecurity/pentext/compare/2.2.0...2.3.0) (2024-04-18)
+
+
+### Features
+
+* Configure GitLab CI/CD ([16bde45](https://github.com/radicallyopensecurity/pentext/commit/16bde45da7843bba0d2777d8609baf27ce4e63a0))
+* express effort in weeks (in addition to days) ([1ff04b7](https://github.com/radicallyopensecurity/pentext/commit/1ff04b71e47e2754d3732df1019d9e55e529a4dd))
+* express effort in weeks (in addition to days) ([a98b936](https://github.com/radicallyopensecurity/pentext/commit/a98b936eed8de166ab0eedcf5f658c6c4acbe306))
+* make futurework snippet less specific ([daece47](https://github.com/radicallyopensecurity/pentext/commit/daece47ddc671332e00530ca769b89a1bc39df7c))
+* remove hidden inline links (aria-hidden=true) ([28a191f](https://github.com/radicallyopensecurity/pentext/commit/28a191f3b4b68028b0f3bef4b21bf00453a4ad5b))
+* support different image width units (incl %) ([8b74a08](https://github.com/radicallyopensecurity/pentext/commit/8b74a0868807f4f2bfcad5ea589f9d742a683880))
+
+
+### Bug Fixes
+
+* ignore template label tag ([143a632](https://github.com/radicallyopensecurity/pentext/commit/143a6325cbc459d9f1af96429160179dd54c980c))
+* ignore template label tag ([14579a8](https://github.com/radicallyopensecurity/pentext/commit/14579a856d6be937d699fe872eee30b3899a51ff))
+
+## [2.3.0](https://git.go-forward.net/radicallyopensecurity/pentext/-/compare/2.2.0...2.3.0) (2024-04-18)
+
+
+### Features
+
+* Configure GitLab CI/CD ([16bde45](https://git.go-forward.net/radicallyopensecurity/pentext/-/commit/16bde45da7843bba0d2777d8609baf27ce4e63a0))
+* express effort in weeks (in addition to days) ([1ff04b7](https://git.go-forward.net/radicallyopensecurity/pentext/-/commit/1ff04b71e47e2754d3732df1019d9e55e529a4dd))
+* express effort in weeks (in addition to days) ([a98b936](https://git.go-forward.net/radicallyopensecurity/pentext/-/commit/a98b936eed8de166ab0eedcf5f658c6c4acbe306))
+* make futurework snippet less specific ([daece47](https://git.go-forward.net/radicallyopensecurity/pentext/-/commit/daece47ddc671332e00530ca769b89a1bc39df7c))
+* remove hidden inline links (aria-hidden=true) ([28a191f](https://git.go-forward.net/radicallyopensecurity/pentext/-/commit/28a191f3b4b68028b0f3bef4b21bf00453a4ad5b))
+* support different image width units (incl %) ([8b74a08](https://git.go-forward.net/radicallyopensecurity/pentext/-/commit/8b74a0868807f4f2bfcad5ea589f9d742a683880))
+
+
+### Bug Fixes
+
+* ignore template label tag ([143a632](https://git.go-forward.net/radicallyopensecurity/pentext/-/commit/143a6325cbc459d9f1af96429160179dd54c980c))
+* ignore template label tag ([14579a8](https://git.go-forward.net/radicallyopensecurity/pentext/-/commit/14579a856d6be937d699fe872eee30b3899a51ff))
+
 ## [2.2.0](https://github.com/radicallyopensecurity/pentext/compare/2.1.1...2.2.0) (2024-01-16)
 
 
