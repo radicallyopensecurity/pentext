@@ -2,6 +2,9 @@
 
 ## [2.3.0](https://github.com/radicallyopensecurity/pentext/compare/2.2.0...2.3.0) (2024-04-18)
 
+### ⚠ IMPORTANT CHANGES
+
+- Rename default branch to `main`: Please don't forget to update your local clone.
 
 ### Features
 
