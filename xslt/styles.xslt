@@ -144,7 +144,7 @@
         <xsl:attribute name="font-size">13pt</xsl:attribute></xsl:attribute-set>
     <xsl:attribute-set name="h3" use-attribute-sets="bold h-title">
         <xsl:attribute name="font-size">12pt</xsl:attribute></xsl:attribute-set>
-    <xsl:attribute-set name="h4" use-attribute-sets="bold h-title"></xsl:attribute-set><xsl:attribute-set name="h5" use-attribute-sets="italic h-title"></xsl:attribute-set>
+    <xsl:attribute-set name="h4" use-attribute-sets="bold h-title"></xsl:attribute-set>
     <xsl:attribute-set name="bold">
         <xsl:attribute name="font-weight">bold</xsl:attribute>
     </xsl:attribute-set>
