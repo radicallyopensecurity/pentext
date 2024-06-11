@@ -141,6 +141,9 @@
                                         <xsl:when test="effort/@in = 'days'">
                                             <xsl:value-of select="effort/min * 8"/>
                                         </xsl:when>
+                                        <xsl:when test="effort/@in = 'weeks'">
+                                            <xsl:value-of select="effort/min * 8 * 5"/>
+                                        </xsl:when>
                                     </xsl:choose>
                                 </min>
                                 <max>
@@ -150,6 +153,9 @@
                                         </xsl:when>
                                         <xsl:when test="effort/@in = 'days'">
                                             <xsl:value-of select="effort/max * 8"/>
+                                        </xsl:when>
+                                        <xsl:when test="effort/@in = 'weeks'">
+                                            <xsl:value-of select="effort/max * 8 * 5"/>
                                         </xsl:when>
                                     </xsl:choose>
                                 </max>
@@ -164,6 +170,9 @@
                                         <xsl:when test="effort/@in = 'days'">
                                             <xsl:value-of select="effort * 8"/>
                                         </xsl:when>
+                                        <xsl:when test="effort/@in = 'weeks'">
+                                            <xsl:value-of select="effort * 8 * 5"/>
+                                        </xsl:when>
                                     </xsl:choose>
                                 </min>
                                 <max>
@@ -173,6 +182,9 @@
                                         </xsl:when>
                                         <xsl:when test="effort/@in = 'days'">
                                             <xsl:value-of select="effort * 8"/>
+                                        </xsl:when>
+                                        <xsl:when test="effort/@in = 'weeks'">
+                                            <xsl:value-of select="effort * 8 * 5"/>
                                         </xsl:when>
                                     </xsl:choose>
                                 </max>
@@ -263,6 +275,10 @@
             <xsl:when test="effort/@in = 'days'">
                 <!-- multiply with hourly rate * 8 -->
                 <xsl:value-of select="$for * hourly_rate * 8"/>
+            </xsl:when>
+            <xsl:when test="effort/@in = 'weeks'">
+                <!-- multiply with hourly rate * 8 * 5 -->
+                <xsl:value-of select="$for * hourly_rate * 8 * 5"/>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
