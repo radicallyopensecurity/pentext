@@ -149,21 +149,6 @@
                         </fo:basic-link>
                     </fo:inline>
                 </fo:block>
-                <!-- <fo:block>
-                    <fo:block xsl:use-attribute-sets="labels">
-                        <xsl:for-each select="findingLabel">
-                            <fo:block xsl:use-attribute-sets="label">
-                                <xsl:attribute name="background-color">
-                                    <xsl:value-of select="@color"/>
-                                </xsl:attribute>
-                                <xsl:attribute name="color">
-                                    <xsl:value-of select="@text"/>
-                                </xsl:attribute>
-                                <xsl:value-of select="."/>
-                            </fo:block>
-                        </xsl:for-each>
-                    </fo:block>
-                </fo:block> -->
             </fo:table-cell>
             <fo:table-cell xsl:use-attribute-sets="td">
                 <fo:block>
