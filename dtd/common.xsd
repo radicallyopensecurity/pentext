@@ -15,6 +15,7 @@
     schemaLocation="http://www.w3.org/2001/XInclude/XInclude.xsd"
   />
 
+  
   <xs:complexType name="emailAddressType" mixed="true">
     <xs:choice minOccurs="0" maxOccurs="1">
       <xs:element name="company_email" />
@@ -213,6 +214,8 @@
 
   <xs:element name="target_application" type="xs:string" />
   <xs:element name="target_application_producer" type="xs:string" />
+  <xs:element name="location" type="xs:string" />
+  <xs:element name="participants" type="xs:string" />
 
   <!-- doc -->
   <xs:element name="title">

@@ -429,6 +429,42 @@
       />
         </xsl:call-template>
     </xsl:template>
+    <xsl:template match="p_duration">
+        <xsl:param
+      name="placeholderElement"
+      select="/*/meta/activityinfo/duration"
+    />
+        <xsl:call-template name="checkPlaceholder">
+            <xsl:with-param
+        name="placeholderElement"
+        select="$placeholderElement"
+      />
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="p_location">
+        <xsl:param
+      name="placeholderElement"
+      select="/*/meta/activityinfo/location"
+    />
+        <xsl:call-template name="checkPlaceholder">
+            <xsl:with-param
+        name="placeholderElement"
+        select="$placeholderElement"
+      />
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="p_participants">
+        <xsl:param
+      name="placeholderElement"
+      select="/*/meta/activityinfo/participants"
+    />
+        <xsl:call-template name="checkPlaceholder">
+            <xsl:with-param
+        name="placeholderElement"
+        select="$placeholderElement"
+      />
+        </xsl:call-template>
+    </xsl:template>
     <xsl:template match="engagement_description">
         <xsl:param
       name="placeholderElement"
