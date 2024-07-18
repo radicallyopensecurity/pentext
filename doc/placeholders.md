@@ -95,6 +95,8 @@ Company's first point of contact during the pentest
 *Refers to:* /*/meta/company/email
 Company's email address
 
+## Application / project
+
 ###t_app
 *Refers to:* /*/meta/activityinfo/target_application
 Name of the tested application (if any)
@@ -134,6 +136,14 @@ End date of test
 ###p_reportdue
 *Refers to:* /*/meta/activityinfo/report_due
 Due date of pentest report
+
+###p_location
+*Refers to:* /*/meta/activityinfo/location
+Location of project
+
+###p_participants
+*Refers to:* /*/meta/activityinfo/participants
+Maximum number of participants
 
 ###finding_count
 *Refers to:* total finding count. Use @threatLevel or @status in this placeholder to filter by threatlevel or status. Can be used only in reports!
