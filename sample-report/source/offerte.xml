@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<offerte
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xsi:noNamespaceSchemaLocation="../dtd/offerte.xsd"
+  xml:lang="en">
+  <meta>
+  <title>Quote</title>
+  <offered_service_long>5-day secure coding training</offered_service_long>
+  <offered_service_short>training</offered_service_short>
+  <xi:include href="snippets/company_info.xml" />
+  <xi:include href="targets.xml" />
+  <permission_parties>
+    <xi:include href="client_info.xml" />
+  </permission_parties>
+  <activityinfo>
+    <participants>7</participants> <!-- Maximum number of participants -->
+    <location>on location, in Ducktown</location> <!-- Location of training -->
+    <duration>5</duration> <!-- Duration of the project / training -->
+    <fee denomination="eur">10,-</fee> <!-- Total costs -->
+    <target_application>a bathtub</target_application>
+    <target_application_producer>The Plumber</target_application_producer>
+    <nature>time-boxed</nature>
+    <persondays>15</persondays> <!-- Number of workdays required, p_persondays -->
+    <planning>
+      <start>To be determined</start>
+      <end>To be determined</end>
+    </planning>
+    <report_due>To be determined</report_due>
+  </activityinfo>
+  <version_history>
+    <version number="auto" date="2024-07-18T10:00:00">
+      <v_author>Swiss Cheese</v_author>
+      <v_description>Initial version</v_description>
+    </version>
+  </version_history>
+  </meta>
+  <section id="introduction">
+    <title>Introduction</title>
+    <p>
+      <client_long />, also known as <client_short />, wants to perform
+      a <company_svc_long />. Some people call that <company_svc_short />.
+      Preferably using <t_app />, as built by <t_app_producer />.
+    </p>
+    <p>
+      To prepare the <company_svc_short /> for <client_short />,
+      <company_short/> requires <p_persondays /> days of work. The
+      <company_svc_long /> itself takes <p_duration /> days, and will be held
+      <p_location />. There is a maximum of <p_participants /> participants.
+    </p>
+  </section>
+</offerte>
