@@ -102,7 +102,7 @@
                         </xsl:if>
                     </xsl:for-each>
                     <planning>
-                        <xsl:comment>start and end dates, in ISO format: YYYY-MM-DD</xsl:comment>
+                        <xsl:comment>start and end dates, in ISO format: 'YYYY-MM-DD' - or 'TBD'</xsl:comment>
                         <xsl:for-each select="/offerte/meta/activityinfo/planning/*">
                             <xsl:copy copy-namespaces="no">
                                 <xsl:copy-of select="node()" copy-namespaces="no"/>

@@ -102,11 +102,11 @@
                             <xsl:value-of select="/*/activityinfo/planning/end"/>
                         </end>
                     </planning>
-                    <xsl:comment>start and end dates, in ISO format: YYYY-MM-DD</xsl:comment>
+                    <xsl:comment>start and end dates, in ISO format: 'YYYY-MM-DD' - or 'TBD'</xsl:comment>
                     <report_due>
                         <xsl:value-of select="/*/activityinfo/delivery"/>
                     </report_due>
-                    <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2016</xsl:comment>
+                    <xsl:comment>date or date range in text, e.g. May 18th until May 25th, 2024</xsl:comment>
                     <nature>
                         <xsl:value-of select="/*/activityinfo/nature"/>
                     </nature>
