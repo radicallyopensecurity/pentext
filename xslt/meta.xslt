@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs my"
-    xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:my="http://www.radical.sexy" version="2.0">
+    xmlns:fo="http://www.w3.org/1999/XSL/Format"
+    xmlns:my="http://www.radical.sexy"
+    version="2.0">
 
     <xsl:template match="meta" mode="frontmatter">
         <xsl:param name="execsummary" tunnel="yes"/>
@@ -99,6 +102,31 @@
         </fo:table>
     </xsl:template>
 
+    <xsl:template name="list_targets_recursive">
+        <xsl:param name="targets_root" select="/*/meta/targets"/>
+        <xsl:if test="$targets_root">
+            <fo:list-block xsl:use-attribute-sets="list_summarytable" >
+                <xsl:for-each select="$targets_root/target">
+                    <fo:list-item xsl:use-attribute-sets="li">
+                        <fo:list-item-label end-indent="label-end()">
+                            <fo:block>
+                                <fo:inline>&#8226;</fo:inline>
+                            </fo:block>
+                        </fo:list-item-label>
+                        <fo:list-item-body start-indent="body-start()">
+                            <fo:block>
+                                <xsl:value-of select="text()"/>
+                                <xsl:call-template name="list_targets_recursive">
+                                    <xsl:with-param name="targets_root" select="./targets" />
+                                </xsl:call-template>
+                            </fo:block>
+                        </fo:list-item-body>
+                    </fo:list-item>
+                </xsl:for-each>
+            </fo:list-block>
+        </xsl:if>
+    </xsl:template>
+
     <xsl:template name="DocProperties">
         <xsl:param name="execsummary" tunnel="yes"/>
         <xsl:variable name="latestVersionNumber">
@@ -163,21 +191,7 @@
                             </fo:table-cell>
                             <fo:table-cell xsl:use-attribute-sets="td">
                                 <fo:block>
-                                    <xsl:choose>
-                                        <xsl:when test="targets/target[2]">
-                                            <!-- more than one target -->
-                                            <xsl:for-each select="targets/target">
-                                                <fo:block>
-                                                  <xsl:value-of select="."/>
-                                                </fo:block>
-                                            </xsl:for-each>
-                                            <!-- end list -->
-                                        </xsl:when>
-                                        <xsl:otherwise>
-                                            <!-- just the one -->
-                                            <xsl:value-of select="targets/target"/>
-                                        </xsl:otherwise>
-                                    </xsl:choose>
+                                    <xsl:call-template name="list_targets_recursive" />
                                 </fo:block>
                             </fo:table-cell>
                         </fo:table-row>
