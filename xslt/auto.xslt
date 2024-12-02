@@ -275,6 +275,9 @@
                                     <fo:block>
                                         <xsl:apply-templates select="name"/>
                                     </fo:block>
+                                    <fo:block xsl:use-attribute-sets="italic">
+                                        (pentester)
+                                    </fo:block>
                                 </fo:table-cell>
                                 <fo:table-cell xsl:use-attribute-sets="td">
                                     <fo:block>
@@ -289,6 +292,9 @@
                             <fo:table-cell xsl:use-attribute-sets="td">
                                 <fo:block>
                                     <xsl:apply-templates select="name"/>
+                                </fo:block>
+                                <fo:block xsl:use-attribute-sets="italic">
+                                    (approver)
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell xsl:use-attribute-sets="td">
