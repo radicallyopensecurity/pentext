@@ -184,7 +184,7 @@
                 </section>
                 <section id="timeline">
                     <title>Timeline</title>
-                    <p>The Security Audit took place between <p_startdate/> and <p_enddate/>.</p>
+                    <p>The security audit took place between <p_startdate/> and <p_enddate/>.</p>
                 </section>
                 <xsl:element name="xi:include">
                     <xsl:attribute name="href">resultsinanutshell.xml</xsl:attribute>
