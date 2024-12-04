@@ -10,9 +10,8 @@
     vulnerability and suggest ways of fixing it.</p>
   <p>This requires an extensive knowledge of the platform the application is running on, as well as
     the extensive knowledge of the language the application in written in and patterns that have
-    been used. Therefore a code audit done by highly-trained specialists with a strong background in
-    programming. </p>
-  <p> During the code audit, we take the following approach: </p>
+    been used. Therefore, a code audit is performed by highly-trained specialists with a strong programming background.</p>
+  <p>During the code audit, we take the following approach:</p>
   <ol>
     <li><b>Thorough comprehension of functionality</b>
       <br/>We try to get a thorough comprehension of how the application works and how it interacts
