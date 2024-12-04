@@ -6,13 +6,13 @@
   <p><todo desc="Add some paragraphs describing in high level the impact of these findings on the organization, priorities in fixing them"/></p>
 
   <p>We recommend fixing all of the issues found and then performing a retest in order to ensure
-    that mitigations are effective and that no new vulnerabilities have been introduced. </p>
-  <p> Finally, we want to emphasize that security is a process – this penetration test is just a
+    that mitigations are effective and that no new vulnerabilities have been introduced.</p>
+  <p>Finally, we want to emphasize that security is a process – this penetration test is just a
     one-time snapshot. Security posture must be continuously evaluated and improved. Regular audits
     and ongoing improvements are essential in order to maintain control of your corporate
     information security. We hope that this pentest report (and the detailed explanations of our
-    findings) will contribute meaningfully towards that end. </p>
-  <p> Please don't hesitate to let us know if you have any further questions, or need further
-    clarification on anything in this report. </p>
+    findings) will contribute meaningfully towards that end.</p>
+  <p>Please don't hesitate to let us know if you have any further questions, or need further
+    clarification on anything in this report.</p>
 
 </section>
