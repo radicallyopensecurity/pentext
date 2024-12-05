@@ -196,7 +196,7 @@ who is also the co-founder/CEO of Radically Open Security.</bio>
 fishinabarrel.sittingduck.com</pre>
 
                         <p>Outcome:</p>
-                        <pre> Nmap scan report for fishinabarrel.sittingduck.com (10.10.10.1)
+                        <pre>Nmap scan report for fishinabarrel.sittingduck.com (10.10.10.1)
 Starting Nmap 4.11 ( http://www.insecure.org/nmap/ ) at 2013-11-11 15:43 EST
 Initiating ARP Ping Scan against 10.10.10.1 [1 port] at 15:43
 The ARP Ping Scan took 0.01s to scan 1 total hosts.
@@ -309,11 +309,11 @@ Raw packets sent: 1681 (73.962KB) | Rcvd: 1681 (77.322KB)</pre>
                         <title>Mail Server</title>
                         <p>The server was running Mailserver XYZ, the most recent version of this
                                 particular piece of software. No relevant vulnerabilities or
-                                exploits were found. </p>
+                                exploits were found.</p>
                 </non-finding>
                 <non-finding id="sqlInjection">
                         <title>SQL Code Injection</title>
-                        <p>The following parameters are not vulnerable to SQL injection. </p>
+                        <p>The following parameters are not vulnerable to SQL injection.</p>
                         <p>All parameters have been checked manually.</p>
                         <pre>-file1.php
 -file2.php
