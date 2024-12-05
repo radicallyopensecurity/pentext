@@ -300,7 +300,9 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:for-each select="/*/section | /*/appendix">
-                    <xsl:call-template name="generate_pages"/>
+                    <xsl:if test="not(./@visibility = 'hidden')">
+                        <xsl:call-template name="generate_pages"/>
+                    </xsl:if>
                 </xsl:for-each>
             </xsl:otherwise>
         </xsl:choose>
