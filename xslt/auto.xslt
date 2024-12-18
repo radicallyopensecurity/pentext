@@ -71,27 +71,17 @@
         <fo:block>
             <fo:table xsl:use-attribute-sets="fwtable table borders">
                 <xsl:call-template name="checkIfLast"/>
-                <fo:table-column column-width="proportional-column-width(12)"
-                    xsl:use-attribute-sets="borders"/>
-                <fo:table-column column-width="proportional-column-width(22)"
+                <fo:table-column column-width="proportional-column-width(16)"
                     xsl:use-attribute-sets="borders"/>
                 <fo:table-column column-width="proportional-column-width(50)"
-                    xsl:use-attribute-sets="borders"/>
-                <fo:table-column column-width="proportional-column-width(16)"
                     xsl:use-attribute-sets="borders"/>
                 <fo:table-body>
                     <fo:table-row keep-with-next.within-column="always">
                         <fo:table-cell xsl:use-attribute-sets="th">
-                            <fo:block>ID</fo:block>
-                        </fo:table-cell>
-                        <fo:table-cell xsl:use-attribute-sets="th">
-                            <fo:block>Type</fo:block>
+                            <fo:block>Info</fo:block>
                         </fo:table-cell>
                         <fo:table-cell xsl:use-attribute-sets="th">
                             <fo:block>Description</fo:block>
-                        </fo:table-cell>
-                        <fo:table-cell xsl:use-attribute-sets="th">
-                            <fo:block>Threat level</fo:block>
                         </fo:table-cell>
                     </fo:table-row>
                     <xsl:choose>
@@ -128,14 +118,16 @@
     </xsl:template>
 
     <xsl:template name="findingsSummaryContent">
-        <fo:table-row xsl:use-attribute-sets="TableFont">
+        <fo:table-row xsl:use-attribute-sets="TableFont" keep-together.within-column="always">
             <xsl:if test="position() mod 2 != 0">
                 <xsl:attribute name="background-color">#ededed</xsl:attribute>
             </xsl:if>
+            
+            <!-- First Table Cell -->
             <fo:table-cell xsl:use-attribute-sets="td">
-                <fo:block>
+               <fo:block>
                     <fo:inline>
-                        <!-- attach id to first finding of each threatLevel so pie charts can link to it -->
+                        <!-- attach id to first finding so internal links can point to it -->
                         <xsl:if test="@id">
                             <xsl:attribute name="id">
                                 <xsl:value-of select="@id"/>
@@ -149,27 +141,90 @@
                         </fo:basic-link>
                     </fo:inline>
                 </fo:block>
-            </fo:table-cell>
-            <fo:table-cell xsl:use-attribute-sets="td">
+
                 <fo:block>
+                    <fo:inline xsl:use-attribute-sets="bold">
+                        <xsl:value-of select="findingThreatLevel"/>
+                    </fo:inline>
+                </fo:block>
+                <fo:block>
+                    <fo:inline xsl:use-attribute-sets="bold">Type: </fo:inline>
                     <xsl:value-of select="findingType"/>
                 </fo:block>
-            </fo:table-cell>
-            <fo:table-cell xsl:use-attribute-sets="td">
+   
+                <!-- Status Section -->
+                <xsl:if test="@status">
+                    <fo:block>
+                        <fo:inline xsl:use-attribute-sets="bold">Status: </fo:inline>
+                        <xsl:choose>
+                            <xsl:when test="@status = 'new' or @status = 'unresolved'">
+                                <fo:inline>
+                                    <xsl:attribute name="color">
+                                        <xsl:value-of select="$color_new"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="@status"/>
+                                </fo:inline>
+                            </xsl:when>
+                            <xsl:when test="@status = 'not_retested'">
+                                <fo:inline>
+                                    <xsl:attribute name="color">
+                                        <xsl:value-of select="$color_notretested"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="@status"/>
+                                </fo:inline>
+                            </xsl:when>
+                            <xsl:when test="@status = 'resolved'">
+                                <fo:inline>
+                                    <xsl:attribute name="color">
+                                        <xsl:value-of select="$color_resolved"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="@status"/>
+                                </fo:inline>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <fo:inline>
+                                    <xsl:value-of select="@status"/>
+                                </fo:inline>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </fo:block>
+                </xsl:if>
+
+                <!-- Labels Section -->
                 <fo:block>
+                    <fo:block xsl:use-attribute-sets="labels p">
+                        <xsl:for-each select="findingLabel">
+                            <fo:inline xsl:use-attribute-sets="label">
+                                <xsl:attribute name="background-color">
+                                    <xsl:value-of select="@color"/>
+                                </xsl:attribute>
+                                <xsl:attribute name="color">
+                                    <xsl:value-of select="@text"/>
+                                </xsl:attribute>
+                                <xsl:value-of select="."/>
+                            </fo:inline>
+                            <xsl:text> </xsl:text>
+                        </xsl:for-each>
+                    </fo:block>
+                </fo:block>
+            </fo:table-cell>
+
+            <!-- Second Table Cell -->
+            <fo:table-cell xsl:use-attribute-sets="td">
+                <fo:block xsl:use-attribute-sets="p">
                     <xsl:value-of select="findingDescription"/>
                 </fo:block>
-            </fo:table-cell>
-            <fo:table-cell xsl:use-attribute-sets="td">
-                <fo:block>
-                    <xsl:value-of select="findingThreatLevel"/>
-                </fo:block>
+                <xsl:if test="findingImpact">
+                    <fo:block xsl:use-attribute-sets="p">
+                        <fo:inline xsl:use-attribute-sets="bold">Impact:</fo:inline>
+                        <xsl:value-of select="findingImpact"/>
+                    </fo:block>
+                </xsl:if>
             </fo:table-cell>
         </fo:table-row>
     </xsl:template>
 
     <xsl:template match="generate_recommendations">
-        <xsl:variable name="match-labels" select="@match-labels"/>
         <xsl:variable name="Ref" select="@Ref"/>
         <xsl:variable name="statusSequence" as="item()*">
             <xsl:for-each select="@status">
@@ -181,19 +236,14 @@
         <fo:block>
             <fo:table xsl:use-attribute-sets="fwtable table borders">
                 <xsl:call-template name="checkIfLast"/>
-                <fo:table-column column-width="proportional-column-width(12)"
+                <fo:table-column column-width="proportional-column-width(16)"
                     xsl:use-attribute-sets="borders"/>
-                <fo:table-column column-width="proportional-column-width(22)"
-                    xsl:use-attribute-sets="borders"/>
-                <fo:table-column column-width="proportional-column-width(66)"
+                <fo:table-column column-width="proportional-column-width(50)"
                     xsl:use-attribute-sets="borders"/>
                 <fo:table-body>
                     <fo:table-row keep-with-next.within-column="always">
                         <fo:table-cell xsl:use-attribute-sets="th">
-                            <fo:block>ID</fo:block>
-                        </fo:table-cell>
-                        <fo:table-cell xsl:use-attribute-sets="th">
-                            <fo:block>Type</fo:block>
+                            <fo:block>Info</fo:block>
                         </fo:table-cell>
                         <fo:table-cell xsl:use-attribute-sets="th">
                             <fo:block>Recommendation</fo:block>
@@ -221,14 +271,6 @@
                                 <xsl:call-template name="recommendationsSummaryContent"/>
                             </xsl:for-each>
                         </xsl:when>
-                        <xsl:when test="not(@Ref) and not(@status) and $match-labels">
-                            <xsl:for-each select="/pentest_report/descendant::finding[matches(
-                                concat('//', string-join(labels/label, '//')),
-                                concat('//', $match-labels))]
-                            ">
-                                <xsl:call-template name="recommendationsSummaryContent"/>
-                            </xsl:for-each>
-                        </xsl:when>
                         <xsl:otherwise>
                             <xsl:for-each select="/pentest_report/descendant::finding">
                                 <xsl:call-template name="recommendationsSummaryContent"/>
@@ -241,11 +283,14 @@
     </xsl:template>
 
     <xsl:template name="recommendationsSummaryContent">
-        <fo:table-row xsl:use-attribute-sets="TableFont">
+        <fo:table-row xsl:use-attribute-sets="TableFont" keep-together.within-column="always">
             <xsl:if test="position() mod 2 != 0">
                 <xsl:attribute name="background-color">#ededed</xsl:attribute>
             </xsl:if>
+
+            <!-- First Table Cell -->
             <fo:table-cell xsl:use-attribute-sets="td">
+                <!-- ID as a Link -->
                 <fo:block>
                     <fo:basic-link xsl:use-attribute-sets="link">
                         <xsl:attribute name="internal-destination">
@@ -254,18 +299,93 @@
                         <xsl:apply-templates select="." mode="number"/>
                     </fo:basic-link>
                 </fo:block>
+
+                <!-- Threat Level -->
+                <xsl:if test="@threatLevel">
+                    <fo:block>
+                        <fo:inline xsl:use-attribute-sets="bold">
+                            <xsl:choose>
+                                <xsl:when test="@threatLevel">
+                                    <xsl:value-of select="@threatLevel"/>
+                                </xsl:when>
+                            </xsl:choose>
+                        </fo:inline>                            
+                    </fo:block>
+                </xsl:if>
+
+                <!-- Type -->
+                <xsl:if test="@type">
+                    <fo:block>
+                        <fo:inline xsl:use-attribute-sets="bold">Type: </fo:inline>
+                        <xsl:value-of select="@type"/>
+                    </fo:block>
+                </xsl:if>
+
+                <!-- Status -->
+                <xsl:if test="@status">
+                    <fo:block>
+                        <fo:inline xsl:use-attribute-sets="bold">Status: </fo:inline>
+                        <xsl:choose>
+                            <xsl:when test="@status = 'new' or @status = 'unresolved'">
+                                <fo:inline>
+                                    <xsl:attribute name="color">
+                                        <xsl:value-of select="$color_new"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="@status"/>
+                                </fo:inline>
+                            </xsl:when>
+                            <xsl:when test="@status = 'not_retested'">
+                                <fo:inline>
+                                    <xsl:attribute name="color">
+                                        <xsl:value-of select="$color_notretested"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="@status"/>
+                                </fo:inline>
+                            </xsl:when>
+                            <xsl:when test="@status = 'resolved'">
+                                <fo:inline>
+                                    <xsl:attribute name="color">
+                                        <xsl:value-of select="$color_resolved"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="@status"/>
+                                </fo:inline>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <fo:inline>
+                                    <xsl:value-of select="@status"/>
+                                </fo:inline>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </fo:block>
+                </xsl:if>
+
+                <!-- Labels Section -->
+                <xsl:if test="labels/label">
+                    <fo:block>
+                        <xsl:for-each select="labels/label">
+                            <fo:inline xsl:use-attribute-sets="label">
+                                <xsl:attribute name="background-color">
+                                    <xsl:value-of select="/pentest_report/meta/labels/label[@name = current()]/@color"/>
+                                </xsl:attribute>
+                                <xsl:attribute name="color">
+                                    <xsl:value-of select="/pentest_report/meta/labels/label[@name = current()]/@text"/>
+                                </xsl:attribute>
+                                <xsl:value-of select="."/>
+                            </fo:inline>
+                            <xsl:text> </xsl:text> <!-- Add space between labels -->
+                        </xsl:for-each>
+                    </fo:block>
+                </xsl:if>
+
             </fo:table-cell>
+
+            <!-- Second Table Cell: Recommendation -->
             <fo:table-cell xsl:use-attribute-sets="td">
                 <fo:block>
-                    <xsl:value-of select="@type"/>
-                </fo:block>
-            </fo:table-cell>
-            <fo:table-cell xsl:use-attribute-sets="td">
-                <fo:block>
+                    <!-- Check for recommendation_summary first -->
                     <xsl:choose>
                         <xsl:when test="recommendation_summary">
-                            <xsl:apply-templates select="recommendation_summary" mode="summarytable"
-                            />
+                            <xsl:apply-templates select="recommendation_summary" mode="summarytable"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:apply-templates select="recommendation" mode="summarytable"/>
