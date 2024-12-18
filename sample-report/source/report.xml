@@ -125,6 +125,18 @@
                         <title>Timeline</title>
                         <p>This penetration test was performed from May 19-22, 2015, and the spearphishing attack was performed on May 20, 2015.</p>
                 </section>
+                <section id="charts" break="before">
+                  <title>Pretty charts</title>
+                  <generate_piechart pieAttr="threatLevel" pieElem="finding" />
+                  <p>
+                    There were <finding_count threatLevel="Extreme" />
+                    findings, <finding_count threatLevel="High" /> findings,
+                    <finding_count threatLevel="Elevated" /> findings,
+                    <finding_count threatLevel="Moderate" /> findings, and there
+                    were <finding_count threatLevel="Low" /> findings.
+                  </p>
+                  <generate_piechart pieAttr="type" pieElem="finding" />
+                </section>
                 <section id="results">
                         <title>Results in a Nutshell</title>
                         <p>We demonstrated a complete attack chain, from beginning to end, that totally compromises the Sitting Duck NOC.
