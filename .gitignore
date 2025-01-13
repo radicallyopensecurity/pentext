@@ -2,9 +2,14 @@ PenText.xpr
 # (Emacs) (temporary) files
 .#*
 \#*#
+# other temporary files
+*~
+*.swp
+
 .projectile
 
 .DS_Store
 *.orig
 
-/target
+# pentext artifact output folder
+target/
