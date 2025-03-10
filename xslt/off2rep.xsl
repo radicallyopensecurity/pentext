@@ -167,14 +167,14 @@
                         how <company_short/> performed the penetration test.</p>
                 </section>
                 <section id="scope">
-                    <title>Scope of work</title>
+                    <title>Scope of Work</title>
                     <p>The scope of the penetration test was limited to the following target(s):</p>
                     <generate_targets/>
                     <p>The scoped services are broken down as follows: </p>
                     <generate_service_breakdown format="list"/>
                 </section>
                 <section id="objectives">
-                    <title>Project objectives</title>
+                    <title>Project Objectives</title>
                     <p>
                         <company_short/> will perform a penetration test of
                         <todo desc="INSERT-THE-SCOPE"/> with <client_short/> in order to assess the security of
@@ -265,7 +265,7 @@
             </xsl:element>
 
             <appendix id="testteam">
-                <title>Testing team</title>
+                <title>Testing Team</title>
                 <generate_testteam/>
             </appendix>
 
