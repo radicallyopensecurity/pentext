@@ -1014,7 +1014,7 @@ body .markdown-body
 </ul>
 <p>The <code>&lt;generate_findings/&gt;</code> element now likewise has this optional <code>@status</code> attribute with the same possible values. You can add it to generate a finding summary table containing only the findings with a specific status.</p>
 <h2 id="june-15-2016"><a name="user-content-june-15-2016" href="#june-15-2016" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>June 15, 2016</h2>
-<p>Giant update to celebrate these xml templates having been elevated to OWASP project status. Because how better to do that than through introducing a load of bugs. :) </p>
+<p>Giant update to celebrate these xml templates having been elevated to OWASP project status. Because how better to do that than through introducing a load of bugs. :)</p>
 <h3 id="multilingual-workflow"><a name="user-content-multilingual-workflow" href="#multilingual-workflow" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Multilingual workflow</h3>
 <p>You can now set the desired language in quickscope, using the offer_language element. This will generate the proper offer with the proper language snippets.</p>
 <p>Note: language stuff is defined in two places:</p>
@@ -1041,7 +1041,7 @@ body .markdown-body
 <li>if not, it uses the standard waiver</li>
 </ol>
 <p>Now isn&rsquo;t that simple!</p>
-<p>Note: to support this functionality, a bunch of waiver-only placeholders have been introduced, to wit: <code>&lt;signee_long&gt;</code>, <code>&lt;signee_short&gt;</code>, <code>&lt;signee_street&gt;</code>, <code>&lt;signee_city&gt;</code>, <code>&lt;signee_country&gt;</code>, <code>&lt;signee_waiver_rep&gt;</code>. Don&rsquo;t use them anywhere else though (they will fail and anyway it wouldn&rsquo;t make sense). </p>
+<p>Note: to support this functionality, a bunch of waiver-only placeholders have been introduced, to wit: <code>&lt;signee_long&gt;</code>, <code>&lt;signee_short&gt;</code>, <code>&lt;signee_street&gt;</code>, <code>&lt;signee_city&gt;</code>, <code>&lt;signee_country&gt;</code>, <code>&lt;signee_waiver_rep&gt;</code>. Don&rsquo;t use them anywhere else though (they will fail and anyway it wouldn&rsquo;t make sense).</p>
 <h2 id="may-23-2016"><a name="user-content-may-23-2016" href="#may-23-2016" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>May 23, 2016</h2>
 <h3 id="offerte-pentest-report"><a name="user-content-offerte-pentest-report" href="#offerte-pentest-report" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Offerte &ndash;&gt; Pentest-report</h3>
 <p>Last step in the document chain has been completed: you can now generate a (bare bones) Pentest report from any offerte the client has accepted, using the following command:</p>
@@ -1095,7 +1095,7 @@ body .markdown-body
 <p>Note that there are some new fields in the client section, <code>&lt;invoice_rep&gt;</code> and <code>&lt;invoice_mail&gt;</code> for use in the&hellip; (see next section)</p>
 <h3 id="invoices"><a name="user-content-invoices" href="#invoices" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Invoices!</h3>
 <p>w00t. You can now generate a pdf invoice directly from offerte.xml. Use:</p>
-<p><code>java  -jar saxon9he.jar -s:/path/to/offerte/source/offerte.xml -xsl:/path/to/offerte/xslt/generate_invoice.xsl -o:/path/to/report/target/invoice.fo INVOICE_NO=[invoice number] -xi</code> </p>
+<p><code>java  -jar saxon9he.jar -s:/path/to/offerte/source/offerte.xml -xsl:/path/to/offerte/xslt/generate_invoice.xsl -o:/path/to/report/target/invoice.fo INVOICE_NO=[invoice number] -xi</code></p>
 <p>And then:</p>
 <p><code>fop -c conf/rosfop.xconf /path/to/offerte/target/invoice.fo path/to/offerte/target/invoice.pdf</code></p>
 <h2 id="march-9-2016"><a name="user-content-march-9-2016" href="#march-9-2016" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>March 9, 2016</h2>
