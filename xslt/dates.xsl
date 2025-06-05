@@ -1,3 +1,7 @@
+<!--
+Hardcoded localization for dates in NL, DE and EN (default)
+to support internationalized dates according to document $lang
+-->
 <xsl:stylesheet
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
