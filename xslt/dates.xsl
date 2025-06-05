@@ -88,7 +88,12 @@ to support internationalized dates according to document $lang
         <xsl:sequence select="concat($day, ' ', $mname, ' ', $yr)"/>
       </xsl:when>
 
-      <!-- English (default): "Month D, YYYY" -->
+      <!-- English (GB): "D Month YYYY" -->
+      <xsl:when test="$lang = 'en-GB'">
+        <xsl:sequence select="concat($day, ' ', $mname, ' ', $yr)"/>
+      </xsl:when>
+
+      <!-- English (US, default): "Month D, YYYY" -->
       <xsl:otherwise>
         <xsl:sequence select="concat($mname, ' ', $day, ', ', $yr)"/>
       </xsl:otherwise>
