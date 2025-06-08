@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:dt-local="http://www.radical.sexy/schema/dt-local"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs my"
     xmlns:fo="http://www.w3.org/1999/XSL/Format"
     xmlns:my="http://www.radical.sexy"
@@ -317,9 +318,7 @@
                             </fo:table-cell>
                             <fo:table-cell xsl:use-attribute-sets="td">
                                 <fo:block>
-                                    <xsl:value-of
-                                        select="format-dateTime(@date, '[MNn] [D1o], [Y]', 'en', (), ())"
-                                    />
+                                    <xsl:value-of select="dt-local:format-dateTime-local($date, $lang)"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell xsl:use-attribute-sets="td">
