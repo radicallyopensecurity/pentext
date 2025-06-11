@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:dt-local="http://www.radical.sexy/schema/dt-local"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="xs" version="2.0">
 
+    <xsl:include href="dates.xsl"/>
     
     <xsl:variable name="strdoc"
         select="document('../source/snippets/localisationstrings.xml')/localised_strings"/>

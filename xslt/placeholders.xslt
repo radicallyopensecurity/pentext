@@ -3,6 +3,7 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:my="http://www.radical.sexy"
+  xmlns:dt-local="http://www.radical.sexy/schema/dt-local"
   exclude-result-prefixes="xs my"
   version="2.0"
 >
@@ -937,9 +938,7 @@
                               self::p_draftdue or self::p_reportdue) and string($placeholderElement) castable as xs:date"
           >
                         <!-- pretty printing for date -->
-                        <xsl:value-of
-              select="format-date($placeholderElement, '[MNn] [D1], [Y]', 'en', (), ())"
-            />
+                        <xsl:value-of select="dt-local:format-date-local-tbd($placeholderElement, $lang)"/>
                     </xsl:when>
                     <xsl:when
             test="(self::contract_end_date or
