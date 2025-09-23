@@ -92,7 +92,7 @@
                                 the penetration test.</p>
                 </section>
                 <section id="scope">
-                        <title>Scope of work</title>
+                        <title>Scope of Work</title>
                         <p>The scope of the Sitting Duck penetration test was limited to the following
                                 targets:</p>
                         <ul>
@@ -117,7 +117,7 @@
                         This means that ROS had full access to  any information needed with regards to the system(s) tested.</p>
                 </section>
                 <section id="objectives">
-                        <title>Project objectives</title>
+                        <title>Project Objectives</title>
                         <p>The objective of the security assessment is to gain insight into the security of the systems mentioned in <a href="#scope" />.</p>
                         <p>ROS generally performs penetration tests by identifying and fingerprinting systems, finding potential vulnerabilities, exploiting them, escalating privileges, and then pivoting to other parts of the customer's infrastructure. ROS uses open-source vulnerability scanning tools to get its bearings, but primarily finds and exploits vulnerabilities with manual testing. The means by which we do this will be described in this report.</p>
                 </section>
@@ -343,7 +343,7 @@ Linda Valkenburg (Kinderen Museum Voor Nieuwe Kunst)</pre>
         </section>
 
         <appendix id="testteam">
-                <title>Testing team</title>
+                <title>Testing Team</title>
                 <generate_testteam/>
         </appendix>
 

@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs"
     xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
 
     <xsl:template match="generate_targets">
-        <fo:block xsl:use-attribute-sets="list">
-            <xsl:call-template name="list_targets_recursive">
-                <xsl:with-param name="targets_root" select="/*/meta/targets" />
-            </xsl:call-template>
-        </fo:block>
+        <xsl:call-template name="targets"/>
+    </xsl:template>
+
+    <xsl:template name="targets">
+        <xsl:param name="Ref" select="@Ref"/>
+        <fo:list-block xsl:use-attribute-sets="list">
+            <xsl:for-each
+                select="/*/meta/targets/target[@Ref = $Ref] | /*/meta/targets/target[not(@Ref)]">
+                <fo:list-item xsl:use-attribute-sets="li">
+                    <!-- insert a bullet -->
+                    <fo:list-item-label end-indent="label-end()">
+                        <fo:block>
+                            <fo:inline>&#8226;</fo:inline>
+                        </fo:block>
+                    </fo:list-item-label>
+                    <!-- list text -->
+                    <fo:list-item-body start-indent="body-start()">
+                        <fo:block>
+                            <xsl:apply-templates/>
+                        </fo:block>
+                    </fo:list-item-body>
+                </fo:list-item>
+            </xsl:for-each>
+        </fo:list-block>
     </xsl:template>
 
     <xsl:template match="generate_teammembers">
@@ -395,9 +413,6 @@
                                     <fo:block>
                                         <xsl:apply-templates select="name"/>
                                     </fo:block>
-                                    <fo:block xsl:use-attribute-sets="italic">
-                                        (pentester)
-                                    </fo:block>
                                 </fo:table-cell>
                                 <fo:table-cell xsl:use-attribute-sets="td">
                                     <fo:block>
@@ -412,9 +427,6 @@
                             <fo:table-cell xsl:use-attribute-sets="td">
                                 <fo:block>
                                     <xsl:apply-templates select="name"/>
-                                </fo:block>
-                                <fo:block xsl:use-attribute-sets="italic">
-                                    (approver)
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell xsl:use-attribute-sets="td">
