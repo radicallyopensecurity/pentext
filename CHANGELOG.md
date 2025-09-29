@@ -1,5 +1,34 @@
 # Changelog
 
+## [2.4.0](https://github.com/radicallyopensecurity/pentext/compare/2.3.0...2.4.0) (2025-09-29)
+
+
+### Features
+
+* add charts to sample report - see [#138](https://github.com/radicallyopensecurity/pentext/issues/138) ([fd374a2](https://github.com/radicallyopensecurity/pentext/commit/fd374a2b111ae3b66c176c70d1aaed755f48405c))
+* add default roles to test team (see [#137](https://github.com/radicallyopensecurity/pentext/issues/137)) ([f71d16d](https://github.com/radicallyopensecurity/pentext/commit/f71d16d8898702f26d52adbf970161e1f936d9bf))
+* add p_duration (back), p_location, and p_participants ([5e43756](https://github.com/radicallyopensecurity/pentext/commit/5e43756be1745ca4c854e94aa5a0e29c33e9bbbb))
+* add role classification to testing team listing ([213a9e3](https://github.com/radicallyopensecurity/pentext/commit/213a9e380a127a0b35c68a0db7c6e5d778b522fd))
+* add samplq quote ([39d6133](https://github.com/radicallyopensecurity/pentext/commit/39d613351fa310ef9c965e404429bc5b9ceedb71))
+* correct section title casing in templates ([abd2820](https://github.com/radicallyopensecurity/pentext/commit/abd2820100f6b92d92cc0aa254971487637fb945))
+* don't use title casing by default in chart ([4a90396](https://github.com/radicallyopensecurity/pentext/commit/4a9039603b8be929347ee960817a19a54ba82fc1))
+* improve gitignore definition ([57adade](https://github.com/radicallyopensecurity/pentext/commit/57adade7cda085fc36c7be37093d1801e67dc9cb))
+* improve gitignore definition ([66f5275](https://github.com/radicallyopensecurity/pentext/commit/66f5275b9b0a37448c226448a5091cc73a59558c))
+* improve layout ([0d7907c](https://github.com/radicallyopensecurity/pentext/commit/0d7907ce24694ff07fea5d756ed7570618a69965))
+
+
+### Bug Fixes
+
+* correct section title casing ([fa3fbbd](https://github.com/radicallyopensecurity/pentext/commit/fa3fbbd9548ca26448cc81fb45070cdf9fa857f9))
+* Define a `desc` attribute for `todo` tags ([78db572](https://github.com/radicallyopensecurity/pentext/commit/78db572bf1671f1c1449a966c23d6903c5603b94))
+* Futurework cleanup ([9cff620](https://github.com/radicallyopensecurity/pentext/commit/9cff62061fcc53bd561b59194926882e440c1fb7))
+* improve XSD definitions ([4d51faf](https://github.com/radicallyopensecurity/pentext/commit/4d51fafdc59e4eac3ecd8c59394cd0cf6b16ad33))
+* No caps needed ([0c9242f](https://github.com/radicallyopensecurity/pentext/commit/0c9242f2d6aef53f9e5aab3c484962a53c86d911))
+* Remove excess spaces ([1ec5aa0](https://github.com/radicallyopensecurity/pentext/commit/1ec5aa0486f29977344fc1bb465b46b4235ee741))
+* Rephrase to make sense ([d68ba79](https://github.com/radicallyopensecurity/pentext/commit/d68ba79ecd37a6b54260b714238f37123b2c1862))
+* skip layout for hidden sections ([c540bfa](https://github.com/radicallyopensecurity/pentext/commit/c540bfa4d17b1188cb7829ea8c434754396783dd))
+* Use same `generate_service_breakdown` tag definition as in offerte XSD ([526b439](https://github.com/radicallyopensecurity/pentext/commit/526b43941d4d5eca48966fdf1be995494d4e5e99))
+
 ## [2.3.0](https://github.com/radicallyopensecurity/pentext/compare/2.2.0...2.3.0) (2024-04-18)
 
 ### ⚠ IMPORTANT CHANGES
