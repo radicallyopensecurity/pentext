@@ -22,7 +22,7 @@
             <fo:table-body>
                 <fo:table-row>
                     <fo:table-cell xsl:use-attribute-sets="td">
-                        <xsl:if test="not(@status)">
+                        <xsl:if test="not(@status) or @status = 'none'">
                             <xsl:attribute name="number-columns-spanned">2</xsl:attribute>
                         </xsl:if>
                         <fo:block xsl:use-attribute-sets="finding-meta">

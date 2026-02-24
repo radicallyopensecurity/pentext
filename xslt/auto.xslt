@@ -184,7 +184,7 @@
                 </fo:block>
    
                 <!-- Status Section -->
-                <xsl:if test="@status">
+                <xsl:if test="@status and @status != 'none'">
                     <fo:block>
                         <fo:inline
               xsl:use-attribute-sets="bold"
@@ -385,7 +385,7 @@
                 </xsl:if>
 
                 <!-- Status -->
-                <xsl:if test="@status">
+                <xsl:if test="@status and @status != 'none'">
                     <fo:block>
                         <fo:inline
               xsl:use-attribute-sets="bold"
