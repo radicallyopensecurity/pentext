@@ -461,6 +461,9 @@
                     <xsl:attribute name="findingId">
                         <xsl:value-of select="@id"/>
                     </xsl:attribute>
+                    <xsl:attribute name="findingPrefix">
+                        <xsl:value-of select="@prefix"/>
+                    </xsl:attribute>
                     <findingNumber>
                         <xsl:apply-templates select="." mode="number"/>
                     </findingNumber>
@@ -517,6 +520,9 @@
                 </xsl:attribute>
                 <xsl:attribute name="findingId">
                     <xsl:value-of select="@findingId"/>
+                </xsl:attribute>
+                <xsl:attribute name="findingPrefix">
+                    <xsl:value-of select="@prefix"/>
                 </xsl:attribute>
                 <!-- add an id for the first entry of each type so that we can link to it -->
                 <xsl:if

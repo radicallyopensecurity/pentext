@@ -5,6 +5,7 @@
 
     <xsl:template match="finding" mode="meta">
         <xsl:variable name="status" select="@status"/>
+        <xsl:variable name="prefix" select="@prefix"/>
         <xsl:variable name="prettyStatus">
             <xsl:sequence
                 select="
