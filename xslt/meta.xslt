@@ -318,7 +318,7 @@
                             </fo:table-cell>
                             <fo:table-cell xsl:use-attribute-sets="td">
                                 <fo:block>
-                                    <xsl:value-of select="dt-local:format-dateTime-local($date, $lang)"/>
+                                    <xsl:value-of select="dt-local:format-dateTime-local-tbd(@date, $lang)"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell xsl:use-attribute-sets="td">

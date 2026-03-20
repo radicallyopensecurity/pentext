@@ -25,7 +25,7 @@
     <xsl:param name="EXEC_SUMMARY" select="false()"/>
 
     <!-- language parameter for localization (quote & invoice) -->
-    <xsl:param name="lang" select="/*/@xml:lang"/>
+    <xsl:param name="lang" select="(/*/@xml:lang, 'en')[1]"/>
 
     <!-- keys for numbering (used in report) -->
     <xsl:key name="rosid" match="section | finding | appendix | non-finding" use="@id"/>
