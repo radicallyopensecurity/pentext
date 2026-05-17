@@ -1,0 +1,57 @@
+name: Quality Assurance
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  xml-lint:
+    name: XML Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+
+      - name: Install xmllint and zpretty
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libxml2-utils
+          pip install --no-cache-dir zpretty
+
+      - name: Well-formedness
+        id: wellformed
+        continue-on-error: true
+        run: bash scripts/lint-xml.sh well-formed
+
+      - name: XSD schema validation
+        id: schema
+        continue-on-error: true
+        run: bash scripts/lint-xml.sh schema
+
+      - name: zpretty formatting
+        id: format
+        continue-on-error: true
+        run: bash scripts/lint-xml.sh format
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "## XML Lint"
+            echo ""
+            echo "| Phase | Files | Failed | Outcome |"
+            echo "| --- | ---: | ---: | --- |"
+            echo "| Well-formedness | ${{ steps.wellformed.outputs.total }} | ${{ steps.wellformed.outputs.failed }} | ${{ steps.wellformed.outcome }} |"
+            echo "| Schema validation | ${{ steps.schema.outputs.total }} | ${{ steps.schema.outputs.failed }} | ${{ steps.schema.outcome }} |"
+            echo "| zpretty formatting | ${{ steps.format.outputs.total }} | ${{ steps.format.outputs.failed }} | ${{ steps.format.outcome }} |"
+            echo ""
+            echo "_Pre-existing failures are recorded but do not fail the workflow. They will be reduced incrementally._"
+          } >> "$GITHUB_STEP_SUMMARY"
