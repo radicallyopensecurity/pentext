@@ -5,6 +5,7 @@
 
     <xsl:template match="finding" mode="meta">
         <xsl:variable name="status" select="@status"/>
+        <xsl:variable name="prefix" select="@prefix"/>
         <xsl:variable name="prettyStatus">
             <xsl:sequence
                 select="
@@ -22,7 +23,7 @@
             <fo:table-body>
                 <fo:table-row>
                     <fo:table-cell xsl:use-attribute-sets="td">
-                        <xsl:if test="not(@status)">
+                        <xsl:if test="not(@status) or @status = 'none'">
                             <xsl:attribute name="number-columns-spanned">2</xsl:attribute>
                         </xsl:if>
                         <fo:block xsl:use-attribute-sets="finding-meta">

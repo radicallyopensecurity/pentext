@@ -8,18 +8,28 @@
         <!-- Output finding display number (context is finding) -->
         <xsl:variable name="findingNumber" select="./@number"/>
         <xsl:variable name="numFormat" select="'000'"/>
-        <xsl:value-of
-            select="concat(ancestor::*[@findingCode][1]/@findingCode, '-', string(format-number($findingNumber, $numFormat)))"
-        />
+        <xsl:choose>
+            <xsl:when test="@prefix">
+                <xsl:value-of select="concat(ancestor::*[@findingCode][1]/@findingCode, '-', @prefix, '-', string(format-number($findingNumber, $numFormat)))" />
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="concat(ancestor::*[@findingCode][1]/@findingCode, '-', string(format-number($findingNumber, $numFormat)))" />
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xsl:template match="non-finding" mode="number">
         <!-- Output finding display number (context is finding) -->
         <xsl:variable name="nonFindingNumber" select="./@number" as="xs:integer"/>
         <xsl:variable name="numFormat" select="'000'"/>
-        <xsl:value-of
-            select="concat('NF-', string(format-number($nonFindingNumber, $numFormat)))"
-        />
+        <xsl:choose>
+            <xsl:when test="@prefix">
+                <xsl:value-of select="concat('NF-', @prefix, '-', string(format-number($nonFindingNumber, $numFormat)))" />
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="concat('NF-', string(format-number($nonFindingNumber, $numFormat)))" />
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template
