@@ -15,16 +15,15 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
+      - name: Set up zpretty
+        uses: gronke/zpretty/.github/actions/zpretty@ros
         with:
-          python-version: "3.x"
+          spec: "git+https://github.com/gronke/zpretty@ros"
 
-      - name: Install xmllint and zpretty
+      - name: Install xmllint
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends libxml2-utils
-          pip install --no-cache-dir zpretty
 
       - name: Well-formedness
         id: wellformed
