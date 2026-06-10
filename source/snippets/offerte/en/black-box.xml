@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <section id="blackboxing">
   <title>The Black-Box Pentesting Method</title>
   <p>
@@ -10,5 +10,5 @@
     the target(s), including source code (when relevant), access to developers
     or system management, etc.
   </p>
-  <p>In this case <company_short/> will conduct a black-Box test.</p>
+  <p>In this case <company_short /> will conduct a black-Box test.</p>
 </section>

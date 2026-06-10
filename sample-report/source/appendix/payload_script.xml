@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <appendix id="payload_script">
-    <title>Phishing Proof of Concept payload generator script</title>
-    	<code>#!/usr/bin/python
+  <title>Phishing Proof of Concept payload generator script</title>
+  <code>#!/usr/bin/python
 import sys
 import socket
 import struct

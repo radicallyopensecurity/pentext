@@ -1,35 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <section>
   <title>Team and Reporting</title>
 
   <section>
     <title>Team</title>
     <p>
-      <company_short/> may perform the activities with its core-team members,
+      <company_short /> may perform the activities with its core-team members,
       external freelancers, and/or volunteers.
     </p>
     <p>First point of contact for this assignment shall be:</p>
     <ul>
       <li>
-        <company_poc1/> (<company_short/>)
+        <company_poc1 /> (<company_short />)
       </li>
       <li>
-        <client_poc1/> (<client_short/>)
+        <client_poc1 /> (<client_short />)
       </li>
     </ul>
     <!-- remove this for non pentesting offers-->
-    <p>The workflow of our penetration testing team is modeled on that of a
+    <p>
+      The workflow of our penetration testing team is modeled on that of a
       Capture The Flag (CTF) team:
 
-      <company_long/> has a geographically distributed team and we use online
+      <company_long /> has a geographically distributed team and we use online
       infrastructure (RocketChat, GitLabs, etc.) to coordinate our work. This
       enables us to invite the customer to send several technical people from
-      their organization to join our <company_svc_short/> team on a volunteer
-      basis. Naturally, we extend this invitation to <client_short/> as well.
+      their organization to join our <company_svc_short /> team on a volunteer
+      basis. Naturally, we extend this invitation to <client_short /> as well.
     </p>
 
-    <p>Throughout the course of the audit, we intend to actively brainstorm with
-      <client_short/> about both the <company_svc_short/>
+    <p>
+      Throughout the course of the audit, we intend to actively brainstorm with
+      <client_short /> about both the <company_svc_short />
       and the process. This is a continuous learning experience for both us and
       you. Also, in our experience, a tight feedback loop with the customer
       greatly improves both the quality and focus of the engagement.
@@ -39,8 +41,8 @@
   <section>
     <title>Reporting</title>
     <p>
-      <company_short/> will report to <client_short/>
-      on the <company_svc_short/>. This report will include the steps it has
+      <company_short /> will report to <client_short />
+      on the <company_svc_short />. This report will include the steps it has
       taken during the test and the vulnerabilities it has found. It will
       include recommendations but not comprehensive solutions on how to address
       these vulnerabilities.
@@ -49,15 +51,14 @@
     <p>Please visit our portfolio on our website for publicly available code audit and pentest reports:</p>
     <ul>
       <li>
-        <a
-          href="https://www.radicallyopensecurity.com/our-portfolio/"
-        >
+        <a href="https://www.radicallyopensecurity.com/our-portfolio/">
           radicallyopensecurity.com/our-portfolio
         </a>
       </li>
     </ul>
 
-    <p>One of <company_short/>'s core principles is “Teach To Fish”, otherwise
+    <p>
+      One of <company_short />'s core principles is “Teach To Fish”, otherwise
       known as “Peek over our Shoulder” (PooS); We strive to structure our
       services so they can also serve as teaching or training opportunities for
       our customers.

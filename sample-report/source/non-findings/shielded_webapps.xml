@@ -1,4 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <non-finding id="shielded_webapps" number="15">
-    <title>Shielded WebApps</title>
-    <p>The HTTP Basic Auth with 2-factor authentication solution is quite solid. The systems behind auth were not tested, because they are shielded well enough as to be not reachable to outsiders.  </p>
+  <title>Shielded WebApps</title>
+  <p>The HTTP Basic Auth with 2-factor authentication solution is quite solid. The systems behind auth were not tested, because they are shielded well enough as to be not reachable to outsiders.  </p>
 </non-finding>

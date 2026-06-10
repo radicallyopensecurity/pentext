@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<quickscope xmlns:xi="http://www.w3.org/2001/XInclude"
-            xmlns:xml="http://www.w3.org/XML/1998/namespace"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:noNamespaceSchemaLocation="../dtd/quickscope.xsd">
+<?xml version="1.0" encoding="utf-8"?>
+<quickscope
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../dtd/quickscope.xsd"
+>
 
   <!-- COMPANY INFO -->
-  <xi:include href="client_info.xml"/>
+  <xi:include href="client_info.xml" />
 
   <!-- SERVICE INFO -->
   <meta>
@@ -33,8 +33,8 @@
     <!-- Which targets will need to be tested?
             (one <target> element for each piece of software/service/server address/location...), delete/add as necessary -->
     <targets>
-      <target></target>
-      <target></target>
+      <target />
+      <target />
     </targets>
     <!-- How many persondays will the pentest be -->
     <persondays>0</persondays>
@@ -52,7 +52,7 @@
     <!-- if unknown, write TBD -->
     <delivery>TBD</delivery>
     <!-- Do you need/want an additional code audit? (possible values: yes/no), only for pentest -->
-    <codeaudit perform="yes"/>
+    <codeaudit perform="yes" />
     <!-- Is there an application that needs to be tested? Add an <application_name> element below. -->
     <!-- INSERT OPTIONAL APPLICATION NAME HERE -->
 

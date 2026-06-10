@@ -1,11 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <section id="nmap">
-    <title>nmap</title>
-    
-    <p>We ran nmap with the following commands:</p>
-    <p>Command:</p>
-    <pre>$ sudo nmap -sS 10.0.23.0/28</pre>
-    <p>Outcome (condensed):</p>
-    <pre>Starting Nmap 6.47 ( http://nmap.org ) at 2014-10-19 22:32 CEST
+  <title>nmap</title>
+
+  <p>We ran nmap with the following commands:</p>
+  <p>Command:</p>
+  <pre>$ sudo nmap -sS 10.0.23.0/28</pre>
+  <p>Outcome (condensed):</p>
+  <pre>Starting Nmap 6.47 ( http://nmap.org ) at 2014-10-19 22:32 CEST
 Nmap scan report for osw004.sittingduck.bv (10.0.23.37)
 Host is up (0.034s latency).
 Not shown: 998 filtered ports
@@ -25,11 +26,11 @@ PORT    STATE SERVICE
 80/tcp  open  http
 443/tcp open  https
 Nmap done: 12 IP addresses (4 hosts up) scanned in 102.34 seconds</pre>
-    
-    <p>Command:</p>                       
-    <pre>$ nmap -A -Pn 172.16.1.0/24</pre>
-    <p>Outcome (Condensed):</p>
-    <pre>Nmap scan report for osw06.sittingduck.bv (172.16.1.94)
+
+  <p>Command:</p>
+  <pre>$ nmap -A -Pn 172.16.1.0/24</pre>
+  <p>Outcome (Condensed):</p>
+  <pre>Nmap scan report for osw06.sittingduck.bv (172.16.1.94)
 Host is up (0.28s latency).
 Not shown: 998 filtered ports
 PORT    STATE SERVICE VERSION
@@ -61,11 +62,11 @@ Not shown: 999 filtered ports
 PORT   STATE SERVICE VERSION
 53/tcp open  domain
 </pre>
-	
-	<p>Command:</p>
-	<pre>$ nmap -A -Pn 172.16.4.0/24</pre>
-	<p>Outcome (condensed):</p>
-	<pre>Nmap scan report for 172.16.4.23
+
+  <p>Command:</p>
+  <pre>$ nmap -A -Pn 172.16.4.0/24</pre>
+  <p>Outcome (condensed):</p>
+  <pre>Nmap scan report for 172.16.4.23
 Host is up (0.23s latency).
 Not shown: 999 filtered ports
 PORT    STATE  SERVICE VERSION
@@ -89,6 +90,6 @@ PORT    STATE SERVICE  VERSION
 80/tcp  open  http     Apache httpd 2.2.15     
 443/tcp open  ssl/http Apache httpd 2.2.15     
 </pre>
-    
-    <p>Nothing relevant was reported.</p>
+
+  <p>Nothing relevant was reported.</p>
 </section>

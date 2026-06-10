@@ -1,11 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<breakdown xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../dtd/servicebreakdown.xsd">
+<?xml version="1.0" encoding="utf-8"?>
+<breakdown
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../dtd/servicebreakdown.xsd"
+>
   <service>
     <specification>Example Service 1: set duration in days and with hourly rate.</specification>
     <effort in="days">2</effort>
     <hourly_rate>10</hourly_rate>
     <fee denomination="eur">
-      <computed/>
+      <computed />
     </fee>
   </service>
   <service>
@@ -16,7 +19,7 @@
     </effort>
     <hourly_rate>10</hourly_rate>
     <fee denomination="eur">
-      <computed/>
+      <computed />
     </fee>
   </service>
   <service>
@@ -45,7 +48,7 @@
     </effort>
     <hourly_rate>50</hourly_rate>
     <fee denomination="eur">
-      <computed/>
+      <computed />
     </fee>
   </service>
   <extra>

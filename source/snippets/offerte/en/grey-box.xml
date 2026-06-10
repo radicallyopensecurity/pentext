@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <section id="greyboxing">
   <title>The Grey-Box Pentesting Method</title>
   <p>
@@ -11,7 +11,7 @@
     developers or system management, etc.
   </p>
   <p>
-    <company_short/>
+    <company_short />
     will conduct Grey-Box testing, which means that partial information is given
     on the target.
   </p>

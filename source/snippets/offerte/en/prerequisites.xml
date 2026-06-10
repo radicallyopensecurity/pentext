@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <section>
   <title>Prerequisites</title>
-  <p>In order to perform this audit, <company_short/> will need access to:</p>
-    <!-- Example of most common scenario, change as necessary -->
+  <p>In order to perform this audit, <company_short /> will need access to:</p>
+  <!-- Example of most common scenario, change as necessary -->
   <ul>
     <li>Test accounts</li>
     <li>Test environment</li>

@@ -1,19 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<section id="futurework" xml:base="futurework.xml" break="before" inexecsummary="no">
+<?xml version="1.0" encoding="utf-8"?>
+<section id="futurework" break="before" inexecsummary="no" xml:base="futurework.xml">
   <title>Future Work</title>
   <ul>
     <li>
       <b>Retest of findings</b>
-      <br/>When mitigations for the vulnerabilities described in this report have been deployed, perform a
+      <br />
+      When mitigations for the vulnerabilities described in this report have been deployed, perform a
       repeat test to ensure that they are effective and have not introduced other security problems.
     </li>
     <li>
       <b>Regular security assessments</b>
-      <br/>Security is a process that must be continuously evaluated and improved; this penetration test is just a single snapshot.
+      <br />
+      Security is a process that must be continuously evaluated and improved; this penetration test is just a single snapshot.
       Regular audits and ongoing improvements are essential in order to maintain control of your corporate information security.
     </li>
     <li>
-      <todo desc="Add any specific future work for this project or remove this list item"/>
+      <todo desc="Add any specific future work for this project or remove this list item" />
     </li>
   </ul>
 </section>

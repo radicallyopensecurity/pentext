@@ -1,30 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <section id="projectoverview_pentest">
   <title>Project Overview</title>
   <p>
-    <company_short/> will perform <company_svc_long/> for <client_short/>
+    <company_short /> will perform <company_svc_long /> for <client_short />
     of the systems described below. The services are intended to gain insight
-    into the security of these systems. To do so, <company_short/>
+    into the security of these systems. To do so, <company_short />
     will access these systems, attempt to find vulnerabilities, and gain further
     access and elevated privileges by exploiting any vulnerabilities found.
   </p>
 
   <p>
-    <company_short/> will test the following targets (the “<b>Targets</b>”):
+    <company_short /> will test the following targets (the “<b>Targets</b>”):
   </p>
 
-  <generate_targets/>
+  <generate_targets />
 
   <p>
-    <company_short/> will test for the presence of the most common
+    <company_short /> will test for the presence of the most common
     vulnerabilities, using both publicly available vulnerability scanning
-    tools and manual testing. <company_short/> shall perform a 
-    <p_boxtype/> intrusive test via the
-    internet (total estimated effort: <p_persondays/> persondays). A breakdown of the requested services can be found below:
+    tools and manual testing. <company_short /> shall perform a
+    <p_boxtype /> intrusive test via the
+    internet (total estimated effort: <p_persondays /> persondays). A breakdown of the requested services can be found below:
   </p>
-  
- 
-  <generate_service_breakdown format="list"/>
+
+  <generate_service_breakdown format="list" />
 
   <!--Not Needed if Disclaimer is Included; Duplicate Text-->
   <!--p>It is possible that in the course of the penetration

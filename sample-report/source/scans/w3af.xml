@@ -1,14 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <section id="w3af">
-    <title>w3af</title>
-    
-    <p>We ran the OWASP Top Ten profile against Open Server Watch and NetMon.</p>
-    <pre>$ w3af_console
-w3af>>> target
-w3af/config:target>>> set target http://monitoring.sittingduck.bv
-w3af/config:target>>> back
-w3af>>> profiles
-w3af/profiles>>> use OWASP_TOP10
-w3af/profiles>>> back
-w3af>>> start</pre>
-    <p>Nothing relevant (that hadn't already been found by manual analysis) was reported.</p>
+  <title>w3af</title>
+
+  <p>We ran the OWASP Top Ten profile against Open Server Watch and NetMon.</p>
+  <pre>$ w3af_console
+w3af&gt;&gt;&gt; target
+w3af/config:target&gt;&gt;&gt; set target http://monitoring.sittingduck.bv
+w3af/config:target&gt;&gt;&gt; back
+w3af&gt;&gt;&gt; profiles
+w3af/profiles&gt;&gt;&gt; use OWASP_TOP10
+w3af/profiles&gt;&gt;&gt; back
+w3af&gt;&gt;&gt; start</pre>
+  <p>Nothing relevant (that hadn't already been found by manual analysis) was reported.</p>
 </section>

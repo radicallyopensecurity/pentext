@@ -75,7 +75,7 @@ run_schema() {
 run_format() {
   echo "::group::zpretty formatting (${#xml_files[@]} files)"
   local out
-  out=$(zpretty --check "${xml_files[@]}" 2>&1 || true)
+  out=$(zpretty --check --max-line-length 120 --first-attribute-on-new-line "${xml_files[@]}" 2>&1 || true)
   echo "$out"
   local failed
   failed=$(printf '%s\n' "$out" | grep -c "^This file would be rewritten:" || true)

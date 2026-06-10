@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <localised_strings>
   <date>
     <!-- Note: NOT IMPLEMENTED YET - date localisation requires some Saxon HE hacking and it isn't pretty -->
@@ -113,10 +113,10 @@
     <translation xml:lang="en">Total amount to be paid</translation>
   </string>
   <string id="invoice_donation">
-    <translation xml:lang="nl">doneert > 90% van haar totale winst aan goede
+    <translation xml:lang="nl">doneert &gt; 90% van haar totale winst aan goede
       doelen.
     </translation>
-    <translation xml:lang="en">donates > 90% of its entire profits to charity.
+    <translation xml:lang="en">donates &gt; 90% of its entire profits to charity.
     </translation>
   </string>
   <string id="invoice_pleasepay">
@@ -159,11 +159,13 @@
   </string>
   <!-- QUICKSCOPING 2 QUOTE -->
   <string id="qs2off_about">
-    <translation xml:lang="nl">Over
-      <client_short/>
+    <translation xml:lang="nl">
+      Over
+      <client_short />
     </translation>
-    <translation xml:lang="en">About
-      <client_short/>
+    <translation xml:lang="en">
+      About
+      <client_short />
     </translation>
   </string>
   <string id="qs2off_infrastructure">
@@ -171,11 +173,13 @@
     <translation xml:lang="en">Infrastructure</translation>
   </string>
   <string id="qs2off_reach">
-    <translation xml:lang="nl">Reikwijdte
-      <company_svc_short/>
+    <translation xml:lang="nl">
+      Reikwijdte
+      <company_svc_short />
     </translation>
-    <translation xml:lang="en">Reach of
-      <company_svc_short/>
+    <translation xml:lang="en">
+      Reach of
+      <company_svc_short />
     </translation>
   </string>
   <!-- PERMISSION PARTIES -->

@@ -1,32 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <section todo="no">
   <!-- section with an overview of ROS activities --><title>Projectoverzicht</title>
   <p>
-    <company_short/> zal <company_svc_long/> uitvoeren voor <client_short/>
+    <company_short /> zal <company_svc_long /> uitvoeren voor <client_short />
     op de hieronder beschreven systemen. De diensten zijn bedoeld om inzicht te
     bieden in de veiligheid van deze systemen. Om dit te kunnen bewerkstelligen
-    zal <company_short/> toegang krijgen tot deze systemen, proberen kwetsbaarheden
+    zal <company_short /> toegang krijgen tot deze systemen, proberen kwetsbaarheden
     op te sporen en trachten verdere toegang te krijgen door de gevonden
     kwetsbaarheden uit te buiten.
   </p>
 
   <p>
-    <company_short/> zal de volgende doelwitten testen (de “<b>Doelwitten</b>”):
+    <company_short /> zal de volgende doelwitten testen (de “<b>Doelwitten</b>”):
   </p>
 
-  <generate_targets/>
+  <generate_targets />
 
   <p>
-    <company_short/> zal testen op de aanwezigheid van de meest voorkomende
+    <company_short /> zal testen op de aanwezigheid van de meest voorkomende
     kwetsbaarheden, gebruik makend van zowel publiek beschikbare scanning tools,
-    als door handmatig testen. <company_short/> zal een grondige 
-    <p_boxtype/> test van <p_persondays/> persoondagen uitvoeren via internet.
+    als door handmatig testen. <company_short /> zal een grondige
+    <p_boxtype /> test van <p_persondays /> persoondagen uitvoeren via internet.
   </p>
 
   <section todo="yes">
     <title>Scope</title>
     <p>
-      <company_short/> schat de uitvoering van de penetratietest op ... dagen in totaal:
+      <company_short /> schat de uitvoering van de penetratietest op ... dagen in totaal:
     </p>
     <ul>
       <li>... dagen voor het testen van ...;</li>

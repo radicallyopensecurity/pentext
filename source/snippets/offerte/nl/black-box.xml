@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <div>
   <p>
   Crystal-Box vs. Black-Box pentesting verwijst naar de hoeveelheid 
@@ -8,7 +8,6 @@
   ontvangen de pentesters alle informatie die opgevraagd wordt betreffende het doelwit, 
   inclusief source code (wanneer dit relevant is), toegang tot developers of systeembeheer, etc...
 </p>
-<p>
-  In dit geval zal <company_short/> een Black-box test uitvoeren.
-</p></div>
-<!-- end of template -->
+  <p>
+    In dit geval zal <company_short /> een Black-box test uitvoeren.
+  </p></div><!-- end of template -->

