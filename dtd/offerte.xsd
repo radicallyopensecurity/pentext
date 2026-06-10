@@ -60,6 +60,9 @@
         <xs:element minOccurs="0" ref="target_application"/>
         <xs:element minOccurs="0" ref="target_application_producer"/>
         <xs:element ref="breakdown" minOccurs="0"/>
+        <xs:element ref="participants" minOccurs="0"/>
+        <xs:element ref="location" minOccurs="0"/>
+        <xs:element ref="duration" minOccurs="0"/>
       </xs:all>
     </xs:complexType>
   </xs:element>
@@ -276,6 +279,10 @@
       <xs:element name="p_reportdue"/>
       <xs:element name="p_startdate"/>
       <xs:element name="p_enddate"/>
+      <xs:element name="p_draftdue"/>
+      <xs:element name="p_duration"/>
+      <xs:element name="p_location"/>
+      <xs:element name="p_participants"/>
       <xs:element name="signee_long"/>
       <xs:element name="signee_short"/>
       <xs:element name="signee_street"/>

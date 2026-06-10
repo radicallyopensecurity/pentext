@@ -644,7 +644,6 @@
   <xs:element name="org" type="xs:string" />
   <xs:element name="journal" type="xs:string" />
   <xs:element name="info" type="xs:string" />
-  <xs:element name="location" type="xs:string" />
   <xs:element name="pubdate" type="xs:string" />
   <xs:element name="accessed" type="xs:date" />
 
