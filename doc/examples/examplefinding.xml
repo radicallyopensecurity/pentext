@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<finding threatLevel="Moderate" type="Escalation">
+<finding id="examplefinding" threatLevel="Moderate" type="Escalation" number="1">
   <title>Example Title</title>
     <description>
         A specialized piece of malware can be crafted to bypass local anti-virus software and to cheat during tests.
