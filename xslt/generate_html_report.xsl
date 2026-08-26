@@ -852,7 +852,7 @@
             </td>
             <td>
                 <div>
-                    <xsl:value-of select="findingDescription"/>
+                    <xsl:copy-of select="findingDescription/node()"/>
                 </div>
             </td>
             <td>

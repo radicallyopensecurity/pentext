@@ -473,7 +473,7 @@
                     <findingDescription>
                         <xsl:choose>
                             <xsl:when test="description_summary">
-                                <xsl:value-of select="description_summary"/>
+                                <xsl:apply-templates select="description_summary" mode="summarytable"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:apply-templates select="description" mode="summarytable"/>
@@ -537,7 +537,7 @@
                     <xsl:value-of select="findingType"/>
                 </findingType>
                 <findingDescription>
-                    <xsl:value-of select="findingDescription"/>
+                    <xsl:copy-of select="findingDescription/node()"/>
                 </findingDescription>
                 <findingThreatLevel>
                     <xsl:value-of select="findingThreatLevel"/>

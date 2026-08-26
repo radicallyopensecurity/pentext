@@ -246,7 +246,7 @@
             <!-- Second Table Cell -->
             <fo:table-cell xsl:use-attribute-sets="td">
                 <fo:block xsl:use-attribute-sets="p">
-                    <xsl:value-of select="findingDescription" />
+                    <xsl:copy-of select="findingDescription/node()"/>
                 </fo:block>
                 <xsl:if test="findingImpact">
                     <fo:block xsl:use-attribute-sets="p">
