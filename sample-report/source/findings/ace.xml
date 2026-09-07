@@ -15,4 +15,9 @@
     <recommendation>
     <p>Where possible, restrict the user access to netmonclientd to mitigate the issue.</p>
     </recommendation>
+    <labels>
+        <label>label1</label>
+        <label>label2</label>
+    </labels>
+
 </finding>    

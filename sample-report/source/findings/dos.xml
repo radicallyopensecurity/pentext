@@ -31,4 +31,7 @@ for u, p in users:
 	<recommendation>
 	<p>Unfortunately, no patch for this issue this exists upstream.</p>
 	</recommendation>
+	<labels>
+		<label>label2</label>
+	</labels>
 </finding>

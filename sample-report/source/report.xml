@@ -5,6 +5,11 @@
                         <full_name>Sitting Duck BV</full_name>
                         <short_name>Sitting Duck</short_name>
                 </client>
+                <labels>
+                        <label name="label1" color="#1f4e79" text="#ffffff"/>
+                        <label name="label2" color="#2e6f4e" text="#ffffff"/>
+                </labels>
+
                 <targets>
                         <target>Sitting Duck NOC</target>
                 </targets>

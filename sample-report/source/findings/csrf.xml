@@ -14,4 +14,7 @@
 	<recommendation>
 	<p>Update NetMon to the latest version, in which the vulnerability has been fixed.</p>
 	</recommendation>
+	<labels>
+		<label>label1</label>
+	</labels>
 </finding>
