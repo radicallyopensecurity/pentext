@@ -6,8 +6,7 @@
   </p>
   <ul>
     <li><company_short/> performs a <company_svc_short/> starting <p_startdate/>.</li>
-    <li><company_short/> delivers the final report on 
-      <p_reportdue/>.</li>
+    <li><company_short/> delivers the final report within 2 weeks after the final testing.</li>
   </ul>
   <p>
     Our fixed-fee price quote for the above described <company_svc_short/> is 
@@ -17,8 +16,8 @@
     <client_short/> will pay the agreed amount within 14 days of the invoice date.
   </p>
   <p>
-    Any additional work will be charged separately. An hourly 
-    rate for additional work will be agreed upon before starting this work.
+    Any additional work will be agreed upon before starting this work. 
+    In case less hours are used, less hours will be invoiced.
   </p>
   <p>A detailed breakdown of the requested services can be found below:</p>
   
