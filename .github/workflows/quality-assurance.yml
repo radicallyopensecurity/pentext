@@ -15,43 +15,43 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
+      - name: Set up zpretty
+        uses: gronke/zpretty/.github/actions/zpretty@ros
         with:
-          python-version: "3.x"
+          spec: "git+https://github.com/gronke/zpretty@ros"
 
-      - name: Install xmllint and zpretty
+      - name: Install xmllint
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends libxml2-utils
-          pip install --no-cache-dir zpretty
 
       - name: Well-formedness
         id: wellformed
         continue-on-error: true
-        run: bash scripts/lint-xml.sh well-formed
+        run: python scripts/lint_xml.py well-formed
 
       - name: XSD schema validation
         id: schema
         continue-on-error: true
-        run: bash scripts/lint-xml.sh schema
+        run: python scripts/lint_xml.py schema
 
       - name: zpretty formatting
         id: format
         continue-on-error: true
-        run: bash scripts/lint-xml.sh format
+        run: python scripts/lint_xml.py format
 
-      - name: Summary
+      - name: Verdict
         if: always()
+        shell: bash
         run: |
-          {
-            echo "## XML Lint"
-            echo ""
-            echo "| Phase | Files | Failed | Outcome |"
-            echo "| --- | ---: | ---: | --- |"
-            echo "| Well-formedness | ${{ steps.wellformed.outputs.total }} | ${{ steps.wellformed.outputs.failed }} | ${{ steps.wellformed.outcome }} |"
-            echo "| Schema validation | ${{ steps.schema.outputs.total }} | ${{ steps.schema.outputs.failed }} | ${{ steps.schema.outcome }} |"
-            echo "| zpretty formatting | ${{ steps.format.outputs.total }} | ${{ steps.format.outputs.failed }} | ${{ steps.format.outcome }} |"
-            echo ""
-            echo "_Pre-existing failures are recorded but do not fail the workflow. They will be reduced incrementally._"
-          } >> "$GITHUB_STEP_SUMMARY"
+          fail=0
+          for outcome in \
+            "${{ steps.wellformed.outcome }}" \
+            "${{ steps.schema.outcome }}" \
+            "${{ steps.format.outcome }}"; do
+            [[ "$outcome" != "success" ]] && fail=1
+          done
+          if (( fail )); then
+            echo "::error::One or more XML lint phases reported failures. See the job summary."
+            exit 1
+          fi
