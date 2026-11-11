@@ -79,6 +79,35 @@
     <translation xml:lang="nl">van</translation>
     <translation xml:lang="en">of</translation>
   </string>
+  <!-- CONTACT BLOCK -->
+  <string id="contact_title">
+    <translation xml:lang="nl">Contact</translation>
+    <translation xml:lang="en">Contact</translation>
+  </string>
+  <string id="contact_formore">
+    <translation xml:lang="nl">Voor meer informatie over dit document en de inhoud daarvan kunt u contact opnemen met</translation>
+    <translation xml:lang="en">For more information about this document and its contents please contact</translation>
+  </string>
+  <string id="contact_name">
+    <translation xml:lang="nl">Naam</translation>
+    <translation xml:lang="en">Name</translation>
+  </string>
+  <string id="contact_address">
+    <translation xml:lang="nl">Adres</translation>
+    <translation xml:lang="en">Address</translation>
+  </string>
+  <string id="contact_phone">
+    <translation xml:lang="nl">Telefoon</translation>
+    <translation xml:lang="en">Phone</translation>
+  </string>
+  <string id="contact_email">
+    <translation xml:lang="nl">E-mail</translation>
+    <translation xml:lang="en">Email</translation>
+  </string>
+  <string id="contact_coc">
+    <translation xml:lang="nl">is ingeschreven in het handelsregister van de Kamer van Koophandel onder nummer</translation>
+    <translation xml:lang="en">is registered at the trade register of the Dutch chamber of commerce under number</translation>
+  </string>
   <!-- INVOICES -->
   <string id="invoice_no">
     <translation xml:lang="nl">Factuur nr.</translation>

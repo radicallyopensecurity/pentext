@@ -283,14 +283,26 @@
 
     <xsl:template name="Contact">
         <div class="container">
-            <h4>Contact</h4>
-            <p>For more information about this document and its contents please contact
-                    <xsl:value-of select="company/full_name"/>
+            <h4>
+                <xsl:call-template name="getString">
+                    <xsl:with-param name="stringID" select="'contact_title'"/>
+                </xsl:call-template>
+            </h4>
+            <p>
+                <xsl:call-template name="getString">
+                    <xsl:with-param name="stringID" select="'contact_formore'"/>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
+                <xsl:value-of select="company/full_name"/>
                 <xsl:if test="not(company/full_name[ends-with(., '.')])"
                     ><xsl:text>.</xsl:text></xsl:if></p>
             <div class="row">
                 <div class="two columns">
-                    <strong>Name</strong>
+                    <strong>
+                        <xsl:call-template name="getString">
+                            <xsl:with-param name="stringID" select="'contact_name'"/>
+                        </xsl:call-template>
+                    </strong>
                 </div>
                 <div class="ten columns">
                     <xsl:value-of select="company/poc1"/>
@@ -298,7 +310,11 @@
             </div>
             <div class="row">
                 <div class="two columns">
-                    <strong>Address</strong>
+                    <strong>
+                        <xsl:call-template name="getString">
+                            <xsl:with-param name="stringID" select="'contact_address'"/>
+                        </xsl:call-template>
+                    </strong>
                 </div>
                 <div class="ten columns">
                     <div>
@@ -315,7 +331,11 @@
             </div>
             <div class="row">
                 <div class="two columns">
-                    <strong>Phone</strong>
+                    <strong>
+                        <xsl:call-template name="getString">
+                            <xsl:with-param name="stringID" select="'contact_phone'"/>
+                        </xsl:call-template>
+                    </strong>
                 </div>
                 <div class="ten columns">
                     <xsl:value-of select="company/phone"/>
@@ -323,15 +343,24 @@
             </div>
             <div class="row">
                 <div class="two columns">
-                    <strong>Email</strong>
+                    <strong>
+                        <xsl:call-template name="getString">
+                            <xsl:with-param name="stringID" select="'contact_email'"/>
+                        </xsl:call-template>
+                    </strong>
                 </div>
                 <div class="ten columns">
                     <xsl:value-of select="company/email"/>
                 </div>
             </div>
             <div class="coc">
-                <xsl:value-of select="company/full_name"/> is registered at the trade register of
-                the Dutch chamber of commerce under number <xsl:value-of select="company/coc"/>.
+                <xsl:value-of select="company/full_name"/>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="getString">
+                    <xsl:with-param name="stringID" select="'contact_coc'"/>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
+                <xsl:value-of select="company/coc"/>.
             </div>
         </div>
     </xsl:template>
