@@ -318,7 +318,7 @@
                             <fo:table-cell xsl:use-attribute-sets="td">
                                 <fo:block>
                                     <xsl:value-of
-                                        select="format-dateTime(@date, '[MNn] [D1o], [Y]', 'en', (), ())"
+                                        select="my:formatDate(string(@date), '[MNn] [D1o], [Y]')"
                                     />
                                 </fo:block>
                             </fo:table-cell>
@@ -363,9 +363,17 @@
     </xsl:template>
 
     <xsl:template name="Contact">
-        <fo:block xsl:use-attribute-sets="title-4">Contact</fo:block>
-        <fo:block xsl:use-attribute-sets="p" margin-left="0">For more information about this
-            document and its contents please contact <xsl:value-of select="company/full_name"/>
+        <fo:block xsl:use-attribute-sets="title-4">
+            <xsl:call-template name="getString">
+                <xsl:with-param name="stringID" select="'contact_title'"/>
+            </xsl:call-template>
+        </fo:block>
+        <fo:block xsl:use-attribute-sets="p" margin-left="0">
+            <xsl:call-template name="getString">
+                <xsl:with-param name="stringID" select="'contact_formore'"/>
+            </xsl:call-template>
+            <xsl:text> </xsl:text>
+            <xsl:value-of select="company/full_name"/>
             <xsl:if test="not(company/full_name[ends-with(., '.')])"
             ><xsl:text>.</xsl:text></xsl:if></fo:block>
         <fo:block>
@@ -375,7 +383,11 @@
                 <fo:table-body xsl:use-attribute-sets="borders">
                     <fo:table-row>
                         <fo:table-cell xsl:use-attribute-sets="th">
-                            <fo:block>Name</fo:block>
+                            <fo:block>
+                                <xsl:call-template name="getString">
+                                    <xsl:with-param name="stringID" select="'contact_name'"/>
+                                </xsl:call-template>
+                            </fo:block>
                         </fo:table-cell>
                         <fo:table-cell xsl:use-attribute-sets="td">
                             <fo:block>
@@ -385,7 +397,11 @@
                     </fo:table-row>
                     <fo:table-row xsl:use-attribute-sets="borders">
                         <fo:table-cell xsl:use-attribute-sets="th">
-                            <fo:block>Address</fo:block>
+                            <fo:block>
+                                <xsl:call-template name="getString">
+                                    <xsl:with-param name="stringID" select="'contact_address'"/>
+                                </xsl:call-template>
+                            </fo:block>
                         </fo:table-cell>
                         <fo:table-cell xsl:use-attribute-sets="td">
                             <fo:block>
@@ -402,7 +418,11 @@
                     </fo:table-row>
                     <fo:table-row xsl:use-attribute-sets="borders">
                         <fo:table-cell xsl:use-attribute-sets="th">
-                            <fo:block>Phone</fo:block>
+                            <fo:block>
+                                <xsl:call-template name="getString">
+                                    <xsl:with-param name="stringID" select="'contact_phone'"/>
+                                </xsl:call-template>
+                            </fo:block>
                         </fo:table-cell>
                         <fo:table-cell xsl:use-attribute-sets="td">
                             <fo:block>
@@ -412,7 +432,11 @@
                     </fo:table-row>
                     <fo:table-row xsl:use-attribute-sets="borders">
                         <fo:table-cell xsl:use-attribute-sets="th">
-                            <fo:block>Email</fo:block>
+                            <fo:block>
+                                <xsl:call-template name="getString">
+                                    <xsl:with-param name="stringID" select="'contact_email'"/>
+                                </xsl:call-template>
+                            </fo:block>
                         </fo:table-cell>
                         <fo:table-cell xsl:use-attribute-sets="td">
                             <fo:block>
@@ -424,8 +448,14 @@
             </fo:table>
         </fo:block>
         <fo:block xsl:use-attribute-sets="coc" break-after="page">
-            <xsl:value-of select="company/full_name"/> is registered at the trade register of the
-            Dutch chamber of commerce under number <xsl:value-of select="company/coc"/>. </fo:block>
+            <xsl:value-of select="company/full_name"/>
+            <xsl:text> </xsl:text>
+            <xsl:call-template name="getString">
+                <xsl:with-param name="stringID" select="'contact_coc'"/>
+            </xsl:call-template>
+            <xsl:text> </xsl:text>
+            <xsl:value-of select="company/coc"/>.
+        </fo:block>
     </xsl:template>
 
     <xsl:template name="ImageAttribution">
