@@ -92,11 +92,21 @@
                     <fo:table-body>
                         <fo:table-row>
                             <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block>For <fo:inline xsl:use-attribute-sets="bold"><xsl:value-of
+                                <fo:block>
+                                    <xsl:call-template name="getString">
+                                        <xsl:with-param name="stringID" select="'signature_for'"/>
+                                    </xsl:call-template>
+                                    <xsl:text> </xsl:text>
+                                    <fo:inline xsl:use-attribute-sets="bold"><xsl:value-of
                                             select="//client/full_name"/></fo:inline></fo:block>
                             </fo:table-cell>
                             <fo:table-cell xsl:use-attribute-sets="td">
-                                <fo:block>For <fo:inline xsl:use-attribute-sets="bold"><xsl:value-of
+                                <fo:block>
+                                    <xsl:call-template name="getString">
+                                        <xsl:with-param name="stringID" select="'signature_for'"/>
+                                    </xsl:call-template>
+                                    <xsl:text> </xsl:text>
+                                    <fo:inline xsl:use-attribute-sets="bold"><xsl:value-of
                                             select="//company/full_name"/></fo:inline></fo:block>
                             </fo:table-cell>
                         </fo:table-row>

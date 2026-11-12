@@ -411,21 +411,45 @@
     </xsl:variable>
 
 
+    <!-- Localised date formatting. Saxon HE has no built-in localisation of month names
+         (the lang argument to format-date/format-dateTime is ignored), so the Dutch month
+         names are spelled out here. English keeps the original formatting per call site. -->
+    <xsl:variable name="nlMonthNames" select="('januari', 'februari', 'maart', 'april', 'mei',
+        'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december')"/>
+
+    <xsl:function name="my:formatDate" as="xs:string">
+        <xsl:param name="value" as="xs:string"/>
+        <xsl:param name="enFormat" as="xs:string"/>
+        <xsl:variable name="date"
+            select="if (contains($value, 'T')) then xs:date(xs:dateTime($value)) else xs:date($value)"/>
+        <xsl:choose>
+            <xsl:when test="$lang = 'nl'">
+                <xsl:value-of
+                    select="concat(format-date($date, '[D1]', 'en', (), ()), ' ',
+                        $nlMonthNames[month-from-date($date)], ' ',
+                        format-date($date, '[Y]', 'en', (), ()))"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="format-date($date, $enFormat, 'en', (), ())"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
     <!-- document version number (various documents) -->
     <xsl:variable name="latestVersionDate">
         <xsl:choose>
             <xsl:when test="/contract">
                 <!-- we're not using versions for contracts, but the contract date will do just fine -->
                 <xsl:value-of
-                    select="format-date(/contract/meta/work/start_date, '[MNn] [D1], [Y]', 'en', (), ())"
+                    select="my:formatDate(string(/contract/meta/work/start_date), '[MNn] [D1], [Y]')"
                 />
             </xsl:when>
             <xsl:when test="/ratecard">
                 <xsl:for-each select="/*/meta/client/rates/latestrevisiondate">
                     <xsl:sort select="xs:dateTime(@date)" order="descending"/>
                     <xsl:if test="position() = 1">
-                        <xsl:value-of select="format-dateTime(@date, '[MNn] [D1], [Y]', en, (), ())"
-                        />
+                        <xsl:value-of
+                            select="my:formatDate(string(@date), '[MNn] [D1], [Y]')"/>
                     </xsl:if>
                 </xsl:for-each>
             </xsl:when>
@@ -434,13 +458,7 @@
                     <xsl:sort select="xs:dateTime(@date)" order="descending"/>
                     <xsl:if test="position() = 1">
                         <xsl:value-of
-                            select="format-dateTime(@date, '[MNn] [D1o], [Y]', 'en', (), ())"/>
-                        <!-- Note: this should be: 
-                    <xsl:value-of select="format-dateTime(@date, $localDateFormat, $lang, (), ())"/> 
-                    to properly be localised, but we're using Saxon HE instead of PE/EE and having localised month names 
-                    would require creating a LocalizerFactory 
-                    See http://www.saxonica.com/html/documentation/extensibility/config-extend/localizing/ for more info
-                    sounds like I'd have to know Java for that so for now, the date isn't localised. :) -->
+                            select="my:formatDate(string(@date), '[MNn] [D1o], [Y]')"/>
                     </xsl:if>
                 </xsl:for-each>
             </xsl:otherwise>
