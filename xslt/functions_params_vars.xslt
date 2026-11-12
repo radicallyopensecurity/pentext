@@ -2,6 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:my="http://www.radical.sexy"
+    xmlns:dt-local="http://www.radical.sexy/schema/dt-local"
     xmlns:fo="http://www.w3.org/1999/XSL/Format"
     exclude-result-prefixes="xs my" version="2.0">
 
@@ -24,7 +25,7 @@
     <xsl:param name="EXEC_SUMMARY" select="false()"/>
 
     <!-- language parameter for localization (quote & invoice) -->
-    <xsl:param name="lang" select="/*/@xml:lang"/>
+    <xsl:param name="lang" select="(/*/@xml:lang, 'en')[1]"/>
 
     <!-- keys for numbering (used in report) -->
     <xsl:key name="rosid" match="section | finding | appendix | non-finding" use="@id"/>
@@ -433,14 +434,7 @@
                 <xsl:for-each select="//version_history/version">
                     <xsl:sort select="xs:dateTime(@date)" order="descending"/>
                     <xsl:if test="position() = 1">
-                        <xsl:value-of
-                            select="format-dateTime(@date, '[MNn] [D1o], [Y]', 'en', (), ())"/>
-                        <!-- Note: this should be: 
-                    <xsl:value-of select="format-dateTime(@date, $localDateFormat, $lang, (), ())"/> 
-                    to properly be localised, but we're using Saxon HE instead of PE/EE and having localised month names 
-                    would require creating a LocalizerFactory 
-                    See http://www.saxonica.com/html/documentation/extensibility/config-extend/localizing/ for more info
-                    sounds like I'd have to know Java for that so for now, the date isn't localised. :) -->
+                        <xsl:value-of select="dt-local:format-dateTime-local-tbd(@date, $lang)"/>
                     </xsl:if>
                 </xsl:for-each>
             </xsl:otherwise>
